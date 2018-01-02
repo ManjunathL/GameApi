@@ -988,6 +988,24 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
+        dwModuleComponent.setProjectName(proposalHeader.getProjectName());
+        dwModuleComponent.setCName(proposalHeader.getName());
+        dwModuleComponent.setcAddress1(proposalHeader.getcAddress1());
+        dwModuleComponent.setcAddress2(proposalHeader.getcAddress2());
+        dwModuleComponent.setcAddress3(proposalHeader.getcAddress3());
+        dwModuleComponent.setcCity(proposalHeader.getcCity());
+        dwModuleComponent.setCEmail(proposalHeader.getCEmail());
+        dwModuleComponent.setCPhone1(proposalHeader.getContact());
+        dwModuleComponent.setCPhone2(proposalHeader.getCPhone2());
+        dwModuleComponent.setPAddress1(proposalHeader.getProjectAddress1());
+        dwModuleComponent.setPAddress2(proposalHeader.getProjectAddress2());
+        dwModuleComponent.setPCity(proposalHeader.getProjectCity());
+        dwModuleComponent.setSalesEmail(proposalHeader.getSalesEmail());
+        dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
+        dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
+        dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
+
+
         String finishCode = finish.getFinishCode();
         /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
@@ -1118,6 +1136,23 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
 
+        dwModuleComponent.setProjectName(proposalHeader.getProjectName());
+        dwModuleComponent.setCName(proposalHeader.getName());
+        dwModuleComponent.setcAddress1(proposalHeader.getcAddress1());
+        dwModuleComponent.setcAddress2(proposalHeader.getcAddress2());
+        dwModuleComponent.setcAddress3(proposalHeader.getcAddress3());
+        dwModuleComponent.setcCity(proposalHeader.getcCity());
+        dwModuleComponent.setCEmail(proposalHeader.getCEmail());
+        dwModuleComponent.setCPhone1(proposalHeader.getContact());
+        dwModuleComponent.setCPhone2(proposalHeader.getCPhone2());
+        dwModuleComponent.setPAddress1(proposalHeader.getProjectAddress1());
+        dwModuleComponent.setPAddress2(proposalHeader.getProjectAddress2());
+        dwModuleComponent.setPCity(proposalHeader.getProjectCity());
+        dwModuleComponent.setSalesEmail(proposalHeader.getSalesEmail());
+        dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
+        dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
+        dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
+
         String finishCode = finish.getFinishCode();
       /*  if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
             finishCode = NEW_MATT_SOLID_FINISH;
@@ -1238,6 +1273,23 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setModuleSeq(productModule.getModuleSequence());
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
+
+        dwModuleComponent.setProjectName(proposalHeader.getProjectName());
+        dwModuleComponent.setCName(proposalHeader.getName());
+        dwModuleComponent.setcAddress1(proposalHeader.getcAddress1());
+        dwModuleComponent.setcAddress2(proposalHeader.getcAddress2());
+        dwModuleComponent.setcAddress3(proposalHeader.getcAddress3());
+        dwModuleComponent.setcCity(proposalHeader.getcCity());
+        dwModuleComponent.setCEmail(proposalHeader.getCEmail());
+        dwModuleComponent.setCPhone1(proposalHeader.getContact());
+        dwModuleComponent.setCPhone2(proposalHeader.getCPhone2());
+        dwModuleComponent.setPAddress1(proposalHeader.getProjectAddress1());
+        dwModuleComponent.setPAddress2(proposalHeader.getProjectAddress2());
+        dwModuleComponent.setPCity(proposalHeader.getProjectCity());
+        dwModuleComponent.setSalesEmail(proposalHeader.getSalesEmail());
+        dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
+        dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
+        dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
 
         String finishCode = finish.getFinishCode();
         /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
@@ -1379,6 +1431,24 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setModuleSeq(productModule.getModuleSequence());
         dwModuleComponent.setAccPackCode("NA");
         dwModuleComponent.setCarcass(productModule.getCarcassCode());
+
+        dwModuleComponent.setProjectName(proposalHeader.getProjectName());
+        dwModuleComponent.setCName(proposalHeader.getName());
+        dwModuleComponent.setcAddress1(proposalHeader.getcAddress1());
+        dwModuleComponent.setcAddress2(proposalHeader.getcAddress2());
+        dwModuleComponent.setcAddress3(proposalHeader.getcAddress3());
+        dwModuleComponent.setcCity(proposalHeader.getcCity());
+        dwModuleComponent.setCEmail(proposalHeader.getCEmail());
+        dwModuleComponent.setCPhone1(proposalHeader.getContact());
+        dwModuleComponent.setCPhone2(proposalHeader.getCPhone2());
+        dwModuleComponent.setPAddress1(proposalHeader.getProjectAddress1());
+        dwModuleComponent.setPAddress2(proposalHeader.getProjectAddress2());
+        dwModuleComponent.setPCity(proposalHeader.getProjectCity());
+        dwModuleComponent.setSalesEmail(proposalHeader.getSalesEmail());
+        dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
+        dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
+        dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
+
 
         String finishCode = finish.getFinishCode();
         /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
