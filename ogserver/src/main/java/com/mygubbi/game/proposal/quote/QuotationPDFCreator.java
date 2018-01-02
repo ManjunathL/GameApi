@@ -109,7 +109,7 @@ public class QuotationPDFCreator
     java.util.Date date;
     java.util.Date currentDate = new java.util.Date(117 ,9,28,0,0,00);
     java.util.Date gstTextChangeDate = new java.util.Date(117 ,10,15,0,0,00);
-    java.util.Date miscTextChangeDate = new java.util.Date(117 ,11,12,0,0,00);
+    java.util.Date miscTextChangeDate = new java.util.Date(118 ,00,1,0,0,00);
     Boolean gstTextChangeDateValue;
     Boolean mscTextChangeDateValue;
 
@@ -856,13 +856,6 @@ public class QuotationPDFCreator
             p.setAlignment(Element.ALIGN_RIGHT);
         document.add(p);
 
-                    p=new Paragraph("MISCELLANEOUS \n",fsize1);
-                    p.setAlignment(Element.ALIGN_LEFT);
-                    document.add(p);
-
-                    p=new Paragraph(" ");
-                    document.add(p);
-
 
                     PdfPTable miscellaneousTable = new PdfPTable(columnWidths1);
                     miscellaneousTable.setWidthPercentage(100);
@@ -889,12 +882,19 @@ public class QuotationPDFCreator
 
                     if(mscTextChangeDateValue)
                     {
+                        p=new Paragraph("MISCELLANEOUS \n",fsize1);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p=new Paragraph(" ");
+                        document.add(p);
+
                         String projectHandling="";
                         projectHandling=projectHandlingAmount.getPrice()+"%";
                         LOG.info("Value for project handling Amount " +projectHandling);
                         LOG.info("project handling charges " +proposalVersion.getProjectHandlingAmount() + proposalVersion.getDeepClearingAmount()+ " proposal version Floor protection " +proposalVersion.getFloorProtectionAmount());
                         this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"1"," Project Handling Charges",proposalVersion.getProjectHandlingQty(),projectHandling,proposalVersion.getProjectHandlingAmount());
-                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"2"," Deep Clearing Charges",proposalVersion.getDeepClearingQty(),String.valueOf(deepClearingAmount.getPrice()),proposalVersion.getDeepClearingAmount());
+                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"2"," Deep Cleaning Charges",proposalVersion.getDeepClearingQty(),String.valueOf(deepClearingAmount.getPrice()),proposalVersion.getDeepClearingAmount());
                         this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"3"," Floor Protection Charges",proposalVersion.getFloorProtectionSqft(),String.valueOf(floorProtectionAmount.getPrice()),proposalVersion.getFloorProtectionAmount());
                         document.add(miscellaneousTable);
 
@@ -1420,12 +1420,12 @@ public class QuotationPDFCreator
                     {
                         p=new Paragraph( "\n D. Miscellaneous:\n",fsize1);
                         document.add(p);
-                    }
 
-                    p=new Paragraph(" ");
-                    document.add(p);
-                    document.add(mscTable);
-                    document.add(gsttotalTableFormsc);
+                        p=new Paragraph(" ");
+                        document.add(p);
+                        document.add(mscTable);
+                        document.add(gsttotalTableFormsc);
+                    }
 
                     p=new Paragraph(" ");
                     document.add(p);
@@ -2577,7 +2577,7 @@ public class QuotationPDFCreator
         double deepClearingwithTax=proposalVersion.getDeepClearingAmount()*deepClearingTax.getSourcePrice();
         double floorProtectionwithTax=proposalVersion.getFloorProtectionAmount()*floorProtectionTax.getSourcePrice();
         GSTForProducts gstPHC=new GSTForProducts("Proposal Services","Project Handling Charges",proposalVersion.getProjectHandlingAmount(),proposalVersion.getProjectHandlingAmount(),projectHandlingwithTax,"18%","A","NA");
-        GSTForProducts gstDCC=new GSTForProducts("Proposal Services","Deep Clearing Charges",proposalVersion.getDeepClearingAmount(),proposalVersion.getDeepClearingAmount(),deepClearingwithTax,"18%","A","NA");
+        GSTForProducts gstDCC=new GSTForProducts("Proposal Services","Deep Cleaning Charges",proposalVersion.getDeepClearingAmount(),proposalVersion.getDeepClearingAmount(),deepClearingwithTax,"18%","A","NA");
         GSTForProducts gstFPC=new GSTForProducts("Proposal Services","Floor Protection Charges",proposalVersion.getFloorProtectionAmount(),proposalVersion.getFloorProtectionAmount(),floorProtectionwithTax,"18%","A","NA");
         proposalservicesList.add(gstPHC);
         proposalservicesList.add(gstDCC);
