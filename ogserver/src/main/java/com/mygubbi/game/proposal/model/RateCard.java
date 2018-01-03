@@ -23,7 +23,7 @@ public class RateCard
     public static final String FACTOR_TYPE = "F";
     public static final String LOADING_FACTOR = "L";
     public static final String LABOUR_FACTOR = "B";
-    public static final String LOADING_FACTOR_NONSTANDARD = "N";
+    public static final String REDUCTION_FACTOR_NONSTANDARD = "N";
     public static final String CUSTOM_ADDON_SALES_PRICE_FACTOR = "CASP";
     public static final String ADDON_WO_TAX_FACTOR = "ADWOTAX";
     public static final String LABOUR_COST_FACTOR = "LC";
@@ -194,5 +194,19 @@ public class RateCard
 
     public void setSetId(String setId) {
         this.setId = setId;
+    }
+
+    @Override
+    public String toString() {
+        return "RateCard{" +
+                "code='" + code + '\'' +
+                ", type='" + type + '\'' +
+                ", city='" + city + '\'' +
+                ", productCategory='" + productCategory + '\'' +
+                ", priceDate=" + priceDate +
+                ", setId='" + setId + '\'' +
+                ", rateUsed=" + rateUsed +
+                ", ratesUsed=" + ratesUsed +
+                '}';
     }
 }

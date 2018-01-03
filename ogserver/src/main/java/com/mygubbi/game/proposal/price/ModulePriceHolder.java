@@ -47,19 +47,15 @@ public class ModulePriceHolder
     private RateCard shutterFinishRateCard;
     private RateCard stdManufacturingCost;
     private RateCard nStdManufacturingCost;
-    private RateCard stdManufacturingCostBasedOnFinish;
-    private RateCard nStdManufacturingCostBasedOnFinish;
     private RateCard carcassDoubleExposedRateCard;
     private RateCard shutterDoubleExposedRateCard;
     private RateCard loadingFactorCard;
     private RateCard labourRateCard;
     private RateCard labourManufacturingRateCard;
-    private RateCard nonStandardloadingFactorCard;
+    private RateCard nonStandardReductionFactorCard;
     private RateCard loadingFactorBasedOnProduct;
     private RateCard stdLoadingSourceFactorBasedOnProduct;
     private RateCard nStdLoadingSourceFactorBasedOnProduct;
-    private RateCard nStdLoadingSourceFactorBasedOnProductFinishset;
-    private RateCard stdLoadingSourceFactorBasedOnProductFinishset;
     private RateCard prodWoTaxFactor;
 
     private PriceMaster lWidthRate;
@@ -120,7 +116,6 @@ public class ModulePriceHolder
     private String moduleCode;
     private String moduleType;
     private String productType;
-   // private String handleType;
 
     private java.sql.Date priceDate;
     private String city;
@@ -185,9 +180,6 @@ public class ModulePriceHolder
             this.resolveComponents();
             this.resolveHandles();
         }
-
-
-
     }
 
     private void standardOrNonStandardModule() {
@@ -246,21 +238,14 @@ public class ModulePriceHolder
         }
         for (HingePack hingePack : this.productModule.getHingePacks())
         {
-            Handle hinge = ModuleDataService.getInstance().getHandleKnobHingeDetails(hingePack.getHingeCode());
             this.getHingeRateBasedOnQty(hingePack);
-         //   this.productionSpecificationComponents.add(new Handle(hinge.getType(),hinge.getCode(),hinge.getMgCode(),hinge.getThickness(),hinge.getTitle()));
         }
 
-//        if (!(this.productModule.getHingeCode() == null)) this.getHingeRate(this.productModule.getHingeCode(),this.productModule.getHingeQuantity());
-       /* if (!(this.productModule.getHandleCode() == null)) this.getHandleOrKnobRate(this.productModule.getHandleCode(),this.productModule.getHandleQuantity());
-        if (!(this.productModule.getKnobCode() == null)) this.getHandleOrKnobRate(this.productModule.getKnobCode(),this.productModule.getKnobQuantity());*/
-    }
+   }
 
     private void resolveHandles()
     {
         String handletypeSelection = this.productLineItem.getHandletypeSelection();
-
-//        LOG.debug("Inisde resolve handles module :" + this.productModule.encodePrettily());
 
         if (handletypeSelection == null) return;
 
@@ -271,52 +256,32 @@ public class ModulePriceHolder
                 if (!(this.productLineItem.getHandleCode() == null))
                 {
                     this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
-                    // Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getHandleCode());
-                    //  this.productionSpecificationComponents.add(new Handle(handle));
                 }
             }
             else if (this.productModule.getHandleOverrideFlag().equals("Yes")) {
                 {
                     this.getHandleOrKnobRate(this.productModule.getHandleCode(), this.productModule.getHandleQuantity());
-                    // Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getHandleCode());
-                    //  this.productionSpecificationComponents.add(new Handle(handle));
                 }
             }
-
-
-
             if (!(this.productLineItem.getKnobCode() == null)){
                 this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
-                // Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getKnobCode());
-                //  this.productionSpecificationComponents.add(new Handle(knob));
             }
         }
 
-
-
         if (Objects.equals(handletypeSelection,GOLA_PROFILE ))
         {
-
-//            LOG.debug("Inside gola profile");
-
-
             if (!(this.productModule.getHandleCode() == null))
             {
                 this.getHandleOrKnobRate(this.productLineItem.getHandleCode(),this.productModule.getHandleQuantity());
-                // Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getHandleCode());
-                //  this.productionSpecificationComponents.add(new Handle(handle));
             }
             if (!(this.productModule.getKnobCode() == null)){
                 this.getHandleOrKnobRate(this.productLineItem.getKnobCode(),this.productModule.getKnobQuantity());
-                // Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(this.productModule.getKnobCode());
-                //  this.productionSpecificationComponents.add(new Handle(knob));
             }
             int moduleCount = 0;
             int drawerModuleCount= 0;
             double wallProfileWidth = 0.0;
             double lProfileWidth = 0.0;
             double cProfileWidth = 0.0;
-            //double golaProfileLength = Double.valueOf(productLineItem.getNoOfLengths().toString());
             double wProfilePrice ;
             double lProfilePrice ;
             double cProfilePrice ;
@@ -355,7 +320,6 @@ public class ModulePriceHolder
                                  lProfileWidth = lProfileWidth + this.productModule.getHeight();
                              } else {
                                  lProfileWidth = lProfileWidth + this.productModule.getWidth();
-
                              }
                          }
                      }
@@ -366,9 +330,7 @@ public class ModulePriceHolder
 
                 profilePrice = wProfilePrice + lProfilePrice + cProfilePrice;
                 bracketPrice = (moduleCount * 2) * this.bracketRate.getPrice();
-//                lConnectorPrice = golaProfileLength * this.lConnectorRate.getPrice();
                 cConnectorPrice = drawerModuleCount * this.cConnectorRate.getPrice();
-
 
                 wProfileSourceCost = wallProfileWidth/1000 * wWidthRate.getSourcePrice();
                 lProfileSorceCost = lProfileWidth/1000 * lWidthRate.getSourcePrice();
@@ -385,20 +347,14 @@ public class ModulePriceHolder
                 golaProfilePrice = profilePrice + bracketPrice  + cConnectorPrice;
                 handleandKnobCost += golaProfilePrice;
 
-//                LOG.debug("Gola Profile Price: " + golaProfilePrice);
-
         }
         else if (Objects.equals(handletypeSelection, "G Profile")){
-
-//            LOG.debug("G Profile : ");
 
             double lWidth = 0;
             double gOrJProfileSourceCost;
             double gOrJProfilePrice = 0;
             double quantity = 0;
-           // for (ProductModule module : this.productLineItem.getModules())
-           // {
-//                LOG.debug("Module : " + this.productModule.toString());
+
                 Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(this.productModule.getMGCode());
                 for (AccessoryPackComponent accessoryPackComponent : handles)
                 {
@@ -422,31 +378,18 @@ public class ModulePriceHolder
                         lWidth = lWidth + this.productModule.getWidth();
                     }
                 }
-           // }
                 gOrJProfilePrice = lWidth/1000 * gProfileRate.getPrice();
-//            LOG.debug("G profile rate : " +  gProfileRate.getPrice());
-
 
             gOrJProfileSourceCost = lWidth/1000 * gProfileRate.getSourcePrice();
             handleandKnobSourceCost +=  gOrJProfileSourceCost;
-
-//            LOG.debug("Inside G profile : "+ gOrJProfilePrice);
-                //LOG.debug("L width Rate :" + gProfileRate.getPrice());
-                handleandKnobCost += gOrJProfilePrice;
-
-
+            handleandKnobCost += gOrJProfilePrice;
         }
         else if (Objects.equals(handletypeSelection, "J Profile"))
         {
-//            LOG.debug("J profile : ");
-
             double lWidth = 0;
             double gOrJProfileSourceCost;
             double gOrJProfilePrice;
             double quantity = 0;
-          //  for (ProductModule module : this.productLineItem.getModules())
-          //  {
-//                LOG.debug("Module : " + this.productModule.toString());
                 Collection<AccessoryPackComponent> handles = ModuleDataService.getInstance().getAccessoryPackComponents(this.productModule.getMGCode());
                 for (AccessoryPackComponent accessoryPackComponent : handles)
                 {
@@ -464,22 +407,14 @@ public class ModulePriceHolder
                     if (this.productModule.getModuleCategory().contains("Drawer"))
                     {
                         lWidth = lWidth + (quantity * this.productModule.getWidth());
-//                        LOG.debug("Inside if :" + lWidth);
                     }
                     else {
                         lWidth = lWidth + this.productModule.getWidth();
-//                        LOG.debug("Inside else :" + lWidth);
                     }
                 }
-           // }
             gOrJProfilePrice = lWidth/1000 * jProfileRate.getPrice();
-//            LOG.debug("J profile rate : " +  jProfileRate.getPrice());
-//            LOG.debug("Inside J profile : "+ gOrJProfilePrice);
-
             gOrJProfileSourceCost = lWidth/1000 * jProfileRate.getSourcePrice();
             handleandKnobSourceCost +=  gOrJProfileSourceCost;
-
-            //LOG.debug("L width Rate :" + gProfileRate.getPrice());
             handleandKnobCost += gOrJProfilePrice;
         }
 
@@ -493,7 +428,6 @@ public class ModulePriceHolder
         }
         else if (component.isHardware())
         {
-//            LOG.debug("hardware Components : " + component.toString());
             this.addHardwareComponent(component, accPackCode);
         }
         else if (component.isAccessory())
@@ -552,26 +486,18 @@ public class ModulePriceHolder
         {
             handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
             handleandKnobSourceCost += handleAndKnobCost.getSourcePrice() * quantity;
-//            LOG.debug("Handle and Knob Cost : " + handleAndKnobCost.getPrice() + ":" + quantity);
         }
-
-
     }
 
     private void getHingeRateBasedOnQty(HingePack hingePack)
     {
-//        LOG.debug("Hinge Pack inside QTY : " + hingePack);
-
         double quantity = hingePack.getQUANTITY();
 
       if (Objects.equals(hingePack.getQtyFlag(), "C")) {
-//          LOG.debug("inisde 1st if" + hingePack);
           if (Objects.equals(hingePack.getQtyFormula(), "") || hingePack.getQtyFormula().isEmpty()) {
-//              LOG.debug("inisde 2nd if" + hingePack);
               String code = null;
               if (Objects.equals(hingePack.getTYPE(), "Soft Close"))
               {
-//                  LOG.debug("inisde soft close" + hingePack);
                   if (productModule.getDepth() < 350)
                       code = "HINGE05";
                   else if (productModule.getDepth() < 400)
@@ -585,8 +511,6 @@ public class ModulePriceHolder
               }
               else
               {
-//                  LOG.debug("inisde non soft close" + hingePack);
-
                   if (productModule.getDepth() < 350)
                       code = "HINGE11";
                   else if (productModule.getDepth() < 400)
@@ -599,16 +523,11 @@ public class ModulePriceHolder
                       code = "HINGE12";
               }
 
-
-//              LOG.debug("code" + code);
-
               PriceMaster hingeCostPriceMaster = RateCardService.getInstance().getHingeRate(code, this.priceDate, this.city);
               hingeCost += hingeCostPriceMaster.getPrice() * quantity;
               hingeSourceCost += hingeCostPriceMaster.getSourcePrice() * quantity;
 
           } else {
-
-//              LOG.debug("Hinge Pack inside C : " + hingePack);
               if (Objects.equals(hingePack.getQtyFormula(), "F6")) {
                   int value1 = (productModule.getHeight() > 2100) ? 5 : 4;
                   int value2 = (productModule.getWidth() > 600) ? 2 : 1;
@@ -626,13 +545,6 @@ public class ModulePriceHolder
             hingeCost += hingeCostPriceMaster.getPrice() * quantity;
             hingeSourceCost += hingeCostPriceMaster.getSourcePrice() * quantity;
         }
-    }
-
-    private void getHingeRate(String code,double quantity)
-    {
-        PriceMaster handleAndKnobCost = RateCardService.getInstance().getHingeRate(code, this.priceDate, this.city);
-
-        handleandKnobCost += handleAndKnobCost.getPrice() * quantity;
     }
 
     private ModulePanel getModulePanel(IModuleComponent component)
@@ -682,9 +594,6 @@ public class ModulePriceHolder
         this.shutterFinishRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
         this.stdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR,RateCard.FACTOR_TYPE ,this.priceDate, this.city);
         this.nStdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
-//        this.nStdManufacturingCostWardrobe = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_WARDROBE, RateCard.FACTOR_TYPE,this.priceDate, this.city);
-//        this.nStdManufacturingCostShoeRack = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_SHOERACK, RateCard.FACTOR_TYPE,this.priceDate, this.city);
-//        this.nStdManufacturingCostStudyTable = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR_STUDYTABLE, RateCard.FACTOR_TYPE,this.priceDate, this.city);
 
         this.carcassDoubleExposedRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getDoubleExposedCostCode(),
                 RateCard.SHUTTER_TYPE,this.priceDate, this.city);
@@ -694,9 +603,8 @@ public class ModulePriceHolder
         this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.labourManufacturingRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
-        this.nonStandardloadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR_NONSTANDARD,
-                RateCard.FACTOR_TYPE,this.priceDate, this.city);
-//        LOG.debug("this.nonstandard" + this.nonStandardloadingFactorCard.getRate());
+        this.nonStandardReductionFactorCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.REDUCTION_FACTOR_NONSTANDARD,
+                RateCard.FACTOR_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
         this.loadingFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LOADING_FACTOR,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city,this.productModule.getProductCategory());
         this.stdLoadingSourceFactorBasedOnProduct = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.STD_MANUFACTURING_COST_FACTOR,
@@ -721,15 +629,11 @@ public class ModulePriceHolder
         this.lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, city);
         this.cConnectorRate = RateCardService.getInstance().getHardwareRate("H072", priceDate, city);
         this.gProfileRate = RateCardService.getInstance().getHardwareRate("H018", priceDate, city);
-//        LOG.debug("G profile Rate : " + this.gProfileRate);
         this.jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
-//        LOG.debug("J profile Rate : " + this.jProfileRate);
-
-
 
 
         if (carcassMaterialRateCard == null || carcassFinishRateCard == null || shutterFinishRateCard == null
-                || loadingFactorCard == null || labourRateCard == null || nonStandardloadingFactorCard == null || loadingFactorBasedOnProduct == null)
+                || loadingFactorCard == null || labourRateCard == null || nonStandardReductionFactorCard == null || loadingFactorBasedOnProduct == null)
         {
             this.addError("Carcass, Carcass Finish, Shutter, Labour or Loading factor rate cards not setup." + carcassCode + " : "
                     + productModule.getFinishCode() + " : " + shutterFinish.getCostCode());
@@ -766,12 +670,6 @@ public class ModulePriceHolder
 
     public JsonObject getPriceJson()
     {
-/*
-        return new JsonObject().put("woodworkCost", this.round(this.woodworkCost, 2))
-                .put("moduleArea", this.moduleArea)
-                .put("totalCost", this.round(this.totalCost, 2));
-
-*/
 
                 return new JsonObject().put("woodworkCost", this.round(this.woodworkCost, 2))
                         .put("moduleArea", this.moduleArea)
@@ -863,68 +761,44 @@ public class ModulePriceHolder
             this.moduleArea = 0;
 
             for (PanelComponent panel : this.getPanelComponents()) {
+
                 double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
+                LOG.debug("rate : " + rate );
                 double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
-                double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePrice();
+                LOG.debug("std Source Rate : " + stdSourceRate );
+                double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
+                LOG.debug("nstd Source Rate : " + nStdSourceRate );
+                double nonStdReductionFactor = this.nonStandardReductionFactorCard.getRateBasedOnProduct();
+                LOG.debug("nstd Reduction Rate : " + nonStdReductionFactor );
                 if (panel.isExposed()) {
                     if ("Standard".equals(moduleType)) {
-                        if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory())) {
-//                        LOG.debug("Inside Wardrobe If clause shutter" + panel.getCost() + ":" + rate);
-//                        LOG.debug("Rate : " + rate);
-                            this.addToShutterCost(panel.getCost() * rate);
-                            this.addToShutterSourceCost(panel.getCost() * rate / stdSourceRate);
+                        this.addToShutterCost(panel.getCost() * rate);
+                        this.addToShutterSourceCost(panel.getCost() * rate / stdSourceRate);
 
-                        } else {
-                            this.addToShutterCost(panel.getCost());
-                            this.addToShutterSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
-                        }
                         if (panel.getCost() == 0.0) {
-                            //this.addToShutterCost(0.0);
                             finishValue = true;
                             return;
                         }
                     } else {
-                        if (Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory())) {
-//                        LOG.info("shoerack value 1 " +rate);
-                            this.addToShutterCost(panel.getCost() * rate);
-                            this.addToShutterSourceCost((panel.getCost() * rate) / this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
-                        } else {
-                            this.addToShutterCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
-                            this.addToShutterSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate()) / nStdSourceRate);
-                        }
+                        this.addToShutterCost(panel.getCost()  * nonStdReductionFactor);
+                        this.addToShutterSourceCost((panel.getCost()  * nonStdReductionFactor) / nStdSourceRate);
                         if (panel.getCost() == 0.0) {
-                            //this.addToShutterCost(0.0);
                             finishValue = true;
                             return;
                         }
-
                     }
                 } else {
                     if ("Standard".equals(moduleType)) {
-                        if (Objects.equals(WARDROBE, this.productModule.getProductCategory()) || Objects.equals("W", this.productModule.getProductCategory())) {
-//                        LOG.debug("Inside Wardrobe If clause Carcass" + ":" + panel.getCost() + ":" + rate );
-
-                            this.addToCarcassCost(panel.getCost() * rate);
-                            this.addToCarcassSourceCost(panel.getCost() * rate / stdSourceRate);
-                        } else {
-                            this.addToCarcassCost(panel.getCost());
-                            this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
-                        }
+                        this.addToCarcassCost(panel.getCost() * rate);
+                        this.addToCarcassSourceCost(panel.getCost() * rate / stdSourceRate);
                     } else if ("hike".equals(moduleType)) {
                         this.addToCarcassCost(panel.getCost());
-                        this.addToCarcassSourceCost(panel.getCost() / stdManufacturingCost.getSourcePrice());
+                        this.addToCarcassSourceCost(panel.getCost() / stdSourceRate);
                     } else {
-                        if (Objects.equals("shoerack", this.productModule.getProductCategory()) || Objects.equals("studytable", this.productModule.getProductCategory()) || Objects.equals("crunit", this.productModule.getProductCategory())) {
-//                        LOG.info("Shoerack value in else 2 " +rate);
-                            this.addToCarcassCost(panel.getCost() * rate);
-                            this.addToCarcassSourceCost((panel.getCost() * rate) / this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct());
-                        } else {
-                            this.addToCarcassCost(panel.getCost() * this.nonStandardloadingFactorCard.getRate());
-                            this.addToCarcassSourceCost((panel.getCost() * this.nonStandardloadingFactorCard.getRate()) / nStdManufacturingCost.getSourcePrice());
-                        }
+                        this.addToCarcassCost(panel.getCost()  * nonStdReductionFactor );
+                        this.addToCarcassSourceCost((panel.getCost()  * nonStdReductionFactor ) / nStdSourceRate);
                     }
                 }
-
             }
 
             for (AccessoryComponent accessory : this.accessoryComponents) {
@@ -992,8 +866,6 @@ public class ModulePriceHolder
                     woTaxFactor = this.prodWoTaxFactor.getSourcePrice();
                     break;
             }
-
-//            LOG.debug("Wo tax factor : " + woTaxFactor);
 
             this.carcassCostWoTax = this.carcassCost * woTaxFactor;
             this.shutterCostWoTax = this.shutterCost * woTaxFactor;
@@ -1065,6 +937,8 @@ public class ModulePriceHolder
             {
                 this.accessoryMargin = (this.accessoryProfit / this.accessoryCostWoTax)*100;
             }
+
+            LOG.debug("MSC COST : " + this.carcassCost + " :" + this.shutterCost + " : " + this.labourCost + " : "  + loadingFactorCard.getRate());
 
             this.woodworkCost = (this.carcassCost + this.shutterCost + this.labourCost) * loadingFactorCard.getRate() + this.handleandKnobCost + this.hingeCost + this.hardwareCost;
             this.totalCost = this.woodworkCost + this.accessoryCost ;
@@ -1434,7 +1308,7 @@ public class ModulePriceHolder
                 ", loadingFactorCard=" + loadingFactorCard +
                 ", labourRateCard=" + labourRateCard +
                 ", labourManufacturingRateCard=" + labourManufacturingRateCard +
-                ", nonStandardloadingFactorCard=" + nonStandardloadingFactorCard +
+                ", nonStandardReductionFactorCard=" + nonStandardReductionFactorCard +
                 ", loadingFactorBasedOnProduct=" + loadingFactorBasedOnProduct +
                 ", stdLoadingSourceFactorBasedOnProduct=" + stdLoadingSourceFactorBasedOnProduct +
                 ", nStdLoadingSourceFactorBasedOnProduct=" + nStdLoadingSourceFactorBasedOnProduct +
