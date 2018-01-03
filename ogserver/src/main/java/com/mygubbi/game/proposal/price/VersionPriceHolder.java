@@ -145,9 +145,9 @@ public class VersionPriceHolder {
 
             vrPrice = vrPrice + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
             vrPriceAfterDiscount = vrPriceAfterDiscount + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
+           vrPriceAfterTax = vrPriceAfterTax + versionServicePriceHolder.getProjectHandlingPriceAfterTax() + versionServicePriceHolder.getDeepClearingPriceAfterTax() + versionServicePriceHolder.getFloorProtectionPriceAfterTax();
+            vrCost = vrCost + versionServicePriceHolder.getProjectHandlingCost() + versionServicePriceHolder.getDeepClearingCost() + versionServicePriceHolder.getFloorProtectionCost();
 
-            System.out.println("Shilpa vrPRice = "+vrPrice);
-            System.out.println("Shilpa vrPriceAfterDiscount = "+vrPriceAfterDiscount);
         }
     }
 

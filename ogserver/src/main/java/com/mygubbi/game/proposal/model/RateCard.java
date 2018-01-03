@@ -37,6 +37,9 @@ public class RateCard
     public static final String PROJECT_HANDLING_FACTOR = "PHC";
     public static final String DEEP_CLEARING_FACTOR = "DCC";
     public static final String FLOOR_PROTECTION_FACTOR = "FPC";
+    public static final String PROJECT_HANDLING_TAX_FACTOR = "PHT";
+    public static final String DEEP_CLEARING_TAX_FACTOR = "DCT";
+    public static final String FLOOR_PROTECTION_TAX_FACTOR = "FPT";
 
     private String code;
     private String type;

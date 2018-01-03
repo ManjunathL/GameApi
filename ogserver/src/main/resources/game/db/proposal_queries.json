@@ -146,8 +146,8 @@
       "id": "proposal.version.price.update",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set amount = ?, finalAmount = ?, discountAmount = ? where id = ?",
-      "params": ["amount", "finalAmount", "discountAmount", "id" ]
+      "query": "update version_master set amount = ?, finalAmount = ?, discountAmount = ?,projectHandlingQty=?,projectHandlingAmount=?,deepClearingAmount=?,floorProtectionAmount=? where id = ?",
+      "params": ["amount", "finalAmount", "discountAmount","projectHandlingQty","projectHandlingAmount","deepClearingAmount","floorProtectionAmount","id" ]
     },
     {
       "id": "proposal.version.selectversion",

@@ -55,16 +55,24 @@ public class ProposalHeader extends JsonObject
     private static final String CPHONE2 =       "cphone2" ;
     private static final String DESIGNER_PHONE ="designerPhone" ;
     private static final String  NO_OF_DAYSFORWORKCOMPLETION="noOfDaysForWorkCompletion";
-
+    private static final String PROJECTHANDLING_CHARGES_FLAG="projectHandlingChargesApplied";
+    private static final String DEEP_CLEARING_FLAG="deepClearingChargesApplied";
+    private static final String FLOOR_PROTECTION_FLAG="floorProtectionChargesApplied";
 
     private Date priceDate;
     private String designerName;
     private Date createDate;
+    private String deepClearingChargesApplied;
+    private String projectHandlingChargesApplied;
+    private String floorProtectionChargesApplied;
 
 
     public ProposalHeader(JsonObject json)
     {
         super(json.getMap());
+        this.setProjectHandlingChargesAppliedForCNC(json.getString(PROJECTHANDLING_CHARGES_FLAG));
+        this.setFloorProtectionChargesAppliedForCNC(json.getString(FLOOR_PROTECTION_FLAG));
+        this.setDeepClearingChargesAppliedForCNC(json.getString(DEEP_CLEARING_FLAG));
     }
 
     public ProposalHeader()
@@ -130,6 +138,48 @@ public class ProposalHeader extends JsonObject
         return this.getString(BEFORE_PRODUCTION_SPECIFICATION);
     }
     public int getNoOfDaysforworkcompletion() {return this.getInteger(NO_OF_DAYSFORWORKCOMPLETION);}
+
+
+    public String getDeepClearingChargesApplied() {
+        return deepClearingChargesApplied;
+    }
+
+    public String getProjectHandlingChargesApplied() {
+        return projectHandlingChargesApplied;
+    }
+
+    public String getFloorProtectionChargesApplied() {
+        return floorProtectionChargesApplied;
+    }
+
+
+    public String getDeepClearingChargesAppliedForMargin() {
+        return this.getString(DEEP_CLEARING_FLAG);
+    }
+
+    public String getProjectHandlingChargesAppliedForMargin() {
+        return this.getString(PROJECTHANDLING_CHARGES_FLAG);
+    }
+
+    public String getFloorProtectionChargesAppliedForMargin() {
+        return this.getString(FLOOR_PROTECTION_FLAG);
+    }
+
+    public ProposalHeader setDeepClearingChargesApplied(String deepClearingChargesApplied) {
+        this.put(deepClearingChargesApplied,DEEP_CLEARING_FLAG);
+        return this;
+    }
+
+    public ProposalHeader setProjectHandlingChargesApplied(String projectHandlingChargesApplied) {
+        this.put(projectHandlingChargesApplied,PROJECTHANDLING_CHARGES_FLAG);
+        return this;
+    }
+
+    public ProposalHeader setFloorProtectionChargesApplied(String floorProtectionChargesApplied) {
+        this.put(floorProtectionChargesApplied,FLOOR_PROTECTION_FLAG);
+        return this;
+    }
+
     public ProposalHeader setSowRemarksV1(String remarksV1)
     {
         put(remarksV1,SOW_REMARKS_V1);
@@ -239,6 +289,17 @@ public class ProposalHeader extends JsonObject
 
     public  String getOfferType() {if(this.containsKey(OFFER_TYPE) )return this.getString(OFFER_TYPE);return "";}
 
+    public void setDeepClearingChargesAppliedForCNC(String deepClearingChargesAppliedForCNC) {
+        this.deepClearingChargesApplied = deepClearingChargesAppliedForCNC;
+    }
+
+    public void setFloorProtectionChargesAppliedForCNC(String floorProtectionChargesAppliedForCNC) {
+        this.floorProtectionChargesApplied = floorProtectionChargesAppliedForCNC;
+    }
+
+    public void setProjectHandlingChargesAppliedForCNC(String projectHandlingChargesAppliedForCNC) {
+        this.projectHandlingChargesApplied = projectHandlingChargesAppliedForCNC;
+    }
 }
 
 

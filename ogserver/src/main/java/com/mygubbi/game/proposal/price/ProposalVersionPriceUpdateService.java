@@ -196,10 +196,27 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             totalProposalVersionProductCost += totalProductCost;
                         }
 
-                        totalProposalVersionProductCost = proposalVersion.getDeepClearingAmount() + proposalVersion.getFloorProtectionAmount() + proposalVersion.getProjectHandlingAmount();
-                        proposalVersion.setAmount(totalProposalVersionProductCost);
+                        double discountAmountNew = totalProposalVersionProductCost * (proposalVersion.getDiscountPercentage()/100);
+                        double totalProductPriceAfterDiscount = totalProposalVersionProductCost - discountAmountNew;
+                        proposalVersion.setProjectHAndlingQty(totalProductPriceAfterDiscount);
 
-                        double discountAmountNew = (int)proposalVersion.getAmount() * (proposalVersion.getDiscountPercentage()/100);
+                        proposalHeader.setDeepClearingChargesAppliedForCNC("true");
+                        proposalHeader.setFloorProtectionChargesAppliedForCNC("true");
+                        proposalHeader.setProjectHandlingChargesAppliedForCNC("true");
+                        VersionServicePriceHolder versionServicePriceHolder = new VersionServicePriceHolder(proposalVersion,totalProductPriceAfterDiscount,proposalHeader);
+                        versionServicePriceHolder.prepare();
+                        if (versionServicePriceHolder.hasErrors())
+                        {
+                            LOG.info(String.valueOf(versionServicePriceHolder.getErrors()));
+                        }
+                        else {
+                            versionServicePriceHolder.calculateTotalServiceCost();
+                        }
+                        totalProposalVersionProductCost = totalProposalVersionProductCost + versionServicePriceHolder.getProjectHandlingPrice() + versionServicePriceHolder.getFloorProtectionPrice() + versionServicePriceHolder.getDeepClearingPrice();
+                        proposalVersion.setProjectHandlingAmount(versionServicePriceHolder.getProjectHandlingPrice());
+                        proposalVersion.setDeepClearingAmount(versionServicePriceHolder.getDeepClearingPrice());
+                        proposalVersion.setFloorProtectionAmount(versionServicePriceHolder.getFloorProtectionPrice());
+                        proposalVersion.setAmount(totalProposalVersionProductCost);
                         double finalAmount = proposalVersion.getAmount() - discountAmountNew;
                         proposalVersion.setDiscountAmount(discountAmountNew);
                         finalAmount = finalAmount - finalAmount%10;
