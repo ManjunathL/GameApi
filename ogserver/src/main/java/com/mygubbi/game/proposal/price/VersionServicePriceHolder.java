@@ -23,6 +23,7 @@ public class VersionServicePriceHolder {
     private RateCard deepClearingTaxRateCard;
     private RateCard floorProtectionTaxRateCard;
 
+    private double projectHandlingQty = 0;
     private double deepClearingQuantity = 0;
     private double floorProtectionSqft = 0;
 
@@ -71,16 +72,19 @@ public class VersionServicePriceHolder {
 
 
     public void calculateTotalServiceCost() {
+        this.projectHandlingQty = this.proposalVersion.getProjectHandlingQty();
         this.deepClearingQuantity = this.proposalVersion.getDeepClearingQty();
         this.floorProtectionSqft = this.proposalVersion.getFloorProtectionSqft();
-        if (this.projectHandlingRateCard.getRate() == 0 || this.totalProductPriceAfterDiscount == 0 || this.proposalHeader.getProjectHandlingChargesApplied().equalsIgnoreCase("false")) {
+        LOG.info("Before floorProtectionSqft = "+floorProtectionSqft);
+        LOG.info("this.proposalHeader.getFloorProtectionChargesApplied() = "+this.proposalHeader.getFloorProtectionChargesApplied());
+        if (this.projectHandlingRateCard.getRate() == 0 || this.totalProductPriceAfterDiscount == 0 ) {
             this.projectHandlingPrice = 0;
         } else {
             this.projectHandlingPrice = this.proposalVersion.getProjectHandlingQty() * (this.projectHandlingRateCard.getRate() / 100);
             this.projectHandlingCost = this.proposalVersion.getProjectHandlingQty() * (this.projectHandlingRateCard.getSourcePrice() / 100);
             this.projectHandlingPriceAfterTax = this.projectHandlingPrice * this.projectHandlingTaxRateCard.getSourcePrice();
         }
-        if (this.floorProtectionSqft == 0 || this.proposalHeader.getFloorProtectionChargesApplied().equalsIgnoreCase("false")) {
+        if (this.floorProtectionSqft == 0) {
             this.floorProtectionPrice = 0;
         }
         else
@@ -89,7 +93,9 @@ public class VersionServicePriceHolder {
             this.floorProtectionCost = this.floorProtectionRateCard.getSourcePrice() * this.floorProtectionSqft;
             this.floorProtectionPriceAfterTax = this.floorProtectionPrice * this.floorProtectionTaxRateCard.getSourcePrice();
         }
-        if (this.deepClearingQuantity == 0 || this.proposalHeader.getDeepClearingChargesApplied().equalsIgnoreCase("false")) {
+
+        LOG.info("After floorProtectionSqft = "+floorProtectionSqft);
+        if (this.deepClearingQuantity == 0 ) {
             this.deepClearingPrice = 0;
         }
         else
@@ -146,6 +152,10 @@ public class VersionServicePriceHolder {
 
     public double getDeepClearingQuantity() {
         return deepClearingQuantity;
+    }
+
+    public double getProjectHandlingQty() {
+        return projectHandlingQty;
     }
 
     public double getFloorProtectionSqft() {

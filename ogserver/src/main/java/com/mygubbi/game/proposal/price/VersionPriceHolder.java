@@ -111,6 +111,7 @@ public class VersionPriceHolder {
     private double floorProtectionPrice = 0;
     private double deepClearingQty = 0;
     private double floorProtectionSqft = 0;
+    private double projectHandlingQty = 0;
 
 
     public VersionPriceHolder(ProposalHeader proposalHeader, List<ProductPriceHolder> productPriceHolders, List<AddonPriceHolder> addonPriceHolders, ProposalVersion proposalVersion) {
@@ -142,12 +143,17 @@ public class VersionPriceHolder {
             floorProtectionPrice = versionServicePriceHolder.getFloorProtectionPrice();
             deepClearingQty = versionServicePriceHolder.getDeepClearingQuantity();
             floorProtectionSqft=versionServicePriceHolder.getFloorProtectionSqft();
+            projectHandlingQty = versionServicePriceHolder.getProjectHandlingQty();
 
             vrPrice = vrPrice + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
             vrPriceAfterDiscount = vrPriceAfterDiscount + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
            vrPriceAfterTax = vrPriceAfterTax + versionServicePriceHolder.getProjectHandlingPriceAfterTax() + versionServicePriceHolder.getDeepClearingPriceAfterTax() + versionServicePriceHolder.getFloorProtectionPriceAfterTax();
+            LOG.info("Before vrcost = "+vrCost);
+            LOG.info("versionServicePriceHolder.getProjectHandlingCost()  = "+versionServicePriceHolder.getProjectHandlingCost() );
+            LOG.info("versionServicePriceHolder.getDeepClearingCost() = "+versionServicePriceHolder.getDeepClearingCost());
+            LOG.info("versionServicePriceHolder.getFloorProtectionCost() = "+versionServicePriceHolder.getFloorProtectionCost());
             vrCost = vrCost + versionServicePriceHolder.getProjectHandlingCost() + versionServicePriceHolder.getDeepClearingCost() + versionServicePriceHolder.getFloorProtectionCost();
-
+            LOG.info("After vrcost = "+vrCost);
         }
     }
 
@@ -1003,6 +1009,10 @@ public class VersionPriceHolder {
         return floorProtectionSqft;
     }
 
+    public double getProjectHandlingQty(){
+        return projectHandlingQty;
+    }
+
     public JsonObject getPriceJson()
     {
         double addonMargin = 0;
@@ -1034,7 +1044,9 @@ public class VersionPriceHolder {
                 .put("deepClearingAmount", this.round(deepClearingPrice, 2))
                 .put("floorProtectionAmount", this.round(floorProtectionPrice, 2))
                 .put("deepClearingQty", this.round(deepClearingQty, 2))
-                .put("floorProtectionSqft", this.round(floorProtectionSqft, 2));
+                .put("floorProtectionSqft", this.round(floorProtectionSqft, 2))
+                .put("projectHandlingQty",this.round(projectHandlingQty,2));
+
 
     }
 

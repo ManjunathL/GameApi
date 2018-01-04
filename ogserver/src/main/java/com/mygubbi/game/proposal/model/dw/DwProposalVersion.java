@@ -143,6 +143,7 @@ public class DwProposalVersion extends JsonObject {
 
     private static final String DEEP_CLEARING_QTY ="deepClearingQty" ;
     private static final String FLOOR_PROTECTION_SQFT ="floorProtectionSqft" ;
+    private static final String PROJECT_HANDLING_QTY ="projectHandlingQty" ;
     private static final String DEEP_CLEARING_AMT ="deepClearingAmount" ;
     private static final String FLOOR_PROTECTION_AMT ="floorProtectionAmount" ;
     private static final String PROJECT_HANDLING_AMT ="projectHandlingAmount" ;
@@ -207,6 +208,16 @@ public class DwProposalVersion extends JsonObject {
         put(FLOOR_PROTECTION_SQFT,sqft);
         return this;
     }
+
+    public static String getProjectHandlingQty() {
+        return PROJECT_HANDLING_QTY;
+    }
+    public DwProposalVersion setProjectHandlingQty(Double amt)
+    {
+        put(PROJECT_HANDLING_QTY,amt);
+        return this;
+    }
+
     public static String getDeepClearingAmt() {
         return DEEP_CLEARING_AMT;
     }
@@ -1409,6 +1420,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setDeepClearingQty(versionPriceHolder.getDeepClearingQty());
         dwProposalVersion.setDeepClearingAmt(versionPriceHolder.getDeepClearingPrice());
         dwProposalVersion.setFloorProtectionInSqft(versionPriceHolder.getFloorProtectionSqft());
+        dwProposalVersion.setProjectHandlingQty(versionPriceHolder.getProjectHandlingQty());
         dwProposalVersion.setFloorProtectionAmt(versionPriceHolder.getFloorProtectionPrice());
         dwProposalVersion.setProjectHandlingAmt(versionPriceHolder.getProjectHandlingPrice());
 
