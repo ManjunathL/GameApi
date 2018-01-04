@@ -192,7 +192,7 @@
       "id": "version.createdraft",
       "type": "insert",
       "table": "version_master",
-      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount,profit,margin,amountWotax,manufactureAmount) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, '',0.0,0.0,0.0,0.0,0.0,0.0,0.0)",
+      "query": "insert into version_master(version, fromVersion, proposalId, title, status, internalStatus, finalAmount, remarks,discountAmount,discountPercentage,amount,profit,margin,amountWotax,manufactureAmount,deepClearingQty) values (0.1, ?, ?, ?, 'Draft', 'Draft', 0.0, '',0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0)",
       "params": ["fromVersion", "proposalId", "title"]
     },
 
