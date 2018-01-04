@@ -894,7 +894,7 @@ public class QuotationPDFCreator
                         LOG.info("Value for project handling Amount " +projectHandling);
                         LOG.info("project handling charges " +proposalVersion.getProjectHandlingAmount() + proposalVersion.getDeepClearingAmount()+ " proposal version Floor protection " +proposalVersion.getFloorProtectionAmount());
                         this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"1"," Project Handling Charges",proposalVersion.getProjectHandlingQty(),projectHandling,proposalVersion.getProjectHandlingAmount());
-                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"2"," Deep Cleaning Charges",proposalVersion.getDeepClearingQty(),String.valueOf(deepClearingAmount.getPrice()),proposalVersion.getDeepClearingAmount());
+                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"2"," House Keeping Charges",proposalVersion.getDeepClearingQty(),String.valueOf(deepClearingAmount.getPrice()),proposalVersion.getDeepClearingAmount());
                         this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"3"," Floor Protection Charges",proposalVersion.getFloorProtectionSqft(),String.valueOf(floorProtectionAmount.getPrice()),proposalVersion.getFloorProtectionAmount());
                         document.add(miscellaneousTable);
 
@@ -2577,7 +2577,7 @@ public class QuotationPDFCreator
         double deepClearingwithTax=proposalVersion.getDeepClearingAmount()*deepClearingTax.getSourcePrice();
         double floorProtectionwithTax=proposalVersion.getFloorProtectionAmount()*floorProtectionTax.getSourcePrice();
         GSTForProducts gstPHC=new GSTForProducts("Proposal Services","Project Handling Charges",proposalVersion.getProjectHandlingAmount(),proposalVersion.getProjectHandlingAmount(),projectHandlingwithTax,"18%","A","NA");
-        GSTForProducts gstDCC=new GSTForProducts("Proposal Services","Deep Cleaning Charges",proposalVersion.getDeepClearingAmount(),proposalVersion.getDeepClearingAmount(),deepClearingwithTax,"18%","A","NA");
+        GSTForProducts gstDCC=new GSTForProducts("Proposal Services","House Keeping Charges",proposalVersion.getDeepClearingAmount(),proposalVersion.getDeepClearingAmount(),deepClearingwithTax,"18%","A","NA");
         GSTForProducts gstFPC=new GSTForProducts("Proposal Services","Floor Protection Charges",proposalVersion.getFloorProtectionAmount(),proposalVersion.getFloorProtectionAmount(),floorProtectionwithTax,"18%","A","NA");
         proposalservicesList.add(gstPHC);
         proposalservicesList.add(gstDCC);
