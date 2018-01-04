@@ -2,7 +2,7 @@
   "version": "0.0.0a",
   "jdbc":[ {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/prod_check",
+    "url": "jdbc:mysql://localhost/report?autoReconnect=true",
     "max_pool_size": 20,
     "user": "root",
     "password": "",

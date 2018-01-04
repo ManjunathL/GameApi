@@ -109,7 +109,7 @@ public class QuotationPDFCreator
     java.util.Date date;
     java.util.Date currentDate = new java.util.Date(117 ,9,28,0,0,00);
     java.util.Date gstTextChangeDate = new java.util.Date(117 ,10,15,0,0,00);
-    java.util.Date miscTextChangeDate = new java.util.Date(118 ,00,1,0,0,00);
+    java.util.Date miscTextChangeDate = new java.util.Date(118 ,00,4,0,0,00);
     Boolean gstTextChangeDateValue;
     Boolean mscTextChangeDateValue;
 
