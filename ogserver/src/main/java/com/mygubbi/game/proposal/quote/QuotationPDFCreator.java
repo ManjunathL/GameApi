@@ -101,7 +101,7 @@ public class QuotationPDFCreator
     List<GSTForProducts> scwList=new ArrayList<>();
     List<GSTForProducts> designServiceList=new ArrayList<>();
     String MSCtaxPercentage="18%";
-    double miscCharges=0.0;
+    Double miscCharges=0.0;
 
     List<GSTForProducts> finalMovableList=new ArrayList<>();
     List<GSTForProducts> finalmovableList=new ArrayList<>();
@@ -857,22 +857,25 @@ public class QuotationPDFCreator
         document.add(p);
 
 
-                    PdfPTable miscellaneousTable = new PdfPTable(columnWidths1);
+                    PdfPTable miscellaneousTable = new PdfPTable(addonsWidths1);
                     miscellaneousTable.setWidthPercentage(100);
 
                     PdfPCell Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-                    itemsCell1.setBackgroundColor(BaseColor.ORANGE);
+                    Cell1.setBackgroundColor(BaseColor.ORANGE);
                     PdfPCell Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-                    itemsCell2.setBackgroundColor(BaseColor.ORANGE);
+                    Cell2.setBackgroundColor(BaseColor.ORANGE);
+                    PdfPCell Cell6=new PdfPCell(new Paragraph("UOM",fsize1));
+                    Cell6.setBackgroundColor(BaseColor.ORANGE);
                     PdfPCell Cell3 = new PdfPCell(new Paragraph("QTY",fsize1));
-                    itemsCell3.setBackgroundColor(BaseColor.ORANGE);
+                    Cell3.setBackgroundColor(BaseColor.ORANGE);
                     PdfPCell Cell4 = new PdfPCell(new Paragraph("PRICE",fsize1));
-                    itemsCell4.setBackgroundColor(BaseColor.ORANGE);
+                    Cell4.setBackgroundColor(BaseColor.ORANGE);
                     PdfPCell Cell5 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-                    itemsCell5.setBackgroundColor(BaseColor.ORANGE);
+                    Cell5.setBackgroundColor(BaseColor.ORANGE);
 
                     miscellaneousTable.addCell(Cell1);
                     miscellaneousTable.addCell(Cell2);
+                    miscellaneousTable.addCell(Cell6);
                     miscellaneousTable.addCell(Cell3);
                     miscellaneousTable.addCell(Cell4);
                     miscellaneousTable.addCell(Cell5);
@@ -882,7 +885,7 @@ public class QuotationPDFCreator
 
                     if(mscTextChangeDateValue)
                     {
-                        p=new Paragraph("MISCELLANEOUS \n",fsize1);
+                        p=new Paragraph("MISCELLANEOUS CHARGES \n",fsize1);
                         p.setAlignment(Element.ALIGN_LEFT);
                         document.add(p);
 
@@ -890,20 +893,19 @@ public class QuotationPDFCreator
                         document.add(p);
 
                         String projectHandling="";
-                        projectHandling=projectHandlingAmount.getPrice()+"%";
-                        LOG.info("Value for project handling Amount " +projectHandling);
-                        LOG.info("project handling charges " +proposalVersion.getProjectHandlingAmount() + proposalVersion.getDeepClearingAmount()+ " proposal version Floor protection " +proposalVersion.getFloorProtectionAmount());
-                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"1"," Project Handling Charges",proposalVersion.getProjectHandlingQty(),projectHandling,proposalVersion.getProjectHandlingAmount());
-                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"2"," House Keeping Charges",proposalVersion.getDeepClearingQty(),String.valueOf(deepClearingAmount.getPrice()),proposalVersion.getDeepClearingAmount());
-                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"3"," Floor Protection Charges",proposalVersion.getFloorProtectionSqft(),String.valueOf(floorProtectionAmount.getPrice()),proposalVersion.getFloorProtectionAmount());
+                        projectHandling=((Double)projectHandlingAmount.getPrice()).intValue()+"%";
+
+                        this.createRowAndFillDataForMiscellaneousForPer(miscellaneousTable,"1"," Project Handling Charges","%",proposalVersion.getProjectHandlingQty(),projectHandling,proposalVersion.getProjectHandlingAmount());
+                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"2"," House Keeping Charges","Rs",proposalVersion.getDeepClearingQty(),String.valueOf(round(deepClearingAmount.getPrice(),0)),round(proposalVersion.getDeepClearingAmount(),0));
+                        this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"3"," Floor Protection Charges","Rs per Sqft",proposalVersion.getFloorProtectionSqft(),String.valueOf(round(floorProtectionAmount.getPrice(),0)),round(proposalVersion.getFloorProtectionAmount(),0));
                         document.add(miscellaneousTable);
 
                         miscCharges=proposalVersion.getProjectHandlingAmount()+proposalVersion.getDeepClearingAmount()+proposalVersion.getFloorProtectionAmount();
-                        p = new Paragraph("Estimated Cost(C):" +miscCharges,fsize1);
+                        p = new Paragraph("Estimated Cost(C):" +miscCharges.intValue(),fsize1);
                         p.setAlignment(Element.ALIGN_RIGHT);
                         document.add(p);
 
-                        p = new Paragraph("Estimated Cost(A+B+C):" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost() + miscCharges  )) ,fsize1);
+                        p = new Paragraph("Estimated Cost(A+B+C):" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost() + miscCharges.intValue())) ,fsize1);
                         p.setAlignment(Element.ALIGN_RIGHT);
                         document.add(p);
 
@@ -913,7 +915,7 @@ public class QuotationPDFCreator
                             p.setAlignment(Element.ALIGN_RIGHT);
                             document.add(p);
                         }
-                        Double val = (quoteData.getTotalCost() + miscCharges) - quoteData.getDiscountAmount();
+                        Double val = (quoteData.getTotalCost() + miscCharges.intValue()) - quoteData.getDiscountAmount();
 
                         Double res = val - val % 10;
                         p = new Paragraph("Estimated Cost After Discount (A+B+C-D): " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,fsize1);
@@ -948,7 +950,7 @@ public class QuotationPDFCreator
                             p.setAlignment(Element.ALIGN_RIGHT);
                             document.add(p);
                         }
-                        Double val = (quoteData.getTotalCost() + miscCharges) - quoteData.getDiscountAmount();
+                        Double val = (quoteData.getTotalCost() + miscCharges.intValue()) - quoteData.getDiscountAmount();
 
                         Double res = val - val % 10;
                         p = new Paragraph("Estimated Cost After Discount (A+B-C): " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,fsize1);
@@ -1236,7 +1238,6 @@ public class QuotationPDFCreator
             for(GSTForProducts proposalServiceList:proposalservicesList)
             {
                 LOG.info("propsal Service List " +proposalServiceList);
-
                 this.createRowForDataForProposalServices(mscTable,count, proposalServiceList.getProducttitle(),proposalServiceList.getCategoryType(),this.round(proposalServiceList.getPriceAfterDiscount(),2), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax(), proposalServiceList.getTax());
                 //this.createRowAndFillDataTemp(mscTable,count,proposalServiceList.getProducttitle(),proposalServiceList.getTax(),proposalServiceList.getPriceAfterDiscount(), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax());
             }
@@ -1418,7 +1419,7 @@ public class QuotationPDFCreator
 
                     if(mscTextChangeDateValue)
                     {
-                        p=new Paragraph( "\n D. Miscellaneous:\n",fsize1);
+                        p=new Paragraph( "\n D. Miscellaneous Charges:\n",fsize1);
                         document.add(p);
 
                         p=new Paragraph(" ");
@@ -2228,9 +2229,9 @@ public class QuotationPDFCreator
             tabname.addCell(cell3);
 
     }
-    private void createRowAndFillDataForMiscellaneous(PdfPTable tabname,String index, String title, Double quantity, String amount, Double total)
+    private void createRowAndFillDataForMiscellaneousForPer(PdfPTable tabname,String index, String title,String uom, Double quantity, String amount, Double total)
     {
-        LOG.info("create row and fill data " +total);
+        LOG.info("create row and fill data " +quantity+ " amount " +amount+ " total " +total);
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -2244,6 +2245,12 @@ public class QuotationPDFCreator
         cell=new PdfPCell(new Paragraph(title,fsize));
         tabname.addCell(cell);
 
+        PdfPCell cl2=new PdfPCell();
+        Pindex=new Paragraph(uom,fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cl2.addElement(Pindex);
+        tabname.addCell(cl2);
+
         PdfPCell cell2=new PdfPCell();
         Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
         Pindex.setAlignment(Element.ALIGN_RIGHT);
@@ -2252,14 +2259,57 @@ public class QuotationPDFCreator
 
 
         PdfPCell cell4 = new PdfPCell();
-        Pindex = new Paragraph(this.getRoundOffValue(amount), fsize);
+        Pindex = new Paragraph((amount), fsize);
         Pindex.setAlignment(Element.ALIGN_RIGHT);
         cell4.addElement(Pindex);
         tabname.addCell(cell4);
 
         PdfPCell cell3 = new PdfPCell();
 
-        Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(round(total,0))), fsize);
+        Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(Double.valueOf(total).intValue())), fsize);
+        Pamt.setAlignment(Element.ALIGN_RIGHT);
+        cell3.addElement(Pamt);
+        tabname.addCell(cell3);
+
+    }
+    private void createRowAndFillDataForMiscellaneous(PdfPTable tabname,String index, String title,String uom, Double quantity, String amount, Double total)
+    {
+        LOG.info("create row and fill data " +quantity+ " amount " +amount+ " total " +total);
+        PdfPCell cell;
+        Paragraph Pindex;
+        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        cell=new PdfPCell(new Paragraph(title,fsize));
+        tabname.addCell(cell);
+
+        PdfPCell cl2=new PdfPCell();
+        Pindex=new Paragraph(uom,fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cl2.addElement(Pindex);
+        tabname.addCell(cl2);
+
+        PdfPCell cell2=new PdfPCell();
+        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cell2.addElement(Pindex);
+        tabname.addCell(cell2);
+
+
+        PdfPCell cell4 = new PdfPCell();
+        Pindex = new Paragraph(this.getRoundOffValue(String.valueOf(Double.valueOf(amount).intValue())), fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cell4.addElement(Pindex);
+        tabname.addCell(cell4);
+
+        PdfPCell cell3 = new PdfPCell();
+
+        Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(Double.valueOf(total).intValue())), fsize);
         Pamt.setAlignment(Element.ALIGN_RIGHT);
         cell3.addElement(Pamt);
         tabname.addCell(cell3);
