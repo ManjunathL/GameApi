@@ -1610,7 +1610,7 @@ public class QuotationPDFCreator
                            ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
                            ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
-                    this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
+                    this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), li.get(index).getAmount());
 
                 }else {
                     String text = "unit consists of " + li.get(index).getModulecount() +
@@ -1619,7 +1619,7 @@ public class QuotationPDFCreator
                             ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
                             ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
-                    this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
+                    this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), li.get(index).getAmount());
                 }
 
                 unitSequence++;
@@ -1642,7 +1642,7 @@ public class QuotationPDFCreator
                         ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
                         ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
-                this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), 0.0);
+                this.createRowAndFillData(li.get(index).getTabName(), null, text, 1.0, li.get(index).getAmount(), li.get(index).getAmount());
                 unitSequence++;
                 if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
             }
@@ -2223,7 +2223,7 @@ public class QuotationPDFCreator
 
             PdfPCell cell3 = new PdfPCell();
 
-            Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(round(total,2))), fsize);
+            Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(total.intValue())), fsize);
             Pamt.setAlignment(Element.ALIGN_RIGHT);
             cell3.addElement(Pamt);
             tabname.addCell(cell3);
