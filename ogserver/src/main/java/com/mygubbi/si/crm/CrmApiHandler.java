@@ -388,7 +388,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                     else
                     {
-                        sendError(routingContext.response(), "User already exists for email: " + email);
+                        sendJsonResponse(routingContext, new JsonObject().put("status", "User already exists").toString());
                     }
                 });
 
