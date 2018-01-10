@@ -2295,7 +2295,7 @@ public class QuotationPDFCreator
         tabname.addCell(cl2);
 
         PdfPCell cell2=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(quantity.intValue())),fsize);
+        Pindex=new Paragraph((String.valueOf(quantity)),fsize);
         Pindex.setAlignment(Element.ALIGN_RIGHT);
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
