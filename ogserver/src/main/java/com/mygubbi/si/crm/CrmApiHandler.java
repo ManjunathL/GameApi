@@ -165,7 +165,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         LOG.info("Create Proposal in Else");
                         LOG.info("Done Proposal");
                         LOG.info("Staring creating profile on website");
-                        createUserOnWebsite(routingContext,requestJson);
+                        createUserOnWebsite(requestJson);
                         LOG.info("created profile on website");
                         sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
 
@@ -233,7 +233,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                     LOG.info("Create Proposal in Else");
                     LOG.info("Done Proposal");
                     LOG.info("Staring creating profile on website");
-                    createUserOnWebsite(routingContext,requestJson);
+                    createUserOnWebsite(requestJson);
                     LOG.info("created profile on website");
                     sendJsonResponse(routingContext, new JsonObject().put("status", "Updated existed profile successfully").toString());
 
@@ -260,7 +260,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         //sendJsonResponse(routingContext, proposalData.encodePrettily());
                        // updateDataInFirebase(requestJson, proposalData);
                         LOG.info("updateProposal Success in else");
-                        createUserOnWebsite(routingContext,requestJson);
+                        createUserOnWebsite(requestJson);
                          sendJsonResponse(routingContext, new JsonObject().put("status", "success").toString());
                     }
                 });
@@ -376,7 +376,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                         {
 
                             LOG.info("Create Customer inside " +requestJson.encodePrettily());
-                          createUserOnWebsite(routingContext,requestJson);
+                          createUserOnWebsite(requestJson);
                             createProposal(routingContext, requestJson);
                             sendJsonResponse(routingContext, new JsonObject().put("status", "Success").toString());
                         }
@@ -388,28 +388,22 @@ public class CrmApiHandler extends AbstractRouteHandler
                     }
                     else
                     {
-                        sendJsonResponse(routingContext, new JsonObject().put("status", "User already exists").toString());
+                        sendError(routingContext.response(), "User already exists for email: " + email);
                     }
                 });
 
     }
 
-    private int createUserOnWebsite(RoutingContext routingContext,JsonObject userJson)
+    private int createUserOnWebsite(JsonObject userJson)
     {
         String acceptSSLCertificates = ConfigHolder.getInstance().getStringValue("acceptSSLCertificates","true");
         String email = userJson.getString("email");
-        if (StringUtils.isEmpty(email))
-        {
-            sendError(routingContext.response(), "Email not found in json request.");
-
-        }
         String fragment = "key1";
         String host = ConfigHolder.getInstance().getStringValue("websiteHost", null);
         if (host == null)
         {
             LOG.error("websiteHost not setup in config for creating user.");
-            sendError(routingContext.response(),"Error in creating user for : " + email);
-//            throw new RuntimeException("Error in creating user for : " + email);
+            throw new RuntimeException("Error in creating user for : " + email);
         }
         try
         {
@@ -488,8 +482,7 @@ public class CrmApiHandler extends AbstractRouteHandler
                 LOG.info("STATUS CODE: " +statusCode);
                 if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                     LOG.error("Error in calling website for creating user." + responseBody);
-                    sendError(routingContext.response(),"Error in creating user for : " + email);
-//                    throw new RuntimeException("Error in creating user for : " + email);
+                    throw new RuntimeException("Error in creating user for : " + email);
                 }
             }
             else
@@ -500,8 +493,7 @@ public class CrmApiHandler extends AbstractRouteHandler
             }
                 if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                     LOG.error("Error in calling website for creating user." + response.toString());
-                    sendError(routingContext.response(),"Error in calling website for creating user " + response.toString());
-//                    throw new RuntimeException("Error in creating user for : " + email);
+                    throw new RuntimeException("Error in creating user for : " + email);
             }
         }
 
