@@ -40,6 +40,7 @@ public class ModulePriceHolder
     private ShutterFinish shutterFinish;
     private ShutterFinish carcassFinish;
     private RateCard carcassMaterialRateCard;
+    private RateCard blendedRateCard;
     private RateCard carcassFinishRateCard;
     private RateCard movableFurnitureRateCard;
     private RateCard nonMovableFurnitureRateCard;
@@ -121,6 +122,7 @@ public class ModulePriceHolder
     private String city;
 
     private JsonArray errors = null;
+
 
 
     public ModulePriceHolder()
@@ -422,7 +424,7 @@ public class ModulePriceHolder
 
     private void addComponent(IModuleComponent component, String accPackCode)
     {
-        if (component.isCarcass() || component.isShutter())
+        if (component.isCarcass() || component.isShutter() || component.isBlended())
         {
             this.addModulePanel(component, accPackCode);
         }
@@ -586,11 +588,11 @@ public class ModulePriceHolder
     {
         this.shutterFinish = ModuleDataService.getInstance().getFinish(productModule.getFinishCode());
         this.carcassFinish = ModuleDataService.getInstance().getFinish(productModule.getCarcassCode(), productModule.getFinishCode(),this.priceDate);
-
         String carcassCode = StringUtils.isEmpty(this.mgModule.getMaterial()) ? productModule.getCarcassCode() : this.mgModule.getMaterial();
         this.carcassMaterialRateCard = RateCardService.getInstance().getRateCard(carcassCode, RateCard.CARCASS_TYPE,this.priceDate, this.city);
-
-        this.carcassFinishRateCard = RateCardService.getInstance().getRateCard(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
+        this.blendedRateCard = RateCardService.getInstance().getBlendedRateCard(carcassCode, shutterFinish.getCostCode(), RateCard.BLENDED_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
+        LOG.debug("blended rate card :" + this.blendedRateCard.toString());
+        this.carcassFinishRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
         this.shutterFinishRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
         this.stdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR,RateCard.FACTOR_TYPE ,this.priceDate, this.city);
         this.nStdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.NONSTD_MANUFACTURING_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
@@ -601,7 +603,8 @@ public class ModulePriceHolder
                 RateCard.SHUTTER_TYPE,this.priceDate, this.city);
 
         this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
-        this.labourRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
+        this.labourRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
+        LOG.debug("Labour rate card : " + labourRateCard.toString());
         this.labourManufacturingRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.nonStandardReductionFactorCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.REDUCTION_FACTOR_NONSTANDARD,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
@@ -765,11 +768,8 @@ public class ModulePriceHolder
                 double rate = this.loadingFactorBasedOnProduct.getRateBasedOnProduct();
                 LOG.debug("rate : " + rate );
                 double stdSourceRate = this.stdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
-                LOG.debug("std Source Rate : " + stdSourceRate );
                 double nStdSourceRate = this.nStdLoadingSourceFactorBasedOnProduct.getSourcePriceBasedOnProduct();
-                LOG.debug("nstd Source Rate : " + nStdSourceRate );
                 double nonStdReductionFactor = this.nonStandardReductionFactorCard.getRateBasedOnProduct();
-                LOG.debug("nstd Reduction Rate : " + nonStdReductionFactor );
                 if (panel.isExposed()) {
                     if ("Standard".equals(moduleType)) {
                         this.addToShutterCost(panel.getCost() * rate);
@@ -848,7 +848,7 @@ public class ModulePriceHolder
         {
             this.totalCost=0.0;
         }else {
-            this.labourCost = this.moduleArea * labourRateCard.getRate();
+            this.labourCost = this.moduleArea * labourRateCard.getRateBasedOnProduct();
             this.labourSourceCost = this.labourCost / labourManufacturingRateCard.getSourcePrice();
 
             double woTaxFactor = 0;
@@ -875,12 +875,12 @@ public class ModulePriceHolder
             this.hingeCostWoTax = this.hingeCost * woTaxFactor;
             this.accessoryCostWoTax = this.accessoryCost * woTaxFactor;
 
-                this.carcassProfit = this.carcassCostWoTax - this.carcassSourceCost;
-                this.shutterProfit = this.shutterCostWoTax - this.shutterSourceCost;
-                this.labourProfit = this.labourCostWoTax - this.labourSourceCost;
-                this.hardwareProfit = this.hardwareCostWoTax - this.hardwareSourceCost;
-                this.handleandKnobProfit = this.handleandKnobCostWoTax - this.handleandKnobSourceCost;
-                this.hingeProfit = this.hingeCostWoTax - this.hingeSourceCost;
+            this.carcassProfit = this.carcassCostWoTax - this.carcassSourceCost;
+            this.shutterProfit = this.shutterCostWoTax - this.shutterSourceCost;
+            this.labourProfit = this.labourCostWoTax - this.labourSourceCost;
+            this.hardwareProfit = this.hardwareCostWoTax - this.hardwareSourceCost;
+            this.handleandKnobProfit = this.handleandKnobCostWoTax - this.handleandKnobSourceCost;
+            this.hingeProfit = this.hingeCostWoTax - this.hingeSourceCost;
             this.accessoryProfit = this.accessoryCostWoTax - this.accessorySourceCost;
 
 
@@ -1032,6 +1032,10 @@ public class ModulePriceHolder
     public RateCard getCarcassMaterialRateCard()
     {
         return carcassMaterialRateCard;
+    }
+    public RateCard getBlendedRateCard()
+    {
+        return blendedRateCard;
     }
 
     public RateCard getCarcassFinishRateCard()
@@ -1372,4 +1376,5 @@ public class ModulePriceHolder
                 ", errors=" + errors +
                 '}';
     }
+
 }

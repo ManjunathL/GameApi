@@ -26,10 +26,12 @@ public class PanelComponent
     private static final String TYPE_BACK = "K";
     private static final String TYPE_OTHER = "O";
     private static final int ACCESSORY_PANEL_THICKNESS = 18;
+    private static final String BLENDED_TYPE = "B";
 
     private double quantity;
     private RateCard materialRateCard;
     private RateCard finishRateCard;
+    private RateCard blendedRateCard;
     private ShutterFinish finish;
 
     private String code;
@@ -44,6 +46,10 @@ public class PanelComponent
     private IModuleComponent moduleComponent;
     private Date priceDate;
     private String city;
+
+    public boolean isBlended() {
+        return BLENDED_TYPE.equals(this.getType());
+    }
 
     private enum PanelExposed{NONE, SINGLE, DOUBLE};
 
@@ -66,20 +72,34 @@ public class PanelComponent
 
     private void doIntegrityCheck(ModulePriceHolder priceHolder)
     {
+
         if (this.getLength() == 0 || this.getBreadth() == 0)
         {
             priceHolder.addError("Module dimensions not set for " + this.getCode());
         }
 
-        if (this.isExposed() && this.getFinishRateCard() == null)
+        if (BLENDED_TYPE.equals(this.getType()))
         {
-            priceHolder.addError("Finish ratecard not set for exposed panel " + this.getCode() + ":" + this.getType() + ":" + this.getExposed());
+//            LOG.debug("Blended rate card : " + this.getBlendedRateCard().toString());
+            if (this.isExposed() && this.getBlendedRateCard() == null)
+            {
+                priceHolder.addError("Blended ratecard not set for exposed panel " + this.getCode() + ":" + this.getType() + ":" + this.getExposed());
+            }
+        }
+        else
+        {
+            if (this.isExposed() && this.getFinishRateCard() == null)
+            {
+                priceHolder.addError("Finish ratecard not set for exposed panel " + this.getCode() + ":" + this.getType() + ":" + this.getExposed());
+            }
+
+            if (!this.isExposed() && this.getMaterialRateCard() == null)
+            {
+                priceHolder.addError("Material ratecard not set for carcass panel " + this.getCode() + ":" + this.getType());
+            }
         }
 
-        if (!this.isExposed() && this.getMaterialRateCard() == null)
-        {
-            priceHolder.addError("Material ratecard not set for carcass panel " + this.getCode() + ":" + this.getType());
-        }
+
     }
 
     private void setBaseAttributes(ModulePanel modulePanel, IModuleComponent component)
@@ -97,6 +117,13 @@ public class PanelComponent
             this.setFinish(priceHolder.getShutterFinish());
             this.setFinishRateCard(this.exposed == PanelExposed.DOUBLE ? priceHolder.getShutterDoubleExposedRateCard() : priceHolder.getShutterFinishRateCard());
         }
+        else if (this.isBlended())
+        {
+//            LOG.debug("Setting blended rateCard");
+            this.setFinish(priceHolder.getShutterFinish());
+           this.setBlendedRateCard(priceHolder.getBlendedRateCard());
+
+        }
         else
         {
             this.setMaterialRateCard(priceHolder.getCarcassMaterialRateCard()).setFinish(priceHolder.getCarcassFinish());
@@ -113,6 +140,12 @@ public class PanelComponent
     public PanelComponent setMaterialRateCard(RateCard materialRateCard)
     {
         this.materialRateCard = materialRateCard;
+        return this;
+    }
+
+    public PanelComponent setBlendedRateCard(RateCard blendedRateCard)
+    {
+        this.blendedRateCard = blendedRateCard;
         return this;
     }
 
@@ -167,6 +200,11 @@ public class PanelComponent
         return finishRateCard;
     }
 
+    public RateCard getBlendedRateCard()
+    {
+        return blendedRateCard;
+    }
+
     public ShutterFinish getFinish()
     {
         return finish;
@@ -205,12 +243,15 @@ public class PanelComponent
     public double getUnitCost()
     {
         double unitCost;
+
+//        LOG.debug("Unit cost :" + this.exposed);
         if (this.exposed == PanelExposed.NONE)
         {
             unitCost = this.getMaterialCost();
         }
         else
         {
+//            LOG.debug("Unit cost : get finish cost");
             unitCost = this.getFinishCost();
         }
         return unitCost;
@@ -224,9 +265,21 @@ public class PanelComponent
 
     public double getFinishCost()
     {
-        if (this.finishRateCard == null) return 0;
-        return this.getArea() * this.finishRateCard.getRateByThickness(this.getThickness());
+        if (BLENDED_TYPE.equals(this.type))
+        {
+//            LOG.debug("Blended type : inside get finish cost ");
+            if (this.blendedRateCard == null) return 0;
+            LOG.debug("MSC values : " + this.getArea() + " : " + this.blendedRateCard.getRateByThickness(this.getThickness()));
+            return this.getArea() * this.blendedRateCard.getRateByThickness(this.getThickness());
+
+        }
+        else {
+            if (this.finishRateCard == null) return 0;
+            return this.getArea() * this.finishRateCard.getRateByThickness(this.getThickness());
+        }
+
     }
+
 
     public double getArea()
     {
@@ -236,6 +289,7 @@ public class PanelComponent
         }
         else
         {
+            LOG.debug("MSC Area : " +  (this.getLength() - this.finish.getCuttingOffset()) + " : " + (this.getBreadth() - this.finish.getCuttingOffset()) + " : " + SQMM2SQFT);
             return (this.getLength() - this.finish.getCuttingOffset()) * (this.getBreadth() - this.finish.getCuttingOffset()) * SQMM2SQFT;
         }
     }
@@ -351,7 +405,7 @@ public class PanelComponent
             }
 
         }
-        else  if (this.isShutter())
+        else  if (this.isShutter() || this.isBlended())
         {
             if (Objects.equals("D", modulePanel.getExposed())) {
                 this.exposed = PanelExposed.DOUBLE;
@@ -362,6 +416,23 @@ public class PanelComponent
             }
 
         }
+
+      /*  if (productModule.getModuleCategory().equals("N - Quick Units"))
+        {
+            if (this.isCarcass())
+            {
+                if (("S").equals(modulePanel.getExposed()))
+                {
+                    this.exposed = PanelExposed.SINGLE;
+                }
+                else if (("D").equals(modulePanel.getExposed()))
+                {
+                    this.exposed = PanelExposed.DOUBLE;
+                }
+            }
+        }
+*/
+//        LOG.debug("MSC exposed : " + this.exposed);
 
     }
 

@@ -7,6 +7,7 @@ public interface IModuleComponent
 {
     public static final String CARCASS_TYPE = "C";
     public static final String SHUTTER_TYPE = "S";
+    public static final String BLENDED_TYPE = "B";
     public static final String ACCESSORY_TYPE = "A";
     public static final String HARDWARE_TYPE = "H";
 
@@ -18,6 +19,7 @@ public interface IModuleComponent
     public boolean isCarcass();
 
     public boolean isShutter();
+    public boolean isBlended();
 
     public boolean isAccessory();
 

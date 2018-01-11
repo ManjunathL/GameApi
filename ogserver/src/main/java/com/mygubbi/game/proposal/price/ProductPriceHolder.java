@@ -1,7 +1,6 @@
 package com.mygubbi.game.proposal.price;
 
 
-import com.mygubbi.common.StringUtils;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.ProductModule;

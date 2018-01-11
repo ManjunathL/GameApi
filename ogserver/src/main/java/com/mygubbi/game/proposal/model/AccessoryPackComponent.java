@@ -78,6 +78,10 @@ public class AccessoryPackComponent extends JsonObject implements IModuleCompone
         return SHUTTER_TYPE.equals(this.getType());
     }
 
+    @Override
+    public boolean isBlended() {
+        return BLENDED_TYPE.equals(this.getType());    }
+
     public boolean isAccessory()
     {
         return ACCESSORY_TYPE.equals(this.getType());

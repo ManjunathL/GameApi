@@ -47,6 +47,11 @@ public class ModuleComponent implements IModuleComponent
         return SHUTTER_TYPE.equals(this.getType());
     }
 
+    public boolean isBlended()
+    {
+        return BLENDED_TYPE.equals(this.getType());
+    }
+
     public boolean isAccessory()
     {
         return ACCESSORY_TYPE.equals(this.getType());

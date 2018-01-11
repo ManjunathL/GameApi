@@ -20,6 +20,7 @@ public class RateCard
 
     public static final String CARCASS_TYPE = "C";
     public static final String SHUTTER_TYPE = "S";
+    public static final String BLENDED_TYPE = "B";
     public static final String FACTOR_TYPE = "F";
     public static final String LOADING_FACTOR = "L";
     public static final String LABOUR_FACTOR = "B";
@@ -34,6 +35,7 @@ public class RateCard
     public static final String NON_MOVABLE_FURNITURE = "NMF";
     public static final String SERVICES_CIVIL_WORK = "SCW";
     public static final String DISCOUNT_PERCENTAGE = "DP";
+    public static final String SQFT_TO_MM_FACTOR = "SQFTMM";
     public static final String PROJECT_HANDLING_FACTOR = "PHC";
     public static final String DEEP_CLEARING_FACTOR = "DCC";
     public static final String FLOOR_PROTECTION_FACTOR = "FPC";
@@ -89,14 +91,21 @@ public class RateCard
 
     public double getRateByThickness(int thickness)
     {
+//        LOG.debug("Get rate by thickness");
 
         PriceMaster priceMaster;
         if (CARCASS_TYPE.equals(this.type)) {
             priceMaster = RateCardService.getInstance().getCarcassRate(this.code, thickness, this.priceDate,this.city);
 
         }
+        else if (BLENDED_TYPE.equals(this.type))
+        {
+
+            priceMaster = RateCardService.getInstance().getBlendedRate(this.code, thickness, this.priceDate, this.city, this.productCategory);
+//            LOG.debug("Get rate by thickness for blended rate : " + priceMaster.toString() );
+        }
         else {
-            priceMaster = RateCardService.getInstance().getShutterRate(this.code, thickness, this.priceDate, this.city);
+            priceMaster = RateCardService.getInstance().getShutterRate(this.code, thickness, this.priceDate, this.city,this.productCategory);
 
         }
         double price = 0;
@@ -172,6 +181,11 @@ public class RateCard
     public static String makeKey(String type, String code, String productCategory)
     {
         return type + ":" + code + ":" + productCategory;
+    }
+
+    public static String makeKey(String type, String code,int thickness ,String productCategory)
+    {
+        return type + ":" + code + ":" + thickness + ":" + productCategory;
     }
 
     public Object getName()
