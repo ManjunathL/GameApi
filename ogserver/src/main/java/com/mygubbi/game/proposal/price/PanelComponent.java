@@ -289,7 +289,6 @@ public class PanelComponent
         }
         else
         {
-            LOG.debug("MSC Area : " +  (this.getLength() - this.finish.getCuttingOffset()) + " : " + (this.getBreadth() - this.finish.getCuttingOffset()) + " : " + SQMM2SQFT);
             return (this.getLength() - this.finish.getCuttingOffset()) * (this.getBreadth() - this.finish.getCuttingOffset()) * SQMM2SQFT;
         }
     }

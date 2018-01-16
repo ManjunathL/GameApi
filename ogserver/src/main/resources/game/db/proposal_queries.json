@@ -2007,6 +2007,23 @@
       "params": ["plannerErpItemCode", "plannerReferencePartNo", "plannerUom", "plannerRate", "plannerQty", "plannerPrice", "proposalId", "spaceType", "roomcode", "productService", "productId", "moduleSeq", "mgCode","DSOErpItemCode"],
       "jsonfields":[]
     },
+    {
+      "id": "proposal.boq.selectproducts",
+      "type": "update",
+      "table": "proposal_boq",
+      "query": "select * from proposal_product p inner join (select max(version) as version from version_master where proposalId = ?) b on p.fromVersion = b.version and p.proposalId = ? and p.active = 'A' order by p.seq;",
+      "params": ["proposalId", "proposalId"],
+      "jsonfields":[]
+    },
+    {
+      "id": "proposal.boq.selectaddons",
+      "type": "update",
+      "table": "proposal_boq",
+      "query": "select * from proposal_product p inner join (select max(version) as version from version_master where proposalId = ?) b on p.fromVersion = b.version and p.proposalId = ? and p.active = 'A' order by p.seq;",
+      "params": ["proposalId", "proposalId"],
+      "jsonfields":[]
+    },
+
 
     {
       "id": "erp.master.select",
