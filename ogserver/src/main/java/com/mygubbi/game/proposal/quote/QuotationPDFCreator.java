@@ -1653,8 +1653,29 @@ public class QuotationPDFCreator
     private void fillAssembledProductUnits(PdfPTable tabname,AssembledProductInQuote product,String series)
     {
         wunitSequence = 0;
+        String cname;
         String caption="",caption1="",caption2="",caption3="",caption4="",captionLoft="",captionWardrobe="";
-        String cname=product.getCatagoryName();
+        if(product.getCatagoryName().equals("akitchen"))
+        {
+            cname="Kitchen";
+        }
+        else if(product.getCatagoryName().equals("aloft"))
+        {
+            cname="Kitchen";
+        }
+        else if(product.getCatagoryName().equals("ahingedwardrobe"))
+        {
+            cname="Wardrobe";
+        }else if(product.getCatagoryName().equals("aslidingwardrobe"))
+        {
+            cname="Wardrobe";
+        }else if(product.getCatagoryName().equals("atvunit"))
+        {
+            cname="tvunit";
+        }else
+         {
+            cname = product.getCatagoryName();
+        }
         String Wcaption="";
         String baseDimesion="",WallDimesion="",TallDimesion="",loftDimesion="",wardrobeDimesion="";
         int KBmodulecount=0,KWmoduleCount=0,KTmoduleCount=0,KLmoduleCount=0,SW1modulecount=0,WWmodulecount=0,WW1modulecount=0;
