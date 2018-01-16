@@ -1755,14 +1755,17 @@ public class QuotationPDFCreator
                         unit.moduleCategory.contains("S - Bathroom Vanity") ||
                         unit.moduleCategory.contains("S - Hinged Wardrobe 2100") ||
                         unit.moduleCategory.contains("S - Kitchen Wall Sliding Units") ||
-                        unit.moduleCategory.contains("S - Hinged Wardrobe 2400") )
+                        unit.moduleCategory.contains("S - Hinged Wardrobe 2400")  ||
+                        unit.moduleCategory.contains("N - Quick Units"))
+
                 {
                     if(     unit.moduleCategory.contains("N - Base Units") ||
                             unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
                             unit.moduleCategory.contains("S - Kitchen Base Drawer Units") ||
                             unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
                             unit.moduleCategory.contains("S - Kitchen Wall Sliding Units") ||
-                            unit.moduleCategory.contains("S - Storage Module Base Unit")) {
+                            unit.moduleCategory.contains("S - Storage Module Base Unit") ||
+                            unit.moduleCategory.contains("N - Quick Units")){
 
                         //LOG.info("Module count " +unit.moduleCount);
                         KBmodulecount += unit.moduleCount;
@@ -1775,7 +1778,8 @@ public class QuotationPDFCreator
                                 unit.moduleCategory.contains("S - Kitchen Base Shutter Units") ||
                                 unit.moduleCategory.contains("S - Storage Module Base Unit") ||
                                 unit.moduleCategory.contains("S - Kitchen Wall Sliding Units") ||
-                                unit.moduleCategory.contains("Base unit") )
+                                unit.moduleCategory.contains("Base unit") ||
+                                unit.moduleCategory.contains("N - Quick Units"))
                         {
                             kbwidthSum = kbwidthSum + unit.getWidth();
                             kbheightSum = unit.getHeight();
@@ -1913,7 +1917,8 @@ public class QuotationPDFCreator
                             unit.moduleCategory.contains("S - Storage Module Wall Unit") ||
                             unit.moduleCategory.contains("S - Storage Module Base Unit") ||
                             unit.moduleCategory.contains("S - Wardrobe Panels") ||
-                            unit.moduleCategory.contains("S - Sliding Wardrobe with Loft"))
+                            unit.moduleCategory.contains("S - Sliding Wardrobe with Loft") ||
+                            unit.moduleCategory.contains("N - Quick Units"))
                 {
                     WWmodulecount += unit.moduleCount;
                     WWbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -1931,14 +1936,26 @@ public class QuotationPDFCreator
                     }else if (Wcaption.equals("Aristo Wardrobe"))
                     {
                         captionWardrobe="Aristo Wardrobe";
-                    }else
+                    }else if(product.getCatagoryName().equals("ahingedwardrobe"))
+                    {
+                        captionWardrobe="Hinged Wardrobe";
+                    }else if(product.getCatagoryName().equals("aslidingwardrobe"))
+                    {
+                        captionWardrobe="Sliding Wardrobe";
+                    }
+                    else
                     {
                         captionWardrobe="Hinged Wardrobe";
                     }
 
 
-                    if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels") || unit.moduleCategory.contains ("H - Panel"))) {
+                    if(!(unit.moduleCategory.contains ("N")|| unit.moduleCategory.contains("S - Wardrobe Panels") || unit.moduleCategory.contains ("H - Panel")) ) {
 
+                        String width = unit.getDimensions();
+                        wardrobewidth = wardrobewidth + " , " + width;
+                        kwaList.add(new String(width));
+                    }else if(unit.moduleCategory.contains("N - Quick Units"))
+                    {
                         String width = unit.getDimensions();
                         wardrobewidth = wardrobewidth + " , " + width;
                         kwaList.add(new String(width));
