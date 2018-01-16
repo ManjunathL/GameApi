@@ -104,7 +104,7 @@ public class BoqCreatorService extends AbstractVerticle {
     private void getProposalProductsBySpaces(ProposalHeader proposalHeader, JsonObject quoteRequest, Message message, BoqDataList boqDataList) {
         QueryData queryData = null;
         JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion", quoteRequest.getDouble("version"));
-        queryData = new QueryData("proposal.product.all.detail", paramsJson);
+        queryData = new QueryData("proposal.boq.selectproducts", paramsJson);
         Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -130,7 +130,7 @@ public class BoqCreatorService extends AbstractVerticle {
         QueryData queryData = null;
         JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion", quoteRequest.getInteger("version"));
 //        LOG.debug("Proposal product addon :" + paramsJson.toString());
-        queryData = new QueryData("proposal.version.addon.list", paramsJson);
+        queryData = new QueryData("proposal.boq.selectaddons", paramsJson);
 
         Integer id = LocalCache.getInstance().store(queryData);
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
