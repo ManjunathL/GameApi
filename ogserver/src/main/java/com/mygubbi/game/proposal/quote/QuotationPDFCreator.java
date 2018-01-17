@@ -114,8 +114,6 @@ public class QuotationPDFCreator
 
     QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader,ProposalVersion proposalVersion)
     {
-        LOG.info("Quote data " +quoteData);
-        LOG.info("proposal Version " +proposalVersion);
         this.date=proposalHeader.getPriceDate();
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
@@ -532,7 +530,8 @@ public class QuotationPDFCreator
 
             Phrase phrase = new Phrase();
             phrase.add(new Chunk("Quotation For: ",fsize1));
-            phrase.add(new Chunk(proposalHeader.getQuotationFor(),fsize1));
+            //phrase.add(new Chunk(proposalHeader.getQuotationFor(),fsize1));
+            phrase.add(new Chunk(proposalVersion.getTitle(),fsize1));
 
             Phrase phrase1 = new Phrase();
             phrase1.add(new Chunk("Date: ",fsize1));
@@ -1032,13 +1031,17 @@ public class QuotationPDFCreator
             cel8.addElement(p);
             cel8.setBorder(Rectangle.NO_BORDER);
             tab2.addCell(cel8);
+                    String noteParagraphString= new String("1. \t Plumbing, counter top , gas piping ,appliances, hob ,chimney ,sink, taps, electrical shifting, tile laying,Core cutting and civil changes are not considered in kitchen quote. These items are quoted seperately if needed.\n"
+                            +"2. \t Final paint quote to be completed after furniture installation by Customer It will be quoted separately if it is in mygubbi scope.\n"
+                            +"3. \t Please refer \"Scope of Services\" section at the end for more details of the services scope\n"
+                            +"4. \t Installation Charges for Appliances are not part of the Appliance prices. If they are to be accounted for in scope, a separate line item has to be explicitly stated with appropriate estimates.\n"
+                            );
 
-            tab2.addCell(new Paragraph("1. \t Plumbing, counter top , gas piping ,appliances, hob ,chimney ,sink, taps, electrical shifting, tile laying,Core cutting and civil changes are not considered in kitchen quote. These items are quoted seperately if needed.\n"
-                    +"2. \t Final paint quote to be completed after furniture installation by Customer It will be quoted separately if it is in mygubbi scope.\n"
-                    +"3. \t Please refer \"Scope of Services\" section at the end for more details of the services scope\n"
-                    +"4. \t Installation Charges for Appliances are not part of the Appliance prices. If they are to be accounted for in scope, a separate line item has to be explicitly stated with appropriate estimates.\n"
-                    ,fsize));
-
+            if(quoteData.fromVersion.equals("1.0") || quoteData.fromVersion.startsWith("0."))
+                    {
+                        noteParagraphString+= "5. \t Rates for Appliances are approximate. The exact amount will be clarified during the DSO Sign Off stage.";
+                    }
+                    tab2.addCell(new Paragraph(noteParagraphString,fsize));
             document.add(tab2);
 
             LOG.info("quoteData .get bookingform flag " +quoteData.getBookingFormFlag()+ " quoteDate get worksContract " +quoteData.getWorksContractFlag());

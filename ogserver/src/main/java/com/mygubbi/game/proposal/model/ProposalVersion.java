@@ -30,6 +30,7 @@ public class ProposalVersion extends JsonObject{
     public static final String FLOOR_PROTECTION_AMT = "floorProtectionAmount";
     public static final String PROJECT_HANDLING_AMT = "projectHandlingAmount";
     public static final String PROJECT_HANDLING_QTY = "projectHandlingQty";
+    public static final String TITLE = "title";
 
     public ProposalVersion() {}
 
@@ -61,6 +62,17 @@ public class ProposalVersion extends JsonObject{
 
     public ProposalVersion setProposalStatus(String status) {
         this.put(STATUS, status);
+        return this;
+    }
+
+    public String getTitle()
+    {
+        return this.getString(TITLE);
+    }
+
+    public ProposalVersion setTitle(String title)
+    {
+        this.put(TITLE,title);
         return this;
     }
     public String getVersion() {
