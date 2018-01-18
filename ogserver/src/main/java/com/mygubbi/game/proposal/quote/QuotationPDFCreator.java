@@ -1044,7 +1044,6 @@ public class QuotationPDFCreator
                     tab2.addCell(new Paragraph(noteParagraphString,fsize));
             document.add(tab2);
 
-            LOG.info("quoteData .get bookingform flag " +quoteData.getBookingFormFlag()+ " quoteDate get worksContract " +quoteData.getWorksContractFlag());
             if(quoteData.getBookingFormFlag().equals("No") && quoteData.getWorksContractFlag().equals("No")) {
             PdfPTable tab=new PdfPTable(1);
             tab.setWidthPercentage(100);
@@ -1237,7 +1236,6 @@ public class QuotationPDFCreator
             count=1;
             for(GSTForProducts proposalServiceList:proposalservicesList)
             {
-                LOG.info("propsal Service List " +proposalServiceList);
                 this.createRowForDataForProposalServices(mscTable,count, proposalServiceList.getProducttitle(),proposalServiceList.getCategoryType(),this.round(proposalServiceList.getPriceAfterDiscount(),2), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax(), proposalServiceList.getTax());
                 //this.createRowAndFillDataTemp(mscTable,count,proposalServiceList.getProducttitle(),proposalServiceList.getTax(),proposalServiceList.getPriceAfterDiscount(), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax());
             }
@@ -1707,8 +1705,6 @@ public class QuotationPDFCreator
         List<String> quickWardrobeList=new ArrayList<>();
 
         String finish=product.getProduct().getFinishType();
-        LOG.info("Finish " +finish);
-
         for(AssembledProductInQuote.Unit unit:product.getUnits())
         {
             if(cname.equals("Wardrobe"))
@@ -1735,7 +1731,6 @@ public class QuotationPDFCreator
                 Wcaption="Aristo Wardrobe";
             }
         }
-        LOG.info("Wcaption " +Wcaption);
 
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
@@ -1766,7 +1761,6 @@ public class QuotationPDFCreator
                 {
                     if(module.getMGCode().equals("MG-NS-EX01"))
                     {
-                        LOG.info("inside if of a kitchen");
                         //base
                         QKBmodulecount +=1;
                         QKBbasecarcass = product.getProduct().getBaseCarcassCode();
@@ -2221,7 +2215,6 @@ public class QuotationPDFCreator
 
         if(QKBamount!=0)
         {
-            LOG.info("inside quick base count");
             obj = new customeclass(tabname, captionForQuickBase, QKBmodulecount, QKBbasecarcass, QKBWallcarcass, QKBfinishmaterial, QKBfinishtype, QKBamount, QKitchneBaseDimension,QKBcolorgroupCode,QKBhinge);
             li.add(obj);
             customFunction(li,unitSequence);
@@ -2230,7 +2223,6 @@ public class QuotationPDFCreator
         }
         if(QKWamount!=0)
         {
-            LOG.info("inside quick base count");
             obj = new customeclass(tabname, captionForQuickWall, QKWmoduleCount, QKWbasecarcass, QKWwallcarcass, QKWfinishmaterial, QKWfinishtype, QKWamount, QKitchneWallDimension,QKWcolorGroupCode,QKWhinge);
             li.add(obj);
             customFunction(li,unitSequence);
@@ -2239,7 +2231,6 @@ public class QuotationPDFCreator
         }
         if(QKTamount!=0)
         {
-            LOG.info("inside quick base count");
             obj = new customeclass(tabname, captionForQuickTall, QKTmoduleCount, QKTbasecarcass, QKTwallcarcass, QKTfinishmaterial, QKTfinishtype, QKTamount, QKitchneTallDimension,QKTcolorGroupCode,QKThinge);
             li.add(obj);
             customFunction(li,unitSequence);
@@ -2279,7 +2270,6 @@ public class QuotationPDFCreator
         }
         if(QKLamount!=0)
         {
-            LOG.info("inside quick base count");
             obj = new customeclass(tabname, captionForQuickLoft, QKLmoduleCount, QKLbasecarcass, QKLwallcarcass, QKLfinishmaterial, QKLfinishtype, QKLamount, QKitchenLoftDimension,QKLcolorGroupCode,QKLhinge);
             li.add(obj);
             customFunction(li,unitSequence);
@@ -2398,7 +2388,6 @@ public class QuotationPDFCreator
     }
     private void createRowAndFillData(PdfPTable tabname,String index, String title, Double quantity, Double amount, Double total)
     {
-        LOG.info("create row and fill data " +total);
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -2435,7 +2424,6 @@ public class QuotationPDFCreator
     }
     private void createRowAndFillDataForMiscellaneousForPer(PdfPTable tabname,String index, String title,String uom, Double quantity, String amount, Double total)
     {
-        LOG.info("create row and fill data " +quantity+ " amount " +amount+ " total " +total);
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -2478,7 +2466,6 @@ public class QuotationPDFCreator
     }
     private void createRowAndFillDataForMiscellaneous(PdfPTable tabname,String index, String title,String uom, Double quantity, String amount, Double total)
     {
-        LOG.info("create row and fill data " +quantity+ " amount " +amount+ " total " +total);
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -2825,8 +2812,6 @@ public class QuotationPDFCreator
     }
     public void getProposalServices()
     {
-        LOG.info("project handling tax " +projectHandlingTax);
-        LOG.info("project handling Amount " +proposalVersion.getProjectHandlingAmount() + "project handling tax " +projectHandlingTax.getSourcePrice());
         double projectHandlingwithTax=proposalVersion.getProjectHandlingAmount()*projectHandlingTax.getSourcePrice();
         double deepClearingwithTax=proposalVersion.getDeepClearingAmount()*deepClearingTax.getSourcePrice();
         double floorProtectionwithTax=proposalVersion.getFloorProtectionAmount()*floorProtectionTax.getSourcePrice();
@@ -2839,7 +2824,6 @@ public class QuotationPDFCreator
     }
     public void getProducts()
     {
-        LOG.info("price Date " +proposalHeader.getPriceDate()+ " project city " +proposalHeader.getProjectCity());
         designServicePrice=RateCardService.getInstance().getFactorRate(DESIGN_SERVICE_PRICE,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         designServiceTax=RateCardService.getInstance().getFactorRate(DESIGN_SERVICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         nonMovablePrice=RateCardService.getInstance().getFactorRate(NON_MOVABLE_PRICE,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
@@ -2847,8 +2831,6 @@ public class QuotationPDFCreator
         nonMovablePriceTax=RateCardService.getInstance().getFactorRate(NON_MOVABLE_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         movablePriceTax=RateCardService.getInstance().getFactorRate(MOVABLE_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         scwTax=RateCardService.getInstance().getFactorRate(SCW_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
-        LOG.info("project handling tax " +PROJECT_HANDLING_TAX + "priceDate " +proposalHeader.getPriceDate()+ " project city " +proposalHeader.getProjectCity());
-
         projectHandlingTax=RateCardService.getInstance().getFactorRate(PROJECT_HANDLING_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         floorProtectionTax=RateCardService.getInstance().getFactorRate(FLOOR_PROTECTION_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         deepClearingTax=RateCardService.getInstance().getFactorRate(DEEP_CLEARING_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
@@ -3408,7 +3390,6 @@ public class QuotationPDFCreator
 
             }
 
-            LOG.info("GST Category " + GSTCategory);
             //String sequence=BOLD_ALPHABET_SEQUENCE[count];
 
             double tax_amount = round(DesignpriceAfterDsicount - currentpriceAfterTax, 2);
