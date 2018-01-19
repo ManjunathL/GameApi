@@ -20,7 +20,7 @@
     background: #e5e7d9!important;
 }
 .offers-form{
-    background: #e2e8d5;
+    background: #e5e7d9;
     color: #333333;
     padding: 0px 5px;
     max-width: 450px;
@@ -154,7 +154,7 @@
 }
 .offers-txt-sec{
     padding:40px 0px;
-    background: #e2e8d5;
+    background:#e5e7d9;
     color: #1a1919;
 }
 .off-cnt{
@@ -230,10 +230,10 @@
   .offers-form {
       margin: 15px 0px;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
-      max-width:90%!important;
+      max-width:100%!important;
   }
   .offers-form h3{
-      font-size: 24px;
+      font-size: 24px!important;
   }
   .btn-offers{
       font-size: 12px;
