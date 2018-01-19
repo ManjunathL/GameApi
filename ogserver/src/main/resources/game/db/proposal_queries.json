@@ -1749,6 +1749,13 @@
       "query": "select * from proposal_sow where proposalId = ? and version = ? and ( L1S01 = 'Yes' or L1S01 ='No')",
       "params": ["proposalId","sowversion"],
       "jsonfields":[]
+    },{
+      "id": "proposal.addon.selectForEmail",
+      "type": "select",
+      "table": "proposal_addon",
+      "query": "select distinct categoryCode,customAddonCategory from proposal_addon where proposalId = ? and fromVersion = ?",
+      "params": ["proposalId","version"],
+      "jsonfields":[]
     },
     {
       "id": "proposal.sow.select.forpdfDownload",

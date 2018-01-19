@@ -406,7 +406,6 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void dsoVersion(RoutingContext routingContext){
-        LOG.info("DSO HERE Shilpa");
         String queryId = "version.designsignoff";
         JsonObject proposalData = routingContext.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
@@ -427,7 +426,6 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void psoVersion(RoutingContext routingContext){
-        LOG.info("PSO HERE Shilpa");
         String queryId = "version.productionsignoff";
         JsonObject proposalData = routingContext.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
@@ -449,10 +447,8 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void confirmVersion(RoutingContext routingContext)
     {
-        LOG.info("Confirming HERE Shilpa");
         String queryId = "version.confirm";
         JsonObject proposalData = routingContext.getBodyAsJson();
-        LOG.info("proposalData = "+proposalData);
         Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -618,6 +614,7 @@ public class ProposalHandler extends AbstractRouteHandler
                             });
 
                         }
+
                         bodyDetails.put("clientName",proposalHeader.getName());
                         bodyDetails.put("opportunityId",proposalHeader.getCrmId());
                         bodyDetails.put("quoteNo",proposalHeader.getQuoteNumNew());
@@ -637,11 +634,107 @@ public class ProposalHandler extends AbstractRouteHandler
                         paramsForEmail.put("toEmails",sb.toString());
                         paramsForEmail.put("paramsObj",bodyDetails);
 
-                        sendEmailToOnConfirm(paramsForEmail);
+//                        sendEmailToOnConfirm(paramsForEmail);
+                        getAddonAndCustomAddonDetails(paramsForEmail,proposalId,proposalVersion.getVersion()+"");
+
                     }
                 });
 
     }
+
+    private void getAddonAndCustomAddonDetails(JsonObject paramsForEmail, Integer proposalId, String toVersion) {
+        JsonObject params = new JsonObject();
+        params.put("proposalId",proposalId);
+        params.put("version",toVersion);
+
+        Map<String,String> addonMp = new HashMap<>();
+        addonMp.put("addon_acc_app","No");
+        addonMp.put("service_counter_top","No");
+        addonMp.put("loose_furniture","No");
+
+        Map<String,String> customAddonMp = new HashMap<>();
+        customAddonMp.put("custom_addon_acc_app","No");
+        customAddonMp.put("custom_service_counter_top","No");
+        customAddonMp.put("custom_loose_furniture","No");
+
+        JsonObject paramsObjForEmail = paramsForEmail.getJsonObject("paramsObj");
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.addon.selectForEmail", params));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,(AsyncResult<Message<Integer>> res) -> {
+            QueryData data = (QueryData) LocalCache.getInstance().remove(res.result().body());
+            if (data == null || data.rows == null || data.rows.isEmpty()){
+                        LOG.info("No regular or custom addon");
+            }else {
+                   List<JsonObject> rows =  data.rows;
+                   rows.forEach(row -> {
+                            String categoryCode = row.getString("categoryCode");
+                            switch(categoryCode){
+                                case "Accessories":
+                                    addonMp.put("addon_acc_app","Yes");
+                                    break;
+
+                                case "Appliances":
+                                    addonMp.put("addon_acc_app","Yes");
+                                    break;
+
+                                case "Services":
+                                    addonMp.put("service_counter_top","Yes");
+                                    break;
+
+                                case "Counter Top":
+                                    addonMp.put("service_counter_top","Yes");
+                                    break;
+
+                                case "Loose Furniture":
+                                    addonMp.put("loose_furniture","Yes");
+                                    break;
+
+                                case "Custom Addon":
+                                {
+                                    String customAddonCategory = row.getString("customAddonCategory");
+                                    switch (customAddonCategory){
+                                        case "Accessories":
+                                            customAddonMp.put("custom_addon_acc_app","Yes");
+                                            break;
+                                        case "Appliances":
+                                            customAddonMp.put("custom_addon_acc_app","Yes");
+                                            break;
+                                        case "Chimney":
+                                            customAddonMp.put("custom_addon_acc_app","Yes");
+                                            break;
+                                        case "Hob":
+                                            customAddonMp.put("custom_addon_acc_app","Yes");
+                                            break;
+                                        case "Sink":
+                                            customAddonMp.put("custom_addon_acc_app","Yes");
+                                            break;
+
+                                        case "Loose Furniture":
+                                            customAddonMp.put("custom_loose_furniture","Yes");
+                                            break;
+
+                                        default:
+                                            customAddonMp.put("custom_service_counter_top","Yes");
+                                            break;
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    paramsObjForEmail.put("addon_acc_app",addonMp.get("addon_acc_app"));
+                    paramsObjForEmail.put("service_counter_top",addonMp.get("service_counter_top"));
+                    paramsObjForEmail.put("loose_furniture",addonMp.get("loose_furniture"));
+
+                    paramsObjForEmail.put("custom_addon_acc_app",customAddonMp.get("custom_addon_acc_app"));
+                    paramsObjForEmail.put("custom_service_counter_top",customAddonMp.get("custom_service_counter_top"));
+                    paramsObjForEmail.put("custom_loose_furniture",customAddonMp.get("custom_loose_furniture"));
+
+                    paramsForEmail.put("paramsObj",paramsObjForEmail);
+                    sendEmailToOnConfirm(paramsForEmail);
+
+                });
+    }
+
     private void sendEmailToOnConfirm(JsonObject emailParams){
 
         String fromEmail = emailParams.getString("fromEmail");

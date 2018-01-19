@@ -12,6 +12,31 @@
 <li>&nbsp;Price After Discount : $vdata.priceAfterDiscount</li>
 <li>&nbsp;Discount Amount (%) : $vdata.discountAmountPerc</li>
 </ul>
+<p><strong><u>Addon Scope of work:</u></strong></p>
+<table border="1">
+<tbody>
+<tr>
+<th>&nbsp;</th>
+<th>&nbsp;Regular Addon</th>
+<th>&nbsp;Custom Addon</th>
+</tr>
+<tr>
+<td>&nbsp;Accessories/Appliances</td>
+<td>&nbsp;$vdata.addon_acc_app</td>
+<td>&nbsp;$vdata.custom_addon_acc_app</td>
+</tr>
+<tr>
+<td>&nbsp;Services/Counter Top</td>
+<td>&nbsp;$vdata.service_counter_top</td>
+<td>&nbsp;$vdata.custom_service_counter_top</td>
+</tr>
+<tr>
+<td>&nbsp;Loose Furniture</td>
+<td>&nbsp;$vdata.loose_furniture</td>
+<td>&nbsp;$vdata.custom_loose_furniture</td>
+</tr>
+</tbody>
+</table>
 <p>Here is the link - <a href="$vdata.url">link to quotation</a></p>
 <p>&nbsp;</p>
 <p>Best Regards, <br /> MyGubbi GAME Team.</p>
