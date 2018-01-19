@@ -2,10 +2,7 @@ package com.mygubbi.game.proposal.quote;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import com.mygubbi.game.proposal.ModuleDataService;
-import com.mygubbi.game.proposal.ProductAddon;
-import com.mygubbi.game.proposal.ProductLineItem;
-import com.mygubbi.game.proposal.ProposalHandler;
+import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.RateCardService;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -117,8 +114,6 @@ public class QuotationPDFCreator
 
     QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader,ProposalVersion proposalVersion)
     {
-        LOG.info("Quote data " +quoteData);
-        LOG.info("proposal Version " +proposalVersion);
         this.date=proposalHeader.getPriceDate();
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
@@ -535,7 +530,8 @@ public class QuotationPDFCreator
 
             Phrase phrase = new Phrase();
             phrase.add(new Chunk("Quotation For: ",fsize1));
-            phrase.add(new Chunk(proposalHeader.getQuotationFor(),fsize1));
+            //phrase.add(new Chunk(proposalHeader.getQuotationFor(),fsize1));
+            phrase.add(new Chunk(proposalVersion.getTitle(),fsize1));
 
             Phrase phrase1 = new Phrase();
             phrase1.add(new Chunk("Date: ",fsize1));
@@ -1035,16 +1031,19 @@ public class QuotationPDFCreator
             cel8.addElement(p);
             cel8.setBorder(Rectangle.NO_BORDER);
             tab2.addCell(cel8);
+                    String noteParagraphString= new String("1. \t Plumbing, counter top , gas piping ,appliances, hob ,chimney ,sink, taps, electrical shifting, tile laying,Core cutting and civil changes are not considered in kitchen quote. These items are quoted seperately if needed.\n"
+                            +"2. \t Final paint quote to be completed after furniture installation by Customer It will be quoted separately if it is in mygubbi scope.\n"
+                            +"3. \t Please refer \"Scope of Services\" section at the end for more details of the services scope\n"
+                            +"4. \t Installation Charges for Appliances are not part of the Appliance prices. If they are to be accounted for in scope, a separate line item has to be explicitly stated with appropriate estimates.\n"
+                            );
 
-            tab2.addCell(new Paragraph("1. \t Plumbing, counter top , gas piping ,appliances, hob ,chimney ,sink, taps, electrical shifting, tile laying,Core cutting and civil changes are not considered in kitchen quote. These items are quoted seperately if needed.\n"
-                    +"2. \t Final paint quote to be completed after furniture installation by Customer It will be quoted separately if it is in mygubbi scope.\n"
-                    +"3. \t Please refer \"Scope of Services\" section at the end for more details of the services scope\n"
-                    +"4. \t Installation Charges for Appliances are not part of the Appliance prices. If they are to be accounted for in scope, a separate line item has to be explicitly stated with appropriate estimates.\n"
-                    ,fsize));
-
+            if(quoteData.fromVersion.equals("1.0") || quoteData.fromVersion.startsWith("0."))
+                    {
+                        noteParagraphString+= "5. \t Rates for Appliances are approximate. The exact amount will be clarified during the DSO Sign Off stage.";
+                    }
+                    tab2.addCell(new Paragraph(noteParagraphString,fsize));
             document.add(tab2);
 
-            LOG.info("quoteData .get bookingform flag " +quoteData.getBookingFormFlag()+ " quoteDate get worksContract " +quoteData.getWorksContractFlag());
             if(quoteData.getBookingFormFlag().equals("No") && quoteData.getWorksContractFlag().equals("No")) {
             PdfPTable tab=new PdfPTable(1);
             tab.setWidthPercentage(100);
@@ -1237,7 +1236,6 @@ public class QuotationPDFCreator
             count=1;
             for(GSTForProducts proposalServiceList:proposalservicesList)
             {
-                LOG.info("propsal Service List " +proposalServiceList);
                 this.createRowForDataForProposalServices(mscTable,count, proposalServiceList.getProducttitle(),proposalServiceList.getCategoryType(),this.round(proposalServiceList.getPriceAfterDiscount(),2), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax(), proposalServiceList.getTax());
                 //this.createRowAndFillDataTemp(mscTable,count,proposalServiceList.getProducttitle(),proposalServiceList.getTax(),proposalServiceList.getPriceAfterDiscount(), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax());
             }
@@ -1654,31 +1652,18 @@ public class QuotationPDFCreator
     {
         wunitSequence = 0;
         String cname;
-        String caption="",caption1="",caption2="",caption3="",caption4="",captionLoft="",captionWardrobe="";
-        if(product.getCatagoryName().equals("akitchen"))
-        {
-            cname="Kitchen";
-        }
-        else if(product.getCatagoryName().equals("aloft"))
-        {
-            cname="Kitchen";
-        }
-        else if(product.getCatagoryName().equals("ahingedwardrobe"))
-        {
-            cname="Wardrobe";
-        }else if(product.getCatagoryName().equals("aslidingwardrobe"))
-        {
-            cname="Wardrobe";
-        }else if(product.getCatagoryName().equals("atvunit"))
+        String caption="",caption1="",caption2="",caption3="",caption4="",captionLoft="",captionWardrobe="",captionForQuickBase="",captionForQuickWall="",captionForQuickTall="",captionForQuickLoft="",captionForWardrobe="";
+        if(product.getCatagoryName().equals("atvunit"))
         {
             cname="tvunit";
         }else
-         {
+        {
             cname = product.getCatagoryName();
         }
         String Wcaption="";
-        String baseDimesion="",WallDimesion="",TallDimesion="",loftDimesion="",wardrobeDimesion="";
-        int KBmodulecount=0,KWmoduleCount=0,KTmoduleCount=0,KLmoduleCount=0,SW1modulecount=0,WWmodulecount=0,WW1modulecount=0;
+        String Kcaption="";
+        String baseDimesion="",WallDimesion="",TallDimesion="",loftDimesion="",wardrobeDimesion="",QKitchneBaseDimension="",QKitchneWallDimension="",QKitchneTallDimension="",QKitchenLoftDimension="",QWardrobeDimension="";
+        int KBmodulecount=0,KWmoduleCount=0,KTmoduleCount=0,KLmoduleCount=0,SW1modulecount=0,WWmodulecount=0,WW1modulecount=0,QWWmodulecount=0;
         String KBbasecarcass="",KWbasecarcass="",KTbasecarcass="",KLbasecarcass="",SW1basecarcass="",WWbasecarcass="",WW1basecarcass="";
         String KBWallcarcass="",KWwallcarcass="",KTwallcarcass="",KLwallcarcass="",SW1wallcarcass="",WWwallcarcass="",WW1wallcarcass="";
         String KBfinishmaterial="",KWfinishmaterial="",KTfinishmaterial="",KLfinishmaterial="",SW1finishmaterial="",WWfinishmaterial="",WW1finishmaterial="";
@@ -1686,24 +1671,40 @@ public class QuotationPDFCreator
         String KBhinge="",KWhinge="",KThinge="",KLhinge="",SW1hinge="",WWhinge="",WW1hinge="";
         String KBfinishtype="",KWfinishtype="",KTfinishtype="",KLfinishtype="",SW1finishtype="",WWfinishtype="",WW1finishtype="";
         double KBamount=0,KWamount=0,KTamount=0,KLamount=0,SW1amount=0,WWamount=0,WW1amount=0;
+        int QKBmodulecount=0,QKWmoduleCount=0,QKTmoduleCount=0,QKLmoduleCount=0;
+        String QKBbasecarcass="",QKWbasecarcass="",QKTbasecarcass="",QKLbasecarcass="",QWWbasecarcass="";
+        String QKBWallcarcass="",QKWwallcarcass="",QKTwallcarcass="",QKLwallcarcass="",QWWwallcarcass="";
+        String QKBfinishmaterial="",QKWfinishmaterial="",QKTfinishmaterial="",QKLfinishmaterial="",QWWfinishmaterial="";
+        String QKBcolorgroupCode="",QKWcolorGroupCode="",QKTcolorGroupCode="",QKLcolorGroupCode="",QWWcolorGroupCode="";
+        String QKBhinge="",QKWhinge="",QKThinge="",QKLhinge="",QWWfinishtype="",QWWhinge="";
+        String QKBfinishtype="",QKWfinishtype="",QKTfinishtype="",QKLfinishtype="";
+        double QKBamount=0,QKWamount=0,QKTamount=0,QKLamount=0,QWWamount=0;
 
         int kbwidthSum=0,kbdepthSum=0,kbheightSum=0;
+        int qkbwidthSum=0,qkbdepthSum=0,qkbheightSum=0;
         int kwwidthSum=0,kwdepthSum=0,kwheightSum=0;
+        int qkwwidthSum=0,qkwdepthSum=0,qkwheightSum=0;
         int ktwidthSum=0,ktdepthSum=0,ktheightSum=0;
+        int qktwidthSum=0,qktdepthSum=0,qktheightSum=0;
         int klwidthSum=0,kldepthSum=0,klheightSum=0;
+        int qklwidthSum=0,qkldepthSum=0,qklheightSum=0;
         int wrwidthSum=0,wrdepthSum=0, wrheightSum=0;
 
+
         unitSequence = 0;
-        String basewidth="",wallwidth="",tallwidth="",loftwidth="",wardrobewidth="",wardrobeLoftwidth="";
+        String basewidth="",wallwidth="",tallwidth="",loftwidth="",wardrobewidth="",wardrobeLoftwidth="",qwardrobewidth="";
         List<String> kwList= new ArrayList<String>();
         List<String> kbList=new ArrayList<String>();
         List<String> ktList=new ArrayList<String>();
         List<String> klList=new ArrayList<String>();
         List<String> kwaList=new ArrayList<String>();
+        List<String> quickKitchenbaseList=new ArrayList<>();
+        List<String> quickKitchenwallList=new ArrayList<>();
+        List<String> quickKitchentallList=new ArrayList<>();
+        List<String> quickKitchenLoftList=new ArrayList<>();
+        List<String> quickWardrobeList=new ArrayList<>();
 
         String finish=product.getProduct().getFinishType();
-        LOG.info("Finish " +finish);
-
         for(AssembledProductInQuote.Unit unit:product.getUnits())
         {
             if(cname.equals("Wardrobe"))
@@ -1730,9 +1731,95 @@ public class QuotationPDFCreator
                 Wcaption="Aristo Wardrobe";
             }
         }
-        LOG.info("Wcaption " +Wcaption);
+
         for (AssembledProductInQuote.Unit unit : product.getUnits())
         {
+            if(product.getCatagoryName().equalsIgnoreCase("aloft"))
+            {
+                for(ProductModule module: product.getModules())
+                {
+                    QKLmoduleCount +=1;
+                    QKLbasecarcass = product.getProduct().getBaseCarcassCode();
+                    QKLwallcarcass = product.getProduct().getWallCarcassCode();
+                    QKLfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
+                    QKLfinishtype = product.getProduct().getFinishType();
+                    QKLcolorGroupCode =product.getProduct().getColorgroupCode();
+                    QKLhinge=product.getHingeTitle();
+                    QKLamount += module.getAmount();
+                    String width = String.valueOf(module.getWidth());
+                    quickKitchenLoftList.add(new String(width));
+                    qklwidthSum = qklwidthSum + module.getWidth();
+                    qklheightSum = module.getHeight();
+                    qkldepthSum = module.getDepth();
+                    QKitchenLoftDimension= qklwidthSum + " x " + qkldepthSum + " x " + qklheightSum;
+                    captionForQuickLoft="Kitchen Loft Unit";
+                }
+            }else
+            if(product.getCatagoryName().equalsIgnoreCase("akitchen"))
+            {
+                for(ProductModule module:product.getModules())
+                {
+                    if(module.getMGCode().equals("MG-NS-EX01"))
+                    {
+                        //base
+                        QKBmodulecount +=1;
+                        QKBbasecarcass = product.getProduct().getBaseCarcassCode();
+                        QKBWallcarcass = product.getProduct().getWallCarcassCode();
+                        QKBfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
+                        QKBfinishtype = product.getProduct().getFinishType();
+                        QKBcolorgroupCode =product.getProduct().getColorgroupCode();
+                        QKBhinge=product.getHingeTitle();
+                        QKBamount += module.getAmount();
+                        String width = String.valueOf(module.getWidth());
+                        quickKitchenbaseList.add(new String(width));
+                        qkbwidthSum = qkbwidthSum + module.getWidth();
+                        qkbheightSum = module.getHeight();
+                        qkbdepthSum = module.getDepth();
+                        QKitchneBaseDimension= qkbwidthSum + " x " + qkbdepthSum + " x " + qkbheightSum;
+                        captionForQuickBase="Kitchen Base Unit";
+
+                    }
+                    else if(module.getMGCode().equals("MG-NS-EX02"))
+                    {
+                        //wall
+                        QKWmoduleCount +=1;
+                        QKWbasecarcass = product.getProduct().getBaseCarcassCode();
+                        QKWwallcarcass =product.getProduct().getWallCarcassCode();
+                        QKWfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
+                        QKWfinishtype = product.getProduct().getFinishType();
+                        QKWcolorGroupCode =product.getProduct().getColorgroupCode();
+                        QKWhinge=product.getHingeTitle();
+                        QKWamount += module.getAmount();
+                        String width = String.valueOf(module.getWidth());
+                        quickKitchenwallList.add(new String(width));
+                        qkwwidthSum = qkwwidthSum + module.getWidth();
+                        qkwheightSum = module.getHeight();
+                        qkwdepthSum = module.getDepth();
+                        QKitchneWallDimension= qkwwidthSum + " x " + qkwdepthSum + " x " + qkwheightSum;
+                        captionForQuickWall="Kitchen Wall Unit";
+                    }
+                    else
+                    {
+                        //tall
+                        QKTmoduleCount +=1;
+                        QKTbasecarcass = product.getProduct().getBaseCarcassCode();
+                        QKTwallcarcass = product.getProduct().getWallCarcassCode();
+                        QKTfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
+                        QKTfinishtype = product.getProduct().getFinishType();
+                        QKTcolorGroupCode =product.getProduct().getColorgroupCode();
+                        QKThinge=product.getHingeTitle();
+                        QKTamount += module.getAmount();
+                        String width = String.valueOf(module.getWidth());
+                        quickKitchentallList.add(new String(width));
+                        qktwidthSum = qktwidthSum + module.getWidth();
+                        qktheightSum = module.getHeight();
+                        qktdepthSum = module.getDepth();
+                        QKitchneTallDimension= qktwidthSum + " x " + qktdepthSum + " x " + qktheightSum;
+                        captionForQuickTall="Kitchen Tall Unit";
+                    }
+                }
+            }
+
             if(cname.equals("Kitchen") )
             {
                 if(     unit.moduleCategory.contains("H - Panel") ||
@@ -1757,7 +1844,6 @@ public class QuotationPDFCreator
                         unit.moduleCategory.contains("S - Kitchen Wall Sliding Units") ||
                         unit.moduleCategory.contains("S - Hinged Wardrobe 2400")  ||
                         unit.moduleCategory.contains("N - Quick Units"))
-
                 {
                     if(     unit.moduleCategory.contains("N - Base Units") ||
                             unit.moduleCategory.contains("S - Kitchen Base Corner Units")||
@@ -1894,6 +1980,37 @@ public class QuotationPDFCreator
 
                     loftDimesion=klwidthSum + " x " + kldepthSum + " x " +klheightSum;
                 }
+            }else if(product.getCatagoryName().equalsIgnoreCase("ahingedwardrobe") || product.getCatagoryName().equalsIgnoreCase("aslidingwardrobe") || product.getCatagoryName().equalsIgnoreCase("awardrobeloft"))
+            {
+                for(ProductModule module:product.getModules())
+                {
+                    QWWmodulecount += unit.moduleCount;
+                    QWWbasecarcass = product.getProduct().getBaseCarcassCode();
+                    QWWwallcarcass = product.getProduct().getWallCarcassCode();
+                    QWWfinishmaterial = ModuleDataService.getInstance().getFinish(product.getProduct().getFinishCode()).getTitle();
+                    QWWfinishtype = product.getProduct().getFinishType();
+                    QWWcolorGroupCode=product.getProduct().getColorgroupCode();
+                    QWWhinge=product.getProduct().getHingeType();
+                    QWWamount +=module.getAmount() ;
+
+                    String width = String.valueOf(module.getWidth());
+                    quickWardrobeList.add(new String(width));
+                    wrwidthSum = wrwidthSum + module.getWidth();
+                    wrheightSum = module.getHeight();
+                    wrdepthSum = module.getDepth();
+                    QWardrobeDimension= wrwidthSum + " x " + wrdepthSum + " x " + wrheightSum;
+                    if(product.getCatagoryName().equalsIgnoreCase("ahingedwardrobe"))
+                    {
+                        captionForWardrobe="Hinged Wardrobe";
+                    }else if(product.getCatagoryName().equalsIgnoreCase("aslidingwardrobe"))
+                    {
+                        captionForWardrobe="Sliding Wardrobe";
+                    }else
+                    {
+                        captionForWardrobe="Wardrobe Loft";
+                    }
+                }
+
             }
             else if(cname.equals("Wardrobe"))
             {
@@ -2096,6 +2213,30 @@ public class QuotationPDFCreator
             wardrobeLoftwidth=wardrobeLoftwidth.substring(2);
         }
 
+        if(QKBamount!=0)
+        {
+            obj = new customeclass(tabname, captionForQuickBase, QKBmodulecount, QKBbasecarcass, QKBWallcarcass, QKBfinishmaterial, QKBfinishtype, QKBamount, QKitchneBaseDimension,QKBcolorgroupCode,QKBhinge);
+            li.add(obj);
+            customFunction(li,unitSequence);
+            unitSequence++;
+            li.clear();
+        }
+        if(QKWamount!=0)
+        {
+            obj = new customeclass(tabname, captionForQuickWall, QKWmoduleCount, QKWbasecarcass, QKWwallcarcass, QKWfinishmaterial, QKWfinishtype, QKWamount, QKitchneWallDimension,QKWcolorGroupCode,QKWhinge);
+            li.add(obj);
+            customFunction(li,unitSequence);
+            unitSequence++;
+            li.clear();
+        }
+        if(QKTamount!=0)
+        {
+            obj = new customeclass(tabname, captionForQuickTall, QKTmoduleCount, QKTbasecarcass, QKTwallcarcass, QKTfinishmaterial, QKTfinishtype, QKTamount, QKitchneTallDimension,QKTcolorGroupCode,QKThinge);
+            li.add(obj);
+            customFunction(li,unitSequence);
+            unitSequence++;
+            li.clear();
+        }
         if(KBamount!=0) {
             obj = new customeclass(tabname, caption, KBmodulecount, KBbasecarcass, KBWallcarcass, KBfinishmaterial, KBfinishtype, KBamount, baseDimesion,KBcolorgroupCode,KBhinge);
             li.add(obj);
@@ -2127,7 +2268,22 @@ public class QuotationPDFCreator
             unitSequence++;
             li.clear();
         }
-
+        if(QKLamount!=0)
+        {
+            obj = new customeclass(tabname, captionForQuickLoft, QKLmoduleCount, QKLbasecarcass, QKLwallcarcass, QKLfinishmaterial, QKLfinishtype, QKLamount, QKitchenLoftDimension,QKLcolorGroupCode,QKLhinge);
+            li.add(obj);
+            customFunction(li,unitSequence);
+            unitSequence++;
+            li.clear();
+        }
+        if(QWWamount!=0)
+        {
+            obj = new customeclass(tabname, captionForWardrobe, QWWmodulecount, QWWbasecarcass, QWWwallcarcass, QWWfinishmaterial, QWWfinishtype, QWWamount, QWardrobeDimension,QWWcolorGroupCode,QWWhinge);
+            li.add(obj);
+            customFunction(li,unitSequence);
+            unitSequence++;
+            li.clear();
+        }
         if(WWamount!=0)
         {
 
@@ -2232,7 +2388,6 @@ public class QuotationPDFCreator
     }
     private void createRowAndFillData(PdfPTable tabname,String index, String title, Double quantity, Double amount, Double total)
     {
-        LOG.info("create row and fill data " +total);
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -2269,7 +2424,6 @@ public class QuotationPDFCreator
     }
     private void createRowAndFillDataForMiscellaneousForPer(PdfPTable tabname,String index, String title,String uom, Double quantity, String amount, Double total)
     {
-        LOG.info("create row and fill data " +quantity+ " amount " +amount+ " total " +total);
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -2312,7 +2466,6 @@ public class QuotationPDFCreator
     }
     private void createRowAndFillDataForMiscellaneous(PdfPTable tabname,String index, String title,String uom, Double quantity, String amount, Double total)
     {
-        LOG.info("create row and fill data " +quantity+ " amount " +amount+ " total " +total);
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -2659,8 +2812,6 @@ public class QuotationPDFCreator
     }
     public void getProposalServices()
     {
-        LOG.info("project handling tax " +projectHandlingTax);
-        LOG.info("project handling Amount " +proposalVersion.getProjectHandlingAmount() + "project handling tax " +projectHandlingTax.getSourcePrice());
         double projectHandlingwithTax=proposalVersion.getProjectHandlingAmount()*projectHandlingTax.getSourcePrice();
         double deepClearingwithTax=proposalVersion.getDeepClearingAmount()*deepClearingTax.getSourcePrice();
         double floorProtectionwithTax=proposalVersion.getFloorProtectionAmount()*floorProtectionTax.getSourcePrice();
@@ -2673,7 +2824,6 @@ public class QuotationPDFCreator
     }
     public void getProducts()
     {
-        LOG.info("price Date " +proposalHeader.getPriceDate()+ " project city " +proposalHeader.getProjectCity());
         designServicePrice=RateCardService.getInstance().getFactorRate(DESIGN_SERVICE_PRICE,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         designServiceTax=RateCardService.getInstance().getFactorRate(DESIGN_SERVICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         nonMovablePrice=RateCardService.getInstance().getFactorRate(NON_MOVABLE_PRICE,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
@@ -2681,8 +2831,6 @@ public class QuotationPDFCreator
         nonMovablePriceTax=RateCardService.getInstance().getFactorRate(NON_MOVABLE_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         movablePriceTax=RateCardService.getInstance().getFactorRate(MOVABLE_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         scwTax=RateCardService.getInstance().getFactorRate(SCW_PRICE_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
-        LOG.info("project handling tax " +PROJECT_HANDLING_TAX + "priceDate " +proposalHeader.getPriceDate()+ " project city " +proposalHeader.getProjectCity());
-
         projectHandlingTax=RateCardService.getInstance().getFactorRate(PROJECT_HANDLING_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         floorProtectionTax=RateCardService.getInstance().getFactorRate(FLOOR_PROTECTION_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
         deepClearingTax=RateCardService.getInstance().getFactorRate(DEEP_CLEARING_TAX,proposalHeader.getPriceDate(),proposalHeader.getProjectCity());
@@ -3242,7 +3390,6 @@ public class QuotationPDFCreator
 
             }
 
-            LOG.info("GST Category " + GSTCategory);
             //String sequence=BOLD_ALPHABET_SEQUENCE[count];
 
             double tax_amount = round(DesignpriceAfterDsicount - currentpriceAfterTax, 2);
