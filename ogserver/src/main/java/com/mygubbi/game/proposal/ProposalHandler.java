@@ -550,6 +550,17 @@ public class ProposalHandler extends AbstractRouteHandler
                             financeTeam.forEach(finace -> {
                                 emailIds.add(finace.getEmail());//finance
                             });
+
+                            Collection<UsersForEmail> crmTeam = ModuleDataService.getInstance().getUserForEmail("crm");
+                            crmTeam.forEach(crm -> {
+                                emailIds.add(crm.getEmail());//crm team
+                            });
+
+                            Collection<UsersForEmail> purchase = ModuleDataService.getInstance().getUserForEmail("purchaseHead");
+                            purchase.forEach(purTeam -> {
+                                emailIds.add(purTeam.getEmail());//purchase
+                            });
+
                         }else if(toVersion.equalsIgnoreCase("2.0")){
                             emailIds.add(proposalHeader.getDesignerEmail()); //designer
                             emailIds.add(proposalHeader.getSalesEmail()); //sales person
@@ -580,6 +591,17 @@ public class ProposalHandler extends AbstractRouteHandler
                             operationsHead.forEach(opHead -> {
                                 emailIds.add(opHead.getEmail());//operations Head
                             });
+
+                            Collection<UsersForEmail> crmTeam = ModuleDataService.getInstance().getUserForEmail("crm");
+                            crmTeam.forEach(crm -> {
+                                emailIds.add(crm.getEmail());//crm team
+                            });
+
+                            Collection<UsersForEmail> purchase = ModuleDataService.getInstance().getUserForEmail("purchaseHead");
+                            purchase.forEach(purTeam -> {
+                                emailIds.add(purTeam.getEmail());//purchase
+                            });
+
                         }else if(toVersion.equalsIgnoreCase("3.0")){
                             emailIds.add(proposalHeader.getDesignerEmail()); //designer
 
