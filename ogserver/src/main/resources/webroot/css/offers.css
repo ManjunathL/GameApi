@@ -1,0 +1,258 @@
+.offers_banner_bg {
+    background-color:#ffffff;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
+.offers-container {
+    width: 1090px;
+}
+.navbar-offers{
+    background: #e5e7d9!important;
+}
+.offers-form{
+    background: #e2e8d5;
+    color: #333333;
+    padding: 0px 5px;
+    max-width: 450px;
+    margin: 0px auto;
+}
+
+.offers-interior-need h1 {
+    font-weight: bold;
+    margin: 0px;
+    font-size: 45px;
+    color: #67777f;
+}
+
+.offers-interior-need{
+    margin: 40px 0px 70px;
+}
+.offers-interior-need h2 {
+    font-weight: 300;
+    font-size: 42px;
+    margin-top: 40px;
+}
+.offers-form .sparkle-form-wrapper{
+    padding: 10px 20px;
+}
+
+.offers-form h3 {
+   text-align: center;
+   margin: 0px;
+   text-transform: capitalize;
+   font-weight: 600;
+   color: #c64a1b;
+   padding: 15px 0px 10px;
+   font-size: 35px;
+   letter-spacing: 4px;
+   font-family: 'Raleway', sans-serif;
+}
+
+.offers-form .form-control{
+    border-radius: 0px;
+    box-shadow: none;
+    height: 35px;
+    line-height: 35px;
+    border-width: 0px 0px 1px 0px;
+    padding: 5px;
+    margin: 15px 0px;
+}
+
+.assurance-fluid h1 {
+    font-size: 42px;
+    letter-spacing: 5px;
+    color: #f1591f;
+}
+
+.assurance-fluid .off_count img {
+    width:200px!important;
+}
+
+.assurance-fluid .off_count {
+   height: 155px;
+}
+.assurance-fluid h4 {
+    font-size: 16px;
+    text-align:center;
+    color: #67777f;
+}
+
+.btn-offers {
+    background: #f1591f;
+    color: #ffffff;
+    text-transform:uppercase;
+    font-size: 16px;
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.42);
+}
+
+.btn-offers:hover,
+.btn-offers:active,
+.btn-offers:focus{
+    color: #ffffff;
+    background: #ec5b23d1;
+    text-decoration: none;
+ }
+
+ .banner-ig{
+    height:560px;
+ }
+ .banner-mob-ig{
+    height:315px;
+ }
+
+ .offers-why-us-fluid{
+     margin-right: auto;
+     margin-left: auto;
+     padding-left: 15px;
+     padding-right: 15px;
+ }
+
+ .offers-why-us-fluid h1{
+     font-size: 42px;
+     letter-spacing: 5px;
+     color: #f1591f;
+ }
+ .offers-section-testimonial {
+     padding-bottom: 50px;
+     background-color: #e5e7d9 !important;
+ }
+
+ .btn-sparkleee-offer {
+     background: #ee6e24;
+     color: #ffffff;
+     font-size: 16px;
+     padding: 10px 10px 10px 10px;
+     text-decoration: none;
+     font-weight: 600;
+     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.42);
+ }
+
+ .btn-sparkleee-offer:hover,
+ .btn-sparkleee-offer:active,
+ .btn-sparkleee-offer:focus{
+     color: #ffffff;
+     background: #ee6e24;
+     text-decoration: none;
+     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.42);
+  }
+.offers-h4-txt h4{
+    font-size:16px;
+    color:#67777f;
+}
+.offers-txt-sec{
+    padding:40px 0px;
+    background: #e2e8d5;
+    color: #1a1919;
+}
+.off-cnt{
+    height: 120px;
+}
+.slider{
+  position: relative;
+}
+.slid-imgs{
+    width:100%;
+    height:552px;
+}
+.slid-mob-imgs{
+    width:100%;
+    height:315px;
+}
+.slider li {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.mob-slider li {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media (min-width: 992px){
+    .offers_banner_bg {
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+    }
+
+}
+ @media (max-width: 767px) {
+ .offers-container {
+     width: 100%;
+ }
+ .navbar-offers .navbar-brand img {
+         width: 150px;
+         margin: 15px auto;
+         text-align: center;
+     }
+  .assurance-fluid h1,
+  .offers-why-us-fluid h1{
+      letter-spacing: 5px;
+      font-size: 14px;
+  }
+
+  .offers-interior-need h1 {
+      font-weight: bold;
+      margin: 0px;
+      font-size: 40px;
+  }
+  .offers-interior-need h2{
+      font-size:30px;
+  }
+  .offers-txt-sec{
+      margin-top: 15px;
+  }
+  .assurance-fluid .off_count img {
+      width:110px!important;
+  }
+
+  .assurance-fluid .off_count {
+     height: 110px;
+  }
+  .offers-form {
+      margin: 15px 0px;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+      max-width:90%!important;
+  }
+  .offers-form h3{
+      font-size: 24px;
+  }
+  .btn-offers{
+      font-size: 12px;
+  }
+  .offers-form h3{
+    font-size: 28px;
+  }
+  .offers-interior-need h1 {
+      font-weight: bold;
+      margin: 0px;
+      font-size: 40px;
+  }
+  .offers-interior-need h2{
+      font-size:30px;
+  }
+  .offers-interior-need {
+      margin: 40px 0px !important;
+  }
+  h3, .h3 {
+      font-size: 14px!important;
+  }
+}
