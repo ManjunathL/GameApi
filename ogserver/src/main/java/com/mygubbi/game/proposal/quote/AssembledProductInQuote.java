@@ -304,7 +304,7 @@ public class AssembledProductInQuote
     {
 
             Collection<ModuleComponent> moduleComponents =
-                    ModuleDataService.getInstance().getModuleComponents(module.getMGCode());
+                    ModuleDataService.getInstance().getModuleComponents(module.getMGCode(),this.priceDate);
             if (moduleComponents == null ) return;
             for (ModuleComponent moduleComponent : moduleComponents)
             {

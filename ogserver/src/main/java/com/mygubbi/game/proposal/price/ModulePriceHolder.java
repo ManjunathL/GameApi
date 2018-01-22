@@ -424,6 +424,7 @@ public class ModulePriceHolder
 
     private void addComponent(IModuleComponent component, String accPackCode)
     {
+        LOG.debug("I module component :" + component.getType() + " : " + component.getComponentCode());
         if (component.isCarcass() || component.isShutter() || component.isBlended())
         {
             this.addModulePanel(component, accPackCode);
@@ -645,7 +646,7 @@ public class ModulePriceHolder
 
     private void getModuleAndComponents()
     {
-        this.moduleComponents = ModuleDataService.getInstance().getModuleComponents(productModule.getMGCode());
+        this.moduleComponents = ModuleDataService.getInstance().getModuleComponents(productModule.getMGCode(),this.priceDate);
         if (moduleComponents == null || moduleComponents.isEmpty() || mgModule == null)
         {
             this.addError("Module components or module not setup for MG code: -" + productModule.getMGCode() + "-");

@@ -1,6 +1,9 @@
 package com.mygubbi.game.proposal.model;
 
+import com.mygubbi.common.DateUtil;
 import io.vertx.core.json.JsonObject;
+
+import java.sql.Date;
 
 /**
  * Created by test on 17-05-2016.
@@ -13,9 +16,14 @@ public class ModuleComponent implements IModuleComponent
     private String quantityFormula;
     private String componentCode;
     private double quantity;
+    private Date fromDate;
+    private Date toDate;
 
     public static ModuleComponent fromJson(JsonObject json)
     {
+        Date fromDateInSql = DateUtil.convertDate(json.getString("fromDate"));
+        Date toDateInSql = DateUtil.convertDate(json.getString("toDate"));;
+
         ModuleComponent component = new ModuleComponent();
         component.setModuleCode(json.getString("modulecode"));
         component.setType(json.getString("comptype"));
@@ -23,6 +31,8 @@ public class ModuleComponent implements IModuleComponent
         component.setQuantity(json.getDouble("quantity"));
         component.setQuantityFlag(json.getString("quantityFlag"));
         component.setQuantityFormula(json.getString("quantityFormula"));
+        component.setFromDate(fromDateInSql);
+        component.setToDate(toDateInSql);
         return component;
     }
 
@@ -132,6 +142,28 @@ public class ModuleComponent implements IModuleComponent
     public ModuleComponent setQuantityFormula(String quantityFormula)
     {
         this.quantityFormula = quantityFormula;
+        return this;
+    }
+
+    public Date getFromDate()
+    {
+        return fromDate;
+    }
+
+    public ModuleComponent setFromDate(Date fromDate)
+    {
+        this.fromDate = fromDate;
+        return this;
+    }
+
+    public Date getToDate()
+    {
+        return toDate;
+    }
+
+    public ModuleComponent setToDate(Date toDate)
+    {
+        this.toDate = toDate;
         return this;
     }
 

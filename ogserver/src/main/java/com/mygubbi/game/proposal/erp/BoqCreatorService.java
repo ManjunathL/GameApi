@@ -222,7 +222,7 @@ public class BoqCreatorService extends AbstractVerticle {
 
 
         for (ProductModule module : modules) {
-            Collection<ModuleComponent> moduleComponents = ModuleDataService.getInstance().getModuleComponents(module.getMGCode());
+            Collection<ModuleComponent> moduleComponents = ModuleDataService.getInstance().getModuleComponents(module.getMGCode(),proposalHeader.getPriceDate());
 
             List<BoqItem> boqItemListMaster = new ArrayList<>();
 

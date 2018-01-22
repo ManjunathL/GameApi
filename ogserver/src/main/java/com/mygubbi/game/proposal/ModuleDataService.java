@@ -17,10 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ModuleDataService extends AbstractVerticle
@@ -597,9 +594,21 @@ public class ModuleDataService extends AbstractVerticle
         }
     }
 
-    public Collection<ModuleComponent> getModuleComponents(String mgCode)
+    public Collection<ModuleComponent> getModuleComponents(String mgCode, Date priceDate)
     {
-        return this.moduleComponentsMap.get(mgCode);
+
+        Collection<ModuleComponent> moduleComponents = this.moduleComponentsMap.get(mgCode);
+        Collection<ModuleComponent> moduleComponentsValid = new ArrayList<>();
+        for (ModuleComponent moduleComponent : moduleComponents)
+        {
+            int before = priceDate.compareTo(moduleComponent.getFromDate());
+            int after = priceDate.compareTo(moduleComponent.getToDate());
+            if (before >= 0 && after <= 0)
+            {
+                moduleComponentsValid.add(moduleComponent);
+            }
+        }
+        return moduleComponentsValid;
     }
 
     public Collection<ColorMaster> getColours(String code)
