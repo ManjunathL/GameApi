@@ -14,7 +14,10 @@
     color: #ffffff;
 }
 .offers-container {
-    width: 1090px;
+    width: 100%;
+}
+.desk-offers-container{
+    width: 1024px;
 }
 .navbar-offers{
     background: #e5e7d9!important;
@@ -221,7 +224,7 @@
       margin-top: 15px;
   }
   .assurance-fluid .off_count img {
-      width:110px!important;
+      width:150px!important;
   }
 
   .assurance-fluid .off_count {

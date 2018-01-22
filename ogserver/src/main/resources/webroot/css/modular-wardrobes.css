@@ -51,7 +51,7 @@ h6 {
     font-family: 'Lato', sans-serif;
 }
 
-h1,
+/*h1,
 h2,
 h3,
 h4,
@@ -59,13 +59,17 @@ h5,
 h6{
     font-family: 'Abel', sans-serif;
     font-weight: 400;
-}
+}*/
 
 ul, ol{
     font-family: 'Raleway', sans-serif;
 }
 .position-relative {
     position: relative;
+}
+
+.mt20{
+    margin-top: 20px;
 }
 .mt30{
     margin-top: 30px;
@@ -468,12 +472,120 @@ ul, ol{
     font-family: 'Lato', sans-serif;
 }
 
+.gethome-interior-need h1 {
+    font-weight: bold;
+    margin: 0px;
+    font-size: 45px;
+    color: #67777f;
+}
+.gethome-interior-need{
+    margin: 40px 30px 0px 70px;
+    font-family: 'Lato', sans-serif;
+}
+.gethome-interior-need h2 {
+    font-weight: 300;
+    font-size: 42px;
+    margin-top: 40px;
+}
+.off-cnt {
+    height: 120px;
+}
+.offers-h4-txt h4{
+    font-size:16px;
+    color:#67777f;
+}
+.assurance-fluid .off_count img {
+    width:200px!important;
+}
+
+.assurance-fluid .off_count {
+   height: 155px;
+}
+.assurance-fluid h4 {
+    font-size: 16px;
+    text-align:center;
+}
+/* Recent Projects */
+.font-size35 {
+    font-size: 35px;
+}
+.txt-over-head{
+    text-shadow: 2px 2px 2px #333;
+}
+
+.txt-over-completed-project-image {
+    position: absolute;
+    top: 48%;
+    left: 5%;
+}
+.txt-over-completed-project-img {
+    position: absolute;
+    top: 25%;
+    left: 5%;
+}
+.txt-over-completed-project-img div {
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+}
+.txt-over-completed-project-image div {
+    width: 45%;
+    background: rgba(0,0,0,0.6);
+}
+.txt-over-completed-project-img div p,
+.txt-over-completed-project-image div p{
+    padding: 20px;
+    font-weight: 300;
+    color:#fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 130%;
+}
+.picture-prfct{
+    background:none!important;
+}
+.picture-prfct p{
+    padding-left:0px!important;
+}
+.explore-space2 {
+    margin-left: 195px !important;
+}
+.btn-explore{
+    background-color: #f1591f;
+    color:#ffffff;
+    border-radius:0px !important;
+    text-transform: uppercase;
+    padding: 6px 17px;
+}
+
+.btn-explore:hover,
+.btn-explore:focus,
+.btn-explore:active{
+    background-color: #dc3000;
+    color: #ffffff;
+}
+.padding0 {
+    padding: 0px;
+}
+.padding-left15 {
+    padding-left: 15px;
+}
+.padding-bottom15 {
+    padding-bottom: 15px;
+}
+
+/* End Recent Projects */
+
 @media (min-width: 1280px) {
     .festive-form .festive-form-wrapper {
         padding: 10px 45px;
     }
 }
-
+@media (max-width: 1024px) {
+    .txt-over-completed-project-img {
+        position: absolute;
+        top: 20%;
+        left: 5%;
+    }
+}
 @media (min-width: 992px) {
     .pn{
         padding: 0px;
@@ -528,6 +640,9 @@ ul, ol{
     }
 }
 @media (max-width: 767px) {
+    .font-size35 {
+        font-size: 22px!important;
+    }
     .navbar-festive .navbar-brand img {
         width: 150px;
         margin: 15px auto 10px;
@@ -553,6 +668,14 @@ ul, ol{
         color: #ffffff;
         padding: 20px 0px 50px;
     }
+
+    .assurance-fluid .off_count img {
+          width:150px!important;
+      }
+
+      .assurance-fluid .off_count {
+         height: 110px;
+      }
 }
 @media (max-width: 420px) {
     .festive_banner_bg {
@@ -757,8 +880,10 @@ ul, ol{
 .cucumber-form{
     background: #ba2027;
     color: #ffffff;
-    padding: 60px 20px 30px;
-    min-height: 480px;
+    /*padding: 60px 20px 30px;
+    min-height: 480px;*/
+    padding: 20px 20px 30px;
+    min-height: 420px;
 }
 .mkc{
     background: #f7e902;
@@ -1027,7 +1152,7 @@ ul, ol{
 .slidhead{
     font-size: 40px;
     font-weight: 300;
-    font-family: 'Abel', sans-serif;
+    /*font-family: 'Abel', sans-serif;*/
     text-align: right;
 }
 
