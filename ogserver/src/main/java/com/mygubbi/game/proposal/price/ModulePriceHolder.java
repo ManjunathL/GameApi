@@ -424,7 +424,6 @@ public class ModulePriceHolder
 
     private void addComponent(IModuleComponent component, String accPackCode)
     {
-        LOG.debug("I module component :" + component.getType() + " : " + component.getComponentCode());
         if (component.isCarcass() || component.isShutter() || component.isBlended())
         {
             this.addModulePanel(component, accPackCode);
