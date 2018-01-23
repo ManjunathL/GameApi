@@ -632,7 +632,7 @@ public class ModulePriceHolder
         this.lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, city);
         this.cConnectorRate = RateCardService.getInstance().getHardwareRate("H072", priceDate, city);
         this.gProfileRate = RateCardService.getInstance().getHardwareRate("H018", priceDate, city);
-        this.jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
+        this.jProfileRate = RateCardService.getInstance().getHardwareRate("H084", priceDate, city);
 
 
         if (carcassMaterialRateCard == null || carcassFinishRateCard == null || shutterFinishRateCard == null

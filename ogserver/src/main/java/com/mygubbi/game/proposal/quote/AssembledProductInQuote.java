@@ -332,7 +332,7 @@ public class AssembledProductInQuote
             PriceMaster lConnectorRate = RateCardService.getInstance().getHardwareRate("H074", priceDate, city);
             PriceMaster cConnectorRate = RateCardService.getInstance().getHardwareRate("H072", priceDate, city);
             PriceMaster gProfileRate = RateCardService.getInstance().getHardwareRate("H018", priceDate, city);
-            PriceMaster jProfileRate = RateCardService.getInstance().getHardwareRate("H077", priceDate, city);
+            PriceMaster jProfileRate = RateCardService.getInstance().getHardwareRate("H084", priceDate, city);
 
 
             //LOG.info("Product Module " +module);
