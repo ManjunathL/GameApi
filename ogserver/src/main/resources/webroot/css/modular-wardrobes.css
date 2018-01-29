@@ -873,6 +873,24 @@ ul, ol{
     text-align: center;
     color: #ffffff;
 }
+.lp_banner_bg {
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1499850518/landing_page/double-bonanza/LV2.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 520px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: #ffffff;
+}
 .kitchen_banner_bg {
     /*background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492680439/landing_page/kitchen-cabinets/Hero_image_banner.jpg");*/
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516702486/landing_page/modular-wardrobes/LandingPage_Kitchen.jpg");
@@ -1371,6 +1389,16 @@ ul, ol{
         background-size: contain;
         min-height: 195px;
     }
+    .lp_banner_bg {
+        background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1499850518/landing_page/double-bonanza/LV_05.jpg");
+        min-height: 300px;
+        padding: 10px 0px 10px;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+        min-height: 195px;
+    }
     .kitchen_banner_bg {
         background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1492680439/landing_page/kitchen-cabinets/Hero_image_banner.jpg");
         min-height: 300px;
@@ -1384,6 +1412,10 @@ ul, ol{
     .cucumber-why-us-head{
         font-size: 26px;
         padding: 20px 0px;
+    }
+    #lp_banner .cucumber-form{
+        min-height:420px;
+        box-shadow: none;
     }
     .cucumber-form{
         min-height:500px;

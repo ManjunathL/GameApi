@@ -1,3 +1,4 @@
+<!--
 <section class="bg-white padding-bottom20 menu-spacer">
     <div class="container-fluid">
         <div class="row">
@@ -6,7 +7,7 @@
         </div>
     </div>
     <div class="container-fluid">
-        <!-- Contact Form -->
+        &lt;!&ndash; Contact Form &ndash;&gt;
         <div class="row">
             <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-12 col-xs-12 carousel-form-box">
                 <div class="row">
@@ -480,7 +481,7 @@
 
     </div>
 
-    <!-- Testimonial Section -->
+    &lt;!&ndash; Testimonial Section &ndash;&gt;
 
     <section class="bg-color-white padding50-0">
         <div class="container align-center">
@@ -744,9 +745,9 @@
         </div>
     </section>
 
-    <!-- Testimonial Section End -->
+    &lt;!&ndash; Testimonial Section End &ndash;&gt;
 
-    <!-- Brand Section -->
+    &lt;!&ndash; Brand Section &ndash;&gt;
 
     <div class="container-fluid margin-top40">
         <h1 class="heading-center-notransform">
@@ -792,7 +793,7 @@
         </div>
     </div>
 
-    <!-- Brand Section End -->
+    &lt;!&ndash; Brand Section End &ndash;&gt;
 
     <div class="container margin-top40 margin-bottom40">
         <div class="row">
@@ -847,4 +848,558 @@
         </div>
     </div>
 
+</section>-->
+
+<link rel="stylesheet" href="/css/modular-wardrobes.css">
+<!-- Slider -->
+<link rel="stylesheet" href="/js/libs/owl.carousel/dist/assets/owl.carousel.css" type="text/css">
+<link rel="stylesheet" href="/js/libs/owl.carousel/dist/assets/owl.theme.default.min.css" type="text/css">
+<link rel="stylesheet" href="/css/owl.transitions.css">
+
+
+<section class="lp_banner_bg hidden-xs">
+    <div class="container festive-container hidden-xs">
+        <div class="row">
+            <div class="col-sm-6 col-md-7 col-md-offset-1 col-lg-7 col-lg-offset-1 pn">
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-4 pn mt20">
+                <div class="cucumber-form mw text-left" id="cucu-form">
+                    <h3 class="text-left"> Get a FREE Design Consultation </h3>
+                    <form method="post" enctype="multipart/form-data"
+                          action="https://web.mxradon.com/t/FormTracker.aspx"
+                          class="width90 margin_auto paddingtop20">
+                        <div class="row">
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='FirstName' name='FirstName'
+                                       placeholder="Name*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
+                                       required='required'/>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='EmailAddress'
+                                       name='EmailAddress' placeholder="Email*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
+                                       required='required' pattern=".+@.+\..+"
+                                       title="<abc>@<xyz>.<com>"/>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control" id='Phone'
+                                       name='Phone'
+                                       placeholder="Phone Number*" maxlength='20'
+                                       value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                       required='required' pattern="\d{10}"
+                                       title="e.g. 9876543210"/>
+                            </div>
+                            <div class="form-group">
+                                <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                    <option value='cityName'>City Name</option>
+                                    <option value='Bangalore'> Bangalore </option>
+                                    <option value='Pune'> Pune </option>
+                                    <option value='Mangalore'> Mangalore </option>
+                                    <option value='Chennai'> Chennai </option>
+                                    <option value='Other' >Other</option>
+                                </select>
+                            </div>
+
+                            <div class="align-center form-group">
+                                <button class="button-orange consult-submit-orange"
+                                        id="form-submit-button"
+                                        type="submit">Submit
+                                </button>
+                                <br/>
+                                <input type="hidden" name="MXHOrgCode" value="9814" />
+                                <input type="hidden" name="MXHLandingPageId" value="5779bc96-3c62-11e6-b61b-22000aa8e760" />
+                                <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
+                                <input type="hidden" name="MXHAsc" value="5" />
+                                <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
+                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                            </div>
+                        </div>
+                    </form>
+                    <script type="text/javascript"> var MXLandingPageId = '5779bc96-3c62-11e6-b61b-22000aa8e760'; </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+
+<section id="lp_banner" class="festive_banner_bg_mob">
+
+    <div class="festive-banner-mob">
+        <img class="img-responsive hidden-lg hidden-md hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1499866008/landing_page/double-bonanza/mob/LV2_MOB.jpg" alt="Landing Banner" >
+    </div>
+    <div class="container festive-container">
+        <div class="row">
+            <div class="col-xs-12 hidden-lg hidden-md hidden-sm festive-mob-form">
+                <div class="cucumber-form mw text-left" id="cucu-form-mob">
+                    <h3 class="text-left"> Get a FREE Design Consultation </h3>
+                    <form method="post" enctype="multipart/form-data"
+                          action="https://web.mxradon.com/t/FormTracker.aspx"
+                          class="width90 margin_auto paddingtop20">
+                        <div class="row">
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='FirstName' name='FirstName'
+                                       placeholder="Name*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.displayName : ''%>" autocomplete='off'
+                                       required='required'/>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control"
+                                       id='EmailAddress'
+                                       name='EmailAddress' placeholder="Email*" maxlength='100'
+                                       value="<%=userProfile ? userProfile.email : ''%>" autocomplete='off'
+                                       required='required' pattern=".+@.+\..+"
+                                       title="<abc>@<xyz>.<com>"/>
+                            </div>
+                            <div class="margin-bottom20 form-group">
+                                <input type='text' class="width100 form-control" id='Phone'
+                                       name='Phone'
+                                       placeholder="Phone Number*" maxlength='20'
+                                       value="<%=userProfile ? userProfile.phone : ''%>" autocomplete='off'
+                                       required='required' pattern="\d{10}"
+                                       title="e.g. 9876543210"/>
+                            </div>
+                            <div class="form-group">
+                                <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                    <option value='cityName'>City Name</option>
+                                    <option value='Bangalore'> Bangalore </option>
+                                    <option value='Pune'> Pune </option>
+                                    <option value='Mangalore'> Mangalore </option>
+                                    <option value='Chennai'> Chennai </option>
+                                    <option value='Other' >Other</option>
+                                </select>
+                            </div>
+
+                            <div class="align-center form-group">
+                                <button class="button-orange consult-submit-orange"
+                                        id="form-submit-button"
+                                        type="submit">Submit
+                                </button>
+                                <br/>
+                                <input type="hidden" name="MXHOrgCode" value="9814" />
+                                <input type="hidden" name="MXHLandingPageId" value="5779bc96-3c62-11e6-b61b-22000aa8e760" />
+                                <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
+                                <input type="hidden" name="MXHAsc" value="5" />
+                                <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
+                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                            </div>
+                        </div>
+                    </form>
+                    <script type="text/javascript"> var MXLandingPageId = '5779bc96-3c62-11e6-b61b-22000aa8e760'; </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Start How it work -->
+<section class="text-center">
+    <div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <p class="mt40">
+                    MyGubbi is a one-stop destination for anyone looking for customized interior design & decor
+                    products. We offer home-interior solutions including modular kitchen and wardrobe units,
+                    entertainment units, shoe racks, tables and more. All our products are highly durable and
+                    functional. Mygubbi is the self-reflection of the aspirations of millions of customers, who are
+                    actively exploring for personalized home decor.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="gethome-interior-need">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text-center">
+                    <h2>Get your dream home <br/> interiors designed</h2>
+                    <h5>by</h5>
+                    <h1> Mygubbi </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                <div class="position-relative">
+                    <h1 class="mod-head mb30">
+                        <span class="mod-green"> Our </span>
+                        <span class="mod-red"> Services </span>
+                        <span class="mod-cer hidden-xs">
+                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1493377940/landing_page/modular-wardrobes/white-cer.jpg" alt="cir">
+                        </span>
+                    </h1>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1 mt30 mb20 text-center">
+
+                <!--
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn;">
+                                            <div class="de_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/20.png" alt="Explore The Designs" class="img-responsive img-centered"><br>
+                                                <span class="fact-des-works"> Explore The Designs </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
+                                            <div class="de_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/21.png" alt="Meet our Sales Associate" class="img-responsive cld-responsive img-centered"><br>
+                                                <span class="fact-des-works"> Meet our Sales Associate </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                                            <div class="de_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/22.png" alt="Customize your home" class="img-responsive cld-responsive img-centered"><br>
+                                                <span class="fact-des-works"> Customize your home </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
+                                            <div class="de_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/23.png" alt="Get estimate & 3D Design" class="img-responsive cld-responsive img-centered"><br>
+                                                <span class="fact-des-works"> Get estimate & 3D Design </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="1.00s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
+                                            <div class="de_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/24.png" alt="Place Your Order" class="img-responsive cld-responsive img-centered"><br>
+                                                <span class="fact-des-works"> Place Your Order </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
+                                            <div class="de_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/25.png" alt="Get Handover in 45 days" class="img-responsive cld-responsive img-centered"><br>
+                                                <span class="fact-des-works">  Get Handover in 45 days </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                -->
+                <div class="row offers-h4-txt">
+                    <div class="col-md-1"></div>
+                    <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn;">
+                        <div class="de_count1 off-cnt">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2.png" alt="KITCHENS" class="img-centered">
+                        </div>
+                        <h4><strong> MODULAR <br/> KITCHENS </strong> </h4>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
+                        <div class="de_count1 off-cnt">
+                            <img src="http://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2_copy.png" alt="WARDROBES" class="img-centered">
+                        </div>
+                        <h4><strong> MODULAR <br/> WARDROBES </strong> </h4>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                        <div class="de_count1 off-cnt">
+                            <img src="http://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2_copy_2.png" alt="STORAGE SOLUTIONS" class="img-centered">
+                        </div>
+                        <h4><strong> STORAGE <br/> SOLUTIONS </strong> </h4>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
+                        <div class="de_count1 off-cnt">
+                            <img src="http://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2_copy_3.png" alt="FURNITURE" class="img-centered">
+                        </div>
+                        <h4><strong> MODULAR <br/> FURNITURE </strong> </h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 wow fadeIn animated" data-wow-delay="1.00s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
+                        <div class="de_count1 off-cnt">
+                            <img src="http://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2_copy_4.png" alt="MORE" class="img-centered">
+                        </div>
+                        <h4><strong> MORE </strong> </h4>
+                    </div>
+
+                </div>
+
+                <!--<div class="row">
+                        <div class="col-md-12 mt30 mb20">
+                            <a href="#cucu-form-mob" class="btn btn-enquiry hidden-sm hidden-md hidden-lg"> Enquire Now </a>
+                            <a href="#cucu-form" class="btn btn-enquiry hidden-xs"> Enquire Now </a>
+                        </div>
+                    </div>-->
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End How it work -->
+
+<!-- End Gallery Section -->
+
+<div class="clearfix"></div>
+
+<!-- Start Gallery Section -->
+
+<!-- Section begin -->
+<section class="section-cucu-facts text-center">
+    <div class="container-fluid">
+        <div class="why-us-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="position-relative">
+                        <h1 class="mod-head mb30">
+                            <span class="mod-green"> Our </span>
+                            <span class="mod-red">Assurance</span>
+                            <span class="mod-cerbg hidden-xs">
+                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1493377939/landing_page/modular-wardrobes/blue-cer.jpg" alt="cir">
+                            </span>
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="col-md-10 col-md-offset-1 mt30 mb30 text-center assurance-fluid">
+
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-3 wow fadeIn animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn;">
+                                    <div class="off_count">
+                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance-01.png" alt="assurance1" class="img-centered">
+                                    </div>
+                                    <h4><strong> Trust of happy <br/> home owners </strong> </h4>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-3 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
+                                    <div class="off_count">
+                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance-02.png" alt="assurance2" class="img-centered">
+                                    </div>
+                                    <h4><strong> Wide range of materials, <br/> finishes & designs </strong> </h4>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-3 wow fadeIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                                    <div class="off_count">
+                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance_Artboard_5.png" alt="assurance3" class="img-centered">
+                                    </div>
+                                    <h4><strong> Products from <br/> trusted brands </strong> </h4>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-3 wow fadeIn animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
+                                    <div class="off_count">
+                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363380/offer%20landingpage/v1/Assurance_Artboard_5_copy.png" alt="assurance4" class="img-centered">
+                                    </div>
+                                    <h4><strong> Transparent <br/> pricing </strong> </h4>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-4 wow fadeIn animated" data-wow-delay="1.0s" style="visibility: visible; animation-name: fadeIn;">
+                                            <div class="off_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance-05.png" alt="assurance5" class="img-centered">
+                                            </div>
+                                            <h4><strong> Hassle - free <br/> Installation </strong> </h4>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-4 wow fadeIn animated" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
+                                            <div class="off_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance-06.png" alt="assurance6" class="img-centered">
+                                            </div>
+                                            <h4><strong> 5 - year <br/> warranty </strong> </h4>
+                                        </div>
+                                        <div class="hidden-xs hidden-sm col-md-4 wow fadeIn animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                                            <div class="off_count">
+                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance_Artboard_9.png" alt="assurance7" class="img-centered">
+                                            </div>
+                                            <h4><strong> 1 year free <br/> maintenance </strong> </h4>
+                                        </div>
+                                        <div class="hidden-md hidden-lg col-sm-6 col-sm-offset-3 wow fadeIn animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                                            <div class="off_count11">
+                                                <img  style="width: 150px;" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance_Artboard_9.png" alt="assurance7" class="img-centered">
+                                            </div>
+                                            <h4><strong> 1 year free <br/> maintenance </strong></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Section -->
+
+<div class="clearfix"></div>
+
+<!-- Start RECENT PROJECTS -->
+<section class="border-bottom-grey bg-color-white pt50 pb50">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <!--<h2 class="section-heading"> RECENT PROJECTS </h2>-->
+                <h1 class="mod-head mb30">
+                    <span class="mod-green"> RECENT </span>
+                    <span class="mod-red">PROJECTS</span>
+                    <span class="mod-cer hidden-xs">
+                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1493377940/landing_page/modular-wardrobes/white-cer.jpg" alt="cir">
+                    </span>
+                </h1>
+            </div>
+        </div>
+        <div class="row hidden-lg hidden-md">
+            <div class="mob-c-project">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1510829507/recent_projects/Amlan_Das_Purina_Elite/_KS_8804.jpg"
+                     class="cld-responsive img-centered width100" alt="Experience Center" />
+                <!--<a class="mob-c-btn" href="/recent-projects">
+                    <button class="btn btn-explore"> EXPLORE </button>
+                </a>-->
+            </div>
+        </div>
+        <div class="row hidden-xs hidden-sm">
+            <div class="col-lg-6 col-md-6 col-sm-6 padding0">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1510829507/recent_projects/Amlan_Das_Purina_Elite/_KS_8804.jpg"
+                     class="cld-responsive img-centered width100" alt="Experience Center" />
+                <div class="txt-over-completed-project-img hidden-xs hidden-sm">
+                    <div>
+                        <p class="txt-over-head font-size35 txt-over-head"> PICTURE PERFECT </p>
+                    </div>
+                </div>
+                <!--<div class="txt-over-completed-project-image hidden-xs hidden-sm">
+                    <div>
+                        <p class="font-size12 font-weight400">
+                            Have a closer look at the designs we’ve customised for customers
+                            just like you, to see why they keep coming back to us.</p>
+                    </div>
+                    <div class="exploring">
+                        <a href="/recent-projects">
+                            <button class="btn btn-explore pull-right"> EXPLORE </button>
+                        </a>
+                    </div>
+                </div>-->
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="row margin0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom15">
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1510924593/recent_projects/Febin_Matew_Emerald_Estilla/_KS_9134.jpg"
+                             class="cld-responsive img-centered width100" alt="Experience Center" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom20">
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1511174101/recent_projects/Nithin_Jadhav_Euphoria/_KS_9152.jpg"
+                             class="cld-responsive img-centered width100" alt="Experience Center" />
+                    </div>
+                </div>
+                <div class="row margin0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom15">
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1511172864/recent_projects/Kalyan_Seshu_Adarsh_Palm_Retreat/_KS_8997.jpg"
+                             class="cld-responsive img-centered width100" alt="Experience Center" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom20">
+                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1511179848/recent_projects/Santosh_Kumar_RBD/_KS_9486.jpg"
+                             class="cld-responsive img-centered width100" alt="Experience Center" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End RECENT PROJECTS -->
+<!-- Start Customer's Speak -->
+<section id="lp-testimonial" class="section-testimonial text-center">
+    <div class="position-relative">
+        <h1 class="mod-head mb30">
+            <span class="mod-green">CUSTOMER</span>
+            <span class="mod-red"> SPEAKS</span>
+            <span class="mod-cer hidden-xs">
+                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/v1493377940/landing_page/modular-wardrobes/white-cer.jpg" alt="cir">
+            </span>
+        </h1>
+    </div>
+    <div class="container">
+
+        <div id="owl-testimonial" class="owl-carousel owl-theme">
+            <div class="item cucumber-testimonial-box">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 text-center mt30">
+                        <img class="img-centered img-profile" src="https://res.cloudinary.com/mygubbi/image/upload/v1492677009/landing_page/modular-wardrobes/Narasimha.png" alt="user">
+                        <h5 class="text-center cucu-testimonialtxt"> H.T. Narasimhan <br/> Bangalore</h5>
+                    </div>
+                    <div class="col-sm-6 col-md-6 mod-testimonial">
+                        <p class="cucu-testimonial">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492678253/landing_page/modular-wardrobes/col-up.png" style="width:23px">
+                            I am happy that I chose MyGubbi for designing wardrobes & kitchen. Right from their sales
+                            team to their designers, they are very cooperative and responsive.A special thanks to M/s
+                            Rajeev,Naik and Nataraj. Times when I was confused with the design, they helped me
+                            understand it better by relating it to my interest, which is something that impressed me a
+                            lot.
+                            <br/><span class="pull-right"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1492678253/landing_page/modular-wardrobes/col-down.png"></span><br/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="item cucumber-testimonial-box">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 text-center mt30">
+                        <img class="img-centered img-profile" src="https://res.cloudinary.com/mygubbi/image/upload/v1492677009/landing_page/modular-wardrobes/chnadra.png" alt="user">
+                        <h5 class="text-center cucu-testimonialtxt"> Mr. Chandra Shekar <br/> Bangalore </h5>
+                    </div>
+                    <div class="col-sm-6 col-md-6 mod-testimonial">
+                        <p class="cucu-testimonial">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492678253/landing_page/modular-wardrobes/col-up.png" style="width:23px">
+                            Neat range of choices, brilliant coordination and excellent post sales communication.
+                            Mygubbi turned out to be the perfect choice for my home interiors, wardrobes & kitchens.
+                            They provided me with a wide range of choices and the quality met my expectations. These
+                            guys are well aware of the requirement and from designing to delivery, they are all just
+                            extremely professional.
+                            <br/><span class="pull-right"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1492678253/landing_page/modular-wardrobes/col-down.png"></span><br/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<style>
+/* #lp-testimonial .owl-carousel .owl-item img {
+    display: block;
+    width: 100% !important;
+    -webkit-transform-style: preserve-3d;
+}*/
+</style>
+<!-- End Customer's Speak -->
+<script type="text/javascript" src="/js/wow.min.js"></script>
+<script type="text/javascript" src="/js/libs/owl.carousel/dist/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/js/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="/js/festive.js"></script>
+<script>
+    $(document).ready(function() {
+      var owl = $("#owl-testimonial");
+
+        owl.owlCarousel({
+          itemsCustom : [
+            [0, 2],
+            [450, 4],
+            [600, 7],
+            [700, 9],
+            [1000, 10],
+            [1200, 12],
+            [1400, 13],
+            [1600, 15]
+          ],
+          navigation : true,
+          items: 2,
+          responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:1
+                },
+                1000:{
+                    items:2
+                }
+            }
+        });
+    });
+
+</script>
