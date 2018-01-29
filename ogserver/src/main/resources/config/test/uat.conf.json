@@ -1,7 +1,7 @@
 {
   "jdbc": {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/mg",
+    "url": "jdbc:mysql://192.168.104.42/mg",
     "max_pool_size": 20,
     "user": "admin",
     "password": "OG$#gubi32"
