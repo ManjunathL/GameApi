@@ -1,8 +1,8 @@
 {
   "version": "0.0.0a",
-  "jdbc": [{
+  "jdbc":[ {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/prod_copy?autoReconnect=true",
+    "url": "jdbc:mysql://192.168.104.42/prod_copy?autoReconnect=true",
     "max_pool_size": 20,
     "user": "admin",
     "password": "OG$#gubi32",
@@ -10,7 +10,7 @@
   },
     {
   "driver_class": "com.mysql.jdbc.Driver",
-  "url": "jdbc:mysql://ogdemodb.cbczvf8aqlef.ap-south-1.rds.amazonaws.com/prod_copy?autoReconnect=true",
+  "url": "jdbc:mysql://192.168.104.42/prod_copy?autoReconnect=true",
   "max_pool_size": 20,
   "user": "admin",
   "password": "OG$#gubi32",
