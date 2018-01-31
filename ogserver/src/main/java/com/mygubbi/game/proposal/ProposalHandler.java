@@ -53,6 +53,10 @@ import java.util.stream.Collectors;
 public class ProposalHandler extends AbstractRouteHandler
 {
     private final static Logger LOG = LogManager.getLogger(ProposalHandler.class);
+    
+    private final static String CONFIRMED = "Confirmed";
+    private final static String DSO = "DSO";
+    private final static String PSO = "PSO";
 
     private String proposalDocsFolder = null;
 
@@ -69,7 +73,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/create").handler(this::createProposal);
         this.post("/version/saveService").handler(this::saveServiceFortheProposal);
         this.post("/version/publishoverride").handler(this::publishTheProposal);
-        this.post("/version/publish").handler(this::publishVersionAfterValidation);
+//        this.post("/version/publish").handler(this::publishVersionAfterValidation);
         this.post("/version/createdraft").handler(this::createInitialDraftProposal);
         this.post("/version/createPostSalesInitial").handler(this::createPostSalesInitial);
         this.post("/version/createversion").handler(this::createProposalVersion);
@@ -238,39 +242,7 @@ public class ProposalHandler extends AbstractRouteHandler
         }
 
     }
-    private void publishVersionAfterValidation(RoutingContext context){
-        JsonObject contextJson = context.getBodyAsJson();
 
-        String verFromProposal = String.valueOf(contextJson.getDouble("version"));
-        String sowVersion = null ;
-        if(verFromProposal.contains("0.")){
-            sowVersion = "1.0";
-        }else if(verFromProposal.contains("1.") ){
-            sowVersion = "2.0";
-        }else if(verFromProposal.contains("2.") || verFromProposal.contains("3.")){
-            sowVersion = "3.0";
-        }else{
-
-            LOG.info("INVALID VERSION and VERSION IS ::"+verFromProposal);
-            return;
-        }
-
-        JsonObject queryParams =  new JsonObject();
-        queryParams.put("proposalId", contextJson.getInteger("proposalId"));
-        queryParams.put("sowversion", sowVersion);
-        queryParams.put("version",contextJson.getDouble("version"));
-        queryParams.put("businessDate",contextJson.getString("businessDate"));
-
-        Integer id1 = LocalCache.getInstance().store(queryParams);
-
-        VertxInstance.get().eventBus().send(SowValidatorService.VALIDATE_PROPOSAL_SOW, id1,
-                (AsyncResult<Message<Integer>> result) -> {
-                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
-                    sendJsonResponse(context, response.toString());
-                });
-
-
-    }
     private void publishTheProposal(RoutingContext routingContext) {
         JsonObject queryParams = new JsonObject();
         queryParams.put("id",routingContext.getBodyAsJson().getInteger("proposalId"));
@@ -474,7 +446,7 @@ public class ProposalHandler extends AbstractRouteHandler
         LOG.info("contextJson = "+contextJson);
         JsonObject paramsForEmail = new JsonObject();
         Integer proposalId = contextJson.getInteger("proposalId");
-        String toVersion = contextJson.getDouble("version")+"";
+        String toVersion = contextJson.getString("version");
         paramsForEmail.put("fromEmail",ConfigHolder.getInstance().getStringValue("FROM_EMAIL","game@mygubbi.com"));
 
         LOG.info("toVersion = "+toVersion);
@@ -792,14 +764,118 @@ public class ProposalHandler extends AbstractRouteHandler
             LOG.error("Error in sending email.", e);
         }
     }
-    private void updateProposalOnConfirm(RoutingContext routingContext)
+    private void updateProposalOnConfirm(RoutingContext context)
     {
+        JsonObject contextJson = context.getBodyAsJson();
+        String verFromProposal = String.valueOf(contextJson.getString("version"));
+        String sowVersion = null ;
+        if(verFromProposal.contains("0.")){
+            sowVersion = "1.0";
+        }else if(verFromProposal.contains("1.") ){
+            sowVersion = "2.0";
+        }else if(verFromProposal.contains("2.") || verFromProposal.contains("3.")){
+            sowVersion = "3.0";
+        }else{
 
-        JsonObject proposalData = routingContext.getBodyAsJson();
-        //send Emai and then publish
-//        sendemailAndUpdateProposal(routingContext);
-        LOG.info("Proposal:" + proposalData.encodePrettily());
-        this.updateProposal(routingContext, proposalData, "proposal.update.onconfirm");
+            LOG.info("INVALID VERSION and VERSION IS ::"+verFromProposal);
+            return;
+        }
+
+        JsonObject queryParams =  new JsonObject();
+        queryParams.put("proposalId", contextJson.getInteger("proposalId"));
+        queryParams.put("sowversion", sowVersion);
+        queryParams.put("version",contextJson.getString("version"));
+        queryParams.put("businessDate",contextJson.getString("businessDate"));
+
+        Integer id1 = LocalCache.getInstance().store(queryParams);
+        VertxInstance.get().eventBus().send(SowValidatorService.VALIDATE_PROPOSAL_SOW, id1,
+                (AsyncResult<Message<Integer>> result) -> {
+                    JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                    LOG.info("Message Reply :: "+response);
+
+                    if(response.getString("status").equalsIgnoreCase("FAILURE")) {
+                        contextJson.put("responseMessage",response.getString("comments"));
+                        contextJson.put("confirmedStatus",false);
+                        sendJsonResponse(context, contextJson.toString());
+                    }
+                    else{
+                        confirmTheProposal(context);
+                    }
+                });
+    }
+
+    private void confirmTheProposal(RoutingContext context) {
+
+        JsonObject contextJson = context.getBodyAsJson();
+        List<QueryData> queryDatas = new ArrayList<>();
+        ProposalVersion proposalVersion = new ProposalVersion(contextJson);
+        JsonObject queryParams = new JsonObject();
+
+        if (proposalVersion.getVersion().startsWith("0.")) {
+            proposalVersion.setFromVersion(proposalVersion.getVersion());
+            proposalVersion.setVersion("1.0");
+            proposalVersion.setProposalStatus(CONFIRMED);
+            proposalVersion.setInternalStatus(CONFIRMED);
+        } else if (proposalVersion.getVersion().startsWith("1.")) {
+            proposalVersion.setFromVersion(proposalVersion.getVersion());
+            proposalVersion.setVersion("2.0");
+            proposalVersion.setProposalStatus(DSO);
+            proposalVersion.setInternalStatus(DSO);
+        } else if (proposalVersion.getVersion().startsWith("2.")) {
+            proposalVersion.setFromVersion(proposalVersion.getVersion());
+            proposalVersion.setVersion("3.0");
+            proposalVersion.setProposalStatus(PSO);
+            proposalVersion.setInternalStatus(PSO);
+        }
+
+        JsonObject proposalHeaderJson = new JsonObject();
+        proposalHeaderJson.put("id",proposalVersion.getProposalId()).put("version",proposalVersion.getVersion()).put("amount",proposalVersion.getFinalAmount());
+
+        queryDatas.add(new QueryData("proposal.version.confirm",proposalVersion));
+        queryDatas.add(new QueryData("proposal.update.onconfirm",proposalHeaderJson));
+
+//        queryDatas.add(new QueryData("version.confirm",contextJson));
+        queryDatas.add(new QueryData("proposal.product.updateVersionOnConfirm",proposalVersion));
+        queryDatas.add(new QueryData("proposal.addon.updateVersionOnConfirm",proposalVersion));
+        queryDatas.add(new QueryData("proposal.version.selectversion",proposalVersion));
+
+        switch (proposalVersion.getVersion())
+        {
+            case "1.0":{
+                queryDatas.add(new QueryData("version.lockallpresalesversions",proposalVersion));
+                queryDatas.add(new QueryData("proposal.sow.version.copy",proposalVersion));
+                break;
+            }
+            case "2.0":{
+                queryDatas.add(new QueryData("version.lockallpostsalesversions",proposalVersion));
+                queryDatas.add(new QueryData("proposal.sow.version.copy.from2.0",proposalVersion));
+                break;
+            }
+            default:
+                queryDatas.add(new QueryData("version.lockallversions",proposalVersion));
+        }
+
+        Integer id = LocalCache.getInstance().store(queryDatas);
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id, (AsyncResult<Message<Integer>> selectResult) -> {
+            List<QueryData> resultDatas = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
+            resultDatas.forEach(item->{
+                if(item.errorFlag && item.updateResult.getUpdated() == 0){
+                    contextJson.put("responseMessage", "Error in publishing version");
+                    contextJson.put("confirmedStatus",false);
+                    sendJsonResponse(context,contextJson.toString());
+                }
+            });
+
+            String sendEmails =  ConfigHolder.getInstance().getStringValue("sendEmail","No");
+            if(sendEmails.equalsIgnoreCase("yes")) {
+                sendEmails(context);
+            }
+            JsonObject firstResJson = resultDatas.get(4).rows.get(0);
+            firstResJson.put("responseMessage", "Successfully Confirmed");
+            firstResJson.put("confirmedStatus",true);
+            sendJsonResponse(context, firstResJson.toString());
+
+        });
     }
 
     private void updateProposal(RoutingContext routingContext, JsonObject proposalData, String queryId)

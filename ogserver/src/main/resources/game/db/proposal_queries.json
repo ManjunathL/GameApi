@@ -56,6 +56,13 @@
       "query": "update version_master set title = ?,finalAmount = ? , status = ? , internalStatus = ?, remarks = ? , fromVersion = ? , discountAmount = ? , discountPercentage = ? , amount = ?, profit = ? , margin = ?, amountWotax = ?, manufactureAmount = ?, ignoreAndPublishFlag = ?, remarksIgnore = ?,projectHandlingAmount = ?,deepClearingQty = ?,deepClearingAmount=?,floorProtectionSqft=?,floorProtectionAmount=?,projectHandlingQty=? where version = ? and proposalId = ? ",
       "params": ["title","finalAmount", "status", "internalStatus", "remarks","fromVersion" , "discountAmount" , "discountPercentage","amount","profit","margin", "amountWotax", "manufactureAmount","ignoreAndPublishFlag","remarksIgnore","projectHandlingAmount","deepClearingQty","deepClearingAmount","floorProtectionSqft","floorProtectionAmount","projectHandlingQty","version","proposalId"]
     },
+    {
+      "id": "proposal.version.confirm",
+      "type": "update",
+      "table": "version_master",
+      "query": "update version_master set version = ?,title = ?,finalAmount = ? , status = ? , internalStatus = ?, remarks = ? , fromVersion = ? , discountAmount = ? , discountPercentage = ? , amount = ?, profit = ? , margin = ?, amountWotax = ?, manufactureAmount = ?, ignoreAndPublishFlag = ?, remarksIgnore = ?,projectHandlingAmount = ?,deepClearingQty = ?,deepClearingAmount=?,floorProtectionSqft=?,floorProtectionAmount=?,projectHandlingQty=? where version = ? and proposalId = ? ",
+      "params": ["version","title","finalAmount", "status", "internalStatus", "remarks","fromVersion" , "discountAmount" , "discountPercentage","amount","profit","margin", "amountWotax", "manufactureAmount","ignoreAndPublishFlag","remarksIgnore","projectHandlingAmount","deepClearingQty","deepClearingAmount","floorProtectionSqft","floorProtectionAmount","projectHandlingQty","fromVersion","proposalId"]
+    },
 
     {
       "id": "proposal.summary",
@@ -223,8 +230,8 @@
       "id": "proposal.update.onconfirm",
       "type": "update",
       "table": "proposal",
-      "query": "update proposal set title = ?, crmId = ?, quoteNo = ?, quoteNoNew = ?, cname = ?, caddress1 = ?, caddress2 = ?, caddress3 = ?, ccity = ?, cemail = ?, cphone1 = ?, cphone2 = ?, projectName = ?, paddress1 = ?, paddress2 = ?, pcity = ?, salesName = ?, salesEmail = ?, salesPhone = ?,  designerName = ?, designerEmail = ?, designerPhone = ?, designPartnerName = ?, designPartnerEmail = ?, designPartnerPhone = ?, amount = ?, updatedBy = ?, status = ?, version = ?, maxDiscountPercentage=?, priceDate = ? ,packageFlag = ? where id = ?",
-      "params": ["title", "crmId", "quoteNo", "quoteNoNew", "cname", "caddress1", "caddress2", "caddress3", "ccity", "cemail", "cphone1", "cphone2", "projectName", "paddress1", "paddress2", "pcity", "salesName", "salesEmail", "salesPhone", "designerName", "designerEmail", "designerPhone", "designPartnerName", "designPartnerEmail", "designPartnerPhone", "amount", "updatedBy", "status", "version","maxDiscountPercentage", "priceDate","packageFlag","id"]
+      "query": "update proposal set amount = ?, status = ?, version = ? where id = ?",
+      "params": ["amount", "status", "version","id"]
     },
 
     {
@@ -287,24 +294,24 @@
       "id": "version.lockallpresalesversions",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set internalStatus = ? where version like '0.%' and proposalId = ?",
-      "params": ["internalStatus","proposalId"]
+      "query": "update version_master set internalStatus = 'Locked' where version like '0.%' and proposalId = ?",
+      "params": ["proposalId"]
     },
 
     {
       "id": "version.lockallpostsalesversions",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set internalStatus = ? where version like '1.%' and proposalId = ?",
-      "params": ["internalStatus","proposalId"]
+      "query": "update version_master set internalStatus = 'Locked' where version like '1.%' and proposalId = ?",
+      "params": ["proposalId"]
     },
 
     {
       "id": "version.lockallversions",
       "type": "update",
       "table": "version_master",
-      "query": "update version_master set internalStatus = ? where version like '2.%' and proposalId = ? ",
-      "params": ["internalStatus","proposalId"]
+      "query": "update version_master set internalStatus = 'Locked' where version like '2.%' and proposalId = ? ",
+      "params": ["proposalId"]
     },
 
     {

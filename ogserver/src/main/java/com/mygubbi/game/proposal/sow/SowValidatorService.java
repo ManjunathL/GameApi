@@ -12,7 +12,6 @@ import io.vertx.core.Future;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.web.RoutingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,8 +65,6 @@ public class SowValidatorService extends AbstractVerticle {
     }
 
     public void validateSowSheet(JsonObject queryParams,Message message){
-        LOG.info("Query Params :: "+queryParams);
-
         JsonObject response  = new JsonObject();
         List sowList = new ArrayList();
         Set spaceRoomListFromSow = new HashSet();
@@ -103,7 +100,7 @@ public class SowValidatorService extends AbstractVerticle {
                                 }
                                 if(row.getString("L1S01").equalsIgnoreCase("No"))
                                     noSpaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
-                                spaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
+                                    spaceRoomListFromSow.add(row.getString("spaceType")+COLON_DELIMITER+row.getString("roomcode").toLowerCase());
                             });
 
                             List spaceRoomList = new ArrayList();
@@ -126,7 +123,7 @@ public class SowValidatorService extends AbstractVerticle {
     private void getListOfAddonAndProduct(Message message,JsonObject contextJson, List sowList, List spaceRoomListFromSow, List yesSpaceRoomListFromSow, List spaceRoomListWithNo, JsonObject params) {
         JsonObject queryParams =  new JsonObject();
         Integer proposalId = contextJson.getInteger("proposalId");
-        Double version = contextJson.getDouble("version");
+        Double version = Double.parseDouble(contextJson.getString("version"));
         queryParams.put("proposalIdForPro", proposalId);
         queryParams.put("fromVerForProd", version);
         queryParams.put("proposalIdForAddOn", proposalId);
@@ -158,7 +155,7 @@ public class SowValidatorService extends AbstractVerticle {
                 if((yesSpaceRoomListFromSow.size() == 0 && spaceRoomListFromAddon.size() == 0 && spaceRoomListFromProduct.size()    == 0)
                         && (spaceRoomListWithNo.size() != 0))
                 {
-                    publishTheProposal(message,contextJson);
+                    sendSuccess(message,"Successfully Validated SOW");
                 }else {
 
                     if(yesSpaceRoomListFromSow.size() == 0 && spaceRoomListWithNo.size() == 0){
@@ -210,39 +207,12 @@ public class SowValidatorService extends AbstractVerticle {
         });
 
     }
-    private void publishTheProposal(Message message,JsonObject contextJson) {
-        JsonObject queryParams = new JsonObject();
-        queryParams.put("id",contextJson.getInteger("proposalId"));
-        queryParams.put("version",contextJson.getDouble("version"));
-        queryParams.put("proposalId",contextJson.getInteger("proposalId"));
-        queryParams.put("businessDate",contextJson.getString("businessDate"));
-
-        List<QueryData> queryDatas = new ArrayList<>();
-        queryDatas.add(new QueryData("version.publish",queryParams));
-        queryDatas.add(new QueryData("proposal.publish",queryParams));
-
-        Integer id = LocalCache.getInstance().store(queryDatas);
-        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id, (AsyncResult<Message<Integer>> selectResult) -> {
-            List<QueryData> resultDatas = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
-            if (resultDatas.get(0).errorFlag || resultDatas.get(0).updateResult.getUpdated() == 0) {
-                sendError(message, "Error in publishing version");
-                LOG.error("Error in publishing version "+resultDatas.get(0).errorMessage, resultDatas.get(0).error );
-            }else if(resultDatas.get(1).errorFlag || resultDatas.get(1).updateResult.getUpdated() == 0){
-                sendError(message, "Error in publishing proposal");
-                LOG.error("Error in publishing proposal "+resultDatas.get(1).errorMessage, resultDatas.get(1).error );
-            }
-
-            else {
-                sendSuccess(message,"Successfully published version/proposal");
-            }
-        });
-    }
 
     private void getListOfProposalAddons(Message message,JsonObject contextJson,List
             <JsonObject>sowList,JsonObject params,List<JsonObject> addOnsFromCustomAddons) {
         JsonObject queryParams =  new JsonObject();
         queryParams.put("proposalId", contextJson.getInteger("proposalId"));
-        queryParams.put("fromVersion", contextJson.getDouble("version"));
+        queryParams.put("fromVersion", contextJson.getString("version"));
 
         JsonObject response = new JsonObject();
         List addOnsFromProductAddonsWithcode = new ArrayList();
@@ -315,7 +285,7 @@ public class SowValidatorService extends AbstractVerticle {
                     sendError(message, "Make scope of service/s response as 'yes' for the following - "+getParamValues(l4Dup));
 
                 }else{
-                    publishTheProposal(message,contextJson);
+                    sendSuccess(message,"Successfully Validated SOW");
                 }
             }
 
@@ -386,7 +356,7 @@ public class SowValidatorService extends AbstractVerticle {
             <JsonObject>sowList,JsonObject params,JsonObject contextJson) {
         JsonObject queryParams = new JsonObject();
         queryParams.put("proposalId", contextJson.getInteger("proposalId"));
-        queryParams.put("fromVersion", contextJson.getDouble("version"));
+        queryParams.put("fromVersion", contextJson.getString("version"));
         List addOnsFromCustomAddons = new ArrayList();
 
         Integer id = LocalCache.getInstance().store(new QueryData("select.customAddons", queryParams));

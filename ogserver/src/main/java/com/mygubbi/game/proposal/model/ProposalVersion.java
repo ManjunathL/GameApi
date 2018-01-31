@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 
 /**
  * Created by Chirag on 08-03-2017.
@@ -13,12 +14,15 @@ public class ProposalVersion extends JsonObject{
 
     public static final String ID = "id";
     public static final String VERSION = "version";
+    public static final String FROM_VERSION = "fromVersion";
+    public static final String TO_VERSION = "toVersion";
     public static final String PROPOSAL_ID = "proposalId";
     public static final String DATE = "date";
     public static final String FINAL_AMOUNT = "finalAmount";
     public static final String DISCOUNT_AMOUNT = "discountAmount";
     public static final String DISCOUNT_PERCENTAGE = "discountPercentage";
     public static final String STATUS = "status";
+    public static final String INTERNAL_STATUS = "internalStatus";
     public static final String CREATED_BY= "createdBy";
     public static final String UPDATED_ON= "updatedOn";
     public static final String BUSINESS_DATE= "businessDate";
@@ -31,6 +35,7 @@ public class ProposalVersion extends JsonObject{
     public static final String PROJECT_HANDLING_AMT = "projectHandlingAmount";
     public static final String PROJECT_HANDLING_QTY = "projectHandlingQty";
     public static final String TITLE = "title";
+
 
     public ProposalVersion() {}
 
@@ -64,6 +69,14 @@ public class ProposalVersion extends JsonObject{
         this.put(STATUS, status);
         return this;
     }
+    public String getInternalStatus() {
+        return this.getString(INTERNAL_STATUS);
+    }
+
+    public ProposalVersion setInternalStatus(String internalStatus) {
+        this.put(INTERNAL_STATUS, internalStatus);
+        return this;
+    }
 
     public String getTitle()
     {
@@ -81,6 +94,23 @@ public class ProposalVersion extends JsonObject{
 
     public ProposalVersion setVersion(String version) {
         this.put(VERSION, version);
+        return this;
+    }
+
+    public String getFromVersion() {
+        return this.getString(FROM_VERSION);
+    }
+
+    public ProposalVersion setFromVersion(String fromVersion) {
+        this.put(FROM_VERSION, fromVersion);
+        return this;
+    }
+    public String getToVersion() {
+        return this.getString(TO_VERSION);
+    }
+
+    public ProposalVersion setToVersion(String toVersion) {
+        this.put(TO_VERSION, toVersion);
         return this;
     }
 

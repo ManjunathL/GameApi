@@ -56,8 +56,7 @@ public class SOWCreatorService extends AbstractVerticle {
 
     private void getDistinctSpaceAndRooms(JsonObject quoteRequest, Message message)
     {
-        LOG.debug("distinct space ");
-        LOG.info("INSIDE getDistinctSpaceAndRooms");
+
         List<QueryData> queryDatas =new ArrayList<>();
 
         double version = quoteRequest.getDouble("version");
@@ -78,35 +77,12 @@ public class SOWCreatorService extends AbstractVerticle {
             LOG.info("INVALID VERSION and VERSION IS::"+verFromProposal);
         }
 
-        if (version==1.0 || version==2.0 || version == 3.0) {
-            LOG.info("version==1.0 || version==2.0 ");
             String versiontobeconsidered = String.valueOf(version);
             jsonObject.put("versiontobeconsidered" , versiontobeconsidered);
             jsonObject.put("sowversion" , sowversion);
             db_query_product = "proposal.product.specificversion";
             db_query_addon = "proposal.addon.specificversion";
-        }
-        else if (version<1.0)
-        {
-            LOG.info("version<1.0 ");
-            db_query_product = "proposal.product.sow.till1";
-            db_query_addon = "proposal.addon.sow.till1";
-            jsonObject.put("sowversion" , sowversion);
 
-        }
-        else if(version < 2.0)
-        {
-            LOG.info("ELSE IF Version till 2.0");
-            db_query_product = "proposal.product.sow.till2";
-            db_query_addon = "proposal.addon.sow.till2";
-            jsonObject.put("sowversion" , "2.0");
-        }else{
-            LOG.info("ELSE");
-            db_query_product = "proposal.product.sow.till3";
-            db_query_addon = "proposal.addon.sow.till3";
-            jsonObject.put("sowversion" , "3.0");
-
-        }
         jsonObject.put("version" , sowversion);
 
         queryDatas.add(new QueryData(db_query_product,jsonObject));
