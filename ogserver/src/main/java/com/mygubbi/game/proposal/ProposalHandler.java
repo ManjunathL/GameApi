@@ -78,9 +78,9 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/version/createPostSalesInitial").handler(this::createPostSalesInitial);
         this.post("/version/createversion").handler(this::createProposalVersion);
         this.post("/version/copyversion").handler(this::copyVersion);
-        this.post("/version/confirm").handler(this::confirmVersion);
-        this.post("/version/designsignoff").handler(this::dsoVersion);
-        this.post("/version/productionsignoff").handler(this::psoVersion);
+//        this.post("/version/confirm").handler(this::confirmVersion);
+//        this.post("/version/designsignoff").handler(this::dsoVersion);
+//        this.post("/version/productionsignoff").handler(this::psoVersion);
         this.post("/update").handler(this::updateProposal);
         this.post("/updateonconfirm").handler(this::updateProposalOnConfirm);
         this.post("/downloadquote").handler(this::downloadQuote);
@@ -377,76 +377,12 @@ public class ProposalHandler extends AbstractRouteHandler
         this.updateProposal(routingContext, proposalData, "proposal.update");
     }
 
-    private void dsoVersion(RoutingContext routingContext){
-        String queryId = "version.designsignoff";
-        JsonObject proposalData = routingContext.getBodyAsJson();
-        Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
-                    {
-                        sendError(routingContext, "Error in updating version.");
-                        LOG.error("Error in updating version. " + resultData.errorMessage, resultData.error);
-                    }
-                    else
-                    {
-                        sendEmails(routingContext);
-                        sendJsonResponse(routingContext, proposalData.toString());
-                    }
-                });
-    }
+    private void sendEmails(ProposalVersion proposalVersion){
 
-    private void psoVersion(RoutingContext routingContext){
-        String queryId = "version.productionsignoff";
-        JsonObject proposalData = routingContext.getBodyAsJson();
-        Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
-                    {
-                        sendError(routingContext, "Error in updating version.");
-                        LOG.error("Error in updating version. " + resultData.errorMessage, resultData.error);
-                    }
-                    else
-                    {
-                        sendEmails(routingContext);
-                        sendJsonResponse(routingContext, proposalData.toString());
-                    }
-                });
-    }
-
-    private void confirmVersion(RoutingContext routingContext)
-    {
-        String queryId = "version.confirm";
-        JsonObject proposalData = routingContext.getBodyAsJson();
-        Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
-                    {
-                        sendError(routingContext, "Error in updating version.");
-                        LOG.error("Error in updating version. " + resultData.errorMessage, resultData.error);
-                    }
-                    else
-                    {
-                        String sendEmails =  ConfigHolder.getInstance().getStringValue("sendEmail","No");
-                       if(sendEmails.equalsIgnoreCase("yes")) {
-                           sendEmails(routingContext);
-                       }
-                        sendJsonResponse(routingContext, proposalData.toString());
-                    }
-                });
-    }
-
-    private void sendEmails(RoutingContext context){
-        JsonObject contextJson = context.getBodyAsJson();
-        LOG.info("contextJson = "+contextJson);
+        LOG.info("Email contextJson = "+proposalVersion);
         JsonObject paramsForEmail = new JsonObject();
-        Integer proposalId = contextJson.getInteger("proposalId");
-        String toVersion = contextJson.getString("version");
+        Integer proposalId = proposalVersion.getProposalId();
+        String toVersion = proposalVersion.getVersion();
         paramsForEmail.put("fromEmail",ConfigHolder.getInstance().getStringValue("FROM_EMAIL","game@mygubbi.com"));
 
         LOG.info("toVersion = "+toVersion);
@@ -733,6 +669,8 @@ public class ProposalHandler extends AbstractRouteHandler
 
         String fromEmail = emailParams.getString("fromEmail");
         String[] toemails = emailParams.getString("toEmails").split(",");
+//        LOG.info("Email receivers = "+emailParams.getString("toEmails").split(","));
+//        String[] toemails = {"shilpa.g@mygubbi.com","vibha.km@mygubbi.com"};
         JsonObject params = emailParams.getJsonObject("paramsObj");
         String subject = emailParams.getString("subject");
         String subjectTemplate = emailParams.getString("subjectTemplate");
@@ -866,11 +804,12 @@ public class ProposalHandler extends AbstractRouteHandler
                 }
             });
 
+            JsonObject firstResJson = resultDatas.get(4).rows.get(0);
             String sendEmails =  ConfigHolder.getInstance().getStringValue("sendEmail","No");
             if(sendEmails.equalsIgnoreCase("yes")) {
-                sendEmails(context);
+                sendEmails(new ProposalVersion(firstResJson));
             }
-            JsonObject firstResJson = resultDatas.get(4).rows.get(0);
+
             firstResJson.put("responseMessage", "Successfully Confirmed");
             firstResJson.put("confirmedStatus",true);
             sendJsonResponse(context, firstResJson.toString());
@@ -1162,13 +1101,26 @@ public class ProposalHandler extends AbstractRouteHandler
             Integer id = LocalCache.getInstance().store(quoteRequestJson);
             VertxInstance.get().eventBus().send(SOWCreatorService.CREATE_SOW_OUTPUT, id,
                     (AsyncResult<Message<Integer>> result) -> {
-                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                        JsonObject response = new JsonObject();
+                         try{
+                             response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                            }catch(Exception e){
+                                LOG.info(e);
+                                JsonObject res = new JsonObject();
+                                res.put("status", "Failure");
+                                res.put("comments", "Error in creating scope of services");
+                                sendJsonResponse(routingContext, res.toString());
+                         }
                         sendJsonResponse(routingContext, response.toString());
                     });
         }
         catch(Exception e)
         {
             LOG.info(e);
+            JsonObject res = new JsonObject();
+            res.put("status", "Failure");
+            res.put("comments", "Error in creating scope of services");
+            sendJsonResponse(routingContext, res.toString());
         }
 
     }
