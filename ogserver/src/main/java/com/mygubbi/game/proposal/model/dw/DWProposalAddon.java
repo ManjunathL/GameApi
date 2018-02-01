@@ -36,6 +36,7 @@ public class DWProposalAddon extends JsonObject {
     private static final String FROM_PROPOSAL = "fromProposal";
     private static final String OFFER_TYPE = "offerType";
     private static final String PACKAGE_FLAG = "packageFlag";
+    private static final String TYPE = "type";
     private static final String CATEGORY="category";
     private static final String SUBCATEGORY="subCategory";
     private static final String SPACETYPE="spaceType";
@@ -106,11 +107,19 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setRoom(productAddon.getRoomCode());
         dwProposalAddon.setAddonId(productAddon.getId());
         dwProposalAddon.setCode(productAddon.getCode());
+        if(productAddon.getCategoryCode().equalsIgnoreCase("Custom Addon")) {
+            dwProposalAddon.setType("Custom");
+            dwProposalAddon.setSubCategory(productAddon.getCustomAddonCategory());
+        }
+        else {
+            dwProposalAddon.setType("Regular");
+            dwProposalAddon.setSubCategory(productAddon.getCategoryCode());
+        }
         if (productAddon.getCategoryCode().equals("Services") || productAddon.getCategoryCode().equals("Counter Top"))
              dwProposalAddon.setCategory("Services");
         else
             dwProposalAddon.setCategory("BP");
-        dwProposalAddon.setSubCategory(productAddon.getCategoryCode());
+
         dwProposalAddon.setProductTypeCode(productAddon.getProductTypeCode());
         dwProposalAddon.setProductSubTypeCode(productAddon.getProductSubtypeCode());
         dwProposalAddon.setProduct(productAddon.getProduct());
@@ -146,6 +155,16 @@ public class DWProposalAddon extends JsonObject {
 
 
         return dwProposalAddon;
+    }
+
+    public  String getTYPE() {
+        return this.getString(TYPE);
+    }
+
+    public DWProposalAddon setType(String type)
+    {
+        put(TYPE,type);
+        return this;
     }
 
     public String getCrmid() {

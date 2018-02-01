@@ -109,7 +109,7 @@ public class AddonPriceHolder {
     }
 
     private void calculatePricingForCustomAddons() {
-        this.unitPrice = productAddon.getAmount();
+        this.unitPrice = productAddon.getRate();
         this.unitSourceCost = this.unitPrice * customAddonSourcePrice.getSourcePrice();
         this.price = this.productAddon.getAmount();
         this.priceWoTax = this.price * this.addonFactor;
