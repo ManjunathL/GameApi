@@ -8,6 +8,7 @@ import com.mygubbi.game.proposal.erp.ExcelSalesOrderCreator;
 import com.mygubbi.game.proposal.jobcard.ExcelJobCardCreator;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.quote.*;
+import com.mygubbi.game.proposal.sow.SpaceRoom;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface ProposalOutputCreator
 
     public String getOutputKey();
 
-    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader, Boolean isValidSow, List<SOWPdf> proposalSOWs, ProposalVersion proposalVersion) {
+    public static ProposalOutputCreator getCreator(OutputType outputType, QuoteData quoteData, ProposalHeader proposalHeader, Boolean isValidSow, List<SOWPdf> proposalSOWs, ProposalVersion proposalVersion, List<SpaceRoom> spaceRooms) {
 
         switch (outputType) {
             case QUOTATION:
@@ -37,7 +38,7 @@ public interface ProposalOutputCreator
                 return new ExcelSalesOrderCreator(quoteData, proposalHeader);
 
             case QUOTEPDF:
-                return new PdfQuoteCreator(quoteData, proposalHeader,isValidSow,proposalVersion);
+                return new PdfQuoteCreator(quoteData, proposalHeader,isValidSow,proposalVersion,spaceRooms);
             case SOWPDF:
                 return new PdfSowCreator(quoteData, proposalHeader,proposalSOWs);
             case BOOKING_FORM:

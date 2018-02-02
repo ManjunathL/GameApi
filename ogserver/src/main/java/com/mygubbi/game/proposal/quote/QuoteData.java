@@ -5,6 +5,7 @@ import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.ProposalHeader;
 import com.mygubbi.game.proposal.model.ProposalVersion;
+import com.mygubbi.game.proposal.sow.SpaceRoom;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +30,7 @@ public class QuoteData
 
     private ProposalHeader proposalHeader;
     private List<ProductLineItem> products;
+    private List<SpaceRoom> spaceRooms;
 
     NumberToWord word=new NumberToWord();
 
@@ -69,11 +71,12 @@ public class QuoteData
         //this.worksContractFlag
         this.prepare();
     }
-    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount, ProposalVersion proposalVersion, String bookingFormFlag, double discountPercentage, String worksContractFlag)
+    public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount, ProposalVersion proposalVersion, String bookingFormFlag, double discountPercentage, String worksContractFlag,List<SpaceRoom> spaceRoom)
     {
         this.city = proposalHeader.getProjectCity();
         this.priceDate = proposalHeader.getPriceDate();
         this.discountPercentage=discountPercentage;
+        this.spaceRooms=spaceRoom;
         if(products != null) {
             for (ProductLineItem productLineItem : products) {
                 this.title = productLineItem.getTitle();
@@ -94,7 +97,7 @@ public class QuoteData
     }
 
      public QuoteData(ProposalHeader proposalHeader, List<ProductLineItem> products, List<ProductAddon> addons, double discountAmount, String proposalVersion, String bookingFormFlag, double discountPercentage, String worksContractFlag)
-{
+    {
     this.city = proposalHeader.getProjectCity();
     this.priceDate = proposalHeader.getPriceDate();
     this.discountPercentage=discountPercentage;

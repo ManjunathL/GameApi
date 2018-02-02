@@ -5,6 +5,8 @@ import com.itextpdf.text.pdf.*;
 import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.RateCardService;
+import com.mygubbi.game.proposal.sow.SpaceRoom;
+import com.sun.org.apache.xpath.internal.operations.Quo;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -109,16 +111,19 @@ public class QuotationPDFCreator
     java.util.Date miscTextChangeDate = new java.util.Date(118 ,00,4,0,0,00);
     Boolean gstTextChangeDateValue;
     Boolean mscTextChangeDateValue;
+    List<SpaceRoom> spaceRoomsList;
 
     PriceMaster designServicePrice, nonMovablePrice, movablePrice, nonMovablePriceTax, movablePriceTax,scwTax,designServiceTax,projectHandlingTax,floorProtectionTax,deepClearingTax,projectHandlingAmount,floorProtectionAmount,deepClearingAmount;
 
-    QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader,ProposalVersion proposalVersion)
+    QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader, ProposalVersion proposalVersion, List<SpaceRoom> spaceRooms)
     {
         this.date=proposalHeader.getPriceDate();
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
         this.noOfDaysWorkCompletion=proposalHeader.getNoOfDaysforworkcompletion();
         this.proposalVersion=proposalVersion;
+        this.spaceRoomsList=spaceRooms;
+        miscCharges=proposalVersion.getProjectHandlingAmount()+proposalVersion.getDeepClearingAmount()+proposalVersion.getFloorProtectionAmount();
         if(date.after(currentDate))
         {
             getProducts();
@@ -406,7 +411,7 @@ public class QuotationPDFCreator
                 p = new Paragraph("Remarks : ______________________________________________________________________________________________________________________", bookingformfsize);
                 document.add(p);
 
-                Double val = quoteData.getTotalCost() - quoteData.getDiscountAmount();
+                Double val = (quoteData.getTotalCost() - miscCharges.intValue()) - quoteData.getDiscountAmount();
 
                 Double res = val - val % 10;
                 p = new Paragraph("Total Quotation Value Rs. " + this.getRoundOffValue(String.valueOf(res.intValue())), bookingformfsize);

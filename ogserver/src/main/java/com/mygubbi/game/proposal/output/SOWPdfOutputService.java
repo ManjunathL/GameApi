@@ -14,6 +14,7 @@ import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.quote.*;
 
+import com.mygubbi.game.proposal.sow.SpaceRoom;
 import com.mygubbi.si.gdrive.DriveFile;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
 import io.vertx.core.AbstractVerticle;
@@ -46,6 +47,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
     public static final String WORKS_CONTRACT="workscontrcat.pdf";
 
     public DriveServiceProvider serviceProvider;
+    List<SpaceRoom> spaceRooms = new ArrayList<>();
 
 
     @Override
@@ -269,10 +271,33 @@ public class SOWPdfOutputService extends AbstractVerticle {
     private void createSow(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
                            List<ProductAddon> addons, List<SOWPdf> proposalSOWs,QuoteData quoteData,Message  message)
     {
+        for (ProductLineItem productLineItem : products)
+        {
+            SpaceRoom spaceRoom = new SpaceRoom(productLineItem.getSpaceType(),productLineItem.getRoomCode());
+            if (!spaceRooms.contains(spaceRoom))
+            {
+                spaceRooms.add(spaceRoom);
+            }
+        }
+        for (ProductAddon productAddon : addons)
+        {
+            SpaceRoom spaceRoom = new SpaceRoom(productAddon.getSpaceType(),productAddon.getRoomCode());
+            if (!spaceRooms.contains(spaceRoom))
+            {
+                spaceRooms.add(spaceRoom);
+            }
+        }
+
+        LOG.info("SpaceRoom List size " +spaceRooms.size());
+        for(SpaceRoom spaceRoom:spaceRooms)
+        {
+            LOG.info("space room data " +spaceRoom);
+        }
+
         try
         {
             ProposalVersion proposalVersion=new ProposalVersion();
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,proposalSOWs,proposalVersion);
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,proposalSOWs,proposalVersion,spaceRooms);
             outputCreator.create();
 
             QuoteSOWPDFCreator quoteSOWPDFCreator=new QuoteSOWPDFCreator(proposalHeader,quoteData,proposalSOWs);
@@ -300,7 +325,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         {
             ProposalVersion proposalVersion=new ProposalVersion();
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>(),proposalVersion);
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>(),proposalVersion,spaceRooms);
             outputCreator.create();
             OfficeUseOnlyPdf officeUseOnlyPdf=new OfficeUseOnlyPdf(proposalHeader);
             String proposalFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/");
@@ -327,7 +352,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         {
             ProposalVersion proposalVersion=new ProposalVersion();
             QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>(),proposalVersion);
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>(),proposalVersion,spaceRooms);
             outputCreator.create();
 
             WorksContractPDFCreator worksContractPDFCreator=new WorksContractPDFCreator(quoteData,proposalHeader);

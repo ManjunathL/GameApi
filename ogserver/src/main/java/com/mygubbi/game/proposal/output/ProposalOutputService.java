@@ -11,6 +11,7 @@ import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.game.proposal.quote.QuoteRequest;
+import com.mygubbi.game.proposal.sow.SpaceRoom;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -185,11 +186,35 @@ public class ProposalOutputService extends AbstractVerticle
     private void createQuote(QuoteRequest quoteRequest, ProposalHeader proposalHeader, List<ProductLineItem> products,
                              List<ProductAddon> addons, Message message, ProposalVersion proposalVersion)
     {
+        List<SpaceRoom> spaceRooms = new ArrayList<>();
+        for (ProductLineItem productLineItem : products)
+        {
+            SpaceRoom spaceRoom = new SpaceRoom(productLineItem.getSpaceType(),productLineItem.getRoomCode());
+            if (!spaceRooms.contains(spaceRoom))
+            {
+                spaceRooms.add(spaceRoom);
+            }
+        }
+        for (ProductAddon productAddon : addons)
+        {
+            SpaceRoom spaceRoom = new SpaceRoom(productAddon.getSpaceType(),productAddon.getRoomCode());
+            if (!spaceRooms.contains(spaceRoom))
+            {
+                spaceRooms.add(spaceRoom);
+            }
+        }
+
+        LOG.info("SpaceRoom List size " +spaceRooms.size());
+        for(SpaceRoom spaceRoom:spaceRooms)
+        {
+            LOG.info("space room data " +spaceRoom);
+        }
+
         try
         {
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),proposalVersion,quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),proposalVersion,quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag(),spaceRooms);
             boolean isValidSow = quoteRequest.isValidSowRows();
-            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,isValidSow, new ArrayList<SOWPdf>(),proposalVersion);
+            ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,isValidSow, new ArrayList<SOWPdf>(),proposalVersion,spaceRooms);
             outputCreator.create();
 
             LOG.debug("created Quotation.pdf");
