@@ -427,6 +427,21 @@
       "type": "select",
       "query": "select * from seo_landing_page where page_url = ?",
       "params": ["page_url"]
+    },
+    {
+      "id": "recentProject.select.all",
+      "type": "select",
+      "query": "select * from Recent_Projects where active<>0 and status='Published'",
+      "params": [
+
+      ]
+    },
+    {
+      "id":"recentProject.select.draft",
+      "type": "select",
+      "query":"select * from Recent_Projects where active<>0 and status='Draft'",
+      "params":[]
     }
   ]
+
 }
