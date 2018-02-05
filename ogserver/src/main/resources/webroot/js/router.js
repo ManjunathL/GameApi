@@ -754,7 +754,7 @@ define([
             document.querySelector('meta[name="keywords"]')
             .setAttribute("content", "mygubbi completed projects");
             setTimeout($('.page').append("<img src='https://res.cloudinary.com/mygubbi/image/upload/v1481115313/home/new_design/spinner.gif' class='page-tran'>"), 0);
-            require(['views/landing_pages/completedprojects_page'], function(CompletedProjectsPage) {
+            require(['views/landing_pages/recentprojects_page'], function(CompletedProjectsPage) {
                 VM.create(VM.COMPLETEDPROJECTSPAGE, CompletedProjectsPage).render();
             });
         });
