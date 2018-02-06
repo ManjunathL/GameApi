@@ -391,41 +391,27 @@ public class ProposalHandler extends AbstractRouteHandler
             paramsForEmail.put("subject","Booking confirmation is done");
             paramsForEmail.put("subjectTemplate","email/confirmation.1_0.subject.vm");
             paramsForEmail.put("bodyTemplate", "email/confirmation.1_0.body.vm");
-            getVersionRecord(paramsForEmail,proposalId,toVersion);
+            getProposalHeaderAndCallSendEmail(proposalVersion,paramsForEmail,proposalId,toVersion);
+//            getVersionRecord(paramsForEmail,proposalId,toVersion);
             //fill to emails and params object properly from database
 
         }else if(toVersion.equals("2.0")){
             paramsForEmail.put("subject","Booking confirmation is done");
             paramsForEmail.put("subjectTemplate","email/confirmation.2_0.subject.vm");
             paramsForEmail.put("bodyTemplate", "email/confirmation.2_0.body.vm");
-            getVersionRecord(paramsForEmail,proposalId,toVersion);
+            getProposalHeaderAndCallSendEmail(proposalVersion,paramsForEmail,proposalId,toVersion);
+//            getVersionRecord(paramsForEmail,proposalId,toVersion);
 //send a mail to Finance team (Jyoti, Sudarshan) and  Planning team (Suresh, Prabhu)
         }else if(toVersion.equals("3.0")){
             paramsForEmail.put("subject","Booking confirmation is done");
             paramsForEmail.put("subjectTemplate","email/confirmation.3_0.subject.vm");
             paramsForEmail.put("bodyTemplate", "email/confirmation.3_0.body.vm");
-            getVersionRecord(paramsForEmail,proposalId,toVersion);
+            getProposalHeaderAndCallSendEmail(proposalVersion,paramsForEmail,proposalId,toVersion);
+//            getVersionRecord(paramsForEmail,proposalId,toVersion);
 //send a mail to Design team(Indicating that Design is frozen and Production starting), Purchase team, Factory team
         }else{
             LOG.error("Invalid toVersion");
         }
-    }
-
-    private void getVersionRecord(JsonObject paramsForEmail,Integer proposalId,String toVersion){
-        JsonObject params = new JsonObject();
-        params.put("proposalId",proposalId);
-        params.put("version",toVersion);
-        Integer id = LocalCache.getInstance().store(new QueryData("version.getversiondetails",params));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
-                (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.rows == null || resultData.rows.isEmpty()) {
-                        LOG.error("Proposal not found for id:" + proposalId);
-                    } else {
-                        ProposalVersion proposalVer = new ProposalVersion(resultData.rows.get(0));
-                        getProposalHeaderAndCallSendEmail(proposalVer,paramsForEmail,proposalId,toVersion);
-                    }
-                });
     }
 
     private void getProposalHeaderAndCallSendEmail(ProposalVersion proposalVersion,JsonObject paramsForEmail,Integer proposalId,String toVersion ) {
@@ -492,6 +478,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
                             Collection<UsersForEmail> planningTeam = ModuleDataService.getInstance().getUserForEmail("planning");
                             planningTeam.forEach(planning -> {
+                                LOG.info("Planning team :: "+planning.getEmail());
                                 emailIds.add(planning.getEmail());//planning
                             });
 
@@ -668,9 +655,14 @@ public class ProposalHandler extends AbstractRouteHandler
     private void sendEmailToOnConfirm(JsonObject emailParams){
 
         String fromEmail = emailParams.getString("fromEmail");
-        String[] toemails = emailParams.getString("toEmails").split(",");
-//        LOG.info("Email receivers = "+emailParams.getString("toEmails").split(","));
-//        String[] toemails = {"shilpa.g@mygubbi.com","vibha.km@mygubbi.com"};
+//        String[] toemails = emailParams.getString("toEmails").split(",");
+        String[] temp = emailParams.getString("toEmails").split(",");
+        LOG.info("Email receivers = ");
+        for (String s : temp) {
+            LOG.info(s);
+        }
+
+        String[] toemails = {"shilpa.g@mygubbi.com","vibha.km@mygubbi.com","nagmani.bhushan@mygubbi.com"};
         JsonObject params = emailParams.getJsonObject("paramsObj");
         String subject = emailParams.getString("subject");
         String subjectTemplate = emailParams.getString("subjectTemplate");
@@ -1128,7 +1120,7 @@ public class ProposalHandler extends AbstractRouteHandler
     private void createBoqOutput(RoutingContext routingContext)
     {
         int count = 0;
-    LOG.debug("Inside create boq output : " + ++count);
+        LOG.debug("Inside create boq output : " + ++count);
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         Integer id = LocalCache.getInstance().store(quoteRequestJson);
         VertxInstance.get().eventBus().send(BoqCreatorService.CREATE_BOQ_OUTPUT, id,  new DeliveryOptions().setSendTimeout(120000),
