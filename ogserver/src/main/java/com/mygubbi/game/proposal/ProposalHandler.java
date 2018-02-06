@@ -655,14 +655,14 @@ public class ProposalHandler extends AbstractRouteHandler
     private void sendEmailToOnConfirm(JsonObject emailParams){
 
         String fromEmail = emailParams.getString("fromEmail");
-//        String[] toemails = emailParams.getString("toEmails").split(",");
-        String[] temp = emailParams.getString("toEmails").split(",");
-        LOG.info("Email receivers = ");
-        for (String s : temp) {
-            LOG.info(s);
-        }
+        String[] toemails = emailParams.getString("toEmails").split(",");
+//        String[] temp = emailParams.getString("toEmails").split(",");
+//        LOG.info("Email receivers = ");
+//        for (String s : temp) {
+//            LOG.info(s);
+//        }
 
-        String[] toemails = {"shilpa.g@mygubbi.com","vibha.km@mygubbi.com","nagmani.bhushan@mygubbi.com"};
+//        String[] toemails = {"shilpa.g@mygubbi.com","shruthi.r@mygubbi.com ","nagmani.bhushan@mygubbi.com"};
         JsonObject params = emailParams.getJsonObject("paramsObj");
         String subject = emailParams.getString("subject");
         String subjectTemplate = emailParams.getString("subjectTemplate");
