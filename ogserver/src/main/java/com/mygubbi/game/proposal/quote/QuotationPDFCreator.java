@@ -1429,18 +1429,31 @@ public class QuotationPDFCreator
                         document.add(p);
                         document.add(mscTable);
                         document.add(gsttotalTableFormsc);
+
+                        p=new Paragraph(" ");
+                        document.add(p);
+
+                        p=new Paragraph("\nE. Summary\n",fsize1);
+                        document.add(p);
+
+                        p=new Paragraph(" ");
+                        document.add(p);
+                        document.add(gsttotalTable);
+                        document.add(designTable);
+                    }else {
+                        p=new Paragraph(" ");
+                        document.add(p);
+
+                        p=new Paragraph("\nD. Summary\n",fsize1);
+                        document.add(p);
+
+                        p=new Paragraph(" ");
+                        document.add(p);
+                        document.add(gsttotalTable);
+                        document.add(designTable);
                     }
 
-                    p=new Paragraph(" ");
-                    document.add(p);
 
-                    p=new Paragraph("\nD. Summary\n",fsize1);
-                    document.add(p);
-
-                    p=new Paragraph(" ");
-                    document.add(p);
-                    document.add(gsttotalTable);
-                    document.add(designTable);
                 }
 
             }

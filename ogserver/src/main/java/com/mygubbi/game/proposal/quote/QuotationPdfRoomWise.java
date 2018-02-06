@@ -1142,18 +1142,31 @@ public class QuotationPdfRoomWise
                             document.add(p);
                             document.add(mscTable);
                             document.add(gsttotalTableFormsc);
+
+                            p=new Paragraph(" ");
+                            document.add(p);
+
+                            p=new Paragraph("\nE. Summary\n",fsize1);
+                            document.add(p);
+
+                            p=new Paragraph(" ");
+                            document.add(p);
+                            document.add(gsttotalTable);
+                            document.add(designTable);
+
+                        }else
+                        {
+                            p=new Paragraph(" ");
+                            document.add(p);
+
+                            p=new Paragraph("\nD. Summary\n",fsize1);
+                            document.add(p);
+
+                            p=new Paragraph(" ");
+                            document.add(p);
+                            document.add(gsttotalTable);
+                            document.add(designTable);
                         }
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-
-                        p=new Paragraph("\nD. Summary\n",fsize1);
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-                        document.add(gsttotalTable);
-                        document.add(designTable);
                     }
 
                 }
@@ -1209,9 +1222,9 @@ public class QuotationPdfRoomWise
         itemsCell1.setBackgroundColor(BaseColor.ORANGE);
         PdfPCell itemsCell2 = new PdfPCell(new Paragraph("ROOM NAME",fsize1));
         itemsCell2.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell3 = new PdfPCell(new Paragraph("PRODUCT",fsize1));
+        PdfPCell itemsCell3 = new PdfPCell(new Paragraph("MODULAR PRODUCT",fsize1));
         itemsCell3.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell4 = new PdfPCell(new Paragraph("ACCESSORIES",fsize1));
+        PdfPCell itemsCell4 = new PdfPCell(new Paragraph("ADD ON ACCESSORIES",fsize1));
         itemsCell4.setBackgroundColor(BaseColor.ORANGE);
         PdfPCell itemsCell5 = new PdfPCell(new Paragraph("APPLIANCES",fsize1));
         itemsCell5.setBackgroundColor(BaseColor.ORANGE);
@@ -1258,7 +1271,7 @@ public class QuotationPdfRoomWise
             {
                 for(AssembledProductInQuote product:assembledProductInQuotes)
                 {
-                    if(sp.getRoom().equalsIgnoreCase(product.getRoom()) && sp.getSpace().equalsIgnoreCase(product.getSpaceType()))
+                    if(sp.getRoom().equals(product.getRoom()) && sp.getSpace().equals(product.getSpaceType()))
                     {
                         totalRoomCost+=product.getAmountWithoutAddons();
                         totalPrice+=product.getAmountWithoutAddons();
@@ -1271,7 +1284,7 @@ public class QuotationPdfRoomWise
 
             if(this.quoteData.getAccessories().size()!=0) {
                 for (ProductAddon productAddonAccessories : this.quoteData.getAccessories()) {
-                    if (sp.getSpace().equalsIgnoreCase(productAddonAccessories.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonAccessories.getRoomCode())) {
+                    if (sp.getSpace().equals(productAddonAccessories.getSpaceType()) && sp.getRoom().equals(productAddonAccessories.getRoomCode())) {
                         totalRoomCost += productAddonAccessories.getAmount();
                         totalPrice += productAddonAccessories.getAmount();
                         accessoryCost += productAddonAccessories.getAmount();
@@ -1283,7 +1296,7 @@ public class QuotationPdfRoomWise
             {
                 for(ProductAddon productAddonAppliances:this.quoteData.getAppliances())
                 {
-                    if(sp.getSpace().equalsIgnoreCase(productAddonAppliances.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonAppliances.getRoomCode()))
+                    if(sp.getSpace().equals(productAddonAppliances.getSpaceType()) && sp.getRoom().equals(productAddonAppliances.getRoomCode()))
                     {
                         totalRoomCost+=productAddonAppliances.getAmount();
                         totalPrice+=productAddonAppliances.getAmount();
@@ -1296,7 +1309,7 @@ public class QuotationPdfRoomWise
             {
                 for(ProductAddon productAddonCounterTop:this.quoteData.getCounterTops())
                 {
-                    if(sp.getSpace().equalsIgnoreCase(productAddonCounterTop.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonCounterTop.getRoomCode()))
+                    if(sp.getSpace().equals(productAddonCounterTop.getSpaceType()) && sp.getRoom().equals(productAddonCounterTop.getRoomCode()))
                     {
                         totalRoomCost+=productAddonCounterTop.getAmount();
                         totalPrice+=productAddonCounterTop.getAmount();
@@ -1309,7 +1322,7 @@ public class QuotationPdfRoomWise
             {
                 for (ProductAddon productAddonLooseFurniture: this.quoteData.getLooseFurniture())
                 {
-                    if(sp.getSpace().equalsIgnoreCase(productAddonLooseFurniture.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonLooseFurniture.getRoomCode()))
+                    if(sp.getSpace().equals(productAddonLooseFurniture.getSpaceType()) && sp.getRoom().equals(productAddonLooseFurniture.getRoomCode()))
                     {
                         totalRoomCost+=productAddonLooseFurniture.getAmount();
                         totalPrice+=productAddonLooseFurniture.getAmount();
@@ -1320,7 +1333,7 @@ public class QuotationPdfRoomWise
             }
             if(quoteData.getServices().size()!=0) {
                 for (ProductAddon productAddonServices : this.quoteData.getServices()) {
-                    if (sp.getSpace().equalsIgnoreCase(productAddonServices.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonServices.getRoomCode())) {
+                    if (sp.getSpace().equals(productAddonServices.getSpaceType()) && sp.getRoom().equals(productAddonServices.getRoomCode())) {
                         totalRoomCost += productAddonServices.getAmount();
                         totalPrice += productAddonServices.getAmount();
                         servicesCost += productAddonServices.getAmount();
@@ -1332,7 +1345,7 @@ public class QuotationPdfRoomWise
             {
                 for(ProductAddon ProductAddonCustomAddon : this.quoteData.getCustomAddons())
                 {
-                    if(sp.getSpace().equalsIgnoreCase(ProductAddonCustomAddon.getSpaceType()) && sp.getRoom().equalsIgnoreCase(ProductAddonCustomAddon.getRoomCode()))
+                    if(sp.getSpace().equals(ProductAddonCustomAddon.getSpaceType()) && sp.getRoom().equals(ProductAddonCustomAddon.getRoomCode()))
                     {
                         if(customAddonAccessoryList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1500,7 +1513,7 @@ public class QuotationPdfRoomWise
             int sequenceNumber = 0;
             if (assembledProductInQuotes.size() != 0) {
                 for (AssembledProductInQuote product : assembledProductInQuotes) {
-                    if (sp.getRoom().equalsIgnoreCase(product.getRoom()) && sp.getSpace().equalsIgnoreCase(product.getSpaceType())) {
+                    if (sp.getRoom().equals(product.getRoom()) && sp.getSpace().equals(product.getSpaceType())) {
                         sequenceNumber++;
                         this.fillAssembledProductInfo(itemsTable, sequenceNumber, product);
                         roomName = product.getRoom();
@@ -1553,7 +1566,7 @@ public class QuotationPdfRoomWise
 
             if (this.quoteData.getAccessories().size() != 0) {
                 for (ProductAddon productAddonAccessories : this.quoteData.getAccessories()) {
-                    if (sp.getSpace().equalsIgnoreCase(productAddonAccessories.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonAccessories.getRoomCode())) {
+                    if (sp.getSpace().equals(productAddonAccessories.getSpaceType()) && sp.getRoom().equals(productAddonAccessories.getRoomCode())) {
                         totalRoomCost += productAddonAccessories.getAmount();
                         accessoryCost += productAddonAccessories.getAmount();
                         totalAddonCost +=productAddonAccessories.getAmount();
@@ -1565,7 +1578,7 @@ public class QuotationPdfRoomWise
 
             if (this.quoteData.getAppliances().size() != 0) {
                 for (ProductAddon productAddonAppliances : this.quoteData.getAppliances()) {
-                    if (sp.getSpace().equalsIgnoreCase(productAddonAppliances.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonAppliances.getRoomCode())) {
+                    if (sp.getSpace().equals(productAddonAppliances.getSpaceType()) && sp.getRoom().equals(productAddonAppliances.getRoomCode())) {
                         totalRoomCost += productAddonAppliances.getAmount();
                         appliancesCost += productAddonAppliances.getAmount();
                         totalAddonCost+=productAddonAppliances.getAmount();
@@ -1576,7 +1589,7 @@ public class QuotationPdfRoomWise
             }
             if (this.quoteData.getCounterTops().size() != 0) {
                 for (ProductAddon productAddonCounterTop : this.quoteData.getCounterTops()) {
-                    if (sp.getSpace().equalsIgnoreCase(productAddonCounterTop.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonCounterTop.getRoomCode())) {
+                    if (sp.getSpace().equals(productAddonCounterTop.getSpaceType()) && sp.getRoom().equals(productAddonCounterTop.getRoomCode())) {
                         totalRoomCost += productAddonCounterTop.getAmount();
                         countertopCost += productAddonCounterTop.getAmount();
                         totalAddonCost+=productAddonCounterTop.getAmount();
@@ -1587,7 +1600,7 @@ public class QuotationPdfRoomWise
             }
             if (quoteData.getLooseFurniture().size() != 0) {
                 for (ProductAddon productAddonLooseFurniture : this.quoteData.getLooseFurniture()) {
-                    if (sp.getSpace().equalsIgnoreCase(productAddonLooseFurniture.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonLooseFurniture.getRoomCode())) {
+                    if (sp.getSpace().equals(productAddonLooseFurniture.getSpaceType()) && sp.getRoom().equals(productAddonLooseFurniture.getRoomCode())) {
                         totalRoomCost += productAddonLooseFurniture.getAmount();
                         totalAddonCost+=productAddonLooseFurniture.getAmount();
                         looseFurnitureCost += productAddonLooseFurniture.getAmount();
@@ -1598,7 +1611,7 @@ public class QuotationPdfRoomWise
             }
             if (quoteData.getServices().size() != 0) {
                 for (ProductAddon productAddonServices : this.quoteData.getServices()) {
-                    if (sp.getSpace().equalsIgnoreCase(productAddonServices.getSpaceType()) && sp.getRoom().equalsIgnoreCase(productAddonServices.getRoomCode())) {
+                    if (sp.getSpace().equals(productAddonServices.getSpaceType()) && sp.getRoom().equals(productAddonServices.getRoomCode())) {
                         totalRoomCost += productAddonServices.getAmount();
                         servicesCost += productAddonServices.getAmount();
                         totalAddonCost+=productAddonServices.getAmount();
@@ -1610,7 +1623,7 @@ public class QuotationPdfRoomWise
             if (this.quoteData.getCustomAddons().size() != 0)
             {
                     for (ProductAddon ProductAddonCustomAddon : this.quoteData.getCustomAddons()) {
-                        if (sp.getSpace().equalsIgnoreCase(ProductAddonCustomAddon.getSpaceType()) && sp.getRoom().equalsIgnoreCase(ProductAddonCustomAddon.getRoomCode())) {
+                        if (sp.getSpace().equals(ProductAddonCustomAddon.getSpaceType()) && sp.getRoom().equals(ProductAddonCustomAddon.getRoomCode())) {
                                 totalRoomCost += ProductAddonCustomAddon.getAmount();
                                 customAddonCost += ProductAddonCustomAddon.getAmount();
                                 totalAddonCost+=ProductAddonCustomAddon.getAmount();
