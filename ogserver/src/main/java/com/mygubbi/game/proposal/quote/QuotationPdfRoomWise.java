@@ -679,10 +679,15 @@ public class QuotationPdfRoomWise
                 p.setAlignment(Element.ALIGN_RIGHT);
                 document.add(p);
 
+            p=new Paragraph(" ");
+            document.add(p);
 
                     p = new Paragraph("DISCOUNT :" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), fsize1);
                     p.setAlignment(Element.ALIGN_RIGHT);
                     document.add(p);
+
+            p=new Paragraph(" ");
+            document.add(p);
 
                 Double val = (quoteData.getTotalCost() + miscCharges.intValue()) - quoteData.getDiscountAmount();
 
@@ -1353,7 +1358,7 @@ public class QuotationPdfRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             accessoryCost+=ProductAddonCustomAddon.getAmount();
                             totalaccessoryCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getExtendedTitle(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }else if(customAddonAppliancesList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1361,7 +1366,7 @@ public class QuotationPdfRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             appliancesCost+=ProductAddonCustomAddon.getAmount();
                             totalappliancesCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getUom(),ProductAddonCustomAddon.getExtendedTitle(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }else if(customAddonCounterTopList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1369,7 +1374,7 @@ public class QuotationPdfRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             countertopCost+=ProductAddonCustomAddon.getAmount();
                             totalcountertopCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getExtendedTitle(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }else if(customAddonServicesList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1377,7 +1382,7 @@ public class QuotationPdfRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             servicesCost+=ProductAddonCustomAddon.getAmount();
                             totalservicesCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getExtendedTitle(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }else if(customAddonLooseFurnitureList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1385,7 +1390,7 @@ public class QuotationPdfRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             looseFurnitureCost+=ProductAddonCustomAddon.getAmount();
                             totallooseFurnitureCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getExtendedTitle(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }
                     }
@@ -1394,7 +1399,7 @@ public class QuotationPdfRoomWise
             roomSummary roomSummary=new roomSummary(roomName,productCost,appliancesCost,countertopCost,servicesCost,looseFurnitureCost,accessoryCost,totalRoomCost);
             roomSummaryList.add(roomSummary);
         }
-        roomSummary subtotalroomSummary=new roomSummary("Sub Total",totalproductCost,totalaccessoryCost,totalappliancesCost,totalcountertopCost,totalservicesCost,totallooseFurnitureCost,totalPrice);
+        roomSummary subtotalroomSummary=new roomSummary("Sub Total",totalproductCost,totalappliancesCost,totalcountertopCost,totalservicesCost,totallooseFurnitureCost,totalaccessoryCost,totalPrice);
         roomSummaryList.add(subtotalroomSummary);
 
         int countForRoomSummary=1;
@@ -1627,7 +1632,7 @@ public class QuotationPdfRoomWise
                                 totalRoomCost += ProductAddonCustomAddon.getAmount();
                                 customAddonCost += ProductAddonCustomAddon.getAmount();
                                 totalAddonCost+=ProductAddonCustomAddon.getAmount();
-                                AddonsList addonsList = new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(), ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getExtendedTitle(), ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                                AddonsList addonsList = new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(), ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(), ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
                                 customaddonsList.add(addonsList);
                         }
                     }

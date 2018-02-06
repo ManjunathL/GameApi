@@ -2676,12 +2676,12 @@ public class QuotationPDFCreator
                 this.createRowAndFillDataForAddon(tabname,String.valueOf(index), addon.getCustomTitle(), addon.getUom(),addon.getQuantity(), addon.getRate(), addon.getAmount());
             else if(("Appliances").equals(addon.getCategoryCode()))
             {
-                this.createProductTitleRowForAddon(tabname,String.valueOf(index),addon.getExtendedTitle());
+                this.createProductTitleRowForAddon(tabname,String.valueOf(index),addon.getProduct());
                 this.createRowAndFillDataForAddon(tabname, null,"Specification: " +addon.getTitle(),addon.getUom(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             }
             else
             {
-                this.createProductTitleRowForAddon(tabname,String.valueOf(index),addon.getExtendedTitle());
+                this.createProductTitleRowForAddon(tabname,String.valueOf(index),addon.getProduct());
                 this.createRowAndFillDataForAddon(tabname, null,"Specification: " +addon.getTitle()+ "\nLocation: " +addon.getREMARKS() ,addon.getUom(), addon.getQuantity(), addon.getRate(), addon.getAmount());
             }
             index++;
