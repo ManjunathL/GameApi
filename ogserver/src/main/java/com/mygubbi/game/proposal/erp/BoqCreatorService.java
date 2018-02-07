@@ -660,7 +660,7 @@ public class BoqCreatorService extends AbstractVerticle {
         else
         {
             Handle handle = ModuleDataService.getInstance().getHandleKnobHingeDetails(assembledProductInQuote.getProduct().getHandleCode());
-            boqItems.add(new BoqItem(handle.getCode(), handle.getArticleNo(),handle.getTitle(), handle.getErpCode(), "Nos", module.getHandleQuantity(), priceDate, city, handle.getBoqDisplayOrder()));
+            boqItems.add(new BoqItem(handle.getCode(), handle.getArticleNo(),handle.getTitle() + " / " + handle.getFinish() + " / " + handle.getThickness(), handle.getErpCode(), "Nos", module.getHandleQuantity(), priceDate, city, handle.getBoqDisplayOrder()));
 
         }
 
@@ -678,7 +678,7 @@ public class BoqCreatorService extends AbstractVerticle {
             return null;
         }
         Handle knob = ModuleDataService.getInstance().getHandleKnobHingeDetails(assembledProductInQuote.getProduct().getKnobCode());
-        return new BoqItem(knob.getCode(), knob.getArticleNo(),knob.getTitle(), knob.getErpCode(), "Nos", module.getKnobQuantity(), priceDate, city, knob.getBoqDisplayOrder());
+        return new BoqItem(knob.getCode(), knob.getArticleNo(),knob.getTitle() + " / " + knob.getFinish() + " / " + knob.getThickness(), knob.getErpCode(), "Nos", module.getKnobQuantity(), priceDate, city, knob.getBoqDisplayOrder());
 
     }
 
