@@ -28,7 +28,7 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
     private String targetFileForWorksContract;
     private boolean isValid_Sow;
     java.util.Date date;
-    java.util.Date quoteChangeDate = new java.util.Date(118 ,1,1,0,0,00);
+    java.util.Date quoteChangeDate = new java.util.Date(118 ,1,7,0,0,00);
 
     public PdfQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader, boolean isValid_Sow, ProposalVersion proposalVersion,List<SpaceRoom> spaceRooms){
         this.quoteData = quoteData;
