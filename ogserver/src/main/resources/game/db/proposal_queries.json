@@ -2037,6 +2037,14 @@
       "params": ["proposalId", "proposalId"],
       "jsonfields":[]
     },
+    {
+      "id": "proposal.boq.delete",
+      "type": "delete",
+      "table": "proposal_boq",
+      "query": "delete from proposal_boq where proposalId = ?",
+      "params": ["proposalId"],
+      "jsonfields":[]
+    },
 
 
     {

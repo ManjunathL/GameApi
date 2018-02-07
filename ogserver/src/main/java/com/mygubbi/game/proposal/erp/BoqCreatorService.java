@@ -95,10 +95,31 @@ public class BoqCreatorService extends AbstractVerticle {
                     }
                     else
                     {
-                        createBoqInDrive(quoteRequest,message,boqDataList);
+                        deleteBoqs(quoteRequest,proposalHeader,message,boqDataList);
                     }
                 });
     }
+
+    private void deleteBoqs(JsonObject quoteRequest, ProposalHeader proposalHeader, Message message, BoqDataList boqDataList) {
+        QueryData queryData = null;
+        queryData = new QueryData("proposal.boq.delete", new JsonObject().put("proposalId", quoteRequest.getInteger("proposalId")));
+        Integer id = LocalCache.getInstance().store(queryData);
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+//                    LOG.info("Parameter Values" +resultData.paramsObject);
+                    if (resultData.errorFlag)
+                    {
+                        message.reply(LocalCache.getInstance().store(new JsonObject().put("error", "Proposal not found for id:" + quoteRequest.getInteger("proposalId"))));
+                        LOG.error("Proposal not found for id:" + quoteRequest.getInteger("proposalId"));
+                    }
+                    else
+                    {
+                        this.getProposalProductsBySpaces(proposalHeader, quoteRequest, message,boqDataList);
+                    }
+                });
+    }
+
 
 
     private void getProposalProductsBySpaces(ProposalHeader proposalHeader, JsonObject quoteRequest, Message message, BoqDataList boqDataList) {
