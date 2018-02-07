@@ -148,12 +148,7 @@ public class VersionPriceHolder {
             vrPrice = vrPrice + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
             vrPriceAfterDiscount = vrPriceAfterDiscount + projectHandlingPrice + deepClearingPrice + floorProtectionPrice;
            vrPriceAfterTax = vrPriceAfterTax + versionServicePriceHolder.getProjectHandlingPriceAfterTax() + versionServicePriceHolder.getDeepClearingPriceAfterTax() + versionServicePriceHolder.getFloorProtectionPriceAfterTax();
-            LOG.info("Before vrcost = "+vrCost);
-            LOG.info("versionServicePriceHolder.getProjectHandlingCost()  = "+versionServicePriceHolder.getProjectHandlingCost() );
-            LOG.info("versionServicePriceHolder.getDeepClearingCost() = "+versionServicePriceHolder.getDeepClearingCost());
-            LOG.info("versionServicePriceHolder.getFloorProtectionCost() = "+versionServicePriceHolder.getFloorProtectionCost());
             vrCost = vrCost + versionServicePriceHolder.getProjectHandlingCost() + versionServicePriceHolder.getDeepClearingCost() + versionServicePriceHolder.getFloorProtectionCost();
-            LOG.info("After vrcost = "+vrCost);
         }
     }
 
