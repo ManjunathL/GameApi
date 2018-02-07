@@ -682,7 +682,7 @@
       "id": "proposal_version.updatedProposals.select",
       "type": "select",
       "table": "version_master",
-          "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.businessDate ) order by vm.businessDate desc,vm.proposalId desc,vm.version asc",
+          "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.updatedOn ) order by vm.updatedOn desc,vm.proposalId desc,vm.version asc",
         "params": [],
       "jsonfields":[]
     },
@@ -690,7 +690,7 @@
       "id": "proposal_version.updatedProposals.select.ForListOfProposals",
       "type": "select",
       "table": "version_master",
-      "query": "select vm.id,vm.proposalId,vm.version,vm.fromVersion,vm.title,vm.finalAmount,vm.status,vm.internalStatus,vm.date,vm.remarks,vm.remarksIgnore,vm.ignoreAndPublishFlag,vm.discountPercentage,vm.discountAmount,vm.amount,vm.updatedOn,vm.profit,vm.margin,vm.amountWotax,vm.manufactureAmount,vm.isDataLoadedToReport,vm.dataLoadedOn,vm.businessDate from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.businessDate ) and vm.proposalId in (?) order by vm.businessDate desc,vm.proposalId desc,vm.version asc",
+      "query": "select vm.id,vm.proposalId,vm.version,vm.fromVersion,vm.title,vm.finalAmount,vm.status,vm.internalStatus,vm.date,vm.remarks,vm.remarksIgnore,vm.ignoreAndPublishFlag,vm.discountPercentage,vm.discountAmount,vm.amount,vm.updatedOn,vm.profit,vm.margin,vm.amountWotax,vm.manufactureAmount,vm.isDataLoadedToReport,vm.dataLoadedOn,vm.updatedOn from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.updatedOn ) and vm.proposalId in (?) order by vm.updatedOn desc,vm.proposalId desc,vm.version asc",
       "params": ["proposalIds"],
       "jsonfields":[]
     },
@@ -698,7 +698,7 @@
       "id": "proposal_version.updatedProposals.select.onDate",
       "type": "select",
       "table": "version_master",
-      "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.businessDate ) and date(vm.businessDate) >= date(?) and  date(vm.businessDate) <= date(?) and businessDate order by vm.businessDate desc,vm.proposalId desc,vm.version asc ",
+      "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.updatedOn ) and date(vm.updatedOn) >= date(?) and  date(vm.updatedOn) <= date(?) and updatedOn order by vm.updatedOn desc,vm.proposalId desc,vm.version asc",
       "params": ["startDate","endDate"],
       "jsonfields":[]
     },
