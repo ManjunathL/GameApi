@@ -411,7 +411,7 @@ public class QuotationPDFCreator
                 p = new Paragraph("Remarks : ______________________________________________________________________________________________________________________", bookingformfsize);
                 document.add(p);
 
-                Double val = (quoteData.getTotalCost() - miscCharges.intValue()) - quoteData.getDiscountAmount();
+                Double val = (quoteData.getTotalCost() + miscCharges.intValue()) - quoteData.getDiscountAmount();
 
                 Double res = val - val % 10;
                 p = new Paragraph("Total Quotation Value Rs. " + this.getRoundOffValue(String.valueOf(res.intValue())), bookingformfsize);
