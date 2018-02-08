@@ -1,9 +1,20 @@
     <!-- Banner Section -->
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <section class="bg-color-white">
     <div class="container-fluid">
         <div class="row">
             <div class="slider_container position-relative">
-                <ul class="bxslider padding0">
+                <video autoplay loop id="myVideo">
+                    <source src="/video/MyGubbi_with website.mp4" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+                <div class="myvideo-content hidden-xs hidden-sm">
+                    <h2 class="beautytxt">Beautiful</h2>
+                     <h2 class="font-size30 color-orange">Home Interior</h2>
+                    <h3>Made Easy</h3>
+                    <button class="btn btn-explore pull-right" id="myBtn" onclick="myFunction()">Pause</button>
+                </div>
+                <!--<ul class="bxslider padding0">
                     <li>
                         <a class="slider-move" href="#" data-number="0">
                             <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516701893/home/v2/RepublicDay_Emailer-03-min.jpg" class="cld-responsive img-centered width100 hidden-sm hidden-xs" alt="mygubbi bedroom design" />
@@ -17,21 +28,31 @@
                         </a>
                     </li>
                 </ul>
-                <!-- Controls -->
+                &lt;!&ndash; Controls &ndash;&gt;
                 <a class="slider_left" role="button" data-slide="prev">
                     <img src="<%= imgBase + 'arr-left-thick.png'%>" class="arr_left" alt="...">
                 </a>
                 <a class="slider_right" role="button" data-slide="next">
                     <img src="<%= imgBase + 'arr-right-thick.png'%>" class="arr_right" alt="...">
-                </a>
+                </a>-->
             </div>
         </div>
     </div>
 </section>
-
 <!-- End Banner Section -->
+<section>
+    <!-- Youtube Section -->
+<!--
+    <a href="#" class="" id="youtubelnk" data-theVideo="https://www.youtube.com/embed/_ytz2UVw7MU"><img src="https://res.cloudinary.com/mygubbi/image/upload/v1468837680/home/video-button_03.png" border="0" class="responsive-image" alt="Null"></a>
+-->
 
 
+<!--
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/_ytz2UVw7MU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+-->
+
+    <!-- Youtube Section End -->
+</section>
 <!-- Services Section -->
 <section class="bg-color-white pt50 pb50 mob-padding-top-20 mob-padding-bottom-0">
     <div class="container-fluid">
@@ -67,7 +88,23 @@
     </div>
 </section>
 <!-- End Services Section -->
-
+<!--<section class="bg-color-white">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="slider_container position-relative">
+                <video controls id="myVideo">
+                    <source src="/video/MyGubbi_with website.mp4" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+                &lt;!&ndash;<div class="content">
+                    <h1>Heading</h1>
+                    <p>Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei. Id qui nemore latine molestiae, ad mutat oblique delicatissimi pro.</p>
+                    <button id="myBtn" onclick="myFunction()">Pause</button>
+                </div>&ndash;&gt;
+            </div>
+        </div>
+    </div>
+</section>-->
 
 <!-- Start Exp Section -->
 <section class="border-bottom-grey bg-color-white" id="services">
@@ -761,4 +798,19 @@
         });
 
     });
+</script>
+
+<script>
+    var video = document.getElementById("myVideo");
+    var btn = document.getElementById("myBtn");
+
+    function myFunction() {
+      if (video.paused) {
+        video.play();
+        btn.innerHTML = "Pause";
+      } else {
+        video.pause();
+        btn.innerHTML = "Play";
+      }
+    }
 </script>
