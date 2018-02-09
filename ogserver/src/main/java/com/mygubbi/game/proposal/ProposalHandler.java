@@ -741,25 +741,29 @@ public class ProposalHandler extends AbstractRouteHandler
         ProposalVersion proposalVersion = new ProposalVersion(contextJson);
         JsonObject queryParams = new JsonObject();
 
+        JsonObject proposalHeaderJson = new JsonObject();
         if (proposalVersion.getVersion().startsWith("0.")) {
             proposalVersion.setFromVersion(proposalVersion.getVersion());
             proposalVersion.setVersion("1.0");
             proposalVersion.setProposalStatus(CONFIRMED);
             proposalVersion.setInternalStatus(CONFIRMED);
+            proposalHeaderJson.put("status",CONFIRMED);
         } else if (proposalVersion.getVersion().startsWith("1.")) {
             proposalVersion.setFromVersion(proposalVersion.getVersion());
             proposalVersion.setVersion("2.0");
             proposalVersion.setProposalStatus(DSO);
             proposalVersion.setInternalStatus(DSO);
+            proposalHeaderJson.put("status",DSO);
         } else if (proposalVersion.getVersion().startsWith("2.")) {
             proposalVersion.setFromVersion(proposalVersion.getVersion());
             proposalVersion.setVersion("3.0");
             proposalVersion.setProposalStatus(PSO);
             proposalVersion.setInternalStatus(PSO);
+            proposalHeaderJson.put("status",PSO);
         }
 
-        JsonObject proposalHeaderJson = new JsonObject();
         proposalHeaderJson.put("id",proposalVersion.getProposalId()).put("version",proposalVersion.getVersion()).put("amount",proposalVersion.getFinalAmount());
+
 
         queryDatas.add(new QueryData("proposal.version.confirm",proposalVersion));
         queryDatas.add(new QueryData("proposal.update.onconfirm",proposalHeaderJson));
