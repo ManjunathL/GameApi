@@ -203,9 +203,8 @@
       "id": "shortlist.add",
       "type": "insert",
       "table": "shortlisted",
-      "query": "insert into shortlisted(id, uid, email, productId, product) values (?, ?, ?, ?, ?)",
+      "query": "insert into shortlisted( uid, email, productId, product) values (?, ?, ?, ?)",
       "params": [
-        "id",
         "uid",
         "email",
         "productId",
