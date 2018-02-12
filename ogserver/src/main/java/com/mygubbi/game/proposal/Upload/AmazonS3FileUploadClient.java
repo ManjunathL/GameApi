@@ -29,13 +29,9 @@ import java.io.File;
     AmazonS3 s3client;
 
 
-    public AmazonS3FileUploadClient(String bucketName) {
+    public AmazonS3FileUploadClient(String bucketName, String accessKey, String secretKey) {
 
         this.bucketName = bucketName;
-
-            String accessKey = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key", "AKIAJS7FUU6IRYAPHDLQ") ;
-            String secretKey = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key", "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") ;
-
 
             BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(accessKey,secretKey);
 

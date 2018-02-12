@@ -19,7 +19,6 @@ public class FileUploadHandler extends AbstractRouteHandler {
 
     private String defaultUrl = "http://" + "designwhimages.mygubbi.com/";
 
-
     AmazonS3FileUploadClient amazonS3FileUploadClient;
 
     public FileUploadHandler(Vertx vertx) {
@@ -31,7 +30,10 @@ public class FileUploadHandler extends AbstractRouteHandler {
 
         this.post("/file").handler(this::fileToAmazon);
         String bucketName = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname", "designwh");
-        amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName);
+        String accessKey = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key", "AKIAJS7FUU6IRYAPHDLQ") ;
+        String secretKey = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key", "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") ;
+
+        amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName,accessKey,secretKey);
 
     }
 
@@ -46,11 +48,22 @@ public class FileUploadHandler extends AbstractRouteHandler {
 
         for (FileUpload f : routingContext.fileUploads()) {
             LOG.info("uploading  " + f.fileName() + ":" + f.uploadedFileName());
-
             amazonS3FileUploadClient.uploadFile(f.fileName(),f.uploadedFileName());
             urlJsonArray.add(defaultUrl+f.fileName());
-
         }
         sendJsonResponse(routingContext,urlJsonArray.toString());
+    }
+
+    public String uploadFile(String fileName)
+    {
+        String bucketName_game = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname_game", "designwh");
+        String accessKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key_game", "AKIAJS7FUU6IRYAPHDLQ") ;
+        String secretKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key_game", "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") ;
+
+        amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName_game,accessKey_game,secretKey_game);
+
+        amazonS3FileUploadClient.uploadFile(fileName,fileName);
+
+        return defaultUrl+fileName;
     }
 }
