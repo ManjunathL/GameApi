@@ -27,6 +27,9 @@ public class FFApiHandler extends AbstractRouteHandler {
     private static final String PRODUCT = "Product";
     private static final String SERVICE = "Service";
     private static final String FALSE_CEILING = "False Ceiling";
+    private static final String LOOSE_FURNITURE = "Loose Furniture";
+    private static final String FURNITURE = "Furniture";
+    private static final String APPLIANCES = "Appliances";
 
     public FFApiHandler(Vertx vertx) {
         super(vertx);
@@ -121,9 +124,19 @@ public class FFApiHandler extends AbstractRouteHandler {
         {
             if (productAddon.isCustomAddon())
             {
+                String service = SERVICE;
+                if (productAddon.getCustomAddonCategory().equals(LOOSE_FURNITURE))
+                {
+                    service = FURNITURE;
+                }
+               else if (productAddon.getCustomAddonCategory().equals(APPLIANCES))
+                {
+                    service = APPLIANCES;
+                }
                 String concat = productAddon.getRoomCode() + " :" + productAddon.getCustomAddonCategory() + " :" + productAddon.getProduct();
-                JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", productAddon.getCustomAddonCategory() + " :" + productAddon.getProduct());
+                JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", service).put("title", productAddon.getCustomAddonCategory() + " :" + productAddon.getProduct());
                 servicesMap.put(concat,put);
+
             }
             else if (productAddon.isCounterTop() && productAddon.getProductTypeCode().equals(FALSE_CEILING))
             {
@@ -135,16 +148,27 @@ public class FFApiHandler extends AbstractRouteHandler {
                 String product = stringCompare(productAddon.getProductSubtypeCode(),productAddon.getProduct());
 
 
+                String service = SERVICE;
+                if (productAddon.getCategoryCode().equals(LOOSE_FURNITURE))
+                {
+                    service = FURNITURE;
+                }
+                else if (productAddon.getCategoryCode().equals(APPLIANCES))
+                {
+                    service = APPLIANCES;
+                }
+
                 if (!(productAddon.getScopeDisplayFlag().equalsIgnoreCase("no"))) {
                 if (servicesMap.containsKey(concat))
                 {
                     concat = productAddon.getProductTypeCode() + " :" + product + " :" + productAddon.getREMARKS();
-                    JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", productAddon.getProductTypeCode() + " :" + product + " :" + productAddon.getREMARKS());
-                    servicesMap.put(concat,put);
+                    JsonObject concatenatedTitle = new JsonObject().put("room", productAddon.getRoomCode()).put("type", service).put("title", productAddon.getProductTypeCode() + " :" + product + " :" + productAddon.getREMARKS());
+                    servicesMap.put(concat,concatenatedTitle);
                 }
                 else {
-                        JsonObject put = new JsonObject().put("room", productAddon.getRoomCode()).put("type", SERVICE).put("title", productAddon.getProductTypeCode() + " :" + product);
-                        servicesMap.put(concat,put);
+
+                        JsonObject concatenatedTitle = new JsonObject().put("room", productAddon.getRoomCode()).put("type", service).put("title", productAddon.getProductTypeCode() + " :" + product);
+                        servicesMap.put(concat,concatenatedTitle);
                     }
                 }
             }
