@@ -12,6 +12,7 @@ public class ReportingObjects {
 
     public int proposalId;
     public String version;
+    public int versionId;
 
 
     public List<JsonObject> queryDatasForModule = new ArrayList<>();

@@ -649,11 +649,11 @@
       "query": "select * from version_master where proposalId in (?) ",
       "params": ["proposalId"]
     },{
-      "id":"update.version_master.dataLoadStatus",
-      "type":"update",
+      "id":"insertOrUpdate.version_master.dataLoadStatus",
+      "type":"insert",
       "table": "version_master",
-      "query":"update version_master set isDataLoadedToReport=?, dataLoadedOn =?  where proposalId = ? and version = ?",
-      "params":[ "status","dataLoadedOn","proposalId","version" ]
+      "query":"INSERT INTO version_run_status(vId,isDataLoadedToReport,dataLoadedOn) VALUES (?,?,?) ON DUPLICATE KEY UPDATE vId = ?,isDataLoadedToReport=?,dataLoadedOn =?",
+      "params":[ "vId1","isDataLoadedToReport1","dataLoadedOn1", "vId2","isDataLoadedToReport2","dataLoadedOn2"]
     },
     {
       "id": "proposal.product.all.detail",
@@ -682,24 +682,16 @@
       "id": "proposal_version.updatedProposals.select",
       "type": "select",
       "table": "version_master",
-          "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.updatedOn ) order by vm.updatedOn desc,vm.proposalId desc,vm.version asc",
+          "query": "select * from (select v.* from version_master v, version_run_status r,proposal p where v.id = r.vId and (r.dataLoadedOn < STR_TO_DATE(v.updatedOn, '%Y-%m-%d %H:%i:%s') or r.isDataLoadedToReport != 'Yes') and p.id = v.proposalId and p.status != 'Deleted' union all select v.* from version_master v inner join proposal p on p.id = v.proposalId where p.status != 'Deleted' and v.id not in (select vId from version_run_status)) vm order by vm.proposalId desc,vm.version asc;",
         "params": [],
-      "jsonfields":[]
-    },
-    {
-      "id": "proposal_version.updatedProposals.select.ForListOfProposals",
-      "type": "select",
-      "table": "version_master",
-      "query": "select vm.id,vm.proposalId,vm.version,vm.fromVersion,vm.title,vm.finalAmount,vm.status,vm.internalStatus,vm.date,vm.remarks,vm.remarksIgnore,vm.ignoreAndPublishFlag,vm.discountPercentage,vm.discountAmount,vm.amount,vm.updatedOn,vm.profit,vm.margin,vm.amountWotax,vm.manufactureAmount,vm.isDataLoadedToReport,vm.dataLoadedOn,vm.updatedOn from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.updatedOn ) and vm.proposalId in (?) order by vm.updatedOn desc,vm.proposalId desc,vm.version asc",
-      "params": ["proposalIds"],
       "jsonfields":[]
     },
     {
       "id": "proposal_version.updatedProposals.select.onDate",
       "type": "select",
       "table": "version_master",
-      "query": "select vm.* from version_master vm inner join proposal p on p.id = vm.proposalId where p.status != 'Deleted' and (vm.isDataLoadedToReport = 'No' or vm.isDataLoadedToReport is Null or vm.dataLoadedOn < vm.updatedOn ) and date(vm.updatedOn) >= date(?) and  date(vm.updatedOn) <= date(?) and updatedOn order by vm.updatedOn desc,vm.proposalId desc,vm.version asc",
-      "params": ["startDate","endDate"],
+      "query": "select * from (select v.* from version_master v, version_run_status r,proposal p where v.id = r.vId and (r.dataLoadedOn < STR_TO_DATE(v.updatedOn, '%Y-%m-%d %H:%i:%s') or r.isDataLoadedToReport != 'Yes') and p.id = v.proposalId and p.status != 'Deleted' and date(v.updatedOn) >= date(?) and  date(v.updatedOn) <= date(?) union all select v.* from version_master v inner join proposal p on p.id = v.proposalId where p.status != 'Deleted' and v.id not in (select vId from version_run_status) and date(v.updatedOn) >= date(?) and  date(v.updatedOn) <= date(?)) vm order by vm.proposalId desc,vm.version asc",
+      "params": ["startDate1","endDate1","startDate2","endDate2"],
       "jsonfields":[]
     },
 

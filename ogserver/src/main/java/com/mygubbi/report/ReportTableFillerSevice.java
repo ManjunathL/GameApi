@@ -140,8 +140,10 @@ public class ReportTableFillerSevice extends AbstractVerticle
     private void getAllUpdatedProposalsOnDate(Message message,String startDate,String endDate)
     {
         JsonObject params = new JsonObject();
-        params.put("startDate",startDate);
-        params.put("endDate",endDate);
+        params.put("startDate1",startDate);
+        params.put("endDate1",endDate);
+        params.put("startDate2",startDate);
+        params.put("endDate2",endDate);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         servicecallTime = LocalDateTime.now();

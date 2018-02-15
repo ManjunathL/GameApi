@@ -54,6 +54,7 @@ public class DwReportingService extends AbstractVerticle {
             ReportingObjects reportingObjects = new ReportingObjects();
             reportingObjects.proposalId = proposalVersion.getProposalId();
             reportingObjects.version = proposalVersion.getVersion();
+            reportingObjects.versionId = proposalVersion.getId();
             LOG.info("Handling (proposalId,version) = "+"("+reportingObjects.proposalId+","+reportingObjects.version+")");
 
             this.getProposalData(message, proposalVersion,reportingObjects);
@@ -123,11 +124,15 @@ public class DwReportingService extends AbstractVerticle {
 
                     if (i == resultDatas.size()) {
                         JsonObject params = new JsonObject();
-                        params.put("proposalId", reportingObjects.proposalId);
-                        params.put("version", reportingObjects.version);
-                        params.put("status", "Yes");
-                        params.put("dataLoadedOn", getCurrentDate());
-                        Integer id2 = LocalCache.getInstance().store(new QueryData("update.version_master.dataLoadStatus", params));
+
+                        params.put("vId1",reportingObjects.versionId);
+                        params.put("isDataLoadedToReport1", "Yes");
+                        params.put("dataLoadedOn1", getCurrentDate());
+                        params.put("vId2",reportingObjects.versionId);
+                        params.put("isDataLoadedToReport2", "Yes");
+                        params.put("dataLoadedOn2", getCurrentDate());
+
+                        Integer id2 = LocalCache.getInstance().store(new QueryData("insertOrUpdate.version_master.dataLoadStatus", params));
                         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id2,
                                 (AsyncResult<Message<Integer>> res) -> {
                                     QueryData resData = (QueryData) LocalCache.getInstance().remove(res.result().body());
