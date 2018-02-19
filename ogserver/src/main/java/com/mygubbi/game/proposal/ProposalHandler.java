@@ -41,7 +41,6 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.plugin2.message.JavaScriptBaseMessage;
 
 import java.sql.Date;
 import java.util.*;
@@ -142,9 +141,6 @@ public class ProposalHandler extends AbstractRouteHandler
                             sendJsonResponse(routingContext, new JsonObject().put("status","success").toString());
                         }
                     });
-
-
-
 //        }
 
     }
