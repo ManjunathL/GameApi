@@ -129,7 +129,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
     private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message,String pdf_name)
     {
         QueryData queryData = null;
-        JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
+        JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getToVersion());
 
         queryData = new QueryData("proposal.product.all.detail", paramsJson);
         Integer id = LocalCache.getInstance().store(queryData);
@@ -170,7 +170,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
     {
 
         QueryData queryData = null;
-        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
+        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getToVersion());
         LOG.debug("Proposal product addon :" + paramsJson.toString());
         queryData = new QueryData("proposal.version.addon.list", paramsJson);
 
@@ -224,7 +224,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         JsonObject jsonObject=new JsonObject();
         List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
 
-        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
+        QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getToVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
         String sowversion = "1.0";
         String version = quoteData.fromVersion;
 
@@ -324,7 +324,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         try
         {
             ProposalVersion proposalVersion=new ProposalVersion();
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getToVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>(),proposalVersion,spaceRooms);
             outputCreator.create();
             OfficeUseOnlyPdf officeUseOnlyPdf=new OfficeUseOnlyPdf(proposalHeader);
@@ -351,7 +351,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
         try
         {
             ProposalVersion proposalVersion=new ProposalVersion();
-            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getFromVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
+            QuoteData quoteData = new QuoteData(proposalHeader, products, addons, quoteRequest.getDiscountAmount(),quoteRequest.getToVersion(),quoteRequest.getBookingFormFlag(),quoteRequest.getDiscountPercentage(),quoteRequest.getWorkscontractFlag());
             ProposalOutputCreator outputCreator = ProposalOutputCreator.getCreator(quoteRequest.getOutputType(), quoteData,proposalHeader,false,new ArrayList<>(),proposalVersion,spaceRooms);
             outputCreator.create();
 

@@ -64,7 +64,7 @@ public class ProposalOutputService extends AbstractVerticle
     {
         List<QueryData> queryDataList = new ArrayList<>();
         queryDataList.add(new QueryData("proposal.header", new JsonObject().put("id", quoteRequest.getProposalId())));
-        queryDataList.add(new QueryData("proposal.version.selectversion", new JsonObject().put("proposalId", quoteRequest.getProposalId()).put("version",quoteRequest.getFromVersion())));
+        queryDataList.add(new QueryData("proposal.version.selectversion", new JsonObject().put("proposalId", quoteRequest.getProposalId()).put("version",quoteRequest.getToVersion())));
         Integer id = LocalCache.getInstance().store(queryDataList);
         VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -87,7 +87,7 @@ public class ProposalOutputService extends AbstractVerticle
     private void getProposalProducts(ProposalHeader proposalHeader, QuoteRequest quoteRequest, Message message, ProposalVersion proposalVersion)
     {
         QueryData queryData = null;
-        JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
+        JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getToVersion());
 
 //        if (quoteRequest.hasProductIds())
 //        {
@@ -137,7 +137,7 @@ public class ProposalOutputService extends AbstractVerticle
     {
 
         QueryData queryData = null;
-        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
+        JsonObject paramsJson = new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getToVersion());
         LOG.debug("Proposal product addon :" + paramsJson.toString());
         /*JsonObject paramsJson= new JsonObject().put("proposalId", proposalHeader.getId()).put("fromVersion",quoteRequest.getFromVersion());
         LOG.info("get proposal products from Version" +quoteRequest.getFromVersion());*/

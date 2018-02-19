@@ -71,7 +71,9 @@
   "SENDGRID_KEY":"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",
   "FROM_EMAIL":"game@mygubbi.com",
   "App_url_for_proposal":"http://gameuat.mygubbi.com/#!New%20Quotation/",
-  "sendEmail":"No"
-
+  "sendEmail":"No",
+  "amazon_s3_bucketname_game":"mygubbigame",
+  "amazon_s3_access_key_game":"AKIAIX6TVPJXWC7C2WCA",
+  "amazon_s3_secret_key_game":"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"
 }
 

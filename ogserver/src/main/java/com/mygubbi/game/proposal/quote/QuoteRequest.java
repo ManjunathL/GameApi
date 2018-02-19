@@ -12,7 +12,8 @@ import java.util.List;
 public class QuoteRequest
 {
     private static final String PROPOSAL_ID = "proposalId";
-    private static final String FROMVERSION="fromVersion";
+    private static final String TOVERSION="toVersion";
+    private static final String VERSION="version";
     private static final String PRODUCT_IDS = "productIds";
     private static final String DISCOUNT_AMOUNT = "discountAmount";
     private static final String ADDON_IDS = "addonIds";
@@ -24,9 +25,11 @@ public class QuoteRequest
     private static final String PROJECT_HANDLING_AMOUNT="projectHandlingAmount";
     private static final String DEEP_CLEARING_AMOUNT="deepClearingAmount";
     private static final String FLOOR_PROTECTION_AMOUNT="floorProtectionAmount";
+    private static final String QUOTE_NO="quoteNo";
 
     private int proposalId;
-    private String fromVersion;
+    private String toVersion;
+    private String version;
     private List<Integer> productsIds;
     private List<Integer> addonIds;
     private List<Integer> versionIds;
@@ -37,6 +40,7 @@ public class QuoteRequest
     private double projectHandlingAmount;
     private double deepClearingAmount;
     private double floorProtectionAmount;
+    private String quoteNo;
 
     public boolean isValidSowRows() {
         return isValidSowRows;
@@ -58,9 +62,9 @@ public class QuoteRequest
     {
         this(jsonData.getInteger(PROPOSAL_ID));
         this.outputType = outputType;
-        if(jsonData.containsKey(FROMVERSION))
+        if(jsonData.containsKey(TOVERSION))
         {
-            this.setFromVersion(jsonData.getString(FROMVERSION));
+            this.setToVersion(jsonData.getString(TOVERSION));
         }
         if (jsonData.containsKey(PRODUCT_IDS))
         {
@@ -100,12 +104,19 @@ public class QuoteRequest
         if(jsonData.containsKey(DEEP_CLEARING_AMOUNT)){
             this.deepClearingAmount=jsonData.getDouble(DEEP_CLEARING_AMOUNT);
         }
+        if(jsonData.containsKey(QUOTE_NO))
+        {
+            this.quoteNo=jsonData.getString(QUOTE_NO);
+        }
     }
 
-    public void setFromVersion(String fromVersion) {
-        this.fromVersion = fromVersion;
+    public void setQuoteNo(String quoteNo) { this.quoteNo=quoteNo;}
+    public void setToVersion(String toVersion) {
+        this.toVersion = toVersion;
     }
-
+    public void setVersion(String version) {
+        this.version=version;
+    }
     public ProposalOutputCreator.OutputType getOutputType()
     {
         return outputType;
@@ -115,11 +126,14 @@ public class QuoteRequest
     {
         return this.proposalId;
     }
-
-    public String getFromVersion() {
-        return fromVersion;
+    public String getQuoteNo() { return this.quoteNo;}
+    public String getToVersion() {
+        return toVersion;
     }
-
+    public String getVersion()
+    {
+        return version;
+    }
     public List<Integer> getProductIds()
     {
         return this.productsIds;
@@ -227,7 +241,7 @@ public class QuoteRequest
     public String toString() {
         return "QuoteRequest{" +
                 "proposalId=" + proposalId +
-                ", fromVersion='" + fromVersion + '\'' +
+                ", toVersion='" + toVersion + '\'' +
                 ", productsIds=" + productsIds +
                 ", addonIds=" + addonIds +
                 ", versionIds=" + versionIds +

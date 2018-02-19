@@ -9,6 +9,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
 import com.mygubbi.config.ConfigHolder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,7 +53,8 @@ import java.io.File;
             PutObjectRequest putObjectRequest = new PutObjectRequest(
                     bucketName, keyName, file);
             putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
-            s3client.putObject(putObjectRequest);
+            PutObjectResult result=s3client.putObject(putObjectRequest);
+            LOG.info("result file " +result.getETag() + " ---> " +result);
         } catch (AmazonServiceException ase) {
             LOG.error("Caught an AmazonServiceException, which " +
                     "means your request made it " +
