@@ -1,10 +1,12 @@
 package com.mygubbi.game.proposal.quote;
 
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.output.AbstractProposalOutputCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,9 +16,10 @@ public class ExcelQuoteCreator extends AbstractProposalOutputCreator
 {
     private final static Logger LOG = LogManager.getLogger(ExcelQuoteCreator.class);
 
-    public ExcelQuoteCreator(QuoteData quoteData,ProposalHeader proposalHeader)
+    public ExcelQuoteCreator(QuoteData quoteData, ProposalHeader proposalHeader, List<SOWPdf> sowList)
     {
-        super(quoteData,proposalHeader);
+        super(quoteData,proposalHeader,sowList);
+
     }
 
     public String getTemplateName()
@@ -50,9 +53,10 @@ public class ExcelQuoteCreator extends AbstractProposalOutputCreator
         }
         else
         {
-            new ExcelQuoteSheetCreator(this.workbookManager.getSheetByName("Quote"), this.quoteData, this.workbookManager.getStyles()).prepare();
+            new ExcelQuoteSheetCreator(this.workbookManager.getSheetByName("Quote"), this.quoteData, this.workbookManager.getStyles(),this.proposalSOWs).prepare();
         }
         new DataSheetCreator(this.workbookManager.getSheetByName("Data"), this.quoteData, this.workbookManager.getStyles()).prepare();
+        new SowQuoteCreator(this.workbookManager.getSheetByName("SOW"),this.quoteData, this.workbookManager.getStyles(),this.proposalSOWs).prepare();
         this.closeWorkbook();
     }
 

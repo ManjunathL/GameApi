@@ -29,13 +29,13 @@ public interface ProposalOutputCreator
 
         switch (outputType) {
             case QUOTATION:
-                return new ExcelQuoteCreator(quoteData, proposalHeader);
+                return new ExcelQuoteCreator(quoteData, proposalHeader,proposalSOWs);
 
             case JOBCARD:
-                return new ExcelJobCardCreator(quoteData, proposalHeader);
+                return new ExcelJobCardCreator(quoteData, proposalHeader,proposalSOWs);
 
             case SALESORDER:
-                return new ExcelSalesOrderCreator(quoteData, proposalHeader);
+                return new ExcelSalesOrderCreator(quoteData, proposalHeader,proposalSOWs);
 
             case QUOTEPDF:
                 return new PdfQuoteCreator(quoteData, proposalHeader,isValidSow,proposalVersion,spaceRooms);

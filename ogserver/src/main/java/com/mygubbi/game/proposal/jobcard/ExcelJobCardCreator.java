@@ -1,11 +1,14 @@
 package com.mygubbi.game.proposal.jobcard;
 
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.output.AbstractProposalOutputCreator;
 import com.mygubbi.game.proposal.quote.AssembledProductInQuote;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 /**
  * Created by Sunil on 22-05-2016.
@@ -14,9 +17,9 @@ public class ExcelJobCardCreator extends AbstractProposalOutputCreator
 {
     private final static Logger LOG = LogManager.getLogger(ExcelJobCardCreator.class);
 
-    public ExcelJobCardCreator(QuoteData quoteData, ProposalHeader proposalHeader)
+    public ExcelJobCardCreator(QuoteData quoteData, ProposalHeader proposalHeader,List<SOWPdf> sowPdfList)
     {
-        super(quoteData,proposalHeader);
+        super(quoteData,proposalHeader,sowPdfList);
     }
 
     public String getTemplateName()

@@ -3,6 +3,7 @@ package com.mygubbi.game.proposal.quote;
 import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.ProductAddon;
 import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.si.excel.ExcelCellProcessor;
 import com.mygubbi.si.excel.ExcelSheetProcessor;
 import com.mygubbi.si.excel.ExcelStyles;
@@ -40,12 +41,14 @@ public class ExcelQuoteSheetCreator implements ExcelCellProcessor
     private ExcelStyles styles;
     private ExcelSheetProcessor sheetProcessor;
     List<customeclass> li,li2;
+    List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
 
-    public ExcelQuoteSheetCreator(Sheet quoteSheet, QuoteData quoteData, ExcelStyles styles)
+    public ExcelQuoteSheetCreator(Sheet quoteSheet, QuoteData quoteData, ExcelStyles styles,List<SOWPdf> sowPdfs)
     {
         this.quoteSheet = quoteSheet;
         this.quoteData = quoteData;
         this.styles = styles;
+        this.proposalSOWs=sowPdfs;
     }
 
     public void prepare()

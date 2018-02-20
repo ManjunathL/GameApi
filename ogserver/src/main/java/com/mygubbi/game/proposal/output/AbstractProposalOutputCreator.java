@@ -3,10 +3,14 @@ package com.mygubbi.game.proposal.output;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.game.proposal.model.ProposalHeader;
+import com.mygubbi.game.proposal.model.SOWPdf;
 import com.mygubbi.game.proposal.quote.QuoteData;
 import com.mygubbi.si.excel.ExcelWorkbookManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by test on 22-07-2016.
@@ -14,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 public abstract class AbstractProposalOutputCreator implements ProposalOutputCreator
 {
     protected QuoteData quoteData;
+    protected  List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
     protected ProposalHeader proposalHeader;
     protected ExcelWorkbookManager workbookManager;
     private String outputFile;
@@ -21,10 +26,11 @@ public abstract class AbstractProposalOutputCreator implements ProposalOutputCre
     public abstract String getTemplateName();
     public abstract String getOutputFilename();
     private final static Logger LOG = LogManager.getLogger(AbstractProposalOutputCreator.class);
-    public AbstractProposalOutputCreator(QuoteData quoteData,ProposalHeader proposalHeader)
+    public AbstractProposalOutputCreator(QuoteData quoteData, ProposalHeader proposalHeader, List<SOWPdf> proposalSOWs)
     {
         this.quoteData = quoteData;
         this.proposalHeader=proposalHeader;
+        this.proposalSOWs=proposalSOWs;
     }
 
     protected void openWorkbook()
