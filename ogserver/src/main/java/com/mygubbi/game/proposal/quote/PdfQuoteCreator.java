@@ -48,8 +48,14 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
         LOG.debug("PATH :" + this.getOutputFile());
         if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
         {
-            LOG.info("if");
-            new QuotationPdfCreatorForPackage(quoteData,proposalHeader).createpdf(targetFile);
+            if(date.after(quoteChangeDate))
+            {
+                    new QuotationPdfCreatorForPackageRoomWise(quoteData,proposalHeader,proposalVersion,spaceRoomList).createpdf(targetFile,isValid_Sow);
+            }else
+            {
+                new QuotationPdfCreatorForPackage(quoteData,proposalHeader).createpdf(targetFile);
+            }
+
             //here take target file as input
         }else {
             if(date.after(quoteChangeDate))

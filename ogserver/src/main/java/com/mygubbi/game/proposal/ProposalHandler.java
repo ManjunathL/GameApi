@@ -978,7 +978,7 @@ public class ProposalHandler extends AbstractRouteHandler
         Boolean IsWorkingContract = new Boolean(workContractFlag);
 
 
-        String version = quoteRequestJson.getString("fromVersion");
+        String version = quoteRequestJson.getString("toVersion");
         LOG.info("Version :: "+version);
         Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, ProposalOutputCreator.OutputType.SOWPDF));
         VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_SOW_PDF_OUTPUT, id, (AsyncResult<Message<Integer>> result) -> {
