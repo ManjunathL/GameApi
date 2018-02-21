@@ -675,6 +675,29 @@ public class QuotationPdfRoomWise
                 p=new Paragraph(" ");
                 document.add(p);
 
+            p=new Paragraph("MISCELLANEOUS CHARGES \n",fsize1);
+            p.setAlignment(Element.ALIGN_LEFT);
+            document.add(p);
+
+            p=new Paragraph(" ");
+            document.add(p);
+
+            String projectHandling="";
+            projectHandling=((Double)projectHandlingAmount.getPrice()).intValue()+"%";
+
+            this.createRowAndFillDataForMiscellaneousForPer(miscellaneousTable,"1"," Project Handling Charges","%",proposalVersion.getProjectHandlingQty(),projectHandling,proposalVersion.getProjectHandlingAmount());
+            this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"2"," House Keeping Charges","Rs",proposalVersion.getDeepClearingQty(),String.valueOf(round(deepClearingAmount.getPrice(),0)),round(proposalVersion.getDeepClearingAmount(),0));
+            this.createRowAndFillDataForMiscellaneous(miscellaneousTable,"3"," Floor Protection Charges","Rs per Sqft",proposalVersion.getFloorProtectionSqft(),String.valueOf(round(floorProtectionAmount.getPrice(),0)),round(proposalVersion.getFloorProtectionAmount(),0));
+            document.add(miscellaneousTable);
+
+            miscCharges=proposalVersion.getProjectHandlingAmount()+proposalVersion.getDeepClearingAmount()+proposalVersion.getFloorProtectionAmount();
+            p = new Paragraph("TOTAL MISCELLANEOUS PRICE " +miscCharges.intValue(),fsize1);
+            p.setAlignment(Element.ALIGN_RIGHT);
+            document.add(p);
+
+            p=new Paragraph(" ");
+            document.add(p);
+
                 p = new Paragraph("TOTAL PRICE :" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost() + miscCharges.intValue())) ,fsize1);
                 p.setAlignment(Element.ALIGN_RIGHT);
                 document.add(p);
@@ -3345,48 +3368,118 @@ public class QuotationPdfRoomWise
         cell=new PdfPCell(new Paragraph(roomName,size1));
         tabname.addCell(cell);
 
-        PdfPCell cell5=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(product.intValue())),fsize);
-        Pindex.setAlignment(Element.ALIGN_RIGHT);
-        cell5.addElement(Pindex);
-        tabname.addCell(cell5);
+        if(product==0 && !(roomName.equalsIgnoreCase("Sub Total")))
+        {
+            PdfPCell cell5=new PdfPCell();
+            Pindex=new Paragraph("-",fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell5.addElement(Pindex);
+            tabname.addCell(cell5);
+        }else
+        {
+            PdfPCell cell5=new PdfPCell();
+            Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(product.intValue())),fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell5.addElement(Pindex);
+            tabname.addCell(cell5);
+        }
 
-        PdfPCell cell2=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(accessory.intValue())),fsize);
-        Pindex.setAlignment(Element.ALIGN_RIGHT);
-        cell2.addElement(Pindex);
-        tabname.addCell(cell2);
+        if(accessory==0 && !(roomName.equalsIgnoreCase("Sub Total")) )
+        {
+            PdfPCell cell2=new PdfPCell();
+            Pindex=new Paragraph("-",fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell2.addElement(Pindex);
+            tabname.addCell(cell2);
+        }else
+        {
+            PdfPCell cell2=new PdfPCell();
+            Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(accessory.intValue())),fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell2.addElement(Pindex);
+            tabname.addCell(cell2);
+        }
 
+        if(appliances==0 && !(roomName.equalsIgnoreCase("Sub Total")))
+        {
+            PdfPCell cell4 = new PdfPCell();
+            Pindex = new Paragraph("-", fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell4.addElement(Pindex);
+            tabname.addCell(cell4);
+        }else
+        {
+            PdfPCell cell4 = new PdfPCell();
+            Pindex = new Paragraph(this.getRoundOffValue(String.valueOf(appliances.intValue())), fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell4.addElement(Pindex);
+            tabname.addCell(cell4);
+        }
 
-        PdfPCell cell4 = new PdfPCell();
-        Pindex = new Paragraph(this.getRoundOffValue(String.valueOf(appliances.intValue())), fsize);
-        Pindex.setAlignment(Element.ALIGN_RIGHT);
-        cell4.addElement(Pindex);
-        tabname.addCell(cell4);
+        if(counterTop==0 && !(roomName.equalsIgnoreCase("Sub Total")))
+        {
+            PdfPCell cell3 = new PdfPCell();
+            Paragraph Pamt = new Paragraph("-", fsize);
+            Pamt.setAlignment(Element.ALIGN_RIGHT);
+            cell3.addElement(Pamt);
+            tabname.addCell(cell3);
 
-        PdfPCell cell3 = new PdfPCell();
-        Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(counterTop.intValue())), fsize);
-        Pamt.setAlignment(Element.ALIGN_RIGHT);
-        cell3.addElement(Pamt);
-        tabname.addCell(cell3);
+        }else
+        {
+            PdfPCell cell3 = new PdfPCell();
+            Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf(counterTop.intValue())), fsize);
+            Pamt.setAlignment(Element.ALIGN_RIGHT);
+            cell3.addElement(Pamt);
+            tabname.addCell(cell3);
+        }
 
-        PdfPCell cell6=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(services.intValue())),fsize);
-        Pindex.setAlignment(Element.ALIGN_RIGHT);
-        cell6.addElement(Pindex);
-        tabname.addCell(cell6);
+        if(services==0 && !(roomName.equalsIgnoreCase("Sub Total")))
+        {
+            PdfPCell cell6=new PdfPCell();
+            Pindex=new Paragraph("-",fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell6.addElement(Pindex);
+            tabname.addCell(cell6);
+        }else
+        {
+            PdfPCell cell6=new PdfPCell();
+            Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(services.intValue())),fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell6.addElement(Pindex);
+            tabname.addCell(cell6);
+        }
 
-        PdfPCell cell7=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(looseFurniture.intValue())),fsize);
-        Pindex.setAlignment(Element.ALIGN_RIGHT);
-        cell7.addElement(Pindex);
-        tabname.addCell(cell7);
+        if(looseFurniture==0 && !(roomName.equalsIgnoreCase("Sub Total")))
+        {
+            PdfPCell cell7=new PdfPCell();
+            Pindex=new Paragraph("-",fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell7.addElement(Pindex);
+            tabname.addCell(cell7);
+        }else
+        {
+            PdfPCell cell7=new PdfPCell();
+            Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(looseFurniture.intValue())),fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell7.addElement(Pindex);
+            tabname.addCell(cell7);
+        }
 
-        PdfPCell cell9=new PdfPCell();
-        Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(totalRoomCost.intValue())),fsize);
-        Pindex.setAlignment(Element.ALIGN_RIGHT);
-        cell9.addElement(Pindex);
-        tabname.addCell(cell9);
+        if(totalRoomCost==0 && !(roomName.equalsIgnoreCase("Sub Total")))
+        {
+            PdfPCell cell9=new PdfPCell();
+            Pindex=new Paragraph("-",fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell9.addElement(Pindex);
+            tabname.addCell(cell9);
+        }else
+        {
+            PdfPCell cell9=new PdfPCell();
+            Pindex=new Paragraph(this.getRoundOffValue(String.valueOf(totalRoomCost.intValue())),fsize);
+            Pindex.setAlignment(Element.ALIGN_RIGHT);
+            cell9.addElement(Pindex);
+            tabname.addCell(cell9);
+        }
     }
 
     public void getProducts()

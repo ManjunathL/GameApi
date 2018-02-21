@@ -225,6 +225,7 @@ public class ProposalOutputService extends AbstractVerticle
                     if (resultData.errorFlag || resultData.rows.size() == 0)
                     {
                         LOG.error("Error in fetching data from proposal_sow table " + resultData.errorMessage, resultData.error);
+                        this.createQuote(quoteRequest, proposalHeader, products, addons, message, proposalVersion,proposalSOWs);
                     }
                     else
                     {
