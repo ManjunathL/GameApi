@@ -39,10 +39,13 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
+import jdk.nashorn.api.scripting.JSObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -368,7 +371,9 @@ public class ProposalHandler extends AbstractRouteHandler
                             return;
                         }
                         proposalData.put("folderPath", docsFolder);
-                        this.updateProposal(routingContext, proposalData, "proposal.folder.update");
+                         List<QueryData> queryDatas = new ArrayList<>();
+                         queryDatas.add(new QueryData("proposal.folder.update",proposalData));
+                        this.updateProposal(routingContext, proposalData, queryDatas);
                     }
                 });
     }
@@ -377,7 +382,77 @@ public class ProposalHandler extends AbstractRouteHandler
     {
         JsonObject proposalData = routingContext.getBodyAsJson();
         LOG.info("Proposal:" + proposalData.encodePrettily());
-        this.updateProposal(routingContext, proposalData, "proposal.update");
+        // get the quote no based on city before saving
+        getMaxQuoteNoBasedOnCityMonthYear(routingContext);
+    }
+
+    private void getMaxQuoteNoBasedOnCityMonthYear(RoutingContext routingContext) {
+        JsonObject bodyDetails =routingContext.getBodyAsJson();
+        ProposalHeader header = new ProposalHeader(bodyDetails);
+        String city = header.getProjectCity();
+        String cityCode = "";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM");
+        LocalDate today = LocalDate.now();
+
+        switch (city) {
+            case "Bangalore":
+                cityCode = "BLR";
+                break;
+            case "Chennai":
+                cityCode = "CHN";
+                break;
+            case "Mangalore":
+                cityCode = "MLR";
+                break;
+            case "Pune":
+                cityCode = "PUN";
+                break;
+        }
+
+        String tempInc = String.format("%04d", 1);
+
+        StringBuilder newQuote = new StringBuilder();
+
+        JsonObject paramsObj = new JsonObject();
+        paramsObj.put("city", cityCode);
+        paramsObj.put("curmonth", String.format("%02d", today.getMonthValue()));
+        paramsObj.put("curYear", today.getYear());
+
+        Integer id = LocalCache.getInstance().store(new QueryData("city.selectMonthCount", paramsObj));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag) {
+                        LOG.error("Error in getting quote val from city_master");
+                    }  else {
+
+                        if (resultData.rows == null || resultData.rows.isEmpty()) {
+                            newQuote.append(paramsObj.getString("city")).append("-").append(today.getYear()).append("-")
+                                    .append(String.format("%02d", today.getMonthValue())).append("-").append(tempInc);
+                        } else {
+                            JsonObject output = resultData.rows.get(0);
+                            String lastQuoteNo = output.getString("quoteNo");
+                            String[] quote_Details = lastQuoteNo.toString().split("-");
+                            newQuote.append(paramsObj.getString("city")).append("-").append(today.getYear()).append("-")
+                                    .append(String.format("%02d", today.getMonthValue())).append("-").
+                                    append(String.format("%04d", Integer.parseInt(quote_Details[quote_Details.length - 1]) + 1));
+
+                        }
+                        List<QueryData> queryDatas = new ArrayList<>();
+
+                        queryDatas.add( new QueryData("proposal.update", bodyDetails));
+                        // city.newCityQuote
+                        paramsObj.put("proposalId",bodyDetails.getString("id"));
+                        paramsObj.put("quoteNo",newQuote);
+                        queryDatas.add( new QueryData("city.newCityQuote", bodyDetails));
+
+                        this.updateProposal(routingContext, bodyDetails, queryDatas);
+                        //i have quote no, insert that to city master and proposal table ...
+
+                    }
+                });
+
+
     }
 
     private void sendEmails(ProposalVersion proposalVersion){
@@ -816,21 +891,24 @@ public class ProposalHandler extends AbstractRouteHandler
         });
     }
 
-    private void updateProposal(RoutingContext routingContext, JsonObject proposalData, String queryId)
+    private void updateProposal(RoutingContext routingContext, JsonObject proposalData, List<QueryData> queryDatas)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData(queryId, proposalData));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+        Integer id = LocalCache.getInstance().store(queryDatas);
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
-                    {
-                        sendError(routingContext, "Error in updating proposal.");
-                        LOG.error("Error in updating proposal. " + resultData.errorMessage, resultData.error);
+                    List<QueryData> resultDatas = (List<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
+                    int i = 0;
+                    for (; i < resultDatas.size(); i++) {
+                        if (resultDatas.get(i).errorFlag ) {
+
+                            sendError(routingContext, "Error in insert Queries");
+                        }
                     }
-                    else
-                    {
+
+                    if (i == resultDatas.size()) {
                         sendJsonResponse(routingContext, proposalData.toString());
                     }
+
                 });
     }
 

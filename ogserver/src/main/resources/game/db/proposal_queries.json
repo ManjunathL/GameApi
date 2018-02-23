@@ -1119,15 +1119,15 @@
     {
       "id": "city.selectMonthCount",
       "type": "select",
-      "query": "select quoteNo from city_master where curmonth= ? and city = ? ",
-      "params": ["curmonth","city"]
+      "query": "select quoteNo from city_master where curmonth= ? and city = ? and curYear = ? order by id desc limit 1 ",
+      "params": ["curmonth","city","curYear"]
     },
 
     {
       "id": "city.newCityQuote",
       "type": "insert",
-      "query": "insert into city_master(city,curmonth,proposalId,quoteNo,cityLocked) values (?, ?, ?, ?, 'Yes')",
-      "params": ["city","curmonth","proposalId","quoteNo"]
+      "query": "insert into city_master(city,curmonth,curYear,proposalId,quoteNo,cityLocked) values (?, ?,?, ?, ?, 'Yes')",
+      "params": ["city","curmonth","curYear","proposalId","quoteNo"]
     },
     {
       "id": "city.selectCity",
