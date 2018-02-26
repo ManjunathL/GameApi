@@ -1,0 +1,150 @@
+<header id="header">
+    <div class="header__main border-bottom-grey">
+        <div class="container">
+            <a onclick="javascript:location.href='/'">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/logo.png" alt="">
+            </a>
+
+            <div class="navigation-trigger visible-xs visible-sm" data-rmd-action="block-open" data-rmd-target=".navigation">
+                <i class="zmdi zmdi-menu"></i>
+            </div>
+
+            <ul class="navigation">
+                <li class="visible-xs visible-sm"><a class="navigation__close" data-rmd-action="navigation-close" href="#"><i class="zmdi zmdi-long-arrow-right"></i></a></li>
+
+                <li class="active navigation__dropdown">
+                    <a href="index.html"><i class="fa fa-search"></i>Search For</a>
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <ul class="navigation__drop-menu">
+                        <li><a href="/">Design</a></li>
+                        <li><a href="/product-list">Product</a></li>
+                    </ul>
+                </li>
+
+                <li class="navigation__dropdown">
+                    <a href="#" class="prevent-default"><i class="fa fa-plus"></i>Add</a>
+
+                    <ul class="navigation__drop-menu">
+                        <li><a href="/l1_form">Design</a></li>
+                        <li><a href="/l3_form">Product</a></li>
+                    </ul>
+                </li>
+
+
+                <!-- <li><a href="submit-property.html"><i class="fa fa-heart"></i>Shortlist</a></li>-->
+
+
+                <li class="navigation__dropdown">
+                    <a href="index.html" data-toggle="dropdown"><i class="fa fa-user" ></i></a>
+                    <ul class="navigation__drop-menu">
+                        <li><a href="login.html">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="action-header affix-top border-bottom-grey">
+    <div class="container">
+        <div class="action-header__item">
+            <!-- <ul class="list-inline list-tag">
+                 <li><a href="#" class="tags">Bed <i class="zmdi zmdi-close"></i> </a></li>
+                 <li><a href="#" class="tags">MDF Bed <i class="zmdi zmdi-close"></i> </a></li>
+                 <li><a href="#" class="tags">EW Bed <i class="zmdi zmdi-close"></i> </a></li>
+                 <li><a href="#" class="tags">King Bed <i class="zmdi zmdi-close"></i> </a></li>
+             </ul>-->
+        </div>
+
+        <div class="action-header__item action-header__views hidden-xs">
+            <a href="javascript:void(0);" id="gridView" class="zmdi zmdi-apps active"></a>
+            <a href="javascript:void(0);" id="listView" class="zmdi zmdi-view-list"></a>
+        </div>
+
+        <div class="action-header__item action-header__item--sort hidden-xs">
+            <span class="action-header__small">Sort by :</span>
+
+            <select class="select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                <option> Recently Added </option>
+                <option>  Most Shortlisted </option>
+                <option> Most Used </option>
+            </select>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+
+        $(".navigation__dropdown a").parent().hover(function() {
+           var submenu = $(this).children('.navigation__drop-menu');
+              if ( $(submenu).is(':hidden') ) {
+                $(submenu).css('display','block');
+              } else {
+                $(submenu).css('display','none');
+              }
+
+        });
+
+        $("#header").mouseleave(function(){
+            var hovered = $("#header").find(".navigation__drop-menu").length;
+            !!hovered && $('.navigation__drop-menu').hide();
+        });
+
+
+        /*$(".navigation__dropdown>li>a").on( "hover", function() {
+            $(this).show();
+            $(".navigation__drop-menu").css({'display':'block'});
+        });*/
+
+        $(".navigation__dropdown a").hover(function() {
+                //$(this).show();
+                //$(".navigation__drop-menu").css('display','block');
+
+        });
+
+        /*var navMain = $("#header");
+        var subMenuUL = $(".navigation");
+        subMenuUL.on("click", "li", null, function() {
+            navMain.collapse('hide');
+        });
+
+        $("#header ul.navigation").on("click", "li", null, function() {
+            $(this).parent().hide();
+        });
+
+        $("#header ul.navigation").hover(function() {
+                $(this).show();
+            },
+            function() {
+               $(this).hide();
+                $(this).hide();
+            });
+
+        $("#header ul.nav li a").hover(function() {
+           $('.navigation').hide();
+           var that = this;
+           $(this).next('.navigation').show();
+        });
+
+        $("#header").mouseleave(function(){
+            var hovered = $("#header").find(".navigation").length;
+            !!hovered && $('.navigation').hide();
+        });*/
+
+        $("#gridView").click(function() {
+            $("#designdetailslist").hide();
+            $("#designdetails").show();
+
+            $("#prodList").hide();
+            $("#prodGrid").show();
+        });
+        $("#listView").click(function() {
+            $("#designdetails").hide();
+            $("#designdetailslist").show();
+
+            $("#prodGrid").hide();
+            $("#prodList").show();
+        });
+
+    });
+
+</script>

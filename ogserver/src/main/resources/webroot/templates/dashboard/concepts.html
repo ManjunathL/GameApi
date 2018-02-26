@@ -1,0 +1,83 @@
+<%= console.log("++++++++++++++++++++++++++ Concepts  +++++++++++++++++++++++++++++") %>
+<%= console.log(conceptdetails[0].listOfConceptBoardConcept) %>
+<%= console.log("++++++++++++++++++++++++++ Current Tab  +++++++++++++++++++++++++++++") %>
+<%= console.log(conceptboardId) %>
+
+<section id="myCarousel112" class="carousel slide">
+    <div class="tagicos">
+        <div id="filters" class="clearfix carousel-inner">
+            <% if(typeof(concepttags) !== 'undefined'){ %>
+            <% var tagnmArr = [] %>
+            <% _.each(concepttags[0].conceptboardtagList, function(conceptdtls, i){ %>
+            <% tagnmArr.push('.'+conceptdtls.tag) %>
+            <% }); %>
+            <% } %>
+            <div class="tagicos-cnt item active"><span class="active filter" data-filter="<%= tagnmArr.join(', ') %>">All</span></div>
+            <% if(typeof(concepttags) !== 'undefined'){ %>
+            <% var clsarr = ['tgf','tgs','tgt','tgfr']; %>
+            <% _.each(concepttags[0].conceptboardtagList, function(concepttgs, i){ %>
+            <% var tagnm = concepttgs.tag %>
+            <%= console.log(" +++++++++ tagnm ============= ") %>
+            <%= console.log(tagnm) %>
+            <div class="tgico">
+                    <span class="filter <%= clsarr[i%4] %>" data-filter=".<%= tagnm %>"><%= tagnm %></span>
+            </div>
+            <!--<div class="tagicos-cnt <% if(i%8 == 1){ %> item <% } %>">
+                <span class="filter <%= clsarr[i%4] %>" data-filter=".<%= tagnm %>"><%= tagnm %></span>
+            </div>-->
+            <% }); %>
+            <% } %>
+        </div>
+    </div>
+    <% /*if(conceptdetails.length > 9){ %>
+    <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x"></i></a>
+    <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x"></i></a>
+    <% }*/ %>
+</section>
+<input type="hidden" id="conceptboardIdVl" value="<%= conceptboardId %>" />
+<section class="pinBoot bg-white" id="pinBoot<%= conceptboardId %>" style="margin-top: 15px;">
+    <% if(typeof(conceptdetails) !== 'undefined'){ %>
+    <% _.each(conceptdetails[0].listOfConceptBoardConcept, function(conceptdtls, i){ %>
+    <% var tagnm = conceptdtls.conceptTag %>
+    <%= console.log(" ++++++++++++++ tagnm ============= ") %>
+    <%= console.log(tagnm) %>
+    <article class="white-panel <%= tagnm %>" data-cat=".<%= tagnm %>">
+        <div class="pin">
+            <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.imgURL %>','<%= conceptdtls.conceptTitle %>','<%= conceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+        </div>
+        <a href="javascript:void(0);" class="conceptImg" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>"  data-element3="<%= conceptdtls.conceptCode %>"> <img src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>"> </a>
+        <h4>
+            <span><a href="javascript:void(0);"> <%= conceptdtls.conceptTitle %> </a></span>
+            <!--<span><a class="pull-right remove-pin"><i class="fa fa-trash" aria-hidden="true"></i></a></span>-->
+        </h4>
+    </article>
+    <% }); %>
+    <% } %>
+
+</section>
+<script type="text/javascript" src="js/libs/jquery.mixitup.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+	     var conceptboardIdVl = $("#conceptboardIdVl").val();
+
+		var filterList = {
+
+			init: function () {
+
+				$('.pinBoot').mixItUp({
+  				selectors: {
+    			  target: '.white-panel',
+    			  filter: '.filter'
+    		  },
+    		  load: {
+      		  filter: 'all'
+      		}
+				});
+			}
+		};
+
+		// Run the show!
+		filterList.init();
+
+    });
+</script>

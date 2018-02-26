@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="js/libs/bootstrap-tagsinput.css">
+<script src="js/libs/bootstrap-tagsinput.js"></script>
+<div class="row">
+    <div class="col-sm-6 col-md-6">
+        <div class="pin-model-img">
+            <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImgg" alt="pin image">
+            <h4>Similar Concepts </h4>
+            <ul id="similarconceptdtls" class="related-conc">
+                <li>
+                    <p>No Similar Concept found</p>
+                </li>
+                <!--<li>
+                    <img src="img/livingroom/testdn.png" alt="">
+                </li>
+                <li>
+                    <img src="img/livingroom/ktn.png" alt="">
+                </li>
+                <li>
+                    <img src="img/pnis/pin7.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/livingroom/Diningroom_banner.jpg" alt="">
+                </li>-->
+            </ul>
+        </div>
+        <div class="pin-model-img">
+            <h4>Related Concepts </h4>
+            <ul id="relatedconceptdtls" class="related-conc">
+                <li>
+                    <p>No Related Concept found</p>
+                </li>
+                <!--<li>
+                    <img src="img/livingroom/testdn.png" alt="">
+                </li>
+                <li>
+                    <img src="img/livingroom/ktn.png" alt="">
+                </li>
+                <li>
+                    <img src="img/pnis/pin7.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/livingroom/Diningroom_banner.jpg" alt="">
+                </li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <div class="new-pin">
+            <h5 id="concNmm">Excepteur sint occaecat cupidatat non proident </h5>
+            <p id="concDes">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+            </p>
+            <input type="hidden" id="conId">
+        </div>
+        <!--new div for add notes and add tags-->
+        <div class="new-pin mt40">
+            <div class="add_notes">
+                <div onclick="showTextArea()" title="Add Notes"><label class="txtwhite">My Notes</label></div>
+                <div id="notes" class="notes-content">
+                     <textarea id="conceptNotetxt" rows="2" cols="38" required="required">
+                     </textarea>
+                    <button id="save_CNote" class="btn btn-add" type="submit">Add Notes</button>
+                </div>
+                <div id="Editnotes" class="notes-content">
+                    <p id="paraEditNote"></p>
+                    <button id="save_edCNote" class="btn btn-add"  type="submit">Edit Notes</button>
+                </div>
+            </div>
+        </div>
+        <div class="new-pin mt40">
+            <div>
+                <label class="txtwhite">My Tags</label><br>
+                <div id="taglists" class="mb15"></div>
+                <input class="form-control" type="text" id="tagtxt" placeholder="Type your tag here with comma separate" value="" data-role="tagsinput"/>
+                <br/> <button id="save_CTag" class="btn btn-add mt15" type="submit">Add Tags</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $("#Editnotes").hide();
+    function showTextArea(){
+        document.getElementById("notes").classList.toggle("show");
+        var x = document.getElementById("notes");
+        if (x.style.display === "block") {
+              x.style.display = "none";
+         }
+        //if the tag is opened , then close that first before opening this.
+
+    }
+    function showTagArea(){
+        document.getElementById("tags").classList.toggle("show");
+
+    }
+</script>

@@ -1,0 +1,75 @@
+<%= console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@") %>
+<%= console.log(component) %>
+
+
+<% a = new Array(); %>
+<% matobj = []; %>
+
+
+<% _.each(component, function(componentc, i){ %>
+<% titleobj = {}; %>
+<% titleobj[component[i].title] = component[i].materialName %>
+<% matobj.push(titleobj) %>
+<% a.push(component[i].title) %>
+
+<% names = a; %>
+
+
+<% uniqueNames = []; %>
+<% $.each(names, function(i, el){ %>
+<% if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el); %>
+<% }); %>
+<% }); %>
+<% $("#furncomponenthidden").val(uniqueNames) %>
+
+<div class="col-sm-3 col-md-3 col-lg-3">
+    <label class="fontsize12">Component</label>
+    <% _.each(uniqueNames, function(uniqueNamesc, i){ %>
+    <br>
+    <h5 id="" class="compnm"><%= uniqueNames[i] %></h5>
+
+    <% }); %>
+
+</div>
+<div class="col-sm-3 col-md-3 col-lg-3">
+
+    <label class="fontsize12">Material</label>
+    <% _.each(uniqueNames,function(uqi, i){ %>
+    <% var randomid = uniqueNames[i].replace(/[^A-Z0-9]+/ig, ''); %>
+    <input type="hidden" id="materialhidden<%= randomid %>" value="">
+    <% if(typeof(uqi) !== 'undefined'){ %>
+
+    <select id="materialsel<%= randomid %>" class="select2_demo_2 form-control materialDrp materialSelCls" data-element=<%= randomid %>>
+        <option>Select</option>
+        <% _.each(matobj,function(matobjc, j){ %>
+        <% if(typeof(matobjc[uqi]) !== 'undefined'){ %>
+
+        <option value="<%= matobjc[uqi] %>"><%= matobjc[uqi] %></option>
+        <% } %>
+        <% }); %>
+    </select>
+    <% } %>
+
+    <% }); %>
+
+</div>
+<div class="col-sm-3 col-md-3 col-lg-3">
+    <label class="fontsize12">Finish Material</label>
+    <% _.each(uniqueNames,function(uqi, j){ %>
+    <% var randomid = uniqueNames[j].replace(/[^A-Z0-9]+/ig, ''); %>
+    <select id="finishmaterial<%= randomid %>" class="select2 form-control materialDrp finishSelCls" data-element=<%= randomid %>>
+        <option>Select</option>
+        <span id="materialFinishsel"></span>
+    </select>
+    <% }); %>
+</div>
+<div class="col-sm-3 col-md-3 col-lg-3">
+    <label class="fontsize12">Finish Type</label>
+    <% _.each(uniqueNames,function(uqi, j){ %>
+    <% var randomid = uniqueNames[j].replace(/[^A-Z0-9]+/ig, ''); %>
+    <select id="finishtype<%= randomid %>" class="select2 form-control materialDrp">
+        <option>Select</option>
+        <span id="materialTypesel"></span>
+    </select>
+    <% }); %>
+</div>

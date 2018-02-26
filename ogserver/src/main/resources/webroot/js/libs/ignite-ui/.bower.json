@@ -1,0 +1,38 @@
+{
+  "name": "ignite-ui",
+  "version": "17.1.1012",
+  "ignore": [
+    "**/.*",
+    "*.md",
+    ".jshintrc",
+    ".jscsrc",
+    ".travis.yml",
+    "bower.json",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": "3.1.1",
+    "jquery-ui": "^1.12.0"
+  },
+  "devDependencies": {
+    "qunit": "^1.23.0",
+    "jquery-mockjax": "^2.2.0",
+    "knockout": "^3.4.0",
+    "knockout.mapping": "^2.0.1",
+    "jquery-tmpl": "*",
+    "JSON-js": "*",
+    "xmldom": "^0.1.16"
+  },
+  "homepage": "https://github.com/IgniteUI/ignite-ui-bower",
+  "_release": "17.1.1012",
+  "_resolution": {
+    "type": "version",
+    "tag": "17.1.1012",
+    "commit": "a93d452625a48cc2dc5c31c9cf5df848014be60e"
+  },
+  "_source": "https://github.com/IgniteUI/ignite-ui-bower.git",
+  "_target": "^17.1.1012",
+  "_originalSource": "ignite-ui",
+  "_direct": true
+}

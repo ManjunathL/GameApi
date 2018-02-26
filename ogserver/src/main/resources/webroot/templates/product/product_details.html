@@ -1,0 +1,41 @@
+<%= console.log(" @@@@@@@@@@@@@@@@ productsdetails @@@@@@@@@@@@@@@@" ) %>
+<%= console.log(productsdetails) %>
+<section class="section">
+    <div class="container">
+        <div class="row" id="detalieddesign">
+            <% if(typeof(productsdetails) != 'undefined'){ %>
+            <div class="actions actions--section p-r-10">
+                <a href="/edit_product-<%= productsdetails[0].id %>" title="Edit"><i class="zmdi zmdi-edit"></i></a>
+                <!--<a onclick="deletedesign()"><i class="zmdi zmdi-delete"></i></a>-->
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+                <div class="card">
+                    <div class="detail-media">
+                        <div class="l1-image">
+                            <img src="<%= productsdetails[0].primaryImageLocation %>" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="detail-info">
+                        <div class="detail-info__header clearfix">
+                            <strong><%= productsdetails[0].productName %> </strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 rmd-sidebar-mobile">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Design Story</h2>
+                    </div>
+                    <div class="card__body">
+                        <p> <%= productsdetails[0].designerstory %> </p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,88 @@
+<link href="css/layout.css" rel="stylesheet">
+<script type="text/javascript" src="js/libs/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="js/libs/jquery.mixitup.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+
+		var filterList = {
+
+			init: function () {
+
+				$('#KpinBoot').mixItUp({
+  				selectors: {
+    			  target: '.white-panel',
+    			  filter: '.filter'
+    		  },
+    		  load: {
+      		  filter: 'all'
+      		}
+				});
+			}
+		};
+
+		// Run the show!
+		filterList.init();
+
+
+	});
+	</script>
+<section id="myCarousel112" class="carousel slide">
+    <div class="tagicos">
+        <div id="filters" class="clearfix carousel-inner">
+            <% if(typeof(conceptdetails) !== 'undefined'){ %>
+            <% var tagnmArr = [] %>
+            <% _.each(conceptdetails, function(conceptdtls, i){ %>
+            <% tagnmArr.push('.'+conceptdtls.tags) %>
+            <% }); %>
+            <% } %>
+            <div class="tagicos-cnt item active"><span class="active filter" data-filter="<%= tagnmArr.join(', ') %>">All</span></div>
+            <% if(typeof(conceptdetails) !== 'undefined'){ %>
+            <% var clsarr = ['tgf','tgs','tgt','tgfr']; %>
+            <% _.each(conceptdetails, function(conceptdtls, i){ %>
+            <% var tagnm = conceptdtls.tags %>
+            <div class="tagicos-cnt <% if(i%8 == 1){ %> item <% } %>">
+                <span class="filter <%= clsarr[i%4] %>" data-filter=".<%= tagnm %>"><%= tagnm %></span>
+            </div>
+            <% }); %>
+            <% } %>
+        </div>
+    </div>
+    <% /*if(conceptdetails.length > 9){ %>
+    <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x"></i></a>
+    <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x"></i></a>
+    <% }*/ %>
+</section>
+<script src="js/libs/pinterest_grid.js"></script>
+<section class="bg-white pinBoot" id="KpinBoot" style="margin-top: 15px;">
+    <% if(typeof(conceptdetails) !== 'undefined'){ %>
+    <% _.each(conceptdetails, function(conceptdtls, i){ %>
+    <% var tagnm = conceptdtls.tags %>
+    <article class="white-panel <%= tagnm %>" data-cat=".<%= tagnm %>">
+        <div class="pin">
+            <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.concept_img %>','<%= conceptdtls.concept_name %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+        </div>
+        <a href="javascript:void(0);" onclick="showDetailsModal('<%= conceptdtls.concept_img %>','<%= conceptdtls.concept_name %>','<%= conceptdtls.concept_desc %>')" > <img src="img/concepts/<%= conceptdtls.concept_img %>" alt="<%= conceptdtls.concept_name %>"> </a>
+        <h4><a href="javascript:void(0);"> <%= conceptdtls.concept_desc %> </a></h4>
+    </article>
+    <% }); %>
+    <% } %>
+
+</section>
+<script src="js/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(new function() {
+        $('#KpinBoot').pinterest_grid({
+            no_columns: 5,
+            padding_x: 20,
+            padding_y: 20,
+            margin_bottom: 50,
+            single_column_breakpoint: 700
+        });
+
+        $('#myCarousel112').carousel({
+            interval: false
+        });
+    });
+
+</script>

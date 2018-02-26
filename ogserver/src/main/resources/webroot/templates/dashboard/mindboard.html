@@ -1,0 +1,228 @@
+<%= console.log("++++++++++++++++++++++++++Concept Board details+++++++++++++++++++++++++++++") %>
+<%= console.log(conceptboardsDtls) %>
+
+<link href="css/layout.css" rel="stylesheet">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2 col-md-2">
+            <input type="hidden" id="accessToken" value="<%= sessionStorage.authtoken %>" />
+            <h5 class="trend-heading">TRENDING</h5>
+            <ul class="trend">
+                <li>
+                    <a href="/listing-detail-1"> <img src="http://designwhimages.mygubbi.com/11_Living room_mid century.jpg" alt="Living Room"> </a>
+                    <span>Living Room</span>
+                </li>
+                <li>
+                    <a href="/listing-detail-2"> <img src="http://designwhimages.mygubbi.com/28_Bedroom_contemporary       .jpg" alt="Bed Room"> </a>
+                    <span>Bed Room</span>
+                </li>
+                <li>
+                    <a href="/listing-detail-3"> <img src="http://designwhimages.mygubbi.com/13_STUDY _CONTEMPORARY  .jpg" alt="Study Room"> </a>
+                    <span>Study Room</span>
+                </li>
+                <li>
+                    <a href="/listing-detail-1"> <img src="http://designwhimages.mygubbi.com/11_Living room_mid century.jpg" alt="Living Room"> </a>
+                    <span>Living Room</span>
+                </li>
+                <li>
+                    <a href="/listing-detail-2"> <img src="http://designwhimages.mygubbi.com/28_Bedroom_contemporary       .jpg" alt="Bed Room"> </a>
+                    <span>Bed Room</span>
+                </li>
+                <li>
+                    <a href="/listing-detail-3"> <img src="http://designwhimages.mygubbi.com/13_STUDY _CONTEMPORARY  .jpg" alt="Study Room"> </a>
+                    <span>Study Room</span>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-sm-10 col-md-10 pd0">
+            <div class="bg-light-gray">
+                <label class="moodboard-lbl">My Moodboards</label>
+                <div class="tab" role="tabpanel" style="margin-top: 0px;">
+                    <!-- Nav tabs -->
+                    <ul id="conceptBoardsPanel" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#All" id="taball" aria-controls="home" role="tab" data-toggle="tab">Everything <i class="fa fa-times-thin"></i></a></li>
+
+                        <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                        <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
+                        <li role="presentation"><a href="#<%= conceptdtl.id %>" id="tab<%= conceptdtl.id %>" title="<%= conceptdtl.name %>" aria-controls="profile" role="tab" data-toggle="tab" class="selTabs" data-element="<%= conceptdtl.name %>" data-element1="<%= conceptdtl.id %>" data-element2="<%= conceptdtl.spaceTypeCode %>"><%= conceptdtl.name %></a></li>
+                        <% }); %>
+                        <% } %>
+
+                        <li class="ico_set" id="addCBoard"><a href="javascript:void(0);"><i class="fa fa-plus"></i></a></li>
+
+                        <!--<li role="presentation"><a href="#Kitchen" aria-controls="profile" role="tab" data-toggle="tab" class="selTabs" data-element="Kitchen">Kitchen</a></li>
+                        <li role="presentation"><a href="#Living" aria-controls="settings" role="tab" data-toggle="tab" class="selTabs" data-element="Living">Living Room</a></li>
+                        <li role="presentation"><a href="#MasterBedroom" aria-controls="settings" role="tab" data-toggle="tab">Master Bedroom</a></li>
+                        <li role="presentation"><a href="#KidsBedroom" aria-controls="settings" role="tab" data-toggle="tab">Kids Bedroom</a></li>
+                    </-->
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade" id="all">
+                            <p>Loading...</p>
+                        </div>
+                        <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                        <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
+                        <div role="tabpanel" class="tab-pane fade" id="<%= conceptdtl.id %>">
+                            <p>Loading...</p>
+                        </div>
+                        <% }); %>
+                        <% } %>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+<div class="modal fade" id="pin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="pin-container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="pin-model-img">
+                        <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg" alt="pin image"> </a>
+                        <h4 id="concNm">Excepteur sint occaecat cupidatat non proident </h4>
+                        <input type="hidden" id="ConcCod" value="">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="new-pin">
+                        <!--<form>
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" placeholder="Mood Board Name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" name="pin" class="btn btn-defalt pin-submit" value="Submit">
+                            </div>
+                        </form>-->
+                    </div>
+                    <div>
+                        <label class="moodboard-lbl">All Concept Boards</label>
+                        <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                        <%= console.log("================== conceptboardsDtls ===================") %>
+                        <%= console.log(conceptboardsDtls) %>
+                        <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
+                        <div class="boardlst" data-element="<%= conceptdtl.id %>"><%= conceptdtl.name %></div>
+                        <% }); %>
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div id="concept-dtls" class="dtls-container" style="">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div id="addcboard-dtls" class="addcboard-container">
+
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    /*$('#myCarousel11').carousel({
+        interval: false
+    });*/
+    /*$('#myCarousel12').carousel({
+        interval: false
+    });*/
+    /*$('#pinBoot1').pinterest_grid({
+        no_columns: 5,
+        padding_x: 20,
+        padding_y: 20,
+        margin_bottom: 50,
+        single_column_breakpoint: 700
+    });*/
+   /* var byTag = [];
+    $(".fl-tags").on( "click", function() {
+        console.log('hellooooooo');
+        if (this.checked) byTag.push("[data-category~='" + $(this).attr("value") + "']");
+        else removeA(byTag, "[data-category~='" + $(this).attr("value") + "']");
+        console.log(byTag);
+    });
+
+    if (byTag.length) {
+
+        if (str == "Include items \n") {
+            str += "    " + "with (" +  byTag.join(',') + ")\n";
+            $($('input[name=fl-tags]:checked')).each(function(index, byTag){
+                if(selector === '') {
+                    selector += "[data-category~='" + byTag.id + "']";
+                } else {
+                    selector += ",[data-category~='" + byTag.id + "']";
+                }
+            });
+        }
+    }*/
+});
+    function showModal(imgnm,cnpnm,cnpcod){
+        $("#concNm").text(cnpnm);
+        $("#ConcCod").val(cnpcod);
+        $("#mastImg").attr("src",imgnm);
+        $('#pin-modal').modal('show');
+    }
+</script>
+
+<script>
+    $(".fl-tags").on( "click", function() {
+        var seltag = $(this).data("element");
+        $( "article" ).hide();
+        $( "article" ).filter(function( index ) {
+        return $( this ).data( "category" ) === seltag;
+      }).show();
+    });
+</script><!--
+<script type="text/javascript" src="js/libs/jquery-2.1.1.js"></script>
+<script src="js/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/libs/pinterest_grid.js"></script>-->
+<!--
+<script>
+    $(document).ready(function() {
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+            alert(target);
+
+            var target = target.replace("#","");
+
+            $("#pinBoot"+target).pinterest_grid({
+                no_columns: 5,
+                padding_x: 20,
+                padding_y: 20,
+                margin_bottom: 50,
+                single_column_breakpoint: 700
+            });
+            $("#pinBoot241").pinterest_grid({
+                no_columns: 5,
+                padding_x: 20,
+                padding_y: 20,
+                margin_bottom: 50,
+                single_column_breakpoint: 700
+            });
+            /*$('#pinBoot242').pinterest_grid({
+                no_columns: 5,
+                padding_x: 20,
+                padding_y: 20,
+                margin_bottom: 50,
+                single_column_breakpoint: 700
+            });*/
+        });
+    });
+
+</script>
+-->

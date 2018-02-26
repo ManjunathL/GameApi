@@ -1,0 +1,312 @@
+<%= console.log("++++++++++++++++++++++++++conceptdetails+++++++++++++++++++++++++++++") %>
+<%= console.log(conceptdetails) %>
+<%= console.log("++++++++++++++++++++++++++designdetails+++++++++++++++++++++++++++++") %>
+<%= console.log(designdetail) %>
+<script src="js/libs/pinterest_grid.js"></script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2 col-md-2">
+            <h5 class="trend-heading">TRENDING</h5>
+            <ul class="trend">
+                <% if(typeof(designdetail) !== 'undefined'){ %>
+                <% _.each(designdetail, function(designdtl, j){ %>
+                <li>
+                    <a href="/listing-detail-<%= designdtl.id %>"> <img src="<%= designdtl.primaryImageLocation %>" alt="<%= designdtl.webDisplayName %>"> </a>
+                    <span><%= designdtl.webDisplayName %></span>
+                </li>
+                <% }); %>
+                <% } %>
+            </ul>
+
+        </div>
+        <div class="col-sm-10 col-md-10 pd0">
+            <div class="bg-light-gray">
+                <label class="moodboard-lbl">My Moodboards</label>
+                <div class="tab" role="tabpanel" style="margin-top: -50px;">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#All" aria-controls="home" role="tab" data-toggle="tab">Everything <i class="fa fa-times-thin"></i></a></li>
+                        <li role="presentation"><a href="#Kitchen" aria-controls="profile" role="tab" data-toggle="tab" class="selTabs" data-element="Kitchen">Kitchen</a></li>
+                        <li role="presentation"><a href="#Living" aria-controls="settings" role="tab" data-toggle="tab" class="selTabs" data-element="Living">Living Room</a></li>
+                        <li role="presentation"><a href="#MasterBedroom" aria-controls="settings" role="tab" data-toggle="tab">Master Bedroom</a></li>
+                        <li role="presentation"><a href="#KidsBedroom" aria-controls="settings" role="tab" data-toggle="tab">Kids Bedroom</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="All">
+                            <section id="myCarousel11" class="carousel slide">
+                                <div class="tagicos carousel-inner">
+                                    <div class="tagicos-cnt item active">
+                                        <% if(typeof(conceptdetails) !== 'undefined'){ %>
+                                        <% var clsarr = ['tgf','tgs','tgt','tgfr']; %>
+                                        <% _.each(conceptdetails, function(conceptdtls, i){ %>
+                                            <div class="tgico">
+                                                <a class="fl-tags <%= clsarr[i%4] %> tgico-link" href="javascript:void(0);" data-element="<%= conceptdtls.tags %>">
+                                                    <span class="spn"><%= conceptdtls.tags %></span>
+                                                </a>
+                                            </div>
+                                        <% }); %>
+                                        <% } %>
+                                    </div>
+                                    <div class="tagicos-cnt item">
+                                        <div class="tgico">
+                                            <a class="tgf tgico-link" href="#">
+                                                <span class="spn">Pastels</span>
+                                            </a>
+                                        </div>
+                                        <div class="tgico">
+                                            <a class="tgs tgico-link" href="#">
+                                                <span class="spn">L Shaped</span>
+                                            </a>
+                                        </div>
+                                        <div class="tgico">
+                                            <a class="tgt tgico-link" href="#">
+                                                <span class="spn">Island</span>
+                                            </a>
+                                        </div>
+                                        <div class="tgico">
+                                            <a class="tgfr tgico-link" href="#">
+                                                <span class="spn">Small</span>
+                                            </a>
+                                        </div>
+                                        <div class="tgico">
+                                            <a class="tgt tgico-link" href="#">
+                                                <span class="spn">Family</span>
+                                            </a>
+                                        </div>
+                                        <div class="tgico">
+                                            <a class="tgf tgico-link" href="#">
+                                                <span class="spn">Glass</span>
+                                            </a>
+                                        </div>
+                                        <div class="tgico">
+                                            <a class="tgfr tgico-link" href="#">
+                                                <span class="spn">Countertop</span>
+                                            </a>
+                                        </div>
+                                        <div class="tgico">
+                                            <a class="tgs tgico-link" href="#">
+                                                <span class="spn">Storage</span>
+                                            </a>
+                                        </div>
+                                        <div class="tgico">
+                                            <a class="tgt tgico-link" href="#">
+                                                <span class="spn">U Shaped</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="left carousel-control" href="#myCarousel11" data-slide="prev"><i class="fa fa-angle-left fa-2x"></i></a>
+                                <a class="right carousel-control" href="#myCarousel11" data-slide="next"><i class="fa fa-angle-right fa-2x"></i></a>
+                            </section>
+                            <section class="bg-white pinBoot" id="pinBoot1" style="margin-top: 15px;">
+                                <% if(typeof(conceptdetails) !== 'undefined'){ %>
+                                <% _.each(conceptdetails, function(conceptdtls, i){ %>
+                                <% var tagnm = conceptdtls.tags %>
+                                <article class="white-panel" data-category="<%= tagnm %>">
+                                    <div class="pin">
+                                        <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.concept_img %>','<%= conceptdtls.concept_name %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+                                    </div>
+                                    <a href="javascript:void(0);" onclick="showDetailsModal('<%= conceptdtls.concept_img %>','<%= conceptdtls.concept_name %>','<%= conceptdtls.concept_desc %>')" > <img src="img/concepts/<%= conceptdtls.concept_img %>" alt="<%= conceptdtls.concept_name %>"> </a>
+                                    <h4><a href="javascript:void(0);"> <%= conceptdtls.concept_desc %> </a></h4>
+                                </article>
+                                <% }); %>
+                                <% } %>
+
+                            </section>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#pinBoot1').pinterest_grid({
+                                        no_columns: 5,
+                                        padding_x: 20,
+                                        padding_y: 20,
+                                        margin_bottom: 50,
+                                        single_column_breakpoint: 700
+                                    });
+                                });
+
+                            </script>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="Kitchen" style="height:800px;">
+
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="Living">
+                            <h2>Section 3</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="MasterBedroom">
+                            <h2>Section 4</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="KidsBedroom">
+                            <h2>Section 5</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+<div class="modal fade" id="pin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="pin-container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="pin-model-img">
+                        <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg" alt="pin image"> </a>
+                        <h4 id="concNm">Excepteur sint occaecat cupidatat non proident </h4>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="new-pin">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" placeholder="Mood Board Name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" name="pin" class="btn btn-defalt pin-submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="dtls-container" style="">
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="pin-model-img">
+                        <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImgg" alt="pin image">
+                        <h4>Used in Designs </h4>
+                        <ul class="related-conc">
+                            <li>
+                                <img src="img/livingroom/testdn.png" alt="">
+                            </li>
+                            <li>
+                                <img src="img/livingroom/ktn.png" alt="">
+                            </li>
+                            <li>
+                                <img src="img/pnis/pin7.jpg" alt="">
+                            </li>
+                            <li>
+                                <img src="img/livingroom/Diningroom_banner.jpg" alt="">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="new-pin">
+                        <h5 id="concNmm">Excepteur sint occaecat cupidatat non proident </h5>
+                        <p id="concDes">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+                        </p>
+                    </div>
+                    <div class="new-pin" style="margin-top: 80px;">
+                        <h4>Related Concepts </h4>
+                        <ul class="related-conc">
+                            <li>
+                                <img src="img/livingroom/testdn.png" alt="">
+                            </li>
+                            <li>
+                                <img src="img/livingroom/ktn.png" alt="">
+                            </li>
+                            <li>
+                               <img src="img/pnis/pin7.jpg" alt="">
+                            </li>
+                            <li>
+                                <img src="img/livingroom/Diningroom_banner.jpg" alt="">
+                            </li>
+                            <li>
+                                <img src="img/pnis/pin7.jpg" alt="">
+                            </li>
+                            <li>
+                                <img src="img/livingroom/Diningroom_banner.jpg" alt="">
+                            </li>
+                            <li>
+                                <div class="more">MORE</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    $('#myCarousel11').carousel({
+        interval: false
+    });
+    /*$('#myCarousel12').carousel({
+        interval: false
+    });*/
+    /*$('#pinBoot1').pinterest_grid({
+        no_columns: 5,
+        padding_x: 20,
+        padding_y: 20,
+        margin_bottom: 50,
+        single_column_breakpoint: 700
+    });*/
+   /* var byTag = [];
+    $(".fl-tags").on( "click", function() {
+        console.log('hellooooooo');
+        if (this.checked) byTag.push("[data-category~='" + $(this).attr("value") + "']");
+        else removeA(byTag, "[data-category~='" + $(this).attr("value") + "']");
+        console.log(byTag);
+    });
+
+    if (byTag.length) {
+
+        if (str == "Include items \n") {
+            str += "    " + "with (" +  byTag.join(',') + ")\n";
+            $($('input[name=fl-tags]:checked')).each(function(index, byTag){
+                if(selector === '') {
+                    selector += "[data-category~='" + byTag.id + "']";
+                } else {
+                    selector += ",[data-category~='" + byTag.id + "']";
+                }
+            });
+        }
+    }*/
+});
+    function showModal(imgnm,cnpnm){
+        $("#concNm").text(cnpnm);
+        $("#mastImg").attr("src","img/concepts/"+imgnm);
+        $('#pin-modal').modal('show');
+    }
+    function showDetailsModal(imgnm,cnpnm,concDes){
+        $("#concNmm").text(cnpnm);
+        $("#concDes").text(concDes);
+        $("#mastImgg").attr("src","img/concepts/"+imgnm);
+        $('#details-modal').modal('show');
+    }
+</script>
+
+<script>
+    $(".fl-tags").on( "click", function() {
+        var seltag = $(this).data("element");
+        $( "article" ).hide();
+        $( "article" ).filter(function( index ) {
+        return $( this ).data( "category" ) === seltag;
+      }).show();
+    });
+</script>

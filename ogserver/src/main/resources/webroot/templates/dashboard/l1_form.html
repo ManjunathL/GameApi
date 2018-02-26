@@ -1,0 +1,852 @@
+<script src="js/libs/upload.js"></script>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="card">
+                    <form class="l1-form">
+                        <div class="card__header">
+                            <h2> Submit Your Design Details </h2>
+                        </div>
+                        <div class="card__body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group form-group--float form-group--float-center ">
+                                        <input type="text" class="form-control" id="designspacename">
+                                        <i class="form-group__bar"></i>
+                                        <label>Space name</label>
+                                    </div>
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="designwebname">
+                                        <i class="form-group__bar"></i>
+                                        <label>Web display name</label>
+                                    </div>
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="designdfile">
+                                        <i class="form-group__bar"></i>
+                                        <label>3D File Location </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="designprimary">
+                                            <label> Primary Images </label>
+                                            <br>
+                                            <label class="btn active">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    <input type="file" name="images" id="images"/>
+
+                                                </form>
+                                            </label>
+                                        </div>
+                                        <input type="hidden" id="primaryimagepath">
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <label> Secondary Images </label>
+                                            <br>
+                                            <label class="btn active">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    <input type="file" id="img_secondary"  name="files[]" multiple />
+                                                    <input type="hidden" id="secondaryimagepath">
+                                                </form>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group p-t-5">
+                                        <div>
+                                            <label>Add L0 ( space layout - dwg & pdf both ) </label>
+                                            <br>
+                                            <label class="btn active">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    <input type="file"  name="images" id="doc"  />
+                                                    <input type="hidden" id="doc1">
+                                                </form>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <label>Add Mood Board (PDF ) </label>
+                                            <br>
+                                            <label class="btn active">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    <input type="file"  name="files[]" id="designmoodboard" />
+                                                    <input type="hidden" id="designmoodboard1">
+                                                </form>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="designconceptnote">
+                                        <i class="form-group__bar"></i>
+                                        <label>Concept Note</label>
+                                    </div>
+                                    <div class="form-group" id="designspace" >
+                                        <label>Space Type</label>
+                                        <input type="hidden" id="furnitureselhidden" value="">
+                                        <select id="spacesel" class="select2">
+                                            <% if(typeof(spaceType) != 'undefined'){ %>
+                                            <option>Select...</option>
+                                            <% _.each(spaceType, function(subc, i){ %>
+                                            <option value="<%= spaceType[i].code %>"><%= spaceType[i].title %></option>
+                                            <% }); %>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="designsize">
+                                        <label>Size Type</label>
+                                        <select id="sizesel" class="select2">
+                                            <% if(typeof(size) != 'undefined'){ %>
+                                            <option>Select...</option>
+                                            <% _.each(size, function(subc, i){ %>
+                                            <option value="<%= size[i].code %>"><%= size[i].title %></option>
+                                            <% }); %>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <label> Space Layout </label>
+                                            <br>
+                                            <label class="btn active">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    <input type="file" id="spaceLayout"  name="files[]" multiple />
+                                                    <input type="hidden" id="spaceLayout1">
+                                                </form>
+
+                                            </label>
+                                        </div>
+                                        <div id="space_block">
+                                            <div class="item-overlay top"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="designproperty">
+                                        <i class="form-group__bar"></i>
+                                        <label>Property Name</label>
+                                    </div>
+
+                                    <div class="form-group" id="designstyle">
+                                        <label>Space Design Style</label>
+
+                                        <select id ="designsel" class="select2">
+                                            <option>Select...</option>
+                                            <% _.each(designstyle, function(designc, i){ %>
+                                            <option value=""><%= designstyle[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="designcolorstyle">
+                                        <label>Space colour style </label>
+
+                                        <select id="designcolorstylesel" class="select2">
+                                            <option>Select...</option>
+                                            <% _.each(designcolorstyle, function(designcolorstylec, i){ %>
+                                            <option value=""><%= designcolorstyle[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Space Feature </label><br/>
+
+                                        <select id="featuresel" class="select2_demo_2 form-control" multiple="multiple">
+                                            <option>Select...</option>
+                                            <% _.each(feature, function(featurec, i){ %>
+                                            <option value=""><%= feature[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                        <input type="hidden" id="featureselhidden" value="" type="hidden">
+                                    </div>
+                                    <div>
+                                        <label>Space element</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Furniture </label><br/>
+                                        <select id="furnituresel" class="select2_demo_2 form-control" multiple="multiple">
+                                        </select>
+                                        <input type="hidden" id="furselected" value="" type="hidden">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Decor </label><br/>
+                                        <select id="decorsel" class="select2_demo_2 form-control" multiple="multiple">
+                                        </select>
+                                        <input type="hidden" id="decorhidden" value="" type="hidden">
+                                    </div>
+                                    <div>
+                                        <label>Wall (treatment)</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group" >
+                                                    <label >Wall treatment type</label><br/>
+
+                                                    <select id ="walltypesel" class="select2_demo_2 form-control" multiple="multiple">
+                                                        <option>Select...</option>
+                                                        <% _.each(walltype, function(walltypec, i){ %>
+                                                        <option value="" id="designwalltype"><%= walltype[i].title %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <input type="hidden" id="walltypehidden" value="" type="hidden">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>material </label><br/>
+
+                                                    <select class="select2_demo_2 form-control" multiple="multiple" id="designmaterialsel">
+                                                        <option>Select...</option>
+                                                        <% _.each(desmat, function(desmatc, i){ %>
+                                                        <option value=""><%= desmat[i].title %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <input type="hidden" id="designmaterialselhidden" value="" type="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Finish Material </label><br/>
+
+                                                    <select class="select2_demo_2 form-control" multiple="multiple" id="designfinish">
+                                                        <option>Select...</option>
+                                                        <% _.each(finmat, function(finmatc, i){ %>
+                                                        <option value=""><%= finmat[i].title %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <input type="hidden" id="designfinishhidden" value="" type="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label> Finish Swatches </label>
+                                                        <br>
+                                                        <label class="btn active">
+                                                            <form method="post" enctype="multipart/form-data">
+                                                                <input type="file" id="swatches"  name="files[]" multiple />
+                                                                <input type="hidden" id="swatchesimagepath">
+                                                            </form>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div id="swatch_block">
+                                                    <div class="top"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label>ceiling ( Treatment )</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>ceiling ( type)</label><br/>
+
+                                                    <select id ="ceiltypesel" class="select2">
+                                                        <option>Select...</option>
+                                                        <% _.each(ceiltype, function(ceiltypec, i){ %>
+                                                        <option value=""><%= ceiltype[i].title %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Material</label><br/>
+
+                                                    <select class="select2_demo_2 form-control" multiple="multiple" id="designceilmaterial">
+                                                        <option>Select...</option>
+                                                        <% _.each(ceilmat, function(ceilmatc, i){ %>
+                                                        <option value=""><%= ceilmat[i].title %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <input type="hidden" id="designceilmaterialhidden" value="" type="hidden">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Finish Material</label><br/>
+
+                                                    <select class="select2_demo_2 form-control" multiple="multiple" id="designceilfinish">
+                                                        <option>Select...</option>
+                                                        <% _.each(ceilfinmat, function(ceilmatc, i){ %>
+                                                        <option value=""><%= ceilfinmat[i].title %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <input type="hidden" id="designceilfinishhidden" value="" type="hidden">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label> Finish Swatches </label>
+                                                        <br>
+                                                        <label class="btn active">
+                                                            <form method="post" enctype="multipart/form-data">
+                                                                <input type="file" id="ceilswatches"  name="files[]" multiple />
+                                                                <input type="hidden" id="ceilswatchesimagepath">
+                                                            </form>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div id="ceilswatch_block">
+                                                    <div class="top"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label>Flooring</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Flooring ( Material )</label><br/>
+                                                    <select class="select2_demo_2 form-control" multiple="multiple" id="designfloormaterial">
+                                                        <option>Select...</option>
+                                                        <% _.each(floormat, function(floormatc, i){ %>
+                                                        <option value=""><%= floormat[i].title %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <input type="hidden" id="designfloormaterialhidden" value="" type="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Finish Material</label><br/>
+                                                    <select class="select2_demo_2 form-control" multiple="multiple" id="designfloorfinish">
+                                                        <option>Select...</option>
+                                                        <% _.each(floorfin, function(floormatc, i){ %>
+                                                        <option value=""><%= floorfin[i].title %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <input type="hidden" id="designfloorfinishhidden" value="" type="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label> Flooring Finish Swatches </label>
+                                                        <br>
+                                                        <label class="btn active">
+                                                            <form method="post" enctype="multipart/form-data">
+                                                                <input type="file" id="flooring_swatches"  name="files[]" multiple />
+                                                                <input type="hidden" id="flooringimagepath">
+                                                            </form>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div id="flooring_block">
+                                                    <div class="top"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><b>Lighting</b></label>
+
+                                        <select id="lightsel" class="select2">
+                                            <option>Select...</option>
+                                            <% _.each(light, function(lightc, i){ %>
+                                            <option value=""><%= light[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="designelement">
+                                        <i class="form-group__bar"></i>
+                                        <label>Design elements / attribute</label>
+                                    </div>
+                                    <div>
+                                        <label>User Persona</label>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label>&nbsp;&nbsp;&nbsp;&nbsp;USER 1</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label>User 1</label>
+                                                <select id="userpersonasel" class="select2">
+                                                    <option>Select...</option>
+                                                    <% _.each(userpersona, function(userpersonac, i){ %>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <option value=""><%= userpersona[i].title %></option>
+                                                    </div>
+                                                    <% }); %>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label>Hobby 1</label>
+                                                <select id="hobbypersonasel" class="select2">
+                                                <option>Select...</option>
+                                                <% _.each(hobbypersona, function(hobbypersonac, i){ %>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <option value=""><%= hobbypersona[i].title %></option>
+                                                </div>
+                                                <% }); %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label>Profession 1</label>
+                                                <select id="professionpersonasel" class="select2">
+                                                    <option>Select...</option>
+                                                    <% _.each(professionpersona, function(professionpersonac, i){ %>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <option value=""><%= professionpersona[i].title %></option>
+                                                    </div>
+                                                    <% }); %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label>&nbsp;&nbsp;&nbsp;&nbsp;USER 2</label>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label>User 2</label>
+                                                <select id="userpersonatwo" class="select2">
+                                                <option>Select...</option>
+                                                <% _.each(userpersonatwo, function(userpersonatwoc, i){ %>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <option value=""><%= userpersonatwo[i].title %></option>
+                                                </div>
+                                                <% }); %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label>Hobby 2</label>
+                                                <select id="hobbypersonatwo" class="select2">
+                                                    <option>Select...</option>
+                                                    <% _.each(hobbypersonatwo, function(hobbypersonatwoc, i){ %>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <option value=""><%= hobbypersonatwo[i].title %></option>
+                                                    </div>
+                                                    <% }); %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label>Profession 2</label>
+                                                <select id="professionpersonatwo" class="select2">
+                                                    <option>Select...</option>
+                                                    <% _.each(professionpersonatwo, function(professionpersonatwoc, i){ %>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <option value=""><%= professionpersonatwo[i].title %></option>
+                                                    </div>
+                                                    <% }); %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                            <label><b>Age group</b></label>
+                                            <select id="agepersona" class="select2">
+                                                <option>Select...</option>
+                                                <% _.each(agepersona, function(agepersonac, i){ %>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <option value=""><%= agepersona[i].title %></option>
+                                                </div>
+                                                <% }); %>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                            <label><b>Religion</b></label>
+                                            <input type="hidden" value="">
+                                            <select id="religionpersona" class="select2">
+                                                <option>Select...</option>
+                                                <% _.each(religionpersona, function(religionpersonac, i){ %>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <option value=""><%= religionpersona[i].title %></option>
+                                                </div>
+                                                <% }); %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                            <label><b>Community</b></label>
+                                            <input type="hidden" value="">
+                                            <select id="communitypersona" class="select2">
+                                                <option>Select...</option>
+                                                <% _.each(communitypersona, function(communitypersonac, i){ %>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <option value=""><%= communitypersona[i].title %></option>
+                                                </div>
+                                                <% }); %>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tag Products</button>
+                                    </div>
+
+                                    <!--<div id="imagelist">
+                                               <div class="item-overlay top"></div>
+                                           </div>-->
+
+
+
+                                    <!-- Modal -->
+                                    <div id="myModal" class="modal" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content ">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Select the associated products</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row listings-grid">
+                                                        <section class="section">
+
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                                    <div class="list-group">
+                                                                        <div class="list-group-item-mg">
+                                                                            <h4> Category </h4>
+                                                                        </div>
+                                                                        <div class="list-group-item">
+                                                                            <div class="filter-group">
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-category" value="Storage" id="Storage">
+                                                                                    Storage
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-category" value="Seating" id="Seating">
+                                                                                    Seating
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-category" value="Table" id="Table">
+                                                                                    Table
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-category" value="Bed" id="Bed">
+                                                                                    Bed
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-category" value="Wall Hang Unit" id="Wall-Hang-Unit">
+                                                                                    Wall Hang Unit
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-category" value="Kitchen" id="Kitchen">
+                                                                                    Kitchen
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-category" value="Wardrobe" id="Wardrobe">
+                                                                                    Wardrobe
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="list-group-item-mg">
+                                                                            <h4> Style </h4>
+                                                                        </div>
+                                                                        <div class="list-group-item">
+                                                                            <div class="filter-group">
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Shabby chic design" id="Shabby-chic-design">
+                                                                                    Shabby chic design
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Contemporary" id="Contemporary">
+                                                                                    Contemporary
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Industrial modern" id="Industrial-modern">
+                                                                                    Industrial modern
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Boho–Indian" id="Boho–Indian">
+                                                                                    Boho–Indian
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Neo classical" id="Neo-Classical">
+                                                                                    Neo classical
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Nautical/Cottage/Classic Coastal" id="Nautical/Cottage/Classic-Coastal">
+                                                                                    Nautical/Cottage/Classic Coastal
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Mid century modern" id="Mid-century-modern">
+                                                                                    Mid century modern
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Scandinavian" id="Scandinavian">
+                                                                                    Scandinavian
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Zen" id="Zen">
+                                                                                    Zen
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-style" value="Modern traditional" id="Modern-traditional">
+                                                                                    Modern traditional
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="list-group-item-mg">
+                                                                            <h4> Colour </h4>
+                                                                        </div>
+                                                                        <div class="list-group-item">
+                                                                            <div class="filter-group">
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Black & White Grayscale" id="Black-&-White-Grayscale">
+                                                                                    Black & White Grayscale
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Black & White Neutral" id="Black-&-White-Neutral">
+                                                                                    Black & White Neutral
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Black & White Fresh" id="Black-&-White-Fresh">
+                                                                                    Black & White Fresh
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Black & White Warm" id="Black-&-White-Warm">
+                                                                                    Black & White Warm
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Neutral Fresh" id="Neutral-Fresh">
+                                                                                    Neutral Fresh
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Neutral Warm" id="Neutral-Warm">
+                                                                                    Neutral Warm
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Monochrome Neutral" id="Monochrome-Neutral">
+                                                                                    Monochrome Neutral
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Monochrome Fresh" id="Monochrome-Fresh">
+                                                                                    Monochrome Fresh
+                                                                                </label>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" name="fl-color" value="Monochrome Warm" id="Monochrome-Warm">
+                                                                                    Monochrome Warm
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-9 col-md-9 col-lg-9" id="productdetails">
+                                                                    <% if(typeof(productdetails) !== 'undefined'){ %>
+                                                                    <% _.each(productdetails, function(productdetailsc, i){ %>
+
+                                                                    <% var catnm =  productdetails[i].category %>
+                                                                    <% catnm = catnm.replace(/\s+/g, '-') %>
+
+                                                                    <% var stnm =  productdetails[i].productStyle %>
+                                                                    <% stnm = stnm.replace(/\s+/g, '-') %>
+
+                                                                    <% var crnm =  productdetails[i].productColor %>
+                                                                    <% crnm = crnm.replace(/\s+/g, '-') %>
+
+                                                                    <div class="product col-sm-6 col-md-4" data-category="<%= catnm %> <%= stnm %> <%= crnm %>">
+                                                                        <div class="product listings-grid__item" data-category="<%= catnm %> <%= stnm %> <%= crnm %>">
+                                                                            <div class="col-sm-2 col-md-2">
+                                                                                <input type="checkbox" class="tagprodChk" id="chk<%= i %>" />
+                                                                            </div>
+                                                                            <div class="listings-grid__main col-sm-10 col-md-10">
+                                                                                <img src="<%= productdetails[i].primaryImageLocation %>" alt="" id="tagimagePath<%= i %>">
+                                                                                <h5 class="entry-title" id="title<%= i %>"><%= productdetails[i].productName %></h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <% }); %>
+                                                                    <% } %>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </section>
+                                                 </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card__footer">
+                            <button type="submit" class="btn btn-primary" id="submitbtn">Submit</button>
+                            <button class="btn btn-sm btn-link">Reset</button>
+                            <button class="btn btn-sm btn-link visible-sm-inline visible-xs-inline" data-rmd-action="block-close" data-rmd-target="#agent-question">Cancel</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="position-relative">
+                    <div class="fix-card">
+                        <div class="card" >
+                            <form >
+                                <div class="card__body__b0">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 ">
+                                            <div class="form-group">
+                                                <div id="list1" class="">
+                                                    <div class="item-overlay top"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <div class="card__body__b0">
+                                <div id="secondary_block">
+                                    <div class="item-overlay top"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="card__body__b0">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group form-group--float form-group--float-center ">
+                                            <textarea rows="5" class="form-control" id="designerstory"></textarea>
+                                            <i class="form-group__bar"></i>
+                                            <label>Designer Story</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div id="myModal1" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="img01">
+                <div id="caption"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" async="" src="https://stats.g.doubleclick.net/dc.js"></script>
+
+<!-- Bootstrap -->
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Waves button ripple effects -->
+<script src="js/libs/waves.min.js"></script>
+
+
+
+<!-- Slick Carousel - Custom Alerts -->
+<script src="js/libs/slick.min.js"></script>
+
+<!-- NoUiSlider -->
+<script src="js/libs/nouislider.min.js"></script>
+
+<!-- Select 2 - Custom Selects -->
+<script src="js/libs/select2.full.min.js"></script>
+<script src="js/libs/chosen.jquery.js"></script>
+<script src="js/libs/jquery.bootstrap-duallistbox.js"></script>
+
+<script src="js/libs/bootstrap-tagsinput.js"></script>
+
+<!-- Site functions and actions -->
+<script src="js/libs/app.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $('.tagsinput').tagsinput({
+            tagClass: 'label label-primary'
+        });
+
+        $(".select2_demo_1").select2({width: "100%"});
+        $(".select2_demo_2").select2({width: "100%"});
+        $(".select2_demo_3").select2({
+            placeholder: "Select a state",
+            allowClear: true
+        });
+
+        $('.dual_select').bootstrapDualListbox({
+            selectorMinimalHeight: 160
+        });
+
+    });
+
+    $('.chosen-select').chosen({width: "100%"});
+
+</script>
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 50%;
+		text-align: center;
+		margin-bottom: 30px;
+
+	}
+
+	td{
+		border: 1px solid #dddddd;
+		text-align: center;
+		padding: 8px;
+	}
+
+
+	tr:nth-child(even) {
+		background-color: #eee;
+	}
+</style>

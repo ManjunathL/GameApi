@@ -1,0 +1,17 @@
+<%= console.log("++++++++++++++++++++++++++related concepts details+++++++++++++++++++++++++++++") %>
+<%= console.log(relatedConcepts) %>
+<% if(typeof(relatedConcepts) !== 'undefined'){ %>
+<% _.each(relatedConcepts[0].relatedConceptsList, function(relcnt, i){ %>
+<li>
+    <img src="<%= relcnt.imgURL %>" alt="<%= relcnt.conceptTitle %>">
+</li>
+<% }); %>
+<% }else{ %>
+<li>
+    <p>No Related Concept found</p>
+</li>
+<% } %>
+<!--
+<li>
+    <div class="more">MORE</div>
+</li>-->

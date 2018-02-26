@@ -1,0 +1,17 @@
+<%= console.log("++++++++++++++++++++++++++similar concepts details+++++++++++++++++++++++++++++") %>
+<%= console.log(similarConcepts) %>
+<% if(typeof(similarConcepts) !== 'undefined'){ %>
+<% _.each(similarConcepts[0].similarConceptsList, function(simcnt, i){ %>
+<li>
+    <img src="<%= simcnt.imgURL %>" alt="<%= simcnt.conceptTitle %>">
+</li>
+<% }); %>
+<% }else{ %>
+<li>
+    <p>No Similar Concept found</p>
+</li>
+<% } %>
+<!--
+<li>
+    <div class="more">MORE</div>
+</li>-->

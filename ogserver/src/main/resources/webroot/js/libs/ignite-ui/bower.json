@@ -1,0 +1,27 @@
+{
+  "name": "ignite-ui",
+  "version": "17.1.1012",
+  "ignore": [
+    "**/.*",
+    "*.md",
+    ".jshintrc",
+    ".jscsrc",
+    ".travis.yml",
+    "bower.json",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": "3.1.1",
+    "jquery-ui": "^1.12.0"
+  },
+  "devDependencies": {
+    "qunit": "^1.23.0",
+    "jquery-mockjax": "^2.2.0",
+    "knockout": "^3.4.0",
+    "knockout.mapping": "^2.0.1",
+    "jquery-tmpl": "*",
+    "JSON-js": "*",
+    "xmldom": "^0.1.16"
+  }
+}

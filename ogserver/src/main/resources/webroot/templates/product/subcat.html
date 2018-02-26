@@ -1,0 +1,6 @@
+<%= console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@") %>
+<%= console.log(subcategory) %>
+<option>Select...</option>
+<% _.each(subcategory, function(subcategoryc, i){ %>
+<option value="<%= subcategory[i].code %>"><%= subcategory[i].title %></option>
+<% }); %>

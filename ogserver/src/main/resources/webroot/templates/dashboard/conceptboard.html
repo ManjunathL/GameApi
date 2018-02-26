@@ -1,0 +1,121 @@
+<%= console.log("++++++++++++++++++++++++++Concept Board details+++++++++++++++++++++++++++++") %>
+<%= console.log(conceptboardsDtls) %>
+<button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>
+<section class="main-conceptboard-sec bg-light-gray">
+    <div class="container">
+        <div class="mt20">
+            <div class="row">
+                <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
+                <div class="col-sm-6 col-md-3 col-lg-3 pd0">
+                    <div class="grid position-relative overflow-hidden">
+                        <div class="imgholder"> <img src="http://designwhimages.mygubbi.com/Extendable Countertop.jpg" /> </div>
+                        <strong><%= conceptdtl.name %></strong>
+                        <!--<p>A peaceful sunset view...</p>
+                        <div class="meta">by j osborn</div>-->
+
+                        <div class="grid-button-strip">
+                            <div class="grid-rgt-pin">
+                                <span title="Edit" class="glyphicon glyphicon-edit"></span>
+                            </div>
+                            <div class="grid-rgt-pin">
+                                <!-- three dots -->
+                                <ul class="dropbtn icons showLeft" data-element="<%= conceptdtl.id %>">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                                <!-- menu -->
+                                <div id="dropdown-content<%= conceptdtl.id %>" class="dropdown-content">
+                                    <a href="/listing-detail-3">Designs</a>
+                                    <a href="/<%= conceptdtl.spaceTypeCode %>-conceptlist-<%= conceptdtl.id %>">Concepts</a>
+                                    <a href="#">Products</a>
+                                    <a href="#">Quotation</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $("ul.dropbtn").click(function(){
+            var dropbtnid = $(this).data("element");
+            $(".dropdown-content").fadeOut();
+            $('#dropdown-content'+dropbtnid).fadeIn();
+        });
+
+        $( ".dropdown-content" ).focusout(function() {
+            $(this).fadeOut();
+        });
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+<div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div id="addcboard-dtls" class="addcboard-container">
+
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    /*$('#myCarousel11').carousel({
+        interval: false
+    });*/
+    /*$('#myCarousel12').carousel({
+        interval: false
+    });*/
+    /*$('#pinBoot1').pinterest_grid({
+        no_columns: 5,
+        padding_x: 20,
+        padding_y: 20,
+        margin_bottom: 50,
+        single_column_breakpoint: 700
+    });*/
+   /* var byTag = [];
+    $(".fl-tags").on( "click", function() {
+        console.log('hellooooooo');
+        if (this.checked) byTag.push("[data-category~='" + $(this).attr("value") + "']");
+        else removeA(byTag, "[data-category~='" + $(this).attr("value") + "']");
+        console.log(byTag);
+    });
+
+    if (byTag.length) {
+
+        if (str == "Include items \n") {
+            str += "    " + "with (" +  byTag.join(',') + ")\n";
+            $($('input[name=fl-tags]:checked')).each(function(index, byTag){
+                if(selector === '') {
+                    selector += "[data-category~='" + byTag.id + "']";
+                } else {
+                    selector += ",[data-category~='" + byTag.id + "']";
+                }
+            });
+        }
+    }*/
+});
+
+</script>
+
+

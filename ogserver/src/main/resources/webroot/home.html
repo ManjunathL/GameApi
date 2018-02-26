@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> IMAGINEER </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet"> 
+   
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script>
+		$(window).load(function() {
+			setTimeout(function() {
+				$('.fly-in').removeClass('hidden');
+			}, 700);
+		});
+	</script>
+</head>
+
+<body>
+    <div class="container-fluid dw-container-fluid">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+				<ul class="fly-in hidden">
+					<li>I</li>
+					<li>M</li>
+					<li>A</li>
+					<li>G</li>
+					<li>I</li>
+					<li>N</li>
+					<li>E</li>
+					<li>E</li>
+					<li>R</li>
+				</ul>				
+                <div class="box">
+					<h5 class="brand-sub-txt">YOUR DREAM HOME</h5>
+					<!--<h1 class="brand-logo">IMAGINEER</h1>
+					<h5 class="brand-sub-txt">YOUR DREAM HOME</h5>-->
+					<div style="margin:0px auto;text-align:center;">
+						<ul class="logheading">
+							<li class="active">
+								<h4> As Customer </h4>
+							</li>
+							<li>
+								<h4 class="bordernon"> As Designer </h4>
+							</li>
+						</ul>
+					</div>
+                    <form id="loginForm" data-toggle="validator" role="form" class="logfrm">
+                        <div class="row display-none" id="login_error_row">
+                            <p class="margin0 error-text align-center" id="login_error"></p>
+                        </div>
+                        <div class="form-group">
+						    <input type="email" id="emailID" class="form-control" name="email" placeholder="Email ID*" value="" maxlength="100"
+                                   required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>" />
+                        </div>
+                        <div class="form-group">
+						    <input type="password" id="passwrd" class="form-control" name="pass" placeholder="Password*" value="" required maxlength="100" />
+                        </div>
+                        <div class="form-group txt-center">
+                            <a href="/" class="btn btn-login">Login</a>
+                            <!--<button id="loginBtn" type="submit" class="btn btn-login">Login</button>-->
+                        </div>
+                        <div class="form-group txt-right mr30">
+						    <a href="/"><span class="helptxt">Need help?</span></a>
+                        </div>
+				  </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- /.container -->
+    
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1>Login to Your Account</h1><br>
+              <form>
+                <input type="email" name="email" placeholder="Email ID">
+                <input type="password" name="pass" placeholder="Password">
+                <input type="button" name="login" class="login loginmodal-submit" value="Login">
+              </form>
+
+              <div class="login-help">
+                <a href="#" data-toggle="modal" data-target="#register-modal" class="pull-left" data-dismiss="modal" >Register</a> 
+                <a href="#" data-toggle="modal" data-target="#pass-modal" class="pull-right" data-dismiss="modal">Forgot Password</a> 
+              </div>
+            </div>
+        </div>
+      </div>
+    
+    <!-- ./ login -->
+    
+    
+    <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1>Register to Your Account</h1><br>
+              <form>
+                <input type="text" name="name" placeholder="Full Name">
+                <input type="email" name="email" placeholder="Email ID">
+                <input type="password" name="pass" placeholder="Password">
+                <input type="submit" name="register" class="login loginmodal-submit" value="Register">
+              </form>
+
+              <div class="login-help">
+               <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#login-modal" class="pull-left" > Login </a> 
+                <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#pass-modal" class="pull-right"> Forgot Password </a> 
+              </div>
+            </div>
+        </div>
+      </div>
+    
+    <!-- ./ Register -->
+    
+    
+    <div class="modal fade" id="pass-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1> Reset Password </h1><br>
+              <form>
+                <input type="email" name="email" placeholder="Email ID">
+                <input type="submit" name="reset" class="login loginmodal-submit" value="Submit">
+              </form>
+
+              <div class="login-help">
+                <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#login-modal" class="pull-left" > Login </a> 
+                <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#register-modal" class="pull-right"> Register </a> 
+              </div>
+            </div>
+        </div>
+      </div>
+
+</body>
+
+</html>

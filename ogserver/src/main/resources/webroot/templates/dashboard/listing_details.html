@@ -1,0 +1,59 @@
+<%= console.log(" @@@@@@@@@@@@@@@@ designsdetails @@@@@@@@@@@@@@@@" ) %>
+<%= console.log(designsdetails) %>
+<%= console.log(tagdetails) %>
+<section class="section">
+    <div class="container">
+        <div class="row" id="detalieddesign">
+            <% if(typeof(designsdetails) != 'undefined'){ %>
+            <div class="actions actions--section p-r-10">
+                <a href="/edit_design-<%= designsdetails[0].id %>" title="Edit"><i class="zmdi zmdi-edit"></i></a>
+                <!--<a onclick="deletedesign()"><i class="zmdi zmdi-delete"></i></a>-->
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+                <div class="card">
+                    <div class="detail-media">
+                        <div class="l1-image">
+                            <img src="<%= designsdetails[0].primaryImageLocation %>" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="detail-info">
+                        <div class="detail-info__header clearfix">
+                            <strong><%= designsdetails[0].spaceName %> </strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4 rmd-sidebar-mobile">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Design Story</h2>
+                    </div>
+                    <div class="card__body">
+                        <p><%= designsdetails[0].designerstory %></p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+        <div class="row" id="tagdetalieddesign">
+            <% if(typeof(tagdetails) != 'undefined'){ %>
+            <h2 style="margin:15px;">Associated Products</h2>
+            <% _.each(tagdetails, function(tagdetailsc, i){ %>
+            <div class="design col-sm-6 col-md-4" >
+                <div class="design listings-grid__item" >
+                    <a href="/product-detail-<%= tagdetails[i].id %>">
+                        <div class="listings-grid__main">
+                            <img src="<%=tagdetails[i].imagePath %>" alt="">
+                            <h5 class="list_prod"><%= tagdetails[i].productName %></h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <% }); %>
+            <% } %>
+        </div>
+        </div>
+</section>

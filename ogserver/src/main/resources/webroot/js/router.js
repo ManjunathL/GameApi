@@ -9,7 +9,7 @@ define([
         routes: {
             //'': 'dashboard',
             '': 'viewconceptboard',
-            'concept-list-:id-:name(/)':'listing_concepts',
+            ':name-conceptlist-:id(/)':'listing_concepts',
             'view(/)': 'dashboard',
             'l1_form(/)': 'l1_form',
             'edit_design-:id(/)': 'editdesign',
@@ -40,7 +40,7 @@ define([
                 VM.create(VM.CONCEPTBOARD, ConceptboardPage).render();
             });
         });
-        router.on('route:listing_concepts', function(conceptboardId,spaceTypeCode) {
+        router.on('route:listing_concepts', function(spaceTypeCode, conceptboardId) {
             console.log("@@@@@@@@@@@@@@@@@@@@@");
             console.log(conceptboardId);
             console.log(spaceTypeCode);

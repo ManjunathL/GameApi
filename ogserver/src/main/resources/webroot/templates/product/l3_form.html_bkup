@@ -1,0 +1,274 @@
+<script src="js/libs/upload.js"></script>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="card">
+                    <form class="l3-form">
+                        <div class="card__header">
+                            <h2> Submit Your Product Details </h2>
+                        </div>
+                        <div class="card__body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="productname">
+                                        <i class="form-group__bar"></i>
+                                        <label> Name of the Product </label>
+                                    </div>
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="productwebname">
+                                        <i class="form-group__bar"></i>
+                                        <label> Web display Name </label>
+                                    </div>
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="productdfile">
+                                        <i class="form-group__bar"></i>
+                                        <label> 3D File Location </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <label> Primary Images </label>
+                                            <br/>
+                                            <label class="btn active">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    <input type="file" id="files1" name="files[]" />
+                                                </form>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="primaryimagepath">
+                                    <div class="form-group">
+                                        <div>
+                                            <label> Secondary Images </label>
+                                            <br>
+                                            <label class="btn active">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    <input type="file" id="img_secondary"  name="files[]" multiple />
+                                                </form>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="secondaryimagepath">
+
+                                    <div class="form-group p-t-5">
+
+                                        <label>Category</label>
+                                        <input type="hidden" id="subcategoryselhidden" value="">
+                                        <select id="categorysel" class="select2">
+                                            <option>Select...</option>
+                                            <% _.each(category, function(categoryc, i){ %>
+                                            <option value="<%= category[i].code %>"><%= category[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Sub Category</label>
+                                        <input type="hidden" id="componenthidden" value="">
+                                        <select id="subcategorysel" class="select2">
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="productusp">
+                                        <i class="form-group__bar"></i>
+                                        <label>Functionality & Product USP, Character</label>
+                                    </div>
+
+                                    <div class="form-group form-group--float form-group--float-center">
+                                        <input type="text" class="form-control" id="productattribute">
+                                        <i class="form-group__bar"></i>
+                                        <label>Design Attribute </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Space</label>
+
+                                        <select id="spacesel" class="select2_demo_2 form-control" multiple="multiple">
+                                            <option>Select...</option>
+                                            <% _.each(spaceType, function(subc, i){ %>
+                                            <option value=""><%= spaceType[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                        <input type="hidden" id="spaceselhidden">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Design Style</label>
+
+                                        <select id="designsel" class="select2">
+                                            <option>Select...</option>
+                                            <% _.each(designstyle, function(designc, i){ %>
+                                            <option value=""><%= designstyle[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Compatibility with other design style</label>
+                                        <select id="compdesignsel" multiple="multiple" class="select2_demo_2 form-control">
+                                            <option>Select...</option>
+                                            <% _.each(otherdesignstyle, function(compdesignc, i){ %>
+                                            <option value=""><%= otherdesignstyle[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                        <input type="hidden" id="compdesignselhidden">
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Product colour style </label>
+                                        <select id="colorsel" class="select2">
+                                            <option>Select...</option>
+                                            <% _.each(colorstyle, function(colorc, i){ %>
+                                            <option value=""><%= colorstyle[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-noraml"> Compatibility with other COLOUR </label><br/>
+                                        <select class="select2_demo_2 form-control" multiple="multiple" id="compcolorsel">
+                                            <option>Select...</option>
+                                            <% _.each(othercolorstyle, function(colorc, i){ %>
+                                            <option value=""><%= othercolorstyle[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                        <input type="hidden" id="compcolorselhidden">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <label> Furniture component material </label>
+                                        <hr>
+
+                                        <input type="hidden" id="furncomponenthidden" value="">
+                                        <div id="componentsel" class="col-sm-12 col-md-12 col-lg-12">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <label>Manufacturing / sourcing scale</label>
+                                        <select id="scalesel" class="select2">
+                                            <% _.each(scale, function(scalec, i){ %>
+                                            <option value=""><%= scale[i].title %></option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card__footer">
+                            <button class="btn btn-primary" onclick="submitdata()">Submit</button>
+                            <button class="btn btn-sm btn-link">Reset</button>
+                            <button class="btn btn-sm btn-link visible-sm-inline visible-xs-inline" data-rmd-action="block-close" data-rmd-target="#agent-question">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="position-relative">
+                    <div class="fix-card">
+                        <div class="card" >
+                            <form>
+                                <div class="card__body__b0">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 ">
+                                            <div class="form-group">
+                                                <div id="list1" class="">
+                                                    <div class="item-overlay top"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="card__body__b0" style="padding-bottom: 10px;">
+                                <div id="secondary_block">
+                                    <div class="item-overlay top"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="card__body__b0">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group form-group--float form-group--float-center ">
+                                            <textarea rows="5" class="form-control" id="productdesignerstory"></textarea>
+                                            <i class="form-group__bar"></i>
+                                            <label>Designer Story</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" async="" src="https://stats.g.doubleclick.net/dc.js"></script>
+
+<!-- Bootstrap -->
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Waves button ripple effects -->
+<script src="js/libs/waves.min.js"></script>
+
+
+
+<!-- Slick Carousel - Custom Alerts -->
+<script src="js/libs/slick.min.js"></script>
+
+<!-- NoUiSlider -->
+<script src="js/libs/nouislider.min.js"></script>
+
+<!-- Select 2 - Custom Selects -->
+<script src="js/libs/select2.full.min.js"></script>
+<script src="js/libs/chosen.jquery.js"></script>
+<script src="js/libs/jquery.bootstrap-duallistbox.js"></script>
+
+<script src="js/libs/bootstrap-tagsinput.js"></script>
+
+<!-- Site functions and actions -->
+<script src="js/libs/app.min.js"></script>
+
+<script>
+	$(document).ready(function(){
+		$('.tagsinput').tagsinput({
+			tagClass: 'label label-primary'
+		});
+		$(".select2_demo_1").select2({width: "100%"});
+		$(".select2_demo_2").select2({width: "100%"});
+		$(".select2_demo_3").select2({
+			placeholder: "Select a state",
+			allowClear: true
+		});
+		$('.dual_select').bootstrapDualListbox({
+			selectorMinimalHeight: 160
+		});
+	});
+	$('.chosen-select').chosen({width: "100%"});
+
+</script>
+
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 50%;
+		text-align: center;
+		margin-bottom: 30px;
+
+	}
+
+	td{
+		border: 1px solid #dddddd;
+		text-align: center;
+		padding: 8px;
+	}
+
+
+	tr:nth-child(even) {
+		background-color: #eee;
+	}
+</style>
