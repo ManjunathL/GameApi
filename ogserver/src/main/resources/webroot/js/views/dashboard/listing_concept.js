@@ -10,19 +10,22 @@ define([
   'text!templates/dashboard/relatedconcepts.html',
   'collections/conceptlists',
   'models/filter',
+  'collections/conceptboards',
   'collections/concepttags',
   'collections/similar_concepts',
   'collections/related_concepts',
   'collections/add_conceptboards',
   'views/dashboard/add_conceptboard',
   'collections/add_conceptToCboards',
+  'collections/remove_conceptFromCboards',
   'collections/add_conceptnotes',
   'collections/add_concepttags'
-], function($, _, Backbone, Bootstrap, pinterest_grid, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, ConceptLists, Filter, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, AddConceptnotes, AddConcepttags){
+], function($, _, Backbone, Bootstrap, pinterest_grid, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, ConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
     filter: null,
+    conceptboards: null,
     concepttags: null,
     similar_concepts: null,
     related_concepts: null,
@@ -30,9 +33,11 @@ define([
     add_concept2boards: null,
     add_conceptnotes: null,
     add_concepttags:null,
+    remove_conceptFromCboards:null,
     initialize: function() {
         this.conceptlists = new ConceptLists();
         this.filter = new Filter();
+        this.conceptboards = new ConceptBoards();
         this.concepttags = new ConceptTags();
         this.similar_concepts = new SimilarConcepts();
         this.related_concepts = new RelatedConcepts();
@@ -40,6 +45,7 @@ define([
         this.add_conceptToCboards = new AddConceptToCboards();
         this.add_conceptnotes = new AddConceptnotes();
         this.add_concepttags = new AddConcepttags();
+        this.remove_conceptFromCboards = new RemoveConceptFromCboards();
 
         this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
@@ -67,8 +73,9 @@ define([
 
         var getConceptsPromise = that.getConcepts(conceptboardId);
         var getConceptTagsPromise = that.getConceptTags(conceptboardId);
+        var getConceptBoardsPromise = that.getConceptBoards();
 
-        Promise.all([getConceptsPromise,getConceptTagsPromise]).then(function() {
+        Promise.all([getConceptsPromise,getConceptTagsPromise,getConceptBoardsPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.fetchConceptListsAndRender(conceptboardId);
         });
@@ -140,15 +147,44 @@ define([
            });
        });
     },
+    getConceptBoards: function(){
+      var that = this;
+      var userId = "user1234600";
+      var userMindboardId = sessionStorage.defaultMindboardId;
+      var pageno = 0;
+      var itemPerPage = 20;
+      return new Promise(function(resolve, reject) {
+           that.conceptboards.getConceptBoardList(userId, userMindboardId, pageno, itemPerPage, {
+               async: true,
+               crossDomain: true,
+               method: "GET",
+               headers:{
+                   "authorization": "Bearer "+ sessionStorage.authtoken
+               },
+               success:function(data) {
+                   //console.log(" +++++++++++++++ Concept Boards ++++++++++++++++++ ");
+                   //console.log(data);
+                   resolve();
+               },
+               error:function(response) {
+                   //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                   //console.log(response);
+                   reject();
+               }
+           });
+      });
+    },
     fetchConceptListsAndRender: function(conceptboardId){
         var that = this;
         var conceptlists = that.conceptlists;
         var concepttags = that.concepttags;
+        var conceptboards = that.conceptboards;
 
         $(this.el).html(_.template(conceptsPageTemplate)({
             "conceptdetails": conceptlists.toJSON(),
             "concepttags": concepttags.toJSON(),
-            "conceptboardId": conceptboardId
+            "conceptboardId": conceptboardId,
+            'conceptboardsDtls':conceptboards.toJSON()
         }));
 
         $('#concept-dtls').html(_.template(conceptdetailsPageTemplate));
@@ -190,7 +226,87 @@ define([
          "click #addCBoard": "viewAddCboard",
          "click .boardlst": "addConcept2Cboard",
          "click #save_CNote": "submitConceptNote",
-         "click #save_CTag": "submitConceptTag"
+         "click #save_CTag": "submitConceptTag",
+         "click .remove-pin": "removeConceptFromCboard"
+
+    },
+    removeConceptFromCboard: function (e) {
+        if (e.isDefaultPrevented()) return;
+        e.preventDefault();
+
+        var currentTarget = $(e.currentTarget);
+        var conceptId = currentTarget.data('element');
+
+        console.log("@@@@@@@ conceptId @@@@@@");
+        console.log(conceptId);
+        console.log("@@@@@@@@@@@@@");
+
+       var that = this;
+       if (confirm("Are you sure to delete the concept?")) {
+
+        that.remove_conceptFromCboards.getremoveConceptFromCBoard(conceptId, {
+           async: true,
+           crossDomain: true,
+           method: "POST",
+           headers:{
+               "authorization": "Bearer "+ sessionStorage.authtoken,
+               "Content-Type": "application/json"
+           },
+           success:function(response) {
+               console.log("Successfully deleted Concept From Concept board- ");
+               console.log(response);
+
+               $("#snackbar").html("Successfully deleted Concept From Concept board ...");
+              var x = document.getElementById("snackbar")
+              x.className = "show";
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+              //$(e.currentTarget).closest('article').remove();
+               return;
+           },
+           error:function(response) {
+               console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
+               console.log(response);
+           }
+       });
+       }
+    },
+    addConcept2Cboard: function (e) {
+        if (e.isDefaultPrevented()) return;
+        e.preventDefault();
+
+        var currentTarget = $(e.currentTarget);
+        var conceptboardId = currentTarget.data('element');
+
+        //var userId = sessionStorage.userId;
+        var userConceptCode = $('#ConcCod').val();
+
+         var formData = {
+             "conceptboardId": conceptboardId,
+             "userConceptCode": userConceptCode
+        };
+
+        var that = this;
+
+        that.add_conceptToCboards.getaddConceptToCBoard(conceptboardId, userConceptCode, {
+           async: true,
+           crossDomain: true,
+           method: "POST",
+           headers:{
+               "authorization": "Bearer "+ sessionStorage.authtoken,
+               "Content-Type": "application/json"
+           },
+           success:function(response) {
+               console.log("Successfully save Concept to Concept board- ");
+               console.log(response);
+               $("#pin-modal").modal('hide');
+               return;
+           },
+           error:function(response) {
+               console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
+               console.log(response);
+           }
+       });
     },
     submitConceptTag: function (e) {
         if (e.isDefaultPrevented()) return;
@@ -199,7 +315,7 @@ define([
         var ctag = $('#tagtxt').val();
         var conceptboardConceptId = $("#conId").val();
 
-        alert(ctag);
+        //alert(ctag);
 
         //var userId = sessionStorage.userId;
         var userId = "user1234600";
@@ -238,7 +354,7 @@ define([
         var cnote = $('#conceptNotetxt').val();
         var conceptboardConceptId = $("#conId").val();
 
-        alert(cnote);
+        //alert(cnote);
 
         //var userId = sessionStorage.userId;
         var userId = "user1234600";
@@ -262,7 +378,10 @@ define([
            success:function(response) {
                console.log("Successfully save Concept Note");
                console.log(response);
-               showTextArea();
+               $("#snackbar").html("Successfully save Concept Note");
+               var x = document.getElementById("snackbar")
+               x.className = "show";
+               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                return;
            },
            error:function(response) {
@@ -322,7 +441,7 @@ define([
      $("#conId").val(cconceptId);
      $("#mastImgg").attr("src",imgnm);
 
-     if(userNote !== ''){
+     if(typeof(userNote) != 'undefined' && userNote != null){
         $("#notes").hide();
         $("#Editnotes").show();
         $("#paraEditNote").html(userNote);
@@ -333,7 +452,7 @@ define([
      }
      $("#conceptNotetxt").text(userNote);
 
-     if(userTag !== ""){
+     if(typeof(userTag) != 'undefined' && userTag != null){
         var arr = userTag.split(",");
         var taglists = '';
         for( var i=0; i< arr.length; i++ ){

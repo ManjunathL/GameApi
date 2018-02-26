@@ -45,7 +45,7 @@
 #filters div {
     float:left;
 }
-#filters div span {
+/*#filters div span {
     display: block;
     text-decoration:none;
     color:#666;
@@ -59,7 +59,7 @@
 #filters div span.active {
     background: #135CFB;
     color:#fff;
-}
+}*/
 
 #portfoliolist .portfolio {
     width:23%;

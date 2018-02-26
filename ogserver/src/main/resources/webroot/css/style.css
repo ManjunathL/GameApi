@@ -714,6 +714,7 @@ ul.spaceTypelst li{
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+    cursor:pointer;
 }
 
 .pinBoot .white-panel:hover .pin{
@@ -1021,23 +1022,23 @@ ul.spaceTypelst li{
 .tgico{
     display: inline-block;
 }
-a.tgico-link.tgf {
+.tgico-link.tgf {
     background-color: #D4EEDC;
     border-color: #D4EEDC;
 }
-a.tgico-link.tgs {
+.tgico-link.tgs {
     background-color: #EBE4F5;
     border-color: #EBE4F5;
 }
-a.tgico-link.tgt {
+.tgico-link.tgt {
     background-color: #D0FFEF;
     border-color: #D0FFEF;
 }
-a.tgico-link.tgfr {
+.tgico-link.tgfr {
     background-color: #FBFFCC;
     border-color: #FBFFCC;
 }
-a.tgico-link {
+.tgico-link {
     background-color: #fff;
     border-radius: 20px;
    /* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);*/
@@ -1046,9 +1047,10 @@ a.tgico-link {
     height: 35px;
     margin-right: 8px;
     overflow: hidden;
-    padding: 0 28px;
+    padding: 7px 20px;
+    cursor: pointer;
 }
-a.tgico-link span.spn {
+.tgico-link span.spn {
     color: rgba(0,0,0,0.6);
     /*color: #656664;
     opacity: 0.8;*/
@@ -1112,6 +1114,10 @@ a.tgico-link span.spn {
 background: #333333;
 }
 
+.carousel-inner > .active {
+    display: block;
+}
+
 
 /* Shilpa's code */
 .col-centered{
@@ -1144,6 +1150,10 @@ footer {
 }
 
 /* Main design of Concept Board */
+
+.page{
+    min-height:850px;
+}
 
 .main-conceptboard-sec{
     min-height:450px;
@@ -1398,4 +1408,48 @@ footer {
 }
 .tag{
     margin-right: 5px;
+}
+
+/* Snackbar at Header */
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius:15px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }

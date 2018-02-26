@@ -79,7 +79,10 @@
     </div>
 </div>
 <script>
-    $("#Editnotes").hide();
+    $(document).ready(function() {
+        $("#Editnotes").hide();
+        $("#notes").show();
+    });
     function showTextArea(){
         document.getElementById("notes").classList.toggle("show");
         var x = document.getElementById("notes");
