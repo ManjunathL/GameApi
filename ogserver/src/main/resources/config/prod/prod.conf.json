@@ -14,8 +14,8 @@
     "processEvents": true
   },
 
-  "ssl_keystore": "ssl/mygubbi.jks",
-  "ssl_password": "m!gubb!$$",
+  "ssl_keystore": "ssl/mygubbiprod.jks",
+  "ssl_password": "0r@nge123$",
 
   "elasticsearch": {
     "cluster_name": "elasticsearch_mg_prod"
@@ -23,9 +23,13 @@
 
   "apicache" : true,
   "shopifyredirect": true,
+  "oldurlredirect": true,
+  "enquirymailto" : "reach@mygubbi.com",
 
   "staticConfigPath": "config/prod/prod.config.js",
-
+  "importsPath": "config/prod/prod.imports.css",
+  "alljs": "js/min.js",
+  "acceptSSLCertificates": "true",
   "robots.txt": ""
 
 }

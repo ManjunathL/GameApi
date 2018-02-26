@@ -1,56 +1,41 @@
 require.config({
   paths: {
-    jquery: 'libs/jquery/dist/jquery.min',
-    jqueryui: 'libs/jquery-ui/jquery-ui',
+    jquery: 'libs/jquery-2.1.1',
     underscore: 'libs/underscore/underscore-min',
+    lodash: 'libs/lodash/lodash.min',
     backbone: 'libs/backbone/backbone-min',
+    select2: 'libs/select2.full.min',
+    chosenjquery: 'libs/chosen.jquery',
+    upload: 'libs/upload',
     text: 'libs/text/text',
-    jqueryeasing: 'libs/jquery.easing/js/jquery.easing.min',
-    sly: 'libs/sly/dist/sly',
-    bootstrap: 'libs/bootstrap-custom/js/bootstrap.min',
+    bootstrap: 'libs/bootstrap/dist/js/bootstrap.min',
     bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
-    firebase: 'libs/firebase/firebase',
-    cloudinary_jquery: 'libs/cloudinary-jquery/cloudinary-jquery.min',
+    imagesloaded: 'libs/imagesloaded/imagesloaded.pkgd',
+    wookmark: 'libs/wookmark/wookmark',
+    pinterest_grid: 'libs/pinterest_grid',
+    mixitup: 'libs/jquery.mixitup.min',
     templates: '../templates'
-  },
-  shim: {
-    'bootstrap': {
-        deps: ['jquery', 'jqueryui'],
-        exports: 'Bootstrap'
-    },
-    'bootstrapvalidator': {
-            deps: ['bootstrap', 'jquery'],
-            exports: 'Bootstrapvalidator'
-    },
-    'backbone': {
-        deps: ['underscore', 'jquery'],
-        exports: function() {
-            return Backbone.noConflict();
-        }
-    },
-    'firebase': {
-        deps: ['jquery'],
-        exports: 'firebase'
-    },
-    'cloudinary_jquery': {
-        deps: ['jquery'],
-        exports: 'cloudinary-jquery'
-    }
-  },
-  map: {
-    '*': {
-      'css': 'libs/require-css/css'
-    }
   }
+
 });
 
 require([
   'views/app',
-  'router'
-], function(AppView, Router){
-  var appView = new AppView();
+  'router',
+  'vm'
+], function(AppView, Router, Vm){
+  var appView = Vm.create({}, 'AppView', AppView);
   appView.render();
-  Router.initialize({"appView": appView});
+  Router.initialize({appView: appView});
 });
 
-var imgBase = "https://res.cloudinary.com/mygubbi/image/upload/";
+//var baseApiUrl = "https://localhost:1443";
+//var baseApiUrl = "http://localhost:1442";
+var baseApiUrl = "https://gameuat.mygubbi.com:1443";
+
+var authbaseRestApiUrl = "http://45.112.138.146:8080/";
+var baseRestApiUrl = "http://45.112.138.146:8080/";
+
+
+//var authbaseRestApiUrl = "http://192.168.104.183:9000/";
+//var baseRestApiUrl = "http://192.168.104.183:9100/";

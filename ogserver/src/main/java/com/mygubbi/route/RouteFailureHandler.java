@@ -1,5 +1,6 @@
 package com.mygubbi.route;
 
+import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
@@ -17,8 +18,9 @@ public class RouteFailureHandler implements Handler<RoutingContext> {
         String uri = context.request().uri();
 
         if (statusCode == 404 && !uri.contains(".")) {
-            RouteUtil.getInstance().sendResponseFromFile(context, "webroot/index.html", RouteUtil.TEXT_HTML_TYPE);
+            RouteUtil.getInstance().sendResponseFromFile(context, "webroot/index_old.html", RouteUtil.TEXT_HTML_TYPE);
         } else {
+            if (statusCode <= 0) statusCode = HttpResponseStatus.NOT_FOUND.code();
             response.setStatusCode(statusCode).end("Sorry we have encountered an Error. Please refresh the page or go to <a href='#'>Home</a> to continue.");
         }
 

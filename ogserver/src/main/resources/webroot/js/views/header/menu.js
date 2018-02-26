@@ -1,104 +1,90 @@
 define([
-    'jquery',
-    'underscore',
-    'backbone',
-    'bootstrap',
-    'bootstrapvalidator',
-    'text!/templates/header/menu.html',
-    'text!/templates/header/shortlist_bar.html',
-    '/js/collections/categories.js',
-    '/js/collections/users.js',
-    '/js/models/autoSearch.js',
-    '/js/models/preSearch.js',
-    '/js/views/header/menu_helper.js',
-    '/js/mgfirebase.js'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, headerMenuTemplate, shortlistTemplate, Categories, Users, AutoSearch, PreSearch, menuHelper, MGF) {
-    var HeaderMenuView = Backbone.View.extend({
-        users: null,
-        categories: null,
-        auto_search: null,
-        pre_search: null,
-        el: '.main-menu-container',
-        render: function() {
-            var that = this;
-            window.users = this.users;
-            this.categories.fetch({
-                success: function() {
-                    that.pre_search.fetch({
-                        success: function() {
-                            menuHelper.getUserProfileWithCB(that.renderSub);
-                        },
-                        error: function() {
-                            console.log("error in fetching user pre_search data");
-                        }
-                    });
-                },
-                error: function() {
-                    console.log("error in fetching user categories data");
-                }
-            });
-        },
-        renderSub: function(userProfile) {
-            var compiledTemplate = _.template(headerMenuTemplate);
-            $(this.el).html(compiledTemplate({
-                "categories": this.categories,
-                "users": this.users,
-                "p_srch": this.pre_search.toJSON(),
-                "a_srch": this.auto_search.toJSON(),
-                "userProfile": userProfile
-            }));
-            this.renderShortlist();
-            menuHelper.ready(this);
-        },
-        events: {},
-        initialize: function() {
-            this.users = new Users();
-            this.categories = new Categories();
-            this.auto_search = new AutoSearch([{
-                "resultName": "sofa cum bed",
-                "query": "/api/products/search/sofa+cum+bed"
-            }, {
-                "resultName": "sofas by material",
-                "query": "/api/products/search/sofa+cum+bed"
-            }, {
-                "resultName": "L Shaped Kitchen",
-                "query": "/api/products/search/L Shaped Kitchen"
-            }, {
-                "resultName": "sofa set",
-                "query": "/api/products/search/sofa+cum+bed"
-            }, {
-                "resultName": "fabric sofa sets",
-                "query": "/api/products/search/sofa+cum+bed"
-            }, {
-                "resultName": "Homer L-Shaped Kitchen",
-                "resultId": "homer-l-shaped-kitchen",
-                "query": "/api/products/search/sofa+cum+bed"
-            }, {
-                "resultName": "sofa cum bed with storage",
-                "query": "/api/products/search/sofa+cum+bed"
-            }, {
-                "resultName": "sofas by speciality",
-                "query": "/api/products/search/sofa+cum+bed"
-            }, {
-                "resultName": "sofa cover",
-                "query": "/api/products/search/sofa+cum+bed"
-            }]);
-            this.pre_search = new PreSearch();
-            this.users.on("add", this.render, this);
-            this.users.on("reset", this.render, this);
-            this.listenTo(Backbone, 'shortlist.change', this.handleShortlistChange);
-            _.bindAll(this, 'renderSub');
-        },
-        handleShortlistChange: function() {
-            var slItems = MGF.getShortListedItems();
-            $('#shortlistSuperScript').html(slItems ? Object.keys(slItems).length : '');
-            this.renderShortlist();
-        },
-        renderShortlist: function() {
-            $('.shortlist').html(_.template(shortlistTemplate)({
-                user_shortlist_items: MGF.getShortListedItems()
-            }));
+  'jquery',
+  'lodash',
+  'backbone',
+  'bootstrap',
+  'text!templates/header/menu.html',
+  'collections/authsettings',
+  'models/authsetup'
+], function($, _, Backbone, Bootstrap, headerMenuTemplate, Authsettings,Authsetup){
+  var HeaderMenuView = Backbone.View.extend({
+    el: '.main-menu-container',
+    authsettings: null,
+    authsetup: null,
+    initialize: function () {
+        this.authsettings = new Authsettings();
+        this.authsetup = new Authsetup();
+        this.getAuthentication();
+       this.listenTo(Backbone);
+       _.bindAll(this, 'getAuthentication');
+    },
+    render: function() {
+        $(this.el).html(_.template(headerMenuTemplate));
+
+        $('a[href="' + window.location.hash + '"]').addClass('active');
+
+        $(document).on("click", "a[href^='/']", function(event) {
+          href = $(event.currentTarget).attr('href');
+          if (!event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+              event.preventDefault();
+              url = href.replace("/^\//", '').replace('\#\!\/', '');
+              window.App.router.navigate(url, {
+                  trigger: true
+              });
+          }
+        });
+    },
+    events: {},
+    getAuthentication: function(){
+        var that = this;
+        var form = new FormData();
+        form.append("username", "rajnish.kumar2291@gmail.com");
+        form.append("password", "welcome");
+        form.append("grant_type", "password");
+        form.append("client_id", "clientIdPassword");
+
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": authbaseRestApiUrl+"MyGubbiAuth/oauth/token",
+          "method": "POST",
+          "headers": {
+            "authorization": "Basic Y2xpZW50SWRQYXNzd29yZDpzZWNyZXQ="
+          },
+          "processData": false,
+          "contentType": false,
+          "mimeType": "multipart/form-data",
+          "data": form
         }
-    })
-    return HeaderMenuView;
+
+        $.ajax(settings).done(function (response) {
+          that.fetchAuthrender(response);
+        });
+    },
+    fetchAuthrender: function (authTokenObj) {
+        var that = this;
+        console.log("authTokenObj++++++++++++++++");
+        var authTokenObj = $.parseJSON(authTokenObj);
+        console.log(authTokenObj.access_token);
+
+         sessionStorage.authtoken = "";
+
+        if(typeof(authTokenObj.access_token) !== 'undefined'){
+            sessionStorage.authtoken = authTokenObj.access_token;
+        }else{
+            sessionStorage.authtoken = "";
+        }
+
+        if(typeof(authTokenObj.userId) !== 'undefined'){
+            sessionStorage.userId = authTokenObj.userId;
+        }else{
+            sessionStorage.userId = "";
+        }
+
+        //$("#accessToken").val(sessionStorage.authtoken);
+    }
+  })
+
+  return HeaderMenuView;
 });
+

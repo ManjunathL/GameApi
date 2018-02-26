@@ -1,6 +1,1 @@
-var env = "dev";
-var restBase = "https://uat.mygubbi.com";
-//var restBase = "https://localhost";
-var fbaseRootUrl = "https://sweltering-fire-6356.firebaseio.com/";
-var applyAnalytics = false;
-var appendRobotsNoFollow = true;
+var restBaseUrl = "http://gameuat.mygubbi.com:1446";

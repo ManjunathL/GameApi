@@ -1,12 +1,9 @@
 define([
-  'jquery',
-  'backbone'
+    'jquery',
+    'backbone'
 ], function($, Backbone){
-  var Product = Backbone.Model.extend({
-      urlRoot:restBase + '/api/products/',
-      defaults: {
-          id: ''
-      }
-  });
-  return Product;
+    var Product = Backbone.Model.extend({
+        urlRoot: baseApiUrl + '/gapi/workbench/productmaster/select'
+    });
+    return Product;
 });

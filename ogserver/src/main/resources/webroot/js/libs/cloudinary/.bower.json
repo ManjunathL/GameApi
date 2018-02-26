@@ -1,6 +1,6 @@
 {
   "name": "cloudinary",
-  "version": "2.0.0",
+  "version": "2.0.9",
   "title": "Cloudinary jQuery Plugin",
   "authors": [
     {
@@ -46,12 +46,13 @@
   "dependencies": {
     "jquery": ">=1.6",
     "blueimp-file-upload": ">=7.2.1",
-    "lodash": "3.10.0",
+    "lodash": "3.10.x",
     "jquery.ui": "1.11.4"
   },
   "devDependencies": {
     "jasmine": "~2.3.x",
-    "requirejs-bower": "2.1.x"
+    "requirejs-bower": "2.1.x",
+    "bootstrap": "~3.3.5"
   },
   "ignore": [
     "/*.*",
@@ -65,14 +66,13 @@
     "js/jquery.iframe-transport.js",
     "js/jquery.ui.widget.js"
   ],
-  "_release": "2.0.0",
+  "_release": "2.0.9",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.0",
-    "commit": "a94a87b2b6029b164b5fdb98f19d6fbf21718a88"
+    "tag": "2.0.9",
+    "commit": "679bf9deac624a6b19b17285bb13e00b9e932f1c"
   },
-  "_source": "git://github.com/cloudinary/cloudinary_js.git",
+  "_source": "https://github.com/cloudinary/cloudinary_js.git",
   "_target": "~2.0.0",
-  "_originalSource": "cloudinary",
-  "_direct": true
+  "_originalSource": "cloudinary"
 }

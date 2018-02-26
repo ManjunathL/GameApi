@@ -28,6 +28,46 @@
         "name": "Sideboard",
         "id": "sideboard",
         "code": "sideboard"
+      },
+      {
+        "name": "Study Table",
+        "id": "studytable",
+        "code": "studytable"
+      },
+      {
+        "name": "Side Table",
+        "id": "sidetable",
+        "code": "sidetable"
+      },
+      {
+        "name": "Book Rack",
+        "id": "bookrack",
+        "code": "bookrack"
+      },
+      {
+        "name": "Coffee Tables",
+        "id": "coffeetable",
+        "code": "coffeetable"
+      },
+      {
+        "name": "Nest of Table",
+        "id": "nestoftable",
+        "code": "nestoftable"
+      },
+      {
+        "name": "Chest of Drawer",
+        "id": "chestofdrawer",
+        "code": "chestofdrawer"
+      },
+      {
+        "name": "Dresser",
+        "id": "dresser",
+        "code": "dresser"
+      },
+      {
+        "name": "Console Table",
+        "id": "consoletable",
+        "code": "consoletable"
       }
     ]
   },
@@ -68,24 +108,14 @@
     "maxPriceLimit":400000,
     "subCategories": [
       {
-        "name": "Wardrobe",
-        "id": "wardrobe",
-        "code": "wardrobe"
+        "name": "Sliding Wardrobe",
+        "id": "slidingwardrobe",
+        "code": "slidingwardrobe"
       },
       {
-        "name": "Study Table",
-        "id": "studytable",
-        "code": "studytable"
-      },
-      {
-        "name": "Side Table",
-        "id": "sidetable",
-        "code": "sidetable"
-      },
-      {
-        "name": "Book Rack",
-        "id": "bookrack",
-        "code": "bookrack"
+        "name": "Swing Wardrobe",
+        "id": "swingwardrobe",
+        "code": "swingwardrobe"
       }
     ]
   }

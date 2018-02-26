@@ -163,6 +163,11 @@
             "index": "not_analyzed",
             "include_in_all": false
           },
+          "seoId": {
+            "type": "string",
+            "index": "not_analyzed",
+            "include_in_all": false
+          },
           "relevance": {
             "type": "long",
             "index": "no",
@@ -214,6 +219,7 @@
         "name",
         "id",
         "productId",
+        "seoId",
         "desc",
         "category",
         "subcategory",

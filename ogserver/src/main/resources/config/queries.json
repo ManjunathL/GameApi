@@ -87,6 +87,50 @@
       "params": []
     },
     {
+      "id": "blog.select.all",
+      "type": "select",
+      "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'publish' ",
+      "params": []
+    },
+    {
+      "id": "blog.select.all.draft",
+      "type": "select",
+      "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'draft' ",
+      "params": []
+    },
+    {
+      "id": "blog.select.all.publish",
+      "type": "select",
+      "query": "select id, blogId, tags, blog_categories, blogJson from blog where status = 'publish' ",
+      "params": []
+    },
+    {
+      "id": "diy.select.all",
+      "type": "select",
+      "query": "select id, diyId, tags, diy_categories, diyJson from diy where status = 'publish'",
+      "params": []
+    },
+    {
+      "id": "diy.select.all.draft",
+      "type": "select",
+      "query": "select * from diy where status = 'draft'",
+      "params": []
+    },
+    {
+      "id": "seo.select.all",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory, content from seo",
+      "params": []
+    },
+    {
+      "id": "product.select.blogTagsLatest",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog where NOT FIND_IN_SET(?,tags) and status = 'publish'",
+      "params": [
+        "tags"
+      ]
+    },
+    {
       "id": "product.select.productid",
       "type": "select",
       "query": "select id, productId, productJson from product where productId = ?",
@@ -95,19 +139,100 @@
       ]
     },
     {
+      "id": "blog.select.blogid",
+      "type": "select",
+      "query": "select id, blogId, tags, blogJson from blog where blogId = ?",
+      "params": [
+        "blogId"
+      ]
+    },
+    {
+      "id": "diy.select.diyid",
+      "type": "select",
+      "query": "select id, diyId, tags, diyJson from diy where diyId = ?",
+      "params": [
+        "diyId"
+      ]
+    },
+    {
+      "id": "seo.select.seoid",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory, content from seo where seoId = ?",
+      "params": [
+        "seoId"
+      ]
+    },
+    {
       "id": "product.select.category",
       "type": "select",
-      "query": "select id, productId, productJson from product where category = ?",
+      "query": "select id, productId, popularity,styleSortSeq, productJson from product where category = ? ORDER BY popularity ASC, styleSortSeq DESC",
       "params": [
         "category"
       ]
     },
     {
+      "id": "product.select.blogTags",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags) and status = 'publish'",
+      "params": [
+        "tags"
+      ]
+    },
+    {
+      "id": "seo.select.seoSubCategory",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, subCategory, content from seo where subCategory = ? AND location = ?",
+      "params": [
+        "subCategory",
+        "location"
+      ]
+    },
+    {
+      "id": "seo.select.seoCategory",
+      "type": "select",
+      "query": "select id, seoId, title, description, metaKeywords, seoJson, subCategory, content from seo where category = ? AND location = ? ",
+      "params": [
+        "category",
+        "location"
+      ]
+    },
+    {
+      "id": "blog.select.allBlogs",
+      "type": "select",
+      "query": "select * from blog ",
+      "params": [
+
+      ]
+    },{
+      "id": "diy.select.allDiys",
+      "type": "select",
+      "query": "select * from diy ",
+      "params": [
+
+      ]
+    },
+    {
+      "id": "product.select.allDiys",
+      "type": "select",
+      "query": "select id, diyId, diy_categories, diyJson from diy ",
+      "params": [
+
+      ]
+    },
+    {
       "id": "product.select.subcategory",
       "type": "select",
-      "query": "select id, productId, productJson from product where subcategory = ?",
+      "query": "select id, productId, popularity,styleSortSeq, productJson from product where subcategory = ? ORDER BY popularity ASC, styleSortSeq DESC",
       "params": [
         "subcategory"
+      ]
+    },
+    {
+      "id": "product.select.blogTags",
+      "type": "select",
+      "query": "select id, blogId, blog_categories, blogJson from blog where find_in_set(?,tags) and status = 'publish'",
+      "params": [
+        "tags"
       ]
     },
     {
@@ -124,7 +249,7 @@
       "id": "product.insert",
       "type": "insert",
       "table": "product",
-      "query": "insert into product(id, productId, name, description, category, subcategory, styleId, productShortJson, productJson) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "query": "insert into product(id, productId, name, description, category, subcategory, styleId, productShortJson, productJson, popularity, relevance, styleSortSeq, url ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       "params": [
         "id",
         "productId",
@@ -134,14 +259,107 @@
         "subcategory",
         "styleId",
         "productShortJson",
-        "productJson"
+        "productJson",
+        "popularity",
+        "relevance",
+        "styleSortSeq",
+        "url"
+      ]
+    },
+    {
+      "id": "blog.insert",
+      "type": "insert",
+      "table": "blog",
+      "query": "insert into blog(id, blogId, tags, blog_categories, blogJson ) values (?, ?, ?, ?, ?)",
+      "params": [
+        "id",
+        "blogId",
+        "tags",
+        "blog_categories",
+        "blogJson"
+      ]
+    },
+    {
+      "id": "diy.insert",
+      "type": "insert",
+      "table": "diy",
+      "query": "insert into diy(id, diyId, tags, diy_categories, diyJson ) values (?, ?, ?, ?, ?)",
+      "params": [
+        "id",
+        "diyId",
+        "tags",
+        "diy_categories",
+        "diyJson"
+      ]
+    },
+    {
+      "id": "seo.insert",
+      "type": "insert",
+      "table": "seo",
+      "query": "insert into seo(id, seoId, title, description, metaKeywords, seoJson, location, category, subCategory, content, url, other_catg_url ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "params": [
+        "id",
+        "seoId",
+        "title",
+        "description",
+        "metaKeywords",
+        "seoJson",
+        "location",
+        "category",
+        "subCategory",
+        "content",
+        "url",
+        "other_catg_url"
+      ]
+    },
+    {
+      "id": "blog.update",
+      "type": "update",
+      "table": "blog",
+      "query": "update blog set tags = ?, blog_categories = ?, blogJson = ? where blogId = ?",
+      "params": [
+        "tags",
+        "blog_categories",
+        "blogJson",
+        "blogId"
+      ]
+    },
+    {
+      "id": "diy.update",
+      "type": "update",
+      "table": "diy",
+      "query": "update diy set tags = ?, diy_categories = ?, diyJson = ? where diyId = ?",
+      "params": [
+        "tags",
+        "diy_categories",
+        "diyJson",
+        "diyId"
+      ]
+    },
+    {
+      "id": "seo.update",
+      "type": "update",
+      "table": "seo",
+      "query": "update seo set title = ?, description = ?, metaKeywords = ? , seoJson = ?, location = ?, category = ? , subCategory = ?, content = ?, url = ?, other_catg_url = ? where seoId = ?",
+      "params": [
+        "title",
+        "description",
+        "metaKeywords",
+        "seoJson",
+        "location",
+        "category",
+        "subCategory",
+        "content",
+        "url",
+        "other_catg_url",
+        "seoId"
       ]
     },
     {
       "id": "product.update",
       "type": "update",
       "table": "product",
-      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, productShortJson = ?, productJson = ? where productId = ?",
+      "query": "update product set name = ?, description = ?, category = ?, subcategory = ?, styleId = ?, productShortJson = ?, productJson = ?, popularity = ?, relevance = ?, styleSortSeq = ?, url = ? where productId = ?",
       "params": [
         "name",
         "description",
@@ -150,6 +368,10 @@
         "styleId",
         "productShortJson",
         "productJson",
+        "popularity",
+        "relevance",
+        "styleSortSeq",
+        "url",
         "productId"
       ]
     },
@@ -170,12 +392,41 @@
       "id": "shortlist.remove",
       "type": "delete",
       "table": "shortlisted",
-      "query": "delete shortlisted where productId = ? and uid = ?",
+      "query": "delete from shortlisted where productId = ? and uid = ?",
       "params": [
         "productId",
         "uid"
       ]
+    },
+    {
+      "id": "addon-master.select.all",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select * from addon_master",
+      "params": []
+    },
+    {
+      "id": "addon-master.select.category",
+      "type": "select",
+      "table": "addon_master",
+      "query": "select * from addon_master where categoryCode = ?",
+      "params": [
+        "categoryCode"
+      ]
+    },
+    {
+      "id": "product.select.relatedSeo",
+      "type": "select",
+      "query": "SELECT * FROM product as a WHERE a.category = ? ORDER BY createDt DESC LIMIT 2",
+      "params": [
+        "category"
+      ]
+    },
+    {
+      "id": "page.select.page_url",
+      "type": "select",
+      "query": "select * from seo_landing_page where page_url = ?",
+      "params": ["page_url"]
     }
   ]
 }
-

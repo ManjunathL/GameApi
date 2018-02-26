@@ -20,8 +20,7 @@
     "tag": "2.7.1",
     "commit": "921b3e83e5d99ef39fbb235d3f8ad0e7fb3bf091"
   },
-  "_source": "git://github.com/dhotson/springy.git",
+  "_source": "https://github.com/dhotson/springy.git",
   "_target": "~2.7.1",
-  "_originalSource": "springy",
-  "_direct": true
+  "_originalSource": "springy"
 }

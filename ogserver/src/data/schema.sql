@@ -89,5 +89,32 @@ CREATE TABLE idsequence (
   PRIMARY KEY (sequencename)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Sequence Generator';
 
+DROP TABLE IF EXISTS blog;
+CREATE TABLE blog (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  blogId varchar(256) NOT NULL,
+  tags TEXT NOT NULL,
+  blog_categories TEXT NULL,
+  blogJson TEXT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY unique_blogId (blogId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS seo;
+CREATE TABLE seo (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  seoId varchar(256) NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT NULL,
+  metaKeywords TEXT NULL,
+  seoJson TEXT NULL,
+  location varchar(256) NOT NULL,
+  category varchar(256) NOT NULL,
+  subCategory varchar(256) NOT NULL,
+  touchtime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY unique_seoId (seoId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

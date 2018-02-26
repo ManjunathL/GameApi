@@ -17,9 +17,9 @@
   "ssl_password": "m!gubb!",
 
   "firebase": {
-    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
-    "loginid": "mygubbi.fbase@gmail.com",
-    "password": "!@#$VGYHasdf435",
+    "fb_url": "https://mygubbi-uat.firebaseio.com/",
+    "loginid": "mygubbi.uat@gmail.com",
+    "password": "uat@mygubbi",
     "processEvents": false
   },
 
@@ -27,7 +27,9 @@
     "url": "cloudinary://492523411154281:Qpr5Vg3klupb-ETRIsj-caLJ5zg@mygubbi"
   },
 
-  "staticConfigPath": "webroot/js/config.js",
-
-  "robots.txt": "User-agent: *\nDisallow: /"
+  "staticConfigPath": "js/config.js",
+  "importsPath": "imports.css",
+  "alljs": "js/main.js",
+  "robots.txt": "User-agent: *\nDisallow: /",
+  "max-age": 432000
 }

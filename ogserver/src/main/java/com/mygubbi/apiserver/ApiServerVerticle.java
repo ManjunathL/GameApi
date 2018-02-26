@@ -19,13 +19,26 @@ import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.handler.sockjs.BridgeOptions;
 import io.vertx.ext.web.handler.sockjs.PermittedOptions;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
+import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpHost;
+import org.apache.http.client.utils.URIUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class ApiServerVerticle extends AbstractVerticle
 {
     private final static Logger LOG = LogManager.getLogger(ApiServerVerticle.class);
+
+    private static String[] URLS = new String[]{
+            "http://mygubbi.com", "http://mygubbi.com/", "http://mygubbi.com/bangalore-lp1",
+            "http://www.mygubbi.com", "http://www.mygubbi.com/", "http://www.mygubbi.com/bangalore-lp",
+            "https://mygubbi.com", "https://mygubbi.com/", "https://mygubbi.com/bangalore-lp1",
+            "https://www.mygubbi.com", "https://www.mygubbi.com/", "https://www.mygubbi.com/bangalore-lp"
+    };
 
     private static final String STANDARD_RESPONSE = new JsonObject().put("status", "error")
             .put("error", "Request did not have a response").toString();
@@ -46,21 +59,33 @@ public class ApiServerVerticle extends AbstractVerticle
 
     private void setupHttpRedirectServer()
     {
+
         String httpsRedirectUrl = ConfigHolder.getInstance().getStringValue("urlwithssl", "https://www.mygubbi.com");
         HttpServer server = VertxInstance.get().createHttpServer();
         Router router = Router.router(VertxInstance.get());
         router.route().handler(routingContext -> {
             String url = routingContext.request().absoluteURI();
-            if (url.startsWith("http:"))
+            try
             {
-                url = "https:" + url.substring(5);
+                URI baseUri = new URI(url);
+                HttpHost httpHost = URIUtils.extractHost(baseUri);
+                String hostName = httpHost.getHostName();
+                boolean hostNameIsNaked = StringUtils.countMatches(hostName, ".") == 1;
+                boolean httpScheme = ("http").equals(httpHost.getSchemeName());
+                //boolean httpsScheme = ("https").equals(httpHost.getSchemeName());
+                if (hostNameIsNaked) hostName = "www." + hostName;
+                URI newUri = URIUtils.rewriteURI(baseUri, new HttpHost(hostName, httpHost.getPort(), "https"));
+                url = newUri.toString();
+                LOG.info("URL " + url + " rewritten as :" + newUri.toString());
             }
-            else
+            catch (URISyntaxException e)
             {
+                LOG.info("Error with url:" + url + " || " + e.getMessage());
                 url = httpsRedirectUrl;
             }
             RouteUtil.getInstance().redirect(routingContext, url, "Redirecting to secure mygubbi.com site");
         });
+       // this.setupRedirectHandlerForOldUrls(router);
         int httpPort = ConfigHolder.getInstance().getInteger("http_port", 80);
         server.requestHandler(router::accept).listen(httpPort);
     }
@@ -70,13 +95,15 @@ public class ApiServerVerticle extends AbstractVerticle
         Router router = Router.router(VertxInstance.get());
 
         this.setupApiHandler(router);
+        this.setupNakedDomainRouter(router);
         this.setupRedirectHandlerForShopifyUrls(router);
+        this.setupRedirectHandlerForOldUrls(router);
         this.setupPrerenderHandler(router);
         this.setupStaticConfigHandler(router);
         this.setupStaticHandler(router);
 
-        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/keystore.jks");
-        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "m!gubb!");
+        String ssl_keystore = ConfigHolder.getInstance().getStringValue("ssl_keystore", "ssl/mygubbiprod.jks");
+        String ssl_password = ConfigHolder.getInstance().getStringValue("ssl_password", "0r@nge123$");
         HttpServerOptions options = new HttpServerOptions()
                 .setKeyStoreOptions(new JksOptions().
                         setPath(ssl_keystore).
@@ -115,7 +142,7 @@ public class ApiServerVerticle extends AbstractVerticle
 
     private void setupStaticHandler(Router router)
     {
-        router.route(HttpMethod.GET, "/*").handler(StaticHandler.create());
+        router.route(HttpMethod.GET, "/*").handler(StaticHandler.create().setMaxAgeSeconds(ConfigHolder.getInstance().getMaxAge()));
         router.route(HttpMethod.GET, "/*").failureHandler(new RouteFailureHandler());
     }
 
@@ -127,6 +154,20 @@ public class ApiServerVerticle extends AbstractVerticle
             router.route(HttpMethod.GET, "/*").handler(new ShopifyRedirectHandler());
             LOG.info("Registered Shopify url handler");
         }
+    }
+    private void setupRedirectHandlerForOldUrls(Router router)
+    {
+        boolean oldUrlRedirectOn = ConfigHolder.getInstance().getBoolean("oldurlredirect", false);
+        if (oldUrlRedirectOn)
+        {
+            router.route(HttpMethod.GET, "/*").handler(new OldUrlRedirectHandler());
+            LOG.info("Registered Old url handler");
+        }
+    }
+
+    private void setupNakedDomainRouter(Router router)
+    {
+        router.route(HttpMethod.GET, "/*").handler(new NakedDomainHandler());
     }
 
     private void setupApiHandler(Router router)
@@ -144,9 +185,16 @@ public class ApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/api/relatedproducts", new RelatedProductHandler(VertxInstance.get()));
         router.mountSubRouter("/api/appliances", new ApplianceHandler(VertxInstance.get()));
         router.mountSubRouter("/api/stories", new StoryHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/blogs", new BlogHandler(VertxInstance.get()));
         router.mountSubRouter("/api/es", new ProductSearchHandler(VertxInstance.get()));
         router.mountSubRouter("/api/pre.search", new PreSearchHandler(VertxInstance.get()));
         router.mountSubRouter("/api/auto.search", new AutoSearchHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/seo", new SeoHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/diy", new DIYHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/addon", new AddonHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/seoProducts", new SeoProductHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/directusBlog", new DirectusBlogHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/landingPage", new LandingPageHandler(VertxInstance.get()));
 
         //router.mountSubRouter("/api/consult", new ConsultHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
     }

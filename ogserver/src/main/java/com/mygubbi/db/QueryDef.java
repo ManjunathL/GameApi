@@ -17,6 +17,8 @@ public class QueryDef
 	public boolean isInsertQuery;
 	public String tableForInsert;
 	public String[] paramList;
+	public String[] jsonFields;
+	private boolean idFieldExists = false;
 	
 	public QueryDef(JsonObject queryJson)
 	{
@@ -29,8 +31,22 @@ public class QueryDef
 			for (int i=0; i<paramsArray.size(); i++)
 			{
 				this.paramList[i] = paramsArray.getString(i);
+				if ("id".equals(this.paramList[i])) this.idFieldExists = true;
 			}
 		}
+
+        if (queryJson.containsKey("jsonfields"))
+        {
+            JsonArray jsonfieldsL = queryJson.getJsonArray("jsonfields");
+            if (jsonfieldsL != null && !jsonfieldsL.isEmpty())
+            {
+                this.jsonFields = new String[jsonfieldsL.size()];
+                for (int i=0; i<jsonfieldsL.size(); i++)
+                {
+                    this.jsonFields[i] = jsonfieldsL.getString(i);
+                }
+            }
+        }
 	}
 
 	public QueryDef(String query, String type)
@@ -45,5 +61,10 @@ public class QueryDef
 		this.isUpdateQuery = !this.type.equals(SELECT_QUERY_TYPE);
 		this.isInsertQuery = this.type.equals(INSERT_QUERY_TYPE);
 		this.tableForInsert = tableForInsert;
+	}
+
+	public boolean hasIdField()
+	{
+		return this.idFieldExists;
 	}
 }

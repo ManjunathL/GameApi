@@ -99,9 +99,25 @@ public class ProductJson extends JsonObject
         return this.getString("styleId");
     }
 
+    public Integer getPopularity() { return this.getInteger("popularity"); }
+
+    public Integer getStyleSortSeq() { return this.getInteger("styleSortSeq"); }
+
+    public Integer getRelevance() {return this.getInteger("relevance");}
+
     public String getFirstImage()
     {
         return this.getJsonArray("images").getString(0);
+    }
+
+    public String getSeoId()
+    {
+        return this.getString("seoId");
+    }
+
+    public String getUrl()
+    {
+        return this.getString("url");
     }
 
     public JsonObject getShortJson()

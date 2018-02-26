@@ -46,7 +46,7 @@
     "tag": "1.11.4",
     "commit": "d6713024e16de90ea71dc0544ba34e1df01b4d8a"
   },
-  "_source": "git://github.com/jquery/jquery-ui.git",
+  "_source": "https://github.com/jquery/jquery-ui.git",
   "_target": "1.11.4",
   "_originalSource": "jquery.ui"
 }

@@ -5,8 +5,10 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.config.ServiceDef;
 import com.mygubbi.config.ServicesConfig;
-import io.vertx.core.*;
-import io.vertx.core.json.JsonArray;
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.DeploymentOptions;
+import io.vertx.core.Future;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -96,6 +98,11 @@ public class ServerVerticle extends AbstractVerticle
         {
             ServiceDef serviceDef = sequentialServices.pop();
             Class serviceClass = serviceDef.getType();
+            if (serviceClass == null)
+            {
+                startFuture.fail("Verticle not setup properly, server not starting. " + serviceDef);
+                return;
+            }
             LOG.info(serviceClass.getName() + " starting ...");
             VertxInstance.get().deployVerticle(serviceClass.getCanonicalName(), serviceDef.getDeploymentOptions(), result ->
             {

@@ -1,16 +1,16 @@
 package com.mygubbi.db;
 
-import java.util.List;
-
+import com.mygubbi.common.StringUtils;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.sql.UpdateResult;
+
+import java.util.List;
 
 public class QueryData
 {
 	public String queryId;
 	public QueryDef queryDef;
-	
 	public JsonObject paramsObject;
 	public List<JsonObject> rows;
 	public UpdateResult updateResult;
@@ -23,15 +23,14 @@ public class QueryData
 	
 	public QueryData()
 	{
-		
+
 	}
-	
+
 	public QueryData(String queryId, JsonObject paramsObject)
 	{
 		this.queryId = queryId;
 		this.paramsObject = paramsObject;
 	}
-
 	public JsonArray getParams()
 	{
 		if (this.paramsObject == null || this.queryDef == null || this.queryDef.paramList == null) return null;
@@ -45,6 +44,10 @@ public class QueryData
 				params.add("");
 			}
 			else if (value instanceof JsonObject)
+			{
+				params.add(value.toString());
+			}
+			else if (value instanceof JsonArray)
 			{
 				params.add(value.toString());
 			}
@@ -93,15 +96,42 @@ public class QueryData
 		return jsonRows;
 	}
 
+	public JsonObject getJsonDataRow(String jsonField)
+	{
+		return new JsonObject(this.rows.get(0).getString(jsonField));
+	}
+
 	public QueryData setResult(List<JsonObject> rows)
 	{
 		this.rows = rows;
+		if (this.queryDef.jsonFields != null)
+		{
+			for (JsonObject row : this.rows)
+			{
+				for (String jsonfield : this.queryDef.jsonFields)
+				{
+                    String data = row.getString(jsonfield);
+                    if (StringUtils.isNonEmpty(data))
+                    {
+						if (data.charAt(0) == '[')
+                        	row.put(jsonfield, new JsonArray(data));
+						else
+							row.put(jsonfield, new JsonObject(data));
+
+                    }
+				}
+			}
+		}
 		return this.endQuery();
 	}
 
 	public QueryData setResult(UpdateResult updateResult)
 	{
 		this.updateResult = updateResult;
+		if (this.queryDef.isInsertQuery && this.updateResult.getKeys() != null && !this.updateResult.getKeys().isEmpty())
+		{
+			this.paramsObject.put("id", this.updateResult.getKeys().getValue(0));
+		}
 		return this.endQuery();
 	}
 }

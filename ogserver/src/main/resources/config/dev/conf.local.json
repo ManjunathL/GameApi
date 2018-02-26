@@ -8,12 +8,14 @@
   },
 
   "firebase": {
-    "fb_url": "https://sweltering-fire-6356.firebaseio.com",
-    "loginid": "mygubbi.fbase@gmail.com",
-    "password": "!@#$VGYHasdf435",
+    "fb_url": "https://mygubbi-uat.firebaseio.com/",
+    "loginid": "mygubbi.uat@gmail.com",
+    "password": "uat@mygubbi",
     "processEvents": false
   },
 
   "apicache" : true,
-  "shopifyredirect": true
+  "shopifyredirect": true,
+  "enquirymailto" : "noob@nomansland.xyz"
+
 }
