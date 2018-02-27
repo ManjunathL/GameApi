@@ -84,6 +84,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/version/createPostSalesInitial").handler(this::createPostSalesInitial);
         this.post("/version/createversion").handler(this::createProposalVersion);
         this.post("/version/copyversion").handler(this::copyVersion);
+        this.post("/createQuoteNumber").handler(this::createQuoteNumber);
 //        this.post("/version/confirm").handler(this::confirmVersion);
 //        this.post("/version/designsignoff").handler(this::dsoVersion);
 //        this.post("/version/productionsignoff").handler(this::psoVersion);
@@ -383,17 +384,33 @@ public class ProposalHandler extends AbstractRouteHandler
         JsonObject proposalData = routingContext.getBodyAsJson();
         LOG.info("Proposal:" + proposalData.encodePrettily());
         // get the quote no based on city before saving
-        getMaxQuoteNoBasedOnCityMonthYear(routingContext);
+        LOG.info("proposal data project city " +proposalData.getString("pcity"));
+        /*if(routingContext.getBodyAsJson().getString("pcity")==null || !routingContext.getBodyAsJson().getString("quoteNoNew").isEmpty() )
+        {
+            LOG.info("inside if of city is null " );*/
+            List<QueryData> queryDatas = new ArrayList<>();
+            queryDatas.add( new QueryData("proposal.update", proposalData));
+            this.updateProposal(routingContext, proposalData,queryDatas);
+        /*}else
+        {
+            getMaxQuoteNoBasedOnCityMonthYear(routingContext);
+        }*/
+
     }
 
-    private void getMaxQuoteNoBasedOnCityMonthYear(RoutingContext routingContext) {
+    private void createQuoteNumber(RoutingContext routingContext) {
+        LOG.info("create quote number called" + routingContext.get("pcity"));
         JsonObject bodyDetails =routingContext.getBodyAsJson();
         ProposalHeader header = new ProposalHeader(bodyDetails);
         String city = header.getProjectCity();
+        LOG.info("city in create quote method " +city);
         String cityCode = "";
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM");
         LocalDate today = LocalDate.now();
-
+        if(city==null  || city.isEmpty())
+        {
+            city="No city";
+        }
         switch (city) {
             case "Bangalore":
                 cityCode = "BLR";
@@ -407,6 +424,7 @@ public class ProposalHandler extends AbstractRouteHandler
             case "Pune":
                 cityCode = "PUN";
                 break;
+            default: break;
         }
 
         String tempInc = String.format("%04d", 1);
@@ -415,9 +433,9 @@ public class ProposalHandler extends AbstractRouteHandler
 
         JsonObject paramsObj = new JsonObject();
         paramsObj.put("city", cityCode);
-        paramsObj.put("curmonth", String.format("%02d", today.getMonthValue()));
+        paramsObj.put("curmonth", Integer.valueOf(String.format("%02d", today.getMonthValue())));
         paramsObj.put("curYear", today.getYear());
-
+        LOG.info("city " + cityCode+ " cur month " +String.format("%02d", today.getMonthValue()) + "cur year " +today.getYear());
         Integer id = LocalCache.getInstance().store(new QueryData("city.selectMonthCount", paramsObj));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
@@ -442,9 +460,10 @@ public class ProposalHandler extends AbstractRouteHandler
 
                         queryDatas.add( new QueryData("proposal.update", bodyDetails));
                         // city.newCityQuote
-                        paramsObj.put("proposalId",bodyDetails.getString("id"));
+                        paramsObj.put("proposalId",bodyDetails.getInteger("id"));
                         paramsObj.put("quoteNo",newQuote);
-                        queryDatas.add( new QueryData("city.newCityQuote", bodyDetails));
+                        LOG.info("quote number " +newQuote);
+                        queryDatas.add( new QueryData("city.newCityQuote", paramsObj));
 
                         this.updateProposal(routingContext, bodyDetails, queryDatas);
                         //i have quote no, insert that to city master and proposal table ...
