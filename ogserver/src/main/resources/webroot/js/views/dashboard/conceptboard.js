@@ -237,11 +237,16 @@ define([
          "userMindboardId": "62"
        });*/
        var formData = {
+            "id": 0,
             "userId": userId,
             "name": $('#cboardnameTxt').val(),
+            "spaceTypeCode":$('#spaceTypeCodeTxt').val(),
             "description": $('#cboarddescTxt').val(),
             "templateCode": $('#templateCodeTxt').val(),
-            "userMindboardId": userMindboardId
+            "userMindboardId": userMindboardId,
+            "imgUrl":$('#cboardImgUrl').val(),
+            "noOfConceptsAdded": 1,
+            "userNote": $('#cboarddescTxt').val()
        };
         var that = this;
         console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
@@ -257,15 +262,32 @@ define([
            },
            data: JSON.stringify(formData),
            success:function(response) {
-               console.log("Successfully save Concept board through template - ");
-               console.log(response);
+              console.log("Successfully save Concept board through template selection... ");
+              console.log(response);
+              $("#addcboard-modal").modal('hide');
+
+                $("#snackbar").html("Successfully save Concept board through template selection... ");
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                return;
+
+          },
+          error:function(model, response, options) {
+          alert("Shilpa respone :: ");
+              console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
+              console.log(JSON.stringify(response));
+              console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+              console.log(response.responseJSON.errorMessage);
+
+               $("#snackbar").html(response.responseJSON.errorMessage);
+               var x = document.getElementById("snackbar")
+               x.className = "show";
+               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                return;
-           },
-           error:function(response) {
-               console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
-               console.log(response);
-           }
-       });
+
+          }
+      });
     },
     getSelectedTemplatess: function(evt){
         evt.preventDefault();

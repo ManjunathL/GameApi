@@ -1422,7 +1422,7 @@ footer {
     border-radius:15px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 9999999;
     left: 50%;
     bottom: 30px;
     font-size: 17px;
