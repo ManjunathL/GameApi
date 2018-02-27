@@ -8,7 +8,7 @@
     "url": "git://github.com/orangegubbidev/apidevelopment.git"
   },
   "scripts": {
-    "start": "http-server src/main/resources/webroot -a 0.0.0.0 -p 8000 -c-1",
+    "start": "http-server src/main/resources/webroot -a 0.0.0.0 -p 8787 -c-1",
     "prestart": "npm install",
     "install": "bower install --allow-root",
     "minify": "gulp"
