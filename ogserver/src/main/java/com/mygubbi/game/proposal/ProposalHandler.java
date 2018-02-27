@@ -1199,6 +1199,7 @@ public class ProposalHandler extends AbstractRouteHandler
                         jsonObject.put("quoteFile",lastFile).put("status","success").put("comments","Successfully published version/proposal").put("responseMessage", "Successfully Confirmed").put("confirmedStatus",true);
                         LOG.info("JSON object response " +jsonObject.toString());
                         sendJsonResponse(routingContext, jsonObject.toString());
+                        uploadToS3=false;
                     });
         }
         else
