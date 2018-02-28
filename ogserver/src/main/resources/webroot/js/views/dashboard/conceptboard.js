@@ -166,6 +166,8 @@ define([
         });
     },
     fetchConceptsAndRender: function() {
+
+    console.log("INSIDE FETCH RENDER");
         var that = this;
        // var designs = that.designs;
        // var concepts = that.concepts;
@@ -216,7 +218,8 @@ define([
                console.log("Successfully save Concept to Concept board- ");
                console.log(response);
                $("#pin-modal").modal('hide');
-               return;
+               that.render();
+//               return;
            },
            error:function(response) {
                console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
@@ -240,6 +243,7 @@ define([
                };
         var that = this;
 
+        if (confirm("Are you sure to delete the concept board?")) {
         that.remove_conceptBoards.getremoveConceptBoard(conceptBoardId, {
            async: true,
            crossDomain: true,
@@ -252,15 +256,16 @@ define([
            success:function(response) {
               console.log("Successfully removed Concept board ... ");
               console.log(response);
-              $("#snackbar").html("Successfully save Concept board through template selection... ");
+              $("#snackbar").html("Successfully removed Concept board through template selection... ");
               var x = document.getElementById("snackbar")
               x.className = "show";
               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-              return;
+              that.render();
+//              return;
 
           },
           error:function(model, response, options) {
-          alert("Shilpa respone :: ");
+
               console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
               console.log(JSON.stringify(response));
               console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
@@ -270,10 +275,13 @@ define([
                var x = document.getElementById("snackbar")
                x.className = "show";
                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-               return;
+//               return;
 
           }
       });
+      }
+
+
 
     },
     submitBoard: function (e) {
@@ -321,16 +329,16 @@ define([
               console.log("Successfully save Concept board through template selection... ");
               console.log(response);
               $("#addcboard-modal").modal('hide');
-
-                $("#snackbar").html("Successfully save Concept board through template selection... ");
-                var x = document.getElementById("snackbar")
-                x.className = "show";
-                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-                return;
+              $("#snackbar").html("Successfully save Concept board through template selection... ");
+              var x = document.getElementById("snackbar")
+              x.className = "show";
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+              that.render();
+              return;
 
           },
           error:function(model, response, options) {
-          alert("Shilpa respone :: ");
+
               console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
               console.log(JSON.stringify(response));
               console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
