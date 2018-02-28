@@ -1184,6 +1184,7 @@ public class ProposalHandler extends AbstractRouteHandler
 
         if (uploadToS3)
         {
+            uploadToS3=false;
             Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum));
             VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                     (AsyncResult<Message<Integer>> result) -> {
@@ -1199,7 +1200,6 @@ public class ProposalHandler extends AbstractRouteHandler
                         jsonObject.put("quoteFile",lastFile).put("status","success").put("comments","Successfully published version/proposal").put("responseMessage", "Successfully Confirmed").put("confirmedStatus",true);
                         LOG.info("JSON object response " +jsonObject.toString());
                         sendJsonResponse(routingContext, jsonObject.toString());
-                        uploadToS3=false;
                     });
         }
         else
