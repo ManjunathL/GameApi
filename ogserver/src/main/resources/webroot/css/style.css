@@ -1252,6 +1252,9 @@ footer {
 .grid:hover .dropbtn {
     display:block;
 }
+.grid:hover .remove-cboard {
+    display:block;
+}
 
 
 .grid .showLeft{
@@ -1452,4 +1455,16 @@ footer {
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+}
+
+.remove-cboard{
+    position: absolute;
+    top: 0;
+    left: 4px;
+    font-size: x-large;
+    color: #e02b4c;
+    display:none;
+}
+.remove-cboard:hover{
+    color: #e02b4c;
 }

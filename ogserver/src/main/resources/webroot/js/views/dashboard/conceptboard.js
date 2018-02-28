@@ -22,8 +22,9 @@ define([
   'collections/related_concepts',
   'collections/add_conceptboards',
   'views/dashboard/add_conceptboard',
-  'collections/add_conceptToCboards'
-], function($, _, Backbone, Bootstrap, pinterest_grid, dashboardPageTemplate, kitchenPageTemplate, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, livingPageTemplate, SpaceTypes, CreateConceptBoards, ConceptBoards, ConceptLists, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards){
+  'collections/add_conceptToCboards',
+  'collections/remove_conceptBoards'
+], function($, _, Backbone, Bootstrap, pinterest_grid, dashboardPageTemplate, kitchenPageTemplate, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, livingPageTemplate, SpaceTypes, CreateConceptBoards, ConceptBoards, ConceptLists, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptBoards){
   var ConceptboardPage = Backbone.View.extend({
     el: '.page',
     //concepts: null,
@@ -37,6 +38,7 @@ define([
     related_concepts: null,
     add_conceptboards: null,
     add_concept2boards: null,
+    remove_conceptBoards:null,
     initialize: function() {
         //this.concepts = new Concepts();
         //this.designs = new Designs();
@@ -49,6 +51,7 @@ define([
         this.related_concepts = new RelatedConcepts();
         this.add_conceptboards = new AddConceptboards();
         this.add_conceptToCboards = new AddConceptToCboards();
+        this.remove_conceptBoards = new RemoveConceptBoards();
         this.listenTo(Backbone);
         _.bindAll(this, 'render','fetchConceptsAndRender');
     },
@@ -181,6 +184,7 @@ define([
         "click #addCBoard": "viewAddCboard",
         "click .spacetypecls": "getSelectedTemplatess",
         "click #save_Cboard": "submitBoard",
+        "click .remove-cboard":"removeConceptBoard"
        // "click .boardlst": "addConcept2Cboard"
     },
     addConcept2Cboard: function (e) {
@@ -219,6 +223,58 @@ define([
                console.log(response);
            }
        });
+    },
+    removeConceptBoard: function (e){
+        if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+
+        var userId = "user1234600";
+        var userMindboardId = sessionStorage.defaultMindboardId;
+
+        var currentTarget = $(e.currentTarget);
+        var conceptBoardId = currentTarget.data('element');
+
+        var formData = {
+                    "conceptboardId": conceptBoardId,
+                    "userId": userId
+               };
+        var that = this;
+
+        that.remove_conceptBoards.getremoveConceptBoard(conceptBoardId, {
+           async: true,
+           crossDomain: true,
+           method: "POST",
+           headers:{
+               "authorization": "Bearer "+ sessionStorage.authtoken,
+               "Content-Type": "application/json"
+           },
+           data: JSON.stringify(formData),
+           success:function(response) {
+              console.log("Successfully removed Concept board ... ");
+              console.log(response);
+              $("#snackbar").html("Successfully save Concept board through template selection... ");
+              var x = document.getElementById("snackbar")
+              x.className = "show";
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+              return;
+
+          },
+          error:function(model, response, options) {
+          alert("Shilpa respone :: ");
+              console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
+              console.log(JSON.stringify(response));
+              console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+              console.log(response.responseJSON.errorMessage);
+
+               $("#snackbar").html(response.responseJSON.errorMessage);
+               var x = document.getElementById("snackbar")
+               x.className = "show";
+               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+               return;
+
+          }
+      });
+
     },
     submitBoard: function (e) {
         if (e.isDefaultPrevented()) return;
