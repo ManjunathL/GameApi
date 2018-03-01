@@ -11,6 +11,7 @@ define([
   'text!templates/dashboard/similarconcepts.html',
   'text!templates/dashboard/relatedconcepts.html',
   'text!templates/dashboard/living.html',
+  'text!templates/dashboard/edit_conceptboard.html',
   //'collections/designs',
   'collections/spacetypes',
   //'collections/concepts',
@@ -23,8 +24,9 @@ define([
   'collections/add_conceptboards',
   'views/dashboard/add_conceptboard',
   'collections/add_conceptToCboards',
-  'collections/remove_conceptBoards'
-], function($, _, Backbone, Bootstrap, pinterest_grid, dashboardPageTemplate, kitchenPageTemplate, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, livingPageTemplate, SpaceTypes, CreateConceptBoards, ConceptBoards, ConceptLists, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptBoards){
+  'collections/remove_conceptBoards',
+  'collections/edit_conceptboards'
+], function($, _, Backbone, Bootstrap, pinterest_grid, dashboardPageTemplate, kitchenPageTemplate, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, livingPageTemplate, editCBoardPageTemplate, SpaceTypes, CreateConceptBoards, ConceptBoards, ConceptLists, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptBoards,EditConceptboards){
   var ConceptboardPage = Backbone.View.extend({
     el: '.page',
     //concepts: null,
@@ -39,6 +41,7 @@ define([
     add_conceptboards: null,
     add_concept2boards: null,
     remove_conceptBoards:null,
+    edit_conceptboards:null,
     initialize: function() {
         //this.concepts = new Concepts();
         //this.designs = new Designs();
@@ -52,6 +55,7 @@ define([
         this.add_conceptboards = new AddConceptboards();
         this.add_conceptToCboards = new AddConceptToCboards();
         this.remove_conceptBoards = new RemoveConceptBoards();
+        this.edit_conceptboards = new EditConceptboards();
         this.listenTo(Backbone);
         _.bindAll(this, 'render','fetchConceptsAndRender');
     },
@@ -186,9 +190,63 @@ define([
         "click #addCBoard": "viewAddCboard",
         "click .spacetypecls": "getSelectedTemplatess",
         "click #save_Cboard": "submitBoard",
-        "click .remove-cboard":"removeConceptBoard"
+        "click .remove-cboard":"removeConceptBoard",
+        "click .editCBoard":"viewEditCboard",
+        "click #update_Cboard":"submitEditCboard"
        // "click .boardlst": "addConcept2Cboard"
     },
+     submitEditCboard: function (e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+
+            var userId = "user1234600";
+            var formData = {
+                "conceptboardId": $('#conceptBoardIdTxt').val(),
+                "userId": userId,
+                "conceptboardName": $('#cboardnameTxt').val(),
+
+           };
+            var that = this;
+            console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+            console.log(formData);
+
+            that.edit_conceptboards.geteditConceptBoard({
+               async: true,
+               crossDomain: true,
+               method: "POST",
+               headers:{
+                   "authorization": "Bearer "+ sessionStorage.authtoken,
+                   "Content-Type": "application/json"
+               },
+               data: JSON.stringify(formData),
+               success:function(response) {
+                  console.log("Successfully updated Concept ... ");
+                  console.log(response);
+                  $("#editcboard-modal").modal('hide');
+                  $("#snackbar").html("Successfully updated Concept ...");
+                  var x = document.getElementById("snackbar")
+                  x.className = "show";
+                  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                  that.render();
+                  return;
+
+              },
+              error:function(model, response, options) {
+
+                  console.log(" +++++++++++++++update Concept to Concept board- Errrorr ++++++++++++++++++ ");
+                  console.log(JSON.stringify(response));
+                  console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+                  console.log(response.responseJSON.errorMessage);
+
+                   $("#snackbar").html(response.responseJSON.errorMessage);
+                   var x = document.getElementById("snackbar")
+                   x.className = "show";
+                   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                   return;
+
+              }
+          });
+        },
     addConcept2Cboard: function (e) {
         if (e.isDefaultPrevented()) return;
         e.preventDefault();
@@ -268,7 +326,7 @@ define([
 
               console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
               console.log(JSON.stringify(response));
-              console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+              console.log("%%%%%%%%% response %%%%%%%%%%%%%%%%");
               console.log(response.responseJSON.errorMessage);
 
                $("#snackbar").html(response.responseJSON.errorMessage);
@@ -551,6 +609,20 @@ define([
     viewAddCboard: function(){
         $('#addcboard-modal').modal('show');
         AddConceptboard.apply();
+    },
+    viewEditCboard: function(evt){
+            var currentTarget = $(evt.currentTarget);
+            var conceptBoardId = currentTarget.data('element');
+            var conceptBoardNm = currentTarget.data('element1');
+
+
+
+            $('#editcboard-modal').modal('show');
+            $('#editcboard-dtls').html(_.template(editCBoardPageTemplate)({
+                 "conceptBoardId": conceptBoardId,
+                 "conceptBoardNm": conceptBoardNm,
+
+             }));
     },
     ready: function(conceptboardId){
            $("#pinBoot"+conceptboardId).pinterest_grid({
