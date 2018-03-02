@@ -337,13 +337,22 @@ define([
            },
            data: JSON.stringify(formData),
            success:function(response) {
-               console.log("Successfully save Concept tags");
-               console.log(response);
-               return;
+                 $("#details-modal").modal('hide');
+                 $("#snackbar").html("Successfully save Concept Note");
+                 var x = document.getElementById("snackbar")
+                 x.className = "show";
+                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                 that.render();
+                 return;
            },
            error:function(response) {
-               console.log(" +++++++++++++++ Concept Note Errrorr ++++++++++++++++++ ");
-               console.log(response);
+                console.log(" +++++++++++++++Error in saving concept tags ++++++++++++++++++ ");
+                console.log(response.responseJSON.errorMessage);
+                $("#snackbar").html(response.responseJSON.errorMessage);
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                return;
            }
        });
     },
@@ -378,15 +387,26 @@ define([
            success:function(response) {
                console.log("Successfully save Concept Note");
                console.log(response);
+               // pin-modal
+               $("#details-modal").modal('hide');
                $("#snackbar").html("Successfully save Concept Note");
                var x = document.getElementById("snackbar")
                x.className = "show";
                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+               that.render();
                return;
            },
            error:function(response) {
-               console.log(" +++++++++++++++ Concept Note Errrorr ++++++++++++++++++ ");
-               console.log(response);
+                console.log(" +++++++++++++++Error in saving concept note ++++++++++++++++++ ");
+                console.log(JSON.stringify(response));
+                console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+                console.log(response.responseJSON.errorMessage);
+
+                $("#snackbar").html(response.responseJSON.errorMessage);
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                return;
            }
        });
     },
@@ -442,25 +462,24 @@ define([
      $("#mastImgg").attr("src",imgnm);
 
      if(typeof(userNote) != 'undefined' && userNote != null){
-        $("#notes").hide();
-        $("#Editnotes").show();
-        $("#paraEditNote").html(userNote);
+        $("#conceptNotetxt").html(userNote);
+        $("#save_CNote").text("Edit Notes");
      }else{
-        $("#notes").show();
-        $("#Editnotes").hide();
-        $("#paraEditNote").html('');
+        $("#conceptNotetxt").html('');
+        $("#save_CNote").text("Add Notes");
      }
-     $("#conceptNotetxt").text(userNote);
+//     $("#conceptNotetxt").text(userNote);
 
      if(typeof(userTag) != 'undefined' && userTag != null){
         var arr = userTag.split(",");
         var taglists = '';
         for( var i=0; i< arr.length; i++ ){
-            taglists += '<span class="tag label label-info">'+arr[i]+'<span data-role="remove"></span></span>'
+            taglists += '<span class="tag label label-info">'+arr[i]+'<span data-role="remove"></span></span>';
         }
+        $("#tagtxt").val(userTag);
         $("#taglists").html(taglists);
      }else{
-        $("#taglists").html('');
+        $("#tagtxt").html('');
      }
 
      $('#details-modal').modal('show');
