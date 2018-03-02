@@ -593,6 +593,13 @@ input[type=checkbox] {
     background-color: #ffffff;
 }
 
+.bg-color-orange {
+    background-color: #ea5c36;
+}
+.bg-color-brown {
+    background-color: #634e42;
+}
+
 .bg-gray {
     background-color: #CCCCCC;
 }

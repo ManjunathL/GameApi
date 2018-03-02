@@ -1,14 +1,14 @@
 <!--Navigation-->
-<nav id="mainNav" class="navbar navbar-shrink border-bottom-grey margin-bottom0 bg-color-white navbar-fixed-top" style="min-height:75px; z-index: 20 !important">
+<nav id="mainNav" class="navbar navbar-shrink margin-bottom0 bg-color-orange navbar-fixed-top nav-menu-height-fx" style="z-index: 20 !important">
     <div class="container mob-container">
         <!-- Brand and toggle get grouped for better mobile display -->
 
         <div class="navbar-header page-scroll pull-left">
             <a class="navbar-toggle collapsed toggle-icon-left" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <img src="<%= imgBase + '48x48.png'%>" class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg burger-logo" alt="mygubbi">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1519902006/home/logo/mygubbi_logo_mobile_1.png" class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg burger-logo" alt="mygubbi">
             </a>
             <a href="/" class="navbar-brand page-scroll padding0 hidden-xs hidden-sm">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/logo.png" class="full_logo width80" alt="mygubbi">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1519896558/home/logo/mygubbi_logo.png" class="full_logo width80" alt="mygubbi">
             </a>
         </div>
 
@@ -50,7 +50,7 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0 .visible-xs-block .visible-sm-block hidden-md hidden-lg">
-            <a href="/consult"><span class="pe-7s-help1 header-icon consult_icon pe-fw color-orange"></span></a>
+            <a href="/consult"><span class="pe-7s-help1 header-icon consult_icon pe-fw color-white"></span></a>
 
             <span class="pe-7s-search search-ico header-icon pe-fw mob-search"></span>
 
@@ -90,22 +90,24 @@
 
             </ul>
             <% }else { %>
-            <span class="pe-7s-user user header-icon pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
+            <span class="pe-7s-user user header-icon pe-fw" style="padding:7px 5px!important;" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
             <% } %>
 
         </div>
 
         <div class="nav navbar-nav navbar-right right-side-menu hidden-xs hidden-sm margin-top10">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="margin-top: 20px;">
                 <li>
                     <span class="pe-7s-search search-ico pe-fw"></span>
                 </li>
-                <li>
-                    <a href="tel:+91-808-886-0860" class="page-scroll font-size18 txt-color-orange" >
-                        <span class="fa-stack fa-sm">
+                <li style="padding-left: 10px;">
+                    <a href="tel:+91-808-886-0860" class="page-scroll font-size18 txt-color-white" style="padding-top: 17px;">
+                        <!--<span class="fa-stack fa-sm">
                              <i class="fa fa-circle fa-stack-2x orange-background"></i>
                              <i class="fa fa-phone fa-stack-1x txt-color-white"></i>
-                        </span>
+                        </span>-->
+
+                        <i class="fa fa-phone txt-color-white"></i>
                         <span> +91 80888 60860 </span>
                     </a>
                 </li>
@@ -162,7 +164,7 @@
 </nav>
 <!-- Navigation End -->
 
-<nav class="navbar collapse navbar-collapse border-bottom-grey menu-sec-height bg-color-white navbar-fixed-top navbar-fixed-top-mg margin-top75" id="bs-example-navbar-collapse-1">
+<nav class="navbar collapse navbar-collapse menu-sec-height nav-menu-bg navbar-fixed-top navbar-fixed-top-mg menu-sec-mrg" id="bs-example-navbar-collapse-1">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
