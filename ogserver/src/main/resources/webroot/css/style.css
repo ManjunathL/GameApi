@@ -1074,6 +1074,11 @@ ul.spaceTypelst li{
 .fa-times-thin:before {
 	content: '\00d7';
 }
+
+.templateDiv{
+    overflow-y: scroll;
+    max-height: 115px;
+}
 .carousel-control {
     position: absolute;
     top: -3px;

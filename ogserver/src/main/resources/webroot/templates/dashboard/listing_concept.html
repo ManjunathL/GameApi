@@ -1,3 +1,5 @@
+<%= console.log("@@@@@@@@@@@@@@@ Concepts @@@@@@@@@@@@@@@@@") %>
+<%= console.log(conceptdetails) %>
 <link href="css/layout.css" rel="stylesheet">
 <section class="col-md-12 col-lg-12">
 <div id="myCarousel112" class="carousel slide">
@@ -14,17 +16,12 @@
             <% var icols = 8; %>
             <% _.each(concepttags[0].conceptboardtagList, function(concepttgs, i){ %>
             <% var tagnm = concepttgs.tag %>
-            <%= console.log(" +++++++++ tagnm ============= ") %>
-            <%= console.log(tagnm) %>
-            <%= console.log(clsarr[i%4]) %>
-
-
             <% if( (++i)%icols == 1 ) {  %>
             <div class="tagicos-cnt item">
             <% } %>
                 <% if( i == 1) {  %>
                 <div class="tgico">
-                    <span class="active filter <%= clsarr[i%4] %> tgico-link" data-filter="<%= tagnmArr.join(', ') %>">All</span>
+                    <span class="active filter <%= clsarr[i%4] %> tgico-link" onclick="getTagsView('all')" data-filter="<%= tagnmArr.join(', ') %>">All</span>
                 </div>
                 <% } %>
                 <div class="tgico">
@@ -49,7 +46,12 @@
     <% var tagnm = conceptdtls.conceptTag %>
     <%= console.log(" ++++++++++++++ tagnm ============= ") %>
     <%= console.log(tagnm) %>
-    <article class="white-panel <%= tagnm %>" data-cat=".<%= tagnm %>">
+
+    <% tagsarr = tagnm.split(","); %>
+    <% tagsnarr = tagsarr.join(" "); %>
+    <% tagsarr = tagsarr.join(", ."); %>
+
+    <article class="white-panel <%= tagsnarr %>" data-cat="tagsarr">
         <div class="pin">
             <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.imgURL %>','<%= conceptdtls.conceptTitle %>','<%= conceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
         </div>
@@ -155,7 +157,7 @@
 
 </script>
 
-<script>
+<!--<script>
     $(".fl-tags").on( "click", function() {
         var seltag = $(this).data("element");
         $( "article" ).hide();
@@ -163,7 +165,7 @@
         return $( this ).data( "category" ) === seltag;
       }).show();
     });
-</script>
+</script>-->
 <script>
     $(document).ready(function() {
         $('#myCarousel').carousel({
@@ -175,4 +177,14 @@
             interval: false
         })
     });
+
+    function getTagsView(selTag){
+        if(selTag == 'all'){
+            filter.set({'noFilterApplied': 0});
+            filter.trigger('change');
+        }else{
+            filter.set({'selectedTag': selTag});
+            filter.trigger('change');
+        }
+    }
 </script>

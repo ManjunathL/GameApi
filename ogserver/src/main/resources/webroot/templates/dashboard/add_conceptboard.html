@@ -78,7 +78,7 @@
 
         </div>-->
         <div id="templateViewdv">
-            <% if(typeof(spacetemplates) !== 'undefined'){ %>
+            <!--<% if(typeof(spacetemplates) !== 'undefined'){ %>
             <ul class="spaceTypelst">
                 <% _.each(spacetemplates[0].spaceTemplateList, function(spltemst, i){ %>
                 <li>
@@ -89,14 +89,43 @@
                 </li>
                 <% }); %>
             </ul>
+            <% } %>-->
+            <% if(typeof(spacetemplates) !== 'undefined'){ %>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 templateDiv">
+                    <% _.each(spacetemplates[0].spaceTemplateList, function(spltemst, i){ %>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="selTemp" data-element="<%= spltemst.templateCode %>">
+                            <img src="<%= spltemst.imgUrl %>" alt="<%= spltemst.templateCode %>" class="img-responsive img-centered">
+                            <h5><%= spltemst.templateTitle %></h5>
+                        </div>
+                    </div>
+                    <% }); %><% _.each(spacetemplates[0].spaceTemplateList, function(spltemst, i){ %>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="selTemp" data-element="<%= spltemst.templateCode %>">
+                            <img src="<%= spltemst.imgUrl %>" alt="<%= spltemst.templateCode %>" class="img-responsive img-centered">
+                            <h5><%= spltemst.templateTitle %></h5>
+                        </div>
+                    </div>
+                    <% }); %><% _.each(spacetemplates[0].spaceTemplateList, function(spltemst, i){ %>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="selTemp" data-element="<%= spltemst.templateCode %>">
+                            <img src="<%= spltemst.imgUrl %>" alt="<%= spltemst.templateCode %>" class="img-responsive img-centered">
+                            <h5><%= spltemst.templateTitle %></h5>
+                        </div>
+                    </div>
+                    <% }); %>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
             <% } %>
         </div>
 
     </div>
     <div class="col-xs-11 col-md-10 col-centered">
         <form>
-            <input type="hidden1" id="spaceTypeCodeTxt" name="spaceTypeCode" value="<%= selectedspaceTypeCode %>">
-            <input type="hidden1" id="templateCodeTxt" name="templateCode" value="">
+            <input type="hidden" id="spaceTypeCodeTxt" name="spaceTypeCode" value="<%= selectedspaceTypeCode %>">
+            <input type="hidden" id="templateCodeTxt" name="templateCode" value="">
             <div class="form-group">
                 <h4>Concept Board Name:</h4>
                 <input type="text" class="form-control" id="cboardnameTxt" name="cboardname" value="" required="required">

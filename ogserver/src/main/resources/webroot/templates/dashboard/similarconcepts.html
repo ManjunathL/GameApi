@@ -1,17 +1,31 @@
 <%= console.log("++++++++++++++++++++++++++similar concepts details+++++++++++++++++++++++++++++") %>
 <%= console.log(similarConcepts) %>
 <% if(typeof(similarConcepts) !== 'undefined'){ %>
-<% _.each(similarConcepts[0].similarConceptsList, function(simcnt, i){ %>
-<li>
-    <img src="<%= simcnt.imgURL %>" alt="<%= simcnt.conceptTitle %>">
-</li>
-<% }); %>
+<div id="owl-demo" class="owl-carousel owl-theme">
+    <% _.each(similarConcepts[0].similarConceptsList, function(simcnt, i){ %>
+    <div class="item">
+        <img src="<%= simcnt.imgURL %>" alt="<%= simcnt.conceptTitle %>">
+    </div>
+    <% }); %>
+</div>
 <% }else{ %>
-<li>
+<div>
     <p>No Similar Concept found</p>
-</li>
+</div>
 <% } %>
-<!--
-<li>
-    <div class="more">MORE</div>
-</li>-->
+
+<script src="js/libs/owl.carousel/dist/owl.carousel.min.js"></script>
+<script>
+   $(document).ready(function() {
+      $("#owl-demo").owlCarousel({
+        autoPlay: 3000,
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+
+    });
+</script>

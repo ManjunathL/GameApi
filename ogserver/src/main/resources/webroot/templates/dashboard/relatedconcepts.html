@@ -1,17 +1,32 @@
 <%= console.log("++++++++++++++++++++++++++related concepts details+++++++++++++++++++++++++++++") %>
 <%= console.log(relatedConcepts) %>
 <% if(typeof(relatedConcepts) !== 'undefined'){ %>
-<% _.each(relatedConcepts[0].relatedConceptsList, function(relcnt, i){ %>
-<li>
-    <img src="<%= relcnt.imgURL %>" alt="<%= relcnt.conceptTitle %>">
-</li>
-<% }); %>
+<div id="owl-related" class="owl-carousel owl-theme">
+    <% _.each(relatedConcepts[0].relatedConceptsList, function(relcnt, i){ %>
+        <div class="item">
+            <img src="<%= relcnt.imgURL %>" alt="<%= relcnt.conceptTitle %>">
+        </div>
+    <% }); %>
+</div>
 <% }else{ %>
-<li>
+<div>
     <p>No Related Concept found</p>
-</li>
+</div>
 <% } %>
-<!--
-<li>
-    <div class="more">MORE</div>
-</li>-->
+
+
+<script src="js/libs/owl.carousel/dist/owl.carousel.min.js"></script>
+<script>
+   $(document).ready(function() {
+      $("#owl-related").owlCarousel({
+        autoPlay: 3000,
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+
+    });
+</script>

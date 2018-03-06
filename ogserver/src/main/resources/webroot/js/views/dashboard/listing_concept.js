@@ -4,6 +4,7 @@ define([
   'backbone',
   'bootstrap',
   'pinterest_grid',
+  'owlcarousel',
   'text!templates/dashboard/listing_concept.html',
   'text!templates/dashboard/conceptdetails.html',
   'text!templates/dashboard/similarconcepts.html',
@@ -20,7 +21,7 @@ define([
   'collections/remove_conceptFromCboards',
   'collections/add_conceptnotes',
   'collections/add_concepttags'
-], function($, _, Backbone, Bootstrap, pinterest_grid, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, ConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, ConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
@@ -180,6 +181,36 @@ define([
         var concepttags = that.concepttags;
         var conceptboards = that.conceptboards;
 
+        if (typeof(that.filter.get('noFilterApplied')) == 'undefined') {
+            that.filter.set({
+                'noFilterApplied': '0'
+            }, {
+                silent: true
+            });
+        }
+
+        var filterApplied = that.filter.get('noFilterApplied');
+
+        var filterTag = that.filter.get('selectedTag');
+
+        if(filterTag){
+            that.filter.set({
+                'noFilterApplied': '1'
+            }, {
+                silent: true
+            });
+        }
+
+        if (filterApplied == '0') {
+            var filteredConcepts = conceptlists.toJSON();
+        }
+
+        console.log("@@@@@@@@@@@@@@@@@@");
+        console.log(filterTag);
+        console.log(filteredConcepts);
+        console.log("@@@@@@@@@@@@@@@@@@");
+
+
         $(this.el).html(_.template(conceptsPageTemplate)({
             "conceptdetails": conceptlists.toJSON(),
             "concepttags": concepttags.toJSON(),
@@ -220,6 +251,8 @@ define([
             /*$('.conceptTagCarousel').carousel({
                 interval: false
             });*/
+
+
     },
     events: {
          "click .conceptImg": "getConceptDetails",
@@ -260,7 +293,7 @@ define([
               var x = document.getElementById("snackbar")
               x.className = "show";
               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
+                that.render();
               //$(e.currentTarget).closest('article').remove();
                return;
            },
@@ -544,6 +577,7 @@ define([
      $('#relatedconceptdtls').html(_.template(relatedconceptPageTemplate)({
          "relatedConcepts": related_concepts.toJSON()
      }));
+
     }
   });
   return ListingConceptPage;

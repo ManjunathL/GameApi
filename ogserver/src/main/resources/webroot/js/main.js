@@ -14,6 +14,7 @@ require.config({
     wookmark: 'libs/wookmark/wookmark',
     pinterest_grid: 'libs/pinterest_grid',
     mixitup: 'libs/jquery.mixitup.min',
+    owlcarousel: 'libs/owl.carousel/dist/owl.carousel.min',
     templates: '../templates'
   }
 
@@ -33,9 +34,9 @@ require([
 //var baseApiUrl = "http://localhost:1442";
 var baseApiUrl = "https://gameuat.mygubbi.com:1443";
 
-//var authbaseRestApiUrl = "http://45.112.138.146:8080/";
-//var baseRestApiUrl = "http://45.112.138.146:8080/";
+var authbaseRestApiUrl = "http://45.112.138.146:8080/";
+var baseRestApiUrl = "http://45.112.138.146:8080/";
 
 
-var authbaseRestApiUrl = "http://192.168.104.183:9000/";
-var baseRestApiUrl = "http://192.168.104.183:9100/";
+//var authbaseRestApiUrl = "http://192.168.104.183:9000/";
+//var baseRestApiUrl = "http://192.168.104.183:9100/";
