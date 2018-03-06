@@ -1,0 +1,20 @@
+<div class="row" id="editCboardsec">
+    <div class="col-sm-12 col-md-12">
+        <h4 class="addcboard-heading">Edit Board</h4>
+    </div>
+
+    <div class="col-xs-11 col-md-10 col-centered">
+        <form>
+            <input type="hidden" id="conceptBoardIdTxt" name="conceptBoardId" value="<%= conceptBoardId %>">
+            <div class="form-group">
+                <h4>Concept Board Name:</h4>
+                <input type="text" class="form-control" id="cboardnameTxt" name="cboardname" value="<%= conceptBoardNm %>" required="required">
+            </div>
+            <div class="mt15">
+                <input type="submit" id="update_Cboard" class="btn addcboard-btn" value="Update Board">
+            </div>
+        </form>
+
+    </div>
+    <div class="clearfix"></div>
+</div>
