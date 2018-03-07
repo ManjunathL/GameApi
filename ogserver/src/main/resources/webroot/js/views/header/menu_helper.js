@@ -138,7 +138,8 @@ define([
                     href = $(event.currentTarget).attr('href');
                     if (!event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
                         event.preventDefault();
-                        url = href.replace("/^\//", '').replace('\#\!\/', '');
+//                        url = href.replace("/^\//", '').replace('\#\!\/', '');
+                        url = href;
                         window.App.router.navigate(url, {
                             trigger: true
                         });

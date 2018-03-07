@@ -37,7 +37,8 @@ define([
         });
 
         router.on('route:concepts_search', function(srcterm) {
-            require(['views/dashboard/search_concept'], function(SearchConceptPage) {
+           srcterm = decodeURIComponent(srcterm);
+           require(['views/dashboard/search_concept'], function(SearchConceptPage) {
                  var options = {
                     model: {
                         "searchTerm": srcterm

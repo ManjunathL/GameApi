@@ -3,7 +3,7 @@
 <% _.each(autoSuggestProducts[0].autoCompletionResutl, function(as) { %>
 <div class="row margin0 margin-top20">
     <a
-            href="/concept_search-<%= as %>"
+            href="/concept_search-<%= encodeURIComponent(as) %>"
             onclick="callSideDown()"
             class="sb-search-txt">
         <div class="col-sm-12 searched-product">
