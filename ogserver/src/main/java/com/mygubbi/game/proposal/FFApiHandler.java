@@ -30,6 +30,9 @@ public class FFApiHandler extends AbstractRouteHandler {
     private static final String LOOSE_FURNITURE = "Loose Furniture";
     private static final String FURNITURE = "Furniture";
     private static final String APPLIANCES = "Appliances";
+    private static final String CHIMNEY = "Chimney";
+    private static final String HOB = "Hob";
+    private static final String SINK = "Sink";
 
     public FFApiHandler(Vertx vertx) {
         super(vertx);
@@ -76,11 +79,13 @@ public class FFApiHandler extends AbstractRouteHandler {
                         List<ProductAddon> addons = new ArrayList<ProductAddon>();
                         for (JsonObject json : resultData.get(1).rows) {
                             addons.add(new ProductAddon(json));
+
                         }
 
                         collectObjects(routingContext,products,addons);
                     }
                 });
+
     }
 
     private void collectObjects(RoutingContext routingContext, List<ProductLineItem> productLineItems,List<ProductAddon> productAddons)
@@ -129,7 +134,8 @@ public class FFApiHandler extends AbstractRouteHandler {
                 {
                     service = FURNITURE;
                 }
-               else if (productAddon.getCustomAddonCategory().equals(APPLIANCES))
+               else if (productAddon.getCustomAddonCategory().equals(APPLIANCES) || productAddon.getCustomAddonCategory().equals(CHIMNEY)
+                        || productAddon.getCustomAddonCategory().equals(HOB) || productAddon.getCustomAddonCategory().equals(SINK))
                 {
                     service = APPLIANCES;
                 }
