@@ -189,21 +189,51 @@ define([
             });
         }
 
+
+
         var filterApplied = that.filter.get('noFilterApplied');
 
         var filterTag = that.filter.get('selectedTag');
 
-        if(filterTag){
+        /*if(filterTag){
+            console.log(" ================ filterTag =================== ");
+            console.log(filterTag);
             that.filter.set({
                 'noFilterApplied': '1'
             }, {
                 silent: true
             });
+        }*/
+
+        if ((typeof(filterTag) !== 'undefined') && (filterTag.length != 0)) {
+            conceptlists = conceptlists.toJSON();
+            var filteredConcepts = that.conceptlists.filterByTags(conceptlists[0].listOfConceptBoardConcept, filterTag);
+
+            console.log("@@@@@@@@@@ filteredConcepts @@@@@@@@");
+            console.log(filteredConcepts);
+            console.log("@@@@@@@@@@@@@@@@@@");
+
+            filteredConcepts[0].listOfConceptBoardConcept = filteredConcepts;
+
+            that.filter.set({
+                'noFilterApplied': '1'
+            }, {
+                silent: true
+            });
+        } else {
+            var filteredConcepts = conceptlists.toJSON();
+            that.filter.set({
+                'noFilterApplied': '0'
+            }, {
+                silent: true
+            });
         }
 
-        if (filterApplied == '0') {
-            var filteredConcepts = conceptlists.toJSON();
-        }
+
+          /*if (filterApplied == '0') {
+                var filteredConcepts = conceptlists.toJSON();
+            }*/
+
 
         console.log("@@@@@@@@@@@@@@@@@@");
         console.log(filterTag);
@@ -212,7 +242,7 @@ define([
 
 
         $(this.el).html(_.template(conceptsPageTemplate)({
-            "conceptdetails": conceptlists.toJSON(),
+            "conceptdetails": filteredConcepts,
             "concepttags": concepttags.toJSON(),
             "conceptboardId": conceptboardId,
             'conceptboardsDtls':conceptboards.toJSON()

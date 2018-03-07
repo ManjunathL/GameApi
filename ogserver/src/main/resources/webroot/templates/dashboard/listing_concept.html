@@ -1,10 +1,11 @@
 <%= console.log("@@@@@@@@@@@@@@@ Concepts @@@@@@@@@@@@@@@@@") %>
 <%= console.log(conceptdetails) %>
 <link href="css/layout.css" rel="stylesheet">
-<section class="col-md-12 col-lg-12">
+<section class="container-fluid">
+<div class="col-md-12 col-lg-12">
 <div id="myCarousel112" class="carousel slide">
     <div class="tagicos">
-        <div id="filters" class="tagicos clearfix carousel-inner">
+        <div class="tagicos clearfix carousel-inner">
             <% if(typeof(concepttags) !== 'undefined'){ %>
             <% var tagnmArr = [] %>
             <% _.each(concepttags[0].conceptboardtagList, function(conceptdtls, i){ %>
@@ -21,11 +22,11 @@
             <% } %>
                 <% if( i == 1) {  %>
                 <div class="tgico">
-                    <span class="active filter <%= clsarr[i%4] %> tgico-link" onclick="getTagsView('all')" data-filter="<%= tagnmArr.join(', ') %>">All</span>
+                    <span class="active <%= clsarr[i%4] %> tgico-link" onclick="getTagsView('all')">All</span>
                 </div>
                 <% } %>
                 <div class="tgico">
-                    <span class="filter <%= clsarr[i%4] %> tgico-link" data-filter=".<%= tagnm %>"><%= tagnm %></span>
+                    <span class="<%= clsarr[i%4] %> tgico-link" onclick="getTagsView('<%= tagnm %>')" title="<%= tagnm %>"><%= tagnm %></span>
                 </div>
             <% if( i%icols == 0 || i== concepttags[0].conceptboardtagList.length ) { %>
             </div>
@@ -44,14 +45,8 @@
     <% if(typeof(conceptdetails) !== 'undefined'){ %>
     <% _.each(conceptdetails[0].listOfConceptBoardConcept, function(conceptdtls, i){ %>
     <% var tagnm = conceptdtls.conceptTag %>
-    <%= console.log(" ++++++++++++++ tagnm ============= ") %>
-    <%= console.log(tagnm) %>
 
-    <% tagsarr = tagnm.split(","); %>
-    <% tagsnarr = tagsarr.join(" "); %>
-    <% tagsarr = tagsarr.join(", ."); %>
-
-    <article class="white-panel <%= tagsnarr %>" data-cat="tagsarr">
+    <article class="white-panel">
         <div class="pin">
             <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.imgURL %>','<%= conceptdtls.conceptTitle %>','<%= conceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
         </div>
@@ -120,42 +115,9 @@
         </div>
     </div>
 </div>
+</div>
 </section>
 
-
-<script type="text/javascript" src="js/libs/jquery.mixitup.min.js"></script>
-<script type="text/javascript">
-	$(function () {
-	     var conceptboardIdVl = $("#conceptboardIdVl").val();
-
-		var filterList = {
-
-			init: function () {
-
-				$('.pinBoot').mixItUp({
-  				selectors: {
-    			  target: '.white-panel',
-    			  filter: '.filter'
-    		  },
-    		  load: {
-      		  filter: 'all'
-      		}
-				});
-			}
-		};
-
-		// Run the show!
-		filterList.init();
-
-    });
-    function showModal(imgnm,cnpnm,cnpcod){
-        $("#concNm").text(cnpnm);
-        $("#ConcCod").val(cnpcod);
-        $("#mastImg").attr("src",imgnm);
-        $('#pin-modal').modal('show');
-    }
-
-</script>
 
 <!--<script>
     $(".fl-tags").on( "click", function() {
@@ -167,6 +129,12 @@
     });
 </script>-->
 <script>
+function showModal(imgnm,cnpnm,cnpcod){
+        $("#concNm").text(cnpnm);
+        $("#ConcCod").val(cnpcod);
+        $("#mastImg").attr("src",imgnm);
+        $('#pin-modal').modal('show');
+    }
     $(document).ready(function() {
         $('#myCarousel').carousel({
             interval: false
@@ -181,8 +149,10 @@
     function getTagsView(selTag){
         if(selTag == 'all'){
             filter.set({'noFilterApplied': 0});
+            filter.set({'selectedTag': ''});
             filter.trigger('change');
         }else{
+            console.log("Selected Tags============ "+selTag);
             filter.set({'selectedTag': selTag});
             filter.trigger('change');
         }

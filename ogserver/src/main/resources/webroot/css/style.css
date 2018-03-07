@@ -657,9 +657,7 @@ ul.spaceTypelst li{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
-    display:none;
     margin:1%;
-    display:none;
     float:left;
     overflow:hidden;
 }
@@ -1049,6 +1047,9 @@ ul.spaceTypelst li{
     overflow: hidden;
     padding: 7px 20px;
     cursor: pointer;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    max-width: 150px;
 }
 .tgico-link span.spn {
     color: rgba(0,0,0,0.6);
@@ -1158,6 +1159,7 @@ footer {
 
 .page{
     min-height:850px;
+    height:auto;
 }
 
 .main-conceptboard-sec{
