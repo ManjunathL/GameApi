@@ -8,7 +8,8 @@ define([
         model: CreateConceptBoard,
         url: baseRestApiUrl + 'MyGubbiApi/conceptboard/create/default/conceptboard/',
         getUserIdAuth: function(userId, options) {
-            this.url = this.url + userId;
+             var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboard/create/default/conceptboard/';
+             this.url = urllnk + userId;
             return this.fetch(options);
         },
         initialize: function(models) {

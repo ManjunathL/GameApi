@@ -1478,3 +1478,28 @@ footer {
 .remove-cboard:hover{
     color: #e02b4c;
 }
+
+
+#search_concept .dropdown-menu{
+    display:block;
+}
+
+.sb-search_suggest {
+   color: #000;
+       font-size: 17px;
+       text-align: left;
+       background-color: #FFF;
+       width: 37%;
+       height: 210px;
+       overflow-y: auto;
+       overflow-x: hidden;
+       padding: 2%;
+       margin: auto;
+       display: none;
+       position: absolute;
+       top: 78%;
+       left: 20%;
+       z-index: 1;
+       box-shadow: 0px 0px 16px 1px rgba(36, 36, 36, 0.4);
+
+}
