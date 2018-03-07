@@ -8,8 +8,7 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.PageSize;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfReader;
@@ -34,11 +33,13 @@ public class MergePdfsRequest {
     private List<String> inputPdfs;
     private String mergedFileName;
     private String mergedAndPageNumberedFileName;
+    private String VersionStatus;
     private final static Logger LOG = LogManager.getLogger(MergePdfsRequest.class);
-    public MergePdfsRequest(List<String> pdfs,String mergedFileName,String mergedAndPageNumberedFileName){
+    public MergePdfsRequest(List<String> pdfs,String mergedFileName,String mergedAndPageNumberedFileName,String VersionStatus){
         this.inputPdfs = pdfs;
         this.mergedFileName = mergedFileName;
         this.mergedAndPageNumberedFileName = mergedAndPageNumberedFileName;
+        this.VersionStatus=VersionStatus;
     }
 
 
@@ -74,6 +75,10 @@ public class MergePdfsRequest {
             }
             PDFCombineUsingJava.close();
             addPageNumberToPdf();
+            if(VersionStatus.equals("Draft"))
+            {
+                addWaterMark();
+            }
         }
 
         catch (Exception e)
@@ -111,5 +116,42 @@ public class MergePdfsRequest {
             e.printStackTrace();
         }
     }
+    private void addWaterMark()
+    {
+        try
+        {
+            PdfReader reader = new PdfReader(this.mergedFileName);
+            PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(mergedAndPageNumberedFileName));
+            int n = reader.getNumberOfPages();
+            // text watermark
+            Font f = new Font(Font.FontFamily.HELVETICA, 30);
+            Phrase p = new Phrase("Draft copy not for circulation", f);
+            // transparency
+            PdfGState gs1 = new PdfGState();
+            gs1.setFillOpacity(0.5f);
+            // properties
+            PdfContentByte over;
+            Rectangle pagesize;
+            float x, y;
+            // loop over every page
+            for (int i = 1; i <= n; i++) {
+                pagesize = reader.getPageSizeWithRotation(i);
+                x = (pagesize.getLeft() + pagesize.getRight()) / 2;
+                y = (pagesize.getTop() + pagesize.getBottom()) / 2;
+                over = stamper.getOverContent(i);
+                over.saveState();
+                over.setGState(gs1);
+                ColumnText.showTextAligned(over, Element.ALIGN_CENTER, p, x, y, 45);
+                over.restoreState();
+            }
+            stamper.close();
+            reader.close();
+        }
+        catch(Exception e)
+        {
+            LOG.info("exception while adding the water mark");
+        }
+    }
+
 
 }

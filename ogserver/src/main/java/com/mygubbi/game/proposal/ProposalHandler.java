@@ -1122,6 +1122,7 @@ public class ProposalHandler extends AbstractRouteHandler
         JsonObject quoteRequestJson = routingContext.getBodyAsJson();
         String city=routingContext.getBodyAsJson().getString("city");
         String version=routingContext.getBodyAsJson().getString("toVersion");
+        String status=routingContext.getBodyAsJson().getString("status");
         String quoteNumber=routingContext.getBodyAsJson().getString("quoteNo") + version;
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
         List<String> inputPdfs = new ArrayList<>();
@@ -1185,7 +1186,7 @@ public class ProposalHandler extends AbstractRouteHandler
         if (uploadToS3)
         {
             uploadToS3=false;
-            Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum));
+            Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status));
             VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                     (AsyncResult<Message<Integer>> result) -> {
                         JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
@@ -1204,7 +1205,7 @@ public class ProposalHandler extends AbstractRouteHandler
         }
         else
         {
-            Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum));
+            Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status));
             VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                     (AsyncResult<Message<Integer>> result) -> {
                         JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
