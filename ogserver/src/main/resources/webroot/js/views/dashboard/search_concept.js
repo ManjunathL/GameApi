@@ -6,29 +6,41 @@ define([
   'pinterest_grid',
    'text!templates/dashboard/search_concept.html',
    'text!templates/dashboard/conceptdetails.html',
+   'models/filter',
   'collections/search_concepts',
   'collections/conceptboards',
   'collections/add_conceptToCboards'
-], function($, _, Backbone, Bootstrap, pinterest_grid, SearchConceptTemplate,conceptdetailsPageTemplate, SearchConcepts,ConceptBoards,AddConceptToCboards){
+], function($, _, Backbone, Bootstrap, pinterest_grid, SearchConceptTemplate,conceptdetailsPageTemplate, Filter,SearchConcepts,ConceptBoards,AddConceptToCboards){
   var SearchConceptPage = Backbone.View.extend({
     el: '.page',
     search_concepts:null,
     conceptboards: null,
+     filter: null,
     initialize: function() {
         this.search_concepts = new SearchConcepts();
+        this.filter = new Filter();
         this.conceptboards = new ConceptBoards();
         this.add_conceptToCboards = new AddConceptToCboards();
         this.listenTo(Backbone);
+        this.filter.on('change', this.render, this);
         _.bindAll(this, 'render');
     },
     render: function () {
         var that = this;
-
+        window.filter = that.filter;
         console.log("+++++++++++++ search term ++++++++++++++");
         console.log(that.model.searchTerm);
 
 
         var searchTerm = that.model.searchTerm;
+        var spaceTypeCode = that.model.name;
+        this.filter.set({
+            'selectedspaceTypeCode':spaceTypeCode
+        }, {
+            silent: true
+        });
+
+         $("#searchInput1").val(searchTerm);
 
         var getsearchConceptsPromise = that.getsearchConcepts(searchTerm);
         var getConceptBoardsPromise = that.getConceptBoards();
@@ -164,18 +176,52 @@ define([
 
          var searchedConcepts = search_concepts.toJSON();
            var conceptboards = that.conceptboards;
+           if (typeof(that.filter.get('noSearchFilterApplied')) == 'undefined') {
+               that.filter.set({
+                   'noSearchFilterApplied': '0'
+               }, {
+                   silent: true
+               });
+           }
 
-         console.log("@@@@@@@@@@@@@@@@@@@@ Successfully Searched @@@@@@@@@@@@@@@@");
-         console.log(searchedConcepts[0].conceptSearchList);
 
+
+           var filterApplied = that.filter.get('noSearchFilterApplied');
+
+           var filterTag = that.filter.get('selectedSearchTag');
+
+           var afterfilteredConcepts = {};
+
+           if ((typeof(filterTag) !== 'undefined') && (filterTag.length != 0)) {
+
+                var conceptObj = searchedConcepts[0].conceptSearchList;
+
+               var filteredConcepts = that.search_concepts.filterBySearchTags(conceptObj.conceptList, filterTag);
+                searchedConcepts[0].conceptSearchList.conceptList = filteredConcepts;
+                searchedConcepts[0].conceptSearchList.tagList = conceptObj.tagList;
+
+               that.filter.set({
+                   'noSearchFilterApplied': '1'
+               }, {
+                   silent: true
+               });
+           } else {
+               var filteredConcepts = searchedConcepts;
+               that.filter.set({
+                   'noSearchFilterApplied': '0'
+               }, {
+                   silent: true
+               });
+           }
         $(this.el).html(_.template(SearchConceptTemplate)({
              "conceptdetails": searchedConcepts[0].conceptSearchList,
              "conceptboardId": "1111",
              'conceptboardsDtls':conceptboards.toJSON()
          }));
         var conceptboardId = "1111";
+
         $('#concept-dtls').html(_.template(conceptdetailsPageTemplate));
-         that.ready(conceptboardId);
+        that.ready(conceptboardId);
 
     },
     ready: function(conceptboardId){

@@ -16,6 +16,20 @@ define([
           _.each(models, function (search_concept){
             search_concept = new SearchConcept(search_concept);
           });
+        },
+        filterBySearchTags:function (searchconceptlist,selectedSearchTag){
+            var that = this;
+            return _.map(searchconceptlist.filter(function(concept){
+                return that.searchconceptWithTags(concept, selectedSearchTag);
+            }), function (concept) {return concept });
+        },
+        searchconceptWithTags: function (conceptObj, selectedSearchTag) {
+            var tagArrObj = conceptObj.tags;
+            var tagArr = tagArrObj.split(",");
+            for (var i=0; i < tagArr.length; i++) {
+                if (tagArr[i] == selectedSearchTag)
+                    return true;
+            }
         }
     });
   return SearchConcepts;
