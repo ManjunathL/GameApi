@@ -1,0 +1,32 @@
+<%= console.log(autoSuggestProducts) %>
+
+<% _.each(autoSuggestProducts[0].autoCompletionResutl, function(as) { %>
+<div class="row margin0 margin-top20">
+    <a
+            href="/concept_search-<%= encodeURIComponent(as) %>"
+            onclick="callSideDown()"
+            class="sb-search-txt">
+        <div class="col-sm-12 searched-product">
+            <%= console.log("+++++++++++++++ I m here +++++++++++++++++") %>
+            <%= console.log(as) %>
+            <%= as %>
+
+
+        </div>
+        <!--<div class="col-sm-6 align-right hidden-xs">
+            <% if (as.defaultPrice !== '0') { %>
+            <i class="fa fa-inr"></i>
+            <%= as.defaultPrice %>/-
+            <% } else { %>
+            Consult for Price
+            <% } %>
+        </div>-->
+    </a>
+</div>
+<% }); %>
+<script>
+function callSideDown(){
+   $('.sb-search_suggest').slideUp();
+}
+</script>
+

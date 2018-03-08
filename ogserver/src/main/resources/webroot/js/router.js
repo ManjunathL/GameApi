@@ -18,6 +18,7 @@ define([
             'product-list(/)': 'products',
             'l3_form(/)': 'l3_form',
             'product-detail-:id(/)': 'product_details',
+            'concept_search-:term(/)':'concepts_search',
             '*something': 'errorPage'
         }
     });
@@ -32,6 +33,19 @@ define([
         router.on('route:dashboard', function(actions) {
             require(['views/dashboard/mindboard'], function(DashboardPage) {
                 VM.create(VM.DASHBOARD, DashboardPage).render();
+            });
+        });
+
+        router.on('route:concepts_search', function(srcterm) {
+           srcterm = decodeURIComponent(srcterm);
+           require(['views/dashboard/search_concept'], function(SearchConceptPage) {
+                 var options = {
+                    model: {
+                        "searchTerm": srcterm
+                    }
+                };
+
+                VM.create(VM.SEARCHCONCEPTPAGE, SearchConceptPage,options).render();
             });
         });
 

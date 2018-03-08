@@ -10,6 +10,7 @@ define(function() {
         PRODUCTDETAILSPAGE: "ProductDetailsPage",
         EDITPRODUCTPAGE: "EditProductPage",
         LISTINGCONCEPTPAGE: "ListingConceptPage",
+        SEARCHCONCEPTPAGE:"SearchConceptPage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

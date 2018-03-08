@@ -5,8 +5,9 @@ define([
   'bootstrap',
   'text!templates/header/menu.html',
   'collections/authsettings',
+  'views/header/menu_helper',
   'models/authsetup'
-], function($, _, Backbone, Bootstrap, headerMenuTemplate, Authsettings,Authsetup){
+], function($, _, Backbone, Bootstrap, headerMenuTemplate, Authsettings, menuHelper, Authsetup){
   var HeaderMenuView = Backbone.View.extend({
     el: '.main-menu-container',
     authsettings: null,
@@ -16,23 +17,19 @@ define([
         this.authsetup = new Authsetup();
         this.getAuthentication();
        this.listenTo(Backbone);
-       _.bindAll(this, 'getAuthentication');
+       _.bindAll(this, 'renderSub', 'getAuthentication');
     },
     render: function() {
+        var that = this;
+        that.renderSub();
+        //$(this.el).html(_.template(headerMenuTemplate));
+
+        //$('a[href="' + window.location.hash + '"]').addClass('active');
+    },
+    renderSub: function(){
         $(this.el).html(_.template(headerMenuTemplate));
-
         $('a[href="' + window.location.hash + '"]').addClass('active');
-
-        $(document).on("click", "a[href^='/']", function(event) {
-          href = $(event.currentTarget).attr('href');
-          if (!event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
-              event.preventDefault();
-              url = href.replace("/^\//", '').replace('\#\!\/', '');
-              window.App.router.navigate(url, {
-                  trigger: true
-              });
-          }
-        });
+        menuHelper.ready(this);
     },
     events: {},
     getAuthentication: function(){
@@ -78,8 +75,9 @@ define([
         if(typeof(authTokenObj.userId) !== 'undefined'){
             sessionStorage.userId = authTokenObj.userId;
         }else{
-            sessionStorage.userId = "";
+            sessionStorage.userId = "user1234600";
         }
+        sessionStorage.userId = "user1234600";
 
         //$("#accessToken").val(sessionStorage.authtoken);
     }
