@@ -41,7 +41,7 @@
         <% } %>
     </div>
     <input type="hidden" id="conceptboardIdVl" value="<%= conceptboardId %>" />
-    <div class="pinBoot bg-white" id="pinBoot<%= conceptboardId %>" style="margin-top: 15px;">
+    <div class="pinBoot bg-white" id="searchpinBoot" style="margin-top: 15px;">
         <% if(typeof(conceptdetails) !== 'undefined'){ %>
         <% _.each(conceptdetails.conceptList, function(conceptdtls, i){ %>
         <% var tagnm = conceptdetails.tagList %>
@@ -121,7 +121,6 @@
 <script type="text/javascript">
 	$(function () {
 	     var conceptboardIdVl = $("#conceptboardIdVl").val();
-
     });
     function showModal(imgnm,cnpnm,cnpcod){
         $("#concNm").text(cnpnm);

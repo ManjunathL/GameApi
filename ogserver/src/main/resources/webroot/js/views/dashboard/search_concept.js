@@ -218,47 +218,22 @@ define([
              "conceptboardId": "1111",
              'conceptboardsDtls':conceptboards.toJSON()
          }));
-        var conceptboardId = "1111";
-
         $('#concept-dtls').html(_.template(conceptdetailsPageTemplate));
-        that.ready(conceptboardId);
+        that.ready();
 
     },
-    ready: function(conceptboardId){
-               $("#pinBoot"+conceptboardId).pinterest_grid({
-                    no_columns: 5,
-                    padding_x: 20,
-                    padding_y: 20,
-                    margin_bottom: 50,
-                    single_column_breakpoint: 700
-                });
-
-                $('#tab'+conceptboardId).on('shown.bs.tab', function (e) {
-                    if (e.isDefaultPrevented()) return;
-                    e.preventDefault();
-                    //var $this = $(this);
-                    //if($this.prop('disabled')) return;
-                    var target = $(e.target).attr("href") // activated tab
-                    //alert(target);
-                    var target = target.replace("#","");
-                    $("#pinBoot"+target).pinterest_grid({
-                        no_columns: 5,
-                        padding_x: 20,
-                        padding_y: 20,
-                        margin_bottom: 50,
-                        single_column_breakpoint: 700
-                    });
-                });
-
-                /*$('.conceptTagCarousel').carousel({
-                    interval: false
-                });*/
-
-
-        },
-             events: {
-                  "click .boardlst": "addConcept2Cboard"
-             },
+    ready: function(){
+       $("#searchpinBoot").pinterest_grid({
+            no_columns: 5,
+            padding_x: 20,
+            padding_y: 20,
+            margin_bottom: 50,
+            single_column_breakpoint: 700
+        });
+     },
+     events: {
+          "click .boardlst": "addConcept2Cboard"
+     }
   });
   return SearchConceptPage;
 });
