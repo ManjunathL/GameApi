@@ -9,7 +9,7 @@
                 <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
                 <div class="col-sm-6 col-md-3 col-lg-3 pd0">
                     <div class="grid position-relative overflow-hidden">
-                        <div class="imgholder"> <a href="/<%= conceptdtl.spaceTypeCode %>-conceptlist-<%= conceptdtl.id %>"><img src="http://designwhimages.mygubbi.com/Extendable Countertop.jpg" /> </a></div>
+                        <div class="imgholder"> <a href="/<%= conceptdtl.spaceTypeCode %>-conceptlist-<%= conceptdtl.id %>"><img src="<%= conceptdtl.imgUrl %>" /> </a></div>
                         <strong><%= conceptdtl.name %></strong>
                         <span><a class="pull-left remove-cboard" title="Remove Concept Board" data-element="<%= conceptdtl.id %>"><i class="fa fa-remove" aria-hidden="true"></i></a></span>
 
@@ -55,6 +55,7 @@
 
         $( ".dropdown-content" ).focusout(function() {
             $(this).fadeOut();
+            $(".dropdown-content").fadeOut();
         });
     });
 
@@ -70,7 +71,15 @@
                 }
             }
         }
+
     }
+
+     $(document).on("click", null, function(e) {
+        var popup = $("dropbtn");
+        if (!$('.dropbtn').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
+            $(".dropdown-content").fadeOut();
+        }
+    });
 </script>
 
 <div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
