@@ -120,11 +120,13 @@ public class MergePdfsRequest {
     {
         try
         {
+            PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
             PdfReader reader = new PdfReader(this.mergedFileName);
             PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(mergedAndPageNumberedFileName));
             int n = reader.getNumberOfPages();
             // text watermark
             Font f = new Font(Font.FontFamily.HELVETICA, 30);
+            Font f1=new Font(Font.FontFamily.TIMES_ROMAN,12,Font.BOLD,BaseColor.BLACK);
             Phrase p = new Phrase("Draft copy not for circulation", f);
             // transparency
             PdfGState gs1 = new PdfGState();
@@ -135,6 +137,7 @@ public class MergePdfsRequest {
             float x, y;
             // loop over every page
             for (int i = 1; i <= n; i++) {
+                Phrase pageNumber=new Phrase("Page " +i + " of " +n,f1);
                 pagesize = reader.getPageSizeWithRotation(i);
                 x = (pagesize.getLeft() + pagesize.getRight()) / 2;
                 y = (pagesize.getTop() + pagesize.getBottom()) / 2;
@@ -142,6 +145,7 @@ public class MergePdfsRequest {
                 over.saveState();
                 over.setGState(gs1);
                 ColumnText.showTextAligned(over, Element.ALIGN_CENTER, p, x, y, 45);
+                ColumnText.showTextAligned(over,Element.ALIGN_BOTTOM,pageNumber,500,10,0);
                 over.restoreState();
             }
             stamper.close();
