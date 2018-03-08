@@ -991,6 +991,7 @@ public class ProposalHandler extends AbstractRouteHandler
         try
         {
             JsonObject jsonObj = routingContext.getBodyAsJson();
+            String status=routingContext.getBodyAsJson().getString("status");
             LOG.info("jsonObj.containsKey(\"bookingFormFlag\") = "+jsonObj.containsKey("bookingFormFlag"));
             Boolean bookingFormFlag = false;
             if(jsonObj.containsKey("bookingFormFlag") && (jsonObj.getValue("bookingFormFlag") != null)){
@@ -1015,7 +1016,20 @@ public class ProposalHandler extends AbstractRouteHandler
                             createBookingFormInPdf(routingContext,response,new JsonObject(),jsonObject);
 //                        sendJsonResponse(routingContext, response.toString());
                         }else{
-                            sendJsonResponse(routingContext, response.toString());
+                            //sendJsonResponse(routingContext, response.toString());
+                            List<String> inputPdfs = new ArrayList<>();
+                            inputPdfs.add(response.getString("quoteFile"));
+                            String location_folder =ConfigHolder.getInstance().getStringValue("proposal_docs_folder","/mnt/game/proposal/" )+"/"+routingContext.getBodyAsJson().getInteger("proposalId");
+                            String merged_pdf = ConfigHolder.getInstance().getStringValue("merged_pdf","merged.pdf" );
+                            String outputFileName = location_folder+"/"+"ver1_"+merged_pdf;
+                            String outputFileNameAfterPageNum = location_folder+"/"+merged_pdf;
+                            Integer id1 = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status));
+                            VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id1,
+                                    (AsyncResult<Message<Integer>> result1) -> {
+                                        JsonObject response1 = (JsonObject) LocalCache.getInstance().remove(result1.result().body());
+                                        LOG.info("Routing Context in quote file = "+response);
+                                        sendJsonResponse(routingContext, response1.toString());
+                                    });
                         }
                     });
         }
