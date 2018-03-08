@@ -14,8 +14,9 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-            <a class="navbar-brand" href="index.html">
-                <img src="img/logo.png" class="img-responsive" alt="logo">
+            <a class="navbar-brand" href="/">
+                <h1 class="brand-logo" style="margin-top: 8px;">IMAGINEST</h1>
+                <h5 class="brand-lgsub-txt">YOUR DREAM HOME</h5>
             </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,19 +43,16 @@
             <div class="row sb-search_suggest"></div>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" data-toggle="modal" data-target="#login-modal">
+                    <a href="javascript:void(0);" id="userIcon" onclick="viewUserProfilemn()">
                         <img src="img/user.png" alt="user" class="img-responsive">
                     </a>
-                    <!--<div class="input-group-btn search-panel">-->
-                        <!--<button type="button" class="btn btn-filter dropdown-toggle btn-filter-dropdwn" data-toggle="dropdown">-->
-                            <!--<span id="user_profile">Filter by</span> <span class="caret"></span>-->
-                        <!--</button>-->
-                        <!--<ul class="dropdown-menu" role="menu">-->
-                            <!--<li><a href="#myProfile"> My Profile </a></li>-->
-                            <!--<li><a href="#myPreference"> My Preferences </a></li>-->
-                            <!--<li><a href="#space"> My Family Profile </a></li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
+                    <div id="userProfile-dv">
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/user-profile"> My Profile </a></li>
+                            <li><a href="/user_preference"> My Preferences </a></li>
+                            <li><a href="#space"> My Family Profile </a></li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -74,4 +72,10 @@ function myFunction() {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 </script>-->
+
+<script>
+    function viewUserProfilemn(){
+        $("#userProfile-dv .dropdown-menu").toggle();
+    }
+</script>
 

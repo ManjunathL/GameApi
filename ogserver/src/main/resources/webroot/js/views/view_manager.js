@@ -11,6 +11,8 @@ define(function() {
         EDITPRODUCTPAGE: "EditProductPage",
         LISTINGCONCEPTPAGE: "ListingConceptPage",
         SEARCHCONCEPTPAGE:"SearchConceptPage",
+        USERPROFILEPAGE:"UserProfilePage",
+        USERPREFERENCEPAGE:"UserPreferencePage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

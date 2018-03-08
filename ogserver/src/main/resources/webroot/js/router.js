@@ -19,6 +19,8 @@ define([
             'l3_form(/)': 'l3_form',
             'product-detail-:id(/)': 'product_details',
             'concept_search-:term(/)':'concepts_search',
+            'user-profile(/)':'user-profile',
+            'user_preference(/)':'user_preference',
             '*something': 'errorPage'
         }
     });
@@ -52,6 +54,17 @@ define([
         router.on('route:viewconceptboard', function(actions) {
             require(['views/dashboard/conceptboard'], function(ConceptboardPage) {
                 VM.create(VM.CONCEPTBOARD, ConceptboardPage).render();
+            });
+        });
+
+        router.on('route:user-profile', function(actions) {
+            require(['views/my_account/user_profile'], function(UserProfilePage) {
+                VM.create(VM.USERPROFILEPAGE, UserProfilePage).render();
+            });
+        });
+        router.on('route:user_preference', function(actions) {
+            require(['views/my_account/user_preference'], function(UserPreferencePage) {
+                VM.create(VM.USERPREFERENCEPAGE, UserPreferencePage).render();
             });
         });
         router.on('route:listing_concepts', function(spaceTypeCode, conceptboardId) {

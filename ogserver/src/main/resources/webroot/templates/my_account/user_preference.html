@@ -1,0 +1,590 @@
+<style>
+	figure {
+    display: inline-block;
+    margin: 20px; /* adjust as needed */
+	}
+	figure img {
+    vertical-align: top;
+	}
+	figure figcaption {
+    text-align: center;
+	}
+	.img-circle {
+    border-radius: 25px;
+	}
+	.slidecontainer {
+    width: 100%;
+}
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+	margin-bottom:45px;
+    width: 30px;
+    height: 44px;
+    border: 0;
+    background: url('img/bal.png');
+	background-repeat:none;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 23px;
+    height: 24px;
+    border: 0;
+    background: url('img/bal.png');
+    cursor: pointer;
+}
+.wrap {
+float: left;
+padding-top: 0;
+padding-left: 0;
+margin: 20px;
+border: 1px solid black;
+}
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+.button4 {border-radius: 12px;}
+.heading-style{
+margin-bottom:30px;
+}
+heading-style-top{
+margin-top:30px;
+}
+.gender-style{
+margin-top: 25px;
+}
+</style>
+
+<div class="container">
+    <h2>Preferences</h2>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+        <li><a data-toggle="tab" href="#menu1">Family</a></li>
+        <li><a data-toggle="tab" href="#menu2">Members</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <h2>Dwelling Type</h2>
+
+            <div class="form-group col-md-4">
+                <figure>
+                    <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/apartment-house.png" alt="Apartment" class="wrap img-circle"  width="100px" height="100px">
+                    <figcaption>Apartment</figcaption>
+                </figure>
+            </div>
+
+            <div class="form-group col-md-4">
+                <figure>
+                    <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/duplex-house.png" alt="Duplex/Pent"  class="wrap img-circle" width="100px" height="100px">
+                    <figcaption>Duplex/Pent House</figcaption>
+                </figure>
+            </div>
+
+            <div class="form-group col-md-4">
+                <figure>
+                    <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/expensive-house.png" alt="Villa"  class="wrap img-circle" width="100px" height="100px">
+                    <figcaption>Villa</figcaption>
+                </figure>
+            </div>
+
+            <div class="clearfix"></div>
+            <h2>Rooms(in BHK)</h2>
+            <div class="heading-style"></div>
+            <div class="form-group col-md-1">
+            </div>
+            <div class="form-group col-md-2">
+                <button class="btn btn-light btn-circle">1</button>
+            </div>
+
+            <div class="form-group col-md-2">
+                <button class="btn btn-light btn-circle">2</button>
+            </div>
+
+            <div class="form-group col-md-2">
+                <button class="btn btn-light btn-circle">3</button>
+            </div>
+
+            <div class="form-group col-md-2">
+                <button class="btn btn-light btn-circle">4</button>
+            </div>
+
+            <div class="form-group col-md-2">
+                <button class="btn btn-light btn-circle">>=5</button>
+            </div>
+
+            <div class="form-group col-md-1 heading-style">
+            </div>
+            <div class="clearfix"></div>
+            <div class="heading-style-top"></div>
+            <h2>Size(in SQFT)</h2>
+            <br/>
+            <br/>
+            <div class="heading-style"></div>
+            <div class="form-group col-md-3">
+                <button type="button" class="btn btn-light button4"><1000</button>
+            </div>
+            <div class="form-group col-md-3">
+                <button type="button" class="btn btn-light button4">1000-1500</button>
+            </div>
+            <div class="form-group col-md-3">
+                <button type="button" class="btn btn-light button4">1500-2000</button>
+            </div>
+            <div class="form-group col-md-3">
+                <button type="button" class="btn btn-light button4">>2000</button>
+            </div>
+            <div class="heading-style"></div>
+            <h2>Usage</h2>
+            <div class="form-group col-md-4">
+                <figure>
+                    <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/primary-home.png" alt="Primary" class="wrap img-circle"  width="100px" height="100px">
+                    <figcaption>Primary</figcaption>
+                </figure>
+            </div>
+
+            <div class="form-group col-md-4">
+                <figure>
+                    <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="Secondary/Weekend"  class="wrap img-circle"  width="100px" height="100px">
+                    <figcaption>Duplex/Pent House</figcaption>
+                </figure>
+            </div>
+
+            <div class="form-group col-md-4">
+                <figure>
+                    <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/remtal-home.png" alt="Rental" class="wrap img-circle"  width="100px" height="100px">
+                    <figcaption>Rental</figcaption>
+                </figure>
+            </div>
+            <br/>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary btn-block">Next</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div id="menu1" class="tab-pane fade">
+            <h3>Size</h3>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="range" min="1" max="20" value="5" class="slider" id="myRangeForAdults"><span style="text-align: center;">Adults</span>
+                    <p>Value: <span id="valueforadults"></span></p>
+                </div>
+                <div class="form-group col-md-6 ">
+                    <input type="range" min="1" max="20" value="3" class="slider" id="myRangeForTeenagers">Teenagers</input>
+                    <p>Value: <span id="valueforteenagers"></span></p>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="range" min="1" max="20" value="2" class="slider" id="myRangeforKids"><span style="text-align: center;">Kids</span>
+                    <p>Value: <span id="valueforkids"></span></p>
+                </div>
+
+                <div class="form-group col-md-6 ">
+                    <input type="range" min="1" max="20" value="4" class="slider" id="myRangeforSeniorCitizen">Senior Citizens</input>
+                    <p>Value: <span id="valueforseniorcitizen"></span></p>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <h5>Comments</h5>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12 ">
+                    <input type="text" class="form-control" id="inputComments1">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12 ">
+                    <h3>We like our home to be ( select all that apply )</h3>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-group col-md-12">
+                    <div id="carousel" class="carousel slide carousel-multi-item" data-type="multi">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="Los Angeles">
+                            </div>
+
+                            <div class="item">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="Chicago">
+                            </div>
+
+                            <div class="item">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="New York">
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+
+                        <div class="left carousel-control">
+                            <a href="#carousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </div>
+
+                        <div class="right carousel-control">
+                            <a href="#carousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <h5>Comments</h5>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12 ">
+                    <input type="text" class="form-control" id="inputComments2">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12 ">
+                    <h3>Hobbies / Intrest (Select all that apply)</h3>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-group col-md-12">
+                    <div id="carousel2" class="carousel slide carousel-multi-item" data-type="multi">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="Los Angeles">
+                            </div>
+
+                            <div class="item">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="Chicago">
+                            </div>
+
+                            <div class="item">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="New York">
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+
+                        <div class="left carousel-control">
+                            <a href="#carousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </div>
+
+                        <div class="right carousel-control">
+                            <a href="#carousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <h5>Comments</h5>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12 ">
+                    <input type="text" class="form-control" id="inputComments3">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12 ">
+                    <h3>We Usually do (Select all that apply)</h3>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="form-group col-md-12">
+                    <div id="carousel1" class="carousel slide carousel-multi-item" data-type="multi">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="Los Angeles">
+                            </div>
+
+                            <div class="item">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="Chicago">
+                            </div>
+
+                            <div class="item">
+                                <img src="http://s3-us-west-2.amazonaws.com/mygubbi-staging/preferences-icons/home/secondary-home.png" alt="New York">
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+
+                        <div class="left carousel-control">
+                            <a href="#carousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </div>
+
+                        <div class="right carousel-control">
+                            <a href="#carousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <h5>Comments</h5>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12 ">
+                    <input type="text" class="form-control" id="inputComments">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary btn-block">Next</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="menu2" class="tab-pane fade">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputname">New Member</label>
+                    <input type="Name" class="form-control" id="inputname" placeholder="Name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputproject">Age Group</label>
+                    <select id="inputproject" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-check form-check-inline form-group col-md-12 gender-style">
+                    <label class="form-check-label">Gender</label>
+                    <input class="form-check-input" type="radio" id="inlineradio1" value="option1">
+                    <label class="form-check-label" for="inlineradio1">Male</label>
+                    <input class="form-check-input" type="radio" id="inlineradio2" value="option1">
+                    <label class="form-check-label" for="inlineradio1">Female</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Work</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject1" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Occupation</label>
+                    <select id="inputproject2" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Hobby 1</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject3" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject4" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Hobby 2</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject5" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject6" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Hobby 3</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject7" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject8" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon glyphicon-floppy-disk"></span> Save
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <h3>Add Family Member  <span class="glyphicon glyphicon-plus"></span></h3>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary btn-block">All Done</button>
+                </div>
+            </div>
+
+
+
+        </div>
+</div>
+    <script>
+        var sliderforAdults = document.getElementById("myRangeForAdults");
+        var outputforAdults = document.getElementById("valueforadults");
+        outputforAdults.innerHTML = sliderforAdults.value;
+
+        sliderforAdults.oninput = function() {
+          outputforAdults.innerHTML = this.value;
+        }
+    </script>
+    <script>
+        var sliderforTeenagers = document.getElementById("myRangeForTeenagers");
+        var outputforTeenagers = document.getElementById("valueforteenagers");
+        outputforTeenagers.innerHTML = sliderforTeenagers.value;
+
+        sliderforTeenagers.oninput = function() {
+          outputforTeenagers.innerHTML = this.value;
+        }
+    </script>
+    <script>
+        var sliderforKids = document.getElementById("myRangeforKids");
+        var outputforKids = document.getElementById("valueforkids");
+        outputforKids.innerHTML = sliderforKids.value;
+
+        sliderforKids.oninput = function() {
+          outputforKids.innerHTML = this.value;
+        }
+    </script>
+    <script>
+        var sliderforSenior = document.getElementById("myRangeforSeniorCitizen");
+        var outputforSenior = document.getElementById("valueforseniorcitizen");
+        outputforSenior.innerHTML = sliderforSenior.value;
+
+        sliderforSenior.oninput = function() {
+          outputforSenior.innerHTML = this.value;
+        }
+    </script>
+
+</div>
