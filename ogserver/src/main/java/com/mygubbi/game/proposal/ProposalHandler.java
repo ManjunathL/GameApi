@@ -44,7 +44,6 @@ import io.vertx.ext.web.handler.BodyHandler;
 import jdk.nashorn.api.scripting.JSObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.plugin.util.UserProfile;
 
 import java.sql.Date;
 import java.time.LocalDate;
