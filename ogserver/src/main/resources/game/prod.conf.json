@@ -23,6 +23,11 @@
   "sendEmail":"Yes",
   "ssl_keystore": "ssl/mygubbiprod.jks",
   "ssl_password": "0r@nge123$",
+  "queryfiles": [
+    "game/db/proposal_queries.json",
+    "game/db/user_queries.json",
+    "config/queries.json"
+  ],
 
   "http_port" : 1445,
   "https_port" : 1446,

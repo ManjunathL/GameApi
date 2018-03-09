@@ -27,6 +27,8 @@ import com.mygubbi.report.DwReportingService;
 import com.mygubbi.report.ReportTableFillerSevice;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.game.proposal.output.SOWPdfOutputService;
+import com.mygubbi.si.crm.CrmApiClient;
+import com.mygubbi.si.crm.CrmOutboundApiHandler;
 import com.mygubbi.si.email.EmailData;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
 import com.sendgrid.SendGrid;
@@ -42,6 +44,7 @@ import io.vertx.ext.web.handler.BodyHandler;
 import jdk.nashorn.api.scripting.JSObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.plugin.util.UserProfile;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -794,6 +797,16 @@ public class ProposalHandler extends AbstractRouteHandler
     private void updateProposalOnConfirm(RoutingContext context)
     {
         JsonObject contextJson = context.getBodyAsJson();
+
+        boolean m1Value = checkIfM1ValueisPresent(contextJson.getString("crmId"));
+        if (!m1Value)
+        {
+            contextJson.put("responseMessage","M1 value not present in CRM, please update it.");
+            contextJson.put("confirmedStatus",false);
+            sendJsonResponse(context, contextJson.toString());
+        }
+
+
         String verFromProposal = String.valueOf(contextJson.getString("version"));
         String sowVersion = null ;
         if(verFromProposal.contains("0.")){
@@ -829,6 +842,18 @@ public class ProposalHandler extends AbstractRouteHandler
                         confirmTheProposal(context);
                     }
                 });
+    }
+
+    private boolean checkIfM1ValueisPresent(String opportunityId) {
+        boolean m1ValuePresent = true;
+        JsonObject opportunityDetailsForGame;
+        try {
+            opportunityDetailsForGame = new CrmApiClient().getOpportunityDetailsForGame(opportunityId);
+            if (Objects.equals(opportunityDetailsForGame.getString("m1_amount_collected_c"),null) || opportunityDetailsForGame.getString("m1_amount_collected_c").equals("")) m1ValuePresent = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return m1ValuePresent;
     }
 
     private void confirmTheProposal(RoutingContext context) {

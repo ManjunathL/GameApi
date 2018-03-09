@@ -11,6 +11,7 @@ import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.rmi.RemoteException;
 import java.security.MessageDigest;
 
 /**
@@ -233,6 +234,17 @@ public class CrmApiClient
         return finalJson.encodePrettily();
 
 
+    }
+
+    public JsonObject getOpportunityDetailsForGame(String opportunityId)
+    {
+        JsonObject doc = null;
+        try {
+            doc = new JsonObject(this.crmPort.get_opportunity_details(this.sessionId, opportunityId));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return doc;
     }
 
     public String getDocuments(String parentType, String parentId, String category, String type) throws Exception
