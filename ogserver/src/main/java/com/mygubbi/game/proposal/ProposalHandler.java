@@ -1017,7 +1017,7 @@ public class ProposalHandler extends AbstractRouteHandler
 //                        sendJsonResponse(routingContext, response.toString());
                         }else{
                             //sendJsonResponse(routingContext, response.toString());
-                            if(type.equals("QUOTEPDF"))
+                            if(Objects.equals("QUOTEPDF",ProposalOutputCreator.OutputType.QUOTEPDF.name()))
                             {
                                 LOG.info("inside quote pdf");
                                 List<String> inputPdfs = new ArrayList<>();

@@ -42,6 +42,13 @@
       "params": [
         "role"
       ]
+    },
+    {
+      "id": "game_user.salesanddesign",
+      "type": "select",
+      "table": "game_user",
+      "query": "select email, role, name, phone from game_user where role in ('sales','designer')",
+      "params": []
     }
   ]
 }

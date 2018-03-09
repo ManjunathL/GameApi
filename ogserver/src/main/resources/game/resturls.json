@@ -424,6 +424,15 @@
     },
 
     {
+      "uri": "/gapi/user/listsalesanddesign",
+      "source": "db",
+      "query":"game_user.salesanddesign",
+      "params":[],
+      "resultfields":[],
+      "default": "[]"
+    },
+
+    {
       "uri": "/gapi/finishcodes",
       "source": "db",
       "query":"finish.codes",
