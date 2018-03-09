@@ -800,9 +800,10 @@ public class ProposalHandler extends AbstractRouteHandler
         boolean m1Value = checkIfM1ValueisPresent(contextJson.getString("crmId"));
         if (!m1Value)
         {
-            contextJson.put("responseMessage","M1 value not present in CRM, please update it.");
+            contextJson.put("responseMessageForM1Amount",true);
             contextJson.put("confirmedStatus",false);
             sendJsonResponse(context, contextJson.toString());
+            return;
         }
 
 
