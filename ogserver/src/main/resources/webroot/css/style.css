@@ -1537,3 +1537,46 @@ margin-top: 25px;
 .user-profile-content h3{
     color: #2A9FD8;
 }
+.show_description-container{
+    padding: 30px;
+    width: 100% !important;
+    background-color: #fff;
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+.show_description-container h5{
+    color:#FFFF00;
+    font-size:18px;
+    font-weight:300;
+}
+.show_description-container h4{
+    color:#FFFF00;
+    font-size:12px;
+    border-bottom: 1px solid #cccccc5e;
+    line-height: 30px;
+}
+
+.show_description-container p{
+    color:#fff;
+    font-size:12px;
+    font-weight:300;
+    line-height: 25px;
+    margin-bottom: 25px;
+}
+#show_description-close{
+    float: right;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+    position: absolute;
+    top: -4px;
+    right: 20px;
+}
+.color-orange{
+    color:#ea5c36;
+}

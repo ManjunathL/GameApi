@@ -9,6 +9,7 @@ define([
   'text!templates/dashboard/conceptdetails.html',
   'text!templates/dashboard/similarconcepts.html',
   'text!templates/dashboard/relatedconcepts.html',
+  'text!templates/dashboard/view_conceptDesc.html',
   'collections/conceptlists',
   'models/filter',
   'collections/conceptboards',
@@ -21,7 +22,7 @@ define([
   'collections/remove_conceptFromCboards',
   'collections/add_conceptnotes',
   'collections/add_concepttags'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, ConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,view_conceptDesc, ConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
@@ -290,7 +291,23 @@ define([
          "click .boardlst": "addConcept2Cboard",
          "click #save_CNote": "submitConceptNote",
          "click #save_CTag": "submitConceptTag",
-         "click .remove-pin": "removeConceptFromCboard"
+         "click .remove-pin": "removeConceptFromCboard",
+         "click. #show_description":"viewDescription"
+
+    },
+    viewDescription:function(evt){
+         var currentTarget = $(evt.currentTarget);
+          var conceptId = currentTarget.data('element');
+          var cnpnm = currentTarget.data('element1');
+
+
+        $('#show_description-modal').modal('show');
+
+        $('#show_description-dtls').html(_.template(view_conceptDesc)({
+            "conceptId": conceptId,
+            "conceptDesc": cnpnm
+
+        }));
 
     },
     removeConceptFromCboard: function (e) {
@@ -495,15 +512,28 @@ define([
    var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
 
     console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
-    console.log(conceptdtls);
+    console.log(JSON.stringify(conceptdtls));
     console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
     console.log(conceptdtls[0].conceptCode);
 
     var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
     if(typeof(conceptdtls) !== 'undefined'){
         imgnm = conceptdtls[0].imgURL;
+
+//        var consTitle = conceptdtls[0].conceptTitle;
+//        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
+        var consTitle = conceptdtls[0].conceptTitle;
+        var n = consTitle.length;
+        if (n > 160){
+        cnpnm = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+
+        } else {
+        cnpnm = consTitle;
+        }
+
+
         concDes = conceptdtls[0].conceptTypeTitle;
-        cnpnm = conceptdtls[0].conceptTitle;
+//        cnpnm = conceptdtls[0].conceptTitle;
         cconceptCode = conceptdtls[0].conceptCode;
         userNote = conceptdtls[0].userNote;
         userTag = conceptdtls[0].userTag;
@@ -520,7 +550,11 @@ define([
      var relconceptCode = cconceptCode;
 
      $("#concNmm").text(concDes);
-     $("#concDes").text(cnpnm);
+     $("#concDes").html(cnpnm);
+     $("#show_description").attr("data-element",cconceptId);
+     $("#show_description").attr("data-element1",consTitle);
+
+
      $("#conId").val(cconceptId);
      $("#mastImgg").attr("src",imgnm);
 
