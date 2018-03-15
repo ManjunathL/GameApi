@@ -959,7 +959,7 @@ public class ProposalHandler extends AbstractRouteHandler
     private void downloadQuote(RoutingContext routingContext)
     {
 
-        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.QUOTATION,false,new JsonObject());
+        this.createProposalOutputForExcel(routingContext, ProposalOutputCreator.OutputType.QUOTATION,false,new JsonObject());
     }
 
     private void downloadQuoteAndSow(RoutingContext routingContext){
@@ -997,19 +997,62 @@ public class ProposalHandler extends AbstractRouteHandler
 
     private void downloadJobCard(RoutingContext routingContext)
     {
-        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.JOBCARD,false,new JsonObject());
+        this.createProposalOutputForExcel(routingContext, ProposalOutputCreator.OutputType.JOBCARD,false,new JsonObject());
     }
 
 
     private void downloadSalesOrder(RoutingContext routingContext)
     {
-        this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.SALESORDER,false,new JsonObject());
+        this.createProposalOutputForExcel(routingContext, ProposalOutputCreator.OutputType.SALESORDER,false,new JsonObject());
     }
 
     /*private void downloadProdSpec(RoutingContext routingContext)
     {
         this.createProposalOutput(routingContext, ProposalOutputCreator.OutputType.PRODSPEC);
     }*/
+
+    private void createProposalOutputForExcel(RoutingContext routingContext, ProposalOutputCreator.OutputType type,boolean ValidSows,JsonObject jsonObject)
+    {
+        try
+        {
+            JsonObject jsonObj = routingContext.getBodyAsJson();
+            String status=routingContext.getBodyAsJson().getString("status");
+            LOG.info("jsonObj.containsKey(\"bookingFormFlag\") = "+jsonObj.containsKey("bookingFormFlag"));
+            Boolean bookingFormFlag = false;
+            if(jsonObj.containsKey("bookingFormFlag") && (jsonObj.getValue("bookingFormFlag") != null)){
+                bookingFormFlag = jsonObj.getString("bookingFormFlag").equalsIgnoreCase("yes")?true:false;
+            }
+            Boolean IsBookingFormFlag = new Boolean(bookingFormFlag);
+
+            LOG.info("ValidSows = "+ValidSows);
+            LOG.debug("Json **** " +routingContext.getBodyAsJson());
+            LOG.debug("Create proposal output :" + routingContext.getBodyAsJson().toString());
+            JsonObject quoteRequestJson = routingContext.getBodyAsJson();
+            quoteRequestJson.put("validSow",ValidSows);
+            // LOG.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +quoteRequestJson.getJsonObject("proposalId"));
+            Integer id = LocalCache.getInstance().store(new QuoteRequest(quoteRequestJson, type));
+            VertxInstance.get().eventBus().send(ProposalOutputService.CREATE_PROPOSAL_OUTPUT, id,
+                    (AsyncResult<Message<Integer>> result) -> {
+                        JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
+                        LOG.info("Quote Res :: "+response);
+                        if(ValidSows){
+                            createSowOutputInPdf(routingContext,response,IsBookingFormFlag,jsonObj);
+                        }else if(IsBookingFormFlag){
+                            createBookingFormInPdf(routingContext,response,new JsonObject(),jsonObject);
+//                        sendJsonResponse(routingContext, response.toString());
+                        }else{
+                                LOG.info("outside quote PDF");
+                                sendJsonResponse(routingContext, response.toString());
+                        }
+                    });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            LOG.info("Exception " +e);
+        }
+
+    }
 
     private void createProposalOutput(RoutingContext routingContext, ProposalOutputCreator.OutputType type,boolean ValidSows,JsonObject jsonObject)
     {
@@ -1041,9 +1084,9 @@ public class ProposalHandler extends AbstractRouteHandler
                             createBookingFormInPdf(routingContext,response,new JsonObject(),jsonObject);
 //                        sendJsonResponse(routingContext, response.toString());
                         }else{
-                            //sendJsonResponse(routingContext, response.toString());
+                            /*//sendJsonResponse(routingContext, response.toString());
                             if(Objects.equals("QUOTEPDF",ProposalOutputCreator.OutputType.QUOTEPDF.name()))
-                            {
+                            {*/
                                 LOG.info("inside quote pdf");
                                 List<String> inputPdfs = new ArrayList<>();
                                 inputPdfs.add(response.getString("quoteFile"));
@@ -1058,10 +1101,10 @@ public class ProposalHandler extends AbstractRouteHandler
                                             LOG.info("Routing Context in quote file = "+response);
                                             sendJsonResponse(routingContext, response1.toString());
                                         });
-                            }else {
                                 LOG.info("outside quote PDF");
-                                sendJsonResponse(routingContext, response.toString());
-                            }
+                        /*}else {
+                            sendJsonResponse(routingContext, response.toString());
+                            }*/
 
                         }
                     });
