@@ -182,6 +182,9 @@ define([
         var concepttags = that.concepttags;
         var conceptboards = that.conceptboards;
 
+        var cBoardList = conceptboards.toJSON();
+        var conceptBoardName =  that.conceptboards.getConceptBoardName(cBoardList[0].listOfUserConceptBoard,conceptboardId);
+
         if (typeof(that.filter.get('noFilterApplied')) == 'undefined') {
             that.filter.set({
                 'noFilterApplied': '0'
@@ -246,7 +249,8 @@ define([
             "conceptdetails": filteredConcepts,
             "concepttags": concepttags.toJSON(),
             "conceptboardId": conceptboardId,
-            'conceptboardsDtls':conceptboards.toJSON()
+            'conceptboardsDtls':conceptboards.toJSON(),
+            "conceptBoardName":conceptBoardName
         }));
 
         $('#concept-dtls').html(_.template(conceptdetailsPageTemplate));

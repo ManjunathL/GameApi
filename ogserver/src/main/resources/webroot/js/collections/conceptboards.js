@@ -16,6 +16,19 @@ define([
           _.each(models, function (conceptboard){
             conceptboard = new ConceptBoard(conceptboard);
           });
+        },
+        getConceptBoardName: function(cBoardList,cBoardId){
+
+            console.log("Coming Here??");
+//            console.log(cBoardList.toJSON());
+            console.log(cBoardList);
+
+            for (var i=0; i < cBoardList.length; i++) {
+                if (cBoardList[i].id == cBoardId){
+                console.log(cBoardList[i].name);
+                    return cBoardList[i].name;
+                    }
+            }
         }
     });
   return ConceptBoards;
