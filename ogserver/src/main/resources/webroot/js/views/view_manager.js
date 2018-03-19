@@ -13,6 +13,7 @@ define(function() {
         SEARCHCONCEPTPAGE:"SearchConceptPage",
         USERPROFILEPAGE:"UserProfilePage",
         USERPREFERENCEPAGE:"UserPreferencePage",
+        VIEWDESIGNSPAGE:"ViewDesignPage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

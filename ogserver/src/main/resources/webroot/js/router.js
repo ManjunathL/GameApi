@@ -19,6 +19,7 @@ define([
             'l3_form(/)': 'l3_form',
             'product-detail-:id(/)': 'product_details',
             'concept_search-:term(/)':'concepts_search',
+            'view_design-:spaceTypeCode(/)':'listing_designs',
             'user-profile(/)':'user-profile',
             'user_preference(/)':'user_preference',
             '*something': 'errorPage'
@@ -50,6 +51,18 @@ define([
                 VM.create(VM.SEARCHCONCEPTPAGE, SearchConceptPage,options).render();
             });
         });
+
+        router.on('route:listing_designs', function(spaceTypeCode) {
+                   require(['views/dashboard/view_design'], function(ViewDesignPage) {
+                         var options = {
+                            model: {
+                                "spaceTypeCode": spaceTypeCode
+                            }
+                        };
+
+                        VM.create(VM.VIEWDESIGNSPAGE, ViewDesignPage,options).render();
+                    });
+                });
 
         router.on('route:viewconceptboard', function(actions) {
             require(['views/dashboard/conceptboard'], function(ConceptboardPage) {
