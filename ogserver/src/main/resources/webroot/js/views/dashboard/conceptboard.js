@@ -111,7 +111,8 @@ define([
     getConceptBoards: function(){
       var that = this;
       var userId = "user1234600";
-      var userMindboardId = sessionStorage.defaultMindboardId;
+     // var userMindboardId = sessionStorage.defaultMindboardId;
+      var userMindboardId = 17;
       var pageno = 0;
       var itemPerPage = 20;
       return new Promise(function(resolve, reject) {

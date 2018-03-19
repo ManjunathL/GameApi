@@ -46,6 +46,7 @@
     background: url('img/bal.png');
 	background-repeat:none;
     cursor: pointer;
+    position:relative;
 }
 
 .slider::-moz-range-thumb {
@@ -89,6 +90,11 @@ margin-top:30px;
 }
 .gender-style{
 margin-top: 25px;
+}
+.novdiv{
+    left: 18.5%;
+    position: absolute;
+    top: -32px;
 }
 </style>
 
@@ -211,24 +217,24 @@ margin-top: 25px;
             <h3>Size</h3>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <input type="range" min="1" max="20" value="5" class="slider" id="myRangeForAdults"><span style="text-align: center;">Adults</span>
-                    <p>Value: <span id="valueforadults"></span></p>
+                    <input type="range" min="1" max="20" value="6" class="slider" id="myRangeForAdults"><span style="text-align: center;">Adults</span>
+                    <div class="novdiv" style="left: 28%;"><span id="valueforadults"></span></div>
                 </div>
                 <div class="form-group col-md-6 ">
                     <input type="range" min="1" max="20" value="3" class="slider" id="myRangeForTeenagers">Teenagers</input>
-                    <p>Value: <span id="valueforteenagers"></span></p>
+                    <div class="novdiv" style="left: 14%;"><span id="valueforteenagers"></span></div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <input type="range" min="1" max="20" value="2" class="slider" id="myRangeforKids"><span style="text-align: center;">Kids</span>
-                    <p>Value: <span id="valueforkids"></span></p>
+                    <div class="novdiv" style="left: 9%;"><span id="valueforkids"></span></div>
                 </div>
 
                 <div class="form-group col-md-6 ">
                     <input type="range" min="1" max="20" value="4" class="slider" id="myRangeforSeniorCitizen">Senior Citizens</input>
-                    <p>Value: <span id="valueforseniorcitizen"></span></p>
+                    <div class="novdiv"><span id="valueforseniorcitizen"></span></div>
                 </div>
             </div>
 
@@ -557,6 +563,7 @@ margin-top: 25px;
 
         sliderforAdults.oninput = function() {
           outputforAdults.innerHTML = this.value;
+          $("#valueforadults").parent().css("left","18%");
         }
     </script>
     <script>

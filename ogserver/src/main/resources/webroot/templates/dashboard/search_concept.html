@@ -1,6 +1,9 @@
 <%= console.log("@@@@@@@@@@@@@@@ Concepts @@@@@@@@@@@@@@@@@") %>
 <%= console.log(conceptdetails) %>
 
+<%= console.log("@@@@@@@@@@@@@@@ Selected Concept Tag @@@@@@@@@@@@@@@@@") %>
+<%= console.log(filterTag) %>
+
 <link href="css/layout.css" rel="stylesheet">
 <section class="col-md-12 col-lg-12 mt15">
     <div id="myCarousel112" class="carousel slide">
@@ -22,11 +25,11 @@
                     <% } %>
                     <% if( i == 1) {  %>
                     <div class="tgico">
-                        <span class="active  <%= clsarr[i%4] %> tgico-link" onclick="getTagsView('all')" title="All" >All</span>
+                        <span class="active  <%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) == 'undefined') || (filterTag == "")){ %> style="background-color:#fff; border:1px solid red;" <% } %> onclick="getTagsView('all')" title="All" >All</span>
                     </div>
                     <% } %>
                     <div class="tgico">
-                        <span class="<%= clsarr[i%4] %> tgico-link" onclick="getTagsView('<%= tagnm %>')" title="<%= tagnm %>"><%= tagnm %></span>
+                        <span class="<%= clsarr[i%4] %> tgico-link" onclick="getTagsView('<%= tagnm %>')" <% if((typeof(filterTag) !== 'undefined') && (filterTag == tagnm)){ %> style="background-color:#fff; border:1px solid red;" <% } %> title="<%= tagnm %>"><%= tagnm %></span>
                     </div>
                     <% if( i%icols == 0 || i== conceptdetails.tagList.length ) { %>
                 </div>

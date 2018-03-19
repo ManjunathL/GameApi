@@ -216,7 +216,8 @@ define([
         $(this.el).html(_.template(SearchConceptTemplate)({
              "conceptdetails": searchedConcepts[0].conceptSearchList,
              "conceptboardId": "1111",
-             'conceptboardsDtls':conceptboards.toJSON()
+             "conceptboardsDtls":conceptboards.toJSON(),
+             "filterTag":filterTag
          }));
         $('#concept-dtls').html(_.template(conceptdetailsPageTemplate));
         that.ready();

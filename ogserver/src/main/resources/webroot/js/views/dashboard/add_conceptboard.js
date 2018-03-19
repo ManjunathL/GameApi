@@ -19,6 +19,7 @@ define([
 
             Promise.all([getSpaceTypeListPromise, viewSpaceTemplates]).then(function() {
                 console.log("@@@@@@@@@@@@@ In side Promiseeeeeeeeeeeeee @@@@@@@@@@@@@@@@@@");
+                console.log("@@@@@@@@@@@@@ spaceTypeCode @@@@@@@@@@@@@@@@@@ "+spaceTypeCode);
                 that.fetchSpacetypesAndRender(spaceTypeCode);
             });
         },
@@ -52,7 +53,7 @@ define([
             console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
             console.log(spaceTypeCode);
             if(typeof(spaceTypeCode) == 'undefined'){
-                var spaceTypeCode = 'SP-ENTRY';
+                var spaceTypeCode = 'SP-KITCHEN';
             }
 
             that.spacetemplates.getSpaceTemplateList(spaceTypeCode,{

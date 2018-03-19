@@ -4,7 +4,9 @@
 <div id="owl-demo" class="owl-carousel owl-theme">
     <% _.each(similarConcepts[0].similarConceptsList, function(simcnt, i){ %>
     <div class="item">
-        <img src="<%= simcnt.imgURL %>" alt="<%= simcnt.conceptTitle %>">
+        <a href="javascript:void(0);" class="conceptImg" data-element="http://designwhimages.mygubbi.com/C-00037.jpg" data-element1="Plate" data-element2="Thali basket/ orgaflag" data-element3="C-00037" data-element4="514">
+        <img src="<%= simcnt.imgURL %>" alt="<%= simcnt.conceptTitle %>" title="<%= simcnt.conceptTitle %>">
+        </a>
     </div>
     <% }); %>
 </div>

@@ -217,7 +217,7 @@ define([
             console.log(filteredConcepts);
             console.log("@@@@@@@@@@@@@@@@@@");
 
-            filteredConcepts[0].listOfConceptBoardConcept = filteredConcepts;
+            conceptlists[0].listOfConceptBoardConcept = filteredConcepts;
 
             that.filter.set({
                 'noFilterApplied': '1'
@@ -225,7 +225,7 @@ define([
                 silent: true
             });
         } else {
-            var filteredConcepts = conceptlists.toJSON();
+            var conceptlists = conceptlists.toJSON();
             that.filter.set({
                 'noFilterApplied': '0'
             }, {
@@ -246,11 +246,12 @@ define([
 
 
         $(this.el).html(_.template(conceptsPageTemplate)({
-            "conceptdetails": filteredConcepts,
+            "conceptdetails": conceptlists,
             "concepttags": concepttags.toJSON(),
             "conceptboardId": conceptboardId,
             'conceptboardsDtls':conceptboards.toJSON(),
-            "conceptBoardName":conceptBoardName
+            "conceptBoardName":conceptBoardName,
+            "filterTag":filterTag
         }));
 
         $('#concept-dtls').html(_.template(conceptdetailsPageTemplate));
@@ -516,7 +517,7 @@ define([
    var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
 
     console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
-    console.log(JSON.stringify(conceptdtls));
+    console.log(conceptdtls);
     console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
     console.log(conceptdtls[0].conceptCode);
 
