@@ -1174,8 +1174,11 @@ footer {
 /* Main design of Concept Board */
 
 .page{
-    min-height:850px;
     height:auto;
+}
+
+.page-hgt{
+    min-height:850px;
 }
 
 .main-conceptboard-sec{

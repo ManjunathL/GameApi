@@ -15,7 +15,7 @@ define([
     initialize: function () {
         this.authsettings = new Authsettings();
         this.authsetup = new Authsetup();
-        this.getAuthentication();
+       // this.getAuthentication();
        this.listenTo(Backbone);
        _.bindAll(this, 'renderSub', 'getAuthentication');
     },
@@ -31,9 +31,11 @@ define([
         $('a[href="' + window.location.hash + '"]').addClass('active');
         menuHelper.ready(this);
     },
-    events: {},
+    events: {
+    },
     getAuthentication: function(){
         var that = this;
+        alert("sssssssssssssssssssss");
         var form = new FormData();
         form.append("username", "rajnish.kumar2291@gmail.com");
         form.append("password", "welcome");

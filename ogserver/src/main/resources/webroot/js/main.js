@@ -1,25 +1,50 @@
 require.config({
-  paths: {
-    jquery: 'libs/jquery-2.1.1',
-    underscore: 'libs/underscore/underscore-min',
-    lodash: 'libs/lodash/lodash.min',
-    backbone: 'libs/backbone/backbone-min',
-    select2: 'libs/select2.full.min',
-    chosenjquery: 'libs/chosen.jquery',
-    upload: 'libs/upload',
-    text: 'libs/text/text',
-    bootstrap: 'libs/bootstrap/dist/js/bootstrap.min',
-    bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
-    imagesloaded: 'libs/imagesloaded/imagesloaded.pkgd',
-    wookmark: 'libs/wookmark/wookmark',
-    pinterest_grid: 'libs/pinterest_grid',
-    mixitup: 'libs/jquery.mixitup.min',
-    owlcarousel: 'libs/owl.carousel/dist/owl.carousel.min',
-    templates: '../templates'
-  }
-
-});
-
+    paths: {
+        jquery: 'libs/jquery-2.1.1',
+        jqueryui: 'libs/jquery-ui/jquery-ui',
+        underscore: 'libs/underscore/underscore-min',
+        lodash: 'libs/lodash/lodash.min',
+        backbone: 'libs/backbone/backbone-min',
+        firebase: 'libs/firebase/firebase',
+        select2: 'libs/select2.full.min',
+        chosenjquery: 'libs/chosen.jquery',
+        upload: 'libs/upload',
+        text: 'libs/text/text',
+        bootstrap: 'libs/bootstrap/dist/js/bootstrap.min',
+        bootstrapvalidator: 'libs/bootstrap-validator/dist/validator.min',
+        imagesloaded: 'libs/imagesloaded/imagesloaded.pkgd',
+        wookmark: 'libs/wookmark/wookmark',
+        pinterest_grid: 'libs/pinterest_grid',
+        mixitup: 'libs/jquery.mixitup.min',
+        owlcarousel: 'libs/owl.carousel/dist/owl.carousel.min',
+        templates: '../templates'
+    },
+    shim: {
+       'bootstrap': {
+           deps: ['jquery', 'jqueryui'],
+           exports: 'Bootstrap'
+       },
+       'bootstrapvalidator': {
+           deps: ['bootstrap', 'jquery'],
+           exports: 'Bootstrapvalidator'
+       },
+       'backbone': {
+           deps: ['underscore', 'jquery'],
+           exports: function () {
+               return Backbone.noConflict();
+           }
+       },
+       'firebase': {
+           deps: ['jquery'],
+           exports: 'firebase'
+       }
+    },
+    map: {
+       '*': {
+           'css': 'libs/require-css/css'
+       }
+    }
+    });
 require([
   'views/app',
   'router',

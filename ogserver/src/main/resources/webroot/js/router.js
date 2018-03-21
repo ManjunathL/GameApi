@@ -40,7 +40,6 @@ define([
         });
 
         router.on('route:viewconceptboard', function(actions) {
-            alert("hi smrutiiiiiii");
             require(['views/dashboard/conceptboard'], function(ConceptboardPage) {
                 VM.create(VM.CONCEPTBOARDPAGE, ConceptboardPage).render();
             });
