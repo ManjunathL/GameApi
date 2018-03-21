@@ -1,7 +1,7 @@
 define(function() {
     return {
-        DASHBOARD: "DashboardPage",
-        CONCEPTBOARD: "ConceptboardPage",
+        HOMEPAGE:"HomePage",
+        CONCEPTBOARDPAGE: "ConceptboardPage",
         PRODUCT_LISTING: "ProductListingPage",
         L1FORMPAGE: "L1formPage",
         EDITDESIGNPAGE: "EditDesignPage",

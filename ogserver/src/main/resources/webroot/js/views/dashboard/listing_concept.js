@@ -259,6 +259,7 @@ define([
         that.ready(conceptboardId);
     },
     ready: function(conceptboardId){
+        $(function() {
            $("#pinBoot"+conceptboardId).pinterest_grid({
                 no_columns: 5,
                 padding_x: 20,
@@ -266,6 +267,7 @@ define([
                 margin_bottom: 50,
                 single_column_breakpoint: 700
             });
+        });
 
             $('#tab'+conceptboardId).on('shown.bs.tab', function (e) {
                 if (e.isDefaultPrevented()) return;

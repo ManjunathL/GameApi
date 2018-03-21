@@ -8,9 +8,9 @@ define([
     var AppRouter = Backbone.Router.extend({
         routes: {
             //'': 'dashboard',
-            '': 'viewconceptboard',
+            '': 'dashboard',
+            'viewconceptboards(/)': 'viewconceptboard',
             ':name-conceptlist-:id(/)':'listing_concepts',
-            'view(/)': 'dashboard',
             'l1_form(/)': 'l1_form',
             'edit_design-:id(/)': 'editdesign',
             'edit_product-:id(/)': 'editproduct',
@@ -34,8 +34,15 @@ define([
 
 
         router.on('route:dashboard', function(actions) {
-            require(['views/dashboard/mindboard'], function(DashboardPage) {
-                VM.create(VM.DASHBOARD, DashboardPage).render();
+            require(['views/dashboard/home'], function(HomePage) {
+                VM.create(VM.HomePage, HomePage).render();
+            });
+        });
+
+        router.on('route:viewconceptboard', function(actions) {
+            alert("hi smrutiiiiiii");
+            require(['views/dashboard/conceptboard'], function(ConceptboardPage) {
+                VM.create(VM.CONCEPTBOARDPAGE, ConceptboardPage).render();
             });
         });
 
@@ -64,11 +71,7 @@ define([
                     });
                 });
 
-        router.on('route:viewconceptboard', function(actions) {
-            require(['views/dashboard/conceptboard'], function(ConceptboardPage) {
-                VM.create(VM.CONCEPTBOARD, ConceptboardPage).render();
-            });
-        });
+
 
         router.on('route:user-profile', function(actions) {
             require(['views/my_account/user_profile'], function(UserProfilePage) {

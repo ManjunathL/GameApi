@@ -24,11 +24,13 @@ define([
             }), function (concept) {return concept });
         },
         searchconceptWithTags: function (conceptObj, selectedSearchTag) {
-            var tagArrObj = conceptObj.tags;
-            var tagArr = tagArrObj.split(",");
-            for (var i=0; i < tagArr.length; i++) {
-                if (tagArr[i] == selectedSearchTag)
-                    return true;
+            if(typeof(conceptObj.tags) !== 'undefined'){
+                var tagArrObj = conceptObj.tags;
+                var tagArr = tagArrObj.split(",");
+                for (var i=0; i < tagArr.length; i++) {
+                    if (tagArr[i] == selectedSearchTag)
+                        return true;
+                }
             }
         }
     });

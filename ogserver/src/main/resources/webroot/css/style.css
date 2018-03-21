@@ -53,7 +53,9 @@ hr {
     position: relative;
 }
 
-
+.mn0{
+    margin:0px !important;
+}
 .mt15{
     margin-top:15px;
 }
@@ -1136,8 +1138,21 @@ background: #333333;
     display:inline-block;
 }
 #addCboardsec h5{
-    width:50%;
-    margin: 10px auto;
+   width: 100%;
+   margin: 10px auto;
+   text-align: center;
+   font-size: 12px;
+   font-weight: 700;
+   color: #666;
+}
+
+#templateViewdv h5{
+   width: 100%;
+   margin: 10px auto;
+   text-align: center;
+   font-size: 12px;
+   font-weight: 700;
+   color: #666;
 }
 
 #addCboardsec .carousel-control.right {
@@ -1579,4 +1594,8 @@ margin-top: 25px;
 }
 .color-orange{
     color:#ea5c36;
+}
+.active-Stypebox{
+    border: 1px solid #ea5c36;
+    box-shadow: 0px 0px 10px 4px #ccc;
 }

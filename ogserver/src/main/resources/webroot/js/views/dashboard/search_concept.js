@@ -144,8 +144,8 @@ define([
                },
                data: JSON.stringify(formData),
                success:function(response){
-                    //console.log("Successfully Searched... ");
-                    //console.log(response);
+                    console.log("Successfully Searched... ");
+                    console.log(response);
                     $("#snackbar").html("Successfully searched ...");
                       var x = document.getElementById("snackbar")
                       x.className = "show";
@@ -224,12 +224,14 @@ define([
 
     },
     ready: function(){
-       $("#searchpinBoot").pinterest_grid({
-            no_columns: 5,
-            padding_x: 20,
-            padding_y: 20,
-            margin_bottom: 50,
-            single_column_breakpoint: 700
+        $(function() {
+           $("#searchpinBoot").pinterest_grid({
+                no_columns: 5,
+                padding_x: 20,
+                padding_y: 20,
+                margin_bottom: 50,
+                single_column_breakpoint: 700
+            });
         });
      },
      events: {
