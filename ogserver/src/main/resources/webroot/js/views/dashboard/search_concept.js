@@ -5,12 +5,12 @@ define([
   'bootstrap',
   'pinterest_grid',
    'text!templates/dashboard/search_concept.html',
-   'text!templates/dashboard/conceptdetails.html',
+   'text!templates/dashboard/searchConceptdetails.html',
    'models/filter',
   'collections/search_concepts',
   'collections/conceptboards',
   'collections/add_conceptToCboards'
-], function($, _, Backbone, Bootstrap, pinterest_grid, SearchConceptTemplate,conceptdetailsPageTemplate, Filter,SearchConcepts,ConceptBoards,AddConceptToCboards){
+], function($, _, Backbone, Bootstrap, pinterest_grid, SearchConceptTemplate,searchConceptdetailsPageTemplate, Filter,SearchConcepts,ConceptBoards,AddConceptToCboards){
   var SearchConceptPage = Backbone.View.extend({
     el: '.page',
     search_concepts:null,
@@ -41,7 +41,6 @@ define([
         });
 
          $("#searchInput1").val(searchTerm);
-
         var getsearchConceptsPromise = that.getsearchConcepts(searchTerm);
         var getConceptBoardsPromise = that.getConceptBoards();
 
@@ -219,7 +218,7 @@ define([
              "conceptboardsDtls":conceptboards.toJSON(),
              "filterTag":filterTag
          }));
-        $('#concept-dtls').html(_.template(conceptdetailsPageTemplate));
+        $('#concept-dtls').html(_.template(searchConceptdetailsPageTemplate));
         that.ready();
 
     },
@@ -235,8 +234,53 @@ define([
         });
      },
      events: {
-          "click .boardlst": "addConcept2Cboard"
-     }
-  });
+          "click .boardlst": "addConcept2Cboard",
+          "click .conceptImg": "getConceptDetails"
+
+     },
+     getConceptDetails: function(evt){
+          var currentTarget = $(evt.currentTarget);
+          console.log(currentTarget.data('element'));
+          console.log(currentTarget.data('element1'));
+          console.log(currentTarget.data('element2'));
+          console.log(currentTarget.data('element3'));
+          console.log(currentTarget.data('element4'));
+          console.log(currentTarget.data('element5'));
+          console.log(currentTarget.data('element6'));
+          console.log(currentTarget.data('element7'));
+
+
+          var imgnm = currentTarget.data('element');
+          var concDes = currentTarget.data('element1');
+          var conceptTitle = currentTarget.data('element2');
+          var cconceptCode = currentTarget.data('element3');
+          var conceptTypeCode = currentTarget.data('element4');
+          var consTitle = currentTarget.data('element5');
+          var spaceElementCodes = currentTarget.data('element6');
+          var sspaceTypeCode = currentTarget.data('element7');
+
+          var n = consTitle.length;
+          if (n > 160){
+              cnpnm = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+          } else {
+               cnpnm = consTitle;
+          }
+
+          var pageno = 0;
+          var itemPerPage = 20;
+          var vconceptCode = cconceptCode;
+
+            $("#concNmm").text(concDes);
+            $("#concDes").html(cnpnm);
+            $("#show_description").attr("data-element",vconceptCode);
+            $("#show_description").attr("data-element1",consTitle);
+
+
+            $("#conId").val(vconceptCode);
+            $("#mastImgg").attr("src",imgnm);
+          $('#details-modal').modal('show');
+  }
+    });
+
   return SearchConceptPage;
 });
