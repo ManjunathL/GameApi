@@ -173,7 +173,6 @@ define([
     },
     fetchConceptsAndRender: function() {
 
-    console.log("INSIDE FETCH RENDER");
         var that = this;
        // var designs = that.designs;
        // var concepts = that.concepts;

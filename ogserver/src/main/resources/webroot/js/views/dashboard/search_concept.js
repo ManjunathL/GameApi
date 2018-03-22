@@ -224,13 +224,16 @@ define([
     },
     ready: function(){
         $(function() {
-           $("#searchpinBoot").pinterest_grid({
-                no_columns: 5,
-                padding_x: 20,
-                padding_y: 20,
-                margin_bottom: 50,
-                single_column_breakpoint: 700
-            });
+            //$(".simg").load(function() {
+            //alert("++++++++++++ I m here +++++++++++++++++++");
+               $("#searchpinBoot").pinterest_grid({
+                    no_columns: 5,
+                    padding_x: 20,
+                    padding_y: 20,
+                    margin_bottom: 50,
+                    single_column_breakpoint: 700
+                });
+            //});
         });
      },
      events: {

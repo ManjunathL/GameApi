@@ -58,6 +58,9 @@ define([
            console.log(authData.uid);
                if(typeof(authData.uid) !== 'undefined'){
                     sessionStorage.fbId = authData.uid;
+
+                    //sessionStorage.userId = authData.uid;
+
                     //window.location = "/viewconceptboards";
 
                     window.App.router.navigate("/viewconceptboards", {

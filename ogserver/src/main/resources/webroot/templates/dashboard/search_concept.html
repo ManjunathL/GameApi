@@ -57,9 +57,9 @@
                 <%= console.log("SHILPA") %>
                 <%= console.log(conceptdtls) %>
                 <% if(typeof(conceptdtls.imgURL) != 'undefined' && conceptdtls.imgURL != null){ %>
-                <img src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>" >
+                <img class="simg" src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>" >
                 <% }else{ %>
-                <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
+                <img class="simg" src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
                 <% } %>
             </a>
             <h4>
