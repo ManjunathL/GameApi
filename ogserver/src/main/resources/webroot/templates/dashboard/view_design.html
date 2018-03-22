@@ -9,14 +9,14 @@
 
     <article class="white-panel">
         <a href="javascript:void(0);" class="conceptImg" >
-            <% if(typeof(conceptdtls.primaryImageLocation) != 'undefined' && conceptdtls.primaryImageLocation != null){ %>
-            <img src="<%= conceptdtls.primaryImageLocation %>" alt="<%= conceptdtls.webDisplayName %>">
+            <% if(typeof(conceptdtls.impUrl) != 'undefined' && conceptdtls.impUrl != null){ %>
+            <img src="<%= conceptdtls.impUrl %>" alt="<%= conceptdtls.title %>">
             <% }else{ %>
-            <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.webDisplayName %>">
+            <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.title %>">
             <% } %>
         </a>
         <h4>
-            <span><a href="javascript:void(0);"> <%= conceptdtls.webDisplayName %> </a></span>
+            <span><a href="javascript:void(0);"> <%= conceptdtls.title %> </a></span>
         </h4>
     </article>
     <% }); %>
