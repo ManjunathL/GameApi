@@ -110,34 +110,211 @@ margin-top: 25px;
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-        <li><a data-toggle="tab" href="#menu1">Family</a></li>
-        <li><a data-toggle="tab" href="#menu2">Members</a></li>
+        <li><a data-toggle="tab" href="#family">Family</a></li>
+        <li><a data-toggle="tab" href="#members">Members</a></li>
     </ul>
 
     <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <% if(typeof(userHomePreferencesDtls) !== 'undefined'){ %>
+                <% _.each(userHomePreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
+                <div class="row">
+                    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
 
-        <% if(typeof(userpreferencesDtls) !== 'undefined'){ %>
-            <% _.each(userpreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
-            <div class="tab-pane fade in active">
-                <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
-
-                <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
-                <div class="form-group col-md-4">
-                    <figure>
-                        <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
-                            <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="100px" height="100px">
-                            <figcaption><%= userOptsdtl.name %></figcaption>
-                        <% }else{ %>
-                            <div class="form-group col-md-2">
-                                <button class="btn btn-light btn-circle"><%= userOptsdtl.name %></button>
-                            </div>
-                        <% } %>
-                    </figure>
+                    <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
+                    <div class="form-group col-md-4">
+                        <figure>
+                            <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
+                                <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="100px" height="100px">
+                                <figcaption><%= userOptsdtl.name %></figcaption>
+                            <% }else{ %>
+                                <div class="form-group col-md-2">
+                                    <button class="btn btn-light btn-circle"><%= userOptsdtl.name %></button>
+                                </div>
+                            <% } %>
+                        </figure>
+                    </div>
+                    <% }); %>
                 </div>
+                <div class="clearfix"></div>
                 <% }); %>
+            <% } %>
+        </div>
+        <div id="family" class="tab-pane">
+            <% if(typeof(userFamilyPreferencesDtls) !== 'undefined'){ %>
+                <% _.each(userFamilyPreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
+                <div class="row">
+                    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+
+                    <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
+                    <div class="form-group col-md-4">
+                        <figure>
+                            <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
+                                <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="100px" height="100px">
+                                <figcaption><%= userOptsdtl.name %></figcaption>
+                            <% }else{ %>
+                                <div class="form-group col-md-2">
+                                    <button class="btn btn-light btn-circle"><%= userOptsdtl.name %></button>
+                                </div>
+                            <% } %>
+                        </figure>
+                    </div>
+                    <% }); %>
+                </div>
+                <div class="clearfix"></div>
+                <% }); %>
+            <% } %>
+        </div>
+        <div id="members" class="tab-pane">
+            <% if(typeof(userMemebersPreferencesDtls[0].familyMembersList) !== 'undefined' && userMemebersPreferencesDtls[0].familyMembersList != ""){ %>
+                <% _.each(userMemebersPreferencesDtls[0].familyMembersList, function(userQuesdtl, j){ %>
+                <div class="row">
+                    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+
+                    <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
+                    <div class="form-group col-md-4">
+                        <figure>
+                            <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
+                                <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="100px" height="100px">
+                                <figcaption><%= userOptsdtl.name %></figcaption>
+                            <% }else{ %>
+                                <div class="form-group col-md-2">
+                                    <button class="btn btn-light btn-circle"><%= userOptsdtl.name %></button>
+                                </div>
+                            <% } %>
+                        </figure>
+                    </div>
+                    <% }); %>
+                </div>
+                <div class="clearfix"></div>
+                <% }); %>
+            <% }else{ %>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputname">New Member</label>
+                    <input type="Name" class="form-control" id="inputname" placeholder="Name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputproject">Age Group</label>
+                    <select id="inputproject" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
             </div>
-            <% }); %>
-        <% } %>
+
+            <div class="form-row">
+                <div class="form-check form-check-inline form-group col-md-12 gender-style">
+                    <label class="form-check-label">Gender</label>
+                    <input class="form-check-input" type="radio" id="inlineradio1" value="option1">
+                    <label class="form-check-label" for="inlineradio1">Male</label>
+                    <input class="form-check-input" type="radio" id="inlineradio2" value="option1">
+                    <label class="form-check-label" for="inlineradio1">Female</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Work</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject1" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Occupation</label>
+                    <select id="inputproject2" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Hobby 1</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject3" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject4" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Hobby 2</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject5" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject6" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Hobby 3</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject7" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject8" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon glyphicon-floppy-disk"></span> Save
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <h3>Add Family Member  <span class="glyphicon glyphicon-plus"></span></h3>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary btn-block">All Done</button>
+                </div>
+            </div>
+
+            <% } %>
+        </div>
 </div>
     <script>
         var sliderforAdults = document.getElementById("myRangeForAdults");
