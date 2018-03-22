@@ -39,12 +39,12 @@ define([
      },
      getLogin: function(){
          var that = this;
-         alert("sssssssssssssssssssss");
+         //alert("sssssssssssssssssssss");
 
          var emailId = $("#emailID").val();
          var pwd = $("#passwrd").val();
 
-         alert(emailId+" ================= "+pwd);
+         //alert(emailId+" ================= "+pwd);
 
          firebase.auth().signInWithEmailAndPassword(emailId, pwd).then(function(authData) {
            // Sign-in successful.
