@@ -110,6 +110,7 @@ define([
     },
     getConceptBoards: function(){
       var that = this;
+      //var userId = sessionStorage.userId;
       var userId = "user1234600";
      // var userMindboardId = sessionStorage.defaultMindboardId;
       var userMindboardId = 17;
@@ -199,7 +200,7 @@ define([
      submitEditCboard: function (e) {
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
-
+            //var userId = sessionStorage.userId;
             var userId = "user1234600";
             var formData = {
                 "conceptboardId": $('#conceptBoardIdTxt').val(),
@@ -290,6 +291,7 @@ define([
         if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
+        //var userId = sessionStorage.userId;
         var userId = "user1234600";
         var userMindboardId = sessionStorage.defaultMindboardId;
 

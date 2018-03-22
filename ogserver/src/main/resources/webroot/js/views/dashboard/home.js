@@ -63,6 +63,7 @@ define([
                     window.App.router.navigate("/viewconceptboards", {
                                     trigger: true
                                 });
+                                that.getAuthentication(emailId,pwd);
 
                }else{
                     sessionStorage.fbId = "";
@@ -76,7 +77,7 @@ define([
          });
 
 
-         //that.getAuthentication(emailId,pwd);
+
          return false;
      },
      getAuthentication: function(emailId,pwd){
