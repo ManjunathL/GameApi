@@ -81,6 +81,31 @@ hr {
    margin-right:30px;
 }
 
+.panelTitletxt{
+    background: #eee;
+    padding: 10px 20px;
+    font-size: 22px;
+}
+.userPref h2{
+    font-weight: 700;
+    font-size: 18px;
+}
+.btn-labeltxt{
+    font-size: 14px!important;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700!important;
+    background-color: #96dbd6;
+    color: #fff;
+}
+.btn-labeltxt:hover,
+.btn-labeltxt:focus,
+.btn-labeltxt:active{
+    font-size: 14px!important;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700!important;
+    background-color: #4eb9b6;
+    color: #fff;
+}
 /*.text{
     text-align: center;
     color: #e7e7e7;

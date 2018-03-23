@@ -63,5 +63,5 @@ var authbaseRestApiUrl = "http://45.112.138.146:8080/";
 var baseRestApiUrl = "http://45.112.138.146:8080/";
 
 
-//var authbaseRestApiUrl = "http://192.168.104.183:9000/";
-//var baseRestApiUrl = "http://192.168.104.183:9100/";
+//var authbaseRestApiUrl = "http://192.168.104.190:9000/";
+//var baseRestApiUrl = "http://192.168.104.190:9100/";
