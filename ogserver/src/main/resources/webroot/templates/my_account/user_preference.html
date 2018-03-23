@@ -88,9 +88,6 @@ border: 1px solid black;
     font-size: 12px;
     line-height: 1.42857;
 }
-.btn-circle:active{
-    border: 2px solid red;
-}
 .button4 {border-radius: 12px;}
 .heading-style{
 margin-bottom:30px;
@@ -130,16 +127,16 @@ margin-top: 25px;
                     <div class="form-group <% if(userQuesdtl.questionnaire.questionDetails.name == "Room"){ %> col-xs-2 <% }else{ %> col-xs-3 <% } %>">
                         <figure>
                             <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
-                                <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="100px" height="100px">
+                                <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle userques" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"   width="100px" height="100px">
                                 <figcaption><%= userOptsdtl.name %></figcaption>
                             <% }else{ %>
                                 <% if((userQuesdtl.questionnaire.questionDetails.name == "Interiors Budget") || (userQuesdtl.questionnaire.questionDetails.name == "Size")){ %>
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-light button4 btn-labeltxt" style="width: 90px;"><%= userOptsdtl.name %></button>
+                                    <button type="button" class="btn btn-light button4 btn-labeltxt userques" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" style="width: 90px;"><%= userOptsdtl.name %></button>
                                 </div>
                                 <% }else{ %>
                                     <div class="form-group">
-                                        <button class="btn btn-light btn-circle btn-labeltxt"><%= userOptsdtl.name %></button>
+                                        <button class="btn btn-light btn-circle btn-labeltxt  userques" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" ><%= userOptsdtl.name %></button>
                                     </div>
                                 <% } %>
                             <% } %>
