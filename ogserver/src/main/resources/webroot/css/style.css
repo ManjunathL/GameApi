@@ -65,6 +65,9 @@ hr {
 .mt40{
     margin-top:40px;
 }
+.pb40{
+    padding-bottom:40px;
+}
 .txt-center{
     text-align:center;
 }
@@ -1626,4 +1629,8 @@ margin-top: 25px;
 .active-Stypebox{
     border: 1px solid #ea5c36;
     box-shadow: 0px 0px 10px 4px #ccc;
+}
+.member-panel{
+    height: 850px;
+    overflow-y: scroll;
 }

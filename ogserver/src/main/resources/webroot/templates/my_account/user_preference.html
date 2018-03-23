@@ -108,7 +108,7 @@ margin-top: 25px;
 }
 </style>
 
-<section class="main-conceptboard-sec bg-light-gray">
+<section class="main-conceptboard-sec bg-light-gray pb40">
 
 <div class="tab container">
     <h2>Preferences</h2>
@@ -177,6 +177,7 @@ margin-top: 25px;
             <% } %>
         </div>
         <div id="members" class="tab-pane">
+            <div class="member-panel">
             <% if(typeof(userMemebersPreferencesDtls[0].familyMembersList) !== 'undefined' && userMemebersPreferencesDtls[0].familyMembersList != ""){ %>
                 <% _.each(userMemebersPreferencesDtls[0].familyMembersList, function(userQuesdtl, j){ %>
             <div class="form-row">
@@ -417,6 +418,7 @@ margin-top: 25px;
             </div>
 
             <% } %>
+            </div>
         </div>
 </div>
     <script>
