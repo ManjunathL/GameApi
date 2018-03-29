@@ -1,9 +1,12 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.handlers;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ProductAddon;
+import com.mygubbi.game.proposal.ProductLineItem;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.crm.CrmApiHandler;

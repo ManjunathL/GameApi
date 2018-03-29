@@ -1,4 +1,4 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.handlers;
 
 import com.mygubbi.common.DateUtil;
 import com.mygubbi.common.LocalCache;

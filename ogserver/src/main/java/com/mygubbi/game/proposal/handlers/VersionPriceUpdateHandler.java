@@ -1,4 +1,4 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.handlers;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
@@ -9,7 +9,6 @@ import com.mygubbi.game.proposal.model.ProposalVersion;
 import com.mygubbi.game.proposal.price.AddOrSubtractHikePriceService;
 import com.mygubbi.game.proposal.price.FinishChangeService;
 import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateService;
-import com.mygubbi.game.proposal.price.ProposalVersionPriceUpdateServiceCopy;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;

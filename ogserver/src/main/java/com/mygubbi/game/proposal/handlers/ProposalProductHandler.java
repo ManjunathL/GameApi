@@ -1,9 +1,13 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.handlers;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ModuleTextFileReader;
+import com.mygubbi.game.proposal.ProductLineItem;
+import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;

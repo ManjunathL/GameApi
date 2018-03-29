@@ -1,7 +1,10 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.handlers;
 
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
+import com.mygubbi.game.proposal.ModuleDataService;
+import com.mygubbi.game.proposal.ModuleForPrice;
+import com.mygubbi.game.proposal.ProductModule;
 import com.mygubbi.game.proposal.model.AccessoryPack;
 import com.mygubbi.game.proposal.price.ComprehensiveModulePricingService;
 import com.mygubbi.game.proposal.price.ModulePriceHolder;

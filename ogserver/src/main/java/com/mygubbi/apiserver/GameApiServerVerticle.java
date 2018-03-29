@@ -3,10 +3,10 @@ package com.mygubbi.apiserver;
 import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.config.StaticConfigHandler;
-import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.Upload.CloudinaryFileUploadHandler;
 import com.mygubbi.game.proposal.Upload.FileUploadHandler;
 import com.mygubbi.game.proposal.erp.BOQHandler;
+import com.mygubbi.game.proposal.handlers.*;
 import com.mygubbi.game.proposal.sow.SOWWriteToDatabaseHandler;
 import com.mygubbi.prerender.PrerenderingHandler;
 import com.mygubbi.route.*;
@@ -127,6 +127,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/fileupload", new FileUploadHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/priceupdate", new VersionPriceUpdateHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/cloudinaryfileupload", new CloudinaryFileUploadHandler(VertxInstance.get()));
+        router.mountSubRouter("/mygubbi/cca", new CCAHandler(VertxInstance.get()));
 
         //LOG.info("Routes:" + router.getRoutes().toString());
     }

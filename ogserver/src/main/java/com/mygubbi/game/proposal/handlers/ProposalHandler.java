@@ -1,7 +1,5 @@
-package com.mygubbi.game.proposal;
+package com.mygubbi.game.proposal.handlers;
 
-import com.itextpdf.text.pdf.PdfNumber;
-import com.itextpdf.text.pdf.PdfPage;
 import com.mygubbi.common.DateUtil;
 import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.StringUtils;
@@ -9,6 +7,7 @@ import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.db.DatabaseService;
 import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.ModuleDataService;
 import com.mygubbi.game.proposal.Upload.FileUploadHandler;
 import com.mygubbi.game.proposal.erp.BOQHandler;
 import com.mygubbi.game.proposal.erp.BoqCreatorService;
@@ -23,12 +22,10 @@ import com.mygubbi.game.proposal.sow.SowValidatorService;
 import com.mygubbi.pipeline.MessageDataHolder;
 import com.mygubbi.pipeline.PipelineExecutor;
 import com.mygubbi.pipeline.PipelineResponseHandler;
-import com.mygubbi.report.DwReportingService;
 import com.mygubbi.report.ReportTableFillerSevice;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.game.proposal.output.SOWPdfOutputService;
 import com.mygubbi.si.crm.CrmApiClient;
-import com.mygubbi.si.crm.CrmOutboundApiHandler;
 import com.mygubbi.si.email.EmailData;
 import com.mygubbi.si.gdrive.DriveServiceProvider;
 import com.sendgrid.SendGrid;
@@ -41,7 +38,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
-import jdk.nashorn.api.scripting.JSObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,9 +45,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by sunil on 25-04-2016.
