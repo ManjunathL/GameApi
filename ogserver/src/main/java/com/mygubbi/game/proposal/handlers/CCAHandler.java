@@ -74,9 +74,16 @@ public class CCAHandler extends AbstractRouteHandler{
 
         LOG.debug("SAL ID in get Documents:" + crmId);
 
-        JSONArray documents = crmDataProvider.getDocuments(crmId);
+       JSONArray documents = crmDataProvider.getDocuments(crmId);
 
-        sendJsonResponse(routingContext, documents.toString());
+//        JSONArray documents = getDocuments(crmId);
+        if (documents.length() != 0)
+        {
+            sendJsonResponse(routingContext, documents.toString());
+        }
+        else {
+            sendError(routingContext, "No documents found for this opportunity");
+        }
 
     }
 
@@ -93,6 +100,16 @@ public class CCAHandler extends AbstractRouteHandler{
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
+        }
+    }
+
+    public JSONArray getDocuments(String opportunityId) {
+
+        try {
+            return dataProviderMode.postResourceWithFormData("get_customer_documents.php", opportunityId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JSONArray();
         }
     }
 

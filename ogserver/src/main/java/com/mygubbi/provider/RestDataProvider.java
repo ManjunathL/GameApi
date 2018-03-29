@@ -96,7 +96,8 @@ public class RestDataProvider implements DataProviderMode {
                 values[index] = data(key, keyValuePairs.get(key));
                 index++;
             }
-            return resty.json(getBaseURLForCrm() + "/" + url , form(values)).array();
+            String anUri = getBaseURLForCrm() + "/" + url;
+            return resty.json(anUri, form(values)).array();
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }

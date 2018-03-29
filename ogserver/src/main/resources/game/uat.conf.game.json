@@ -74,6 +74,9 @@
   "sendEmail":"No",
   "amazon_s3_bucketname_game":"mygubbigame",
   "amazon_s3_access_key_game":"AKIAIX6TVPJXWC7C2WCA",
-  "amazon_s3_secret_key_game":"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"
+  "amazon_s3_secret_key_game":"mp3+VuQeT9NKvXO+doCbH4GO/gEpGm/+/aMLopAu",
+
+  "urlForCrm":"https://suite.mygubbi.com/mygubbi_crm29102017/test-api"
+
 }
 
