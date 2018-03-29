@@ -277,6 +277,11 @@ define([
             document.title = 'Living room designs and interiors from MyGubbi';
             document.querySelector('meta[name="description"]').setAttribute("content", "Buy Your Living Room furniture online from MyGubbi and jazz up your life with the latest Décor.Get Your Dining Room furniture custom made by picking out from a range of dining room designs");
             document.querySelector('meta[name="keywords"]').setAttribute("content", "living and dining room, living and dining room designs, living and dining room design ,living room furniture online,living room designs, dining room designs, dining room furniture,living room interior");
+        },
+        landingpage: function () {
+            document.title = 'Custom Home decor, Modular Kitchen, Wardrobes & Storage solutions';
+            document.querySelector('meta[name="description"]').setAttribute("content", "Discover the range Home Interior solutions, Kitchen designs, wooden wardrobes; styled to be extraordinary. Upto 5-Years warranty and 0% EMI option. Request a call back now!");
+            document.querySelector('meta[name="keywords"]').setAttribute("content", "home interior decor, home interior design, interior home decor, home interiors, custom made furniture, custom furniture, online customised furniture, modern furniture design, furniture designs");
         }
     });
     var routeSubCategory = function(subCategory, category, cityName) {

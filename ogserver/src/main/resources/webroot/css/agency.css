@@ -42,13 +42,20 @@
 .margin-top75{
    margin-top:75px !important;
 }
-
-
 .nav>li>a{
     padding: 10px 5px;
 }
-
 #nav>li>a {
+    padding: 0px 6px !important;
+    border-right: 1px solid #ea5c36;
+    cursor: pointer;
+    background-color: #ea5c36;
+    font-size: 13px;
+    border-bottom: 2px solid #ea5c36;
+    color: #fff;
+}
+
+/*#nav>li>a {
     padding: 0px 6px !important;
     border-right: 1px solid #ddd;
     cursor: pointer;
@@ -56,53 +63,45 @@
     font-size: 13px;
     border-bottom: 2px solid #fff;
     color: #556871;
-}
-
+}*/
 .menu-mygubbi ul,
 .menu-mygubbi ol{
      font-family: 'Lato', sans-serif;
 }
-
 .right-side-menu .nav>li>a:hover,
 .right-side-menu .nav>li>a:focus {
     text-decoration: none;
-    background-color: #fff;
+    background-color: #ea5c36;
+    color:#ffffff;
 }
-
 .last-item{
     border-right: 0px solid #ddd!important;
 }
-
 .menu-mygubbi{
     width:100%;
     margin: 0px auto;
 }
-
 .navbar-center{
     float: none;
     position: relative;
-    text-align: center;
+    text-align: right;
     margin: 5px auto 8px;
 }
-
 .navbar-center li{
     float: inherit;
     text-rendering: optimizeLegibility;
     display:inline-block;
     margin: 0px auto;
 }
-
 .social-menu-lnk{
     color: rgba(0,0,0,0.6);
     font-size:16px;
     margin-top: 5px;
 }
-
 #storeLnk a{
     border-bottom: 2px dotted #f1591f !important;
     width: 100%;
 }
-
 @media (max-width: 992px) {
     #storeLnk a{
         border-bottom: 2px dotted #f1591f !important;
@@ -112,32 +111,26 @@
 /******************************** Home Page ************************************/
 
 /* Start Home Page Banner Section */
-
 .banner-link {
     position: absolute;
     right: 22%;
     top: 0px;
 }
-
 .img-banner-link {
     width: 335px;
 }
-
 .banner-mobile-link {
     background: #784715;
     padding-bottom: 30px;
 }
-
 .red-plum-mob-banner-link{
     display: block;
     height: 100%;
     text-align: center;
 }
-
 .img-mob-banner-link{
     width: 50%;
 }
-
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
     .banner-link {
@@ -816,12 +809,19 @@
     margin: 0px auto;
 }
 
-.search-ico{
+/*.search-ico{
     color: #566771;
     padding-top: 12px;
     font-weight: 400;
     cursor: pointer;
     font-size: 32px;
+}*/
+.search-ico{
+    color: #ffffff;
+    padding-top: 16px;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: 22px;
 }
 
 .mob-search{
@@ -941,6 +941,10 @@
     margin-top: 70px;
 }*/
 
+/*.bx-viewport{
+    height: 540px !important;
+}*/
+
 .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
     position: absolute;
     bottom: 5% !important;
@@ -949,7 +953,6 @@
     z-index: 1;
     text-align: center;
 }
-
 .bx-pager-item {
     display: inline-block;
 }
@@ -964,7 +967,7 @@
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    display: block;
+    display: none;
 }
 
 .bx-wrapper .bx-pager.bx-default-pager a:hover, .bx-wrapper .bx-pager.bx-default-pager a.active {
@@ -993,7 +996,7 @@
     position: absolute;
     top: 0%;
     left: 0%;
-    bottom: 0%;
+    bottom: 20%;
 }
 
 .slider_left:hover {
@@ -1011,7 +1014,7 @@
     position: absolute;
     top: 0%;
     right: 0%;
-    bottom: 0%;
+    bottom: 20%;
 }
 
 .slider_right:hover {
@@ -1792,17 +1795,37 @@ fieldset[disabled] .btn-xl.active {
 }
 
 
-.header-icon {
+/*.header-icon {
     margin: 5px 5px !important;
     font-size: 24px;
     font-weight: 600 !important;
-}
+}*/
 
-.user {
+.header-icon {
+    margin: 5px 5px !important;
+    font-size: 22px;
+    font-weight: bolder !important;
+    /* background-color: white; */
+    padding-top: 2px;
+}
+.header-icon:hover{
+    background-color: none;
+}
+/*.user {
     color: #566771 !important;
     padding: 15px 5px !important;
     font-size: 24px;
     font-weight: 600;
+    cursor: pointer;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+}*/
+
+.user {
+    color: #ffffff !important;
+    padding: 17px 5px !important;
+    font-size: 22px;
+    font-weight: bolder;
     cursor: pointer;
     -webkit-transition: color 0.3s, opacity 0.2s;
     transition: color 0.3s, opacity 0.2s, transform 0.3s;
@@ -1820,8 +1843,8 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .full_logo {
-    margin-top: 8px;
-    margin-left: 30px;
+    margin-top: 30px;
+    margin-left: 0px;
 }
 
 .content {
@@ -2862,9 +2885,16 @@ fieldset[disabled] .btn-xl.active {
     margin-top: 30%;
 }
 
-.wishlist {
+/*.wishlist {
     color: #f1591f !important;
+}*/
+
+.wishlist{
+    color: #fff !important;
 }
+/*.wishlist.active{
+    color: rgba(241,90,34,1)!important;
+}*/
 
 .sub-font {
     font-size: 12px;
@@ -4647,51 +4677,6 @@ hr {
 .thumb {
     text-align: center;
 }
-
-/* Filter section design */
-
-/*#filter-section{*/
-
-/*padding:0px 10px 20px 20px;*/
-
-/*}*/
-
-/*#filter-section #filter-inside .filter-group {*/
-
-/*padding-left: 15px;*/
-
-/*// border-bottom: 1px solid #ccc;*/
-
-/*}*/
-
-/*#filter-section #filter-inside .filter-group .filter-list {*/
-
-/*padding: 15px 0px;*/
-
-/*}*/
-
-/*#filter-inside .filter-list .btn:hover {*/
-
-/*font-weight: 600;*/
-
-/*color:#000;*/
-
-/*}*/
-
-/*#filter-section #filter-inside .filter-group .fname {*/
-
-/*padding: 15px 0px;*/
-
-/*text-transform: uppercase;*/
-
-/*color: #777;*/
-
-/*height: 40px;*/
-
-/*line-height: 40px;*/
-
-/*}*/
-
 .color-rounds > .glyphicon-remove,
 .glyphicon-ok {
     color: #eee;
@@ -4700,37 +4685,30 @@ hr {
     line-height: 33px;
     text-align: center
 }
-
 .color-rounds:hover > .glyphicon-ok {
     display: block;
 }
-
 .filter-right {
     padding: 10px;
     position: absolute;
     top: 10px;
 }
-
 .view-in-txt {
     position: absolute;
     left: -11px;
     bottom: 57px;
 }
-
 .shortlist-in-details {
     margin-top: 25px;
     margin-bottom: 10px;
 }
-
 .w-portfolio-item-title {
     font-weight: 400 !important;
     font-size: 16px !important;
 }
-
 .paddingleft50 {
     padding-left: 50px;
 }
-
 .padding6 {
     padding: 6px;
 }
@@ -5023,21 +5001,28 @@ a.tab-ico {
 }
 
 .sb-search {
-        display: none;
-        position: absolute;
-        z-index: 10;
-        top: 15px;
-        right: 431px;
-        width: 47%;
-
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 15px;
+    right: 305px;
+    width: 49.5%;
 }
-
+/*.sb-search {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: 15px;
+    right: 431px;
+    width: 47%;
+}
+*/
 .sb-search-input {
     border: none;
     outline: none;
     background: #F2F4F4;
     width: 100%;
-    height: 50px;
+    height: 45px;
     margin: 0;
     padding: 15px 65px 15px 20px;
     font-family: inherit;
@@ -5182,9 +5167,15 @@ a.tab-ico {
         padding-top: 20px;
     }
 
-    .sb-search {
+    /*.sb-search {
         right: 4% !important;
         width: 79% !important;
+    }*/
+
+    .sb-search {
+        left: 3% !important;
+        width: 95% !important;
+        top: 102%!important;
     }
 
     .share-ico-txt {
@@ -7530,6 +7521,13 @@ img.thumbnail {
         background-size: cover;
         background-size: cover;
     }
+
+    .wl-gallery{
+    	max-height: 360px;
+    }
+    .wl-gallery-img{
+        max-height:308px;
+    }
 }
 
 .make-right-arrow{
@@ -8228,11 +8226,81 @@ html .ui-button.ui-state-disabled:active {
 
 /* Home page changes */
 
+/* New Home Page Start */
+.nav-menu-bg{
+    background-color:#ea5c36;
+}
+.nav-menu-height-fx{
+    min-height:75px;
+}
+
+.onbanner-txt{
+    position:absolute;
+    bottom:10%;
+    left:8%;
+}
+.onbanner-txt h2{
+    font-family:'Montserrat', sans-serif;
+    color:#ffffff;
+    font-size:48px;
+    font-weight: 900;
+    text-transform: Capitalize!important;
+}
+.onbanner-txt h4{
+    font-family:'Montserrat', sans-serif;
+    color:#ffffff;
+    font-size:32px;
+    font-weight: 200;
+    text-transform: none!important;
+}
+.ugadiIcon{
+    position: absolute;
+    left: 10%;
+    top: 10%;
+    width:266px;
+}
+.menu-sec-mrg{
+    margin-top:75px !important;
+}
+
+@media (max-width: 767px) {
+    .onbanner-txt{
+        position:absolute;
+        bottom:8%;
+        left:8%;
+    }
+    .onbanner-txt h2{
+        font-family:'Montserrat', sans-serif;
+        color:#ffffff;
+        font-size:30px;
+        font-weight: 900;
+        text-transform: Capitalize!important;
+    }
+    .onbanner-txt h4{
+        font-family:'Montserrat', sans-serif;
+        color:#ffffff;
+        font-size:20px;
+        font-weight: 200;
+        text-transform: none!important;
+    }
+
+    .nav-menu-height-fx{
+        min-height:45px;
+    }
+
+    .menu-sec-mrg{
+        margin-top:60px !important;
+    }
+}
+
+/* New Home Page End */
+
+
 .right-side-menu .nav>li>a{
     font-family: 'Lato', sans-serif;
 }
 .sb-search{
-    top: 12px;
+    top: 32px;
 }
 .search-close-ico {
     position: absolute;
@@ -8250,12 +8318,12 @@ html .ui-button.ui-state-disabled:active {
 .drop{
     top: 110%;
 }
-.wishlist{
+/*.wishlist{
     color: #566771 !important;
 }
 .wishlist.active{
     color: rgba(241,90,34,1)!important;
-}
+}*/
 .premium-home-txt{
     position: absolute;
     bottom: 0;
@@ -8522,6 +8590,17 @@ html .ui-button.ui-state-disabled:active {
 }
 
 @media (max-width: 767px) {
+    .nav-menu-bg{
+        background-color:#634e42;
+    }
+    .menu-mygubbi #nav li a:hover,
+    .menu-mygubbi #nav li a:active,
+    .menu-mygubbi #nav li a:focus{
+        background: #ea5c36;
+        color: #fff !important;
+        /*border-bottom: 2px solid #ff3200;*/
+    }
+
     .banner-icon-height{
         min-height: 150px;
     }
@@ -8568,6 +8647,12 @@ html .ui-button.ui-state-disabled:active {
 
 }
 @media screen and (max-width: 480px) {
+    .ugadiIcon{
+        position: absolute;
+        left: 10%;
+        top: 5%;
+        width: 150px;
+    }
     .enquire-btn-div {
         position: absolute;
         left: 25%;
@@ -8658,9 +8743,13 @@ html .ui-button.ui-state-disabled:active {
 }
 
 @media (max-width: 991px) {
-    .menu-icon {
+    /*.menu-icon {
         left: auto !important;
         right: 20px;
+    }*/
+    .menu-icon {
+        left: auto !important;
+        right: 0px;
     }
 
     .all {
@@ -8681,8 +8770,13 @@ html .ui-button.ui-state-disabled:active {
         margin-top: 1px !important;
     }
 
-    .burger-logo {
+    /*.burger-logo {
         height: 34px;
+    }*/
+
+    .burger-logo {
+        height: 24px;
+        margin-left: -7px;
     }
 
     .footer-bg {
@@ -8769,13 +8863,23 @@ html .ui-button.ui-state-disabled:active {
 }
 
 @media (max-width: 767px) {
-    #nav>li>a{
+    .dropdown-menu>li>a{
+        color:#fff;
+    }
+    #nav>li>a {
         padding: 5px 5px!important;
-        border-right: 0px solid #ddd;
+        border-right: 1px solid #634e42;
         cursor: pointer;
-        background-color: #fff;
+        background-color: #634e42;
+        font-size: 13px;
+        border-bottom: 2px solid #634e42;
+        color: #fff;
         width: 100%;
     }
+
+    /*.bx-viewport{
+        height: 257px !important;
+    }*/
 }
 
 /* Mobile Responsive by Smruti on 7thDec2016 */

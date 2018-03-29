@@ -1,5 +1,5 @@
 var env = "dev";
-var restBase = "https://192.168.104.43";
+var restBase = "https://192.168.1.43";
 //var restBase = "https://localhost";
 var fbaseRootUrl = "https://mygubbi-uat.firebaseio.com/";
 var applyAnalytics = false;

@@ -360,6 +360,9 @@ input[type=checkbox] {
 }
 
 /* Padding Top */
+.paddingtop15{
+    padding-top:15px!important;
+}
 
 .pt0{
     padding-top:0;
@@ -3582,7 +3585,7 @@ a.hideLink {
 }
 
 .career-offer li.gubbi {
-    background: url('https://res.cloudinary.com/mygubbi/image/upload/v1476339052/career/gubbi.png') no-repeat left top;
+    background: url('https://res.cloudinary.com/mygubbi/image/upload/v1519975423/home/logo/gubbi.png') no-repeat left top;
     padding-left: 35px;
 }
 .nav-career .nav-tabs.nav-justified>.active>a,
@@ -4109,6 +4112,26 @@ a.hideLink {
       height: 100%;
       width: 100%;
       overflow: hidden;
+      background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1520337573/home/logo/video-banner_2.jpg");
+      background-repeat: no-repeat;
+      background-position: center 100%;
+      width: 100%;
+      -webkit-background-size: 100%;
+      -moz-background-size: 100%;
+      -o-background-size: 100%;
+      background-size: 100%;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    #myFooterVideo {
+        position: relative;
+        bottom: 0%;
+      left: 0%;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
       background: #000;
     }
 
@@ -4143,6 +4166,7 @@ a.hideLink {
         font-style:normal;
         text-transform: capitalize;
     }
+
 /* End Experience center page */
 
 /* Start Platinum home */
@@ -4238,6 +4262,10 @@ a.hideLink {
 @media (max-width: 767px) {
     .p-service-bg {
         height: 1060px;
+    }
+
+    .mrgmns20 {
+        margin-top:-20px;
     }
 }
 

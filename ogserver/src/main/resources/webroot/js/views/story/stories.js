@@ -98,6 +98,11 @@ define([
             }).reverse();
 
 
+            latestBlogs = _(latestBlogs).sortBy(function(ltblog) {
+                return Date.parse(ltblog.date_of_publish);
+            }).reverse();
+
+
             var rec_stories = [];
             $.each(nwstories.slice(0,3), function(i, data) {
                 rec_stories.push(data);

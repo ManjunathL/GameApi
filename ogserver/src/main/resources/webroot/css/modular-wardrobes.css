@@ -68,6 +68,10 @@ ul, ol{
     position: relative;
 }
 
+.pd0{
+    padding:0px !important;
+}
+
 .mt20{
     margin-top: 20px;
 }
@@ -88,11 +92,16 @@ ul, ol{
     margin-bottom: 30px;
 }
 
+/*.bg-color-orange{
+    background-color: #ea5c36 !important;
+    border-color: #ea5c36;
+}*/
+
 .navbar-festive{
     margin-bottom: 0px;
-    height: 100px;
-    background: #FFFFFF;
-    border-color: #FFFFFF;
+    height: 70px;
+    background: #ea5c36;
+    border-color: #ea5c36;
     border-radius: 0px;
 }
 .navbar-festive .navbar-brand{
@@ -102,8 +111,28 @@ ul, ol{
 }
 
 .navbar-festive .navbar-brand img {
-    width: 150px;
+    width: 195px;
     margin: 15px auto 10px;
+}
+
+.right-side-menu{
+    margin-top:20px;
+}
+
+.font-size18 {
+    font-size: 18px;
+}
+
+.right-side-menu .nav>a{
+    font-family: 'Lato', sans-serif;
+     background-color: #ea5c36;
+        color:#ffffff;
+}
+.right-side-menu .nav>a:hover,
+.right-side-menu .nav>a:focus {
+    text-decoration: none;
+    background-color: #ea5c36;
+    color:#ffffff;
 }
 
 .width100{
@@ -558,7 +587,7 @@ ul, ol{
     margin-left: 195px !important;
 }
 .btn-explore{
-    background-color: #f1591f;
+    background-color: #ea5c36;
     color:#ffffff;
     border-radius:0px !important;
     text-transform: uppercase;
@@ -568,7 +597,7 @@ ul, ol{
 .btn-explore:hover,
 .btn-explore:focus,
 .btn-explore:active{
-    background-color: #dc3000;
+    background-color: #ea5c36e0;
     color: #ffffff;
 }
 
@@ -601,7 +630,8 @@ ul, ol{
     margin: 0px auto;
 }
 .btn-offers {
-    background: #f1591f;
+    background: #ea5c36;
+    opacity: 1;
     color: #ffffff;
     text-transform:uppercase;
     font-size: 16px;
@@ -615,7 +645,8 @@ ul, ol{
 .btn-offers:active,
 .btn-offers:focus{
     color: #ffffff;
-    background: #ec5b23d1;
+    background: #ea5c36;
+    opacity:0.8;
     text-decoration: none;
  }
 
@@ -644,7 +675,6 @@ ul, ol{
     .prn{
         padding-right: 0px;
     }
-
 }
 
 @media (max-width: 768px) {
@@ -690,6 +720,10 @@ ul, ol{
         margin: 40px 30px 0px 40px;
         font-family: 'Lato', sans-serif;
     }
+    .navbar-festive .navbar-brand img {
+          width: 245px;
+          margin: 25px auto 10px;
+      }
 }
 @media (max-width: 767px) {
     .font-size35 {
@@ -727,6 +761,9 @@ ul, ol{
 
       .assurance-fluid .off_count {
          height: 110px;
+      }
+      .navbar-festive {
+          height: 65px;
       }
 }
 @media (max-width: 420px) {
@@ -767,6 +804,11 @@ ul, ol{
         width: 145px;
         margin: 15px auto 10px;
     }
+    .navbar-festive {
+        height: 65px;
+    }
+
+
     .de_count {
         min-height: 125px;
     }
@@ -896,7 +938,7 @@ ul, ol{
     background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516702486/landing_page/modular-wardrobes/LandingPage_Kitchen.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
-    min-height: 520px;
+    min-height: 495px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
