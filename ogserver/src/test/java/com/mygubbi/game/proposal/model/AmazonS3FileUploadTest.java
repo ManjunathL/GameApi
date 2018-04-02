@@ -7,13 +7,16 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.*;
 import junit.framework.TestCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Chirag on 16-03-2017.
@@ -30,18 +33,49 @@ public class AmazonS3FileUploadTest extends TestCase {
     public void testValidRecord(){
 
         AmazonS3FileUploadClient();
-        uploadFile();
-
+//        uploadFile();
+        List<String> objectslistFromFolder = getObjectslistFromFolder("design-wh", "");
+        System.out.print(objectslistFromFolder.size());
+        objectslistFromFolder.forEach(v->{
+            String baseUrl = "http://designwhimages.mygubbi.com/";
+            try {
+                System.out.println(baseUrl+ URLEncoder.encode(v, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        });
     }
+
+
+        public List<String> getObjectslistFromFolder(String bucketName, String folderKey) {
+
+        ListObjectsRequest listObjectsRequest =
+                new ListObjectsRequest()
+                        .withBucketName(bucketName);
+
+        List<String> keys = new ArrayList<>();
+
+        ObjectListing objects = s3client.listObjects(listObjectsRequest);
+        for (;;) {
+            List<S3ObjectSummary> summaries = objects.getObjectSummaries();
+            if (summaries.size() < 1) {
+                break;
+            }
+            summaries.forEach(s -> keys.add(s.getKey()));
+            objects = s3client.listNextBatchOfObjects(objects);
+        }
+
+        return keys;
+    }
+
 
 
 
     public void AmazonS3FileUploadClient() {
 
 
-        String accessKey = "AKIAJS7FUU6IRYAPHDLQ";
-        String secretKey = "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";
-
+        String accessKey = "AKIAIYWIAMY6EVGV4DQA";
+              String secretKey = "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";
 
         BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(accessKey, secretKey);
 

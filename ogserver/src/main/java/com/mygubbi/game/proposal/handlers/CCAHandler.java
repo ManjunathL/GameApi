@@ -42,8 +42,10 @@ public class CCAHandler extends AbstractRouteHandler{
         crmDataProvider = new CrmDataProvider();
 
         this.post("/getdocuments").handler(this::getDocuments);
-        this.post("/getcustomerdetails").handler(this::getCustomerDetails);
-        this.post("/createissue").handler(this::createIssue);
+        this.post("/getprofile").handler(this::getOpportunity);
+        this.post("/getcustomerissues").handler(this::getIssues);
+
+        this.post("/getupdates").handler(this::getDailyUpdates);
     }
 
     private void getDocuments(RoutingContext routingContext) {
@@ -51,14 +53,24 @@ public class CCAHandler extends AbstractRouteHandler{
         getDocumentDetails(routingContext);
     }
 
-    private void getCustomerDetails(RoutingContext routingContext) {
+    private void getOpportunity(RoutingContext routingContext) {
         if (isAuthenticated(routingContext)) return;
-        getDocumentDetails(routingContext);
+        getOpportunityDetails(routingContext);
     }
 
-    private void createIssue(RoutingContext routingContext) {
+    private void getIssues(RoutingContext routingContext) {
         if (isAuthenticated(routingContext)) return;
-        getDocumentDetails(routingContext);
+        getIssueDetails(routingContext);
+    }
+
+
+    private void getDailyUpdates(RoutingContext routingContext) {
+        if (isAuthenticated(routingContext)) return;
+        getDailyUpdatesFromCrm(routingContext);
+    }
+
+    private void getDailyUpdatesFromCrm(RoutingContext routingContext) {
+
     }
 
     private boolean isAuthenticated(RoutingContext routingContext) {
@@ -76,7 +88,6 @@ public class CCAHandler extends AbstractRouteHandler{
 
        JSONArray documents = crmDataProvider.getDocuments(crmId);
 
-//        JSONArray documents = getDocuments(crmId);
         if (documents.length() != 0)
         {
             sendJsonResponse(routingContext, documents.toString());
@@ -87,31 +98,56 @@ public class CCAHandler extends AbstractRouteHandler{
 
     }
 
-    public List<JsonObject> getOpportunity(String opportunityId) {
+    public void getOpportunityDetails(RoutingContext routingContext) {
 
-        JSONArray jsonArray = dataProviderMode.getResourceArray("rest-get-opportunity-details.php", new HashMap<String, String>() {
-            {
-                put("opportuities_id", opportunityId + "");
-            }
-        });
+        String crmId = routingContext.request().getParam("opportunity_id");
+
+        LOG.debug("SAL ID in get opportunity:" + crmId);
+
+        JSONObject opportunityDetails = crmDataProvider.getOpportunityDetails(crmId);
+        if (opportunityDetails == null)
+        {
+            sendError(routingContext, "No details found for this opportunity");
+
+        }
+        else {
+
+
+        JSONObject detailsToImaginest = new JSONObject();
         try {
-            JsonObject[] items = this.mapper.readValue(jsonArray.toString(), JsonObject[].class);
-            return new ArrayList<>(Arrays.asList(items));
-        } catch (Exception e) {
+            detailsToImaginest.put("customerName",opportunityDetails.getString("customer_name_c"));
+            detailsToImaginest.put("customerPhone",opportunityDetails.getString("customer_phone_c"));
+            detailsToImaginest.put("salesStage",opportunityDetails.getString("sales_stage"));
+            detailsToImaginest.put("salesName",opportunityDetails.getString("salesuser_name"));
+            detailsToImaginest.put("salesPhone",opportunityDetails.getString("salesuser_mobile"));
+            detailsToImaginest.put("supervisorName",opportunityDetails.getString("supervisor"));
+            detailsToImaginest.put("supervisorPhone",opportunityDetails.getString("supervisor_mobile"));
+        } catch (JSONException e) {
             e.printStackTrace();
-            return new ArrayList<>();
+        }
+            sendJsonResponse(routingContext, detailsToImaginest.toString());
+
         }
     }
 
-    public JSONArray getDocuments(String opportunityId) {
+    private void getIssueDetails(RoutingContext routingContext) {
 
-        try {
-            return dataProviderMode.postResourceWithFormData("get_customer_documents.php", opportunityId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new JSONArray();
+        String crmId = routingContext.request().getParam("opportunity_id");
+
+        LOG.debug("SAL ID in get Issue details:" + crmId);
+
+        JSONArray documents = crmDataProvider.getCustomerIssues(crmId);
+
+        if (documents.length() != 0)
+        {
+            sendJsonResponse(routingContext, documents.toString());
         }
+        else {
+            sendError(routingContext, "No issues found for this opportunity");
+        }
+
     }
+
 
 
 }

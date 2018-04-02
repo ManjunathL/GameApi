@@ -1,6 +1,7 @@
 package com.mygubbi.provider;
 
 import us.monoid.json.JSONArray;
+import us.monoid.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -19,6 +20,34 @@ private DataProviderMode dataProviderMode;
 
         try {
             return dataProviderMode.postResourceWithUrl("get_customer_documents.php", new HashMap<String, String>(){
+                {
+                    put("opportunity_name",opportunityId);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JSONArray();
+        }
+    }
+
+    public JSONObject getOpportunityDetails(String opportunityId) {
+
+        try {
+            return dataProviderMode.postResourceWithFormData("get_opportunity_details.php", new HashMap<String, String>(){
+                {
+                    put("opportunity_name",opportunityId);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONArray getCustomerIssues(String opportunityId) {
+
+        try {
+            return dataProviderMode.postResourceWithUrl("get_customer_issues.php", new HashMap<String, String>(){
                 {
                     put("opportunity_name",opportunityId);
                 }

@@ -66,7 +66,24 @@ public class RestDataProvider implements DataProviderMode {
 
     @Override
     public JSONObject postResourceWithFormData(String url, Map<String, String> keyValuePairs) {
-        return null;
+        try {
+
+                FormData[] values = new FormData[keyValuePairs.size()];
+                int index = 0;
+                for (String key : keyValuePairs.keySet()) {
+                    values[index] = data(key, keyValuePairs.get(key));
+                    index++;
+                }
+            String anUri = getBaseURLForCrm() + "/" + url;
+
+
+            return resty.json(anUri, form(values)).object();
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error querying - " + url, e);
+        }
+
     }
 
     @Override
