@@ -58,6 +58,7 @@ public class ProposalHeader extends JsonObject
     private static final String PROJECTHANDLING_CHARGES_FLAG="projectHandlingChargesApplied";
     private static final String DEEP_CLEARING_FLAG="deepClearingChargesApplied";
     private static final String FLOOR_PROTECTION_FLAG="floorProtectionChargesApplied";
+    public static final String  EXPECTED_DELIVERY_DATE= "expectedDeliveryDate";
 
     private Date priceDate;
     private String designerName;
@@ -65,7 +66,7 @@ public class ProposalHeader extends JsonObject
     private String deepClearingChargesApplied;
     private String projectHandlingChargesApplied;
     private String floorProtectionChargesApplied;
-
+    private Date expectedDeliveryDate;
 
     public ProposalHeader(JsonObject json)
     {
@@ -233,6 +234,13 @@ public class ProposalHeader extends JsonObject
         this.priceDate = priceDate;
     }
 
+    public Date getExpectedDeliveryDate() {
+        return DateUtil.convertDate(this.getString(EXPECTED_DELIVERY_DATE));
+    }
+
+    public void setExpectedDeliveryDate(Date expectedDeliveryDate) {
+        this.expectedDeliveryDate = expectedDeliveryDate;
+    }
 
     public String getCrmId()
     {

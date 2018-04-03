@@ -145,8 +145,17 @@ public class DWProposalProduct extends JsonObject {
     private static final String DESIGNER_EMAIL ="designerEmail" ;
     private static final String DESIGNER_PHONE ="designerPhone" ;
     private static final String PROJECT_NAME = "projectName";
+    private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
 
-
+    public DWProposalProduct setExpectedDeliveryDate(Date dt) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String format = formatter.format(dt);
+        this.put(EXPECTED_DELIVERY_DATE, format);
+        return  this;
+    }
+    public Date getExpectedDeliveryDate() {
+        return (Date) this.getValue(EXPECTED_DELIVERY_DATE);
+    }
 
     public static String getCustomerId() {
         return CUSTOMER_ID;
@@ -1435,9 +1444,7 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setHikeModuleCost(productPriceHolder.getHikeModuleCost());
         dwProposalProduct.setInstallationCost(0);
         dwProposalProduct.setTransportationCost(0);
-
-
-
+        dwProposalProduct.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
         return dwProposalProduct;
     }
 

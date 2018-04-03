@@ -37,6 +37,7 @@
 </tr>
 </tbody>
 </table>
+<p>The Expected delivery date $vdata.expectedDeliveryDate </p>
 <p>Here is the link - <a href="$vdata.url">link to quotation</a></p>
 <p>&nbsp;</p>
 <p>Best Regards, <br /> MyGubbi GAME Team.</p>

@@ -100,12 +100,23 @@ public class DWModuleComponent extends JsonObject {
     private static final String DESIGNER_EMAIL ="designerEmail" ;
     private static final String DESIGNER_PHONE ="designerPhone" ;
     private static final String PROJECT_NAME = "projectName";
+    private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
 
     public DWModuleComponent(JsonObject json) {
         super(json.getMap());
     }
 
     public DWModuleComponent() {}
+    public DWModuleComponent setExpectedDeliveryDate(Date dt) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String format = formatter.format(dt);
+        this.put(EXPECTED_DELIVERY_DATE, format);
+        return  this;
+    }
+    public Date getExpectedDeliveryDate() {
+        return (Date) this.getValue(EXPECTED_DELIVERY_DATE);
+    }
+
     public static String getCustomerId() {
         return CUSTOMER_ID;
     }
@@ -854,7 +865,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setComponentUom("Qty");
         dwModuleComponent.setComponentTitle(panelComponent.getTitle());
         dwModuleComponent.setComponentQty(panelComponent.getQuantity());
-
+        dwModuleComponent.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
         //calculatePanelPriceAndCost(productModule, panelComponent, nonStandardloadingFactorCard, nStdLoadingSourceFactorBasedOnProduct, stdManufacturingCost, nStdManufacturingCost, rate, stdSourceRate, nStdSourceRate, moduleType);
 
         if (panelComponent.isExposed()) {
@@ -953,6 +964,7 @@ public class DWModuleComponent extends JsonObject {
             }
         }
 
+        dwModuleComponent.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());
@@ -1101,6 +1113,7 @@ public class DWModuleComponent extends JsonObject {
             }
         }
 
+        dwModuleComponent.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());
@@ -1239,6 +1252,7 @@ public class DWModuleComponent extends JsonObject {
             }
         }
 
+        dwModuleComponent.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());
@@ -1396,6 +1410,7 @@ public class DWModuleComponent extends JsonObject {
             }
         }
 
+        dwModuleComponent.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
         dwModuleComponent.setProposalId(proposalHeader.getId());
         dwModuleComponent.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwModuleComponent.setSalesName(proposalHeader.getSalespersonName());

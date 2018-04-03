@@ -2,7 +2,7 @@ package com.mygubbi.game.proposal.handlers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mygubbi.game.proposal.model.CustomerDocument;
+//import com.mygubbi.game.proposal.model.CustomerDocument;
 import com.mygubbi.provider.CrmDataProvider;
 import com.mygubbi.provider.DataProviderMode;
 import com.mygubbi.provider.RestDataProvider;

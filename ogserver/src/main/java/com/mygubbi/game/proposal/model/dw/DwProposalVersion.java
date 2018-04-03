@@ -147,6 +147,7 @@ public class DwProposalVersion extends JsonObject {
     private static final String DEEP_CLEARING_AMT ="deepClearingAmount" ;
     private static final String FLOOR_PROTECTION_AMT ="floorProtectionAmount" ;
     private static final String PROJECT_HANDLING_AMT ="projectHandlingAmount" ;
+    private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
 
     public DwProposalVersion() {
     }
@@ -481,6 +482,10 @@ public class DwProposalVersion extends JsonObject {
 
     public Date getProposalPriceDate() {
         return (Date) this.getValue(PROPOSAL_PRICE_DATE);
+    }
+
+    public Date getExpectedDeliveryDate() {
+        return (Date) this.getValue(EXPECTED_DELIVERY_DATE);
     }
 
     public Date getBusinessDate() {
@@ -881,6 +886,13 @@ public class DwProposalVersion extends JsonObject {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = formatter.format(dt);
         this.put(BUSINESS_DATE, format);
+        return  this;
+    }
+
+    public DwProposalVersion setExpectedDeliveryDate(Date dt) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String format = formatter.format(dt);
+        this.put(EXPECTED_DELIVERY_DATE, format);
         return  this;
     }
 
@@ -1423,7 +1435,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setProjectHandlingQty(versionPriceHolder.getProjectHandlingQty());
         dwProposalVersion.setFloorProtectionAmt(versionPriceHolder.getFloorProtectionPrice());
         dwProposalVersion.setProjectHandlingAmt(versionPriceHolder.getProjectHandlingPrice());
-
+        dwProposalVersion.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
 
         return dwProposalVersion;
     }

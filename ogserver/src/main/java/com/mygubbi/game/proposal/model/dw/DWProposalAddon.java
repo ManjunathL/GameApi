@@ -77,7 +77,7 @@ public class DWProposalAddon extends JsonObject {
     private static final String DESIGNER_EMAIL ="designerEmail" ;
     private static final String DESIGNER_PHONE ="designerPhone" ;
     private static final String PROJECT_NAME = "projectName";
-
+    private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
 
     public DWProposalAddon()
     {}
@@ -110,15 +110,20 @@ public class DWProposalAddon extends JsonObject {
         if(productAddon.getCategoryCode().equalsIgnoreCase("Custom Addon")) {
             dwProposalAddon.setType("Custom");
             dwProposalAddon.setSubCategory(productAddon.getCustomAddonCategory());
+            if (productAddon.getCustomAddonCategory().equalsIgnoreCase("Accessories") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Appliances") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Chimney") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Hob") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Sink"))
+                dwProposalAddon.setCategory("BP");
+            else
+                dwProposalAddon.setCategory("Services");
         }
         else {
             dwProposalAddon.setType("Regular");
             dwProposalAddon.setSubCategory(productAddon.getCategoryCode());
+            if (productAddon.getCategoryCode().equals("Services") || productAddon.getCategoryCode().equals("Counter Top"))
+                dwProposalAddon.setCategory("Services");
+            else
+                dwProposalAddon.setCategory("BP");
         }
-        if (productAddon.getCategoryCode().equals("Services") || productAddon.getCategoryCode().equals("Counter Top"))
-             dwProposalAddon.setCategory("Services");
-        else
-            dwProposalAddon.setCategory("BP");
+
 
         dwProposalAddon.setProductTypeCode(productAddon.getProductTypeCode());
         dwProposalAddon.setProductSubTypeCode(productAddon.getProductSubtypeCode());
@@ -152,10 +157,21 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setSalesPhone(proposalHeader.getSalesPhone());
         dwProposalAddon.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwProposalAddon.setDesignerPhone(proposalHeader.getDesignerPhone());
-
+        dwProposalAddon.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
 
         return dwProposalAddon;
     }
+
+    public DWProposalAddon setExpectedDeliveryDate(Date dt) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String format = formatter.format(dt);
+        this.put(EXPECTED_DELIVERY_DATE, format);
+        return  this;
+    }
+    public Date getExpectedDeliveryDate() {
+        return (Date) this.getValue(EXPECTED_DELIVERY_DATE);
+    }
+
 
     public  String getTYPE() {
         return this.getString(TYPE);
