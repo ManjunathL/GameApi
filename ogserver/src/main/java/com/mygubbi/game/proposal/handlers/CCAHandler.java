@@ -44,8 +44,8 @@ public class CCAHandler extends AbstractRouteHandler{
         this.post("/getdocuments").handler(this::getDocuments);
         this.post("/getprofile").handler(this::getOpportunity);
         this.post("/getcustomerissues").handler(this::getIssues);
-
         this.post("/getupdates").handler(this::getDailyUpdates);
+        this.post("/createissue").handler(this::createCustomerIssue);
     }
 
     private void getDocuments(RoutingContext routingContext) {
@@ -146,6 +146,24 @@ public class CCAHandler extends AbstractRouteHandler{
             sendError(routingContext, "No issues found for this opportunity");
         }
 
+    }
+
+    private void createCustomerIssue(RoutingContext routingContext){
+        String crmId = routingContext.request().getParam("opportunity_id");
+        String issue = routingContext.request().getParam("issue");
+
+        LOG.debug("CUSTOMER ISSUE LOG PARAMS : " + crmId + ":" + issue);
+
+        JSONObject createIssue = crmDataProvider.createCustomerIssue(crmId,issue);
+
+        if (createIssue != null)
+        {
+            sendJsonResponse(routingContext,createIssue.toString());
+        }
+        else
+        {
+            sendError(routingContext,"Issue could not be created");
+        }
     }
 
 

@@ -57,4 +57,19 @@ private DataProviderMode dataProviderMode;
             return new JSONArray();
         }
     }
+
+    public JSONObject createCustomerIssue(String opportunityId, String issue) {
+
+        try {
+            return dataProviderMode.postResourceWithFormData("create_customer_issue.php", new HashMap<String, String>(){
+                {
+                    put("opportunity_name",opportunityId);
+                    put("name",issue);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
