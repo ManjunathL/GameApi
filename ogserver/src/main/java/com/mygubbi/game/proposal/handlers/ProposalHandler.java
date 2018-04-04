@@ -628,6 +628,7 @@ public class ProposalHandler extends AbstractRouteHandler
                         bodyDetails.put("clientName",proposalHeader.getName());
                         bodyDetails.put("opportunityId",proposalHeader.getCrmId());
                         bodyDetails.put("quoteNo",proposalHeader.getQuoteNumNew());
+                        bodyDetails.put("noOfDaysForWorkCompletion",proposalHeader.getNoOfDaysforworkcompletion());
                         bodyDetails.put("expectedDeliveryDate",proposalHeader.getExpectedDeliveryDate().toString());
                         bodyDetails.put("price",proposalVersion.getAmount());
                         bodyDetails.put("priceAfterDiscount",proposalVersion.getFinalAmount());

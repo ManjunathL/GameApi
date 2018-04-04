@@ -6,6 +6,11 @@
 <li>Opportunity ID : $vdata.opportunityId</li>
 <li>Quotation # : $vdata.quoteNo&nbsp;</li>
 </ul>
+<p><strong><u>Works Completion Date:</u></strong></p>
+<ul>
+<li>&nbsp;The client expected Works Complete date is  : $vdata.expectedDeliveryDate</li>
+<li>&nbsp;MyGubbi Works completion days from the day DSO payment is done is : $vdata.noOfDaysForWorkCompletion days</li>
+</ul>
 <p><strong><u>Financials:</u></strong></p>
 <ul>
 <li>&nbsp;Price : $vdata.price</li>
@@ -37,7 +42,6 @@
 </tr>
 </tbody>
 </table>
-<p>The Expected delivery date $vdata.expectedDeliveryDate </p>
 <p>Here is the link - <a href="$vdata.url">link to quotation</a></p>
 <p>&nbsp;</p>
 <p>Best Regards, <br /> MyGubbi GAME Team.</p>

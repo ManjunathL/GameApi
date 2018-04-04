@@ -996,6 +996,14 @@
       "default": "[]"
     },
     {
+      "uri": "/gapi/proposal/offerValidationDetails",
+      "source": "db",
+      "query":"proposal.offer.offerDetails",
+      "params":["offerName"],
+      "resultfields":[],
+      "default": "[]"
+    },
+    {
       "uri": "/gapi/proposal/discount/discountAmount",
       "source": "db",
       "query":"proposal.discount.discountAmount",
