@@ -116,8 +116,9 @@ define([
       var userMindboardId = 17;
       var pageno = 0;
       var itemPerPage = 20;
+      var filterId = 1;
       return new Promise(function(resolve, reject) {
-           that.conceptboards.getConceptBoardList(userId, userMindboardId, pageno, itemPerPage, {
+           that.conceptboards.getConceptBoardList(userId, userMindboardId, pageno, itemPerPage,filterId, {
                async: true,
                crossDomain: true,
                method: "GET",

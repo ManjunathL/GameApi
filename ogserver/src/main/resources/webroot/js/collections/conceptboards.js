@@ -7,9 +7,9 @@ define([
     var ConceptBoards = Backbone.Collection.extend({
         model: ConceptBoard,
         url: baseRestApiUrl + 'MyGubbiApi/conceptboard/get/conceptboard/list/',
-        getConceptBoardList: function(userId,userMindboardId,pageno,itemPerPage, options) {
+        getConceptBoardList: function(userId,userMindboardId,pageno,itemPerPage, filterId, options) {
             var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboard/get/conceptboard/list/';
-            this.url = urllnk + userId + '/' + userMindboardId + '/' + pageno + '/' + itemPerPage;
+            this.url = urllnk + userId + '/' + userMindboardId + '/' + pageno + '/' + itemPerPage + '/' + filterId;
             return this.fetch(options);
         },
         initialize: function(models) {
