@@ -749,6 +749,39 @@ public class QuotationPdfRoomWise
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
 
+            PdfPTable tab1eForOffer=new PdfPTable(1);
+            tab1eForOffer.setWidthPercentage(100);
+
+            if(proposalHeader.getOfferType().equalsIgnoreCase("Chill Deal Offer – 18"))
+            {
+                PdfPCell ocel6=new PdfPCell();
+                p = new Paragraph("Chill Deal Offer: ",fsize1);
+                p.setAlignment(Element.ALIGN_LEFT);
+                ocel6.addElement(p);
+                ocel6.setBorder(Rectangle.NO_BORDER);
+                tab1eForOffer.addCell(ocel6);
+
+                PdfPCell ocel8=new PdfPCell();
+                p=new Paragraph("This proposal has Chill Deal Offer included in it. The terms and conditions of this offer is as follows:\n",fsize);
+                p.setAlignment(Element.ALIGN_LEFT);
+                ocel8.addElement(p);
+                ocel8.setBorder(Rectangle.NO_BORDER);
+                tab1eForOffer.addCell(ocel8);
+
+                tab1eForOffer.addCell(new Paragraph
+                        ("1. \t AC Units will be offered for a minimum billing amount of Rs 3,00,000/-\n" +
+                                "      i. \t \tRs 3 lac to Rs 5.9 lac – 1 AC\n" +
+                                "      ii. \t \t Rs 6 lac to Rs 8.9 lac – 2 AC\n" +
+                                "      iii \t \tRs 9 lac and above – 3 AC\n" +
+                                "2. \tThis deal is valid for bookings done during 2nd Apr 2018 till 30th Apr 2018 in the cities of Bangalore, Chennai and Pune.\n" +
+                                "3. \tProject installation has to happen before 31st Sep 2018 (if sites are going to be ready later this offer cannot be availed)\n" +
+                                "4. \tThe AC on offer would be of Model “1.0 T 3D Cool Inverter 3S COPR-W” from Whirlpool or equivalent Model/Brand. Essentially the model will have a Capacity of 1 T, Type will be “Inverter“, with a 3 Star Rating.\n"+
+                                "5. \tInstallation, Delivery charges are to be borne by the customer.\n",fsize));
+                document.add(tab1eForOffer);
+
+                p=new Paragraph(" ");
+                document.add(p);
+            }
             PdfPTable tab1=new PdfPTable(1);
             tab1.setWidthPercentage(100);
 
