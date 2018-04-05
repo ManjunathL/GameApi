@@ -12,8 +12,8 @@ public class OfferProductMapping extends JsonObject {
     private static final String TYPE="type";
     private static final String CATEGORY="category";
     private static final String SUB_CATEGORY="subCategory";
-    private static final String MIN_ORDER_VALUE="discountPercentage";
-    private static final String MIN_PRODUCT_QTY="oldTxnAmount";
+    private static final String MIN_ORDER_VALUE="minOrderValue";
+    private static final String MIN_PRODUCT_QTY="minProductQty";
 
     public OfferProductMapping(JsonObject jsonObject)
     {

@@ -245,10 +245,20 @@ public class ProposalHandler extends AbstractRouteHandler
     }
 
     private void publishTheProposal(RoutingContext routingContext) {
+
+
+
+
         JsonObject queryParams = new JsonObject();
         Integer proposalId = routingContext.getBodyAsJson().getInteger("proposalId");
         queryParams.put("id", proposalId);
         Double version = routingContext.getBodyAsJson().getDouble("version");
+
+        checkIfProductsAddedAsPerOffer(routingContext,proposalId, String.valueOf(version),queryParams);
+
+    }
+
+    private void publishVersion(RoutingContext routingContext, JsonObject queryParams, Integer proposalId, Double version) {
         queryParams.put("version", version);
         queryParams.put("proposalId", proposalId);
         queryParams.put("businessDate",routingContext.getBodyAsJson().getString("businessDate"));
@@ -269,7 +279,10 @@ public class ProposalHandler extends AbstractRouteHandler
             }
 
             else {
-                checkIfProductsAddedAsPerOffer(routingContext,proposalId, String.valueOf(version));
+
+
+                uploadToS3 = true;
+                checkValidRowsInDB(routingContext,new JsonObject());
                 //this.createProposalOutput(routingContext,ProposalOutputCreator.OutputType.QUOTEPDF,false,new JsonObject());
                 /*LOG.info("quote file after calling method " +quoteFile);
                 FileUploadHandler fileUploadHandler = new FileUploadHandler(VertxInstance.get());
@@ -280,16 +293,13 @@ public class ProposalHandler extends AbstractRouteHandler
         });
     }
 
-    private void checkIfProductsAddedAsPerOffer(RoutingContext routingContext, int proposalId, String version)
+    private void checkIfProductsAddedAsPerOffer(RoutingContext routingContext, int proposalId, String version,JsonObject queryParams)
     {
         List<QueryData> queryDataList = new ArrayList<>();
         List<OfferProductMapping> offerProductMappingList = new ArrayList<>();
         List<ProductAddon> productAddons = new ArrayList<>();
         double totalAfterDiscount = routingContext.getBodyAsJson().getDouble("finalAmount");
-        double offerCode = routingContext.getBodyAsJson().getDouble("offerCode");
-
-        int noOfPresentProducts = 0;
-        int minProductReqd = 0;
+        String offerCode = routingContext.getBodyAsJson().getString("offerCode");
 
         queryDataList.add(new QueryData("offer.product.mapping.select", new JsonObject().put("offerCode",offerCode)));
         queryDataList.add(new QueryData("proposal.version.addons.select", new JsonObject().put("proposalId",proposalId).put("version",version)));
@@ -305,31 +315,37 @@ public class ProposalHandler extends AbstractRouteHandler
                     }
                     else
                     {
+                        int noOfPresentProducts = 0;
+                        int minProductReqd = 0;
                         for (JsonObject jsonObject : resultData.get(0).rows)
                         {
                             offerProductMappingList.add(new OfferProductMapping(jsonObject));
                         }
-                        for (JsonObject jsonObject : resultData.get(0).rows)
+                        for (JsonObject jsonObject : resultData.get(1).rows)
                         {
                             productAddons.add(new ProductAddon(jsonObject));
                         }
-                    }
-                });
 
 
-        for (OfferProductMapping offerProductMapping : offerProductMappingList)
+        if (offerProductMappingList.size() != 0)
         {
-            if (offerProductMapping.getMinOrderValue() <= totalAfterDiscount)
+            for (OfferProductMapping offerProductMapping : offerProductMappingList)
             {
-                minProductReqd = offerProductMapping.getMinOrderQty();
+                if (offerProductMapping.getMinOrderValue() <= totalAfterDiscount)
+                {
+                    minProductReqd = offerProductMapping.getMinOrderQty();
+                }
             }
         }
 
-        for (ProductAddon productAddon : productAddons)
+        if (productAddons.size() != 0)
         {
-            if (productAddon.getCategoryCode().equals("Appliances") && productAddon.getProductTypeCode().equals("AC") && productAddon.getProductSubtypeCode().equals("AC"))
+            for (ProductAddon productAddon : productAddons)
             {
-                noOfPresentProducts += productAddon.getQuantity();
+                if (productAddon.getCategoryCode().equals("Appliances") && productAddon.getProductTypeCode().equals("AC") && productAddon.getProductSubtypeCode().equals("AC"))
+                {
+                    noOfPresentProducts += productAddon.getQuantity();
+                }
             }
         }
 
@@ -338,16 +354,21 @@ public class ProposalHandler extends AbstractRouteHandler
 
         if (difference < 0)
         {
-            sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","error").put("offerValidationMessage","Please add " + Math.abs(difference) + " AC's in order to publish")));
+            sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","error").put("message","Please add " + Math.abs(difference) + " AC's in order to publish")));
+            return;
         }
         if (difference > 0)
         {
-            sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","error").put("offerValidationMessage","Please remove " + difference + " AC's in order to publish")));
+            sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","error").put("message","Please remove " + difference + " AC's in order to publish")));
+            return;
         }
         else {
-            uploadToS3 = true;
-            checkValidRowsInDB(routingContext,new JsonObject());
+            publishVersion(routingContext, queryParams, proposalId, Double.valueOf(version));
+
         }
+
+                    }
+                });
     }
 
 
