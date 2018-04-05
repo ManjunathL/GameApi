@@ -2065,8 +2065,8 @@
     {
       "id": "proposal.offer.offername",
       "type": "select",
-      "table": "OfferMaster",
-      "query": "select * from OfferMaster where fromDate <= ? and toDate >= ?",
+      "table": "offer_master",
+      "query": "select * from offer_master where fromDate <= ? and toDate >= ?",
       "params": ["fromDate","toDate"]
     },
     {
@@ -2201,8 +2201,8 @@
     {
       "id": "proposal.offer.offerDetails",
       "type": "select",
-      "table": "OfferMaster",
-      "query": "select * from OfferMaster where offerName=?",
+      "table": "offer_master",
+      "query": "select * from offer_master where offerName=?",
       "params": ["offerName"]
     }
   ]
