@@ -2204,6 +2204,13 @@
       "table": "offer_master",
       "query": "select * from offer_master where offerName=?",
       "params": ["offerName"]
+    },
+    {
+      "id": "offer.product.mapping.select",
+      "type": "select",
+      "table": "offer_product_mapping",
+      "query": "select * from offer_product_mapping where offerCode=? order by minOrderValue",
+      "params": ["offerCode"]
     }
   ]
 }
