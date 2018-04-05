@@ -239,11 +239,14 @@ define([
      },
      events: {
           "click .boardlst": "addConcept2Cboard",
-          "click .conceptImg": "getConceptDetails"
+          "click .conceptImgg": "getConceptDetails"
 
      },
      getConceptDetails: function(evt){
           var currentTarget = $(evt.currentTarget);
+
+          console.log(" ++++++++++++++++ I m here ++++++++++++++++++++++ ");
+
           console.log(currentTarget.data('element'));
           console.log(currentTarget.data('element1'));
           console.log(currentTarget.data('element2'));
