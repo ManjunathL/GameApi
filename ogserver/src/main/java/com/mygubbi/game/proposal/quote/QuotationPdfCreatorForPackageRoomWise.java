@@ -734,7 +734,7 @@ public class QuotationPdfCreatorForPackageRoomWise
             PdfPTable tab1eForOffer=new PdfPTable(1);
             tab1eForOffer.setWidthPercentage(100);
 
-            if(proposalHeader.getOfferType().equalsIgnoreCase("Chill Deal Offer – 18"))
+            if(proposalHeader.getOfferCode().equalsIgnoreCase("OF-CDO"))
             {
                 LOG.info("inside chill deal offer");
                 PdfPCell ocel6=new PdfPCell();

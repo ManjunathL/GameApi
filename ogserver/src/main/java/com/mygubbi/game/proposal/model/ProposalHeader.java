@@ -46,6 +46,7 @@ public class ProposalHeader extends JsonObject
     public static final String UPDATED_ON="updatedBy";
     public static final String UPDATED_BY="updatedBy";
     public static final String BEFORE_PRODUCTION_SPECIFICATION="beforeProductionSpecification";
+    public static final String OFFER_CODE="offerCode";
 
     private static final String CADDRESS1 =     "caddress1" ;
     private static final String CADDRESS2 =     "caddress2" ;
@@ -66,6 +67,7 @@ public class ProposalHeader extends JsonObject
     private String deepClearingChargesApplied;
     private String projectHandlingChargesApplied;
     private String floorProtectionChargesApplied;
+    private String offerCode;
     private Date expectedDeliveryDate;
 
     public ProposalHeader(JsonObject json)
@@ -296,6 +298,7 @@ public class ProposalHeader extends JsonObject
         else return this.getInteger(FROM_PROPOSAL); }
 
     public  String getOfferType() {if(this.containsKey(OFFER_TYPE) )return this.getString(OFFER_TYPE);return "";}
+    public  String getOfferCode() {if(this.containsKey(OFFER_CODE) )return this.getString(OFFER_CODE);return "";}
 
     public void setDeepClearingChargesAppliedForCNC(String deepClearingChargesAppliedForCNC) {
         this.deepClearingChargesApplied = deepClearingChargesAppliedForCNC;
