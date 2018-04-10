@@ -232,7 +232,7 @@ hr {
 }
 
 .box {
-    margin-top: 225px;
+    margin-top: 25px;
     margin-bottom: 20px;
     padding: 30px 15px;
     background: #fff;
@@ -371,12 +371,12 @@ hr {
     color:#2A9FD8;
 }
 .filter-box-top .btn-filter-dropdwn{
-	background: #FFFF00 !important;
+	background: #ec5136 !important;
 	border: 1px solid #eee;
 	border-radius: 0px;
 	padding: 6.5px 20px;
 	font-size: 14px;
-	color: #2A9FD8;
+	color: #fff;
 	letter-spacing: 1px;
 	text-transform: capitalize;
 	font-family: 'Raleway', sans-serif;
@@ -527,8 +527,9 @@ hr {
     min-height: 350px;
 }
 .addcboard-heading{
-    background: #FFFF00;
-    color: #2A9FD8;
+    background: #ec5136;
+    color: #fff;
+    font-weight: bold;
     padding: 10px 20px;
     text-align: left;
     letter-spacing:5px;
@@ -538,8 +539,8 @@ hr {
 
 .addcboard-btn{
     border: 0px;
-    color: #2A9FD8;
-    background-color: #FFFF00;
+    color: #fff;
+    background-color: #ec5136;
     padding: 10px;
     font-size: 14px;
     padding: 10px 20px;
@@ -853,7 +854,6 @@ ul.spaceTypelst li{
      font-size: 12px;
 }
 .footer{
-    margin-top: 30px;
     text-align: center;
 }
 
@@ -1193,7 +1193,8 @@ background: #333333;
 
 footer {
     position: relative;
-    color: #000;
+    color: #fff;
+    background-color: #33434E;
     padding: 30px 0 0px 0;
     text-align: left;
     border-top: 1px solid #ccc;
@@ -1207,7 +1208,7 @@ footer {
 }
 
 .page-hgt{
-    min-height:850px;
+    min-height:539px;
 }
 
 .main-conceptboard-sec{
@@ -1423,7 +1424,7 @@ footer {
   font-size: 18px;
   border: none;
   outline: none;
-  background-color: #f1591f;
+  background-color: #ec5136;
   color: white;
   cursor: pointer;
   padding: 15px;

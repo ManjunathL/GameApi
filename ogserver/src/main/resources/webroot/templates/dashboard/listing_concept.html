@@ -4,6 +4,7 @@
 <%= console.log("@@@@@@@@@@@@@@@ Selected Concept Tag @@@@@@@@@@@@@@@@@") %>
 <%= console.log(filterTag) %>
 <link href="css/layout.css" rel="stylesheet">
+<button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>
 <section class="container-fluid">
 <div class="col-md-12 col-lg-12">
 <h2 class="panelTitletxt"><%= conceptBoardName %></h2>
@@ -120,6 +121,20 @@
     </div>
 </div>
 </div>
+    <div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div id="addcboard-dtls" class="addcboard-container">
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div id="editcboard-dtls" class="addcboard-container">
+
+            </div>
+        </div>
+    </div>
 </section>
 
 
