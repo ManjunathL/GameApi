@@ -99,18 +99,19 @@ hr {
     font-size: 14px!important;
     font-family: 'Lato', sans-serif;
     font-weight: 700!important;
-    background-color: #96dbd6;
-    color: #fff;
+    background-color: #fff;
+    /*color: #fff;*/
+    box-shadow: 1px 1px 12px #000;
 }
-.btn-labeltxt:hover,
+/*.btn-labeltxt:hover,*/
 .btn-labeltxt:focus,
 .btn-labeltxt:active{
     font-size: 14px!important;
     font-family: 'Lato', sans-serif;
     font-weight: 700!important;
-    background-color: #4eb9b6;
+    background-color: #ea5c36;
     color: #fff;
-    border: 1px solid #ea5c36;
+    /*border: 1px solid #ea5c36;*/
 }
 /*.text{
     text-align: center;
@@ -370,7 +371,7 @@ hr {
     padding: 5px 20px;
     font-size: 16px;
     background: #fff;
-    color:#2A9FD8;
+    color:#888888;;
 }
 .filter-box-top .btn-filter-dropdwn{
 	background: #ec5136 !important;
@@ -407,7 +408,7 @@ hr {
 .filter-box-top .open>.dropdown-toggle.btn-filter-dropdwn:focus, 
 .filter-box-top .open>.dropdown-toggle.btn-filter-dropdwn:hover{
     background-color: #FFFF00;
-    color: #2A9FD8;
+    color: #fff;
     border: 1px solid #eee;	
 }
 .filter-box-top .search-ico:hover,
@@ -719,7 +720,7 @@ ul.spaceTypelst li{
     color: #343434;
     text-decoration: none;
     font-family: 'Raleway', sans-serif;
-    font-weight: 400;
+    font-weight: 600;
 }
 .pinBoot .white-panel:hover {
     -webkit-transition: all 0.5s ease-in-out;
@@ -983,16 +984,18 @@ ul.spaceTypelst li{
 .tab .nav-tabs > li{
 	margin-top:0px;
     margin-right: 2px;
+    width: 378px;
 }
 .tab .nav-tabs > li > a{
     border: none;
-    padding: 5px 25px;
+    padding: 12px 31px;
     color:#fff;
-    background:#2A9FD8;
+    background:#ec5136;
+    text-align: center;
     border-radius:0;
-    font-size: 12px;
+    font-size: 17px;
     text-overflow: ellipsis;
-    max-width: 120px;
+    max-width: 373px;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -1008,9 +1011,10 @@ ul.spaceTypelst li{
 .tab .nav-tabs > li.active > a:hover{
     border: none;
     background:#fff;
-    color:#2A9FD8;
+    color:#33434E;
     transition:background 0.20s linear;
     font-family: 'Raleway', sans-serif;
+    border-top: 1px solid #ec5136;
 }
 .tab .nav-tabs li.active:after {
     content: "";

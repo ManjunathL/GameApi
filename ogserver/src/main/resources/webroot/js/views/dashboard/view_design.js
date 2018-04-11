@@ -84,7 +84,7 @@ define([
     ready: function(){
         $(function() {
            $("#searchpinBoot").pinterest_grid({
-                no_columns: 5,
+                no_columns: 3,
                 padding_x: 20,
                 padding_y: 20,
                 margin_bottom: 50,
