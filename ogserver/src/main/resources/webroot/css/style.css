@@ -490,30 +490,33 @@ hr {
 .dtls-container{
     padding: 30px;
     width: 100% !important;
-    background-color: #333;
+    background-color: #FFF;
     margin: 0 auto;
     border-radius: 2px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    opacity:1;
 }
 .dtls-container h5{
-    color:#FFFF00;
+    color:#ea5c36;
     font-size:18px;
-    font-weight:300;
+    font-weight:600;
 }
 .dtls-container h4{
-    color:#FFFF00;
-    font-size:12px;
+    color:#ea5c36;
+    font-size:14px;
     border-bottom: 1px solid #cccccc5e;
     line-height: 30px;
+    font-weight: 600;
 }
 
 .dtls-container p{
-    color:#fff;
+    color:#555 !important;
     font-size:12px;
-    font-weight:300;
+    font-weight:600;
     line-height: 25px;
     margin-bottom: 25px;
+    margin-top:20px;
 }
 /* Add Concept Board Start */
 .addcboard-container{
@@ -1635,4 +1638,74 @@ margin-top: 25px;
 .member-panel{
     height: 850px;
     overflow-y: scroll;
+}
+
+
+.form-control {
+  width: 100%;
+  height: 35px;
+  padding: 20px 13px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #eee;
+  border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.form-control:focus {
+  border-color: #b4b4b4;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(180,180,180,.6);
+}
+
+.form-control::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #999;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #999;
+}
+
+.has-success .checkbox,.has-success .checkbox-inline,.has-success .control-label,.has-success .form-control-feedback,.has-success .help-block,.has-success .radio,.has-success .radio-inline,.has-success.checkbox label,.has-success.checkbox-inline label,.has-success.radio label,.has-success.radio-inline label {
+  color: #4CAF50;
+}
+
+.form-control::-ms-expand {
+  border: 0;
+  background-color: transparent;
+}
+
+.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control {
+  background-color: #eee;
+  opacity: 1;
+}
+
+.form-control[disabled],fieldset[disabled] .form-control {
+  cursor: not-allowed;
+}
+
+textarea.form-control {
+  height: auto;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  input[type=date].form-control,input[type=time].form-control,input[type=datetime-local].form-control,input[type=month].form-control {
+    line-height: 35px;
+  }
+
+  .input-group-sm input[type=date],.input-group-sm input[type=time],.input-group-sm input[type=datetime-local],.input-group-sm input[type=month],input[type=date].input-sm,input[type=time].input-sm,input[type=datetime-local].input-sm,input[type=month].input-sm {
+    line-height: 30px;
+  }
+
+  .input-group-lg input[type=date],.input-group-lg input[type=time],.input-group-lg input[type=datetime-local],.input-group-lg input[type=month],input[type=date].input-lg,input[type=time].input-lg,input[type=datetime-local].input-lg,input[type=month].input-lg {
+    line-height: 40px;
+  }
 }

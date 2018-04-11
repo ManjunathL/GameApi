@@ -357,6 +357,12 @@ define([
                          silent: true
                      });
 
+         that.filter_preference.set({
+             'selectedFinalObj':user_home_preferences
+         }, {
+             silent: true
+         });
+
         return false;
     }
   });

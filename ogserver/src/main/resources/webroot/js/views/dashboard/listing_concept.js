@@ -502,9 +502,16 @@ define([
      var currentTarget = $(evt.currentTarget);
 
      var cconceptId = currentTarget.data('element4');
+
+     var cconceptCode = currentTarget.data('element5');
      var that = this;
 
+     var similarConceptsListObj = {};
+     var relatedConceptsListObj = {};
+
+
      var conceptlists = that.conceptlists;
+
      conceptlists = conceptlists.toJSON();
 
      console.log("@@@@@@@@@@@@@@@@@ conceptlists @@@@@@@@@@@@@@@@@@@@");
@@ -517,7 +524,46 @@ define([
                 conceptdtls = item;
             }
      });*/
-   var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
+
+     if(typeof(that.similar_concepts) !== 'undefined' && that.similar_concepts != ""){
+        var similarConceptsListObj = that.similar_concepts;
+        similarConceptsListObj = similarConceptsListObj.toJSON();
+
+        console.log("@@@@@@@@@@@@@@@@@ similarConceptsList @@@@@@@@@@@@@@@@@@@@");
+             console.log(similarConceptsListObj);
+     }
+     if(typeof(that.related_concepts) !== 'undefined' && that.related_concepts != ""){
+        var relatedConceptsListObj = that.related_concepts;
+        relatedConceptsListObj = relatedConceptsListObj.toJSON();
+
+        console.log("@@@@@@@@@@@@@@@@@ relatedConceptsList @@@@@@@@@@@@@@@@@@@@");
+             console.log(relatedConceptsListObj);
+     }
+
+     console.log("@@@@@@@@@@@@@@@@@ cconceptCode @@@@@@@@@@@@@@@@@@@@");
+     console.log(cconceptCode);
+
+
+
+    /*if(typeof(cconceptCode) !== 'undefined' && relatedConceptsListObj != ""){
+        var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
+        console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
+    }else{
+       var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
+    }*/
+
+    if(typeof(cconceptCode) !== 'undefined'){
+      if(similarConceptsListObj.length > 0){
+          var conceptdtls = that.similar_concepts.getSimilarConcept(similarConceptsListObj[0].similarConceptsList,cconceptCode);
+          console.log("@@@@@@@@@@@@@@@@@ Inside Similar Concept @@@@@@@@@@@@@@@@@@@@");
+      }
+      if(relatedConceptsListObj.length > 0){
+        var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
+        console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
+      }
+    }else{
+       var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
+    }
 
     console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
     console.log(conceptdtls);

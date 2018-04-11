@@ -9,7 +9,7 @@ define([
         url: baseRestApiUrl + 'MyGubbiApi/designs/getdesignsperspace/',
         getDesigns: function(spaceTypeCode, options) {
             var urllnk = baseRestApiUrl + 'MyGubbiApi/designs/getdesignsperspace/';
-            this.url = urllnk + spaceTypeCode;
+            this.url = urllnk + spaceTypeCode +'?filteredStyles=ST-CONTEMPORARY&createdByFilter=1&myFavFilter=false';
             return this.fetch(options);
         },
         initialize: function(models) {

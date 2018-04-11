@@ -4,7 +4,6 @@
 <%= console.log(userFamilyPreferencesDtls) %>
 <%= console.log("@@@@@@@@@@@@@@@@@@@@@@@ userMemebersPreferencesDtls @@@@@@@@@@@@@@@@@@@@@@@@@") %>
 <%= console.log(userMemebersPreferencesDtls) %>
-
 <style>
 	figure {
     display: inline-block;
@@ -157,7 +156,6 @@ margin-top: 25px;
                 <% _.each(userFamilyPreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
                 <div class="col-md-12">
                     <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
-
                     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
                     <div class="form-group col-xs-2">
                         <figure>

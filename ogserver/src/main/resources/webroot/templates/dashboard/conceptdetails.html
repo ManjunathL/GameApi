@@ -33,58 +33,98 @@
         right: -30px;
         top: 5px;
     }
+    .form-group {
+      position: relative;
+      margin-bottom: 15px;
+    }
+    .form-control{
+        color:#555;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 25px;
+    }
+    .form-control {
+      padding-left: 2px;
+      padding-right: 2px;
+      resize: none;
+      border-left: 0;
+      border-top: 0;
+      border-right: 0;
+    }
+
+    .form-control,.form-control:focus {
+      box-shadow: none;
+    }
+    .main-concept-img{
+        box-shadow: 0px 2px 10px;
+    }
+    .relConceptImg{
+        box-shadow: 0px 2px 10px #000;
+    }
+    .owl-carousel {
+        width: 98%;
+    }
 </style>
 
-<div class="row">
-    <div class="col-sm-6 col-md-6">
+<div class="row conceptdtlspg">
+    <div class="col-sm-4 col-md-4">
         <div class="pin-model-img">
-            <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImgg" alt="pin image">
+            <img src="img/pnis/pin1.jpg" class="main-concept-img img-responsive" id="mastImgg" alt="pin image" width="290px">
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <p id="concDes">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+                </p>
+                <!--new div for add notes and add tags-->
+                <!--<div class="new-pin mt40">
+                    <div>
+                        <label class="txtwhite">My Tags</label><br>
+                        <div id="taglists" class="mb15"></div>
+                        <input class="form-control" type="text" id="tagtxt" placeholder="Type your tag here with comma separate" value="" data-role="tagsinput"/>
+                        <br/> <button id="save_CTag" class="btn btn-add mt15" type="submit">Add Tags</button>
+                    </div>
+
+                </div>-->
+            </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-6">
+    <!--<div class="col-sm-1 col-md-1"></div>-->
+    <div class="col-sm-8 col-md-8" style="padding-left:40px;">
         <div class="new-pin">
             <h5 id="concNmm">Excepteur sint occaecat cupidatat non proident </h5>
-            <p id="concDes">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
-            </p>
             <input type="hidden" id="conId">
         </div>
-        <!--new div for add notes and add tags-->
-        <div class="new-pin mt40">
+        <div class="new-pin">
             <div class="add_notes">
-                <div onclick="showTextArea()" title="Add Notes"><label class="txtwhite">My Notes</label></div>
-                <div id="notes" class="notes-content">
-                     <textarea id="conceptNotetxt" rows="2" cols="38" required="required">
-                     </textarea>
-                     <button id="save_CNote" class="btn btn-add" type="submit">Add Notes</button>
+                <div onclick="showTextArea()" title="Add Notes">
+                    <!--<label class="txtwhite">My Notes</label>-->
                 </div>
-              </div>
-        </div>
-        <div class="new-pin mt40">
-            <div>
-                <label class="txtwhite">My Tags</label><br>
-                <div id="taglists" class="mb15"></div>
-                <input class="form-control" type="text" id="tagtxt" placeholder="Type your tag here with comma separate" value="" data-role="tagsinput"/>
-                <br/> <button id="save_CTag" class="btn btn-add mt15" type="submit">Add Tags</button>
+                <div id="notes" class="notes-content form-group">
+                    <textarea id="conceptNotetxt" placeholder="Add a Note" rows="2" cols="38" required="required" class="form-control">
+                    </textarea>
+                </div>
+                <button id="save_CNote" class="btn btn-add" type="submit">Add Notes</button>
             </div>
-
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h4>Similar Concepts </h4>
+                <div id="similarconceptdtls"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h4>Related Concepts </h4>
+                <div id="relatedconceptdtls"></div>
+            </div>
         </div>
     </div>
 </div>
-<div class="clearfix"></div>
-<div class="row">
-    <div class="col-sm-12 col-md-12">
-        <h4>Similar Concepts </h4>
-        <div id="similarconceptdtls"></div>
-    </div>
-</div>
-<div class="clearfix"></div>
-<div class="row">
-    <div class="col-sm-12 col-md-12">
-        <h4>Related Concepts </h4>
-        <div id="relatedconceptdtls"></div>
-    </div>
-</div>
+
+
 <div class="modal fade" id="show_description-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <button id ="show_description-close" type="button" class="close" data-dismiss="modal">&times;</button>
