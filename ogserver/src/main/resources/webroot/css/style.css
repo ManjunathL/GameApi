@@ -85,9 +85,11 @@ hr {
 }
 
 .panelTitletxt{
-    background: #eee;
     padding: 10px 20px;
     font-size: 22px;
+    font-weight: bold;
+    background: #fff;
+    text-align: center;
 }
 .userPref h2{
     font-weight: 700;
@@ -420,8 +422,8 @@ hr {
 .filter-box-top .open>.dropdown-toggle.search-ico.focus, 
 .filter-box-top .open>.dropdown-toggle.search-ico:focus, 
 .filter-box-top .open>.dropdown-toggle.search-ico:hover{
-    background-color: #FFFF00;
-    color: #2A9FD8;
+    background-color: #ec5136 ;
+    color: #fff;
     border: 1px solid #eee;	
 }
 
@@ -585,7 +587,7 @@ ul.spaceTypelst li{
   width: 90%;
   margin-bottom: 10px;
   -webkit-appearance: none;
-  background: #F5FF00;
+  background: #fff;
   border: 1px solid #F5FF00;
   border-top: 1px solid #F5FF00;
   /* border-radius: 2px; */
@@ -893,7 +895,7 @@ ul.spaceTypelst li{
 }
 
 .bg-white {
-    background-color: #ffffff;
+    background-color: #f2f4f4;
 }
 
 .portfolio-box {
@@ -1375,11 +1377,14 @@ footer {
 .grid .dropdown a:hover {background-color: #f1f1f1}
 
 .show {display:block;}
-
+.btn-save{
+    border-radius: 20px !important;
+    padding: 8px 69px !important;
+}
 .btn {
      display: inline-block;
      padding: 6px 12px;
-     margin-bottom: 0;
+      margin-bottom: 12px;
      font-size: 14px;
      font-weight: 400;
      line-height: 1.42857143;
@@ -1395,7 +1400,7 @@ footer {
      user-select: none;
      background-image: none;
      border: 1px solid transparent;
-     border-radius: 4px;
+     border-radius: 5px;
  }
 
 .btn-login {
@@ -1413,7 +1418,7 @@ footer {
 .btn-login:active,
 .btn-login:focus{
     color: #ffffff;
-    background: rgba(51,122,183,0.9);
+    background: #ea5c36;;
     border-color: rgba(51,122,183,0.9);
 }
 
@@ -1558,7 +1563,8 @@ footer {
 #userProfile-dv .dropdown-menu {
     right: 10px;
     left: auto;
-    margin-top:-10px;
+    margin-top:0px;
+    border-top:2px solid #ec5136;
 }
 
 #userProfile-dv .dropdown-menu>li>a{
@@ -1569,7 +1575,8 @@ footer {
 #userProfile-dv .dropdown-menu>li>a:hover,
 #userProfile-dv .dropdown-menu>li>a:focus,
 #userProfile-dv .dropdown-menu>li>a:active{
-    background-color: #FFFF00;
+ background-color: #ec5136;
+ color: #fff;
 }
 
 .address-style{
@@ -1586,7 +1593,8 @@ margin-bottom: 25px;
 margin-top: 25px;
 }
 .user-profile-content h3{
-    color: #2A9FD8;
+    color: #ea5c36;
+    font-weight: bold;
 }
 .show_description-container{
     padding: 30px;
@@ -1708,4 +1716,14 @@ textarea.form-control {
   .input-group-lg input[type=date],.input-group-lg input[type=time],.input-group-lg input[type=datetime-local],.input-group-lg input[type=month],input[type=date].input-lg,input[type=time].input-lg,input[type=datetime-local].input-lg,input[type=month].input-lg {
     line-height: 40px;
   }
+}
+
+#userProfile-dv .dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 600;
+    line-height: 2.428571;
+    color: #555;
+    white-space: nowrap;
 }

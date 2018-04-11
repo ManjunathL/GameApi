@@ -5,9 +5,10 @@
 <%= console.log(filterTag) %>
 <link href="css/layout.css" rel="stylesheet">
 <button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>
-<section class="container-fluid">
-<div class="col-md-12 col-lg-12">
-<h2 class="panelTitletxt"><%= conceptBoardName %></h2>
+<section class="container-fluid" style="background: #f2f4f4;">
+    <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;"><%= conceptBoardName %></h2>
+
+    <div class="col-md-12 col-lg-12" >
 <div id="myCarousel112" class="carousel slide mt30">
     <div class="tagicos">
         <div class="tagicos clearfix carousel-inner">
@@ -41,8 +42,8 @@
         </div>
     </div>
     <% if(concepttags[0].conceptboardtagList.length > 9){ %>
-    <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x"></i></a>
-    <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x"></i></a>
+    <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x" style="color: #33434E;"></i></a>
+    <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x" style="color: #33434E;"></i></a>
     <% } %>
 </div>
 <input type="hidden" id="conceptboardIdVl" value="<%= conceptboardId %>" />

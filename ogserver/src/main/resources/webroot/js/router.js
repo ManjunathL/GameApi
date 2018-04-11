@@ -34,6 +34,7 @@ define([
 
 
         router.on('route:dashboard', function(actions) {
+        //setTimeout($('.page').append('<img src="img/everything/rotating-balls-spinner.gif"'), 5000);
             require(['views/dashboard/home'], function(HomePage) {
                 VM.create(VM.HomePage, HomePage).render();
             });

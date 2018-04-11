@@ -366,10 +366,10 @@ define([
             "userId": userId,
             "name": $('#cboardnameTxt').val(),
             "spaceTypeCode":$('#spaceTypeCodeTxt').val(),
-            "description": $('#cboarddescTxt').val(),
+            "description": 'none',
             "templateCode": $('#templateCodeTxt').val(),
             "userMindboardId": userMindboardId,
-            "imgUrl":$('#cboardImgUrl').val(),
+            "imgUrl":'none',
             "noOfConceptsAdded": 1,
             "userNote": $('#cboarddescTxt').val()
        };

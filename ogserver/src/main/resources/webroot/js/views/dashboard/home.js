@@ -22,7 +22,9 @@ define([
     },
     render: function() {
         var that = this;
-        $(this.el).html(_.template(homePageTemplate));
+          $(this.el).html(_.template(homePageTemplate));
+
+
         $(document).on("click", "a[href^='/']", function(event) {
                     href = $(event.currentTarget).attr('href');
                     if (!event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
