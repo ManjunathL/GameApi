@@ -589,8 +589,8 @@ ul.spaceTypelst li{
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
-  border: 1px solid #F5FF00;
-  border-top: 1px solid #F5FF00;
+  border: 1px solid #ea5c36;
+  border-top: 1px solid #ea5c36;
   /* border-radius: 2px; */
   padding: 0 8px;
   -moz-box-shadow: none;
@@ -598,7 +598,7 @@ ul.spaceTypelst li{
   box-shadow: none;
   letter-spacing: 5px;
   padding-left:15px;
-  color:#0064B8;
+  color:#555;
   /*text-transform: uppercase;*/
 }
 
@@ -1062,20 +1062,28 @@ ul.spaceTypelst li{
     display: inline-block;
 }
 .tgico-link.tgf {
-    background-color: #D4EEDC;
-    border-color: #D4EEDC;
+    background-color: #ff9800;
+    border-color: #ff9800;
+    /*background-color: #D4EEDC;
+    border-color: #D4EEDC;*/
 }
 .tgico-link.tgs {
-    background-color: #EBE4F5;
-    border-color: #EBE4F5;
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    /*background-color: #EBE4F5;
+    border-color: #EBE4F5;*/
 }
 .tgico-link.tgt {
-    background-color: #D0FFEF;
-    border-color: #D0FFEF;
+    background-color: #009688;
+    border-color: #009688;
+    /*background-color: #D0FFEF;
+    border-color: #D0FFEF;*/
 }
 .tgico-link.tgfr {
-    background-color: #FBFFCC;
-    border-color: #FBFFCC;
+    background-color:#673ab7;
+    border-color:#673ab7;
+    /*background-color: #FBFFCC;
+    border-color: #FBFFCC;*/
 }
 .tgico-link {
     background-color: #fff;
@@ -1091,6 +1099,14 @@ ul.spaceTypelst li{
     word-wrap: break-word;
     text-overflow: ellipsis;
     max-width: 150px;
+    color: #FFF;
+    font-family: 'Raleway', sans-serif;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 22px;
+    text-decoration: none;
+    white-space: nowrap;
 }
 .tgico-link span.spn {
     color: rgba(0,0,0,0.6);
@@ -1099,7 +1115,7 @@ ul.spaceTypelst li{
     font-family: 'Raleway', sans-serif;
     display: inline-block;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 35px;
     text-decoration: none;
     white-space: nowrap;
@@ -1141,10 +1157,10 @@ ul.spaceTypelst li{
 }
 /* Reposition the controls slightly */
 .carousel-control.left{
-	left: -20px;
+	left: 0px;
 }
 .carousel-control.right {
-	right:20px;
+	right:0px;
 }
 /* Changes the position of the indicators */
 .carousel-indicators {
@@ -1409,8 +1425,8 @@ footer {
 
 .btn-login {
     color: #fff;
-    background: rgba(51,122,183,1);
-    border-color: rgba(51,122,183,1);
+    background: rgba(234,92,54,1);
+    border-color: rgba(234,92,54,1);
     border-radius: 10px;
     text-shadow: 0px 0px 0px #fff;
     text-transform: uppercase;
@@ -1423,7 +1439,7 @@ footer {
 .btn-login:focus{
     color: #ffffff;
     background: #ea5c36;;
-    border-color: rgba(51,122,183,0.9);
+    border-color: rgba(234,92,54,0.9);
 }
 
 /* Add Concept Board */
@@ -1558,8 +1574,8 @@ footer {
        margin: auto;
        display: none;
        position: absolute;
-       top: 78%;
-       left: 20%;
+       top: 66%;
+       left: 15%;
        z-index: 1;
        box-shadow: 0px 0px 16px 1px rgba(36, 36, 36, 0.4);
 }

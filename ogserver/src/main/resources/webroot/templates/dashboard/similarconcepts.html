@@ -4,7 +4,7 @@
 <div id="owl-demo" class="owl-carousel owl-theme">
     <% _.each(similarConcepts[0].similarConceptsList, function(simcnt, i){ %>
     <div class="item">
-        <a href="javascript:void(0);" class="conceptImg" data-element5="<%= simcnt.conceptCode %>">
+        <a href="javascript:void(0);" class="similarconceptImg" data-element5="<%= simcnt.conceptCode %>">
         <img src="<%= simcnt.imgURL %>" alt="<%= simcnt.conceptTitle %>" class="relConceptImg" title="<%= simcnt.conceptTitle %>">
         </a>
     </div>

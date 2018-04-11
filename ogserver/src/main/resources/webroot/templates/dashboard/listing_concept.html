@@ -20,7 +20,7 @@
             <% } %>
             <% if(typeof(concepttags) !== 'undefined'){ %>
             <% var clsarr = ['tgf','tgs','tgt','tgfr']; %>
-            <% var icols = 8; %>
+            <% var icols = 10; %>
             <% _.each(concepttags[0].conceptboardtagList, function(concepttgs, i){ %>
             <% var tagnm = concepttgs.tag %>
             <% if( (++i)%icols == 1 ) {  %>
@@ -28,11 +28,11 @@
             <% } %>
                 <% if( i == 1) {  %>
                 <div class="tgico">
-                    <span class="active <%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) == 'undefined') || (filterTag == "")){ %> style="background-color:#fff; border:1px solid red;" <% } %> onclick="getTagsView('all')">All</span>
+                    <span class="active <%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) == 'undefined') || (filterTag == "")){ %> style="background-color: #fff;color: #666;box-shadow: 0px 5px 10px #555;" <% } %> onclick="getTagsView('all')">All</span>
                 </div>
                 <% } %>
                 <div class="tgico">
-                    <span onclick="getTagsView('<%= tagnm %>')"  class="<%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) !== 'undefined') && (filterTag == tagnm)){ %> style="background-color:#fff; border:1px solid red;" <% } %> title="<%= tagnm %>"><%= tagnm %></span>
+                    <span onclick="getTagsView('<%= tagnm %>')"  class="<%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) !== 'undefined') && (filterTag == tagnm)){ %> style="background-color: #fff;color: #666;box-shadow: 0px 5px 10px #555;" <% } %> title="<%= tagnm %>"><%= tagnm %></span>
                 </div>
             <% if( i%icols == 0 || i== concepttags[0].conceptboardtagList.length ) { %>
             </div>
@@ -41,7 +41,7 @@
             <% } %>
         </div>
     </div>
-    <% if(concepttags[0].conceptboardtagList.length > 9){ %>
+    <% if(concepttags[0].conceptboardtagList.length > 11){ %>
     <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x" style="color: #33434E;"></i></a>
     <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x" style="color: #33434E;"></i></a>
     <% } %>
