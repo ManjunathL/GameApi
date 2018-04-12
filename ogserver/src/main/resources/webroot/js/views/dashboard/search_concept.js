@@ -146,10 +146,10 @@ define([
                success:function(response){
                     console.log("Successfully Searched... ");
                     console.log(response);
-                    $("#snackbar").html("Successfully searched ...");
+                    /*$("#snackbar").html("Successfully searched ...");
                       var x = document.getElementById("snackbar")
                       x.className = "show";
-                      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);*/
                     resolve();
                },
                error:function(response) {
@@ -158,10 +158,10 @@ define([
                     console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
                     console.log(response.responseJSON.errorMessage);
 
-                    $("#snackbar").html(response.responseJSON.errorMessage);
+                    /*$("#snackbar").html(response.responseJSON.errorMessage);
                     var x = document.getElementById("snackbar")
                     x.className = "show";
-                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);*/
                     reject();
                }
             });
@@ -226,7 +226,6 @@ define([
     ready: function(){
         $(function() {
             //$(".simg").load(function() {
-            //alert("++++++++++++ I m here +++++++++++++++++++");
                $("#searchpinBoot").pinterest_grid({
                     no_columns: 5,
                     padding_x: 20,

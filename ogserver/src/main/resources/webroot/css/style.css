@@ -1014,7 +1014,8 @@ ul.spaceTypelst li{
     color:#33434E;
     transition:background 0.20s linear;
     font-family: 'Raleway', sans-serif;
-    border-top: 1px solid #ec5136;
+    border-top: 2px solid #ec5136;
+    border-top: 2px solid #ec5136;
 }
 .tab .nav-tabs li.active:after {
     content: "";
@@ -1425,8 +1426,8 @@ footer {
 
 .btn-login {
     color: #fff;
-    background: rgba(234,92,54,1);
-    border-color: rgba(234,92,54,1);
+    background: rgba(99,78,66,1);
+    border-color: rgba(99,78,66,1);
     border-radius: 10px;
     text-shadow: 0px 0px 0px #fff;
     text-transform: uppercase;

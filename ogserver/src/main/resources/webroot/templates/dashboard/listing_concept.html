@@ -47,7 +47,7 @@
     <% } %>
 </div>
 <input type="hidden" id="conceptboardIdVl" value="<%= conceptboardId %>" />
-<div class="pinBoot bg-white" id="pinBoot<%= conceptboardId %>" style="margin-top: 15px;">
+<div class="pinBoot bg-white" id="pinBoot<%= conceptboardId %>" style="margin-top: 15px;min-height:835px;">
     <% if(typeof(conceptdetails) !== 'undefined'){ %>
     <% _.each(conceptdetails[0].listOfConceptBoardConcept, function(conceptdtls, i){ %>
     <% var tagnm = conceptdtls.conceptTag %>

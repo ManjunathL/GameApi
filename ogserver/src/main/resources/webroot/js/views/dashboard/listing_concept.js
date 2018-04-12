@@ -268,6 +268,7 @@ define([
                 margin_bottom: 50,
                 single_column_breakpoint: 700
             });
+            $(window).resize();
         });
 
             $('#tab'+conceptboardId).on('shown.bs.tab', function (e) {
