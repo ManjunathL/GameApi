@@ -268,6 +268,7 @@ define([
                 margin_bottom: 50,
                 single_column_breakpoint: 700
             });
+            $(window).resize();
         });
 
             $('#tab'+conceptboardId).on('shown.bs.tab', function (e) {
@@ -295,6 +296,8 @@ define([
     },
     events: {
          "click .conceptImg": "getConceptDetails",
+         "click .relatedconceptImg": "getRelatedConceptDetails",
+         "click .similarconceptImg": "getSimilarConceptDetails",
          "click #addCBoard": "viewAddCboard",
          "click .boardlst": "addConcept2Cboard",
          "click #save_CNote": "submitConceptNote",
@@ -503,67 +506,15 @@ define([
 
      var cconceptId = currentTarget.data('element4');
 
-     var cconceptCode = currentTarget.data('element5');
      var that = this;
-
-     var similarConceptsListObj = {};
-     var relatedConceptsListObj = {};
-
-
      var conceptlists = that.conceptlists;
-
      conceptlists = conceptlists.toJSON();
 
      console.log("@@@@@@@@@@@@@@@@@ conceptlists @@@@@@@@@@@@@@@@@@@@");
      console.log(conceptlists);
 
-     //debugger
-    /* var conceptdtls = {};
-     _.find(conceptlists[0].listOfConceptBoardConcept, function(item, index) {
-            if (item.id == cconceptId) {
-                conceptdtls = item;
-            }
-     });*/
 
-     if(typeof(that.similar_concepts) !== 'undefined' && that.similar_concepts != ""){
-        var similarConceptsListObj = that.similar_concepts;
-        similarConceptsListObj = similarConceptsListObj.toJSON();
-
-        console.log("@@@@@@@@@@@@@@@@@ similarConceptsList @@@@@@@@@@@@@@@@@@@@");
-             console.log(similarConceptsListObj);
-     }
-     if(typeof(that.related_concepts) !== 'undefined' && that.related_concepts != ""){
-        var relatedConceptsListObj = that.related_concepts;
-        relatedConceptsListObj = relatedConceptsListObj.toJSON();
-
-        console.log("@@@@@@@@@@@@@@@@@ relatedConceptsList @@@@@@@@@@@@@@@@@@@@");
-             console.log(relatedConceptsListObj);
-     }
-
-     console.log("@@@@@@@@@@@@@@@@@ cconceptCode @@@@@@@@@@@@@@@@@@@@");
-     console.log(cconceptCode);
-
-
-
-    /*if(typeof(cconceptCode) !== 'undefined' && relatedConceptsListObj != ""){
-        var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
-        console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
-    }else{
        var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
-    }*/
-
-    if(typeof(cconceptCode) !== 'undefined'){
-      if(similarConceptsListObj.length > 0){
-          var conceptdtls = that.similar_concepts.getSimilarConcept(similarConceptsListObj[0].similarConceptsList,cconceptCode);
-          console.log("@@@@@@@@@@@@@@@@@ Inside Similar Concept @@@@@@@@@@@@@@@@@@@@");
-      }
-      if(relatedConceptsListObj.length > 0){
-        var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
-        console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
-      }
-    }else{
-       var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
-    }
 
     console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
     console.log(conceptdtls);
@@ -576,17 +527,17 @@ define([
 
 //        var consTitle = conceptdtls[0].conceptTitle;
 //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
-        var consTitle = conceptdtls[0].conceptTitle;
+        var consTitle = conceptdtls[0].conceptDescription;
         var n = consTitle.length;
         if (n > 160){
-        cnpnm = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+        concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
 
         } else {
-        cnpnm = consTitle;
+        concDes = consTitle;
         }
 
 
-        concDes = conceptdtls[0].conceptTypeTitle;
+        cnpnm = conceptdtls[0].conceptTitle;
 //        cnpnm = conceptdtls[0].conceptTitle;
         cconceptCode = conceptdtls[0].conceptCode;
         userNote = conceptdtls[0].userNote;
@@ -603,8 +554,222 @@ define([
      var vconceptCode = cconceptCode;
      var relconceptCode = cconceptCode;
 
-     $("#concNmm").text(concDes);
-     $("#concDes").html(cnpnm);
+     $("#concNmm").text(cnpnm);
+     $("#concDes").html(concDes);
+     $("#show_description").attr("data-element",cconceptId);
+     $("#show_description").attr("data-element1",consTitle);
+
+
+     $("#conId").val(cconceptId);
+     $("#mastImgg").attr("src",imgnm);
+
+     if(typeof(userNote) != 'undefined' && userNote != null){
+        $("#conceptNotetxt").html(userNote);
+        $("#save_CNote").text("Edit Notes");
+     }else{
+        $("#conceptNotetxt").html('');
+        $("#save_CNote").text("Add Notes");
+     }
+//     $("#conceptNotetxt").text(userNote);
+
+     if(typeof(userTag) != 'undefined' && userTag != null){
+        var arr = userTag.split(",");
+        var taglists = '';
+        for( var i=0; i< arr.length; i++ ){
+            taglists += '<span class="tag label label-info">'+arr[i]+'<span data-role="remove"></span></span>';
+        }
+        $("#tagtxt").val(userTag);
+        $("#taglists").html(taglists);
+     }else{
+        $("#tagtxt").html('');
+     }
+
+     $('#details-modal').modal('show');
+
+
+     var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
+     var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
+
+     Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
+         console.log("@@@@@@@@@@@@@ In side Concept Promise @@@@@@@@@@@@@@@@@@");
+         that.fetchRelatedConceptAndRender();
+     });
+    },
+    getRelatedConceptDetails: function(evt){
+     var currentTarget = $(evt.currentTarget);
+
+     var cconceptId = currentTarget.data('element4');
+
+     var cconceptCode = currentTarget.data('element5');
+     var that = this;
+
+     var relatedConceptsListObj = that.related_concepts;
+     relatedConceptsListObj = relatedConceptsListObj.toJSON();
+
+        console.log("@@@@@@@@@@@@@@@@@ relatedConceptsList @@@@@@@@@@@@@@@@@@@@");
+        console.log(relatedConceptsListObj);
+     console.log("@@@@@@@@@@@@@@@@@ cconceptCode @@@@@@@@@@@@@@@@@@@@");
+     console.log(cconceptCode);
+
+
+
+    /*if(typeof(cconceptCode) !== 'undefined' && relatedConceptsListObj != ""){
+        var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
+        console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
+    }else{
+       var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
+    }*/
+
+    if(typeof(cconceptCode) !== 'undefined'){
+        var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
+        console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
+      }
+    console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
+    console.log(conceptdtls);
+    console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
+    console.log(conceptdtls[0].conceptCode);
+
+    var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
+    if(typeof(conceptdtls) !== 'undefined'){
+        imgnm = conceptdtls[0].imgURL;
+
+//        var consTitle = conceptdtls[0].conceptTitle;
+//        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
+        var consTitle = conceptdtls[0].conceptDescription;
+        var n = consTitle.length;
+        if (n > 160){
+        concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+
+        } else {
+        concDes = consTitle;
+        }
+
+
+        cnpnm = conceptdtls[0].conceptTitle;
+//        cnpnm = conceptdtls[0].conceptTitle;
+        cconceptCode = conceptdtls[0].conceptCode;
+        userNote = conceptdtls[0].userNote;
+        userTag = conceptdtls[0].userTag;
+    }
+
+     var pageno = 0;
+     var itemPerPage = 20;
+
+     var conceptboardId = that.filter.get('selectedconceptboardId');
+     var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
+
+
+     var vconceptCode = cconceptCode;
+     var relconceptCode = cconceptCode;
+
+     $("#concNmm").text(cnpnm);
+     $("#concDes").html(concDes);
+     $("#show_description").attr("data-element",cconceptId);
+     $("#show_description").attr("data-element1",consTitle);
+
+
+     $("#conId").val(cconceptId);
+     $("#mastImgg").attr("src",imgnm);
+
+     if(typeof(userNote) != 'undefined' && userNote != null){
+        $("#conceptNotetxt").html(userNote);
+        $("#save_CNote").text("Edit Notes");
+     }else{
+        $("#conceptNotetxt").html('');
+        $("#save_CNote").text("Add Notes");
+     }
+//     $("#conceptNotetxt").text(userNote);
+
+     if(typeof(userTag) != 'undefined' && userTag != null){
+        var arr = userTag.split(",");
+        var taglists = '';
+        for( var i=0; i< arr.length; i++ ){
+            taglists += '<span class="tag label label-info">'+arr[i]+'<span data-role="remove"></span></span>';
+        }
+        $("#tagtxt").val(userTag);
+        $("#taglists").html(taglists);
+     }else{
+        $("#tagtxt").html('');
+     }
+
+     $('#details-modal').modal('show');
+
+
+     var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
+     var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
+
+     Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
+         console.log("@@@@@@@@@@@@@ In side Concept Promise @@@@@@@@@@@@@@@@@@");
+         that.fetchRelatedConceptAndRender();
+     });
+    },
+    getSimilarConceptDetails: function(evt){
+     var currentTarget = $(evt.currentTarget);
+
+     var cconceptId = currentTarget.data('element4');
+
+     var cconceptCode = currentTarget.data('element5');
+     var that = this;
+
+      var similarConceptsListObj = {};
+
+     var similarConceptsListObj = that.similar_concepts;
+             similarConceptsListObj = similarConceptsListObj.toJSON();
+
+             console.log("@@@@@@@@@@@@@@@@@ similarConceptsList @@@@@@@@@@@@@@@@@@@@");
+                  console.log(similarConceptsListObj);
+
+   /*if(typeof(cconceptCode) !== 'undefined' && relatedConceptsListObj != ""){
+        var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
+        console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
+    }else{
+       var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
+    }*/
+
+    if(typeof(cconceptCode) !== 'undefined'){
+        var conceptdtls = that.similar_concepts.getSimilarConcept(similarConceptsListObj[0].similarConceptsList,cconceptCode);
+        console.log("@@@@@@@@@@@@@@@@@ Inside Similar Concept @@@@@@@@@@@@@@@@@@@@");
+    }
+    console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
+    console.log(conceptdtls);
+    console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
+    console.log(conceptdtls[0].conceptCode);
+
+    var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
+    if(typeof(conceptdtls) !== 'undefined'){
+        imgnm = conceptdtls[0].imgURL;
+
+//        var consTitle = conceptdtls[0].conceptTitle;
+//        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
+        var consTitle = conceptdtls[0].conceptDescription;
+        var n = consTitle.length;
+        if (n > 160){
+        concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+
+        } else {
+        concDes = consTitle;
+        }
+
+
+        cnpnm = conceptdtls[0].conceptTitle;
+//        cnpnm = conceptdtls[0].conceptTitle;
+        cconceptCode = conceptdtls[0].conceptCode;
+        userNote = conceptdtls[0].userNote;
+        userTag = conceptdtls[0].userTag;
+    }
+
+     var pageno = 0;
+     var itemPerPage = 20;
+
+     var conceptboardId = that.filter.get('selectedconceptboardId');
+     var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
+
+
+     var vconceptCode = cconceptCode;
+     var relconceptCode = cconceptCode;
+
+     $("#concNmm").text(cnpnm);
+     $("#concDes").html(concDes);
      $("#show_description").attr("data-element",cconceptId);
      $("#show_description").attr("data-element1",consTitle);
 

@@ -132,6 +132,18 @@ define([
                     }
                 }, 250));
 
+                $("#userProfile-dv").mouseleave(function(){
+                    var hovered = $("#userProfile-dv").find(".dropdown-menu").length;
+                    !!hovered && $('.dropdown-menu').hide();
+                });
+
+                /*$(document).on("click", null, function(e) {
+                    var userProfiledv = $("#userProfile-dv");
+                    if (!$('#userIcon').is(e.target) && !userProfiledv.is(e.target) && userProfiledv.has(e.target).length == 0) {
+                        $("#userProfile-dv").hide();
+                    }
+                });*/
+
 
                 /* Search on menu bar End  */
                 $(document).on("click", "a[href^='/']", function(event) {
