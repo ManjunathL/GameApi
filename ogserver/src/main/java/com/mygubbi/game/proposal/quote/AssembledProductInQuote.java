@@ -571,7 +571,7 @@ public class AssembledProductInQuote
 
     private void addToModuleHandle(Handle handleCode, double quantity)
     {
-        LOG.info("handle code " +handleCode +"quantity " +quantity);
+//        LOG.info("handle code " +handleCode +"quantity " +quantity);
         //ModulePart part=new ModulePart(handleCode.getCode(), "UOM", quantity, handleCode.getTitle(),"Catalogue code","ERP code");
         ModulePart part=new ModulePart(handleCode.getCode(), "UOM", quantity, handleCode.getTitle(),handleCode.getArticleNo(),handleCode.getErpCode());
         if(!(quantity==0.0))
@@ -582,7 +582,7 @@ public class AssembledProductInQuote
 
     private void addToModuleHinge(HingePack hingeCode, double quantity)
     {
-        LOG.debug("Hinge Pack /; " + hingeCode.toString());
+//        LOG.debug("Hinge Pack /; " + hingeCode.toString());
         if (!(hingeCode == null || hingeCode.isEmpty()))
         {
             ModulePart part;

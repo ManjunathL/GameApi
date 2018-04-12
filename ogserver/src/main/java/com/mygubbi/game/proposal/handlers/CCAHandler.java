@@ -122,6 +122,7 @@ public class CCAHandler extends AbstractRouteHandler{
             detailsToImaginest.put("salesPhone",opportunityDetails.getString("salesuser_mobile"));
             detailsToImaginest.put("supervisorName",opportunityDetails.getString("supervisor"));
             detailsToImaginest.put("supervisorPhone",opportunityDetails.getString("supervisor_mobile"));
+            detailsToImaginest.put("updates",opportunityDetails.getString("comment"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -591,7 +591,7 @@ public class ModulePriceHolder
         String carcassCode = StringUtils.isEmpty(this.mgModule.getMaterial()) ? productModule.getCarcassCode() : this.mgModule.getMaterial();
         this.carcassMaterialRateCard = RateCardService.getInstance().getRateCard(carcassCode, RateCard.CARCASS_TYPE,this.priceDate, this.city);
         this.blendedRateCard = RateCardService.getInstance().getBlendedRateCard(carcassCode, shutterFinish.getCostCode(), RateCard.BLENDED_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
-        LOG.debug("blended rate card :" + this.blendedRateCard.toString());
+//        LOG.debug("blended rate card :" + this.blendedRateCard.toString());
         this.carcassFinishRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(carcassFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
         this.shutterFinishRateCard = RateCardService.getInstance().getRateCard(shutterFinish.getCostCode(), RateCard.SHUTTER_TYPE,this.priceDate, this.city);
         this.stdManufacturingCost = RateCardService.getInstance().getRateCard(RateCard.STD_MANUFACTURING_COST_FACTOR,RateCard.FACTOR_TYPE ,this.priceDate, this.city);
@@ -604,7 +604,7 @@ public class ModulePriceHolder
 
         this.loadingFactorCard = RateCardService.getInstance().getRateCard(RateCard.LOADING_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.labourRateCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.LABOUR_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
-        LOG.debug("Labour rate card : " + labourRateCard.toString());
+//        LOG.debug("Labour rate card : " + labourRateCard.toString());
         this.labourManufacturingRateCard = RateCardService.getInstance().getRateCard(RateCard.LABOUR_COST_FACTOR, RateCard.FACTOR_TYPE,this.priceDate, this.city);
         this.nonStandardReductionFactorCard = RateCardService.getInstance().getRateCardBasedOnProduct(RateCard.REDUCTION_FACTOR_NONSTANDARD,
                 RateCard.FACTOR_TYPE,this.priceDate, this.city, this.productModule.getProductCategory());
