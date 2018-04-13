@@ -137,7 +137,7 @@ define([
     },
     events: {
         "click .userques": "getSelectedQuestion",
-        "click #save_homeId":"saveHomePreferences"
+        "click #save_homeId":"saveHomePreferences",
     },
     saveHomePreferences:function(e){
         var that = this;

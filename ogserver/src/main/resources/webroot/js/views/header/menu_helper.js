@@ -5,9 +5,12 @@ define([
     'bootstrap',
     'bootstrapvalidator',
     'collections/autosuggest_products',
-    'text!templates/header/suggest_results.html'
-], function($, _, Backbone, Bootstrap, BootstrapValidator, AutoSuggestProducts, SuggestResultsPage) {
+    'text!templates/header/suggest_results.html',
+    'mgfirebase'
+], function($, _, Backbone, Bootstrap, BootstrapValidator, AutoSuggestProducts, SuggestResultsPage,MGF) {
     return {
+        ref: MGF.rootRef,
+        refAuth: MGF.refAuth,
         getSuggestions: function(term) {
             return new Promise(function(resolve, reject) {
                 var autoSuggestProducts = new AutoSuggestProducts();
@@ -55,6 +58,17 @@ define([
                 });
             });
         },
+      signOutUser: function(ev) {
+            this.refAuth.signOut().then(function() {
+               // Sign-out successful.
+               console.log("Sign-out successful.");
+               window.location = '/';
+            }, function(error) {
+              // An error happened.
+              // An error happened.
+              console.log("Sign-out failed due to some error." + error.errorMessage);
+            });
+        },
         debounce: function(fn, delay) {
             var timer = null;
             return function() {
@@ -68,10 +82,11 @@ define([
         },
         ready: function(parent) {
 
-            _.bindAll(this, 'getSuggestions', 'debounce');
+            _.bindAll(this, 'getSuggestions', 'debounce','signOutUser');
 
             var events = {
-                "click .sb-search-txt": this.gotoSearchedProduct
+                "click .sb-search-txt": this.gotoSearchedProduct,
+                "click .signout_icon": this.signOutUser
             };
 
             parent.delegateEvents(events);

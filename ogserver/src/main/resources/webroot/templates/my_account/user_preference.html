@@ -124,7 +124,7 @@ margin-top: 25px;
                     <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
 
                     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
-                    <div class="form-group <% if(userQuesdtl.questionnaire.questionDetails.name == "Room"){ %> col-xs-2 <% }else{ %> col-xs-3 <% } %>">
+                    <div class="form-group <% if(userQuesdtl.questionnaire.questionDetails.name == 'Room'){ %> col-xs-2 <% }else{ %> col-xs-3 <% } %>">
                         <figure>
                             <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
                                 <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle userques" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"   width="100px" height="100px">
@@ -189,8 +189,8 @@ margin-top: 25px;
 
                                 <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
                                 <div class="form-group col-md-2">
-                                    <figure>
-                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="80px" height="80px">
+                                    <figure> <button class="btn btn-labeltxt clickAction" style="padding: 0px 0px 0px 0px;">
+                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="80px" height="80px"></button>
                                         <figcaption><%= userOptsdtl.name %></figcaption>
                                     </figure>
                                 </div>
@@ -319,24 +319,23 @@ margin-top: 25px;
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <button type="button" class="btn addcboard-btn">
-                        Save
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon glyphicon-floppy-disk"></span> Save
                     </button>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <h3>Add Family Member  <span class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
+                    <h3>Add Family Member  <span class="glyphicon glyphicon-plus"></span></h3>
                 </div>
             </div>
 
-            <!--<div class="form-row">
+            <div class="form-row">
                 <div class="form-group col-md-12">
                     <button type="button" class="btn btn-primary btn-block">All Done</button>
                 </div>
-            </div>-->
-
+            </div>
             </div>
         </div>
 </div>
@@ -377,6 +376,7 @@ margin-top: 25px;
           outputforSenior.innerHTML = this.value;
         }
     </script>
+
 </div>
 
 </section>

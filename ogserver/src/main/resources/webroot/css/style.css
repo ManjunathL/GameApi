@@ -695,7 +695,9 @@ ul.spaceTypelst li{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
-    margin:1%;
+    /*margin:1%;*/
+    margin-top:60px;
+    margin-left: 26px;
     float:left;
     overflow:hidden;
 }
