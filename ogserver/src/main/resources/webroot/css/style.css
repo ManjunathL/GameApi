@@ -383,7 +383,7 @@ hr {
 	letter-spacing: 1px;
 	text-transform: capitalize;
 	font-family: 'Raleway', sans-serif;
-	font-weight: 300;
+	font-weight: 600;
 }
 /*.filter-box-top .btn-filter{
     padding: 5px 20px;
@@ -670,7 +670,6 @@ ul.spaceTypelst li{
 }
 
 .pinBoot {
-    position: relative;
     max-width: 100%;
     width: 100%;
     height: auto;
@@ -1747,4 +1746,13 @@ textarea.form-control {
     line-height: 2.428571;
     color: #555;
     white-space: nowrap;
+}
+
+.recomnd{
+    background: rgba(236,81,54,0.75);
+    color: rgb(255, 255, 255);
+    border-color: rgb(209, 42, 59) transparent;
+    font-size:12px;
+    text-align:center;
+    font-weight:600;
 }

@@ -4,8 +4,24 @@
 <%= console.log("@@@@@@@@@@@@@@@ Selected Concept Tag @@@@@@@@@@@@@@@@@") %>
 <%= console.log(filterTag) %>
 <link href="css/layout.css" rel="stylesheet">
+<style>
+    .IJsqo {
+        position: absolute;
+        left: -8px;
+        top: 0;
+        background-color: #8a584b;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 5px 9px 4px;
+        max-width: 50%;
+        text-transform: uppercase;
+        border-color: #8a584b;
+    }
+</style>
 <button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>
-<section class="container-fluid" style="background: #f2f4f4;">
+<section>
+    <div class="container-fluid" style="background: #f2f4f4;">
     <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;"><%= conceptBoardName %></h2>
 
     <div class="col-md-12 col-lg-12" >
@@ -47,7 +63,9 @@
     <% } %>
 </div>
 <input type="hidden" id="conceptboardIdVl" value="<%= conceptboardId %>" />
-<div class="pinBoot bg-white" id="pinBoot<%= conceptboardId %>" style="margin-top: 15px;min-height:835px;">
+        <div class="position-relative" style="height:auto;">
+<div class="pinBoot bg-white" id="pinBoot<%= conceptboardId %>" style="margin-top: 15px;">
+
     <% if(typeof(conceptdetails) !== 'undefined'){ %>
     <% _.each(conceptdetails[0].listOfConceptBoardConcept, function(conceptdtls, i){ %>
     <% var tagnm = conceptdtls.conceptTag %>
@@ -71,9 +89,36 @@
     <% }); %>
     <% } %>
 
+    <!-- Recommended Start--->
+    <% if(typeof(needconceptlisting) !== 'undefined'){ %>
+    <% _.each(needconceptlisting[0].youMayNeedItConceptList, function(needconceptdtls, i){ %>
+    <% var tagnm = needconceptdtls.conceptTag %>
+
+    <article class="white-panel">
+        <div class="pin">
+            <a href="javascript:void(0);" onclick="showModal('<%= needconceptdtls.imgURL %>','<%= needconceptdtls.conceptTitle %>','<%= needconceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+        </div>
+        <a href="javascript:void(0);" class="needconceptImg" data-element="<%= needconceptdtls.imgURL %>" data-element1="<%= needconceptdtls.conceptTypeTitle %>" data-element2="<%= needconceptdtls.conceptTitle %>"  data-element3="<%= needconceptdtls.conceptCode %>" data-element4="<%= needconceptdtls.id %>">
+            <% if(typeof(needconceptdtls.imgURL) != 'undefined' && needconceptdtls.imgURL != null){ %>
+            <img src="<%= needconceptdtls.imgURL %>" alt="<%= needconceptdtls.conceptTitle %>">
+            <% }else{ %>
+            <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= needconceptdtls.conceptTitle %>">
+            <% } %>
+        </a>
+        <!--<div class="recomnd"><div>Recommended</div></div>-->
+        <div class="recomnd"><div>Must Try</div></div>
+        <h4>
+            <span><a href="javascript:void(0);"> <%= needconceptdtls.conceptTitle %> </a></span>
+            <span><a class="pull-right remove-pin" data-element="<%= needconceptdtls.id %>"><i class="fa fa-trash" aria-hidden="true"></i></a></span>
+        </h4>
+    </article>
+    <% }); %>
+    <% } %>
+    <!-- Recommended End--->
+
 </div>
 
-
+        </div>
 
 <div class="modal fade" id="pin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
@@ -135,6 +180,7 @@
 
             </div>
         </div>
+    </div>
     </div>
 </section>
 

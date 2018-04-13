@@ -67,15 +67,15 @@ define([
         //var getConceptsPromise = that.getConcepts();
         //var getDesignsPromise = that.getDesigns();
 
-        Promise.all([createConceptBoardPromise,getConceptBoardsPromise]).then(function() {
+        Promise.all([getConceptBoardsPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.fetchConceptsAndRender();
         });
     },
     createConceptBoard: function(){
         var that = this;
-        //var userId = sessionStorage.userId;
-        var userId = "user1234600";
+        var userId = sessionStorage.userId;
+        //var userId = "user1234600";
         return new Promise(function(resolve, reject) {
             that.createconceptboards.getUserIdAuth(userId, {
                 async: true,
@@ -110,9 +110,9 @@ define([
     },
     getConceptBoards: function(){
       var that = this;
-      //var userId = sessionStorage.userId;
-      var userId = "user1234600";
-     // var userMindboardId = sessionStorage.defaultMindboardId;
+      var userId = sessionStorage.userId;
+      //var userId = "user1234600";
+      //var userMindboardId = sessionStorage.defaultMindboardId;
       var userMindboardId = 17;
       var pageno = 0;
       var itemPerPage = 20;
@@ -200,8 +200,8 @@ define([
      submitEditCboard: function (e) {
             if (e.isDefaultPrevented()) return;
             e.preventDefault();
-            //var userId = sessionStorage.userId;
-            var userId = "user1234600";
+            var userId = sessionStorage.userId;
+            //var userId = "user1234600";
             var formData = {
                 "conceptboardId": $('#conceptBoardIdTxt').val(),
                 "userId": userId,

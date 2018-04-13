@@ -11,6 +11,7 @@ define([
   'text!templates/dashboard/relatedconcepts.html',
   'text!templates/dashboard/view_conceptDesc.html',
   'collections/conceptlists',
+  'collections/needconceptlists',
   'models/filter',
   'collections/conceptboards',
   'collections/concepttags',
@@ -22,10 +23,11 @@ define([
   'collections/remove_conceptFromCboards',
   'collections/add_conceptnotes',
   'collections/add_concepttags'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,view_conceptDesc, ConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
+    needconceptlists: null,
     filter: null,
     conceptboards: null,
     concepttags: null,
@@ -38,6 +40,7 @@ define([
     remove_conceptFromCboards:null,
     initialize: function() {
         this.conceptlists = new ConceptLists();
+        this.needconceptlists = new NeedConceptLists();
         this.filter = new Filter();
         this.conceptboards = new ConceptBoards();
         this.concepttags = new ConceptTags();
@@ -74,10 +77,11 @@ define([
 
 
         var getConceptsPromise = that.getConcepts(conceptboardId);
+        var getNeedConceptsPromise = that.getNeedConcepts(conceptboardId);
         var getConceptTagsPromise = that.getConceptTags(conceptboardId);
         var getConceptBoardsPromise = that.getConceptBoards();
 
-        Promise.all([getConceptsPromise,getConceptTagsPromise,getConceptBoardsPromise]).then(function() {
+        Promise.all([getConceptsPromise,getNeedConceptsPromise,getConceptTagsPromise,getConceptBoardsPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.fetchConceptListsAndRender(conceptboardId);
         });
@@ -99,6 +103,60 @@ define([
                       //console.log("Successfully fetch "+ currTab  +" Concepts - ");
 
                       console.log("I m here   ++++++++++++++ "+conceptboardId);
+                      console.log(response);
+
+                      /*if(typeof(conceptboardId) != 'undefined'){
+                          sessionStorage.conceptboardId = conceptboardId;
+                      }else{
+                          sessionStorage.conceptboardId = "";
+                      }*/
+                        if (!(that.filter.get('selectedconceptboardId'))) {
+                          this.filter.set({
+                              'selectedconceptboardId':conceptboardId
+                          }, {
+                              silent: true
+                          });
+                      }
+                      resolve();
+                  },
+                  error:function(response) {
+                      console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                      console.log(response);
+                      reject();
+                  }
+              });
+             }else{
+                resolve();
+             }
+        });
+    },
+    getNeedConcepts: function(conceptboardId){
+        var that = this;
+        var pageno = 0;
+        var itemPerPage = 20;
+        var userId = sessionStorage.userId;
+
+        var formData = {
+            "conceptboardId": 1591,
+            "spaceTypeCode": "SP-KITCHEN",
+            "userId": userId
+        };
+
+        return new Promise(function(resolve, reject) {
+             if(typeof(conceptboardId) !== 'undefined') {
+               that.needconceptlists.fetch({
+                    async: true,
+                    crossDomain: true,
+                    method: "POST",
+                    headers:{
+                       "authorization": "Bearer "+ sessionStorage.authtoken,
+                       "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify(formData),
+                  success:function(response) {
+                      //console.log("Successfully fetch "+ currTab  +" Concepts - ");
+
+                      console.log("needconceptlist   ++++++++++++++ "+conceptboardId);
                       console.log(response);
 
                       /*if(typeof(conceptboardId) != 'undefined'){
@@ -180,6 +238,7 @@ define([
     fetchConceptListsAndRender: function(conceptboardId){
         var that = this;
         var conceptlists = that.conceptlists;
+        var needconceptlists = that.needconceptlists;
         var concepttags = that.concepttags;
         var conceptboards = that.conceptboards;
 
@@ -248,6 +307,7 @@ define([
 
         $(this.el).html(_.template(conceptsPageTemplate)({
             "conceptdetails": conceptlists,
+            "needconceptlisting": needconceptlists.toJSON(),
             "concepttags": concepttags.toJSON(),
             "conceptboardId": conceptboardId,
             'conceptboardsDtls':conceptboards.toJSON(),
@@ -296,6 +356,7 @@ define([
     },
     events: {
          "click .conceptImg": "getConceptDetails",
+         "click .needconceptImg": "getNeedConceptDetails",
          "click .relatedconceptImg": "getRelatedConceptDetails",
          "click .similarconceptImg": "getSimilarConceptDetails",
          "click #addCBoard": "viewAddCboard",
@@ -528,6 +589,100 @@ define([
 //        var consTitle = conceptdtls[0].conceptTitle;
 //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
         var consTitle = conceptdtls[0].conceptDescription;
+        var n = consTitle.length;
+        if (n > 160){
+        concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+
+        } else {
+        concDes = consTitle;
+        }
+
+
+        cnpnm = conceptdtls[0].conceptTitle;
+//        cnpnm = conceptdtls[0].conceptTitle;
+        cconceptCode = conceptdtls[0].conceptCode;
+        userNote = conceptdtls[0].userNote;
+        userTag = conceptdtls[0].userTag;
+    }
+
+     var pageno = 0;
+     var itemPerPage = 20;
+
+     var conceptboardId = that.filter.get('selectedconceptboardId');
+     var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
+
+
+     var vconceptCode = cconceptCode;
+     var relconceptCode = cconceptCode;
+
+     $("#concNmm").text(cnpnm);
+     $("#concDes").html(concDes);
+     $("#show_description").attr("data-element",cconceptId);
+     $("#show_description").attr("data-element1",consTitle);
+
+
+     $("#conId").val(cconceptId);
+     $("#mastImgg").attr("src",imgnm);
+
+     if(typeof(userNote) != 'undefined' && userNote != null){
+        $("#conceptNotetxt").html(userNote);
+        $("#save_CNote").text("Edit Notes");
+     }else{
+        $("#conceptNotetxt").html('');
+        $("#save_CNote").text("Add Notes");
+     }
+//     $("#conceptNotetxt").text(userNote);
+
+     if(typeof(userTag) != 'undefined' && userTag != null){
+        var arr = userTag.split(",");
+        var taglists = '';
+        for( var i=0; i< arr.length; i++ ){
+            taglists += '<span class="tag label label-info">'+arr[i]+'<span data-role="remove"></span></span>';
+        }
+        $("#tagtxt").val(userTag);
+        $("#taglists").html(taglists);
+     }else{
+        $("#tagtxt").html('');
+     }
+
+     $('#details-modal').modal('show');
+
+
+     var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
+     var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
+
+     Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
+         console.log("@@@@@@@@@@@@@ In side Concept Promise @@@@@@@@@@@@@@@@@@");
+         that.fetchRelatedConceptAndRender();
+     });
+    },
+    getNeedConceptDetails: function(evt){
+     var currentTarget = $(evt.currentTarget);
+
+     var cconceptId = currentTarget.data('element3');
+
+     var that = this;
+     var needconceptlists = that.needconceptlists;
+     needconceptlists = needconceptlists.toJSON();
+
+     console.log("@@@@@@@@@@@@@@@@@ needconceptlists @@@@@@@@@@@@@@@@@@@@");
+     console.log(needconceptlists);
+
+
+       var conceptdtls = that.needconceptlists.getConcept(needconceptlists[0].youMayNeedItConceptList,cconceptId);
+
+    console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
+    console.log(conceptdtls);
+    console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
+    console.log(conceptdtls[0].conceptCode);
+
+    var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
+    if(typeof(conceptdtls) !== 'undefined'){
+        imgnm = conceptdtls[0].imgURL;
+
+//        var consTitle = conceptdtls[0].conceptTitle;
+//        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
+        var consTitle = conceptdtls[0].conceptTypeDescription;
         var n = consTitle.length;
         if (n > 160){
         concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
