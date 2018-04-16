@@ -30,12 +30,11 @@ define([
     },
     getEverythingConceptBoard: function(){
         var that = this;
-        debugger
 
         var userId = sessionStorage.userId;
         var userMindboardId = 17;
         var pageno = 0;
-        var itemPerPage = 10;
+        var itemPerPage = 50;
 
         var formData = {
                       "tag": "",
