@@ -1,7 +1,14 @@
 <%= console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@22222@") %>
 <%= console.log(designList) %>
-
-
+<style>
+    .pinBoot .white-panel {
+        margin-top: 10px!important;
+    }
+    .filters ul.dropdown-menu li{
+        padding-top:10px;
+        display:block;
+    }
+</style>
 <section>
     <div class="portfolio-box bg-white hidden-sm hidden-xs" id="filter-choose-container">
         <div class="container">
@@ -25,34 +32,48 @@
                             <ul class="dropdown-menu drop" aria-labelledby="dropdownMenu">
                                 <li>
                                     <a>
-                                        <input
-                                                type="checkbox"
+                                        <div
                                                 class="margin-right-5"
-                                                name="style" title="ST-CONTEMPORARY" onclick="getStyleId(this.id,this.title)">
+                                                name="style" title="" onclick="getStyleId(this.title)">
+                                        All
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <div
+                                                class="margin-right-5"
+                                                name="style" title="ST-CONTEMPORARY" onclick="getStyleId(this.title)">
                                         CONTEMPORARY
+                                        </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a>
-                                        <input
-                                                type="checkbox"
+                                        <div
                                                 class="margin-right-5"
-                                                name="style" title="ST-NEOCLASSICAL" onclick="getStyleId(this.id,this.title)">
+                                                name="style" title="ST-NEOCLASSICAL" onclick="getStyleId(this.title)">
                                         Neo Classical
+
+                                        </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a>
-                                        <input
-                                                type="checkbox"
+                                        <div
                                                 class="margin-right-5"
-                                                name="style">
+                                                name="style" title="ST-Shabbychic" onclick="getStyleId(this.title)">
                                         Shabby chic
+                                        </div>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-8 pull-right text-right">
+                    <h4><%= designList.length %> Designs Found</h4>
                 </div>
             </div>
         </div>
@@ -60,7 +81,7 @@
 </section>
 <section class="main-conceptboard-sec bg-light-gray">
     <div class="container">
-        <div class="mt20">
+        <div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                       <!--  <div class="col-sm-6 col-md-4 col-lg-4">
@@ -94,19 +115,20 @@
 </section>
 <script>
 
-    function getStyleId(id, title) {
-        var filterArr = filter.get('filterIds');
-        var filterNameArr = filter.get('selectedFiltersName');
-        var styleArr = filter.get('styleIds');
-        filterArr.push(id);
-        filterNameArr.push(title);
+    function getStyleId(title) {
 
-        id = id.substring(0, id.length - 3);
-        styleArr.push(id);
+        //alert("================"+title);
 
-        filter.set({'filterIds': filterArr});
-        filter.set({'selectedFiltersName': filterNameArr});
-        filter.set({'styleIds': styleArr});
+        var filterStyleNameArr = filter.get('selectedStyleName');
+
+        //filterStyleNameArr.push(title);
+
+        filterStyleNameArr = title;
+
+        //alert("filterStyleNameArr ================"+filterStyleNameArr);
+
+        filter.set({'selectedStyleName': filterStyleNameArr});
+
         filter.trigger('change');
     }
 

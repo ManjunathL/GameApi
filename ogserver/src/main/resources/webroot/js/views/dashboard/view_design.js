@@ -5,18 +5,27 @@ define([
   'bootstrap',
   'pinterest_grid',
   'text!templates/dashboard/view_design.html',
-  'collections/viewDesigns'
-], function($, _, Backbone, Bootstrap, pinterest_grid, viewDesignPageTemplate,viewDesigns){
+  'collections/viewDesigns',
+  'models/filter'
+], function($, _, Backbone, Bootstrap, pinterest_grid, viewDesignPageTemplate,viewDesigns, Filter){
   var ViewDesignPage = Backbone.View.extend({
     el: '.page',
     viewDesigns: null,
+    filter: null,
     initialize: function() {
         this.viewDesigns = new viewDesigns();
+        this.filter = new Filter();
+
+        this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
         _.bindAll(this, 'render');
     },
     render: function () {
         var that = this;
+
+        window.filter = that.filter;
+
+
         console.log("****IN RENDER ***********")
         var spaceTypeCode = that.model.spaceTypeCode;
 //        alert("that.model.name = "+that.model.spaceTypeCode);
@@ -74,6 +83,35 @@ define([
         var that = this;
         var viewDesigns = that.viewDesigns;
         viewDesigns = viewDesigns.toJSON();
+
+
+        if (typeof(that.filter.get('selectedStyleName')) == 'undefined') {
+            //var arrSt = new Array();
+
+            that.filter.set({
+                'selectedStyleName': ''
+            }, {
+                silent: true
+            });
+        }
+
+
+        var filterStyleName = that.filter.get('selectedStyleName');
+
+        console.log("++++++++++++++ StyleName ++++++++++++++++++++");
+        console.log(filterStyleName);
+
+        if(typeof(filterStyleName) !== 'undefined' && filterStyleName.length > 0){
+            var filteredDesigns = that.viewDesigns.filterByStyleName(viewDesigns[0].designList, filterStyleName);
+
+            console.log("@@@@@@@@@@ filteredConcepts @@@@@@@@");
+            console.log(filteredDesigns);
+            console.log("@@@@@@@@@@@@@@@@@@");
+
+             viewDesigns[0].designList = filteredDesigns;
+
+        }
+
 
 
         $(this.el).html(_.template(viewDesignPageTemplate)({

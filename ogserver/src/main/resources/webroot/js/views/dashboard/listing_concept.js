@@ -212,7 +212,8 @@ define([
     },
     getConceptBoards: function(){
       var that = this;
-      var userId = "user1234600";
+      var userId = sessionStorage.userId;
+      //var userId = "user1234600";
       var userMindboardId = sessionStorage.defaultMindboardId;
       var pageno = 0;
       var itemPerPage = 50;
@@ -483,8 +484,8 @@ define([
 
         //alert(ctag);
 
-        //var userId = sessionStorage.userId;
-        var userId = "user1234600";
+        var userId = sessionStorage.userId;
+        //var userId = "user1234600";
 
         //var conceptboardConceptId = 329;
         //shilpa check what all need to be sent
@@ -531,8 +532,8 @@ define([
 
         //alert(cnote);
 
-        //var userId = sessionStorage.userId;
-        var userId = "user1234600";
+        var userId = sessionStorage.userId;
+        //var userId = "user1234600";
 
         //var conceptboardConceptId = 329;
         //shilpa check what all need to be sent
