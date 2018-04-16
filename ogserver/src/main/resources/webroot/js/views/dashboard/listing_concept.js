@@ -22,9 +22,8 @@ define([
   'collections/add_conceptToCboards',
   'collections/remove_conceptFromCboards',
   'collections/add_conceptnotes',
-  'collections/add_concepttags',
-  'collections/everything'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags,Everything){
+  'collections/add_concepttags'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
@@ -39,7 +38,6 @@ define([
     add_conceptnotes: null,
     add_concepttags:null,
     remove_conceptFromCboards:null,
-    everything:null,
     initialize: function() {
         this.conceptlists = new ConceptLists();
         this.needconceptlists = new NeedConceptLists();
@@ -53,7 +51,6 @@ define([
         this.add_conceptnotes = new AddConceptnotes();
         this.add_concepttags = new AddConcepttags();
         this.remove_conceptFromCboards = new RemoveConceptFromCboards();
-        this.everything=new Everything();
 
         this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
@@ -83,10 +80,6 @@ define([
         var getNeedConceptsPromise = that.getNeedConcepts(conceptboardId);
         var getConceptTagsPromise = that.getConceptTags(conceptboardId);
         var getConceptBoardsPromise = that.getConceptBoards();
-
-      // if(spaceTypeCode=='all')
-       // var everything = that.getEverything();
-
 
         Promise.all([getConceptsPromise,getNeedConceptsPromise,getConceptTagsPromise,getConceptBoardsPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
@@ -137,47 +130,6 @@ define([
              }
         });
     },
-        getEverything: function(){
-            var that = this;
-            var userId = sessionStorage.userId;
-            var userMindboardId = sessionStorage.defaultMindboardId;
-            var pageno = 0;
-            var itemPerPage = 20;
-            return new Promise(function(resolve, reject) {
-                 if(typeof(0) !== 'undefined') {
-                   that.everything.getEverythingList(userId, userMindboardId, pageno, itemPerPage, {
-                      async: true,
-                      crossDomain: true,
-                      method: "GET",
-                      headers:{
-                          "authorization": "Bearer "+ sessionStorage.authtoken
-                      },
-                      success:function(response) {
-                          //console.log("Successfully fetch "+ currTab  +" Concepts - ");
-
-                          console.log(" everything response");
-                          console.log(response);
-
-                            if (!(that.filter.get('selectedconceptboardId'))) {
-                              this.filter.set({
-                                  'selectedconceptboardId':conceptboardId
-                              }, {
-                                  silent: true
-                              });
-                          }
-                          resolve();
-                      },
-                      error:function(response) {
-                          console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
-                          console.log(response);
-                          reject();
-                      }
-                  });
-                 }else{
-                    resolve();
-                 }
-            });
-        },
     getNeedConcepts: function(conceptboardId){
         var that = this;
         var pageno = 0;
