@@ -1,12 +1,8 @@
 {
-  "author": "Nitin Puri <univermal@gmail.com>",
+  "author": "Mygubbi",
   "name": "og-web-ui",
   "description": "modular js setup with backbone",
   "version": "0.0.0",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/orangegubbidev/apidevelopment.git"
-  },
   "scripts": {
     "start": "http-server src/main/resources/webroot -a 0.0.0.0 -p 8787 -c-1",
     "prestart": "npm install",

@@ -89,7 +89,7 @@ define([
     getConcepts: function(conceptboardId){
         var that = this;
         var pageno = 0;
-        var itemPerPage = 20;
+        var itemPerPage = 50;
         return new Promise(function(resolve, reject) {
              if(typeof(conceptboardId) !== 'undefined') {
                that.conceptlists.getConceptList(conceptboardId, pageno, itemPerPage, {
@@ -133,12 +133,15 @@ define([
     getNeedConcepts: function(conceptboardId){
         var that = this;
         var pageno = 0;
-        var itemPerPage = 20;
+        var itemPerPage = 50;
         var userId = sessionStorage.userId;
 
+        //var conceptboardId = that.filter.get('selectedconceptboardId');
+        var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
+
         var formData = {
-            "conceptboardId": 1591,
-            "spaceTypeCode": "SP-KITCHEN",
+            "conceptboardId": conceptboardId,
+            "spaceTypeCode": sspaceTypeCode,
             "userId": userId
         };
 
@@ -212,7 +215,7 @@ define([
       var userId = "user1234600";
       var userMindboardId = sessionStorage.defaultMindboardId;
       var pageno = 0;
-      var itemPerPage = 20;
+      var itemPerPage = 50;
       var filterId = 1;
       return new Promise(function(resolve, reject) {
            that.conceptboards.getConceptBoardList(userId, userMindboardId, pageno, itemPerPage,filterId, {
@@ -271,6 +274,14 @@ define([
 
         if ((typeof(filterTag) !== 'undefined') && (filterTag.length != 0)) {
             conceptlists = conceptlists.toJSON();
+            needconceptlists = needconceptlists.toJSON();
+            //if(typeof(needconceptlists) !== 'undefined'){
+                var filteredneedConcepts = that.needconceptlists.filterByTags(needconceptlists[0].youMayNeedItConceptList, filterTag);
+                console.log("@@@@@@@@@@ filteredneedConcepts @@@@@@@@");
+                console.log(filteredneedConcepts);
+                console.log("@@@@@@@@@@@@@@@@@@");
+                needconceptlists[0].youMayNeedItConceptList = filteredneedConcepts;
+            //}
             var filteredConcepts = that.conceptlists.filterByTags(conceptlists[0].listOfConceptBoardConcept, filterTag);
 
             console.log("@@@@@@@@@@ filteredConcepts @@@@@@@@");
@@ -279,6 +290,8 @@ define([
 
             conceptlists[0].listOfConceptBoardConcept = filteredConcepts;
 
+
+
             that.filter.set({
                 'noFilterApplied': '1'
             }, {
@@ -286,6 +299,7 @@ define([
             });
         } else {
             var conceptlists = conceptlists.toJSON();
+            var needconceptlists = needconceptlists.toJSON();
             that.filter.set({
                 'noFilterApplied': '0'
             }, {
@@ -307,7 +321,7 @@ define([
 
         $(this.el).html(_.template(conceptsPageTemplate)({
             "conceptdetails": conceptlists,
-            "needconceptlisting": needconceptlists.toJSON(),
+            "needconceptlisting": needconceptlists,
             "concepttags": concepttags.toJSON(),
             "conceptboardId": conceptboardId,
             'conceptboardsDtls':conceptboards.toJSON(),
@@ -606,7 +620,7 @@ define([
     }
 
      var pageno = 0;
-     var itemPerPage = 20;
+     var itemPerPage = 50;
 
      var conceptboardId = that.filter.get('selectedconceptboardId');
      var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
@@ -808,7 +822,7 @@ define([
     }
 
      var pageno = 0;
-     var itemPerPage = 20;
+     var itemPerPage = 50;
 
      var conceptboardId = that.filter.get('selectedconceptboardId');
      var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');

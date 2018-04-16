@@ -29,15 +29,15 @@ define([
         },
         filterByTags:function (needconceptlist,selectedTag){
             var that = this;
-            return _.map(needconceptlist.filter(function(concept){
-                return that.concepWithTags(concept, selectedTag);
-            }), function (concept) {return concept });
+            return _.map(needconceptlist.filter(function(needconceptlist){
+                return that.needconcepWithTags(needconceptlist, selectedTag);
+            }), function (needconceptlist) {return needconceptlist });
         },
-        concepWithTags: function (conceptObj, selectedTag) {
-            var tagArrObj = conceptObj.conceptTag;
+        needconcepWithTags: function (conceptObj, selectedTag) {
+            var tagArrObj = conceptObj.tags;
             var tagArr = tagArrObj.split(",");
             for (var i=0; i < tagArr.length; i++) {
-                if (tagArr[i] == selectedTag)
+                if (tagArr[i] == selectedTag.toLowerCase())
                     return true;
             }
         }

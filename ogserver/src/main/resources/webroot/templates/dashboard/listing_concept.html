@@ -4,24 +4,9 @@
 <%= console.log("@@@@@@@@@@@@@@@ Selected Concept Tag @@@@@@@@@@@@@@@@@") %>
 <%= console.log(filterTag) %>
 <link href="css/layout.css" rel="stylesheet">
-<style>
-    .IJsqo {
-        position: absolute;
-        left: -8px;
-        top: 0;
-        background-color: #8a584b;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 500;
-        padding: 5px 9px 4px;
-        max-width: 50%;
-        text-transform: uppercase;
-        border-color: #8a584b;
-    }
-</style>
-<button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>
+<!--<button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>-->
 <section>
-    <div class="container-fluid" style="background: #f2f4f4;">
+    <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;">
     <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;"><%= conceptBoardName %></h2>
 
     <div class="col-md-12 col-lg-12" >
@@ -105,8 +90,8 @@
             <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= needconceptdtls.conceptTitle %>">
             <% } %>
         </a>
-        <!--<div class="recomnd"><div>Recommended</div></div>-->
-        <div class="recomnd"><div>Must Try</div></div>
+        <div class="recomnd"><div>Recommended</div></div>
+        <!--<div class="recomnd"><div>Must Try</div></div>-->
         <h4>
             <span><a href="javascript:void(0);"> <%= needconceptdtls.conceptTitle %> </a></span>
             <span><a class="pull-right remove-pin" data-element="<%= needconceptdtls.id %>"><i class="fa fa-trash" aria-hidden="true"></i></a></span>
@@ -182,7 +167,7 @@
         </div>
     </div>
     </div>
-    <div style=" margin-bottom: 138px;"></div>
+<!--    <div style=" margin-bottom: 138px;"></div>-->
 </section>
 
 
