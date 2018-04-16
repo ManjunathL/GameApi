@@ -1,0 +1,147 @@
+<%= console.log("@@@@@@@@@@@@@@@ Concepts @@@@@@@@@@@@@@@@@") %>
+<%= console.log(listOfConcepts) %>
+<link href="css/layout.css" rel="stylesheet">
+<!--<button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>-->
+<section>
+    <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;">
+        <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;">Everything</h2>
+
+        <div class="col-md-12 col-lg-12" >
+
+            <div class="position-relative" style="height:auto;">
+                <div class="pinBoot bg-white" id="listOfConceptspinBoot" style="margin-top: 15px;">
+
+                    <% if(typeof(listOfConcepts) !== 'undefined'){ %>
+                    <% _.each(listOfConcepts, function(conceptdtls, i){ %>
+                    <% var tagnm = conceptdtls.conceptTag %>
+
+                    <article class="white-panel">
+                        <div class="pin">
+                            <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.imgURL %>','<%= conceptdtls.conceptTitle %>','<%= conceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+                        </div>
+                        <a href="javascript:void(0);" class="conceptImg" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>"  data-element3="<%= conceptdtls.conceptCode %>" data-element4="<%= conceptdtls.id %>">
+                            <% if(typeof(conceptdtls.imgURL) != 'undefined' && conceptdtls.imgURL != null){ %>
+                            <img src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>">
+                            <% }else{ %>
+                            <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
+                            <% } %>
+                        </a>
+                        <h4>
+                            <span><a href="javascript:void(0);"> <%= conceptdtls.conceptTitle %> </a></span>
+                            <span><a class="pull-right remove-pin" data-element="<%= conceptdtls.id %>"><i class="fa fa-trash" aria-hidden="true"></i></a></span>
+                        </h4>
+                    </article>
+                    <% }); %>
+                    <% } %>
+
+
+                </div>
+
+            </div>
+
+            <div class="modal fade" id="pin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="pin-container">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="pin-model-img">
+                                    <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg" alt="pin image"> </a>
+                                    <h4 id="concNm">Excepteur sint occaecat cupidatat non proident </h4>
+                                    <input type="hidden" id="ConcCod" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="new-pin">
+                                    <!--<form>
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Mood Board Name">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="submit" name="pin" class="btn btn-defalt pin-submit" value="Submit">
+                                        </div>
+                                    </form>-->
+                                </div>
+                                <!--<div>
+                                    <label class="moodboard-lbl">All Concept Boards</label>
+                                    <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                                    <%= console.log("================== conceptboardsDtls ===================") %>
+                                    <%= console.log(conceptboardsDtls) %>
+                                    <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
+                                    <div class="boardlst" data-element="<%= conceptdtl.id %>"><%= conceptdtl.name %></div>
+                                    <% }); %>
+                                    <% } %>
+
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog" style="width:980px;">
+                    <div id="concept-dtls" class="dtls-container" style="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div id="addcboard-dtls" class="addcboard-container">
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="editcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div id="editcboard-dtls" class="addcboard-container">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    <div style=" margin-bottom: 138px;"></div>-->
+</section>
+
+
+<!--<script>
+    $(".fl-tags").on( "click", function() {
+        var seltag = $(this).data("element");
+        $( "article" ).hide();
+        $( "article" ).filter(function( index ) {
+        return $( this ).data( "category" ) === seltag;
+      }).show();
+    });
+</script>-->
+<script>
+    function showModal(imgnm,cnpnm,cnpcod){
+        $("#concNm").text(cnpnm);
+        $("#ConcCod").val(cnpcod);
+        $("#mastImg").attr("src",imgnm);
+        $('#pin-modal').modal('show');
+    }
+    $(document).ready(function() {
+        $('#myCarousel').carousel({
+            interval: false
+        });
+
+        $('#myCarousel112 .item:first').addClass('active');
+        $('#myCarousel112').carousel({
+            interval: false
+        })
+    });
+
+    function getTagsView(selTag){
+        if(selTag == 'all'){
+            filter.set({'noFilterApplied': 0});
+            filter.set({'selectedTag': ''});
+            filter.trigger('change');
+        }else{
+            console.log("Selected Tags============ "+selTag);
+            $("#"+selTag).css("background-color","#fff");
+            filter.set({'selectedTag': selTag});
+            filter.trigger('change');
+        }
+    }
+</script>

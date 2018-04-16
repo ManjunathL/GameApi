@@ -14,6 +14,7 @@ define(function() {
         USERPROFILEPAGE:"UserProfilePage",
         USERPREFERENCEPAGE:"UserPreferencePage",
         VIEWDESIGNSPAGE:"ViewDesignPage",
+        EVERYTHINGCONCEPTPAGE:"EverythingConceptPage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

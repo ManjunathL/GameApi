@@ -22,6 +22,7 @@ define([
             'view_design-:spaceTypeCode(/)':'listing_designs',
             'user-profile(/)':'user-profile',
             'user_preference(/)':'user_preference',
+            'listofconcepts(/)':'listing_everything',
             '*something': 'errorPage'
         }
     });
@@ -71,6 +72,17 @@ define([
                     });
                 });
 
+         router.on('route:listing_everything', function(spaceTypeCode) {
+                           require(['views/dashboard/everything_concepts'], function(EverythingConceptPage) {
+                                 var options = {
+                                    model: {
+                                        "spaceTypeCode": spaceTypeCode
+                                    }
+                                };
+
+                                VM.create(VM.EVERYTHINGCONCEPTPAGE, EverythingConceptPage,options).render();
+                            });
+                        });
 
 
         router.on('route:user-profile', function(actions) {
