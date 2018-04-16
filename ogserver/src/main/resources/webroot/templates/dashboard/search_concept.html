@@ -5,8 +5,10 @@
 <%= console.log(filterTag) %>
 
 <link href="css/layout.css" rel="stylesheet">
-<section class="col-md-12 col-lg-12 mt15">
-    <div id="myCarousel112" class="carousel slide">
+<section>
+    <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;">
+        <div class="col-md-12 col-lg-12" >
+    <div id="myCarousel112" class="carousel slide mt30">
         <div class="tagicos">
             <div  class="tagicos clearfix carousel-inner">
                 <% if(typeof(conceptdetails.tagList) !== 'undefined'){ %>
@@ -44,6 +46,7 @@
         <% } %>
     </div>
     <input type="hidden" id="conceptboardIdVl" value="<%= conceptboardId %>" />
+            <div class="position-relative" style="height:auto;">
     <div class="pinBoot bg-white" id="searchpinBoot" style="margin-top: 15px;min-height:835px;">
         <% if(typeof(conceptdetails) !== 'undefined'){ %>
         <% _.each(conceptdetails.conceptList, function(conceptdtls, i){ %>
@@ -68,7 +71,8 @@
         <% } %>
 
     </div>
-    <div class="clearfix"></div>
+            </div>
+                <div class="clearfix"></div>
 
 
 
@@ -119,7 +123,8 @@
         </div>
     </div>
 
-
+        </div>
+    </div>
 </section>
 
 
