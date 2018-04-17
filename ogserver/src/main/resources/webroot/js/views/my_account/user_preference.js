@@ -49,6 +49,7 @@ define([
         //var userId = sessionStorage.userId;
         var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
         return new Promise(function(resolve, reject) {
+            if(userId){
            that.user_home_preferences.getUserPreferences(category, userId, {
                async: true,
                crossDomain: true,
@@ -68,6 +69,9 @@ define([
                    reject();
                }
            });
+           }else{
+                         resolve();
+                      }
       });
     },getUserFamilyPreferences: function(){
         var that = this;
@@ -75,52 +79,63 @@ define([
         //var userId = sessionStorage.userId;
         var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
         return new Promise(function(resolve, reject) {
-           that.user_family_preferences.getUserPreferences(category, userId, {
-               async: true,
-               crossDomain: true,
-               method: "GET",
-               headers:{
-                   "authorization": "Bearer "+ sessionStorage.authtoken
-               },
-               success:function(data) {
+           if(userId){
+               that.user_family_preferences.getUserPreferences(category, userId, {
+                   async: true,
+                   crossDomain: true,
+                   method: "GET",
+                   headers:{
+                       "authorization": "Bearer "+ sessionStorage.authtoken
+                   },
+                   success:function(data) {
 
-                   console.log(" +++++++++++++++ getUserFamilyPreferences ++++++++++++++++++ ");
-                   console.log(data);
-                   resolve();
-               },
-               error:function(response) {
-                   //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
-                   //console.log(response);
-                   reject();
-               }
-           });
+                       console.log(" +++++++++++++++ getUserFamilyPreferences ++++++++++++++++++ ");
+                       console.log(data);
+                       resolve();
+                   },
+                   error:function(response) {
+                       //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                       //console.log(response);
+                       reject();
+                   }
+               });
+           }else{
+              resolve();
+           }
       });
-    },getUserMemberPreferences: function(){
+    },
+    getUserMemberPreferences: function(){
         var that = this;
 
         //var userId = sessionStorage.userId;
         var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
-        return new Promise(function(resolve, reject) {
-           that.user_members_preferences.getFamilyPreferences( userId, {
-               async: true,
-               crossDomain: true,
-               method: "GET",
-               headers:{
-                   "authorization": "Bearer "+ sessionStorage.authtoken
-               },
-               success:function(data) {
 
-                   console.log(" +++++++++++++++ getUserMemberPreferences ++++++++++++++++++ ");
-                   console.log(data);
-                   resolve();
-               },
-               error:function(response) {
-                   //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
-                   //console.log(response);
-                   reject();
-               }
-           });
+        return new Promise(function(resolve, reject) {
+            if(userId){
+               that.user_members_preferences.getFamilyPreferences( userId, {
+                   async: true,
+                   crossDomain: true,
+                   method: "GET",
+                   headers:{
+                       "authorization": "Bearer "+ sessionStorage.authtoken
+                   },
+                   success:function(data) {
+
+                       console.log(" +++++++++++++++ getUserMemberPreferences ++++++++++++++++++ ");
+                       console.log(data);
+                       resolve();
+                   },
+                   error:function(response) {
+                       //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                       //console.log(response);
+                       reject();
+                   }
+               });
+           }else{
+            resolve();
+           }
       });
+
     },
     fetchUserPreferencesAndRender: function(){
         var that = this;
@@ -137,7 +152,7 @@ define([
     },
     events: {
         "click .userques": "getSelectedQuestion",
-        "click #save_homeId":"saveHomePreferences",
+        "click #save_homeId":"saveHomePreferences"
     },
     saveHomePreferences:function(e){
         var that = this;
