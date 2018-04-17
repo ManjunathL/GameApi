@@ -16,7 +16,7 @@
     text-align: center;
 	}
 	.img-circle {
-    border-radius: 25px;
+    border-radius: 15px;
 	}
 	.slidecontainer {
     width: 100%;
@@ -67,7 +67,6 @@ float: left;
 padding-top: 0;
 padding-left: 0;
 margin: 20px;
-border: 1px solid black;
 box-shadow: 1px 1px 12px #000;
 }
 .btn-circle.btn-xl {
@@ -162,9 +161,9 @@ margin-top: 25px;
                                 <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
 
                                 <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                     <figure>
-                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="200px" height="200px">
+                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="300px" height="250px">
                                         <figcaption><%= userOptsdtl.name %></figcaption>
                                     </figure>
                                 </div>
