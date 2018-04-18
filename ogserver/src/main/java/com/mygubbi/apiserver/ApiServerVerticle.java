@@ -196,6 +196,7 @@ public class ApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/api/directusBlog", new DirectusBlogHandler(VertxInstance.get()));
         router.mountSubRouter("/api/landingPage", new LandingPageHandler(VertxInstance.get()));
         router.mountSubRouter("/api/recentProject", new RecentProjectPageHandler(VertxInstance.get()));
+        router.mountSubRouter("/api/images", new ImageRetrieverHandler(VertxInstance.get()));
 
         //router.mountSubRouter("/api/consult", new ConsultHandler(vertx)); //todo: this is just for testing as of now, remove this handler once the real Kapture URL is put in kapture.js
     }
