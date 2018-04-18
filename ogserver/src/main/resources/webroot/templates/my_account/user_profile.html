@@ -4,35 +4,35 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="inputname">Name</label>
-                <input type="text" class="form-control" id="inputname" placeholder="Name">
+                <input type="text" class="form-control" id="inputname" placeholder="Name" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputsurname">Sur Name</label>
-                <input type="text" class="form-control" id="inputsurname" placeholder="Sur Name">
+                <input type="text" class="form-control" id="inputsurname" placeholder="Sur Name" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputmobilenumber">Mobile Number</label>
-                <input type="text" class="form-control" id="inputmobilenumber" placeholder="Mobile Number">
+                <input type="number" class="form-control" id="inputmobilenumber" placeholder="Mobile Number" maxlength="10" pattern="[1-9]{1}[0-9]{9}" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="inputemail">Additional Email</label>
-                <input type="text" class="form-control" id="inputemail" placeholder="Additional Email">
+                <input type="email" class="form-control" id="inputemail" placeholder="Additional Email" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputdob">Date Of Birth</label>
-                <input type="date" class="form-control" id="inputdob" placeholder="Date Of Birth">
+                <input type="date" class="form-control" id="inputdob" placeholder="Date Of Birth" required>
             </div>
             <div class="form-group col-md-4">
                 <label class="form-check-label" style="margin-right: 9px;">Gender  </label>
 
-                <input class="form-check-input" type="radio" id="inlineradio1" value="option1">
+                <input class="form-check-input" type="radio" id="inlineradio1" value="option1" name="gender" required>
                 <label class="form-check-label" for="inlineradio1">
                     <i style=" font-size: 46px;margin-right: 13px; " class="fa fa-male" aria-hidden="true"></i>
                 </label>
-                <input class="form-check-input" type="radio" id="inlineradio2" value="option1">
+                <input class="form-check-input" type="radio" id="inlineradio2" value="option1" name="gender">
                 <label class="form-check-label" for="inlineradio1">
                     <i style=" font-size: 46px;margin-right: 8px; " class="fa fa-female" aria-hidden="true"></i>
                 </label>
@@ -43,38 +43,42 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="inputcity">City</label>
-                <input type="text" class="form-control" id="inputcity" placeholder="City">
+                <input type="text" class="form-control" id="inputcity" placeholder="City" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputbuilder">Builder</label>
-                <select id="inputbuilder" class="form-control">
+                <input type="text" class="form-control" id="inputbuilder" placeholder="Builder" required>
+                <!--<select id="inputbuilder" class="form-control">
                     <option selected>Choose...</option>
                     <option>...</option>
-                </select>
+                </select>-->
             </div>
             <div class="form-group col-md-4">
                 <label for="inputproject">Project</label>
-                <select id="inputproject" class="form-control">
+                <input type="text" class="form-control" id="inputproject" placeholder="Project" required>
+                <!--<select id="inputproject" class="form-control">
                     <option selected>Choose...</option>
                     <option>...</option>
-                </select>
+                </select>-->
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputprojecttower">Project Tower</label>
-                <select id="inputprojecttower" class="form-control">
+                <!--<select id="inputprojecttower" class="form-control">
                     <option selected>Choose...</option>
                     <option>...</option>
-                </select>
+                </select>-->
+                <input type="text" class="form-control" id="inputprojecttower" placeholder="Project Tower" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputplan">Plan</label>
-                <select id="inputplan" class="form-control">
+                <!--<select id="inputplan" class="form-control">
                     <option selected>Choose...</option>
                     <option>...</option>
-                </select>
+                </select>-->
+                <input type="text" class="form-control" id="inputplan" placeholder="Plan" required>
             </div>
         </div>
 
@@ -83,24 +87,25 @@
 
         <div class="form-group address-style">
             <label for="inputProjectAddress">Project Address</label>
-            <input type="text" class="form-control" id="inputProjectAddress" placeholder="1234 Main St">
+            <input type="text" class="form-control" id="inputProjectAddress" placeholder="1234 Main St" required>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputProjectCity">City</label>
-                <input type="text" class="form-control" id="inputProjectCity">
+                <input type="text" class="form-control" id="inputProjectCity" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputProjectState">State</label>
-                <select id="inputProjectState" class="form-control">
+                <input type="text" class="form-control" id="inputProjectState" placeholder="State" required>
+                <!--<select id="inputProjectState" class="form-control">
                     <option selected>Choose...</option>
                     <option>...</option>
-                </select>
+                </select>-->
             </div>
             <div class="form-group col-md-2">
                 <label for="inputpincode">Pin Code</label>
-                <input type="text" class="form-control" id="inputpincode">
+                <input type="number" class="form-control" id="inputpincode" maxlength="6" required>
             </div>
         </div>
 
@@ -108,26 +113,27 @@
 
         <div class="form-group address-style">
             <label for="inputCommunicationAddress">Communication Address</label>
-            <input type="text" class="form-control" id="inputCommunicationAddress" placeholder="1234 Main St">
+            <input type="text" class="form-control" id="inputCommunicationAddress" placeholder="1234 Main St" required>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputCommunicationCity">City</label>
-                <input type="text" class="form-control" id="inputCommunicationCity">
+                <input type="text" class="form-control" id="inputCommunicationCity" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputCommunicationState">State</label>
-                <select id="inputCommunicationState" class="form-control">
+                <input type="text" class="form-control" id="inputCommunicationState" required>
+                <!--<select id="inputCommunicationState" class="form-control">
                     <option selected>Choose...</option>
                     <option>...</option>
-                </select>
+                </select>-->
             </div>
             <div class="form-group col-md-2">
                 <label for="inputCommunicationpincode">Pin Code</label>
-                <input type="text" class="form-control" id="inputCommunicationpincode">
+                <input type="number" class="form-control" id="inputCommunicationpincode" maxlength="6" required>
             </div>
         </div>
-        <button style="margin-left: 475px;background-color: #ea5c36;" type="submit" class="btn btn-primary btn-save">Save</button>
+        <button style="margin-left: 475px;background-color: #ea5c36;" type="submit" class="btn btn-primary btn-save" id="save_details">Save</button>
     </form>
 </div>
