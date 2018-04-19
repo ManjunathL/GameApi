@@ -7,8 +7,9 @@ define([
   'collections/user_preferences',
   'collections/family_preferences',
   'collections/saveuser_preferences',
-  'models/filter_preference'
-], function($, _, Backbone, Bootstrap, UserProfileTemplate,UserPreferences,FamilyPreferences,SaveUserPreferences,FilterPreference){
+  'models/filter_preference',
+  'models/filter'
+], function($, _, Backbone, Bootstrap, UserProfileTemplate,UserPreferences,FamilyPreferences,SaveUserPreferences,FilterPreference,Filter){
   var UserProfilePage = Backbone.View.extend({
     el: '.page',
     user_home_preferences: null,
@@ -16,14 +17,16 @@ define([
     user_members_preferences: null,
     saveuser_preferences:null,
     filter_preference: null,
+    filter: null,
     initialize: function() {
         this.filter_preference = new FilterPreference();
         this.user_home_preferences = new UserPreferences();
         this.user_family_preferences = new UserPreferences();
         this.user_members_preferences = new FamilyPreferences();
         this.saveuser_preferences = new SaveUserPreferences();
-
+        this.filter = new Filter();
         this.filter_preference.on('change', this.render, this);
+        this.filter.on('change', 'getSelectedQuestionFamily', this);
         this.listenTo(Backbone);
         _.bindAll(this, 'render');
     },
@@ -31,6 +34,8 @@ define([
        var that = this;
 
        window.filter_preference = that.filter_preference;
+       window.filter = that.filter;
+
 
 
 
@@ -395,7 +400,7 @@ define([
                      var formData = that.filter_preference.get("selectedFamilyPreference");
 
                     var category = 1;
-                    console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+                    console.log("++++++++++++++++++++++++++family  formData ++++++++++++++++++++++++++++++");
                     console.log(JSON.stringify(formData));
 
 
@@ -437,8 +442,11 @@ define([
         },
     getSelectedQuestionFamily: function(evt){
             evt.preventDefault();
-
+            var filterSelectedImage = {};
+            var weAllImage={};
             var that = this;
+
+
 
             var currentTarget = $(evt.currentTarget);
             var quesId = currentTarget.data('element');
@@ -455,8 +463,36 @@ define([
             var weWouldLikeOurHomeToBe = {};
             var weLoveTo={};
             var weUsuallyDo={};
+            var arrr ={};
 
+           if (typeof(that.filter.get('selectedArr')) != 'undefined') {
+                filterSelectedImage = that.filter.get('selectedArr');
+                 that.filter_preference.set({
+                    'selectedWeWouldLikeOurHomeToBe':filterSelectedImage
+                    }, {
+                        silent: true
+                    });
+           }
 
+          if (typeof(that.filter.get('selectedweusallyDo')) != 'undefined') {
+              weUsuallyDo = that.filter.get('selectedweusallyDo');
+               that.filter_preference.set({
+                    'selectedWeUsuallyDo':weUsuallyDo
+                }, {
+                    silent: true
+                });
+
+          }
+
+         if (typeof(that.filter.get('selectedweLoveTO')) != 'undefined') {
+             weLoveTo = that.filter.get('selectedweLoveTO');
+             that.filter_preference.set({
+                   'selectedWeLoveTo':weLoveTo
+               }, {
+                   silent: true
+               });
+
+         }
 
             if(typeof(quesName) !== 'undefined' && quesName == "Adults"){
 
@@ -525,23 +561,9 @@ define([
 
             }
 
-            if(typeof(quesName) !== 'undefined' && quesName == "We would like our home to be"){
-                weWouldLikeOurHomeToBe['optionId'] = quesOptionid;
-                weWouldLikeOurHomeToBe['optionType'] = 2;
-                weWouldLikeOurHomeToBe['quesAnsId'] = quesOptionid;
-                weWouldLikeOurHomeToBe['quesId'] = quesId;
-                weWouldLikeOurHomeToBe['selectionStatus'] = 1;
-                weWouldLikeOurHomeToBe['userOptionDesc'] = "";
 
-                that.filter_preference.set({
-                    'selectedWeWouldLikeOurHomeToBe':weWouldLikeOurHomeToBe
-                }, {
-                    silent: true
-                });
 
-            }
-
-             if(typeof(quesName) !== 'undefined' && quesName == "We love to"){
+             /*if(typeof(quesName) !== 'undefined' && quesName == "We love to"){
                 weLoveTo['optionId'] = quesOptionid;
                 weLoveTo['optionType'] = 2;
                 weLoveTo['quesAnsId'] = quesOptionid;
@@ -570,7 +592,7 @@ define([
                       silent: true
                   });
 
-             }
+             }*/
 
             console.log(" +++++++++++++++ quesId ++++++++++++++++++ ");
             console.log(quesName);
@@ -627,17 +649,17 @@ define([
                     }
                     if(j == 4){
                         if(typeof(that.filter_preference.get("selectedWeWouldLikeOurHomeToBe")) !== 'undefined'){
-                            userQuesdtl.userSelectedOption[0] = that.filter_preference.get("selectedWeWouldLikeOurHomeToBe");
+                            userQuesdtl.userSelectedOption = that.filter_preference.get("selectedWeWouldLikeOurHomeToBe");
                         }
                     }
                      if(j == 5){
                         if(typeof(that.filter_preference.get("selectedWeLoveTo")) !== 'undefined'){
-                            userQuesdtl.userSelectedOption[0] = that.filter_preference.get("selectedWeLoveTo");
+                            userQuesdtl.userSelectedOption = that.filter_preference.get("selectedWeLoveTo");
                         }
                     }
                     if(j == 6){
                          if(typeof(that.filter_preference.get("selectedWeUsuallyDo")) !== 'undefined'){
-                             userQuesdtl.userSelectedOption[0] = that.filter_preference.get("selectedWeUsuallyDo");
+                             userQuesdtl.userSelectedOption = that.filter_preference.get("selectedWeUsuallyDo");
                          }
                      }
 

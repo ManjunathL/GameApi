@@ -16,7 +16,7 @@
     text-align: center;
 	}
 	.img-circle {
-    border-radius: 25px;
+    border-radius: 15px;
 	}
 	.slidecontainer {
     width: 100%;
@@ -67,7 +67,6 @@ float: left;
 padding-top: 0;
 padding-left: 0;
 margin: 20px;
-border: 1px solid black;
 box-shadow: 1px 1px 12px #000;
 }
 .btn-circle.btn-xl {
@@ -108,6 +107,10 @@ margin-top: 25px;
 .img-circle:focus{
     background-color:#634e42;
     cursor:pointer;
+}
+.btn-circle:hover, .btn-circle:active, .btn-circle:focus {
+    background-color: #634e42;
+    cursor: pointer;
 }
 </style>
 
@@ -166,14 +169,18 @@ margin-top: 25px;
                             <div class="col-md-12">
                                 <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
                                 <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
-
                                 <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                     <figure>
-                                        <img id="Limg<%= j %>" src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" class="wrap img-circle multiselect"  width="200px" height="200px">
+                                        <img  id="<%= userOptsdtl.quesOptionid %>" src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" class="wrap img-circle multiselectFamily clickAction userquesfamily"  width="300px" height="250px">
+                                       <i id="idIcon<%= userOptsdtl.quesOptionid %>" class="fa fa-check-circle" aria-hidden="true" style="font-size: 28px; color: #ec5136;position:  absolute; right: 11px;top: 47px;display:none;"></i>
                                        <figcaption><%= userOptsdtl.name %></figcaption>
                                     </figure>
                                 </div>
+
+
+
+
                                 <% }else{ %>
                                 <div class="form-group col-xs-2">
                                     <figure>
@@ -195,8 +202,8 @@ margin-top: 25px;
 
                                 <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
                                 <div class="form-group col-md-2">
-                                    <figure> <button class="btn btn-labeltxt clickAction userquesfamily" style="padding: 0px 0px 0px 0px;" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>">
-                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="80px" height="80px"></button>
+                                    <figure> <span  id="IconImage<%= userOptsdtl.quesOptionid %>"   class="btn btn-labeltxt clickAction userquesfamily multiselectFam" style="padding: 0px 0px 0px 0px;" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>">
+                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle "  width="80px" height="80px"></span>
                                         <figcaption><%= userOptsdtl.name %></figcaption>
                                     </figure>
                                 </div>
@@ -204,7 +211,7 @@ margin-top: 25px;
                                 <div class="form-group col-xs-2">
                                     <figure>
                                         <div class="form-group">
-                                            <button class="btn btn-light btn-circle btn-labeltxt userquesfamily" id="multiselect" <% if(typeof(userQuesdtl.userSelectedOption[0].optionId) !== 'undefined' && userQuesdtl.userSelectedOption[0].optionId == userOptsdtl.quesOptionid){ %> style="background-color:#634e42;color:#fff;" <% } %>data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"><%= userOptsdtl.name %></button>
+                                            <div class="btn btn-light btn-circle btn-labeltxt userquesfamily" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"><%= userOptsdtl.name %></div>
                                         </div>
                                     </figure>
                                 </div>
@@ -221,121 +228,115 @@ margin-top: 25px;
         </div>
             <% } %>
         </div>
-
         <div id="members" class="tab-pane">
-            <div id="elements">
-                 <div class="member-panel" >
-                    <div id="copymember">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputname">New Member</label>
-                        <input type="Name" class="form-control" id="inputname" placeholder="Name">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputage">Age Group</label>
-                        <select id="inputage" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
+            <div class="member-panel">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputname">New Member</label>
+                    <input type="Name" class="form-control" id="inputname" placeholder="Name">
                 </div>
-
-                <div class="form-row">
-                    <div class="form-check form-check-inline form-group col-md-12 gender-style">
-                        <label class="form-check-label">Gender</label>
-                        <input class="form-check-input" type="radio" id="male" value="option1">
-                        <label class="form-check-label" for="male">Male</label>
-                        <input class="form-check-input" type="radio" id="female" value="option1">
-                        <label class="form-check-label" for="female">Female</label>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label class="form-check-label">Work</label>
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label for="inputcategory">Category</label>
-                        <select id="inputcategory" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label for="inputoccupation">Occupation</label>
-                        <select id="inputoccupation" class="form-control">
+                <div class="form-group col-md-6">
+                    <label for="inputproject">Age Group</label>
+                    <select id="inputproject" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
-                        </select>
-                    </div>
+                    </select>
                 </div>
+            </div>
 
-                <div class="form-row">
+            <div class="form-row">
+                <div class="form-check form-check-inline form-group col-md-12 gender-style">
+                    <label class="form-check-label">Gender</label>
+                    <input class="form-check-input" type="radio" id="inlineradio1" value="option1">
+                    <label class="form-check-label" for="inlineradio1">Male</label>
+                    <input class="form-check-input" type="radio" id="inlineradio2" value="option1">
+                    <label class="form-check-label" for="inlineradio1">Female</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label">Work</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject1" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="inputproject">Occupation</label>
+                    <select id="inputproject2" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group col-md-2">
                     <label class="form-check-label">Hobby 1</label>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="input2ndcategory">Category</label>
-                    <select id="input2ndcategory" class="form-control">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject3" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="input1sthobbies">Hobbies</label>
-                    <select id="input1sthobbies" class="form-control">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject4" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
             </div>
 
-                <div class="form-row">
+            <div class="form-row">
                 <div class="form-group col-md-2">
                     <label class="form-check-label">Hobby 2</label>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="input3rdcategory">Category</label>
-                    <select id="input3rdcategory" class="form-control">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject5" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="input2ndhobbies">Hobbies</label>
-                    <select id="input2ndhobbies" class="form-control">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject6" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
             </div>
 
-                <div class="form-row">
+            <div class="form-row">
                 <div class="form-group col-md-2">
                     <label class="form-check-label">Hobby 3</label>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="input4thcategory">Category</label>
-                    <select id="input4thcategory" class="form-control">
+                    <label for="inputproject">Category</label>
+                    <select id="inputproject7" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="input3rdhobbies">Hobbies</label>
-                    <select id="input3rdhobbies" class="form-control">
+                    <label for="inputproject">Hobbies</label>
+                    <select id="inputproject8" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
-                </div>
-            </div>
-                 </div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <button type="button" id="btn1" class="btn btn-default btn-sm">
+                    <button type="button" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon glyphicon-floppy-disk"></span> Save
                     </button>
                 </div>
@@ -343,86 +344,141 @@ margin-top: 25px;
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <h3>Add Family Member  <span  id="addfamily" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
+                    <h3>Add Family Member  <span class="glyphicon glyphicon-plus"></span></h3>
                 </div>
             </div>
 
-            <!--<div class="form-row">
+            <div class="form-row">
                 <div class="form-group col-md-12">
                     <button type="button" class="btn btn-primary btn-block">All Done</button>
                 </div>
-            </div>-->
-
+            </div>
             </div>
         </div>
 </div>
-    <script>
- var current_id = 0;
-    $('#addfamily').click(function(){
-        console.log("add family button clicked");
-        nextElement($('#copymember'));
-    })
 
-    function nextElement(element){
-       console.log("inside next element" +element);
-        var newElement = element.clone();
-        var id = current_id+1;
-        current_id = id;
-        newElement.attr("id","member-panel"+current_id);
-		var field = $('input', newElement).attr("id");
-        $('input.inputname', newElement).attr("id","NAME"+current_id );
-        $('input.inputage', newElement).attr("id","AGE"+current_id );
-        $('input.male', newElement).attr("id","MALE"+current_id );
-        $('input.female', newElement).attr("id","FEMALE"+current_id );
-        $('input.inputcategory', newElement).attr("id","INPUTCATEGORY"+current_id );
-        $('input.inputoccupation', newElement).attr("id","INPUTOCCUPATION"+current_id );
-        $('input.input2ndcategory', newElement).attr("id","INPUT2ndCATEGORY"+current_id );
-        $('input.input1sthobbies', newElement).attr("id","INPUT1stHOBBY"+current_id );
-        $('input.input3rdcategory', newElement).attr("id","INPUT3rdCATEGORY"+current_id );
-        $('input.input2ndhobbies', newElement).attr("id","INPUT2ndHOBBY"+current_id );
-        $('input.input4thcategory', newElement).attr("id","INPUT4thCATEGORY"+current_id );
-        $('input.input3rdhobbies', newElement).attr("id","INPUT3rdHOBBY"+current_id );
-        newElement.appendTo($("#elements"));
-    }
-
-</script>
-    <script>
-        var sliderforAdults = document.getElementById("myRangeForAdults");
-        var outputforAdults = document.getElementById("valueforadults");
-        outputforAdults.innerHTML = sliderforAdults.value;
-
-        sliderforAdults.oninput = function() {
-          outputforAdults.innerHTML = this.value;
-          $("#valueforadults").parent().css("left","18%");
-        }
-    </script>
-    <script>
-        var sliderforTeenagers = document.getElementById("myRangeForTeenagers");
-        var outputforTeenagers = document.getElementById("valueforteenagers");
-        outputforTeenagers.innerHTML = sliderforTeenagers.value;
-
-        sliderforTeenagers.oninput = function() {
-          outputforTeenagers.innerHTML = this.value;
-        }
-    </script>
-    <script>
-        var sliderforKids = document.getElementById("myRangeforKids");
-        var outputforKids = document.getElementById("valueforkids");
-        outputforKids.innerHTML = sliderforKids.value;
-
-        sliderforKids.oninput = function() {
-          outputforKids.innerHTML = this.value;
-        }
-    </script>
-    <script>
-        var sliderforSenior = document.getElementById("myRangeforSeniorCitizen");
-        var outputforSenior = document.getElementById("valueforseniorcitizen");
-        outputforSenior.innerHTML = sliderforSenior.value;
-
-        sliderforSenior.oninput = function() {
-          outputforSenior.innerHTML = this.value;
-        }
-    </script>
 </div>
 
 </section>
+<script type="text/javascript">
+var arr = new Array();
+var ourhomearr = new Array();
+
+var i=0;
+$('.multiselectFamily').click(function (e) {
+
+    var currentTarget = $(e.currentTarget);
+    var familyoptId = currentTarget.attr('id');
+
+    var Optionid = currentTarget.data('element');
+    var quesOptionid = currentTarget.data('element1');
+    var quesName = currentTarget.data('element2');
+
+        if($.inArray(familyoptId, arr) != '-1') {
+            $("#"+familyoptId).css("border","0px solid black ");
+            $("#idIcon"+familyoptId).css("display", "none");
+            var weWouldLikeOurHomeToBe = {};
+            arr.pop(familyoptId);
+            weWouldLikeOurHomeToBe['optionId'] = Optionid;
+            weWouldLikeOurHomeToBe['quesAnsId'] = quesOptionid;
+            weWouldLikeOurHomeToBe['quesName'] = quesName;
+            weWouldLikeOurHomeToBe['optionType'] = 2;
+            weWouldLikeOurHomeToBe['selectionStatus'] = 1;
+            weWouldLikeOurHomeToBe['userOptionDesc'] = "";
+            ourhomearr.pop(weWouldLikeOurHomeToBe);
+        } else {
+            $("#"+familyoptId).css("border","2px solid black");
+            $("#idIcon"+familyoptId).css("display", "block");
+            var weWouldLikeOurHomeToBe = {};
+            arr.push(familyoptId);
+            weWouldLikeOurHomeToBe['optionId'] = Optionid;
+            weWouldLikeOurHomeToBe['optionType'] = 2;
+            weWouldLikeOurHomeToBe['quesAnsId'] = quesOptionid;
+            weWouldLikeOurHomeToBe['selectionStatus'] = 1;
+            weWouldLikeOurHomeToBe['userOptionDesc'] = "";
+            ourhomearr.push(weWouldLikeOurHomeToBe);
+        }
+
+        console.log("+++++++++++++Tushar+++++++++++++++++");
+        console.log(ourhomearr);
+        console.log("+++++++++++++++++++++++++++++++++++++++++");
+
+         filter.set({'selectedArr': ourhomearr});
+         filter.trigger('change');
+});
+
+
+var ourweLoveTO = new Array();
+var ourweusallyDo = new Array();
+$('.multiselectFam').click(function (e) {
+    var currentTarget = $(e.currentTarget);
+    var familyoptId = currentTarget.attr('id');
+
+    var Optionid = currentTarget.data('element');
+    var quesOptionid = currentTarget.data('element1');
+    var quesName = currentTarget.data('element2');
+
+        if($.inArray(familyoptId, arr) != '-1') {
+            $("#"+familyoptId).css("background-color","");
+
+            var weLoveTO = {};
+            var weusallyDo = {};
+            arr.pop(familyoptId);
+            if(quesName== "We love to"){
+                weLoveTO['optionId'] = Optionid;
+                weLoveTO['quesAnsId'] = quesOptionid;
+                weLoveTO['quesName'] = quesName;
+                weLoveTO['optionType'] = 2;
+                weLoveTO['selectionStatus'] = 1;
+                weLoveTO['userOptionDesc'] = "";
+                ourweLoveTO.pop(weLoveTO);
+             }
+            if(quesName=="We usually do"){
+
+                weusallyDo['optionId'] = Optionid;
+                weusallyDo['quesAnsId'] = quesOptionid;
+                weusallyDo['quesName'] = quesName;
+                weusallyDo['optionType'] = 2;
+                weusallyDo['selectionStatus'] = 1;
+                weusallyDo['userOptionDesc'] = "";
+                ourweusallyDo.pop(weusallyDo);
+            }
+        } else {
+            $("#"+familyoptId).css("background-color","rgba(99,78,66,1)");
+
+            var weLoveTO = {};
+            var weusallyDo = {};
+            arr.push(familyoptId);
+               if(quesName== "We love to"){
+                weLoveTO['optionId'] = Optionid;
+                weLoveTO['quesAnsId'] = quesOptionid;
+                weLoveTO['quesName'] = quesName;
+                weLoveTO['optionType'] = 2;
+                weLoveTO['selectionStatus'] = 1;
+                weLoveTO['userOptionDesc'] = "";
+                ourweLoveTO.push(weLoveTO);
+             }
+            if(quesName=="We usually do"){
+                weusallyDo['optionId'] = Optionid;
+                weusallyDo['quesAnsId'] = quesOptionid;
+                weusallyDo['quesName'] = quesName;
+                weusallyDo['optionType'] = 2;
+                weusallyDo['selectionStatus'] = 1;
+                weusallyDo['userOptionDesc'] = "";
+                ourweusallyDo.push(weusallyDo);
+            }
+        }
+
+        console.log("+++++++++++++Tushar+++++++++++++++++");
+        console.log(ourweLoveTO);
+        console.log("+++++++++++++++++++++++++++++++++++++++++");
+                console.log(ourweusallyDo);
+
+
+         filter.set({'selectedweLoveTO': ourweLoveTO});
+         filter.set({'selectedweusallyDo': ourweusallyDo});
+         filter.trigger('change');
+});
+
+
+</script>
