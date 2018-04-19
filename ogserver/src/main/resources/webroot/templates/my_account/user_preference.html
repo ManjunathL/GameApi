@@ -103,6 +103,12 @@ margin-top: 25px;
     position: absolute;
     top: -32px;
 }
+.img-circle:hover,
+.img-circle:active,
+.img-circle:focus{
+    background-color:#634e42;
+    cursor:pointer;
+}
 </style>
 
 <section class="main-conceptboard-sec bg-light-gray pb40">
@@ -164,15 +170,15 @@ margin-top: 25px;
                                 <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
                                 <div class="form-group col-md-3">
                                     <figure>
-                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="200px" height="200px">
-                                        <figcaption><%= userOptsdtl.name %></figcaption>
+                                        <img id="Limg<%= j %>" src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" class="wrap img-circle multiselect"  width="200px" height="200px">
+                                       <figcaption><%= userOptsdtl.name %></figcaption>
                                     </figure>
                                 </div>
                                 <% }else{ %>
                                 <div class="form-group col-xs-2">
                                     <figure>
                                         <div class="form-group">
-                                            <button class="btn btn-light btn-circle btn-labeltxt"><%= userOptsdtl.name %></button>
+                                          <button class="btn btn-light btn-circle btn-labeltxt userquesfamily " data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"><%= userOptsdtl.name %></button>
                                         </div>
                                     </figure>
                                 </div>
@@ -189,8 +195,8 @@ margin-top: 25px;
 
                                 <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
                                 <div class="form-group col-md-2">
-                                    <figure>
-                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="80px" height="80px">
+                                    <figure> <button class="btn btn-labeltxt clickAction userquesfamily" style="padding: 0px 0px 0px 0px;" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>">
+                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle"  width="80px" height="80px"></button>
                                         <figcaption><%= userOptsdtl.name %></figcaption>
                                     </figure>
                                 </div>
@@ -198,7 +204,7 @@ margin-top: 25px;
                                 <div class="form-group col-xs-2">
                                     <figure>
                                         <div class="form-group">
-                                            <button class="btn btn-light btn-circle btn-labeltxt"><%= userOptsdtl.name %></button>
+                                            <button class="btn btn-light btn-circle btn-labeltxt userquesfamily" id="multiselect" <% if(typeof(userQuesdtl.userSelectedOption[0].optionId) !== 'undefined' && userQuesdtl.userSelectedOption[0].optionId == userOptsdtl.quesOptionid){ %> style="background-color:#634e42;color:#fff;" <% } %>data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"><%= userOptsdtl.name %></button>
                                         </div>
                                     </figure>
                                 </div>
@@ -206,9 +212,13 @@ margin-top: 25px;
 
                         <% }); %>
                     </div>
+
     <% if(userQuesdtl.questionnaire.questionDetails.name == "We love to" || userQuesdtl.questionnaire.questionDetails.name == "We usually do"){ %> <div class="clearfix"></div> <% } %>
                     <% } %>
                 <% }); %>
+        <div class="saveHome">
+            <input type="submit" id="save_familyId" class="btn addcboard-btn" value="Save">
+        </div>
             <% } %>
         </div>
 
