@@ -237,7 +237,8 @@ public class ProposalHeader extends JsonObject
     }
 
     public Date getExpectedDeliveryDate() {
-        return DateUtil.convertDate(this.getString(EXPECTED_DELIVERY_DATE));
+        return Date.valueOf((this.getString(EXPECTED_DELIVERY_DATE)));
+
     }
 
     public void setExpectedDeliveryDate(Date expectedDeliveryDate) {

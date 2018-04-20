@@ -96,7 +96,7 @@ public class AddonPriceHolder {
 
     private void calculatePricingForStdAddons(PriceMaster addonRate) {
         this.unitPrice = addonRate.getPrice();
-        this.unitSourceCost = addonRate.getSourcePrice();
+        this.unitSourceCost = addonRate.getSourcePrice()+addonRate.getInstallationSourcePrice();
         this.price = this.productAddon.getAmount();
         this.priceWoTax = this.price * this.addonFactor;
         this.sourceCost = this.productAddon.getQuantity() * this.unitSourceCost;

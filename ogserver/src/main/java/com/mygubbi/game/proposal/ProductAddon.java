@@ -37,6 +37,7 @@ public class ProductAddon extends JsonObject
     private static String RATE = "rate";
     private static String REMARKS = "remarks";
     private static String UPDATED_BY = "updatedBy";
+    private static String INSTALLATION_PRICE = "installationPrice";
 
 
     public ProductAddon()
@@ -164,7 +165,7 @@ public class ProductAddon extends JsonObject
 
     public String getExtendedTitle() { return this.getProductTypeCode() + "-" + this.getProductSubtypeCode() + "-" +this.getProduct();}
     public String getCustomTitle() { return this.getProduct();}
-
+    public double getInstallationPrice(){return this.getDouble(INSTALLATION_PRICE);}
     public ProductAddon setUom(String uom)
     {
         this.put(UOM, uom);
@@ -181,6 +182,13 @@ public class ProductAddon extends JsonObject
         this.put(AMOUNT, amount);
         return this;
     }
+
+    public ProductAddon setInstallationPrice(double installationPrice)
+    {
+        this.put(INSTALLATION_PRICE, installationPrice);
+        return this;
+    }
+
 
     public ProductAddon setRoomcode(String room)
     {

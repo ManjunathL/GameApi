@@ -776,18 +776,36 @@ public class QuotationPdfCreatorForPackageRoomWise
             cel6.setBorder(Rectangle.NO_BORDER);
             tab1.addCell(cel6);
 
+            if(proposalHeader.getProjectCity().equals("Chennai"))
+            {
+                tab1.addCell(new Paragraph
+                        ("1. \tStandard ply used will be of BWP (Boiling water proof) specification and will be of Greenply, Centuryply, Archidply or equivalent.\n" +
+                                "2. \tMdf: \tInterior Grade Mdf\n" +
+                                "3. \tEdge Banding: \tRehau\n" +
+                                "4. \tLaminates: \tGlossy /Matt/Textured/Metalic Laminates by Merino/Greenlam\n" +
+                                "5. \tHardwares: \tHettich/Ebco/Rehau\n" +
+                                "6. \tAccessories: \tHe - Hettich/Ha - Hafele/Ev - Evershine/Eb - Ebco\n" +
+                                "7. \tGlass/Mirror: \tAsahi/ Saint Gobain\n"+
+                                "8. \tLacquered Glass: \tSaint Gobain\n" +
+                                "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
+                                "10.\tSink: \tCarisyl/Franke/Nirali/Futura\n",fsize));
 
-            tab1.addCell(new Paragraph
-                    ("1. \tPly: \tIS 303 grade\n" +
-                            "2. \tMdf: \tInterior Grade Mdf\n" +
-                            "3. \tEdge Banding: \tRehau\n" +
-                            "4. \tLaminates: \tGlossy /Matt/Textured/Metalic Laminates by Merino/Greenlam\n" +
-                            "5. \tHardwares: \tHettich/Ebco/Rehau\n" +
-                            "6. \tAccessories: \tHe - Hettich/Ha - Hafele/Ev - Evershine/Eb - Ebco\n" +
-                            "7. \tGlass/Mirror: \tAsahi/ Saint Gobain\n"+
-                            "8. \tLacquered Glass: \tSaint Gobain\n" +
-                            "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
-                            "10.\tSink: \tCarisyl/Franke/Nirali/Futura\n",fsize));
+            }
+            else
+            {
+                tab1.addCell(new Paragraph
+                        ("1. \tPly: \tIS 303 grade\n" +
+                                "2. \tMdf: \tInterior Grade Mdf\n" +
+                                "3. \tEdge Banding: \tRehau\n" +
+                                "4. \tLaminates: \tGlossy /Matt/Textured/Metalic Laminates by Merino/Greenlam\n" +
+                                "5. \tHardwares: \tHettich/Ebco/Rehau\n" +
+                                "6. \tAccessories: \tHe - Hettich/Ha - Hafele/Ev - Evershine/Eb - Ebco\n" +
+                                "7. \tGlass/Mirror: \tAsahi/ Saint Gobain\n"+
+                                "8. \tLacquered Glass: \tSaint Gobain\n" +
+                                "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
+                                "10.\tSink: \tCarisyl/Franke/Nirali/Futura\n",fsize));
+
+            }
 
             PdfPCell cel7=new PdfPCell();
             p = new Paragraph(new Paragraph("Other Finishes offered are Acrylic, Foil, PU paint, UV laminated panels,Hardwood of mygubbi make.\t\t\t\t\n",fsize));
@@ -1395,7 +1413,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             accessoryCost+=ProductAddonCustomAddon.getAmount();
                             totalaccessoryCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getInstallationPrice(),ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }else if(customAddonAppliancesList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1403,7 +1421,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             appliancesCost+=ProductAddonCustomAddon.getAmount();
                             totalappliancesCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getInstallationPrice(),ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }else if(customAddonCounterTopList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1411,7 +1429,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             countertopCost+=ProductAddonCustomAddon.getAmount();
                             totalcountertopCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(),ProductAddonCustomAddon.getInstallationPrice(), ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }else if(customAddonServicesList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1419,7 +1437,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             servicesCost+=ProductAddonCustomAddon.getAmount();
                             totalservicesCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(),ProductAddonCustomAddon.getInstallationPrice(), ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }else if(customAddonLooseFurnitureList.contains(ProductAddonCustomAddon.getCustomAddonCategory()))
                         {
@@ -1427,7 +1445,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                             totalPrice+=ProductAddonCustomAddon.getAmount();
                             looseFurnitureCost+=ProductAddonCustomAddon.getAmount();
                             totallooseFurnitureCost+=ProductAddonCustomAddon.getAmount();
-                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                            AddonsList addonsList=new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(),ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(),ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getInstallationPrice(),ProductAddonCustomAddon.getAmount());
                             customaddonsList.add(addonsList);
                         }
                     }
@@ -1571,7 +1589,7 @@ public class QuotationPdfCreatorForPackageRoomWise
             }
             document.add(itemsTable);
 
-            float[] columnWidthsForAccessories = {1, 2,7, 1, 1, 1, 1};
+            float[] columnWidthsForAccessories = {1, 2,7, 1, 1, 1, 1,1};
             PdfPTable AccessoryTable = new PdfPTable(columnWidthsForAccessories);
             AccessoryTable.setWidthPercentage(100);
 
@@ -1587,6 +1605,8 @@ public class QuotationPdfCreatorForPackageRoomWise
             itemsCell3ForAccessory.setBackgroundColor(BaseColor.ORANGE);
             PdfPCell itemsCell4ForAccessory = new PdfPCell(new Paragraph("PRICE", fsize1));
             itemsCell4ForAccessory.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell itemsCell8ForAccessory = new PdfPCell(new Paragraph("INSTALLATION PRICE", fsize1));
+            itemsCell8ForAccessory.setBackgroundColor(BaseColor.ORANGE);
             PdfPCell itemsCell5ForAccessory = new PdfPCell(new Paragraph("AMOUNT", fsize1));
             itemsCell5ForAccessory.setBackgroundColor(BaseColor.ORANGE);
 
@@ -1596,6 +1616,7 @@ public class QuotationPdfCreatorForPackageRoomWise
             AccessoryTable.addCell(itemsCell6ForAccessory);
             AccessoryTable.addCell(itemsCell3ForAccessory);
             AccessoryTable.addCell(itemsCell4ForAccessory);
+            AccessoryTable.addCell(itemsCell8ForAccessory);
             AccessoryTable.addCell(itemsCell5ForAccessory);
             boolean no_accessories = true;
 
@@ -1612,7 +1633,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                         totalRoomCost += productAddonAccessories.getAmount();
                         accessoryCost += productAddonAccessories.getAmount();
                         totalAddonCost +=productAddonAccessories.getAmount();
-                        AddonsList addonsList = new AddonsList(productAddonAccessories.getCategoryCode(), productAddonAccessories.getTitle(),productAddonAccessories.getExtendedTitle(), productAddonAccessories.getUom(), productAddonAccessories.getQuantity(), productAddonAccessories.getRate(), productAddonAccessories.getAmount());
+                        AddonsList addonsList = new AddonsList(productAddonAccessories.getCategoryCode(), productAddonAccessories.getTitle(),productAddonAccessories.getExtendedTitle(), productAddonAccessories.getUom(), productAddonAccessories.getQuantity(), productAddonAccessories.getRate(),productAddonAccessories.getInstallationPrice(), productAddonAccessories.getAmount());
                         customaddonsList.add(addonsList);
                     }
                 }
@@ -1624,7 +1645,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                         totalRoomCost += productAddonAppliances.getAmount();
                         appliancesCost += productAddonAppliances.getAmount();
                         totalAddonCost+=productAddonAppliances.getAmount();
-                        AddonsList addonsList = new AddonsList(productAddonAppliances.getCategoryCode(), productAddonAppliances.getTitle(),productAddonAppliances.getExtendedTitle(), productAddonAppliances.getUom(), productAddonAppliances.getQuantity(), productAddonAppliances.getRate(), productAddonAppliances.getAmount());
+                        AddonsList addonsList = new AddonsList(productAddonAppliances.getCategoryCode(), productAddonAppliances.getTitle(),productAddonAppliances.getExtendedTitle(), productAddonAppliances.getUom(), productAddonAppliances.getQuantity(), productAddonAppliances.getRate(),productAddonAppliances.getInstallationPrice(), productAddonAppliances.getAmount());
                         customaddonsList.add(addonsList);
                     }
                 }
@@ -1635,7 +1656,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                         totalRoomCost += productAddonCounterTop.getAmount();
                         countertopCost += productAddonCounterTop.getAmount();
                         totalAddonCost+=productAddonCounterTop.getAmount();
-                        AddonsList addonsList = new AddonsList(productAddonCounterTop.getCategoryCode(), productAddonCounterTop.getTitle(),productAddonCounterTop.getExtendedTitle(), productAddonCounterTop.getUom(), productAddonCounterTop.getQuantity(), productAddonCounterTop.getRate(), productAddonCounterTop.getAmount());
+                        AddonsList addonsList = new AddonsList(productAddonCounterTop.getCategoryCode(), productAddonCounterTop.getTitle(),productAddonCounterTop.getExtendedTitle(), productAddonCounterTop.getUom(), productAddonCounterTop.getQuantity(), productAddonCounterTop.getRate(),productAddonCounterTop.getInstallationPrice(), productAddonCounterTop.getAmount());
                         customaddonsList.add(addonsList);
                     }
                 }
@@ -1646,7 +1667,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                         totalRoomCost += productAddonLooseFurniture.getAmount();
                         totalAddonCost+=productAddonLooseFurniture.getAmount();
                         looseFurnitureCost += productAddonLooseFurniture.getAmount();
-                        AddonsList addonsList = new AddonsList(productAddonLooseFurniture.getCategoryCode(), productAddonLooseFurniture.getTitle(), productAddonLooseFurniture.getExtendedTitle(),productAddonLooseFurniture.getUom(), productAddonLooseFurniture.getQuantity(), productAddonLooseFurniture.getRate(), productAddonLooseFurniture.getAmount());
+                        AddonsList addonsList = new AddonsList(productAddonLooseFurniture.getCategoryCode(), productAddonLooseFurniture.getTitle(), productAddonLooseFurniture.getExtendedTitle(),productAddonLooseFurniture.getUom(), productAddonLooseFurniture.getQuantity(), productAddonLooseFurniture.getRate(), productAddonLooseFurniture.getInstallationPrice(),productAddonLooseFurniture.getAmount());
                         customaddonsList.add(addonsList);
                     }
                 }
@@ -1657,7 +1678,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                         totalRoomCost += productAddonServices.getAmount();
                         servicesCost += productAddonServices.getAmount();
                         totalAddonCost+=productAddonServices.getAmount();
-                        AddonsList addonsList = new AddonsList(productAddonServices.getCategoryCode(), productAddonServices.getTitle(),productAddonServices.getExtendedTitle(), productAddonServices.getUom(), productAddonServices.getQuantity(), productAddonServices.getRate(), productAddonServices.getAmount());
+                        AddonsList addonsList = new AddonsList(productAddonServices.getCategoryCode(), productAddonServices.getTitle(),productAddonServices.getExtendedTitle(), productAddonServices.getUom(), productAddonServices.getQuantity(), productAddonServices.getRate(), productAddonServices.getInstallationPrice(),productAddonServices.getAmount());
                         customaddonsList.add(addonsList);
                     }
                 }
@@ -1669,7 +1690,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                         totalRoomCost += ProductAddonCustomAddon.getAmount();
                         customAddonCost += ProductAddonCustomAddon.getAmount();
                         totalAddonCost+=ProductAddonCustomAddon.getAmount();
-                        AddonsList addonsList = new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(), ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(), ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getAmount());
+                        AddonsList addonsList = new AddonsList(ProductAddonCustomAddon.getCustomAddonCategory(), ProductAddonCustomAddon.getTitle(),ProductAddonCustomAddon.getProduct(), ProductAddonCustomAddon.getUom(), ProductAddonCustomAddon.getQuantity(), ProductAddonCustomAddon.getRate(), ProductAddonCustomAddon.getInstallationPrice(),ProductAddonCustomAddon.getAmount());
                         customaddonsList.add(addonsList);
                     }
                 }
@@ -1680,7 +1701,7 @@ public class QuotationPdfCreatorForPackageRoomWise
             {
                 slNoForAccessories++;
                 this.createProductTitleRowForAddon(AccessoryTable,"B. " +String.valueOf(slNoForAccessories),addonsList.getCategory(), addonsList.getExtendedTitle());
-                this.createRowAndFillDataForAddon(AccessoryTable, "", "","Specification: "+addonsList.getDescription(),addonsList.getUom(),addonsList.getQty(),addonsList.getPrice(),addonsList.getAmount());
+                this.createRowAndFillDataForAddon(AccessoryTable, "", "","Specification: "+addonsList.getDescription(),addonsList.getUom(),addonsList.getQty(),addonsList.getPrice(),addonsList.getInstallationPrice(),addonsList.getAmount());
             }
 
 
@@ -2802,10 +2823,10 @@ public class QuotationPdfCreatorForPackageRoomWise
         Paragraph p=new Paragraph("");
         p.setAlignment(Element.ALIGN_RIGHT);
         cell.addElement(p);
-        cell.setColspan(4);
+        cell.setColspan(5);
         tabname.addCell(cell);
     }
-    private void createRowAndFillDataForAddon(PdfPTable tabname,String index,String category, String title,String UOM, Double quantity, Double amount, Double total)
+    private void createRowAndFillDataForAddon(PdfPTable tabname,String index,String category, String title,String UOM, Double quantity, Double amount, Double insPrice,Double total)
     {
         PdfPCell cell;
         Paragraph Pindex;
@@ -2842,8 +2863,14 @@ public class QuotationPdfCreatorForPackageRoomWise
         cell4.addElement(Pindex);
         tabname.addCell(cell4);
 
+        PdfPCell cell6 = new PdfPCell();
+        Pindex = new Paragraph(this.getRoundOffValue(String.valueOf(insPrice.intValue())), fsize);
+        Pindex.setAlignment(Element.ALIGN_RIGHT);
+        cell6.addElement(Pindex);
+        tabname.addCell(cell6);
+
         PdfPCell cell3 = new PdfPCell();
-        double amt = quantity * amount;
+        double amt = quantity * (amount+insPrice);
         Paragraph Pamt = new Paragraph(this.getRoundOffValue(String.valueOf((int) amt)), fsize);
         Pamt.setAlignment(Element.ALIGN_RIGHT);
         cell3.addElement(Pamt);

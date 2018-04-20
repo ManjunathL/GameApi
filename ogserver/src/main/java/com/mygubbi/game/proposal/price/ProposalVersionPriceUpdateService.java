@@ -278,9 +278,9 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                                 continue;
                             }
                             PriceMaster addonRate = RateCardService.getInstance().getAddonRate(addonLineItem.getCode(), proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
-                            newTotalVersionAddonCost += addonRate.getPrice();
+                            newTotalVersionAddonCost += addonRate.getPrice()+addonRate.getInstallationPrice();
                             addonLineItem.setRate(addonRate.getPrice());
-                            addonLineItem.setAmount(addonRate.getPrice() * addonLineItem.getQuantity());
+                            addonLineItem.setAmount((addonRate.getPrice()+addonRate.getInstallationPrice())* addonLineItem.getQuantity());
                             addonLineItem.setFromVersion(proposalVersion.getVersion());
                             if (addonLineItem.getRate() == 0)
                             {

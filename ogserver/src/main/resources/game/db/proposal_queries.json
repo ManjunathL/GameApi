@@ -485,8 +485,8 @@
       "id": "proposal.addon.add",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, customAddonCategory,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?, ?, ?)",
-      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "customAddonCategory","productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks", "spaceType", "roomcode","scopeDisplayFlag"]
+      "query": "insert into proposal_addon(proposalId, fromVersion, seq, code, categoryCode, customAddonCategory,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, title, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag,installationPrice) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,? ,?, ?, ?,?)",
+      "params":["proposalId", "fromVersion", "seq", "code", "categoryCode", "customAddonCategory","productTypeCode", "productSubtypeCode", "brandCode", "product", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","remarks", "spaceType", "roomcode","scopeDisplayFlag","installationPrice"]
     },
 
     {
@@ -508,8 +508,8 @@
       "id": "proposal.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?,customAddonCategory=?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?, productSubtypeCode = ?, remarks =?, spaceType = ?, roomcode = ? where id = ?",
-      "params": ["seq","product","code", "categoryCode","customAddonCategory", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","productSubtypeCode","remarks", "spaceType", "roomcode", "id"]
+      "query": "update proposal_addon set seq = ?,product= ?, code = ?, categoryCode = ?,customAddonCategory=?, productTypeCode = ?, brandCode = ?, catalogueCode = ?, title = ?, rate = ?, quantity = ?, amount = ?, uom = ?, updatedBy = ?, productSubtypeCode = ?, remarks =?, spaceType = ?, roomcode = ?,installationPrice=? where id = ?",
+      "params": ["seq","product","code", "categoryCode","customAddonCategory", "productTypeCode", "brandCode", "catalogueCode", "title", "rate", "quantity", "amount", "uom", "updatedBy","productSubtypeCode","remarks", "spaceType", "roomcode", "installationPrice","id"]
     },
 
     {
@@ -560,7 +560,7 @@
       "id": "proposal.addon.createnew",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag) select proposalId, ?, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag from proposal_addon where proposalId= ? and fromVersion = ? ",
+      "query": "insert into proposal_addon (proposalId,fromVersion, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag,installationPrice) select proposalId, ?, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag,installationPrice from proposal_addon where proposalId= ? and fromVersion = ? ",
       "params": ["toVersion","proposalId","fromVersion"]
     },
 
@@ -584,7 +584,7 @@
       "id": "proposal.addon.createnewfromoldproposal",
       "type": "insert",
       "table": "proposal_addon",
-      "query": "insert into proposal_addon  (proposalId,fromVersion, title, seq, code, categoryCode,customAddonCategory,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity,amount, uom, updatedBy,remarks,spaceType, roomcode, scopeDisplayFlag) select ?, ?, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag from proposal_addon where proposalId = ? and fromVersion = ?",
+      "query": "insert into proposal_addon  (proposalId,fromVersion, title, seq, code, categoryCode,customAddonCategory,productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity,amount, uom, updatedBy,remarks,spaceType, roomcode, scopeDisplayFlag,installationPrice) select ?, ?, title, seq, code, categoryCode,customAddonCategory, productTypeCode, productSubtypeCode, brandCode, product, catalogueCode, rate, quantity, amount, uom, updatedBy,remarks, spaceType, roomcode, scopeDisplayFlag,installationPrice from proposal_addon where proposalId = ? and fromVersion = ?",
       "params": ["proposalId","version","oldProposalId","toVersion"]
     },
 
@@ -908,7 +908,7 @@
       "id": "pricemaster.select.all",
       "type": "select",
       "table": "price_master",
-      "query": "select rateType,rateId,city,price,sourcePrice,fromDate,toDate from price_master",
+      "query": "select rateType,rateId,city,price,sourcePrice,fromDate,toDate,installationPrice,installationSourcePrice from price_master",
       "params": []
     },
 

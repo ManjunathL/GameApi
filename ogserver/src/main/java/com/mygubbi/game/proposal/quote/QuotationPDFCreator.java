@@ -1006,19 +1006,36 @@ public class QuotationPDFCreator
             cel6.setBorder(Rectangle.NO_BORDER);
             tab1.addCell(cel6);
 
+                    if(proposalHeader.getProjectCity().equals("Chennai"))
+                    {
+                        tab1.addCell(new Paragraph
+                                ("1. \tStandard ply used will be of BWP (Boiling water proof) specification and will be of Greenply, Centuryply, Archidply or equivalent.\n" +
+                                        "2. \tMdf: \tInterior Grade Mdf\n" +
+                                        "3. \tEdge Banding: \tRehau\n" +
+                                        "4. \tLaminates: \tGlossy /Matt/Textured/Metalic Laminates by Merino/Greenlam\n" +
+                                        "5. \tHardwares: \tHettich/Ebco/Rehau\n" +
+                                        "6. \tAccessories: \tHe - Hettich/Ha - Hafele/Ev - Evershine/Eb - Ebco\n" +
+                                        "7. \tGlass/Mirror: \tAsahi/ Saint Gobain\n"+
+                                        "8. \tLacquered Glass: \tSaint Gobain\n" +
+                                        "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
+                                        "10.\tSink: \tCarisyl/Franke/Nirali/Futura\n",fsize));
 
-            tab1.addCell(new Paragraph
-                    ("1. \tPly: \tIS 303 grade\n" +
-                            "2. \tMdf: \tInterior Grade Mdf\n" +
-                            "3. \tEdge Banding: \tRehau\n" +
-                            "4. \tLaminates: \tGlossy /Matt/Textured/Metalic Laminates by Merino/Greenlam\n" +
-                            "5. \tHardwares: \tHettich/Ebco/Rehau\n" +
-                            "6. \tAccessories: \tHe - Hettich/Ha - Hafele/Ev - Evershine/Eb - Ebco\n" +
-                            "7. \tGlass/Mirror: \tAsahi/ Saint Gobain\n"+
-                            "8. \tLacquered Glass: \tSaint Gobain\n" +
-                            "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
-                            "10.\tSink: \tCarisyl/Franke/Nirali/Futura\n",fsize));
+                    }
+                    else
+                    {
+                        tab1.addCell(new Paragraph
+                                ("1. \tPly: \tIS 303 grade\n" +
+                                        "2. \tMdf: \tInterior Grade Mdf\n" +
+                                        "3. \tEdge Banding: \tRehau\n" +
+                                        "4. \tLaminates: \tGlossy /Matt/Textured/Metalic Laminates by Merino/Greenlam\n" +
+                                        "5. \tHardwares: \tHettich/Ebco/Rehau\n" +
+                                        "6. \tAccessories: \tHe - Hettich/Ha - Hafele/Ev - Evershine/Eb - Ebco\n" +
+                                        "7. \tGlass/Mirror: \tAsahi/ Saint Gobain\n"+
+                                        "8. \tLacquered Glass: \tSaint Gobain\n" +
+                                        "9. \tAppliances: \tFaber /Elica/Kaff/Nagold/ Bosch\n" +
+                                        "10.\tSink: \tCarisyl/Franke/Nirali/Futura\n",fsize));
 
+                    }
             PdfPCell cel7=new PdfPCell();
             p = new Paragraph(new Paragraph("Other Finishes offered are Acrylic, Foil, PU paint, UV laminated panels,Hardwood of mygubbi make.\t\t\t\t\n",fsize));
             p.setAlignment(Element.ALIGN_LEFT);

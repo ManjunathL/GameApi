@@ -22,6 +22,8 @@ public class PriceMaster {
     public static final String CITY = "city";
     public static final String FROM_DATE = "fromDate";
     public static final String TO_DATE = "toDate";
+    public static final String INSTALLATION_PRICE = "installationPrice";
+    public static final String INSTALLATIONSOURCE_PRICE = "installationSourcePrice";
 
     private String rateType;
     private String rateId;
@@ -30,6 +32,8 @@ public class PriceMaster {
     private double sourcePrice;
     private Date fromDate;
     private Date toDate;
+    private double installationPrice;
+    private double installationSourcePrice;
 
     private final static Logger LOG = LogManager.getLogger(PriceMaster.class);
 
@@ -48,7 +52,9 @@ public class PriceMaster {
                 .setPrice(json.getDouble(PRICE))
                 .setSourcePrice(json.getDouble(SOURCE_PRICE))
                 .setFromDate(fromDateInSql)
-                .setToDate(toDateInSql);
+                .setToDate(toDateInSql)
+                .setInstallationPrice(json.getDouble(INSTALLATION_PRICE))
+                .setInstallationSourcePrice(json.getDouble(INSTALLATIONSOURCE_PRICE));
     }
 
     public String getRateType() {
@@ -78,6 +84,23 @@ public class PriceMaster {
         return this;
     }
 
+    public PriceMaster setInstallationSourcePrice(double installationSourcePrice)
+    {
+        this.installationSourcePrice=installationSourcePrice;
+        return this;
+    }
+
+    public  double getInstallationSourcePrice()
+    {
+        return installationSourcePrice;
+    }
+    public double getInstallationPrice(){return installationPrice;}
+
+    public PriceMaster setInstallationPrice(double installationPrice)
+    {
+        this.installationPrice=installationPrice;
+        return this;
+    }
     public double getSourcePrice()
     {
         return sourcePrice;
@@ -146,6 +169,6 @@ public class PriceMaster {
     {
         return new JsonObject().put("rateType", this.rateType).put("rateId", this.rateId).put("city", this.city)
                 .put("price", this.price).put("sourcePrice",this.sourcePrice)
-                .put("fromDate", this.fromDate.toString()).put("toDate", this.toDate.toString());
+                .put("fromDate", this.fromDate.toString()).put("toDate", this.toDate.toString()).put("installationPrice",this.installationPrice).put("installationSourcePrice",this.installationSourcePrice);
     }
 }
