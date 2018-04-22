@@ -516,8 +516,8 @@
       "id": "proposal.version.addon.update",
       "type": "update",
       "table": "proposal_addon",
-      "query": "update proposal_addon set rate = ?, amount = ? where id = ?",
-      "params": ["rate", "amount", "id"]
+      "query": "update proposal_addon set rate = ?, amount = ? ,installationPrice=? where id = ?",
+      "params": ["rate", "amount","installationPrice" ,"id"]
     },
 
     {

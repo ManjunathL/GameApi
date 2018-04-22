@@ -280,6 +280,7 @@ public class ProposalVersionPriceUpdateService extends AbstractVerticle
                             PriceMaster addonRate = RateCardService.getInstance().getAddonRate(addonLineItem.getCode(), proposalHeader.getPriceDate(), proposalHeader.getProjectCity());
                             newTotalVersionAddonCost += addonRate.getPrice()+addonRate.getInstallationPrice();
                             addonLineItem.setRate(addonRate.getPrice());
+                            addonLineItem.setInstallationPrice(addonRate.getInstallationPrice());
                             addonLineItem.setAmount((addonRate.getPrice()+addonRate.getInstallationPrice())* addonLineItem.getQuantity());
                             addonLineItem.setFromVersion(proposalVersion.getVersion());
                             if (addonLineItem.getRate() == 0)
