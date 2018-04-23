@@ -22,7 +22,9 @@ public class AddonPriceHolder {
     private String city;
 
     private double unitPrice = 0.0;
+    private double installationPrice = 0.0;
     private double unitSourceCost = 0.0;
+    private double installationSourcePrice = 0.0;
     private double price = 0.0;
     private double priceWoTax = 0.0;
     private double sourceCost = 0.0;
@@ -96,6 +98,8 @@ public class AddonPriceHolder {
 
     private void calculatePricingForStdAddons(PriceMaster addonRate) {
         this.unitPrice = addonRate.getPrice();
+        this.installationSourcePrice=addonRate.getInstallationSourcePrice();
+        this.installationPrice=productAddon.getInstallationPrice();
         this.unitSourceCost = addonRate.getSourcePrice()+addonRate.getInstallationSourcePrice();
         this.price = this.productAddon.getAmount();
         this.priceWoTax = this.price * this.addonFactor;
@@ -110,6 +114,7 @@ public class AddonPriceHolder {
 
     private void calculatePricingForCustomAddons() {
         this.unitPrice = productAddon.getRate();
+        this.installationPrice=productAddon.getInstallationPrice();
         this.unitSourceCost = this.unitPrice * customAddonSourcePrice.getSourcePrice();
         this.price = this.productAddon.getAmount();
         this.priceWoTax = this.price * this.addonFactor;
@@ -154,6 +159,22 @@ public class AddonPriceHolder {
 
     public double getMargin() {
         return addonMargin;
+    }
+
+    public double getInstallationPrice() {
+        return installationPrice;
+    }
+
+    public void setInstallationPrice(double installationPrice) {
+        this.installationPrice = installationPrice;
+    }
+
+    public double getInstallationSourcePrice() {
+        return installationSourcePrice;
+    }
+
+    public void setInstallationSourcePrice(double installationSourcePrice) {
+        this.installationSourcePrice = installationSourcePrice;
     }
 
     public ProductAddon getProductAddon()

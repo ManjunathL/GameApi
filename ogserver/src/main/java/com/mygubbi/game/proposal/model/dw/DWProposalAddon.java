@@ -78,6 +78,8 @@ public class DWProposalAddon extends JsonObject {
     private static final String DESIGNER_PHONE ="designerPhone" ;
     private static final String PROJECT_NAME = "projectName";
     private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
+    private static final String INSTALLATION_PRICE ="installationPrice" ;
+    private static final String INSTALLATION_SOURCE_PRICE ="installationSourcePrice" ;
 
     public DWProposalAddon()
     {}
@@ -158,7 +160,8 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwProposalAddon.setDesignerPhone(proposalHeader.getDesignerPhone());
         dwProposalAddon.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
-
+        dwProposalAddon.setInstallationPrice(addonPriceHolder.getInstallationPrice());
+        dwProposalAddon.setInstallationSourcePrice(addonPriceHolder.getInstallationSourcePrice());
         return dwProposalAddon;
     }
 
@@ -172,6 +175,24 @@ public class DWProposalAddon extends JsonObject {
         return (Date) this.getValue(EXPECTED_DELIVERY_DATE);
     }
 
+    public double getInstallationPrice() {
+        return this.getDouble(INSTALLATION_PRICE);
+    }
+
+    public DWProposalAddon setInstallationPrice(double installationPrice)
+    {
+        put(INSTALLATION_PRICE,installationPrice);
+        return this;
+    }
+    public double getInstallationSourcePrice() {
+        return this.getDouble(INSTALLATION_SOURCE_PRICE);
+    }
+
+    public DWProposalAddon setInstallationSourcePrice(double installationSourcePrice)
+    {
+        put(INSTALLATION_SOURCE_PRICE,installationSourcePrice);
+        return this;
+    }
 
     public  String getTYPE() {
         return this.getString(TYPE);
