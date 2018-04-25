@@ -6,9 +6,9 @@ define([
 ], function($, _, Backbone, AddConceptboard){
     var AddConceptboards = Backbone.Collection.extend({
         model: AddConceptboard,
-        url: baseRestApiUrl + 'MyGubbiApi/conceptboard/add/template/',
+        url: baseRestApiUrl + 'MyGubbiApi/conceptboard/web/add/template/',
         getaddConceptBoardTemplate: function(userId,userMindboardId, options) {
-            var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboard/add/template/';
+            var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboard/web/add/template/';
             this.url = urllnk + userId + '/' + userMindboardId;
             return this.fetch(options);
         },

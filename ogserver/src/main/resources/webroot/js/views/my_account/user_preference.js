@@ -230,6 +230,10 @@ define([
         var usage = {};
 
         if(typeof(quesName) !== 'undefined' && quesName == "Interiors Budget"){
+            $(".Interiors").css('background-color','');
+            $(".Interiors").css('color','#000');
+            $("#"+quesOptionid).css('background-color','#634e42');
+            $("#"+quesOptionid).css('color','#fff');
 
             interiors_budget['optionId'] = quesOptionid;
             interiors_budget['optionType'] = 1;
@@ -248,6 +252,10 @@ define([
         }
 
          if(typeof(quesName) !== 'undefined' && quesName == "Dwelling type"){
+            $(".Dwelling").css('background-color','');
+            $(".Dwelling").css('color','#000');
+            $("#"+quesOptionid).css('background-color','#634e42');
+            $("#"+quesOptionid).css('color','#fff');
 
             dwelling_type['optionId'] = quesOptionid;
             dwelling_type['optionType'] = 1;
@@ -265,6 +273,11 @@ define([
         }
 
         if(typeof(quesName) !== 'undefined' && quesName == "Room"){
+            $(".Room").css('background-color','');
+            $(".Room").css('color','#000');
+            $("#"+quesOptionid).css('background-color','#634e42');
+            $("#"+quesOptionid).css('color','#fff');
+
             room['optionId'] = quesOptionid;
             room['optionType'] = 1;
             room['quesAnsId'] = quesOptionid;
@@ -281,6 +294,11 @@ define([
         }
 
         if(typeof(quesName) !== 'undefined' && quesName == "Size"){
+            $(".Size").css('background-color','');
+            $(".Size").css('color','#000');
+            $("#"+quesOptionid).css('background-color','#634e42');
+            $("#"+quesOptionid).css('color','#fff');
+
             size['optionId'] = quesOptionid;
             size['optionType'] = 1;
             size['quesAnsId'] = quesOptionid;
@@ -297,6 +315,10 @@ define([
         }
 
         if(typeof(quesName) !== 'undefined' && quesName == "Usage"){
+            $(".Usage").css('background-color','');
+            $("#"+quesOptionid).css('background-color','#634e42');
+            $("#"+quesOptionid).css('color','#fff');
+
             usage['optionId'] = quesOptionid;
             usage['optionType'] = 1;
             usage['quesAnsId'] = quesOptionid;

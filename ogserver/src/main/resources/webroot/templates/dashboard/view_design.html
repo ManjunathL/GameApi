@@ -87,9 +87,10 @@
                       <!--  <div class="col-sm-6 col-md-4 col-lg-4">
                             <div class="grid position-relative overflow-hidden">-->
 
-                    <div class="pinBoot bg-white" id="searchpinBoot" style="margin-top: 15px;min-height:220px;">
+                    <div class="pinBoot bg-white" id="searchpinBoot" style="margin-top: 15px;min-height:220px; position: relative;">
                         <% if(typeof(designList) !== 'undefined'){ %>
                         <% _.each(designList, function(conceptdtls, i){ %>
+
 
                         <article class="white-panel">
                             <a href="javascript:void(0);" class="conceptImg" >
@@ -99,12 +100,17 @@
                                 <img src="http://designwhimages.mygubbi.com/no-img.png" style="height:230px; width:100%;"  alt="<%= conceptdtls.title %>">
                                 <% } %>
                             </a>
+                            <div  style="">
+                           <i class=" shortList shortListdesign fa fa-thumb-tack shortIcon" aria-hidden="true"  id="<%= conceptdtls.designCode %>" <% if(conceptdtls.liked == true){ %> style="color:#ec5136 ;" <% } %>  ></i>
+                            </div>
                             <h4>
-                                <span><a href="javascript:void(0);"> <%= conceptdtls.title %> </a></span>
+                                <span ><a href="javascript:void(0);"> <%= conceptdtls.title %> </a></span>
                             </h4>
                         </article>
+
                         <% }); %>
                         <% } %>
+
                     <!--</div>
                             </div>-->
                     </div>
@@ -132,4 +138,14 @@
         filter.trigger('change');
     }
 
+var arr = new Array();
+$('.shortList').click(function (e) {
+    var currentTarget = $(e.currentTarget);
+    var familyoptId = currentTarget.attr('id');
+
+
+
+         filter.set({'shortedList': familyoptId});
+         filter.trigger('change');
+});
 </script>

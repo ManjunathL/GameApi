@@ -5,7 +5,7 @@ define([
   'bootstrap',
   'pinterest_grid',
   'owlcarousel',
-  'text!templates/dashboard/listing_concept.html',
+  'text!templates/dashboard/listing_concept_new.html',
   'text!templates/dashboard/conceptdetails.html',
   'text!templates/dashboard/similarconcepts.html',
   'text!templates/dashboard/relatedconcepts.html',
@@ -22,8 +22,9 @@ define([
   'collections/add_conceptToCboards',
   'collections/remove_conceptFromCboards',
   'collections/add_conceptnotes',
-  'collections/add_concepttags'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags){
+  'collections/add_concepttags',
+  'collections/spaceelements'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
@@ -37,6 +38,7 @@ define([
     add_concept2boards: null,
     add_conceptnotes: null,
     add_concepttags:null,
+    spaceelements:null,
     remove_conceptFromCboards:null,
     initialize: function() {
         this.conceptlists = new ConceptLists();
@@ -50,6 +52,7 @@ define([
         this.add_conceptToCboards = new AddConceptToCboards();
         this.add_conceptnotes = new AddConceptnotes();
         this.add_concepttags = new AddConcepttags();
+         this.spaceelements = new SpaceElements();
         this.remove_conceptFromCboards = new RemoveConceptFromCboards();
 
         this.filter.on('change', this.render, this);
@@ -80,8 +83,9 @@ define([
         var getNeedConceptsPromise = that.getNeedConcepts(conceptboardId);
         var getConceptTagsPromise = that.getConceptTags(conceptboardId);
         var getConceptBoardsPromise = that.getConceptBoards();
+        var getSpaceElementPromise = that.getSpaceElement(spaceTypeCode);
 
-        Promise.all([getConceptsPromise,getNeedConceptsPromise,getConceptTagsPromise,getConceptBoardsPromise]).then(function() {
+        Promise.all([getConceptsPromise,getNeedConceptsPromise,getConceptTagsPromise,getConceptBoardsPromise,getSpaceElementPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.fetchConceptListsAndRender(conceptboardId);
         });
@@ -130,6 +134,41 @@ define([
              }
         });
     },
+    getSpaceElement: function(spaceTypeCode){
+            var that = this;
+            return new Promise(function(resolve, reject) {
+                 if(typeof(spaceTypeCode) !== 'undefined') {
+                   that.spaceelements.getSpaceElement(spaceTypeCode, {
+                      async: true,
+                      crossDomain: true,
+                      method: "GET",
+                      headers:{
+                          "authorization": "Bearer "+ sessionStorage.authtoken
+                      },
+                      success:function(response) {
+
+                          console.log("I m here   ++++++++++++++ "+spaceTypeCode);
+                          console.log(response);
+                            if (!(that.filter.get('selectedspaceelements'))) {
+                              this.filter.set({
+                                  'selectedspaceelements':spaceTypeCode
+                              }, {
+                                  silent: true
+                              });
+                          }
+                          resolve();
+                      },
+                      error:function(response) {
+                          console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                          console.log(response);
+                          reject();
+                      }
+                  });
+                 }else{
+                    resolve();
+                 }
+            });
+        },
     getNeedConcepts: function(conceptboardId){
         var that = this;
         var pageno = 0;
@@ -245,6 +284,7 @@ define([
         var needconceptlists = that.needconceptlists;
         var concepttags = that.concepttags;
         var conceptboards = that.conceptboards;
+        var spaceelements = that.spaceelements;
 
         var cBoardList = conceptboards.toJSON();
         var conceptBoardName =  that.conceptboards.getConceptBoardName(cBoardList[0].listOfUserConceptBoard,conceptboardId);
@@ -262,6 +302,8 @@ define([
         var filterApplied = that.filter.get('noFilterApplied');
 
         var filterTag = that.filter.get('selectedTag');
+
+        var filterElement = that.filter.get('selectedElement');
 
         /*if(filterTag){
             console.log(" ================ filterTag =================== ");
@@ -308,6 +350,40 @@ define([
             });
         }
 
+        if ((typeof(filterElement) !== 'undefined') && (filterElement.length != 0)) {
+
+            conceptlists = conceptlists;
+            needconceptlists = needconceptlists;
+            //if(typeof(needconceptlists) !== 'undefined'){
+                var filteredneedConcepts = that.needconceptlists.filterByElement(needconceptlists[0].youMayNeedItConceptList, filterElement);
+                console.log("@@@@@@@@@@ filteredneedConcepts @@@@@@@@");
+                console.log(filteredneedConcepts);
+                console.log("@@@@@@@@@@@@@@@@@@");
+                needconceptlists[0].youMayNeedItConceptList = filteredneedConcepts;
+            //}
+            var filteredConcepts = that.conceptlists.filterByElement(conceptlists[0].listOfConceptBoardConcept, filterElement);
+
+            console.log("@@@@@@@@@@ filteredConcepts @@@@@@@@");
+            console.log(filteredConcepts);
+            console.log("@@@@@@@@@@@@@@@@@@");
+
+            conceptlists[0].listOfConceptBoardConcept = filteredConcepts;
+
+            that.filter.set({
+                'noFilterApplied': '1'
+            }, {
+                silent: true
+            });
+        } else {
+            var conceptlists = conceptlists;
+            var needconceptlists = needconceptlists;
+            that.filter.set({
+                'noFilterApplied': '0'
+            }, {
+                silent: true
+            });
+        }
+
 
           /*if (filterApplied == '0') {
                 var filteredConcepts = conceptlists.toJSON();
@@ -337,7 +413,7 @@ define([
     ready: function(conceptboardId){
         $(function() {
            $("#pinBoot"+conceptboardId).pinterest_grid({
-                no_columns: 5,
+                no_columns: 4,
                 padding_x: 20,
                 padding_y: 20,
                 margin_bottom: 50,

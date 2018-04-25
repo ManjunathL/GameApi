@@ -6,15 +6,18 @@ define([
   'pinterest_grid',
   'text!templates/dashboard/view_design.html',
   'collections/viewDesigns',
-  'models/filter'
-], function($, _, Backbone, Bootstrap, pinterest_grid, viewDesignPageTemplate,viewDesigns, Filter){
+  'models/filter',
+  'collections/save_shortlist_designs'
+], function($, _, Backbone, Bootstrap, pinterest_grid, viewDesignPageTemplate,viewDesigns, Filter, SaveShortListDesigns){
   var ViewDesignPage = Backbone.View.extend({
     el: '.page',
     viewDesigns: null,
     filter: null,
+    save_shortlist_designs:null,
     initialize: function() {
         this.viewDesigns = new viewDesigns();
         this.filter = new Filter();
+        this.save_shortlist_designs=new SaveShortListDesigns();
 
         this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
@@ -28,6 +31,7 @@ define([
 
         console.log("****IN RENDER ***********")
         var spaceTypeCode = that.model.spaceTypeCode;
+
 //        alert("that.model.name = "+that.model.spaceTypeCode);
 //        var spaceTypeCode = "SP-LIVING";
 
@@ -40,6 +44,9 @@ define([
 
 
     },
+     events: {
+            "click .shortListdesign": "saveShortListDesigns",
+        },
     getDesigns: function(spaceTypeCode){
         var that = this;
         return new Promise(function(resolve, reject) {
@@ -79,6 +86,75 @@ define([
             });
 
     },
+     /*  getShortListDesign: function(spaceTypeCode){
+            var that = this;
+            return new Promise(function(resolve, reject) {
+                if(!that.shortListDesigns.get('id')){
+                    that.shortListDesigns.getShortListDesign(spaceTypeCode, {
+                       async: true,
+                       crossDomain: true,
+                       method: "GET",
+                       headers:{
+                           "authorization": "Bearer "+ sessionStorage.authtoken
+                       },
+                       success:function(response){
+
+                            resolve();
+                       },
+                       error:function(response) {
+                            console.log(" +++++++++++++++ Search- Errrorr ++++++++++++++++++ ");
+                            console.log(JSON.stringify(response));
+                            console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+                            console.log(response.responseJSON.errorMessage);
+                            reject();
+                       }
+                    });
+                }else{
+                    reject();
+                }
+                });
+
+        },*/
+         saveShortListDesigns:function(e){
+                var that = this;
+              var filterShortDesign={};
+                if (e.isDefaultPrevented()) return;
+                        e.preventDefault();
+                         var userId = "user1234600";
+                          var spaceTypeCode = that.model.spaceTypeCode;
+                         var formData = that.filter.get("shortedList");
+                            if (typeof(that.filter.get('shortedList')) != 'undefined') {
+                                          filterShortDesign = that.filter.get('shortedList');
+
+                             }
+
+                        console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+                        console.log(JSON.stringify(formData));
+
+
+                        that.save_shortlist_designs.saveShortListDesigns(spaceTypeCode,filterShortDesign,{
+                           async: true,
+                           crossDomain: true,
+                           method: "POST",
+                           headers:{
+                               "authorization": "Bearer "+ sessionStorage.authtoken,
+                               "Content-Type": "application/json"
+                           },
+                           success:function(response) {
+                              console.log("Successfully saved Home Preferences");
+                              console.log(response);
+
+
+                          },
+                          error:function(model, response, options) {
+
+                              console.log(" +++++++++++++++ Home Preferences save- Errrorr ++++++++++++++++++ ");
+                              console.log(JSON.stringify(response));
+
+                          }
+                      });
+         },
+
     rendersub: function(){
         var that = this;
         var viewDesigns = that.viewDesigns;

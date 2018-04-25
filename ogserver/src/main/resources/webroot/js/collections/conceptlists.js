@@ -6,9 +6,9 @@ define([
 ], function($, _, Backbone, ConceptList){
     var ConceptLists = Backbone.Collection.extend({
         model: ConceptList,
-        url: baseRestApiUrl + 'MyGubbiApi/conceptboardConcept/get/concept-list/',
+        url: baseRestApiUrl + 'MyGubbiApi/conceptboardConcept/get/concept-list/web/',
         getConceptList: function(conceptboardId,pageno,itemPerPage, options) {
-            var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboardConcept/get/concept-list/';
+            var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboardConcept/get/concept-list/web/';
             this.url = urllnk + conceptboardId + '/' + pageno + '/' + itemPerPage;
             return this.fetch(options);
         },
@@ -40,6 +40,19 @@ define([
                 if (tagArr[i] == selectedTag)
                     return true;
             }
+        },
+        filterByElement:function (conceptlist,selectedElement){
+            var that = this;
+            return _.map(conceptlist.filter(function(concept){
+                return that.concepWithElements(concept, selectedElement);
+            }), function (concept) {return concept });
+        },
+        concepWithElements: function (conceptObj, selectedElement) {
+            var spaceElementCode = conceptObj.spaceElementCode;
+
+                if (spaceElementCode == selectedElement)
+                    return true;
+
         }
     });
   return ConceptLists;

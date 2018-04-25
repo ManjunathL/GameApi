@@ -40,7 +40,20 @@ define([
                 if (tagArr[i] == selectedTag.toLowerCase())
                     return true;
             }
-        }
+        },
+         filterByElement:function (conceptlist,selectedElement){
+             var that = this;
+             return _.map(conceptlist.filter(function(concept){
+                 return that.needconcepWithElements(concept, selectedElement);
+             }), function (concept) {return concept });
+         },
+         needconcepWithElements: function (conceptObj, selectedElement) {
+             var spaceElementCode = conceptObj.spaceElementCode;
+
+                 if (spaceElementCode == selectedElement)
+                     return true;
+
+         }
     });
   return NeedConceptLists;
 });

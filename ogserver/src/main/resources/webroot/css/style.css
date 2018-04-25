@@ -104,15 +104,14 @@ hr {
     box-shadow: 1px 1px 12px #000;
 }
 /*.btn-labeltxt:hover,*/
-.btn-labeltxt:focus,
+/*.btn-labeltxt:focus,
 .btn-labeltxt:active{
     font-size: 14px!important;
     font-family: 'Lato', sans-serif;
     font-weight: 700!important;
     background-color:rgba(99,78,66,1);
     color: #fff;
-    /*border: 1px solid #ea5c36;*/
-}
+}*/
 /*.text{
     text-align: center;
     color: #e7e7e7;
@@ -268,6 +267,226 @@ hr {
     border-right: 0px solid #ddd !important;
     border-bottom: 0px solid #ddd !important;
 }
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.mr10{
+    margin-right:10px;
+}
+.filterSPElement{
+    margin-top: 15px!important;
+    font-weight: 600!important;
+    font-size: 20px!important;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    margin-top: 10px;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #fff;
+    color: #ec5136;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    min-width: 60px;
+    max-width: 60px;
+    text-align: center;
+}
+
+#sidebar.active .sidebar-header h3, #sidebar.active .CTAs {
+    display: none;
+}
+
+#sidebar.active .sidebar-header strong {
+    display: block;
+}
+
+#sidebar ul li a {
+    text-align: left;
+}
+
+#sidebar.active ul li a {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+#sidebar.active ul li a i {
+    margin-right:  0;
+    display: block;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+#sidebar.active ul ul a {
+    padding: 10px !important;
+}
+
+#sidebar.active a[aria-expanded="false"]::before, #sidebar.active a[aria-expanded="true"]::before {
+    top: auto;
+    bottom: 5px;
+    right: 50%;
+    -webkit-transform: translateX(50%);
+    -ms-transform: translateX(50%);
+    transform: translateX(50%);
+}
+
+#sidebar .sidebar-header {
+    padding: 0px 20px 20px 20px;
+    background: #fff;
+    height: 86px;
+    border-bottom: 19px solid #f2f4f4;
+    border-top: 11px solid #f2f4f4;
+}
+
+#sidebar .sidebar-header strong {
+    display: none;
+    font-size: 1.8em;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #fff;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #ec5136;
+    background: #fff;
+    cursor:pointer;
+}
+#sidebar ul li a i {
+    margin-right: 10px;
+}
+
+#sidebar .tit{
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left;
+    padding: 0px 20px;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #ec5136;
+    background: #fff;
+}
+
+
+#sidebar a[data-toggle="collapse"] {
+    position: relative;
+}
+
+#sidebar a[aria-expanded="false"]::before, #sidebar a[aria-expanded="true"]::before {
+    content: '\003e';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}
+#sidebar a[aria-expanded="true"]::before {
+    content: '\003e';
+}
+
+
+#sidebar ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #fff;
+}
+
+#sidebar ul.CTAs {
+    padding: 20px;
+}
+
+#sidebar ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+#sidebar a.download {
+    background: #fff;
+    color: #7386D5;
+}
+
+#sidebar a.article, a.article:hover {
+    background: #33434E !important;
+    color: #fff !important;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #ec5136!important;
+    border-color: #ec5136!important;
+}
+.btn-info:hover, .btn-info:active{
+    color: #fff;
+    background-color: #ec5136!important;
+    border-color: #ec5136!important;
+}
+
+
+
+/* ---------------------------------------------------
+.linkImage{
+    color: rgba(99,78,66,1);
+    }
+    .linkImage:hover{
+        color: white;
+        }
+.sidenav {
+   box-shadow: 0px 2px 10px #555;
+       width: 255px;
+       position: fixed;
+       /* z-index: 1; */
+       top: 275px;
+       margin-left: -53px;
+       margin-top: -83px;
+       background: white;
+       overflow-x: hidden;
+       padding: 8px 0;
+}
+.filterOption:hover{
+background: #ec5136 ;
+}
+
+
+@media screen and (max-height: 450px) {
+    /*.sidenav {padding-top: 15px;}*/
+    .sidenav a {font-size: 18px;}
+}
+
+.fliterBox{
+    box-shadow: 0 2px 4px 0 rgba(48,56,97,.2);
+    padding-top: 35px;
+    position: relative;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    margin-bottom: 100px;
+    overflow: hidden;
+    contain: strict;
+}
+.filterOption{
+    text-align:center;
+}
 .logfrm{
 	background: #F6F6F6;
 	width: 40%;
@@ -338,7 +557,7 @@ hr {
 
 
 .filter-box-top {
-    padding: 10px 20px;
+    padding: 10px 45px;
 }
 
 /*.filter-box-top .form-control {
@@ -709,6 +928,7 @@ ul.spaceTypelst li{
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     padding-left:15px;
+    height: 25px;
 }
 .pinBoot .white-panel b.lorem{
 	color:#A742F5;
@@ -1319,6 +1539,22 @@ footer {
     font-size:22px;
     color: #ffffff;
 }
+.list-heart {
+    color: red;
+    font-size: 25px !important;
+    padding: 10px 5px;
+}
+ .list-heart {
+        font-size: 22px !important;
+        padding: 13px 4px;
+    }
+    .list-heart:hover {
+        color: #f1591f;
+    }
+
+     .list-heart:active {
+        color: #ff3200;
+    }
 .grid-button-strip {
     position: absolute;
     top: 0px;
@@ -1349,7 +1585,14 @@ footer {
     text-shadow: none !important;
     color:#fff !important;
 }
-
+.shortIcon{
+    position: absolute;
+    top: -6px;
+    left: 326px;
+    color: #566670;
+    font-size: 25px !important;
+    padding: 10px 5px;
+}
 .grid .icons li {
     background: none repeat scroll 0 0 #fff;
     height: 7px;
@@ -1579,7 +1822,7 @@ footer {
        display: none;
        position: absolute;
        top: 66%;
-       left: 15%;
+       left: 20%;
        z-index: 1;
        box-shadow: 0px 0px 16px 1px rgba(36, 36, 36, 0.4);
 }

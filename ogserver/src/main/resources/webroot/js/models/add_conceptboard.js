@@ -3,7 +3,7 @@ define([
     'backbone'
 ], function($, Backbone){
     var AddConceptboard = Backbone.Model.extend({
-        urlRoot:baseRestApiUrl + '/MyGubbiApi/conceptboard/add/template/'
+        urlRoot:baseRestApiUrl + '/MyGubbiApi/conceptboard/web/add/template/'
     });
     return AddConceptboard;
 });
