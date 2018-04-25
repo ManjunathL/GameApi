@@ -513,15 +513,15 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
         <div class="row">
             <div class="col-sm-6 col-md-6 hidden-xs hidden-sm">
                 <h5> CONTACT INFO </h5>
-                <P class="hidden-xs hidden-sm"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/phone_03.png" alt="phone"> 080888 60860 (9 AM to 6 PM, Mon - Sat) </P>
-                <P class="hidden-md hidden-lg"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/phone_03.png" alt="phone"> 080888 60860 <br/><span class="pl20"> (9 AM to 6 PM, Mon - Sat) </span>  </P>
+                <P class="hidden-xs hidden-sm"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/phone_03.png" alt="phone"> 0 8088 860 860 (9 AM to 6 PM, Mon - Sat) </P>
+                <P class="hidden-md hidden-lg"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/phone_03.png" alt="phone"> 0 8088 860 860 <br/><span class="pl20"> (9 AM to 6 PM, Mon - Sat) </span>  </P>
                 <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842490/landing_page/steal-deal/mail_03.png" alt="phone"> reach@mygubbi.com </P>
                 <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/location_03.png" alt="phone">  1502, 2nd Floor, 19th Main Road, Sector 4, HSR Layout, Bangalore 560 102, India </P>
             </div>
             <div class="col-xs-8 col-xs-offset-2 col-sm-offset-1 col-sm-5 col-md-6 hidden-md hidden-lg">
                 <h5> CONTACT INFO </h5>
-                <P class="hidden-xs hidden-sm"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/phone_03.png" alt="phone"> 080888 60860 (9 AM to 6 PM, Mon - Sat) </P>
-                <P class="hidden-md hidden-lg"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/phone_03.png" alt="phone"> 080888 60860 <br/><span class="pl20"> (9 AM to 6 PM, Mon - Sat) </span>  </P>
+                <P class="hidden-xs hidden-sm"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/phone_03.png" alt="phone"> 0 8088 860 860 (9 AM to 6 PM, Mon - Sat) </P>
+                <P class="hidden-md hidden-lg"> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/phone_03.png" alt="phone"> 0 8088 860 860 <br/><span class="pl20"> (9 AM to 6 PM, Mon - Sat) </span>  </P>
                 <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842490/landing_page/steal-deal/mail_03.png" alt="phone"> reach@mygubbi.com </P>
                 <P> <img src="https://res.cloudinary.com/mygubbi/image/upload/v1501842489/landing_page/steal-deal/location_03.png" alt="phone">  1502, 2nd Floor, 19th Main Road, Sector 4, HSR Layout, Bangalore 560 102, India </P>
             </div>
