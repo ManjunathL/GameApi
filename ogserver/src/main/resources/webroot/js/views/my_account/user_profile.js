@@ -8,13 +8,24 @@ define([
 ], function($, _, Backbone, Bootstrap,MGF, UserProfileTemplate){
   var UserProfilePage = Backbone.View.extend({
     el: '.page',
+    ref: MGF.rootRef,
+    refAuth: MGF.refAuth,
+     renderWithUserProfCallback: function (userProfData, provider) {
+        $(this.el).html(_.template(UserProfileTemplate)({
+            'userProfile': userProfData,
+            'provider': provider
+        }));
+        document.title = userProfData.displayName + ' | mygubbi';
+     },
+      render: function () {
+                 var authData = this.refAuth.currentUser;
+                 MGF.getUserProfile(authData, this.renderWithUserProfCallback);
+                  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@ffffffffffff@@2");
+                  console.log(authData);
+      },
     initialize: function() {
         this.listenTo(Backbone);
-        _.bindAll(this, 'render');
-    },
-    render: function () {
-       var that = this;
-       $(this.el).html(_.template(UserProfileTemplate));
+        _.bindAll(this,'renderWithUserProfCallback','render');
     },
      events: {
                 "click #save_details": "submit"

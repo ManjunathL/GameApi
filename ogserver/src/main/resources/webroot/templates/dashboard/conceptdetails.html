@@ -91,9 +91,13 @@
     </div>
     <!--<div class="col-sm-1 col-md-1"></div>-->
     <div class="col-sm-8 col-md-8" style="padding-left:40px;">
+        <div class="pin" style="float:right;">
+            <a href="javascript:void(0);" onclick="showModalDeta()" class="btn btn-pin boardlst"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+        </div>
         <div class="new-pin">
             <h5 id="concNmm">Excepteur sint occaecat cupidatat non proident </h5>
             <input type="hidden" id="conId">
+
         </div>
         <div class="new-pin">
             <div class="add_notes">
@@ -124,21 +128,61 @@
     </div>
 </div>
 
-
-<div class="modal fade" id="show_description-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="pin-modal-conceptdtls" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
-        <button id ="show_description-close" type="button" class="close" data-dismiss="modal">&times;</button>
-        <div id="show_description-dtls" class="show_description-container">
+        <div class="pin-container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="pin-model-img">
+                        <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg1" alt="pin image"> </a>
+                        <h4 id="concNm1">Excepteur sint occaecat cupidatat non proident </h4>
+                        <input type="hidden" id="ConcCod">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="new-pin">
+                    </div>
+                    <div>
+                        <label class="moodboard-lbl">All Concept Boards</label>
+                        <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                        <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
+                        <div class="boardlst" data-element="<%= conceptdtl.id %>"><%= conceptdtl.name %></div>
+                        <% }); %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+
+
+
+<div class="modal fade" id="show_description-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <button id ="show_description-close"  onclick="removeDialog()" type="button" class="close" data-dismiss="modal">&times;</button>
+        <div id="show_description-dtls" class="show_description-container">
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div id="addcboard-dtls" class="addcboard-container">
+
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
         $("#Editnotes").hide();
         $("#notes").show();
     });
+function removeDialog() {
+  $("#show_description-close").remove();
+}
+
     function showTextArea(){
         document.getElementById("notes").classList.toggle("show");
         var x = document.getElementById("notes");
@@ -151,5 +195,9 @@
     function showTagArea(){
         document.getElementById("tags").classList.toggle("show");
 
+    }
+    function showModalDeta(){
+        $("#ConcCod").modal('show');
+        $('#pin-modal-conceptdtls').modal('show');
     }
 </script>

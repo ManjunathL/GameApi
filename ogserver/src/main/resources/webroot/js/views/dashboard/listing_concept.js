@@ -406,7 +406,9 @@ define([
             "filterTag":filterTag
         }));
 
-        $('#concept-dtls').html(_.template(conceptdetailsPageTemplate));
+        $('#concept-dtls').html(_.template(conceptdetailsPageTemplate)({
+            'conceptboardsDtls':conceptboards.toJSON()
+        }));
 
         that.ready(conceptboardId);
     },
@@ -518,18 +520,22 @@ define([
         if (e.isDefaultPrevented()) return;
         e.preventDefault();
 
+        var that = this;
+
         var currentTarget = $(e.currentTarget);
         var conceptboardId = currentTarget.data('element');
 
+          var conceptlists = that.conceptlists;
+             conceptlists = conceptlists.toJSON();
+
         //var userId = sessionStorage.userId;
         var userConceptCode = $('#ConcCod').val();
+
 
          var formData = {
              "conceptboardId": conceptboardId,
              "userConceptCode": userConceptCode
         };
-
-        var that = this;
 
         that.add_conceptToCboards.getaddConceptToCBoard(conceptboardId, userConceptCode, {
            async: true,
@@ -543,6 +549,8 @@ define([
                console.log("Successfully save Concept to Concept board- ");
                console.log(response);
                $("#pin-modal").modal('hide');
+               $("#pin-modal-conceptdtls").modal('hide');
+
                return;
            },
            error:function(response) {
@@ -679,7 +687,7 @@ define([
 
 //        var consTitle = conceptdtls[0].conceptTitle;
 //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
-        var consTitle = conceptdtls[0].conceptDescription;
+        var consTitle = conceptdtls[0].conceptDetails;
         var n = consTitle.length;
         if (n > 160){
         concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
@@ -708,12 +716,15 @@ define([
 
      $("#concNmm").text(cnpnm);
      $("#concDes").html(concDes);
+     $("#ConcCod").val(cconceptCode);
      $("#show_description").attr("data-element",cconceptId);
      $("#show_description").attr("data-element1",consTitle);
 
 
      $("#conId").val(cconceptId);
      $("#mastImgg").attr("src",imgnm);
+
+     $("#mastImg1").attr("src",imgnm);
 
      if(typeof(userNote) != 'undefined' && userNote != null){
         $("#conceptNotetxt").html(userNote);
@@ -802,12 +813,14 @@ define([
 
      $("#concNmm").text(cnpnm);
      $("#concDes").html(concDes);
+     $("#ConcCod").val(cconceptCode);
      $("#show_description").attr("data-element",cconceptId);
      $("#show_description").attr("data-element1",consTitle);
 
 
      $("#conId").val(cconceptId);
      $("#mastImgg").attr("src",imgnm);
+     $("#mastImg1").attr("src",imgnm);
 
      if(typeof(userNote) != 'undefined' && userNote != null){
         $("#conceptNotetxt").html(userNote);
@@ -881,7 +894,7 @@ define([
 
 //        var consTitle = conceptdtls[0].conceptTitle;
 //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
-        var consTitle = conceptdtls[0].conceptDescription;
+        var consTitle = conceptdtls[0].conceptDetails;
         var n = consTitle.length;
         if (n > 160){
         concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
@@ -910,12 +923,14 @@ define([
 
      $("#concNmm").text(cnpnm);
      $("#concDes").html(concDes);
+     $("#ConcCod").val(cconceptCode);
      $("#show_description").attr("data-element",cconceptId);
      $("#show_description").attr("data-element1",consTitle);
 
 
      $("#conId").val(cconceptId);
      $("#mastImgg").attr("src",imgnm);
+     $("#mastImg1").attr("src",imgnm);
 
      if(typeof(userNote) != 'undefined' && userNote != null){
         $("#conceptNotetxt").html(userNote);
@@ -987,7 +1002,7 @@ define([
 
 //        var consTitle = conceptdtls[0].conceptTitle;
 //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
-        var consTitle = conceptdtls[0].conceptDescription;
+        var consTitle = conceptdtls[0].conceptDetails;
         var n = consTitle.length;
         if (n > 160){
         concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
@@ -1016,12 +1031,14 @@ define([
 
      $("#concNmm").text(cnpnm);
      $("#concDes").html(concDes);
+     $("#ConcCod").val(cconceptCode);
      $("#show_description").attr("data-element",cconceptId);
      $("#show_description").attr("data-element1",consTitle);
 
 
      $("#conId").val(cconceptId);
      $("#mastImgg").attr("src",imgnm);
+     $("#mastImg1").attr("src",imgnm);
 
      if(typeof(userNote) != 'undefined' && userNote != null){
         $("#conceptNotetxt").html(userNote);
