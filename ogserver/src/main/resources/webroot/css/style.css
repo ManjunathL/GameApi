@@ -56,6 +56,9 @@ hr {
 .mn0{
     margin:0px !important;
 }
+.ml0{
+    margin-left:0px !important;
+}
 .mt15{
     margin-top:15px;
 }
@@ -1809,22 +1812,33 @@ footer {
 }
 
 .sb-search_suggest {
-   color: #000;
-       font-size: 17px;
-       text-align: left;
-       background-color: #FFF;
-       width: 37%;
-       height: 210px;
-       overflow-y: auto;
-       overflow-x: hidden;
-       padding: 2%;
-       margin: auto;
-       display: none;
-       position: absolute;
-       top: 66%;
-       left: 20%;
-       z-index: 1;
-       box-shadow: 0px 0px 16px 1px rgba(36, 36, 36, 0.4);
+   font-size: 14px;
+   text-align: left;
+   background-color: #FFF;
+   width: 37%;
+   height: 210px;
+   overflow-y: auto;
+   overflow-x: hidden;
+   padding: 2%;
+   margin: auto;
+   display: none;
+   position: absolute;
+   top: 66%;
+   left: 20%;
+   z-index: 1;
+   box-shadow: 0px 0px 16px 1px rgba(36, 36, 36, 0.4);
+   line-height: 2.2;
+}
+.sb-search_suggest a{
+    color:#555;
+}
+.sb-search_suggest a:hover,
+.sb-search_suggest a:active,
+.sb-search_suggest a:focus{
+    color:#fff;
+}
+.sb-search_suggest a:hover > div{
+    background:#ec5136;
 }
 
 #userProfile-dv .dropdown-menu {

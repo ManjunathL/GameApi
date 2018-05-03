@@ -32,7 +32,7 @@ define([
         var that = this;
 
         var userId = sessionStorage.userId;
-        var userMindboardId = 17;
+        var userMindboardId = sessionStorage.defaultMindboardId;
         var pageno = 0;
         var itemPerPage = 50;
 

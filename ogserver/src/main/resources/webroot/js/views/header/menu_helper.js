@@ -106,16 +106,23 @@ define([
 //                    });
 //
 //                });
-                $('.search').click(function() {
+                $('.search-ico').click(function(e) {
                     $('.sb-search_suggest').slideDown();
                     $('#searchInput1').focus();
+                    e.preventDefault();
+                    return false;
                 });
 
                 $('.search_close').click(function() {
                     $('.sb-search_suggest').slideUp();
                 });
 
-                $('#searchInput1').keyup(function() {
+                $('#searchInput1').keyup(function(e) {
+
+                    if (e.keyCode == 13){
+                        e.preventDefault();
+                        return false;
+                    }
 
                     var char = $(this).val().length;
                     if (char >= 3) {
@@ -132,7 +139,7 @@ define([
 
                 $('#searchInput1').keyup(that.debounce(function(e) {
 
-                    if (e.keyCode == 13) return;
+                    if (e.keyCode == 13) return false;
 
                     var term = $(this).val();
                     if (term.length >= 3) {
@@ -146,6 +153,14 @@ define([
                         $('.sb-search_suggest').slideUp();
                     }
                 }, 250));
+
+                $('#searchInput1').keypress(function(e) {
+                        if (e.keyCode == 13){
+                            //alert("I m here");
+                            e.preventDefault();
+                            return false;
+                        }
+                });
 
                 $("#userProfile-dv").mouseleave(function(){
                     var hovered = $("#userProfile-dv").find(".dropdown-menu").length;

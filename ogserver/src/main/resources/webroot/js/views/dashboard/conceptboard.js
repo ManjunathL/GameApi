@@ -112,9 +112,7 @@ define([
       var that = this;
       var userId = sessionStorage.userId;
       //var userId = "user1234600";
-      sessionStorage.defaultMindboardId = 17;
       var userMindboardId = sessionStorage.defaultMindboardId;
-      //var userMindboardId = 17;
       var pageno = 0;
       var itemPerPage = 20;
       var filterId = 1;
@@ -292,8 +290,8 @@ define([
         if (e.isDefaultPrevented()) return;
             e.preventDefault();
 
-        //var userId = sessionStorage.userId;
-        var userId = "user1234600";
+        var userId = sessionStorage.userId;
+        //var userId = "user1234600";
         var userMindboardId = sessionStorage.defaultMindboardId;
 
         var currentTarget = $(e.currentTarget);
@@ -350,8 +348,8 @@ define([
         if (e.isDefaultPrevented()) return;
         e.preventDefault();
 
-        //var userId = sessionStorage.userId;
-        var userId = "user1234600";
+        var userId = sessionStorage.userId;
+        //var userId = "user1234600";
         var userMindboardId = sessionStorage.defaultMindboardId;
 
         //var formData = new FormData();

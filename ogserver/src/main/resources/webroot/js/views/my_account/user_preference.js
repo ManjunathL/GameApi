@@ -51,8 +51,8 @@ define([
     getUserHomePreferences: function(){
         var that = this;
         var category = 1;
-        //var userId = sessionStorage.userId;
-        var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
+        var userId = sessionStorage.userId;
+        //var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
         return new Promise(function(resolve, reject) {
             if(userId){
            that.user_home_preferences.getUserPreferences(category, userId, {
@@ -82,8 +82,8 @@ define([
     getUserFamilyPreferences: function(){
         var that = this;
         var category = 2;
-        //var userId = sessionStorage.userId;
-        var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
+        var userId = sessionStorage.userId;
+        //var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
         return new Promise(function(resolve, reject) {
            if(userId){
                that.user_family_preferences.getUserPreferences(category, userId, {
@@ -113,8 +113,8 @@ define([
     getUserMemberPreferences: function(){
         var that = this;
 
-        //var userId = sessionStorage.userId;
-        var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
+        var userId = sessionStorage.userId;
+        //var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
 
         return new Promise(function(resolve, reject) {
             if(userId){
@@ -169,7 +169,8 @@ define([
 
         if (e.isDefaultPrevented()) return;
                 e.preventDefault();
-                 var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
+                 //var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
+                 var userId = sessionStorage.userId;
                  var formData = that.filter_preference.get("selectedHomePreference");
 
                 var category = 1;
@@ -418,7 +419,8 @@ define([
 
             if (e.isDefaultPrevented()) return;
                     e.preventDefault();
-                     var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
+                     //var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
+                     var userId = sessionStorage.userId;
                      var formData = that.filter_preference.get("selectedFamilyPreference");
 
                     var category = 1;

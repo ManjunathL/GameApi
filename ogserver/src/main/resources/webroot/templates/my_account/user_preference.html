@@ -247,7 +247,7 @@ margin-top: 25px;
                                 <div class="form-group col-xs-2">
                                     <figure>
                                         <div class="form-group ">
-                                            <button id="butt<%= userOptsdtl.quesOptionid %>" name="<%= userOptsdtl.name %>" class="btn btn-light btn-circle btn-labeltxt multibutton userquesfamily cirbtn" <% if(typeof(userQuesdtl.userSelectedOption[0].optionId) !== 'undefined' && userQuesdtl.userSelectedOption[0].optionId == userOptsdtl.quesOptionid){ %> style="background-color:#634e42;color:#fff;" <% } %> data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"><%= userOptsdtl.name %></button>
+                                            <button id="butt<%= userOptsdtl.quesOptionid %>" name="<%= userOptsdtl.name %>" class="btn btn-light btn-circle btn-labeltxt multibutton userquesfamily cirbtn"  data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"><%= userOptsdtl.name %></button>
                                         </div>
                                     </figure>
                                 </div>
@@ -266,14 +266,15 @@ margin-top: 25px;
         </div>
         <div id="members" class="tab-pane">
             <div class="member-panel">
+                <div id="copymember">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputname">New Member</label>
                     <input type="Name" class="form-control" id="inputname" placeholder="Name">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputproject">Age Group</label>
-                    <select id="inputproject" class="form-control">
+                    <label for="inputage">Age Group</label>
+                    <select id="inputage" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
@@ -283,10 +284,10 @@ margin-top: 25px;
             <div class="form-row">
                 <div class="form-check form-check-inline form-group col-md-12 gender-style">
                     <label class="form-check-label">Gender</label>
-                    <input class="form-check-input" type="radio" id="inlineradio1" value="option1">
-                    <label class="form-check-label" for="inlineradio1">Male</label>
-                    <input class="form-check-input" type="radio" id="inlineradio2" value="option1">
-                    <label class="form-check-label" for="inlineradio1">Female</label>
+                    <input class="form-check-input" type="radio" id="male" value="option1">
+                    <label class="form-check-label" for="male">Male</label>
+                    <input class="form-check-input" type="radio" id="female" value="option1">
+                    <label class="form-check-label" for="female">Female</label>
                 </div>
             </div>
 
@@ -295,15 +296,15 @@ margin-top: 25px;
                     <label class="form-check-label">Work</label>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputproject">Category</label>
-                    <select id="inputproject1" class="form-control">
+                    <label for="inputcategory">Category</label>
+                    <select id="inputcategory" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputproject">Occupation</label>
-                    <select id="inputproject2" class="form-control">
+                    <label for="inputoccupation">Occupation</label>
+                    <select id="inputoccupation" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
@@ -315,15 +316,15 @@ margin-top: 25px;
                     <label class="form-check-label">Hobby 1</label>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputproject">Category</label>
-                    <select id="inputproject3" class="form-control">
+                    <label for="input2ndcategory">Category</label>
+                    <select id="input2ndcategory" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputproject">Hobbies</label>
-                    <select id="inputproject4" class="form-control">
+                    <label for="input1sthobbies">Hobbies</label>
+                    <select id="input1sthobbies" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
@@ -335,15 +336,15 @@ margin-top: 25px;
                     <label class="form-check-label">Hobby 2</label>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputproject">Category</label>
-                    <select id="inputproject5" class="form-control">
+                    <label for="input3rdcategory">Category</label>
+                    <select id="input3rdcategory" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputproject">Hobbies</label>
-                    <select id="inputproject6" class="form-control">
+                    <label for="input2ndhobbies">Hobbies</label>
+                    <select id="input2ndhobbies" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
@@ -355,15 +356,15 @@ margin-top: 25px;
                     <label class="form-check-label">Hobby 3</label>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputproject">Category</label>
-                    <select id="inputproject7" class="form-control">
+                    <label for="input4thcategory">Category</label>
+                    <select id="input4thcategory" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-5">
-                    <label for="inputproject">Hobbies</label>
-                    <select id="inputproject8" class="form-control">
+                    <label for="input3rdhobbies">Hobbies</label>
+                    <select id="input3rdhobbies" class="form-control">
                         <option selected>Choose...</option>
                         <option>...</option>
                     </select>
@@ -380,7 +381,7 @@ margin-top: 25px;
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <h3>Add Family Member  <span class="glyphicon glyphicon-plus"></span></h3>
+                    <h3>Add Family Member  <span class="glyphicon glyphicon-plus" id="addfamily"></span></h3>
                 </div>
             </div>
 
@@ -388,6 +389,7 @@ margin-top: 25px;
                 <div class="form-group col-md-12">
                     <button type="button" class="btn btn-primary btn-block">All Done</button>
                 </div>
+            </div>
             </div>
             </div>
         </div>
@@ -517,5 +519,37 @@ $('.multiselectFam').click(function (e) {
 });
 
 
+
+</script>
+
+
+<script>
+var current_id = 0;
+$('#addfamily').click(function(){
+    console.log("add family button clicked");
+    nextElement($('#copymember'));
+})
+
+function nextElement(element){
+    console.log("inside next element" +element);
+    var newElement = element.clone();
+    var id = current_id+1;
+    current_id = id;
+    newElement.attr("id","member-panel"+current_id);
+    var field = $('input', newElement).attr("id");
+    $('#inputname', newElement).attr("id","inputname"+current_id );
+    $('#inputage', newElement).attr("id","inputage"+current_id );
+    $('#male', newElement).attr("id","male"+current_id );
+    $('#female', newElement).attr("id","female"+current_id );
+    $('#inputcategory', newElement).attr("id","inputcategory"+current_id );
+    $('#inputoccupation', newElement).attr("id","inputoccupation"+current_id );
+    $('#input2ndcategory', newElement).attr("id","input2ndcategory"+current_id );
+    $('#input1sthobbies', newElement).attr("id","input1sthobbies"+current_id );
+    $('#input3rdcategory', newElement).attr("id","input3rdcategory"+current_id );
+    $('#input2ndhobbies', newElement).attr("id","input2ndhobbies"+current_id );
+    $('#input4thcategory', newElement).attr("id","input4thcategory"+current_id );
+    $('#input3rdhobbies', newElement).attr("id","input3rdhobbies"+current_id );
+    newElement.appendTo($("#copymember"));
+}
 
 </script>

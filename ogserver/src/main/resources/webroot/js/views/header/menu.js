@@ -17,7 +17,7 @@ define([
         this.authsetup = new Authsetup();
        // this.getAuthentication();
        this.listenTo(Backbone);
-       _.bindAll(this, 'renderSub', 'getAuthentication');
+       _.bindAll(this, 'renderSub');
     },
     render: function() {
         var that = this;
