@@ -32,6 +32,7 @@ public class FileUploadHandler extends AbstractRouteHandler {
         this.route().handler(BodyHandler.create().setUploadsDirectory("c:/Users/Public/uploads"));
 
         this.post("/file").handler(this::fileToAmazon);
+        this.post("/uploadimage/*").handler(this::uploadFileImaginest);
         String bucketName_game = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname_game", "mygubbigame");
         String accessKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key_game", "AKIAIX6TVPJXWC7C2WCA") ;
         String secretKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key_game", "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") ;
@@ -70,5 +71,20 @@ public class FileUploadHandler extends AbstractRouteHandler {
         amazonS3FileUploadClient.uploadFile(quoteNum,fileName);
 
         return defaultUrl+quoteNum;
+    }
+
+    public void uploadFileImaginest(RoutingContext routingContext)
+    {
+
+        String fileName = routingContext.request().getParam("imageUrl");
+
+        String bucketName_game = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname_imaginest", "mygubbigame");
+        String accessKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key_imaginest", "AKIAIX6TVPJXWC7C2WCA") ;
+        String secretKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key_imaginest", "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") ;
+
+        amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName_game,accessKey_game,secretKey_game);
+
+        amazonS3FileUploadClient.uploadFile(fileName,fileName);
+
     }
 }

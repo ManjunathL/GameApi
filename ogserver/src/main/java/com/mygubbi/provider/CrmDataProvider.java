@@ -3,6 +3,7 @@ package com.mygubbi.provider;
 import us.monoid.json.JSONArray;
 import us.monoid.json.JSONObject;
 
+import java.io.File;
 import java.util.HashMap;
 
 /**
@@ -58,13 +59,14 @@ private DataProviderMode dataProviderMode;
         }
     }
 
-    public JSONObject createCustomerIssue(String opportunityId, String issue) {
+    public JSONObject createCustomerIssue(String opportunityId, String issue, String documents) {
 
         try {
             return dataProviderMode.postResourceWithFormData("create_customer_issue.php", new HashMap<String, String>(){
                 {
                     put("opportunity_name",opportunityId);
                     put("name",issue);
+                    put("documents", documents);
                 }
             });
         } catch (Exception e) {

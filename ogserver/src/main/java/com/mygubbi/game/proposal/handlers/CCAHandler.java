@@ -21,6 +21,8 @@ import us.monoid.json.JSONException;
 import us.monoid.json.JSONObject;
 import us.monoid.web.JSONResource;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.*;
 
@@ -152,10 +154,11 @@ public class CCAHandler extends AbstractRouteHandler{
     private void createCustomerIssue(RoutingContext routingContext){
         String crmId = routingContext.request().getParam("opportunity_id");
         String issue = routingContext.request().getParam("issue");
+        String documents = routingContext.request().getParam("documets");
 
         LOG.debug("CUSTOMER ISSUE LOG PARAMS : " + crmId + ":" + issue);
 
-        JSONObject createIssue = crmDataProvider.createCustomerIssue(crmId,issue);
+        JSONObject createIssue = crmDataProvider.createCustomerIssue(crmId,issue,documents);
 
         if (createIssue != null)
         {

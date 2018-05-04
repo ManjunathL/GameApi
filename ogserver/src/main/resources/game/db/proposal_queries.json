@@ -1022,8 +1022,8 @@
       "id": "addons.products",
       "type": "select",
       "table": "addon_master",
-      "query": "select categoryCode,catalogueCode,title,product,code,rate,imagePath,uom,scopeDisplayFlag from addon_master where categoryCode = ? and productTypeCode = ? and productSubtypeCode = ? and brandCode = ?",
-      "params": ["categoryCode","productTypeCode","productSubtypeCode", "brandCode"]
+      "query": "select categoryCode,catalogueCode,title,product,code,rate,imagePath,uom,scopeDisplayFlag from addon_master where categoryCode = ? and productTypeCode = ? and productSubtypeCode = ? and brandCode = ? and fromDate < ? and toDate > ?",
+      "params": ["categoryCode","productTypeCode","productSubtypeCode", "brandCode", "priceDate", "priceDate"]
     },
 
     {
