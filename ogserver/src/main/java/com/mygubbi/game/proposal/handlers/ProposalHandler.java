@@ -961,6 +961,12 @@ public class ProposalHandler extends AbstractRouteHandler
             proposalVersion.setProposalStatus(CONFIRMED);
             proposalVersion.setInternalStatus(CONFIRMED);
             proposalHeaderJson.put("status",CONFIRMED);
+            java.util.Date date=new java.util.Date(); // your date
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int year = cal.get(Calendar.YEAR)%100;
+            int month = cal.get(Calendar.MONTH);
+            proposalHeaderJson.put("bookingOrderMonth",theMonth(month)+"-"+year);
         } else if (proposalVersion.getVersion().startsWith("1.")) {
             proposalVersion.setFromVersion(proposalVersion.getVersion());
             proposalVersion.setVersion("2.0");
@@ -1025,7 +1031,10 @@ public class ProposalHandler extends AbstractRouteHandler
 
         });
     }
-
+    public static String theMonth(int month){
+        String[] monthNames = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        return monthNames[month];
+    }
     private void updateProposal(RoutingContext routingContext, JsonObject proposalData, List<QueryData> queryDatas)
     {
         Integer id = LocalCache.getInstance().store(queryDatas);

@@ -1066,6 +1066,14 @@
       "params":["proposalId","version"],
       "resultfields":[],
       "default": "[]"
+    },
+    {
+      "uri": "/gapi/proposal/version/selectversion",
+      "source": "db",
+      "query":"proposal.version.selectversion",
+      "params":["proposalId","version"],
+      "resultfields":[],
+      "default": "[]"
     }
   ]
 }
