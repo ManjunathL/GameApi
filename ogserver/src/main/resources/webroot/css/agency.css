@@ -490,6 +490,37 @@
     margin-left: 207px !important;
 }
 
+
+
+.menu-address
+{
+    padding-bottom: 0px;
+    margin: 0px !important;
+}
+.menu-banglore
+{
+    display: inline-block;
+    color: #fff;
+    font-weight: 600;
+    border-right: 1px solid #fff;
+    padding-right: 10px;
+}
+.menu-pune{
+display: inline-block;
+    padding-left: 10px;
+    color: #fff;
+    font-weight: 600;
+    border-right: 1px solid #fff;
+    padding-right: 10px;
+}
+.menu-chennai{
+    display: inline-block;
+    padding-left: 10px;
+    color: #fff;
+    font-weight: 600;
+}
+
+
 .thought-txt{
     position:absolute;
     top:30%;
