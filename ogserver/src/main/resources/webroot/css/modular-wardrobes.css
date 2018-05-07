@@ -1002,10 +1002,16 @@ ul, ol{
     /*padding: 60px 20px 30px;
     min-height: 480px;*/
     padding: 20px 20px 30px;
-    min-height: 420px;
+    min-height: 288px;
     background: rgba(229, 231, 217, 0.85);
     border-radius: 4px;
     box-shadow: 8px 0px 20px rgba(51, 51, 51, 0.26);
+}
+.cucumber-form-contact{
+position: fixed;
+z-index: 999;
+right: 30px;
+
 }
 .mkc{
     background: #f7e902;
@@ -1091,7 +1097,7 @@ ul, ol{
     text-align: center;
     text-transform: capitalize;
     font-weight: 600;
-    font-size: 36px;
+    font-size: 20px;
     font-family: 'Lato', sans-serif;
     color: #c64a1b;
 }
