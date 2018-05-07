@@ -9,6 +9,7 @@ define([
   'text!templates/dashboard/conceptdetails.html',
   'text!templates/dashboard/similarconcepts.html',
   'text!templates/dashboard/relatedconcepts.html',
+  'text!templates/dashboard/spaceelements.html',
   'text!templates/dashboard/view_conceptDesc.html',
   'collections/conceptlists',
   'collections/needconceptlists',
@@ -23,8 +24,9 @@ define([
   'collections/remove_conceptFromCboards',
   'collections/add_conceptnotes',
   'collections/add_concepttags',
-  'collections/spaceelements'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements){
+  'collections/spaceelements',
+  'collections/spacetemplates'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,spaceTempPageTemplate, view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements, SpaceTemplates){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
@@ -39,6 +41,7 @@ define([
     add_conceptnotes: null,
     add_concepttags:null,
     spaceelements:null,
+    spacetemplates: null,
     remove_conceptFromCboards:null,
     initialize: function() {
         this.conceptlists = new ConceptLists();
@@ -52,8 +55,9 @@ define([
         this.add_conceptToCboards = new AddConceptToCboards();
         this.add_conceptnotes = new AddConceptnotes();
         this.add_concepttags = new AddConcepttags();
-         this.spaceelements = new SpaceElements();
+        this.spaceelements = new SpaceElements();
         this.remove_conceptFromCboards = new RemoveConceptFromCboards();
+        this.spacetemplates = new SpaceTemplates();
 
         this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
@@ -88,7 +92,58 @@ define([
         Promise.all([getConceptsPromise,getNeedConceptsPromise,getConceptTagsPromise,getConceptBoardsPromise,getSpaceElementPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.fetchConceptListsAndRender(conceptboardId);
+
         });
+    },
+    viewSpaceTemplates: function(e){
+        if (e.isDefaultPrevented()) return;
+        e.preventDefault();
+
+        var that = this;
+
+
+
+        var currentTarget = $(e.currentTarget);
+        var conceptboardId = currentTarget.data('element');
+        var spaceTypeCode = currentTarget.data('element1');
+
+        console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
+                 console.log(spaceTypeCode);
+
+        that.spaceelements.getSpaceElement(spaceTypeCode,{
+        async: true,
+        crossDomain: true,
+        method: "GET",
+        headers:{
+        "authorization": "Bearer "+ sessionStorage.authtoken
+        },
+        success: function(response) {
+        console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
+        console.log(response);
+        that.fetchSpacetypesAndRender(conceptboardId);
+        //resolve();
+        },
+        error: function(model, response, options) {
+        //reject();
+        console.log(" +++++++++++++++ Space Type Templates Error ++++++++++++++++++ ");
+                          console.log(response);
+        }
+        });
+
+    },
+
+    fetchSpacetypesAndRender: function(conceptboardId){
+        var that = this;
+        var spaceelements = that.spaceelements;
+
+        $("#spaceTemp111").html(_.template(spaceTempPageTemplate)({
+           "spacetemplates": spaceelements.toJSON(),
+           "selectedconceptboardId": conceptboardId
+       }));
+       $("#spaceTemp11").html(_.template(spaceTempPageTemplate)({
+                  "spacetemplates": spaceelements.toJSON(),
+                  "selectedconceptboardId": conceptboardId
+              }));
     },
     getConcepts: function(conceptboardId){
         var that = this;
@@ -226,7 +281,7 @@ define([
              }
         });
     },
-     getConceptTags: function(conceptboardId){
+    getConceptTags: function(conceptboardId){
         var that = this;
         return new Promise(function(resolve, reject) {
             that.concepttags.getConceptTagList(conceptboardId, {
@@ -403,12 +458,15 @@ define([
             "conceptboardId": conceptboardId,
             'conceptboardsDtls':conceptboards.toJSON(),
             "conceptBoardName":conceptBoardName,
-            "filterTag":filterTag
+            "filterTag":filterTag,
+            "spaceelements":spaceelements.toJSON()
         }));
 
         $('#concept-dtls').html(_.template(conceptdetailsPageTemplate)({
             'conceptboardsDtls':conceptboards.toJSON()
+
         }));
+
 
         that.ready(conceptboardId);
     },
@@ -453,11 +511,12 @@ define([
          "click .relatedconceptImg": "getRelatedConceptDetails",
          "click .similarconceptImg": "getSimilarConceptDetails",
          "click #addCBoard": "viewAddCboard",
-         "click .boardlst": "addConcept2Cboard",
+         "click .boardlst": "viewSpaceTemplates",
          "click #save_CNote": "submitConceptNote",
          "click #save_CTag": "submitConceptTag",
          "click .remove-pin": "removeConceptFromCboard",
-         "click. #show_description":"viewDescription"
+         "click. #show_description":"viewDescription",
+         "click #saveSpaveElement":"addConcept2Cboard"
 
     },
     viewDescription:function(evt){
@@ -521,23 +580,26 @@ define([
         e.preventDefault();
 
         var that = this;
-
+        console.log(" +++++++++++++++ I am here  ++++++++++++++++++ ");
         var currentTarget = $(e.currentTarget);
-        var conceptboardId = currentTarget.data('element');
+        var conceptboardId = $('#conceptBoardIdTxt').val();
 
-          var conceptlists = that.conceptlists;
-             conceptlists = conceptlists.toJSON();
+         //var conceptlists = that.conceptlists;
+             //conceptlists = conceptlists.toJSON();
 
         //var userId = sessionStorage.userId;
         var userConceptCode = $('#ConcCod').val();
+        var spaceElementCode=$('#spaceElementCodeTxt').val();
 
 
          var formData = {
              "conceptboardId": conceptboardId,
-             "userConceptCode": userConceptCode
+             "userConceptCode": userConceptCode,
+             "spaceElementCode": spaceElementCode
         };
-
-        that.add_conceptToCboards.getaddConceptToCBoard(conceptboardId, userConceptCode, {
+         console.log(" ++++++formData  ++++++++++++++++++ ");
+         console.log(formData);
+        that.add_conceptToCboards.getaddConceptToCBoard(conceptboardId,userConceptCode,spaceElementCode,{
            async: true,
            crossDomain: true,
            method: "POST",
@@ -545,6 +607,7 @@ define([
                "authorization": "Bearer "+ sessionStorage.authtoken,
                "Content-Type": "application/json"
            },
+           data: JSON.stringify(formData),
            success:function(response) {
                console.log("Successfully save Concept to Concept board- ");
                console.log(response);
@@ -689,12 +752,14 @@ define([
 //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
         var consTitle = conceptdtls[0].conceptDetails;
         var n = consTitle.length;
-        if (n > 160){
-        concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+        if (n > 60){
+        concDes = consTitle.slice(0, 60) +' <a  href="javascript:void(0);" class="color-orange read_full sidebar-box black" ><a href="javascript:void(0);" onclick="showDesc()" class="button readMore" style="">Read More...</a></p></a>';
 
         } else {
         concDes = consTitle;
         }
+
+        concFullDes = consTitle;
 
 
         cnpnm = conceptdtls[0].conceptTitle;
@@ -716,6 +781,7 @@ define([
 
      $("#concNmm").text(cnpnm);
      $("#concDes").html(concDes);
+     $("#concFullDes").html(concFullDes);
      $("#ConcCod").val(cconceptCode);
      $("#show_description").attr("data-element",cconceptId);
      $("#show_description").attr("data-element1",consTitle);
@@ -786,12 +852,12 @@ define([
 //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
         var consTitle = conceptdtls[0].conceptTypeDescription;
         var n = consTitle.length;
-        if (n > 160){
+        /*if (n > 160){
         concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
 
         } else {
         concDes = consTitle;
-        }
+        }*/
 
 
         cnpnm = conceptdtls[0].conceptTitle;

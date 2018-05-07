@@ -6,10 +6,10 @@ define([
 ], function($, _, Backbone, AddConceptToCboard){
     var AddConceptToCboards = Backbone.Collection.extend({
         model: AddConceptToCboard,
-        url: baseRestApiUrl + 'MyGubbiApi/conceptboardConcept/add/',
-        getaddConceptToCBoard: function(conceptboardId,conceptCode, options) {
-            var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboardConcept/add/';
-            this.url = urllnk + conceptboardId + '/' + conceptCode;
+        url: baseRestApiUrl + 'MyGubbiApi/conceptboardConcept/web/add/',
+        getaddConceptToCBoard: function(conceptboardId,conceptCode,spaceElementCode,options) {
+            var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboardConcept/web/add';
+            this.url = urllnk + "?conceptboardId=" + conceptboardId + "&conceptCode=" + conceptCode + "&spaceElementCode=" + spaceElementCode;
             return this.fetch(options);
         },
         initialize: function(models) {
@@ -20,3 +20,7 @@ define([
     });
   return AddConceptToCboards;
 });
+
+/*
+http://45.112.138.146:8080/MyGubbiApi/conceptboardConcept/web/add?conceptboardId=3595&conceptCode=C-00129&spaceElementCode=SE-BASECABINET
+"http://45.112.138.146:8080/MyGubbiApi/conceptboardConcept/web/add?conceptboardId=3727&conceptCode=C-00148&spaceElementCode=SE-BASECABINET"*/

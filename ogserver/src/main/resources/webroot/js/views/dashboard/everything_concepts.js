@@ -5,23 +5,32 @@ define([
   'bootstrap',
   'pinterest_grid',
   'text!templates/dashboard/everything.html',
-  'collections/everythings'
-], function($, _, Backbone, Bootstrap, pinterest_grid, everythingPageTemplate,Everything){
+   'models/filter',
+  'collections/everythings',
+  'collections/conceptalltags',
+], function($, _, Backbone, Bootstrap, pinterest_grid, everythingPageTemplate, Filter, Everything, ConceptAllTags){
   var EverythingConceptPage = Backbone.View.extend({
     el: '.page',
+    filter: null,
     everythings: null,
+    conceptalltags: null,
     initialize: function() {
+        this.filter = new Filter();
         this.everythings = new Everything();
+        this.conceptalltags = new ConceptAllTags();
+        this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
         _.bindAll(this, 'render');
     },
     render: function () {
         var that = this;
+        window.filter = that.filter;
         console.log("****IN RENDER ***********")
         var spaceTypeCode = that.model.spaceTypeCode;
         var getEverythingConceptBoardPromise = that.getEverythingConceptBoard();
+        var getConceptAllTagsPromise = that.getConceptAllTags();
 
-        Promise.all([getEverythingConceptBoardPromise]).then(function() {
+        Promise.all([getEverythingConceptBoardPromise,getConceptAllTagsPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.rendersub();
         });
@@ -32,7 +41,7 @@ define([
         var that = this;
 
         var userId = sessionStorage.userId;
-        var userMindboardId = 17;
+        var userMindboardId = sessionStorage.defaultMindboardId;
         var pageno = 0;
         var itemPerPage = 50;
 
@@ -112,15 +121,60 @@ define([
          }
     });
     },
+    getConceptAllTags: function(){
+            var that = this;
+            var userMindboardId = sessionStorage.defaultMindboardId;
 
+            return new Promise(function(resolve, reject) {
+             if(typeof(userMindboardId) !== 'undefined') {
+               that.conceptalltags.getConceptAllTagList(userMindboardId, {
+                  async: true,
+                  crossDomain: true,
+                  method: "GET",
+                  headers:{
+                      "authorization": "Bearer "+ sessionStorage.authtoken
+                  },
+                  success:function(response) {
+                      console.log("Successfully fetch Concept Tags - ");
+                      console.log(response);
+                      resolve();
+                  },
+                  error:function(response) {
+                      console.log(" +++++++++++++++ Errrorr Tags ++++++++++++++++++ ");
+                      console.log(response);
+                      reject();
+                  }
+              });
+             }else{
+                resolve();
+             }
+             });
+
+        },
     rendersub: function(){
         var that = this;
         var everythings = that.everythings;
         everythings = everythings.toJSON();
 
+        var conceptalltags = that.conceptalltags;
+         var filterTag = that.filter.get('selectedTag');
+        if ((typeof(filterTag) !== 'undefined') && (filterTag.length != 0)) {
+         var filteredConcepts = that.everythings.filterByTags(everythings[0].listOfConcepts, filterTag);
+
+            console.log("@@@@@@@@@@ filteredConcepts @@@@@@@@");
+            console.log(filteredConcepts);
+            console.log("@@@@@@@@@@@@@@@@@@");
+
+                    everythings[0].listOfConcepts = filteredConcepts;
+                    }
+console.log("@@@@@@@@@@ everythings[0].listOfConcepts  @@@@@@@@");
+            console.log(everythings[0].listOfConcepts );
+            console.log("@@@@@@@@@@@@@@@@@@");
 
         $(this.el).html(_.template(everythingPageTemplate)({
-         "listOfConcepts": everythings[0].listOfConcepts
+         "listOfConcepts": everythings[0].listOfConcepts,
+         "conceptalltags": conceptalltags.toJSON(),
+          "filterTag":filterTag
         }));
         that.ready();
     },

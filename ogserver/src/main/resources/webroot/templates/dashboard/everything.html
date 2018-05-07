@@ -1,13 +1,53 @@
+<%= console.log("@@@@@@@@@@@@@@@ Tag list @@@@@@@@@@@@@@@@@") %>
+<%= console.log(conceptalltags) %>
+
 <%= console.log("@@@@@@@@@@@@@@@ Concepts @@@@@@@@@@@@@@@@@") %>
 <%= console.log(listOfConcepts) %>
 <link href="css/layout.css" rel="stylesheet">
 <!--<button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>-->
+
 <section>
     <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;">
         <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;">Home</h2>
 
         <div class="col-md-12 col-lg-12" >
-
+            <div id="myCarousel112" class="carousel slide mt30">
+                <div class="tagicos">
+                    <div class="tagicos clearfix carousel-inner">
+                        <% if(typeof(conceptalltags) !== 'undefined'){ %>
+                        <% var tagnmArr = [] %>
+                        <% _.each(conceptalltags[0].conceptboardtagList, function(conceptdtls, i){ %>
+                        <% tagnmArr.push('.'+conceptdtls.tag) %>
+                        <% }); %>
+                        <% } %>
+                        <% if(typeof(conceptalltags) !== 'undefined'){ %>
+                        <% var clsarr = ['tgf','tgs','tgt','tgfr']; %>
+                        <% var icols = 10; %>
+                        <% _.each(conceptalltags[0].conceptboardtagList, function(concepttgs, i){ %>
+                        <% var tagnm = concepttgs.tag %>
+                        <% if( (++i)%icols == 1 ) {  %>
+                        <div class="tagicos-cnt item">
+                            <% } %>
+                            <% if( i == 1) {  %>
+                            <div class="tgico">
+                                <span class="active <%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) == 'undefined') || (filterTag == "")){ %> style="background-color: #fff;color: #666;box-shadow: 0px 5px 10px #555;" <% } %> onclick="getTagsView('all')">All</span>
+                            </div>
+                            <% } %>
+                            <div class="tgico">
+                                <span onclick="getTagsView('<%= tagnm %>')"  class="<%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) !== 'undefined') && (filterTag == tagnm)){ %> style="background-color: #fff;color: #666;box-shadow: 0px 5px 10px #555;" <% } %> title="<%= tagnm %>"><%= tagnm %></span>
+                            </div>
+                            <% if( i%icols == 0 || i== conceptalltags[0].conceptboardtagList.length ) { %>
+                        </div>
+                        <% } %>
+                        <% }); %>
+                        <% } %>
+                    </div>
+                </div>
+                <% if(conceptalltags[0].conceptboardtagList.length > 11){ %>
+                <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x" style="color: #33434E;"></i></a>
+                <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x" style="color: #33434E;"></i></a>
+                <% } %>
+            </div>
             <div class="position-relative" style="height:auto;">
                 <div class="pinBoot bg-white" id="listOfConceptspinBoot" style="margin-top: 15px;margin-bottom: 130px;k">
 

@@ -1,3 +1,7 @@
+<%= console.log("@@@####################### Tushar @@@@@@@@@@@@@@@@@") %>
+<%= console.log(conceptboardsDtls) %>
+
+
 <link rel="stylesheet" href="js/libs/bootstrap-tagsinput.css">
 <script src="js/libs/bootstrap-tagsinput.js"></script>
 
@@ -64,16 +68,57 @@
     .owl-carousel {
         width: 98%;
     }
+    .btn-container{
+      margin: auto;
+      height:44px;
+      width:166.23px;
+
+}
+.readMore{
+    color: #ea5c36;
+}
+ #owl-sptype .item{
+        margin: 3px;
+        padding: 10px;
+    }
+    #owl-sptype .item img{
+        display: block;
+        width: 106px;
+        height: 75px;
+    }
+
+    #owl-tmpltype .item{
+        margin: 3px;
+        padding: 10px;
+    }
+    #owl-tmpltype .item img{
+        display: block;
+        width: 145px;
+        height: 96px;
+    }
+    .owl-prev{
+        position: absolute;
+        left: -25px;
+        top: 25px;
+    }
+    .owl-next{
+        position: absolute;
+        right: -30px;
+        top: 25px;
+    }
 </style>
 
-<div class="row conceptdtlspg">
-    <div class="col-sm-4 col-md-4">
+<div class="row conceptdtlspg" id="place">
+       <div class="col-sm-4 col-md-4">
         <div class="pin-model-img">
             <img src="img/pnis/pin1.jpg" class="main-concept-img img-responsive" id="mastImgg" alt="pin image" width="290px">
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12">
                 <p id="concDes">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+                </p>
+                <p id="concFullDes" style="display:none;">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
                 </p>
                 <!--new div for add notes and add tags-->
@@ -92,7 +137,7 @@
     <!--<div class="col-sm-1 col-md-1"></div>-->
     <div class="col-sm-8 col-md-8" style="padding-left:40px;">
         <div class="pin" style="float:right;">
-            <a href="javascript:void(0);" onclick="showModalDeta()" class="btn btn-pin boardlst"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+         lllllllll   <a href="javascript:void(0);" onclick="showModalDeta()" class="btn btn-pin "> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
         </div>
         <div class="new-pin">
             <h5 id="concNmm">Excepteur sint occaecat cupidatat non proident </h5>
@@ -132,14 +177,15 @@
     <div class="modal-dialog">
         <div class="pin-container">
             <div class="row">
-                <div class="col-sm-6 col-md-6">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="col-sm-3 col-md-3">
                     <div class="pin-model-img">
                         <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg1" alt="pin image"> </a>
                         <h4 id="concNm1">Excepteur sint occaecat cupidatat non proident </h4>
                         <input type="hidden" id="ConcCod">
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-6">
+               <!-- <div class="col-sm-6 col-md-6">
                     <div class="new-pin">
                     </div>
                     <div>
@@ -150,7 +196,23 @@
                         <% }); %>
                         <% } %>
                     </div>
-                </div>
+                </div>-->
+
+                    <div class="col-xs-8 col-sm-8 col-md-8 ">
+                        <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                        <div id="owl-sptype1" class="owl-carousel owl-theme">
+                            <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(splst, i){ %>
+                            <div class="item boardlst"
+                                 data-element="<%= splst.id %>" data-element1="<%= splst.spaceTypeCode %>" >
+                                <img src="<%= splst.imgUrl %>" alt="<%= splst.code %>" class="img-responsive img-centered">
+                                <h5><%= splst.name %></h5>
+                            </div>
+                            <% }); %>
+                        </div>
+                        <% } %>
+                        <div id="spaceTemp11"></div>
+                    </div>
+
             </div>
         </div>
     </div>
@@ -159,13 +221,13 @@
 
 
 
-<div class="modal fade" id="show_description-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
+<!--<div class="modal fade" id="show_description-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" >
         <button id ="show_description-close"  onclick="removeDialog()" type="button" class="close" data-dismiss="modal">&times;</button>
         <div id="show_description-dtls" class="show_description-container">
         </div>
     </div>
-</div>
+</div>-->
 <div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div id="addcboard-dtls" class="addcboard-container">
@@ -179,9 +241,7 @@
         $("#Editnotes").hide();
         $("#notes").show();
     });
-function removeDialog() {
-  $("#show_description-close").remove();
-}
+
 
     function showTextArea(){
         document.getElementById("notes").classList.toggle("show");
@@ -200,4 +260,32 @@ function removeDialog() {
         $("#ConcCod").modal('show');
         $('#pin-modal-conceptdtls').modal('show');
     }
+  function showDesc(){
+   $('#concFullDes').css('display', 'block');
+    $('#concDes').css('display', 'none');
+  }
+
+   $(function() {
+      $("#owl-sptype1").owlCarousel({
+        autoPlay: 3000,
+        items : 5,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+      $("#owl-tmpltype").owlCarousel({
+        autoPlay: 3000,
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+        $("#frmsec").fadeOut();
+    });
+
+
 </script>
