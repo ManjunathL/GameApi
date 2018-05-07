@@ -53,7 +53,8 @@ define([
     },
     getConceptBoards: function(){
           var that = this;
-          var userId = "user1234600";
+          //var userId = "user1234600";
+          var userId = sessionStorage.userId
           var userMindboardId = sessionStorage.defaultMindboardId;
           var pageno = 0;
           var itemPerPage = 20;

@@ -1,15 +1,24 @@
 define(['firebase', 'underscore', 'backbone'], function(firebase, _, backbone) {
 
     // Initialize Firebase
-      var fbaseconfig = {
+      /*var fbaseconfig = {
         apiKey: "AIzaSyCoKs1sqeE8GmMKysYpkOdO9KkZXcmhDQ0",
         authDomain: "mygubbi-uat.firebaseapp.com",
         databaseURL: "https://mygubbi-uat.firebaseio.com",
         projectId: "mygubbi-uat",
         storageBucket: "mygubbi-uat.appspot.com",
         messagingSenderId: "106892346704"
-      };
-      firebase.initializeApp(fbaseconfig);
+      }*/;
+
+      var fbaseconfig = {
+          apiKey: "AIzaSyDSPcBzLKajg_Y2FH3UjpqfxxVocDqjbdw",
+          authDomain: "mygubbi-imagineer.firebaseapp.com",
+          databaseURL: "https://mygubbi-imagineer.firebaseio.com",
+          projectId: "mygubbi-imagineer",
+          storageBucket: "mygubbi-imagineer.appspot.com",
+          messagingSenderId: "921246497123"
+        };
+        firebase.initializeApp(fbaseconfig);
 
     console.log("@@@@@@@@@@@@@@ Firebase Initialization @@@@@@@@@@@@@@@@@@@");
     console.log(fbaseconfig.databaseURL);

@@ -61,14 +61,18 @@ define([
                if(typeof(authData.uid) !== 'undefined'){
                     sessionStorage.fbId = authData.uid;
 
-                    //sessionStorage.userId = authData.uid;
+                    sessionStorage.fbtoken = authData._lat;
+
+                    if(typeof(authData.uid) !== 'undefined'){
+                     sessionStorage.userId = authData.uid;
+                    }
 
                     //window.location = "/viewconceptboards";
 
                     window.App.router.navigate("/viewconceptboards", {
-                                    trigger: true
-                                });
-                                that.getAuthentication(emailId,pwd);
+                        trigger: true
+                    });
+                    that.getAuthentication(emailId,pwd);
 
                }else{
                     sessionStorage.fbId = "";
@@ -89,8 +93,8 @@ define([
          var that = this;
 
          var form = new FormData();
-         form.append("username", emailId);
-         form.append("password", pwd);
+         form.append("username", sessionStorage.fbtoken);
+         form.append("password", "welcome");
          form.append("grant_type", "password");
          form.append("client_id", "clientIdPassword");
 
@@ -131,12 +135,12 @@ define([
              sessionStorage.authtoken = "";
          }
 
-         if(typeof(authTokenObj.userId) !== 'undefined'){
+         /*if(typeof(authTokenObj.userId) !== 'undefined'){
              sessionStorage.userId = authTokenObj.userId;
-         }else{
-             sessionStorage.userId = "user1234600";
-         }
-         sessionStorage.userId = "user1234600";
+         }*///else{
+             //sessionStorage.userId = "user1234600";
+         //}
+         //sessionStorage.userId = "user1234600";
 
          //$("#accessToken").val(sessionStorage.authtoken);
          //window.location.href = "/viewconceptboards";
