@@ -80,4 +80,17 @@
 		filterList.init();
 
     });
+
+    function getTagsView(selTag){
+        if(selTag == 'all'){
+            filter.set({'noFilterApplied': 0});
+            filter.set({'selectedTag': ''});
+            filter.trigger('change');
+        }else{
+            console.log("Selected Tags============ "+selTag);
+            $("#"+selTag).css("background-color","#fff");
+            filter.set({'selectedTag': selTag});
+            filter.trigger('change');
+        }
+    }
 </script>

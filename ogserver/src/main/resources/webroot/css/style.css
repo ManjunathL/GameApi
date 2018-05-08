@@ -868,7 +868,7 @@ ul.spaceTypelst li{
 
 @media (min-width: 768px){
     .modal-dialog {
-        width: 600px;
+        width: 900px;
         margin: 40px auto;
     }
 }

@@ -1,0 +1,87 @@
+<%= console.log("++++++++++++++++++++++++++spacet elements details+++++++++++++++++++++++++++++") %>
+<%= console.log(spacetemplates) %>
+<style>
+    #owl-sptype .item{
+        margin: 3px;
+        padding: 10px;
+    }
+    #owl-sptype .item img{
+        display: block;
+        width: 106px;
+        height: 75px;
+    }
+
+    .owl-tmpltype .item{
+        margin: 3px;
+        padding: 10px;
+    }
+    .owl-tmpltype .item img{
+        display: block;
+        width: 145px;
+        height: 96px;
+    }
+    .owl-prev{
+        position: absolute;
+        left: -25px;
+        top: 25px;
+    }
+    .owl-next{
+        position: absolute;
+        right: -30px;
+        top: 25px;
+    }
+</style>
+
+<% if(typeof(spacetemplates) !== 'undefined'){ %>
+<div  class="owl-carousel owl-theme owl-tmpltype">
+    <% _.each(spacetemplates[0].spaceElementList, function(spltemst, i){ %>
+    <div class="item selTemp"
+         data-element="<%= spltemst.code %>"  >
+        <img src="<%= spltemst.imageUrl %>" alt="<%= spltemst.code %>" class="img-responsive img-centered">
+        <h5><%= spltemst.title %></h5>
+    </div>
+    <% }); %>
+</div>
+<% }else{ %>
+<div>
+    <p>No Related Space Element</p>
+</div>
+<% } %>
+<div class="clearfix"></div>
+<div class="frmsec" class="col-xs-12 col-md-12 col-centered  ">
+    <form>
+        <input type="hidden" id="conceptBoardIdTxt" name="conceptBoardIdTxt" value="<%= selectedconceptboardId %>">
+        <input type="hidden" id="spaceElementCodeTxt" name="spaceElementCodeTxt" value="">
+        <div class="mt15" style="text-align:right;">
+            <input type="submit" id="saveSpaveElement" class="btn addcboard-btn " value="Add Concept">
+        </div>
+    </form>
+
+</div>
+<div class="clearfix"></div>
+<script src="js/libs/owl.carousel/dist/owl.carousel.min.js"></script>
+<script>
+   $(document).ready(function() {
+      $(".owl-tmpltype").owlCarousel({
+        autoPlay: 3000,
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+
+    });
+
+       $(".frmsec").fadeOut();
+    $(".selTemp").click(function(evt){
+        evt.preventDefault();
+        var currentTarget = $(evt.currentTarget);
+        var tempCode = currentTarget.data('element');
+        $("#spaceElementCodeTxt").val(tempCode);
+        $(".selTemp").removeClass("active-Stypebox");
+        $(currentTarget).addClass("active-Stypebox");
+        $(".frmsec").fadeIn();
+    });
+</script>

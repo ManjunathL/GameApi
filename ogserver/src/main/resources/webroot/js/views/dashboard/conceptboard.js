@@ -22,11 +22,12 @@ define([
   'collections/similar_concepts',
   'collections/related_concepts',
   'collections/add_conceptboards',
+  'collections/add_blankboards',
   'views/dashboard/add_conceptboard',
   'collections/add_conceptToCboards',
   'collections/remove_conceptBoards',
   'collections/edit_conceptboards'
-], function($, _, Backbone, Bootstrap, pinterest_grid, dashboardPageTemplate, kitchenPageTemplate, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, livingPageTemplate, editCBoardPageTemplate, SpaceTypes, CreateConceptBoards, ConceptBoards, ConceptLists, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptBoards,EditConceptboards){
+], function($, _, Backbone, Bootstrap, pinterest_grid, dashboardPageTemplate, kitchenPageTemplate, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate, livingPageTemplate, editCBoardPageTemplate, SpaceTypes, CreateConceptBoards, ConceptBoards, ConceptLists, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddBlankboards, AddConceptboard, AddConceptToCboards, RemoveConceptBoards,EditConceptboards){
   var ConceptboardPage = Backbone.View.extend({
     el: '.page',
     //concepts: null,
@@ -39,6 +40,7 @@ define([
     similar_concepts: null,
     related_concepts: null,
     add_conceptboards: null,
+    add_blankboards: null,
     add_concept2boards: null,
     remove_conceptBoards:null,
     edit_conceptboards:null,
@@ -53,6 +55,7 @@ define([
         this.similar_concepts = new SimilarConcepts();
         this.related_concepts = new RelatedConcepts();
         this.add_conceptboards = new AddConceptboards();
+        this.add_blankboards = new AddBlankboards();
         this.add_conceptToCboards = new AddConceptToCboards();
         this.remove_conceptBoards = new RemoveConceptBoards();
         this.edit_conceptboards = new EditConceptboards();
@@ -351,7 +354,7 @@ define([
         var userId = sessionStorage.userId;
         //var userId = "user1234600";
         var userMindboardId = sessionStorage.defaultMindboardId;
-
+        var CheckConceptBoard = $('#templateCodeTxt').val();
         //var formData = new FormData();
        /*var formData = JSON.stringify({
          "userId": "user1234600",
@@ -360,6 +363,8 @@ define([
          "templateCode": "TC1001",
          "userMindboardId": "62"
        });*/
+
+       if(CheckConceptBoard != "blank"){
        var formData = {
             "id": 0,
             "userId": userId,
@@ -412,6 +417,60 @@ define([
 
           }
       });
+      }else{
+             var formData = {
+                      "id": 0,
+                      "userId": userId,
+                      "name": $('#cboardnameTxt').val(),
+                      "spaceTypeCode":$('#spaceTypeCodeTxt').val(),
+                      "description": 'blank',
+                     /* "templateCode": $('#templateCodeTxt').val(),*/
+                      "userMindboardId": userMindboardId,
+                      /*"imgUrl":'none',
+                      "noOfConceptsAdded": 1,*/
+                      "userNote": 'blank'
+                 };
+                  var that = this;
+                  console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+                  console.log(formData);
+
+                  that.add_blankboards.fetch({
+                     async: true,
+                     crossDomain: true,
+                     method: "POST",
+                     headers:{
+                         "authorization": "Bearer "+ sessionStorage.authtoken,
+                         "Content-Type": "application/json"
+                     },
+                     data: JSON.stringify(formData),
+                     success:function(response) {
+                        console.log("Successfully save Concept board through template selection... ");
+                        console.log(response);
+                        $("#addcboard-modal").modal('hide');
+                        $("#snackbar").html("Successfully save Concept board through template selection... ");
+                        var x = document.getElementById("snackbar")
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                        that.render();
+                        return;
+
+                    },
+                    error:function(model, response, options) {
+
+                        console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
+                        console.log(JSON.stringify(response));
+                        console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+                        console.log(response.responseJSON.errorMessage);
+
+                         $("#snackbar").html(response.responseJSON.errorMessage);
+                         var x = document.getElementById("snackbar")
+                         x.className = "show";
+                         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                         return;
+
+                    }
+                });
+            }
     },
     getSelectedTemplatess: function(evt){
         evt.preventDefault();
