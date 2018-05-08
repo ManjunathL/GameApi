@@ -43,6 +43,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -106,6 +109,7 @@ public class ProposalHandler extends AbstractRouteHandler
         this.post("/updatepricefordraftproposals").handler(this::updatePriceForDraftProposals);
         this.get("/ratefactordetailsfromhandler").handler(this::getRateFactor);
         this.post("/version/price").handler(this::getPriceV2);
+        this.get("/getbookingmonthoptions").handler(this::getBookingMonth);
         this.proposalDocsFolder = ConfigHolder.getInstance().getStringValue("proposal_docs_folder", "/tmp/");
         LOG.info("this.proposalDocsFolder:" + this.proposalDocsFolder);
     }
@@ -1636,10 +1640,82 @@ public class ProposalHandler extends AbstractRouteHandler
             LOG.debug("From proposalHandler service ");
 //            message.reply(LocalCache.getInstance().store(new JsonObject().put("status","success")));
             sendJsonResponse(context,new JsonObject().put("status","success").toString());
-
-
         }
     }
+
+    private void getBookingMonth(RoutingContext routingContext)
+    {
+        int proposalId = Integer.parseInt(routingContext.request().getParam("proposalId"));
+        String version = (routingContext.request().getParam("version"));
+        JsonObject jsonObject =  new JsonObject();
+        jsonObject.put("proposalId",proposalId);
+        jsonObject.put("version",version);
+
+        Integer id = LocalCache.getInstance().store(new QueryData("proposal.version.selectversion", jsonObject));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.rows.isEmpty())
+                    {
+                        getBookingMonthOptions(routingContext,new java.util.Date(System.currentTimeMillis()),false);
+                    }
+                    else
+                    {
+                        ProposalVersion proposalVersion = new ProposalVersion(resultData.rows.get(0));
+                        java.util.Date utilDate = new java.util.Date(proposalVersion.getBusinessDate().getTime());
+                        getBookingMonthOptions(routingContext,utilDate,true);
+
+                    }
+                });
+
+    }
+
+    private void getBookingMonthOptions(RoutingContext routingContext,java.util.Date confirmedDate,boolean confirmedStatus)
+    {
+        List<JsonObject> months = new ArrayList<>();
+        if (confirmedStatus)
+        {
+            LOG.info("Confirmed status true:");
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(confirmedDate);
+            int curr_month = c.get(Calendar.MONTH);
+            int previous_month = curr_month - 1;
+
+            String curr_monthName = concatMonthAndYear(curr_month);
+            String previous_monthName = concatMonthAndYear(previous_month);
+
+            months.add(new JsonObject().put("bookingMonth",curr_monthName));
+            months.add(new JsonObject().put("bookingMonth",previous_monthName));
+
+            sendJsonResponse(routingContext,months.toString());
+        }
+        else
+        {
+            LOG.info("Confirmed status false:");
+            months.add(new JsonObject().put("bookingMonth","NA"));
+            sendJsonResponse(routingContext,months.toString());
+        }
+
+
+    }
+
+    public static String concatMonthAndYear(int num)
+    {
+        String month = "wrong";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11 ) {
+            month = months[num];
+        }
+
+        String month_Title = month.substring(0,3);
+        DateFormat df = new SimpleDateFormat("yy"); // Just the year, with 2 digits
+        String formattedDate = df.format(Calendar.getInstance().getTime());
+
+        return month_Title + "-" + formattedDate;
+    }
+
 }
 
 
