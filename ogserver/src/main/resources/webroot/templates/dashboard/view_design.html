@@ -1,5 +1,8 @@
 <%= console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@22222@") %>
 <%= console.log(designList) %>
+
+<%= console.log("@@@@@@@@@@@@@@@@@@@ roomlayouts @@@@@@@@22222@") %>
+<%= console.log(roomlayouts) %>
 <style>
     .pinBoot .white-panel {
         margin-top: 10px!important;
@@ -17,7 +20,8 @@
                     <h4>Filters:</h4>
                 </div>
                 <div class="col-lg-8 col-md-8 hidden-sm hidden-xs">
-                    <ul class="dropdown filters">
+                    <div class="col-lg-4 col-md-4">
+                        <ul class="dropdown filters">
                         <li class="padding0-20">
                             <a
                                     class="dropdown-toggle"
@@ -70,10 +74,70 @@
                             </ul>
                         </li>
                     </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <ul class="dropdown filters">
+                        <li class="padding0-20">
+                            <a
+                                    class="dropdown-toggle"
+                                    id="dropdownMenu_Room"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="true">
+                                Room Layout
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu drop" aria-labelledby="dropdownMenu">
+                                <li>
+                                    <a>
+                                        <div
+                                                class="margin-right-5"
+                                                name="room" title="" onclick="getRoomLayout(this.title)">
+                                        All
+                                        </div>
+                                    </a>
+                                </li>
+                                <% if(typeof(roomlayouts) !== 'undefined'){ %>
+                                    <% _.each(roomlayouts[0].roomLayoutList, function(roomlyt, i){ %>
+                                    <li>
+                                        <a>
+                                            <div
+                                                    class="margin-right-5"
+                                                    name="room" title="<%= roomlyt.roomLayoutCode %>" onclick="getRoomLayout(this.title)">
+                                                <%= roomlyt.roomLayoutCode %>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <% }); %>
+                                <% } %>
+                                <!--<li>
+                                    <a>
+                                        <div
+                                                class="margin-right-5"
+                                                name="room" title="LA-0006" onclick="getRoomLayout(this.title)">
+                                            LA-0006
+
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <div
+                                                class="margin-right-5"
+                                                name="room" title="LA-0007" onclick="getRoomLayout(this.title)">
+                                            LA-0007
+                                        </div>
+                                    </a>
+                                </li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                    </div>
                 </div>
 
                 <div class="col-lg-3 col-md-8 pull-right text-right">
-                    <h4><%= designList.length %> Designs Found</h4>
+                    <h4><%= designList.length %> Looks Found</h4>
                 </div>
             </div>
         </div>
@@ -134,6 +198,18 @@
         //alert("filterStyleNameArr ================"+filterStyleNameArr);
 
         filter.set({'selectedStyleName': filterStyleNameArr});
+
+        filter.trigger('change');
+    }
+    function getRoomLayout(title) {
+
+        alert("================"+title);
+
+        var filterRoomLayoutArr = filter.get('selectedRoomLayout');
+
+        filterRoomLayoutCode = title;
+
+        filter.set({'selectedRoomLayout': filterRoomLayoutCode});
 
         filter.trigger('change');
     }

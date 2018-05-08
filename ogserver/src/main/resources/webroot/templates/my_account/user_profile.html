@@ -1,5 +1,7 @@
+<% if(typeof(userProfile) !== 'undefined'){ %>
 <%= console.log("@@@@@@@@@  userProfile @@@@@@@@@") %>
 <%= console.log(userProfile) %>
+<% } %>
 <div class="container user-profile-content">
     <form method="post" class="form-horizontal">
         <h3 class="p-style">Basic Information</h3>
@@ -30,11 +32,11 @@
             <div class="form-group col-md-4">
                 <label class="form-check-label" style="margin-right: 9px;">Gender  </label>
 
-                <input class="form-check-input" type="radio" id="inlineradio1" value="option1" name="gender" <% if(userProfile.gender == "male"){ %> checked="checked" <% } %> required />
+                <input class="form-check-input" type="radio" id="inlineradio1" value="option1" name="gender" <% if(typeof(userProfile) !== 'undefined' && userProfile.gender == "male"){ %> checked="checked" <% } %> required />
                 <label class="form-check-label" for="inlineradio1">
                     <i style=" font-size: 46px;margin-right: 13px; " class="fa fa-male" aria-hidden="true"></i>
                 </label>
-                <input class="form-check-input" type="radio" id="inlineradio2" value="option1" name="gender" <% if(userProfile.gender == "female"){ %> checked="checked" <% } %> >
+                <input class="form-check-input" type="radio" id="inlineradio2" value="option1" name="gender" <% if(typeof(userProfile) !== 'undefined' &&    userProfile.gender == "female"){ %> checked="checked" <% } %> >
                 <label class="form-check-label" for="inlineradio1">
                     <i style=" font-size: 46px;margin-right: 8px; " class="fa fa-female" aria-hidden="true"></i>
                 </label>

@@ -30,6 +30,20 @@ define([
                 if (designStyleArr[i] == selectedStylenm)
                     return true;
             }
+        },
+        filterByRoomLayout:function (designlist,selectedRoomnm){
+            var that = this;
+            return _.map(designlist.filter(function(design){
+                return that.designWithRoomLayouts(design, selectedRoomnm);
+            }), function (design) {return design });
+        },
+        designWithRoomLayouts: function (designObj, selectedRoomnm) {
+            var designRoomArrObj = designObj.roomLayoutCode;
+            var designRoomArr = designRoomArrObj.split(",");
+            for (var i=0; i < designRoomArr.length; i++) {
+                if (designRoomArr[i] == selectedRoomnm)
+                    return true;
+            }
         }
     });
   return ViewDesigns;

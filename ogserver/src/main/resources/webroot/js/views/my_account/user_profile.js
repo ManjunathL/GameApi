@@ -20,7 +20,6 @@ define([
             'userProfile': userProfData,
             'provider': provider
         }));
-        document.title = userProfData.displayName + ' | mygubbi';
     },
     render: function () {
         var authData = this.refAuth.currentUser;

@@ -19,7 +19,7 @@ define([
             'l3_form(/)': 'l3_form',
             'product-detail-:id(/)': 'product_details',
             'concept_search-:term(/)':'concepts_search',
-            'view_design-:spaceTypeCode(/)':'listing_designs',
+            ':name-viewdesign-:id(/)':'listing_designs',
             'user-profile(/)':'user-profile',
             'user_preference(/)':'user_preference',
             'listofconcepts(/)':'listing_everything',
@@ -60,10 +60,11 @@ define([
             });
         });
 
-        router.on('route:listing_designs', function(spaceTypeCode) {
+        router.on('route:listing_designs', function(spaceTypeCode,conceptboardId) {
                    require(['views/dashboard/view_design'], function(ViewDesignPage) {
                          var options = {
                             model: {
+                                "id": conceptboardId,
                                 "spaceTypeCode": spaceTypeCode
                             }
                         };
