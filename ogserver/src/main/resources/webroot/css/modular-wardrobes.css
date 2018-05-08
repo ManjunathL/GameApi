@@ -653,6 +653,38 @@ ul, ol{
 
 /* End Recent Projects */
 
+/* Add Concept Board */
+#consultIco{
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #ec5136;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    border: .3em solid #fff;
+    box-sizing: content-box;
+    overflow: hidden;
+    transition: background-color .2s ease-in-out .2s;
+    -webkit-transition: background-color .2s ease-in-out .2s;
+    -ms-transition: background-color .2s ease-in-out .2s;
+    -o-transition: background-color .2s ease-in-out .2s;
+    width: 2.5em;
+    height: 2.5em;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+
+#consultIco i.fa{
+    font-size:35px;
+    padding: 4px 8px;
+}
+
 @media (min-width: 1280px) {
     .festive-form .festive-form-wrapper {
         padding: 10px 45px;
@@ -674,6 +706,16 @@ ul, ol{
     }
     .prn{
         padding-right: 0px;
+    }
+
+
+}
+
+@media only screen
+and (min-width : 768px)
+and (max-width : 1024px)  {
+    .matchingcls{
+       display:none;
     }
 }
 
@@ -1001,9 +1043,9 @@ ul, ol{
     color: #ffffff;
     /*padding: 60px 20px 30px;
     min-height: 480px;*/
-    padding: 20px 20px 30px;
+    padding: 0px 0px 0px;
     min-height: 288px;
-    background: rgba(229, 231, 217, 0.85);
+    background: rgba(229, 231, 217, 0.6);
     border-radius: 4px;
     box-shadow: 8px 0px 20px rgba(51, 51, 51, 0.26);
 }
@@ -1097,7 +1139,7 @@ right: 30px;
     text-align: center;
     text-transform: capitalize;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Lato', sans-serif;
     color: #c64a1b;
 }
@@ -1462,12 +1504,13 @@ right: 30px;
         padding: 20px 0px;
     }
     #lp_banner .cucumber-form{
-        min-height:420px;
+       /* min-height:420px;*/
         box-shadow: none;
     }
     .cucumber-form{
-        min-height:500px;
+        /*min-height:500px;*/
         box-shadow: none;
+        padding-top: 10px;
     }
     .cucumber-price-bg h1{
         font-size: 30px;
