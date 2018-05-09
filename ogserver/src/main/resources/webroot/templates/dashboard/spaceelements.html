@@ -31,14 +31,16 @@
         top: 25px;
     }
 </style>
-
+<div>
+    <h4 style="font-size: 18px;font-weight: 300;color: #333;">Identity Room Area</h4>
+</div>
 <% if(typeof(spacetemplates) !== 'undefined'){ %>
 <div  class="owl-carousel owl-theme owl-tmpltype">
     <% _.each(spacetemplates[0].spaceElementList, function(spltemst, i){ %>
     <div class="item selTemp"
          data-element="<%= spltemst.code %>"  >
         <img src="<%= spltemst.imageUrl %>" alt="<%= spltemst.code %>" class="img-responsive img-centered">
-        <h5><%= spltemst.title %></h5>
+        <h5 style="color: #333;font-size: 16px;font-weight: 400;"><%= spltemst.title %></h5>
     </div>
     <% }); %>
 </div>

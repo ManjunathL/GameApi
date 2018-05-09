@@ -1,6 +1,6 @@
 var restBaseUrl = "http://gameuat.mygubbi.com:1446";
 
-var fbaseRootUrl = "https://mygubbi-uat.firebaseio.com/";
+var fbaseRootUrl = "https://mygubbi-imagineer.firebaseio.com/";
 
 
 // Initialize Firebase

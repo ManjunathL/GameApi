@@ -3,9 +3,43 @@
 
 <%= console.log("@@@@@@@@@@@@@@@ Concepts @@@@@@@@@@@@@@@@@") %>
 <%= console.log(listOfConcepts) %>
+
+<%= console.log("@@@@@@@@@@@@@@@ conceptboardsDtls @@@@@@@@@@@@@@@@@") %>
+<%= console.log(conceptboardsDtls) %>
 <link href="css/layout.css" rel="stylesheet">
 <!--<button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>-->
+<style>
+        #owl-sptype5.item{
+        margin: 3px;
+        padding: 10px;
+    }
+    #owl-sptype5 .item img{
+        display: block;
+        width: 106px;
+        height: 75px;
+    }
 
+    #owl-tmpltype .item{
+        margin: 3px;
+        padding: 10px;
+        padding: 10px;
+    }
+    #owl-tmpltype .item img{
+        display: block;
+        width: 145px;
+        height: 96px;
+    }
+    .owl-prev{
+        position: absolute;
+        left: -25px;
+        top: 25px;
+    }
+    .owl-next{
+        position: absolute;
+        right: -30px;
+        top: 25px;
+    }
+</style>
 <section>
     <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;">
         <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;">Home</h2>
@@ -59,7 +93,7 @@
                         <div class="pin">
                             <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.imgURL %>','<%= conceptdtls.conceptTitle %>','<%= conceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
                         </div>
-                        <a href="javascript:void(0);" class="conceptImg" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>"  data-element3="<%= conceptdtls.conceptCode %>" data-element4="<%= conceptdtls.id %>">
+                        <a href="javascript:void(0);" class="conceptImg1" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>"  data-element3="<%= conceptdtls.conceptCode %>" data-element4="<%= conceptdtls.id %>" data-element5="<%= conceptdtls.userConceptBoardId %>" data-element6="<%= conceptdtls.spaceTypeCode %>">
                             <% if(typeof(conceptdtls.imgURL) != 'undefined' && conceptdtls.imgURL != null){ %>
                             <img src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>">
                             <% }else{ %>
@@ -82,49 +116,80 @@
             <div class="modal fade" id="pin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
                     <div class="pin-container">
+                        <div class="col-sm-12 col-md-12">
+                            <h3 class="addcboard-heading">Add Concept To Board</h3>
+                        </div>
+                        <div class="clearfix"></div>
                         <div class="row">
-                            <div class="col-sm-6 col-md-6">
-                                <div class="pin-model-img">
-                                    <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg" alt="pin image"> </a>
-                                    <h4 id="concNm">Excepteur sint occaecat cupidatat non proident </h4>
-                                    <input type="hidden" id="ConcCod" value="">
+                            <div class="col-sm-12 col-xs-12 col-md-12">
+                                <div class="col-sm-3 col-xs-3 col-md-3">
+                                    <div class="pin-model-img">
+                                        <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg" alt="pin image"> </a>
+                                        <h4 id="concNm1">Excepteur sint occaecat cupidatat non proident </h4>
+                                        <input type="hidden" id="ConcCod" value="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6">
-                                <div class="new-pin">
-                                    <!--<form>
-                                        <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="Mood Board Name">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="submit" name="pin" class="btn btn-defalt pin-submit" value="Submit">
-                                        </div>
-                                    </form>-->
-                                </div>
-                                <!--<div>
-                                    <label class="moodboard-lbl">All Concept Boards</label>
+                                <div class="col-xs-8 col-sm-8 col-md-8 ">
+                                    <div>
+                                        <h4>Identity Room </h4>
+                                    </div>
                                     <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
-                                    <%= console.log("================== conceptboardsDtls ===================") %>
-                                    <%= console.log(conceptboardsDtls) %>
-                                    <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
-                                    <div class="boardlst" data-element="<%= conceptdtl.id %>"><%= conceptdtl.name %></div>
+                                    <div id="owl-sptype5" class="owl-carousel owl-theme" style="display:block">
+                                        <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(splst, i){ %>
+                                        <div class="item boardlst"
+                                        data-element="<%= splst.id %>" data-element1="<%= splst.spaceTypeCode %>" >
+                                        <img src="<%= splst.imgUrl %>" alt="<%= splst.code %>" class="img-responsive img-centered">
+                                        <h5 style="color: #333;"><%= splst.name %></h5>
+                                    </div>
                                     <% }); %>
-                                    <% } %>
-
-                                </div>-->
+                                </div>
+                                <% } %>
+                                <div id="spaceTemp111"></div>
                             </div>
+                        </div>
+                        <!--       <div class="col-md-12 col-lg-12">
+
+                                   <% if(typeof(spacetemplates) !== 'undefined'){ %>
+                                   <div id="owl-tmpltype" class="owl-carousel owl-theme">
+                                       <% _.each(spacetemplates[0].spaceTemplateList, function(spltemst, i){ %>
+                                       <div class="item selTemp"
+                                            data-element="<%= spltemst.templateCode %>"  >
+                                           <img src="<%= spltemst.imgUrl %>" alt="<%= spltemst.templateCode %>" class="img-responsive img-centered">
+                                           <h5><%= spltemst.templateTitle %></h5>
+                                       </div>
+                                       <% }); %>
+                                   </div>
+                                   <% } %>
+                                   <div class="clearfix"></div>
+                               </div>-->
+                        <div class="col-sm-6 col-md-6">
+                            <div class="new-pin">
+                                <!--<form>
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control" placeholder="Mood Board Name">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="submit" name="pin" class="btn btn-defalt pin-submit" value="Submit">
+                                    </div>
+                                </form>-->
+                            </div>
+                            <!--  <div>
+                                  <label class="moodboard-lbl">All Concept Boards</label>
+                                  <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                                  <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
+                                  <div class="boardlst" data-element="<%= conceptdtl.id %>"><%= conceptdtl.name %></div>
+                                  <% }); %>
+                                  <% } %>
+                              </div>-->
+
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog" style="width:980px;">
-                    <div id="concept-dtls" class="dtls-container" style="">
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
@@ -137,6 +202,14 @@
             <div class="modal-dialog">
                 <div id="editcboard-dtls" class="addcboard-container">
 
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="details-modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width:980px;">
+                <div id="concept-dtls" class="dtls-container" style="">
+
+                    Hi Tushar
                 </div>
             </div>
         </div>
@@ -156,7 +229,7 @@
 </script>-->
 <script>
     function showModal(imgnm,cnpnm,cnpcod){
-        $("#concNm").text(cnpnm);
+        $("#concNm1").text(cnpnm);
         $("#ConcCod").val(cnpcod);
         $("#mastImg").attr("src",imgnm);
         $('#pin-modal').modal('show');
@@ -184,4 +257,26 @@
             filter.trigger('change');
         }
     }
+
+     $(function() {
+      $("#owl-sptype5").owlCarousel({
+        autoPlay: 3000,
+        items : 5,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+      $("#owl-tmpltype").owlCarousel({
+        autoPlay: 3000,
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+        $("#frmsec").fadeOut();
+    });
 </script>
