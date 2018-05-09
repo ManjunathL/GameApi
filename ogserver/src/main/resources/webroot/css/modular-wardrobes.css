@@ -663,12 +663,12 @@ ul, ol{
     font-size: 18px;
     border: none;
     outline: none;
-    background-color: #ec5136;
+    background-color: #e76341d9;
     color: white;
     cursor: pointer;
     padding: 15px;
     border-radius: 50%;
-    border: .3em solid #fff;
+    border: .3em solid #ec5136;
     box-sizing: content-box;
     overflow: hidden;
     transition: background-color .2s ease-in-out .2s;
@@ -1433,7 +1433,18 @@ right: 30px;
     padding:0;
     border-top: 2px solid #ba2027;
 }
-
+.matching-img-center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+.matching-img-center-web{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
 .tab-content{
     padding:0px
 }
