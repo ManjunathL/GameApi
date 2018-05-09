@@ -157,51 +157,11 @@ define([
         var itemPerPage = 50;
 
         var formData = {
-                      "tag": "",
-                      "type": 0
-                    };
-
-       /*console.log("tagObj");
-       console.log(typeof(tagObj));
-
-        var formData = {
-            "userId": userId,
-            "userMindboardId": 17,
-            "pageno": pageno,
-            "itemPerPage":itemPerPage,
-            "tagDTO":tagObj
-        };*/
-
-
+          "tag": "",
+          "type": 0
+        };
         console.log("formData");
         console.log(formData);
-        /*return new Promise(function(resolve, reject) {
-                           that.everything.fetch({
-                              async: true,
-                              crossDomain: true,
-                              method: "POST",
-                              headers:{
-                                 "authorization": "Bearer "+ sessionStorage.authtoken,
-                                 "Content-Type": "application/json"
-                              },
-                              data: JSON.stringify(formData),
-                              success:function(response) {
-                                  //console.log("Successfully fetch "+ currTab  +" Concepts - ");
-
-                                  console.log(" everything response");
-                                  console.log(response);
-
-                                  resolve();
-                              },
-                              error:function(response) {
-                                  console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
-                                  console.log(response);
-                                  reject();
-                              }
-                          });
-
-                    });*/
-
         return new Promise(function(resolve, reject) {
          if(typeof(userId) !== 'undefined') {
            that.everythings.getEverythingList(userId, userMindboardId, pageno, itemPerPage,{

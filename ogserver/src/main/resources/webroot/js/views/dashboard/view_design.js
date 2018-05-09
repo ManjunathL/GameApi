@@ -7,15 +7,18 @@ define([
   'text!templates/dashboard/view_design.html',
   'collections/viewDesigns',
   'models/filter',
-  'collections/save_shortlist_designs'
-], function($, _, Backbone, Bootstrap, pinterest_grid, viewDesignPageTemplate,viewDesigns, Filter, SaveShortListDesigns){
+  'collections/save_shortlist_designs',
+  'collections/roomlayouts'
+], function($, _, Backbone, Bootstrap, pinterest_grid, viewDesignPageTemplate,viewDesigns, Filter, SaveShortListDesigns, RoomLayouts){
   var ViewDesignPage = Backbone.View.extend({
     el: '.page',
     viewDesigns: null,
     filter: null,
     save_shortlist_designs:null,
+    roomlayouts:null,
     initialize: function() {
         this.viewDesigns = new viewDesigns();
+        this.roomlayouts = new RoomLayouts();
         this.filter = new Filter();
         this.save_shortlist_designs=new SaveShortListDesigns();
 
@@ -30,28 +33,28 @@ define([
 
 
         console.log("****IN RENDER ***********")
+        var conceptboardId = that.model.id;
         var spaceTypeCode = that.model.spaceTypeCode;
 
 //        alert("that.model.name = "+that.model.spaceTypeCode);
 //        var spaceTypeCode = "SP-LIVING";
 
-        var getDesignsPromise = that.getDesigns(spaceTypeCode);
+        var getDesignsPromise = that.getDesigns(conceptboardId);
+        var getRoomLayoutsPromise = that.getRoomLayouts(spaceTypeCode);
 
-        Promise.all([getDesignsPromise]).then(function() {
+        Promise.all([getDesignsPromise,getRoomLayoutsPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.rendersub();
         });
-
-
     },
-     events: {
-            "click .shortListdesign": "saveShortListDesigns",
-        },
-    getDesigns: function(spaceTypeCode){
+    events: {
+        "click .shortListdesign": "saveShortListDesigns",
+    },
+    getDesigns: function(conceptboardId){
         var that = this;
         return new Promise(function(resolve, reject) {
             if(!that.viewDesigns.get('id')){
-                that.viewDesigns.getDesigns(spaceTypeCode, {
+                that.viewDesigns.getDesigns(conceptboardId, {
                    async: true,
                    crossDomain: true,
                    method: "GET",
@@ -86,78 +89,91 @@ define([
             });
 
     },
-     /*  getShortListDesign: function(spaceTypeCode){
-            var that = this;
-            return new Promise(function(resolve, reject) {
-                if(!that.shortListDesigns.get('id')){
-                    that.shortListDesigns.getShortListDesign(spaceTypeCode, {
-                       async: true,
-                       crossDomain: true,
-                       method: "GET",
-                       headers:{
-                           "authorization": "Bearer "+ sessionStorage.authtoken
-                       },
-                       success:function(response){
+    getRoomLayouts: function(spaceTypeCode){
+        var that = this;
+        return new Promise(function(resolve, reject) {
+            if(!that.roomlayouts.get('id')){
+                that.roomlayouts.getRoomLayoutList(spaceTypeCode, {
+                   async: true,
+                   crossDomain: true,
+                   method: "GET",
+                   headers:{
+                       "authorization": "Bearer "+ sessionStorage.authtoken
+                   },
+                   success:function(response){
+                        //console.log("Successfully Searched... ");
+                        //console.log(response);
+                        /*$("#snackbar").html("Successfully searched ...");
+                          var x = document.getElementById("snackbar")
+                          x.className = "show";
+                          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);*/
+                        resolve();
+                   },
+                   error:function(response) {
+                        console.log(" +++++++++++++++ Search- Errrorr ++++++++++++++++++ ");
+                        console.log(JSON.stringify(response));
+                        console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+                        console.log(response.responseJSON.errorMessage);
 
-                            resolve();
-                       },
-                       error:function(response) {
-                            console.log(" +++++++++++++++ Search- Errrorr ++++++++++++++++++ ");
-                            console.log(JSON.stringify(response));
-                            console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
-                            console.log(response.responseJSON.errorMessage);
-                            reject();
-                       }
-                    });
-                }else{
-                    reject();
-                }
+                        /*$("#snackbar").html(response.responseJSON.errorMessage);
+                        var x = document.getElementById("snackbar")
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);*/
+                        reject();
+                   }
                 });
+            }else{
+                reject();
+            }
+            });
 
-        },*/
-         saveShortListDesigns:function(e){
-                var that = this;
-              var filterShortDesign={};
-                if (e.isDefaultPrevented()) return;
-                        e.preventDefault();
-                         var userId = "user1234600";
-                          var spaceTypeCode = that.model.spaceTypeCode;
-                         var formData = that.filter.get("shortedList");
-                            if (typeof(that.filter.get('shortedList')) != 'undefined') {
-                                          filterShortDesign = that.filter.get('shortedList');
+    },
+    saveShortListDesigns:function(e){
+        var that = this;
+        var filterShortDesign={};
 
-                             }
+        if (e.isDefaultPrevented()) return;
 
-                        console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
-                        console.log(JSON.stringify(formData));
+         //var userId = "user1234600";
+         var userId = sessionStorage.userId;
+         var conceptboardId = that.model.id;
+         var spaceTypeCode = that.model.spaceTypeCode;
+         var formData = that.filter.get("shortedList");
+            if (typeof(that.filter.get('shortedList')) != 'undefined') {
+                          filterShortDesign = that.filter.get('shortedList');
 
+             }
 
-                        that.save_shortlist_designs.saveShortListDesigns(spaceTypeCode,filterShortDesign,{
-                           async: true,
-                           crossDomain: true,
-                           method: "POST",
-                           headers:{
-                               "authorization": "Bearer "+ sessionStorage.authtoken,
-                               "Content-Type": "application/json"
-                           },
-                           success:function(response) {
-                              console.log("Successfully saved Home Preferences");
-                              console.log(response);
+        console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+        console.log(JSON.stringify(formData));
 
 
-                          },
-                          error:function(model, response, options) {
+        that.save_shortlist_designs.saveShortListDesigns(conceptboardId,filterShortDesign,{
+           async: true,
+           crossDomain: true,
+           method: "POST",
+           headers:{
+               "authorization": "Bearer "+ sessionStorage.authtoken,
+               "Content-Type": "application/json"
+           },
+           success:function(response) {
+              console.log("Successfully saved Home Preferences");
+              console.log(response);
 
-                              console.log(" +++++++++++++++ Home Preferences save- Errrorr ++++++++++++++++++ ");
-                              console.log(JSON.stringify(response));
 
-                          }
-                      });
-         },
+          },
+          error:function(model, response, options) {
 
+              console.log(" +++++++++++++++ Home Preferences save- Errrorr ++++++++++++++++++ ");
+              console.log(JSON.stringify(response));
+
+          }
+        });
+    },
     rendersub: function(){
         var that = this;
         var viewDesigns = that.viewDesigns;
+        var roomlayouts = that.roomlayouts;
         viewDesigns = viewDesigns.toJSON();
 
 
@@ -170,12 +186,25 @@ define([
                 silent: true
             });
         }
+        if (typeof(that.filter.get('selectedRoomLayout')) == 'undefined') {
+            //var arrSt = new Array();
+
+            that.filter.set({
+                'selectedRoomLayout': ''
+            }, {
+                silent: true
+            });
+        }
 
 
         var filterStyleName = that.filter.get('selectedStyleName');
+        var filterRoomLayout = that.filter.get('selectedRoomLayout');
 
         console.log("++++++++++++++ StyleName ++++++++++++++++++++");
         console.log(filterStyleName);
+
+        console.log("++++++++++++++ RoomLayout ++++++++++++++++++++");
+        console.log(filterRoomLayout);
 
         if(typeof(filterStyleName) !== 'undefined' && filterStyleName.length > 0){
             var filteredDesigns = that.viewDesigns.filterByStyleName(viewDesigns[0].designList, filterStyleName);
@@ -183,15 +212,28 @@ define([
             console.log("@@@@@@@@@@ filteredConcepts @@@@@@@@");
             console.log(filteredDesigns);
             console.log("@@@@@@@@@@@@@@@@@@");
+            viewDesigns[0].designList = filteredDesigns;
 
-             viewDesigns[0].designList = filteredDesigns;
+        }else{
+            viewDesigns = viewDesigns;
+        }
 
+        if(typeof(filterRoomLayout) !== 'undefined' && filterRoomLayout.length > 0){
+            var filteredDesigns = that.viewDesigns.filterByRoomLayout(viewDesigns[0].designList, filterRoomLayout);
+
+            console.log("@@@@@@@@@@ filteredConcepts @@@@@@@@");
+            console.log(filteredDesigns);
+            console.log("@@@@@@@@@@@@@@@@@@");
+            viewDesigns[0].designList = filteredDesigns;
+        }else{
+            viewDesigns = viewDesigns;
         }
 
 
 
         $(this.el).html(_.template(viewDesignPageTemplate)({
-         "designList": viewDesigns[0].designList
+         "designList": viewDesigns[0].designList,
+         "roomlayouts": roomlayouts.toJSON()
         }));
         that.ready();
     },
