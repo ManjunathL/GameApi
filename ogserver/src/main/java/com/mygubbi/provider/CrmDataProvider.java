@@ -66,7 +66,21 @@ private DataProviderMode dataProviderMode;
                 {
                     put("opportunity_name",opportunityId);
                     put("name",issue);
-                    put("documents", documents);
+                    put("document", documents);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONArray getUpdates(String opportunityId) {
+
+        try {
+            return dataProviderMode.postResourceWithUrl("get_room_status.php", new HashMap<String, String>(){
+                {
+                    put("opportunity_name",opportunityId);
                 }
             });
         } catch (Exception e) {

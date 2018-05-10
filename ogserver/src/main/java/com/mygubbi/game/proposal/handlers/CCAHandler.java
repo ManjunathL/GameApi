@@ -8,23 +8,14 @@ import com.mygubbi.provider.DataProviderMode;
 import com.mygubbi.provider.RestDataProvider;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.crm.CrmApiHandler;
-import groovy.json.JsonException;
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.monoid.json.JSONArray;
 import us.monoid.json.JSONException;
 import us.monoid.json.JSONObject;
-import us.monoid.web.JSONResource;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.*;
 
 /**
  * Created by User on 09-10-2017.
@@ -47,7 +38,7 @@ public class CCAHandler extends AbstractRouteHandler{
         this.post("/getprofile").handler(this::getOpportunity);
         this.post("/getcustomerissues").handler(this::getIssues);
         this.post("/getupdates").handler(this::getDailyUpdates);
-        this.post("/createissue").handler(this::createCustomerIssue);
+        this.post("/createissue").handler(this::createIssue);
     }
 
     private void getDocuments(RoutingContext routingContext) {
@@ -71,8 +62,26 @@ public class CCAHandler extends AbstractRouteHandler{
         getDailyUpdatesFromCrm(routingContext);
     }
 
-    private void getDailyUpdatesFromCrm(RoutingContext routingContext) {
+    private void createIssue(RoutingContext routingContext) {
+        if (isAuthenticated(routingContext)) return;
+        createCustomerIssue(routingContext);
+    }
 
+
+    private void getDailyUpdatesFromCrm(RoutingContext routingContext) {
+        String crmId = routingContext.request().getParam("opportunity_id");
+
+        LOG.debug("SAL ID in get Issue details:" + crmId);
+
+        JSONArray documents = crmDataProvider.getUpdates(crmId);
+
+        if (documents.length() != 0)
+        {
+            sendJsonResponse(routingContext, documents.toString());
+        }
+        else {
+            sendError(routingContext, "No issues found for this opportunity");
+        }
     }
 
     private boolean isAuthenticated(RoutingContext routingContext) {
@@ -153,12 +162,21 @@ public class CCAHandler extends AbstractRouteHandler{
 
     }
 
-    private void createCustomerIssue(RoutingContext routingContext){
-        String crmId = routingContext.request().getParam("opportunity_id");
-        String issue = routingContext.request().getParam("issue");
-        String documents = routingContext.request().getParam("documets");
 
-        LOG.debug("CUSTOMER ISSUE LOG PARAMS : " + crmId + ":" + issue);
+    private void createCustomerIssue(RoutingContext routingContext){
+        JsonObject proposalData = routingContext.getBodyAsJson();
+        LOG.debug("proposalData : " +  proposalData.encodePrettily());
+        LOG.debug("context : " +  routingContext.getBodyAsJson());
+        LOG.debug("name : " + routingContext.getBodyAsJson());
+        LOG.debug("issue : " + routingContext.request().getParam("issue"));
+
+
+
+        String crmId = "opportunity_name";
+        String issue = "issue";
+        String documents = "documents";
+
+        LOG.debug("CUSTOMER ISSUE LOG PAR+AMS : " + crmId + ":" + issue);
 
         JSONObject createIssue = crmDataProvider.createCustomerIssue(crmId,issue,documents);
 
