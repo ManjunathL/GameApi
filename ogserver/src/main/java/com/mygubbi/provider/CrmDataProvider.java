@@ -88,4 +88,18 @@ private DataProviderMode dataProviderMode;
             return null;
         }
     }
+
+    public JSONArray getHandoverDetails(String opportunityId) {
+
+        try {
+            return dataProviderMode.postResourceWithUrl("get_handedover_details.php", new HashMap<String, String>(){
+                {
+                    put("opportunity_name",opportunityId);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

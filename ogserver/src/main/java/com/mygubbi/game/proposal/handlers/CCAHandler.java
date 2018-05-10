@@ -39,6 +39,7 @@ public class CCAHandler extends AbstractRouteHandler{
         this.post("/getcustomerissues").handler(this::getIssues);
         this.post("/getupdates").handler(this::getDailyUpdates);
         this.post("/createissue").handler(this::createIssue);
+        this.post("/gethandoverdetails").handler(this::getHandoverDetails);
     }
 
     private void getDocuments(RoutingContext routingContext) {
@@ -67,22 +68,11 @@ public class CCAHandler extends AbstractRouteHandler{
         createCustomerIssue(routingContext);
     }
 
-
-    private void getDailyUpdatesFromCrm(RoutingContext routingContext) {
-        String crmId = routingContext.request().getParam("opportunity_id");
-
-        LOG.debug("SAL ID in get Issue details:" + crmId);
-
-        JSONArray documents = crmDataProvider.getUpdates(crmId);
-
-        if (documents.length() != 0)
-        {
-            sendJsonResponse(routingContext, documents.toString());
-        }
-        else {
-            sendError(routingContext, "No issues found for this opportunity");
-        }
+    private void getHandoverDetails(RoutingContext routingContext) {
+        if (isAuthenticated(routingContext)) return;
+        getHandover(routingContext);
     }
+
 
     private boolean isAuthenticated(RoutingContext routingContext) {
         CrmApiHandler crmApiHandler = new CrmApiHandler(vertx);
@@ -171,7 +161,6 @@ public class CCAHandler extends AbstractRouteHandler{
         LOG.debug("issue : " + routingContext.request().getParam("issue"));
 
 
-
         String crmId = "opportunity_name";
         String issue = "issue";
         String documents = "documents";
@@ -189,6 +178,40 @@ public class CCAHandler extends AbstractRouteHandler{
             sendError(routingContext,"Issue could not be created");
         }
     }
+
+    private void getHandover(RoutingContext routingContext) {
+        String crmId = routingContext.request().getParam("opportunity_id");
+
+        LOG.debug("SAL ID in get handover details:" + crmId);
+
+        JSONArray documents = crmDataProvider.getHandoverDetails(crmId);
+
+        if (documents.length() != 0)
+        {
+            sendJsonResponse(routingContext, documents.toString());
+        }
+        else {
+            sendError(routingContext, "No handover details found for this opportunity");
+        }
+    }
+
+
+    private void getDailyUpdatesFromCrm(RoutingContext routingContext) {
+        String crmId = routingContext.request().getParam("opportunity_id");
+
+        LOG.debug("SAL ID in get updates details:" + crmId);
+
+        JSONArray documents = crmDataProvider.getUpdates(crmId);
+
+        if (documents.length() != 0)
+        {
+            sendJsonResponse(routingContext, documents.toString());
+        }
+        else {
+            sendError(routingContext, "No updates found for this opportunity");
+        }
+    }
+
 
 
 
