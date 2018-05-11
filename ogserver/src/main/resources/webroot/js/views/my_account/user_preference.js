@@ -9,8 +9,10 @@ define([
   'collections/saveuser_preferences',
   'collections/saveuser_members',
   'models/filter_preference',
-  'models/filter'
-], function($, _, Backbone, Bootstrap, UserProfileTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter){
+  'models/filter',
+  'collections/family_preferences',
+  'collections/editfamilymembers'
+], function($, _, Backbone, Bootstrap, UserProfileTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter,FamilyPreferences,EditFamilyMembers){
   var UserProfilePage = Backbone.View.extend({
     el: '.page',
     user_home_preferences: null,
@@ -20,6 +22,8 @@ define([
     saveuser_members:null,
     filter_preference: null,
     filter: null,
+    family_preference:null,
+    editfamilymembers:null,
     initialize: function() {
         this.filter_preference = new FilterPreference();
         this.user_home_preferences = new UserPreferences();
@@ -30,6 +34,8 @@ define([
         this.filter = new Filter();
         this.filter_preference.on('change', this.render, this);
         this.filter.on('change', 'getSelectedQuestionFamily', this);
+        this.family_preference = new FamilyPreferences();
+        this.editfamilymembers = new EditFamilyMembers();
         this.listenTo(Backbone);
         _.bindAll(this, 'render');
     },
@@ -52,8 +58,9 @@ define([
         var getUserHomePreferencesPromise = that.getUserHomePreferences();
         var getUserFamilyPreferencesPromise = that.getUserFamilyPreferences();
         var getUserMemberPreferencesPromise = that.getUserMemberPreferences(memberId);
+        var getUserFamilyPreferencesPromise = that.getAllFamilyPreferences();
 
-        Promise.all([getUserHomePreferencesPromise,getUserFamilyPreferencesPromise,getUserMemberPreferencesPromise]).then(function() {
+        Promise.all([getUserHomePreferencesPromise,getUserFamilyPreferencesPromise,getUserMemberPreferencesPromise,getUserFamilyPreferencesPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.fetchUserPreferencesAndRender();
         });
@@ -154,20 +161,61 @@ define([
       });
 
     },
+     getAllFamilyPreferences: function(){
+            var that = this;
+
+            var userId = sessionStorage.userId;
+            //var memberId = 0;
+            //var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
+
+            return new Promise(function(resolve, reject) {
+                if(userId){
+                   that.family_preference.getFamilyPreferences(userId, {
+                       async: true,
+                       crossDomain: true,
+                       method: "GET",
+                       headers:{
+                           "authorization": "Bearer "+ sessionStorage.authtoken
+                       },
+                       success:function(data) {
+
+                           console.log(" +++++++++++++++ getAllFamilyPreferences ++++++++++++++++++ ");
+                           console.log(data);
+                           resolve();
+                       },
+                       error:function(response) {
+                           //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                           //console.log(response);
+                           reject();
+                       }
+                   });
+               }else{
+                resolve();
+               }
+          });
+
+        },
+
     fetchUserPreferencesAndRender: function(){
         var that = this;
         var user_home_preferences = that.user_home_preferences;
         var user_family_preferences = that.user_family_preferences;
         var user_members = that.user_members;
+        var family_preference = that.family_preference;
+        var editfamilymembers = that.editfamilymembers;
+
+        console.log("@@@@@@@@@@@@@@@@@@ family_preference @@@@@@@@@@@@@@@@@@2222");
+        console.log(family_preference);
 
         console.log("@@@@@@@@@@@@@@@@@@ user_members @@@@@@@@@@@@@@@@@@2222");
         console.log(user_members);
 
-
         $(this.el).html(_.template(UserProfileTemplate)({
            'userHomePreferencesDtls':user_home_preferences.toJSON(),
            'userFamilyPreferencesDtls':user_family_preferences.toJSON(),
-           'userMemebersPreferencesDtls':user_members.toJSON()
+           'userMemebersPreferencesDtls':user_members.toJSON(),
+           'allFamilyPreference':family_preference.toJSON(),
+           'editFamilyPreference':editfamilymembers.toJSON()
        }));
     },
     events: {
@@ -176,7 +224,41 @@ define([
         "click .userquesfamily":"getSelectedQuestionFamily",
         "click #save_familyId":"saveFamilyPreferences",
         "click .userMember":"getSelectedMember",
-        "click #save_familyMemebr":"saveFamilyMembers"
+        "click #save_familyMemebr":"saveFamilyMembers",
+        "click #edit_familyMemebr":"editFamilyMembers"
+
+    },
+    editFamilyMembers: function(evt){
+              var that = this;
+              evt.preventDefault();
+              var currentTarget = $(evt.currentTarget);
+              var userId = sessionStorage.userId;
+              var memberId = currentTarget.data('element');
+              return new Promise(function(resolve, reject) {
+                  if(userId){
+                     that.editfamilymembers.editFamilyMembers(userId,memberId, {
+                         async: true,
+                         crossDomain: true,
+                         method: "GET",
+                         headers:{
+                             "authorization": "Bearer "+ sessionStorage.authtoken
+                         },
+                         success:function(data) {
+
+                             console.log(" +++++++++++++++ editFamilyMembers ++++++++++++++++++ ");
+                             console.log(data);
+                             resolve();
+                         },
+                         error:function(response) {
+                             //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                             //console.log(response);
+                             reject();
+                         }
+                     });
+                 }else{
+                  resolve();
+                 }
+            });
 
     },
     saveHomePreferences:function(e){

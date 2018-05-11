@@ -526,7 +526,7 @@ define([
          "click .remove-pin": "removeConceptFromCboard",
          "click. #show_description":"viewDescription",
          "click #saveSpaveElement":"addConcept2Cboard",
-         //"click #save_uploadConceptBoard": "submitUploadConceptBoard",
+         "click #save_uploadConceptBoard": "submitUploadConceptBoard",
          "submit #userconceptfrm": "submitUploadConceptBoard"
 
     },

@@ -4,6 +4,11 @@
 <%= console.log(userFamilyPreferencesDtls) %>
 <!--<%= console.log("@@@@@@@@@@@@@@@@@@@@@@@ userMemebersPreferencesDtls @@@@@@@@@@@@@@@@@@@@@@@@@") %>
 <%= console.log(userMemebersPreferencesDtls) %>-->
+<%= console.log("@@@@@@@@@@@@@@@@@@@@@@@ AllFamilyPreference @@@@@@@@@@@@@@@@@@@@@@@@@") %>
+<%= console.log(allFamilyPreference) %>
+
+<%= console.log("@@@@@@@@@@@@@@@@@@@@@@@ EditFamilyPreference @@@@@@@@@@@@@@@@@@@@@@@@@") %>
+<%= console.log(editFamilyPreference) %>
 
 <style>
 	figure {
@@ -314,19 +319,28 @@ margin-top: 25px;
                         </tr>
                         </thead>
                         <tbody>
+                        <% if(typeof(allFamilyPreference) !== 'undefined'){ %>
+                        <% _.each(allFamilyPreference[0].familyMembersList, function(userQuesdtl, j){ %>
                         <tr>
-                            <td class="text-left">Smruti</td>
-                            <td class="text-left">26-45</td>
+
+                            <td class="text-left"><%= userQuesdtl.memberName %></td>
+                            <td class="text-left"> <%=userQuesdtl.age %></td>
+                            <% if(userQuesdtl.gender=='1'){ %>
+                            <td class="text-left">Male</td>
+                            <% }else{ %>
                             <td class="text-left">Female</td>
+                            <% } %>
                             <td class="text-left">Computer Engineer</td>
                             <td class="text-left">Cooking</td>
                             <td class="text-left">Cyclying</td>
                             <td class="text-left">Painting</td>
                             <td class="text-right">
-                                <a href="javascript:void(0);" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit" onclick="showMemberModal()" ><i class="fa fa-pencil"></i></a>
+                               <a href="javascript:void(0);" data-toggle="tooltip" title="" class="btn btn-primary" id="edit_familyMemebr"  data-element="<%= userQuesdtl.memberId %>" data-original-title="Edit" onclick="showMemberModal()" ><i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
-                        <tr>
+                        <% }); %>
+                        <% } %>
+                     <!--   <tr>
                             <td class="text-left">Shruthi</td>
                             <td class="text-left">19-25</td>
                             <td class="text-left">Female</td>
@@ -349,7 +363,7 @@ margin-top: 25px;
                             <td class="text-right">
                                 <a href="javascript:void(0);" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit" onclick="showMemberModal()" ><i class="fa fa-pencil"></i></a>
                             </td>
-                        </tr>
+                        </tr>-->
                         </tbody>
                     </table>
                 </div>
