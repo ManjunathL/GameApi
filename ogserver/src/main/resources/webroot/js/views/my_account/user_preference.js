@@ -5,25 +5,28 @@ define([
   'bootstrap',
   'text!templates/my_account/user_preference.html',
   'collections/user_preferences',
-  'collections/family_preferences',
+  'collections/user_members',
   'collections/saveuser_preferences',
+  'collections/saveuser_members',
   'models/filter_preference',
   'models/filter'
-], function($, _, Backbone, Bootstrap, UserProfileTemplate,UserPreferences,FamilyPreferences,SaveUserPreferences,FilterPreference,Filter){
+], function($, _, Backbone, Bootstrap, UserProfileTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter){
   var UserProfilePage = Backbone.View.extend({
     el: '.page',
     user_home_preferences: null,
     user_family_preferences: null,
-    user_members_preferences: null,
+    user_members: null,
     saveuser_preferences:null,
+    saveuser_members:null,
     filter_preference: null,
     filter: null,
     initialize: function() {
         this.filter_preference = new FilterPreference();
         this.user_home_preferences = new UserPreferences();
         this.user_family_preferences = new UserPreferences();
-        this.user_members_preferences = new FamilyPreferences();
+        this.user_members = new UserMembers();
         this.saveuser_preferences = new SaveUserPreferences();
+        this.saveuser_members = new SaveUserMembers();
         this.filter = new Filter();
         this.filter_preference.on('change', this.render, this);
         this.filter.on('change', 'getSelectedQuestionFamily', this);
@@ -36,12 +39,19 @@ define([
        window.filter_preference = that.filter_preference;
        window.filter = that.filter;
 
+        if(typeof(that.filter_preference.get('savedMemberId')) !== 'undefined'){
+            var memberId = that.filter_preference.get('savedMemberId');
+        }else{
+            var memberId = 0;
+        }
+
+
 
 
 
         var getUserHomePreferencesPromise = that.getUserHomePreferences();
         var getUserFamilyPreferencesPromise = that.getUserFamilyPreferences();
-        var getUserMemberPreferencesPromise = that.getUserMemberPreferences();
+        var getUserMemberPreferencesPromise = that.getUserMemberPreferences(memberId);
 
         Promise.all([getUserHomePreferencesPromise,getUserFamilyPreferencesPromise,getUserMemberPreferencesPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
@@ -110,15 +120,16 @@ define([
            }
       });
     },
-    getUserMemberPreferences: function(){
+    getUserMemberPreferences: function(memberId){
         var that = this;
 
         var userId = sessionStorage.userId;
+        //var memberId = 0;
         //var userId = "2ZBLKQ4vGMRSuN7k8AH8nf7InG43";
 
         return new Promise(function(resolve, reject) {
             if(userId){
-               that.user_members_preferences.getFamilyPreferences( userId, {
+               that.user_members.getUserMembers( userId, memberId, {
                    async: true,
                    crossDomain: true,
                    method: "GET",
@@ -147,20 +158,25 @@ define([
         var that = this;
         var user_home_preferences = that.user_home_preferences;
         var user_family_preferences = that.user_family_preferences;
-        var user_members_preferences = that.user_members_preferences;
+        var user_members = that.user_members;
+
+        console.log("@@@@@@@@@@@@@@@@@@ user_members @@@@@@@@@@@@@@@@@@2222");
+        console.log(user_members);
 
 
         $(this.el).html(_.template(UserProfileTemplate)({
            'userHomePreferencesDtls':user_home_preferences.toJSON(),
            'userFamilyPreferencesDtls':user_family_preferences.toJSON(),
-           'userMemebersPreferencesDtls':user_members_preferences.toJSON()
+           'userMemebersPreferencesDtls':user_members.toJSON()
        }));
     },
     events: {
         "click .userques": "getSelectedQuestion",
         "click #save_homeId":"saveHomePreferences",
         "click .userquesfamily":"getSelectedQuestionFamily",
-        "click #save_familyId":"saveFamilyPreferences"
+        "click #save_familyId":"saveFamilyPreferences",
+        "click .userMember":"getSelectedMember",
+        "click #save_familyMemebr":"saveFamilyMembers"
 
     },
     saveHomePreferences:function(e){
@@ -214,6 +230,49 @@ define([
                   }
               });
     },
+    getSelectedMember: function(evt){
+        evt.preventDefault();
+
+        var that = this;
+
+
+
+
+        var currentTarget = $(evt.currentTarget);
+        var quesId = currentTarget.data('element');
+        var quesOptionid = currentTarget.data('element1');
+        var quesAns = currentTarget.data('element2');
+
+        var age_group = [{
+            'optionId':quesOptionid,
+            'optionType':1,
+            'quesAnsId':0,
+            'quesId':quesId,
+            'selectionStatus':1,
+            'userOptionDesc':""
+        }];
+
+
+        that.filter_preference.set({
+            'selectedAgegroup':age_group
+        }, {
+            silent: true
+        });
+
+        that.filter_preference.set({
+            'selectedAge':quesAns
+        }, {
+            silent: true
+        });
+
+
+        console.log("@@@@@@@@@@@@ Age Group @@@@@@@@@@@@@@@");
+        console.log(quesAns);
+        console.log(that.filter_preference.get("selectedAgegroup"));
+
+        return false;
+
+    },
     getSelectedQuestion: function(evt){
         evt.preventDefault();
 
@@ -241,7 +300,7 @@ define([
             interiors_budget['quesAnsId'] = quesOptionid;
             interiors_budget['quesId'] = quesId;
             interiors_budget['selectionStatus'] = 1;
-            interiors_budget['userOptionDesc'] = "Added by shilpa";
+            interiors_budget['userOptionDesc'] = "";
 
 
             that.filter_preference.set({
@@ -391,9 +450,6 @@ define([
 
          var user_pref_for_saving = {};
          user_pref_for_saving = user_home_preferences[0].userQues;
-
-         console.log("_____________SHILPA LINE______________");
-         console.log(user_pref_for_saving);
 
          console.log("@@@@@@@@@@@@@@ Final user_home_preferences object to save @@@@@@@@@@@@@@@@@@@");
          console.log(user_home_preferences);
@@ -711,7 +767,175 @@ define([
              });
 
             return false;
+        },
+    saveFamilyMembers:function(e){
+        var that = this;
+        if (e.isDefaultPrevented()) return;
+
+        var name = $("#inputname").val();
+        var gender = $("input[name='gender']:checked").val();
+
+        var workcategory = $("#inputcategory").val();
+
+
+        var workoccupation = $("#inputoccupation").val();
+        var workoccupationquesId = $("#inputoccupation").find(':selected').data('element');
+        var workoccupationquesOptId = $("#inputoccupation").find(':selected').data('element1');
+
+        var wobj=[{
+           "optionId": workoccupationquesOptId,
+           "optionType": 1,
+           "quesAnsId": 0,
+           "quesId": workoccupationquesOptId,
+           "selectionStatus": 1,
+           "userOptionDesc": ""
+       }];
+
+        var hobby1category = $("#inputhobby1category").val();
+        var hobby1 = $("#inputhobby1").val();
+        var hobby1quesId = $("#inputhobby1").find(':selected').data('element');
+        var hobby1quesOptId = $("#inputhobby1").find(':selected').data('element1');
+
+        var hobby2category = $("#inputhobby2category").val();
+        var hobby2 = $("#inputhobby2").val();
+        var hobby2quesId = $("#inputhobby2").find(':selected').data('element');
+        var hobby2quesOptId = $("#inputhobby2").find(':selected').data('element1');
+
+        var hobby3category = $("#inputhobby3category").val();
+        var hobby3 = $("#inputhobby3").val();
+        var hobby3quesId = $("#inputhobby3").find(':selected').data('element');
+        var hobby3quesOptId = $("#inputhobby3").find(':selected').data('element1');
+
+        var hobbiesArrObj = [
+            {
+              "optionId": hobby1quesOptId,
+              "optionType": 1,
+              "quesAnsId": 0,
+              "quesId": hobby1quesId,
+              "selectionStatus": 1,
+              "userOptionDesc": ""
+            },
+            {
+              "optionId": hobby2quesOptId,
+              "optionType": 1,
+              "quesAnsId": 0,
+              "quesId": hobby2quesId,
+              "selectionStatus": 1,
+              "userOptionDesc": ""
+            },
+            {
+              "optionId": hobby2quesOptId,
+              "optionType": 1,
+              "quesAnsId": 0,
+              "quesId": hobby3quesId,
+              "selectionStatus": 1,
+              "userOptionDesc": ""
+            }
+          ];
+
+        console.log(" @@@@@@@@@@@@@@ hobbiesArrObj @@@@@@@@@@@@@@@@@@@@@@ ");
+        console.log(hobbiesArrObj);
+
+
+        console.log(" @@@@@@@@@@@@@@ selectedAgegroup @@@@@@@@@@@@@@@@@@@@@@ ");
+        console.log(that.filter_preference.get("selectedAgegroup"));
+
+
+        var familyper =
+        {
+            "age": that.filter_preference.get("selectedAge"),
+            "gender": 1,
+            "imageUrl": "",
+            "memberId": 0,
+            "memberName": name
+          };
+
+
+        var  user_members = that.user_members;
+        user_members = user_members.toJSON();
+
+        console.log("@@@@@@@@@@@@@@ user_members @@@@@@@@@@@@@@@@@@@");
+        console.log(user_members);
+
+        if(typeof(user_members) !== 'undefined'){
+            user_members[0].userQuesAns.familyPerson = familyper;
+
+            _.each(user_members[0].userQuesAns.memberQuestionnaireList, function(userQuesdtl, j){
+                if(userQuesdtl.name == "Occupation"){
+                    userQuesdtl.memberSelectedAnswer = wobj;
+                }
+
+                if(userQuesdtl.name == "hobbies"){
+                    userQuesdtl.memberSelectedAnswer = hobbiesArrObj;
+                }
+
+                if(userQuesdtl.name == "age"){
+                    userQuesdtl.memberSelectedAnswer = that.filter_preference.get("selectedAgegroup");
+                }
+            });
+
+
+            console.log("@@@@@@@@@@@@@@ Final user_members data for saving@@@@@@@@@@@@@@@@@@@");
+
+
+            var formData = user_members[0].userQuesAns;
+            console.log(JSON.stringify(formData));
+
+            var userId = sessionStorage.userId;
+            that.saveuser_members.saveUserMembers(userId,{
+               async: true,
+               crossDomain: true,
+               method: "POST",
+               headers:{
+                   "authorization": "Bearer "+ sessionStorage.authtoken,
+                   "Content-Type": "application/json"
+               },
+               data: JSON.stringify(formData),
+               success:function(response) {
+                  console.log("Successfully saved Family Members");
+                  console.log(response);
+
+                  var memberList = response.toJSON();
+
+                  var smemberId = memberList[0].memberId;
+
+                  that.filter_preference.set({
+                       'savedMemberId':smemberId
+                   }, {
+                       silent: true
+                   });
+
+                  $("#addMember-modal").modal('hide');
+
+                  /*$("#snackbar").html("Successfully saved Family Members");
+                  var x = document.getElementById("snackbar")
+                  x.className = "show";
+                  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                  that.render();
+                  return;
+*/
+              },
+              error:function(model, response, options) {
+
+                  console.log(" +++++++++++++++ User Members save- Errrorr ++++++++++++++++++ ");
+                  console.log(JSON.stringify(response));
+
+                  $("#addMember-modal").modal('hide');
+
+
+                  /* $("#snackbar").html(response.responseJSON.errorMessage);
+                   var x = document.getElementById("snackbar")
+                   x.className = "show";
+                   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                   return;*/
+
+              }
+          });
+
         }
+        //return;
+
+    }
   });
   return UserProfilePage;
 });
