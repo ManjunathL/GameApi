@@ -6,9 +6,9 @@ define([
   'pinterest_grid',
   'owlcarousel',
   'text!templates/dashboard/everything.html',
-  'text!templates/dashboard/conceptdetails.html',
-  'text!templates/dashboard/similarconcepts.html',
-  'text!templates/dashboard/relatedconcepts.html',
+  'text!templates/dashboard/homeconceptdetails.html',
+  'text!templates/dashboard/homesimilarconcepts.html',
+  'text!templates/dashboard/homerelatedconcepts.html',
   'text!templates/dashboard/spaceelements.html',
    'models/filter',
   'collections/everythings',
@@ -51,6 +51,21 @@ define([
         console.log("****IN RENDER ***********")
         var conceptboardId = that.model.id;
         var spaceTypeCode = that.model.spaceTypeCode;
+
+        this.filter.set({
+            'selconceptboardId':conceptboardId
+        }, {
+            silent: true
+        });
+
+
+        this.filter.set({
+            'selspaceTypeCode':spaceTypeCode
+        }, {
+            silent: true
+        });
+
+
         var getEverythingConceptBoardPromise = that.getEverythingConceptBoard();
         var getConceptAllTagsPromise = that.getConceptAllTags();
         var getConceptBoardsPromise = that.getConceptBoards();
@@ -225,8 +240,8 @@ define([
 
     events: {
          "click .conceptImg1": "getConceptDetails",
-         "click .relatedconceptImg": "getRelatedConceptDetails",
-         "click .similarconceptImg": "getSimilarConceptDetails",
+         "click .homerelatedconceptImg": "getRelatedConceptDetails",
+         "click .homesimilarconceptImg": "getSimilarConceptDetails",
          "click .boardlst": "viewSpaceTemplates",
          "click #saveSpaveElement":"addConcept2Cboard"
          },
@@ -330,8 +345,8 @@ define([
           var pageno = 0;
           var itemPerPage = 50;
 
-          var conceptboardId = that.filter.get('selectedconceptboardId');
-          var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
+          var conceptboardId = that.filter.get('selconceptboardId');
+          var sspaceTypeCode = that.filter.get('selspaceTypeCode');
 
 
           var vconceptCode = cconceptCode;
@@ -471,8 +486,8 @@ define([
           var pageno = 0;
           var itemPerPage = 50;
 
-          var conceptboardId = that.filter.get('selectedconceptboardId');
-          var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
+          var conceptboardId = that.filter.get('selconceptboardId');
+          var sspaceTypeCode = that.filter.get('selspaceTypeCode');
 
 
           var vconceptCode = cconceptCode;
@@ -579,8 +594,8 @@ define([
       var pageno = 0;
       var itemPerPage = 20;
 
-      var conceptboardId = that.filter.get('selectedconceptboardId');
-      var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
+      var conceptboardId = that.filter.get('selconceptboardId');
+      var sspaceTypeCode = that.filter.get('selspaceTypeCode');
 
 
       var vconceptCode = cconceptCode;

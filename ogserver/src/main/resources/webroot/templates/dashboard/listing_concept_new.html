@@ -35,9 +35,23 @@
         right: -30px;
         top: 25px;
     }
+    .upload {
+      position: relative;
+      overflow: hidden;
+      background-color: #ec5136;
+      color: white;
+    }
+    #fileupload {
+      position: absolute;
+      font-size: 50px;
+      opacity: 0;
+      right: 0;
+      top: 0;
+      }
+
 </style>
 <link href="css/layout.css" rel="stylesheet">
-<!--<button id="addCBoard" title="Add Concept Board"><i class="fa fa-plus"></i></button>-->
+<button id="addCBoard" title="Add Concept Board"><i class="fa fa-cloud-upload"></i></button>
 <section>
     <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;padding-left:0px;">
 
@@ -192,7 +206,7 @@
 
             <div class="modal fade" id="pin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
-                    <div class="pin-container">
+                    <div class="pin-container" style="height: 600px;">
                         <div class="col-sm-12 col-md-12">
                             <h3 class="addcboard-heading">Add Concept To Board</h3>
                         </div>
@@ -274,10 +288,26 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div id="addcboard-dtls" class="addcboard-container">
-
+        <div class="modal fade" id="addcboard-modalForImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="">
+                <div id="addcboard-dtls" class="addcboard-container" style="width: 63%;min-height: 150px">
+                    <form id="userconceptfrm" method="post" enctype="multipart/form-data">
+                    <div class="upload btn btn-default ">
+                        Upload
+                        <input id="conceptfileupload" type="file" name="conceptfile"/>
+                    </div>
+                    <div class="form-group">
+                        <h4>Concept Board Name:</h4>
+                        <input type="text" class="form-control" id="cboardcnameTxt" name="cboardname" />
+                    </div>
+                    <div class="form-group">
+                        <h4>Concept Board Desc:</h4>
+                        <input type="text" class="form-control" id="cboarddescTxt" name="cboarddesc" />
+                    </div>
+                    <div class="mt15" style="text-align:right;">
+                        <input type="submit" id="save_uploadConceptBoard" class="btn addcboard-btn" value="Submit">
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>

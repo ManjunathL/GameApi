@@ -25,8 +25,9 @@ define([
   'collections/add_conceptnotes',
   'collections/add_concepttags',
   'collections/spaceelements',
-  'collections/spacetemplates'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,spaceTempPageTemplate, view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements, SpaceTemplates){
+  'collections/spacetemplates',
+  'collections/uploaduserconcepts'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,spaceTempPageTemplate, view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements, SpaceTemplates, UploadUserConcepts){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
@@ -43,6 +44,7 @@ define([
     spaceelements:null,
     spacetemplates: null,
     remove_conceptFromCboards:null,
+    uploaduserconcepts:null,
     initialize: function() {
         this.conceptlists = new ConceptLists();
         this.needconceptlists = new NeedConceptLists();
@@ -58,7 +60,7 @@ define([
         this.spaceelements = new SpaceElements();
         this.remove_conceptFromCboards = new RemoveConceptFromCboards();
         this.spacetemplates = new SpaceTemplates();
-
+        this.uploaduserconcepts= new UploadUserConcepts();
         this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
         _.bindAll(this, 'render','fetchConceptListsAndRender');
@@ -69,6 +71,13 @@ define([
 
         var conceptboardId = that.model.id;
         var spaceTypeCode = that.model.name;
+
+        this.filter.set({
+            'selectedconceptboardId':conceptboardId
+        }, {
+            silent: true
+        });
+
 
         this.filter.set({
             'selectedspaceTypeCode':spaceTypeCode
@@ -516,7 +525,9 @@ define([
          "click #save_CTag": "submitConceptTag",
          "click .remove-pin": "removeConceptFromCboard",
          "click. #show_description":"viewDescription",
-         "click #saveSpaveElement":"addConcept2Cboard"
+         "click #saveSpaveElement":"addConcept2Cboard",
+         //"click #save_uploadConceptBoard": "submitUploadConceptBoard",
+         "submit #userconceptfrm": "submitUploadConceptBoard"
 
     },
     viewDescription:function(evt){
@@ -533,6 +544,88 @@ define([
 
         }));
 
+    },
+    viewAddCboard: function(){
+        $('#addcboard-modalForImage').modal('show');
+        AddConceptboard.apply();
+    },
+    submitUploadConceptBoard: function (e) {
+
+        /*var data = new FormData();
+        var files = $('[type="file"]').get(0).files;
+        console.log("@@@@@@@ data @@@@@@");
+                console.log(files);
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            data.append("file", files[0]);
+        }
+
+        console.log("@@@@@@@ data @@@@@@");
+        console.log(data);
+        return false;*/
+        //var data = $("#userconceptfrm").serialize();
+
+        //var files = $( 'input[name="conceptfile"]' ).get(0).files[0];
+
+
+      /*/ var data;
+
+       data = $('#userconceptfrm').serialize();*/
+      // data.append('file', $('#conceptfileupload')[0].files[0]);
+
+      var that = this;
+
+      var userId = sessionStorage.userId;
+      var conceptboardIdtxt = that.filter.get("selectedconceptboardId");
+      var cboardnameTxt = $('#cboardcnameTxt').val();
+      var cboarddescTxt = $('#cboarddescTxt').val();
+      var conceptfileupload= $( '#conceptfileupload' ).get(0).files;
+      //var conceptfileupload= $( '#conceptfileupload' ).val();
+
+      console.log("@@@@@@@ conceptfileupload @@@@@@");
+              console.log(conceptfileupload);
+
+        var formData = {
+            "file":conceptfileupload,
+            "name": cboardnameTxt,
+            "description": cboarddescTxt,
+            "userId": userId,
+            "conceptboardId" :conceptboardIdtxt
+       };
+
+        console.log("@@@@@@@ form @@@@@@");
+        console.log(cboardnameTxt);
+        console.log(conceptfileupload);
+        console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+        console.log(formData);
+
+        that.uploaduserconcepts.fetch({
+               async: true,
+               crossDomain: true,
+               method: "POST",
+               headers:{
+                   "authorization": "Bearer "+ sessionStorage.authtoken
+               },
+               data: JSON.stringify(formData),
+               success:function(response) {
+                  console.log("Successfully save user Concept image  .. ");
+                  console.log(response);
+
+              },
+              error:function(model, response, options) {
+
+                  console.log(" +++++++++++++++ save save user Concept image- Errrorr ++++++++++++++++++ ");
+                  console.log(JSON.stringify(response));
+                  console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+                  console.log(response.responseJSON.errorMessage);
+
+              }
+          });
+
+
+
+
+      return false;
     },
     removeConceptFromCboard: function (e) {
         if (e.isDefaultPrevented()) return;
