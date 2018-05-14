@@ -34,7 +34,7 @@ define([
             }), function (needconceptlist) {return needconceptlist });
         },
         needconcepWithTags: function (conceptObj, selectedTag) {
-            if(typeof(conceptObj.tags) !== 'undefined'){
+            if(typeof(conceptObj.tags) !== 'undefined' && conceptObj.tags !== null){
                 var tagArrObj = conceptObj.tags;
                 var tagArr = tagArrObj.split(",");
                 for (var i=0; i < tagArr.length; i++) {
