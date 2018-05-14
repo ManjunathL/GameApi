@@ -107,36 +107,32 @@ define([
     viewSpaceTemplates: function(e){
         if (e.isDefaultPrevented()) return;
         e.preventDefault();
-
         var that = this;
-
-
-
         var currentTarget = $(e.currentTarget);
         var conceptboardId = currentTarget.data('element');
         var spaceTypeCode = currentTarget.data('element1');
 
         console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
-                 console.log(spaceTypeCode);
+        console.log(spaceTypeCode);
 
         that.spaceelements.getSpaceElement(spaceTypeCode,{
-        async: true,
-        crossDomain: true,
-        method: "GET",
-        headers:{
-        "authorization": "Bearer "+ sessionStorage.authtoken
-        },
-        success: function(response) {
-        console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
-        console.log(response);
-        that.fetchSpacetypesAndRender(conceptboardId);
-        //resolve();
-        },
-        error: function(model, response, options) {
-        //reject();
-        console.log(" +++++++++++++++ Space Type Templates Error ++++++++++++++++++ ");
-                          console.log(response);
-        }
+            async: true,
+            crossDomain: true,
+            method: "GET",
+            headers:{
+            "authorization": "Bearer "+ sessionStorage.authtoken
+            },
+            success: function(response) {
+            console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
+            console.log(response);
+            that.fetchSpacetypesAndRender(conceptboardId);
+            //resolve();
+            },
+            error: function(model, response, options) {
+                //reject();
+                console.log(" +++++++++++++++ Space Type Templates Error ++++++++++++++++++ ");
+                console.log(response);
+            }
         });
 
     },
@@ -150,9 +146,9 @@ define([
            "selectedconceptboardId": conceptboardId
        }));
        $("#spaceTemp11").html(_.template(spaceTempPageTemplate)({
-                  "spacetemplates": spaceelements.toJSON(),
-                  "selectedconceptboardId": conceptboardId
-              }));
+          "spacetemplates": spaceelements.toJSON(),
+          "selectedconceptboardId": conceptboardId
+      }));
     },
     getConcepts: function(conceptboardId){
         var that = this;
@@ -169,16 +165,9 @@ define([
                   },
                   success:function(response) {
                       //console.log("Successfully fetch "+ currTab  +" Concepts - ");
-
                       console.log("I m here   ++++++++++++++ "+conceptboardId);
                       console.log(response);
-
-                      /*if(typeof(conceptboardId) != 'undefined'){
-                          sessionStorage.conceptboardId = conceptboardId;
-                      }else{
-                          sessionStorage.conceptboardId = "";
-                      }*/
-                        if (!(that.filter.get('selectedconceptboardId'))) {
+                      if (!(that.filter.get('selectedconceptboardId'))) {
                           this.filter.set({
                               'selectedconceptboardId':conceptboardId
                           }, {
@@ -199,40 +188,40 @@ define([
         });
     },
     getSpaceElement: function(spaceTypeCode){
-            var that = this;
-            return new Promise(function(resolve, reject) {
-                 if(typeof(spaceTypeCode) !== 'undefined') {
-                   that.spaceelements.getSpaceElement(spaceTypeCode, {
-                      async: true,
-                      crossDomain: true,
-                      method: "GET",
-                      headers:{
-                          "authorization": "Bearer "+ sessionStorage.authtoken
-                      },
-                      success:function(response) {
+        var that = this;
+        return new Promise(function(resolve, reject) {
+             if(typeof(spaceTypeCode) !== 'undefined') {
+               that.spaceelements.getSpaceElement(spaceTypeCode, {
+                  async: true,
+                  crossDomain: true,
+                  method: "GET",
+                  headers:{
+                      "authorization": "Bearer "+ sessionStorage.authtoken
+                  },
+                  success:function(response) {
 
-                          console.log("I m here   ++++++++++++++ "+spaceTypeCode);
-                          console.log(response);
-                            if (!(that.filter.get('selectedspaceelements'))) {
-                              this.filter.set({
-                                  'selectedspaceelements':spaceTypeCode
-                              }, {
-                                  silent: true
-                              });
-                          }
-                          resolve();
-                      },
-                      error:function(response) {
-                          console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
-                          console.log(response);
-                          reject();
+                      console.log("I m here   ++++++++++++++ "+spaceTypeCode);
+                      console.log(response);
+                        if (!(that.filter.get('selectedspaceelements'))) {
+                          this.filter.set({
+                              'selectedspaceelements':spaceTypeCode
+                          }, {
+                              silent: true
+                          });
                       }
-                  });
-                 }else{
-                    resolve();
-                 }
-            });
-        },
+                      resolve();
+                  },
+                  error:function(response) {
+                      console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                      console.log(response);
+                      reject();
+                  }
+              });
+             }else{
+                resolve();
+             }
+        });
+    },
     getNeedConcepts: function(conceptboardId){
         var that = this;
         var pageno = 0;
@@ -527,7 +516,98 @@ define([
          "click. #show_description":"viewDescription",
          "click #saveSpaveElement":"addConcept2Cboard",
          //"click #save_uploadConceptBoard": "submitUploadConceptBoard",
+         "change #conceptfileupload": "getuploadedFileDtls",
+         //"change #conceptfileupload": "handleFileSelect",
+         "click #showImg": "showuploadedFileDtls",
          "submit #userconceptfrm": "submitUploadConceptBoard"
+
+    },
+    handleFileSelect: function(evt){
+        var that = this;
+        console.log("@@@@@@@@@@@@@@@ I M Here @@@@@@@@@@@@@@@");
+
+        var currentTarget = $(evt.currentTarget);
+        var currId = currentTarget.attr('id');
+
+        var userId = sessionStorage.userId;
+        var conceptboardIdtxt = 3488;
+
+        console.log(" @@@@@@@@@@@@@@@ "+currId+" @@@@@@@@@@@@@@@ ");
+
+        var files = evt.target.files; // FileList object
+
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+            continue;
+            }
+
+            var reader = new FileReader();
+
+            if(currId == "conceptfileupload"){
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                    return function(e) {
+                        // Render thumbnail.
+                        var span = document.createElement('span');
+                        span.innerHTML = "<a href='" + e.target.result + "'><img class='thumb1 a-thumbnail' src='" + e.target.result + "'/></a>"
+                        document.getElementById('list1').insertBefore(span, null);
+                    };
+                })(f);
+            }
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+
+        var formData = new FormData();
+
+        for ( var ff in files)
+        {
+            console.log("file:");
+            console.log(files[ff]);
+            console.log(files[ff].name)
+            formData.append('file', files[ff]);
+        }
+
+
+      formData.append("name","testing dsdsdbbbbbb by smruti");
+      formData.append("description","testing sdsddfddf desc by smruti");
+      formData.append("userId",userId);
+      formData.append("conceptboardId",conceptboardIdtxt);
+
+        console.log("@@@@@@@@@@@@@@@ formData @@@@@@@@@@@@@@@@@@@");
+        console.log(formData);
+
+        $.ajax({
+        url: baseRestApiUrl +  'MyGubbiApi/upload/usercreatedconcept',
+        type: "POST",
+        headers:{
+           "authorization": "Bearer "+ sessionStorage.authtoken,
+        },
+        data : formData,
+        processData: false,
+        contentType: false,
+        success: function (res)
+        {
+            console.log("Successfully uploaded Image");
+            console.log(res);
+            /*if(currId == "conceptfileupload"){
+                var splits = res;
+                var imagesHtml = "";
+                for ( var img in splits)
+                {
+                    var newImgUrl = splits[img].trim();
+                    console.log(newImgUrl);
+                    imagesHtml = imagesHtml +  "<span><a href='" + newImgUrl + "'><img class='thumb1 a-thumbnail' src='" + newImgUrl + "'/></a></span>"
+                }
+                document.getElementById("list1").innerHTML = imagesHtml;
+                document.getElementById("primaryimagepath").value = newImgUrl;
+            }*/
+        }
+      });
 
     },
     viewDescription:function(evt){
@@ -547,31 +627,53 @@ define([
     },
     viewAddCboard: function(){
         $('#addcboard-modalForImage').modal('show');
-        AddConceptboard.apply();
+        return;
+    },
+    getuploadedFileDtls: function (evt) {
+        var that = this;
+
+        var files = evt.target.files;
+
+        for (var i = 0, f; f = files[i]; i++) {
+
+            if (!f.type.match('image.*')) {
+            continue;
+            }
+
+            var reader = new FileReader();
+            reader.readAsDataURL(f);
+        }
+
+       // var formData = new FormData();
+
+            console.log("file:");
+            console.log(files[0]);
+            console.log(files[0].name)
+            //formData.append('file', files[ff]);
+            var fileObj = {};
+            //var fileMnObj = new File();
+            if(files[0].name != ""){
+                that.filter.set({
+                    'imgData': files[0]
+                }, {
+                    silent: true
+                });
+            }
+
+        console.log("++++++++++++ Image Data +++++++++++++++++++");
+        console.log(that.filter.get('imgData'));
+        return false;
+    },
+    showuploadedFileDtls: function (e) {
+        var that = this;
+        var dataImage = that.filter.get('imgData');
+        $('#imgtt').attr('src',dataImage);
+        return false;
     },
     submitUploadConceptBoard: function (e) {
 
-        /*var data = new FormData();
-        var files = $('[type="file"]').get(0).files;
-        console.log("@@@@@@@ data @@@@@@");
-                console.log(files);
-        // Add the uploaded image content to the form data collection
-        if (files.length > 0) {
-            data.append("file", files[0]);
-        }
-
-        console.log("@@@@@@@ data @@@@@@");
-        console.log(data);
-        return false;*/
-        //var data = $("#userconceptfrm").serialize();
-
-        //var files = $( 'input[name="conceptfile"]' ).get(0).files[0];
-
-
-      /*/ var data;
-
-       data = $('#userconceptfrm').serialize();*/
-      // data.append('file', $('#conceptfileupload')[0].files[0]);
+        if (e.isDefaultPrevented()) return;
+                e.preventDefault();
 
       var that = this;
 
@@ -579,53 +681,62 @@ define([
       var conceptboardIdtxt = that.filter.get("selectedconceptboardId");
       var cboardnameTxt = $('#cboardcnameTxt').val();
       var cboarddescTxt = $('#cboarddescTxt').val();
-      var conceptfileupload= $( '#conceptfileupload' ).get(0).files;
+      //var conceptfileupload= $( '#conceptfileupload' ).get(0).files[0];
+      var conceptfileupload= that.filter.get('imgData');
       //var conceptfileupload= $( '#conceptfileupload' ).val();
 
       console.log("@@@@@@@ conceptfileupload @@@@@@");
-              console.log(conceptfileupload);
+      console.log(conceptfileupload);
 
-        var formData = {
-            "file":conceptfileupload,
-            "name": cboardnameTxt,
-            "description": cboarddescTxt,
-            "userId": userId,
-            "conceptboardId" :conceptboardIdtxt
-       };
+      var formData = new FormData();
 
-        console.log("@@@@@@@ form @@@@@@");
-        console.log(cboardnameTxt);
-        console.log(conceptfileupload);
+      formData.append("file",conceptfileupload);
+      formData.append("name",cboardnameTxt);
+      formData.append("description",cboarddescTxt);
+      formData.append("userId",userId);
+      formData.append("conceptboardId",conceptboardIdtxt);
         console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
         console.log(formData);
 
         that.uploaduserconcepts.fetch({
-               async: true,
-               crossDomain: true,
-               method: "POST",
-               headers:{
-                   "authorization": "Bearer "+ sessionStorage.authtoken
-               },
-               data: JSON.stringify(formData),
-               success:function(response) {
-                  console.log("Successfully save user Concept image  .. ");
-                  console.log(response);
+           async: true,
+           crossDomain: true,
+           method: "POST",
+           headers:{
+               "authorization": "Bearer "+ sessionStorage.authtoken,
+           },
+           processData: false,
+           contentType: false,
+           data: formData,
+           success:function(response) {
+              console.log("Successfully save user Concept  .. ");
+              console.log(JSON.stringify(response));
 
-              },
-              error:function(model, response, options) {
+              $("#addcboard-modalForImage").modal('hide');
 
-                  console.log(" +++++++++++++++ save save user Concept image- Errrorr ++++++++++++++++++ ");
-                  console.log(JSON.stringify(response));
-                  console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
-                  console.log(response.responseJSON.errorMessage);
+              $("#snackbar").html("Successfully save user Concept ...");
+              var x = document.getElementById("snackbar")
+              x.className = "show";
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+              that.render();
+              //return;
+              //$(e.currentTarget).closest('article').remove();
+              //return false;
 
-              }
-          });
+          },
+          error:function(model, response, options) {
+              console.log(" +++++++++++++++ save save user Concept image- Errrorr ++++++++++++++++++ ");
+              console.log(JSON.stringify(response));
+              $("#addcboard-modalForImage").modal('hide');
 
-
-
-
-      return false;
+                $("#snackbar").html("Successfully save user Concept ...");
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                that.render();
+          }
+      });
+      return;
     },
     removeConceptFromCboard: function (e) {
         if (e.isDefaultPrevented()) return;
@@ -659,7 +770,7 @@ define([
               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                 that.render();
               //$(e.currentTarget).closest('article').remove();
-               return;
+              // return;
            },
            error:function(response) {
                console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
@@ -707,7 +818,7 @@ define([
                $("#pin-modal").modal('hide');
                $("#pin-modal-conceptdtls").modal('hide');
 
-               return;
+               //return;
            },
            error:function(response) {
                console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
@@ -750,7 +861,7 @@ define([
                  x.className = "show";
                  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                  that.render();
-                 return;
+                 //return;
            },
            error:function(response) {
                 console.log(" +++++++++++++++Error in saving concept tags ++++++++++++++++++ ");

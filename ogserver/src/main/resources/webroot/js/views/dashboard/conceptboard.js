@@ -394,12 +394,13 @@ define([
               console.log("Successfully save Concept board through template selection... ");
               console.log(response);
               $("#addcboard-modal").modal('hide');
+
               $("#snackbar").html("Successfully save Concept board through template selection... ");
               var x = document.getElementById("snackbar")
               x.className = "show";
               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
               that.render();
-              return;
+              //return;
 
           },
           error:function(model, response, options) {
@@ -408,12 +409,7 @@ define([
               console.log(JSON.stringify(response));
               console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
               console.log(response.responseJSON.errorMessage);
-
-               $("#snackbar").html(response.responseJSON.errorMessage);
-               var x = document.getElementById("snackbar")
-               x.className = "show";
-               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-               return;
+                return;
 
           }
       });
