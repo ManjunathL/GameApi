@@ -355,6 +355,11 @@ define([
         //var userId = "user1234600";
         var userMindboardId = sessionStorage.defaultMindboardId;
         var CheckConceptBoard = $('#templateCodeTxt').val();
+
+        console.log(" Hello Tushar ");
+        console.log(CheckConceptBoard);
+
+
         //var formData = new FormData();
        /*var formData = JSON.stringify({
          "userId": "user1234600",
@@ -393,7 +398,10 @@ define([
            success:function(response) {
               console.log("Successfully save Concept board through template selection... ");
               console.log(response);
+              console.log("++++ I m here +");
+
               $("#addcboard-modal").modal('hide');
+              $(".modal-backdrop").css('display','none');
 
               $("#snackbar").html("Successfully save Concept board through template selection... ");
               var x = document.getElementById("snackbar")
@@ -442,12 +450,15 @@ define([
                      success:function(response) {
                         console.log("Successfully save Concept board through template selection... ");
                         console.log(response);
-                        $("#addcboard-modal").modal('hide');
-                        $("#snackbar").html("Successfully save Concept board through template selection... ");
-                        var x = document.getElementById("snackbar")
-                        x.className = "show";
-                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-                        that.render();
+
+                         $("#addcboard-modal").modal('hide');
+                         $(".modal-backdrop").css('display','none');
+
+                          $("#snackbar").html("Successfully save Concept board through template selection... ");
+                          var x = document.getElementById("snackbar")
+                          x.className = "show";
+                          setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                          that.render();
                         return;
 
                     },

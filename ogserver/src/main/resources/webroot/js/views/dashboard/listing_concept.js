@@ -515,99 +515,9 @@ define([
          "click .remove-pin": "removeConceptFromCboard",
          "click. #show_description":"viewDescription",
          "click #saveSpaveElement":"addConcept2Cboard",
-         //"click #save_uploadConceptBoard": "submitUploadConceptBoard",
          "change #conceptfileupload": "getuploadedFileDtls",
-         //"change #conceptfileupload": "handleFileSelect",
          "click #showImg": "showuploadedFileDtls",
          "submit #userconceptfrm": "submitUploadConceptBoard"
-
-    },
-    handleFileSelect: function(evt){
-        var that = this;
-        console.log("@@@@@@@@@@@@@@@ I M Here @@@@@@@@@@@@@@@");
-
-        var currentTarget = $(evt.currentTarget);
-        var currId = currentTarget.attr('id');
-
-        var userId = sessionStorage.userId;
-        var conceptboardIdtxt = 3488;
-
-        console.log(" @@@@@@@@@@@@@@@ "+currId+" @@@@@@@@@@@@@@@ ");
-
-        var files = evt.target.files; // FileList object
-
-        // Loop through the FileList and render image files as thumbnails.
-        for (var i = 0, f; f = files[i]; i++) {
-
-            // Only process image files.
-            if (!f.type.match('image.*')) {
-            continue;
-            }
-
-            var reader = new FileReader();
-
-            if(currId == "conceptfileupload"){
-                // Closure to capture the file information.
-                reader.onload = (function(theFile) {
-                    return function(e) {
-                        // Render thumbnail.
-                        var span = document.createElement('span');
-                        span.innerHTML = "<a href='" + e.target.result + "'><img class='thumb1 a-thumbnail' src='" + e.target.result + "'/></a>"
-                        document.getElementById('list1').insertBefore(span, null);
-                    };
-                })(f);
-            }
-
-            // Read in the image file as a data URL.
-            reader.readAsDataURL(f);
-        }
-
-        var formData = new FormData();
-
-        for ( var ff in files)
-        {
-            console.log("file:");
-            console.log(files[ff]);
-            console.log(files[ff].name)
-            formData.append('file', files[ff]);
-        }
-
-
-      formData.append("name","testing dsdsdbbbbbb by smruti");
-      formData.append("description","testing sdsddfddf desc by smruti");
-      formData.append("userId",userId);
-      formData.append("conceptboardId",conceptboardIdtxt);
-
-        console.log("@@@@@@@@@@@@@@@ formData @@@@@@@@@@@@@@@@@@@");
-        console.log(formData);
-
-        $.ajax({
-        url: baseRestApiUrl +  'MyGubbiApi/upload/usercreatedconcept',
-        type: "POST",
-        headers:{
-           "authorization": "Bearer "+ sessionStorage.authtoken,
-        },
-        data : formData,
-        processData: false,
-        contentType: false,
-        success: function (res)
-        {
-            console.log("Successfully uploaded Image");
-            console.log(res);
-            /*if(currId == "conceptfileupload"){
-                var splits = res;
-                var imagesHtml = "";
-                for ( var img in splits)
-                {
-                    var newImgUrl = splits[img].trim();
-                    console.log(newImgUrl);
-                    imagesHtml = imagesHtml +  "<span><a href='" + newImgUrl + "'><img class='thumb1 a-thumbnail' src='" + newImgUrl + "'/></a></span>"
-                }
-                document.getElementById("list1").innerHTML = imagesHtml;
-                document.getElementById("primaryimagepath").value = newImgUrl;
-            }*/
-        }
-      });
 
     },
     viewDescription:function(evt){
@@ -714,6 +624,8 @@ define([
 
               $("#addcboard-modalForImage").modal('hide');
 
+              $(".modal-backdrop").css('display','none');
+
               $("#snackbar").html("Successfully save user Concept ...");
               var x = document.getElementById("snackbar")
               x.className = "show";
@@ -727,7 +639,10 @@ define([
           error:function(model, response, options) {
               console.log(" +++++++++++++++ save save user Concept image- Errrorr ++++++++++++++++++ ");
               console.log(JSON.stringify(response));
+
               $("#addcboard-modalForImage").modal('hide');
+
+              $(".modal-backdrop").css('display','none');
 
                 $("#snackbar").html("Successfully save user Concept ...");
                 var x = document.getElementById("snackbar")
