@@ -37,7 +37,76 @@ define([
                 });
     },
      events: {
-         "click #loginBtn": "getLogin"
+         "click #loginBtn": "getLogin",
+         "click #signuplnk": "signupOpen",
+         "click #registerBtn": "registerUser"
+     },
+     registerUser: function(e){
+        var that = this;
+
+        var name = $('#reg_name').val();
+        var email = $('#reg_email_id').val();
+        var password = $('#reg_password').val();
+        var phoneNum = $('#reg_mobile').val();
+
+        console.log(name+" ============= "+email+" ============= "+password+" ============= "+phoneNum);
+
+
+        this.refAuth.createUserWithEmailAndPassword(email, password).then(function(userData) {
+            console.log("Successfully created user account with uid:", userData.uid);
+            var photoURL = userData.photoURL ? userData.photoURL: 'https://res.cloudinary.com/mygubbi/image/upload/v1484131794/cep/user_new.png';
+
+
+            var userData = {
+                email: $('#reg_email_id').val(),
+                name: $('#reg_name').val(),
+                photo: photoURL,
+                phoneNo: $('#reg_mobile').val(),
+                uid: userData.uid
+            };
+
+            //console.log("@@@@@@@@@@@@ userData @@@@@@@@@@@@@@@@@@@");
+            //console.log(userData);
+            that.createUser(userData.uid, userData, that.unAuthAfterProfile);
+
+        }, function(error) {
+            // An error happened.
+            console.log("Error creating user:", error);
+            $('#reg_error').html(error);
+            $('#reg_error_row').css("display", "block");
+            window.signupButton.button('reset');
+        });
+
+        return false;
+
+     },
+     createUser: function(userId, data) {
+         var that = this;
+         this.ref.child("users").child(userId).set(data, function(error) {
+             if (error) {
+                 console.log("Data could not be saved." + error);
+                 //if (next) next(false);
+             } else {
+                 console.log("Data saved successfully.");
+                 //if (next) next(true);
+             }
+         });
+     },
+     unAuthAfterProfile: function() {
+         window.signupButton.button('reset');
+         $('#reg_done_message').html("Thanks for registering with us. You now have access to our personalized service. Please <a href='#' id='goto-login'>Login</a> to proceed.");
+         $('#register-modal').modal('hide');
+         $('#notify').modal('show');
+
+         this.refAuth.onAuthStateChanged(this.onFAuth);
+
+         setTimeout(function() {
+             window.location = '/';
+         }, 1000);
+
+     },
+     signupOpen: function(){
+        $("#register-modal").modal('show');
      },
      getLogin: function(){
          var that = this;

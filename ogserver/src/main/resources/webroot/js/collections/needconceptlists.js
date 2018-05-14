@@ -34,11 +34,13 @@ define([
             }), function (needconceptlist) {return needconceptlist });
         },
         needconcepWithTags: function (conceptObj, selectedTag) {
-            var tagArrObj = conceptObj.tags;
-            var tagArr = tagArrObj.split(",");
-            for (var i=0; i < tagArr.length; i++) {
-                if (tagArr[i] == selectedTag.toLowerCase())
-                    return true;
+            if(typeof(conceptObj.tags) !== 'undefined'){
+                var tagArrObj = conceptObj.tags;
+                var tagArr = tagArrObj.split(",");
+                for (var i=0; i < tagArr.length; i++) {
+                    if (tagArr[i] == selectedTag.toLowerCase())
+                        return true;
+                }
             }
         },
          filterByElement:function (conceptlist,selectedElement){

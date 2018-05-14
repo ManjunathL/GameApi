@@ -54,6 +54,7 @@
                 </div>
                 <div class="form-group txt-right mr30">
                     <a href="/"><span class="helptxt">Need help?</span></a>
+                    <a href="javascript:void(0);" id="signuplnk"><span class="helptxt">Sign Up</span></a>
                 </div>
           </form>
         </div>
@@ -66,24 +67,45 @@
 
 <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 <div class="modal-dialog">
-    <div class="loginmodal-container">
-        <h1>Register to Your Account</h1><br>
-      <form>
-        <input type="text" name="name" placeholder="Full Name">
-        <input type="email" name="email" placeholder="Email ID">
-        <input type="password" name="pass" placeholder="Password">
-        <input type="submit" name="register" class="login loginmodal-submit" value="Register">
-      </form>
-
-      <div class="login-help">
-       <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#login-modal" class="pull-left" > Login </a>
-        <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#pass-modal" class="pull-right"> Forgot Password </a>
-      </div>
+    <div class="signupmodal-container">
+        <h4>Register Your Account</h4><br>
+          <form id="signupfrm">
+              <div class="row display-none" id="reg_error_row" style="text-align: center;">
+                  <p class="margin0 error-text align-center" id="reg_error" style="color: darkred;"></p>
+              </div>
+              <div class="form-group">
+                    <input type="text" id="reg_name" name="name" class="form-control signupfrmtxt" placeholder="Full Name" maxlength="100" autocomplete="off" required />
+              </div>
+              <div class="form-group">
+                    <input type="email" id="reg_email_id" class="form-control signupfrmtxt" name="email" placeholder="Email ID*" value="" maxlength="100"
+                     required pattern=".+@.+\..+" title="<abc>@<xyz>.<com>" autocomplete="off" />
+              </div>
+              <div class="form-group">
+                <input type="password" id="reg_password" name="pass" class="form-control signupfrmtxt" placeholder="Password" maxlength="10"  autocomplete="off" required />
+              </div>
+              <div class="form-group">
+                  <input type="text" id="reg_mobile" name="mobile" class="form-control signupfrmtxt" placeholder="Mobile Number" maxlength="10" required pattern="[1-9]{1}[0-9]{9}"  autocomplete="off" />
+              </div>
+              <div class="form-group">
+                  <input type="submit" name="register" class="btn btn-login" id="registerBtn" value="Register">
+              </div>
+          </form>
     </div>
 </div>
 </div>
 
 <!-- ./ Register -->
+
+<!-- Notification Modal -->
+<div id="notify" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content signup">
+            <p class="margin0" id="reg_done_message"></p>
+        </div>
+    </div>
+</div>
+<!-- Notification End -->
 
 
 <div class="modal fade" id="pass-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

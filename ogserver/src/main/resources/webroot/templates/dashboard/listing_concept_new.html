@@ -287,14 +287,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+
         <div class="modal fade" id="addcboard-modalForImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="">
+            <div class="modal-dialog">
                 <div id="addcboard-dtls" class="addcboard-container" style="width: 63%;min-height: 150px">
-                    <form id="userconceptfrm" method="post" enctype="multipart/form-data">
-                    <div class="upload btn btn-default ">
+                    <form id="userconceptfrm" method="post" name="userconceptfrm" enctype="multipart/form-data">
+                    <div class="form-group">
                         Upload
                         <input id="conceptfileupload" type="file" name="conceptfile"/>
+                        <!--<input type="button" id="showImg" class="btn addcboard-btn" value="Show">-->
+                        <div id="list1">
+                        </div>
                     </div>
                     <div class="form-group">
                         <h4>Concept Board Name:</h4>
@@ -318,6 +321,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!--    <div style=" margin-bottom: 138px;"></div>-->
 </section>
