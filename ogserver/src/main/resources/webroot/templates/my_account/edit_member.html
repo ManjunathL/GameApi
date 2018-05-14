@@ -1,0 +1,215 @@
+<%= console.log("@@@@@@@@@@@@@@@@@@@@@@@ editfamilymembers @@@@@@@@@@@@@@@@@@@@@@@@@") %>
+<%= console.log(editfamilymembers) %>
+<form>
+    <% if(typeof(editfamilymembers) !== 'undefined'){ %>
+    <div class="col-md-12">
+        <h2>Name</h2>
+        <div class="form-group col-md-6">
+            <input type="Name" class="form-control" id="edit_inputname" placeholder="Name" value="<%= editfamilymembers[0].userQuesAns.familyPerson.memberName %>">
+        </div>
+    </div>
+    <input type="hidden1" id="edit_memberId" value="<%= editfamilymembers[0].userQuesAns.familyPerson.memberId %>" />
+    <div class="col-md-12">
+        <h2>Gender</h2>
+        <div class="form-group col-md-6 gender-style">
+            <% if(editfamilymembers[0].userQuesAns.familyPerson.gender=='0'){ %>
+            <input class="form-check-input" type="radio" name="edit_gender" id="edit_male" value="0" checked>
+            <label class="form-check-label" for="edit_male">Male</label>
+            <input class="form-check-input" type="radio" name="edit_gender" id="edit_female" value="1" >
+            <label class="form-check-label" for="edit_female">Female</label>
+            <%}else if(editfamilymembers[0].userQuesAns.familyPerson.gender=='1'){ %>
+            <input class="form-check-input" type="radio" name="edit_gender" id="edit_male" value="0">
+            <label class="form-check-label" for="edit_male">Male</label>
+            <input class="form-check-input" type="radio" name="edit_gender" id="edit_female" value="1" checked>
+            <label class="form-check-label" for="edit_female">Female</label>
+            <%} %>
+        </div>
+    </div>
+    <%} %>
+    <% if(typeof(editfamilymembers) !== 'undefined'){ %>
+    <% _.each(editfamilymembers[0].userQuesAns.memberQuestionnaireList, function(memberQuesdtl, j){ %>
+
+
+    <% if(memberQuesdtl.name == 'age'){ %>
+    <div class="col-md-12">
+        <h2><%= memberQuesdtl.category[0].questionDetails.name %></h2>
+        <% _.each(memberQuesdtl.category[0].options, function(catopt, j){ %>
+        <div class="form-group col-xs-1" style="width: 13.333333%;padding: 0px 15px 0px 0px;">
+            <figure>
+                <div class="form-group">
+                    <button type="button" class="btn btn-light button4 btn-labeltxt userMember" data-element="<%= memberQuesdtl.category[0].questionDetails.quesId %>" data-element1="<%= catopt.quesOptionid %>" data-element2="<%= catopt.name %>"  <% if(editfamilymembers[0].userQuesAns.familyPerson.age==catopt.name) { %> style="width:90px; background-color: #634e42; color: #fff;" <% }else{  %>style="width:90px;" <% } %>><%= catopt.name %></button>
+                </div>
+            </figure>
+        </div>
+        <% }); %>
+    </div>
+    <% } %>
+    <% if(memberQuesdtl.name == 'Occupation'){ %>
+    <div class="col-md-12">
+        <h2>Work</h2>
+        <div class="form-group col-md-6">
+            <label for="edit_inputcategory">Category</label>
+            <select id="edit_inputcategory" class="form-control">
+                <option selected>Choose...</option>
+                <% _.each(memberQuesdtl.category, function(occupCat, j){ %>
+                <option value="<%= j %>" data-element="<%= occupCat.questionDetails.quesId %>" <% if(memberQuesdtl.memberSelectedAnswer[0].quesId == occupCat.questionDetails.quesId ){%> selected="selected" <% } %>><%= occupCat.questionDetails.name %></option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="edit_inputoccupation">Occupation</label>
+            <select id="edit_inputoccupation" class="form-control">
+                <option selected>Choose...</option>
+                <% _.each(memberQuesdtl.category, function(occupCat, i){ %>
+                <% _.each(memberQuesdtl.category[i].options, function(occupopt, k){ %>
+                <option class="occ<%= i %> occnm" value="<%= i %>" data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>" <% if(memberQuesdtl.memberSelectedAnswer[0].optionId == occupopt.quesOptionid ){%> selected="selected" <% } %>>
+                    <%= occupopt.name %>
+                </option>
+                <% }); %>
+                <% }); %>
+            </select>
+        </div>
+    </div>
+    <% } %>
+    <% if(memberQuesdtl.name == 'hobbies'){ %>
+    <div class="col-md-12">
+        <h2>Hobby1</h2>
+        <div class="form-group col-md-6">
+            <label for="edit_inputhobby1category">Category</label>
+            <select id="edit_inputhobby1category" class="form-control">
+                <option selected>Choose...</option>
+                <% _.each(memberQuesdtl.category, function(occupCat, a){ %>
+                <%  if(memberQuesdtl.memberSelectedAnswer[0].quesId == occupCat.questionDetails.quesId ){%>
+                <option value="<%= a %>" selected="selected"><%= occupCat.questionDetails.name %></option>
+                <% }else{ %>
+                <option value="<%= a %>"><%= occupCat.questionDetails.name %></option>
+                <% } %>
+                <% }); %>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="edit_inputhobby1">Hobbies</label>
+            <select id="edit_inputhobby1" class="form-control">
+                <option selected>Choose...</option>
+                <% _.each(memberQuesdtl.category, function(occupCat, b1){ %>
+                <% _.each(memberQuesdtl.category[b1].options, function(occupopt, k){ %>
+                <option class="hob1<%= b1 %> hobnm1" value="<%= b1 %>" data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>"  data-element2=" <%= memberQuesdtl.memberSelectedAnswer[0].quesId %>"  <% if(memberQuesdtl.memberSelectedAnswer[0].optionId == occupopt.quesOptionid ){%> selected="selected" <% } %>>
+                    <%= occupopt.name %>
+                </option>
+                <% }); %>
+                <% }); %>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h2>Hobby2</h2>
+        <div class="form-group col-md-6">
+            <label for="edit_inputhobby2category">Category</label>
+            <select id="edit_inputhobby2category" class="form-control">
+                <option selected>Choose...</option>
+                <% _.each(memberQuesdtl.category, function(occupCat, a2){ %>
+                <%  if(memberQuesdtl.memberSelectedAnswer[1].quesId == occupCat.questionDetails.quesId ){%>
+                <option value="<%= a2 %>" selected="selected"><%= occupCat.questionDetails.name %></option>
+                <% }else{ %>
+                <option value="<%= a2 %>"><%= occupCat.questionDetails.name %></option>
+                <% } %>
+                <% }); %>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="edit_inputhobby2">Hobbies</label>
+            <select id="edit_inputhobby2" class="form-control">
+                <option selected>Choose...</option>
+                <% _.each(memberQuesdtl.category, function(occupCat, b2){ %>
+                <% _.each(memberQuesdtl.category[b2].options, function(occupopt, k){ %>
+                <option class="hob2<%= b2 %> hobnm2" value="<%= b2 %>" data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>"  <% if(memberQuesdtl.memberSelectedAnswer[0].optionId == occupopt.quesOptionid ){%> selected="selected" <% } %>>
+                    <%= occupopt.name %>
+                </option>
+                <% }); %>
+                <% }); %>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h2>Hobby3</h2>
+        <div class="form-group col-md-6">
+            <label for="edit_inputhobby3category">Category</label>
+            <select id="edit_inputhobby3category" class="form-control">
+                <option selected>Choose...</option>
+                <% _.each(memberQuesdtl.category, function(occupCat, a3){ %>
+                <%  if(memberQuesdtl.memberSelectedAnswer[2].quesId == occupCat.questionDetails.quesId ){%>
+                <option value="<%= a3 %>" selected="selected"><%= occupCat.questionDetails.name %></option>
+                <% }else{ %>
+                <option value="<%= a3 %>"><%= occupCat.questionDetails.name %></option>
+                <% } %>
+                <% }); %>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="edit_inputhobby3">Hobbies</label>
+            <select id="edit_inputhobby3" class="form-control">
+                <option selected>Choose...</option>
+                <% _.each(memberQuesdtl.category, function(occupCat, b3){ %>
+                <% _.each(memberQuesdtl.category[b3].options, function(occupopt, k){ %>
+                <%  if(memberQuesdtl.memberSelectedAnswer[2].quesId == occupCat.questionDetails.quesId ){%>
+                <option class="hob3<%= b3 %> hobnm3" value="<%= b3 %>"  data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>" selected="selected">
+                    <%= occupopt.name %>
+                </option>
+                <% }else{ %>
+                <option class="hob3<%= b3 %> hobnm3" value="<%= b3 %>"  data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>">
+                    <%= occupopt.name %>
+                </option>
+                <% } %>
+                <% }); %>
+                <% }); %>
+            </select>
+        </div>
+    </div>
+    <% } %>
+    <% }); %>
+    <% } %>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <input type="button" id="update_familyMemebr" class="btn addcboard-btn" value="Save">
+        </div>
+    </div>
+</form>
+<script>
+
+$(document).ready(function() {
+  $('#edit_inputcategory').change(function() {
+        //alert($(this).val());
+        var selWork = $(this).val();
+        if(selWork != ""){
+            $(".occnm").css('display','none');
+            $(".occ"+selWork).css('display','block');
+        }
+  });
+  $('#edit_inputhobby1category').change(function() {
+        //alert($(this).val());
+        var selHob1 = $(this).val();
+        if(selHob1 != ""){
+            $(".hobnm1").css('display','none');
+            $(".hob1"+selHob1).css('display','block');
+        }
+  });
+  $('#edit_inputhobby2category').change(function() {
+        //alert($(this).val());
+        var selHob2 = $(this).val();
+        if(selHob2 != ""){
+            $(".hobnm2").css('display','none');
+            $(".hob2"+selHob2).css('display','block');
+        }
+  });
+
+  $('#edit_inputhobby3category').change(function() {
+        //alert($(this).val());
+        var selHob3 = $(this).val();
+        if(selHob3 != ""){
+            $(".hobnm3").css('display','none');
+            $(".hob3"+selHob3).css('display','block');
+        }
+  });
+});
+
+</script>

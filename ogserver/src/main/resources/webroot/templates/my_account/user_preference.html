@@ -8,7 +8,10 @@
 <%= console.log(allFamilyPreference) %>
 
 <%= console.log("@@@@@@@@@@@@@@@@@@@@@@@ EditFamilyPreference @@@@@@@@@@@@@@@@@@@@@@@@@") %>
+<% if(typeof(editFamilyPreference) !== 'undefined' && editFamilyPreference != []){ %>
 <%= console.log(editFamilyPreference) %>
+<% } %>
+
 
 <style>
 	figure {
@@ -307,14 +310,14 @@ margin-top: 25px;
                             </td>
                             <td class="text-left"><a href="" class="asc">Gender</a>
                             </td>
-                            <td class="text-left"><a href="" class="asc">Work</a>
+                           <!-- <td class="text-left"><a href="" class="asc">Work</a>
                             </td>
                             <td class="text-left"><a href="" class="asc">Hobby1</a>
                             </td>
                             <td class="text-left"><a href="" class="asc">Hobby2</a>
                             </td>
                             <td class="text-left"><a href="" class="asc">Hobby3</a>
-                            </td>
+                            </td>-->
                             <td class="text-right">Action</td>
                         </tr>
                         </thead>
@@ -325,17 +328,17 @@ margin-top: 25px;
 
                             <td class="text-left"><%= userQuesdtl.memberName %></td>
                             <td class="text-left"> <%=userQuesdtl.age %></td>
-                            <% if(userQuesdtl.gender=='1'){ %>
+                            <% if(userQuesdtl.gender=='0'){ %>
                             <td class="text-left">Male</td>
                             <% }else{ %>
                             <td class="text-left">Female</td>
                             <% } %>
-                            <td class="text-left">Computer Engineer</td>
+                            <!--<td class="text-left">Computer Engineer</td>
                             <td class="text-left">Cooking</td>
                             <td class="text-left">Cyclying</td>
-                            <td class="text-left">Painting</td>
+                            <td class="text-left">Painting</td>-->
                             <td class="text-right">
-                               <a href="javascript:void(0);" data-toggle="tooltip" title="" class="btn btn-primary" id="edit_familyMemebr"  data-element="<%= userQuesdtl.memberId %>" data-original-title="Edit" onclick="showMemberModal()" ><i class="fa fa-pencil"></i></a>
+                               <a href="javascript:void(0);" data-toggle="tooltip" title="" class="btn btn-primary" id="edit_familyMemebr"  data-element="<%= userQuesdtl.memberId %>" data-original-title="Edit" onclick="editMemberModal()" ><i class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
                         <% }); %>
@@ -378,12 +381,13 @@ margin-top: 25px;
                                         <input type="Name" class="form-control" id="inputname" placeholder="Name">
                                     </div>
                                 </div>
+                                <!--<input type="hidden" id="memberId" value="0" />-->
                                 <div class="col-md-12">
                                     <h2>Gender</h2>
                                     <div class="form-group col-md-6 gender-style">
-                                        <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                                        <input class="form-check-input" type="radio" name="gender" id="male" value="0">
                                         <label class="form-check-label" for="male">Male</label>
-                                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                        <input class="form-check-input" type="radio" name="gender" id="female" value="1">
                                         <label class="form-check-label" for="female">Female</label>
                                     </div>
                                 </div>
@@ -521,6 +525,12 @@ margin-top: 25px;
                                 </div>
                             </form>
                         </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="editMember-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                        <div id="editMember-dtls" class="addcboard-container">
+                            </div>
                     </div>
                 </div>
 
@@ -786,6 +796,9 @@ $('.multiselectFam').click(function (e) {
 
 function showMemberModal(){
     $('#addMember-modal').modal('toggle');
+}
+function editMemberModal(){
+    $('#editMember-modal').modal('toggle');
 }
 
 $(document).ready(function() {

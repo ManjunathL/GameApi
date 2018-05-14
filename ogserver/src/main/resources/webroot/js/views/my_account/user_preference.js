@@ -4,6 +4,7 @@ define([
   'backbone',
   'bootstrap',
   'text!templates/my_account/user_preference.html',
+  'text!templates/my_account/edit_member.html',
   'collections/user_preferences',
   'collections/user_members',
   'collections/saveuser_preferences',
@@ -12,7 +13,7 @@ define([
   'models/filter',
   'collections/family_preferences',
   'collections/editfamilymembers'
-], function($, _, Backbone, Bootstrap, UserProfileTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter,FamilyPreferences,EditFamilyMembers){
+], function($, _, Backbone, Bootstrap, UserProfileTemplate, editMemberPageTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter,FamilyPreferences,EditFamilyMembers){
   var UserProfilePage = Backbone.View.extend({
     el: '.page',
     user_home_preferences: null,
@@ -202,7 +203,7 @@ define([
         var user_family_preferences = that.user_family_preferences;
         var user_members = that.user_members;
         var family_preference = that.family_preference;
-        var editfamilymembers = that.editfamilymembers;
+        //var editfamilymembers = that.editfamilymembers;
 
         console.log("@@@@@@@@@@@@@@@@@@ family_preference @@@@@@@@@@@@@@@@@@2222");
         console.log(family_preference);
@@ -215,7 +216,7 @@ define([
            'userFamilyPreferencesDtls':user_family_preferences.toJSON(),
            'userMemebersPreferencesDtls':user_members.toJSON(),
            'allFamilyPreference':family_preference.toJSON(),
-           'editFamilyPreference':editfamilymembers.toJSON()
+           //'editFamilyPreference':editfamilymembers.toJSON()
        }));
     },
     events: {
@@ -225,6 +226,7 @@ define([
         "click #save_familyId":"saveFamilyPreferences",
         "click .userMember":"getSelectedMember",
         "click #save_familyMemebr":"saveFamilyMembers",
+        "click #update_familyMemebr":"updateFamilyMembers",
         "click #edit_familyMemebr":"editFamilyMembers"
 
     },
@@ -234,33 +236,36 @@ define([
               var currentTarget = $(evt.currentTarget);
               var userId = sessionStorage.userId;
               var memberId = currentTarget.data('element');
-              return new Promise(function(resolve, reject) {
-                  if(userId){
-                     that.editfamilymembers.editFamilyMembers(userId,memberId, {
-                         async: true,
-                         crossDomain: true,
-                         method: "GET",
-                         headers:{
-                             "authorization": "Bearer "+ sessionStorage.authtoken
-                         },
-                         success:function(data) {
+             that.editfamilymembers.editFamilyMembers(userId,memberId, {
+                 async: true,
+                 crossDomain: true,
+                 method: "GET",
+                 headers:{
+                     "authorization": "Bearer "+ sessionStorage.authtoken
+                 },
+                 success:function(data) {
 
-                             console.log(" +++++++++++++++ editFamilyMembers ++++++++++++++++++ ");
-                             console.log(data);
-                             resolve();
-                         },
-                         error:function(response) {
-                             //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
-                             //console.log(response);
-                             reject();
-                         }
-                     });
-                 }else{
-                  resolve();
+                     console.log(" +++++++++++++++ editFamilyMembers ++++++++++++++++++ ");
+                     console.log(data);
+                      $('#editMember-modal').modal('show');
+                     that.fetchEditAndRender();
+                 },
+                 error:function(response) {
+                     //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
+                     //console.log(response);
                  }
-            });
+             });
 
     },
+     fetchEditAndRender: function(){
+         var that = this;
+         var editfamilymembers = that.editfamilymembers;
+
+         $('#editMember-dtls').html(_.template(editMemberPageTemplate)({
+             "editfamilymembers": editfamilymembers.toJSON()
+         }));
+
+        },
     saveHomePreferences:function(e){
         var that = this;
 
@@ -857,6 +862,7 @@ define([
         var name = $("#inputname").val();
         var gender = $("input[name='gender']:checked").val();
 
+         var memberId = $("#memberId").val();
         var workcategory = $("#inputcategory").val();
 
 
@@ -868,7 +874,7 @@ define([
            "optionId": workoccupationquesOptId,
            "optionType": 1,
            "quesAnsId": 0,
-           "quesId": workoccupationquesOptId,
+           "quesId": workoccupationquesId,
            "selectionStatus": 1,
            "userOptionDesc": ""
        }];
@@ -906,7 +912,7 @@ define([
               "userOptionDesc": ""
             },
             {
-              "optionId": hobby2quesOptId,
+              "optionId": hobby3quesOptId,
               "optionType": 1,
               "quesAnsId": 0,
               "quesId": hobby3quesId,
@@ -926,7 +932,7 @@ define([
         var familyper =
         {
             "age": that.filter_preference.get("selectedAge"),
-            "gender": 1,
+            "gender": gender,
             "imageUrl": "",
             "memberId": 0,
             "memberName": name
@@ -1017,7 +1023,176 @@ define([
         }
         //return;
 
-    }
+    },
+    updateFamilyMembers:function(e){
+            var that = this;
+            if (e.isDefaultPrevented()) return;
+
+            var name = $("#edit_inputname").val();
+            var gender = $("input[name='edit_gender']:checked").val();
+
+             var memberId = $("#edit_memberId").val();
+            var workcategory = $("#edit_inputcategory").val();
+
+
+            var workoccupation = $("#edit_inputoccupation").val();
+            var workoccupationquesId = $("#edit_inputoccupation").find(':selected').data('element');
+            var workoccupationquesOptId = $("#edit_inputoccupation").find(':selected').data('element1');
+
+            var wobj=[{
+               "optionId": workoccupationquesOptId,
+               "optionType": 1,
+               "quesAnsId": 0,
+               "quesId": workoccupationquesId,
+               "selectionStatus": 1,
+               "userOptionDesc": ""
+           }];
+
+            var hobby1category = $("#edit_inputhobby1category").val();
+            var hobby1 = $("#edit_inputhobby1").val();
+            var hobby1quesId = $("#edit_inputhobby1").find(':selected').data('element');
+            var hobby1quesOptId = $("#edit_inputhobby1").find(':selected').data('element1');
+
+            var hobby2category = $("#edit_inputhobby2category").val();
+            var hobby2 = $("#edit_inputhobby2").val();
+            var hobby2quesId = $("#edit_inputhobby2").find(':selected').data('element');
+            var hobby2quesOptId = $("#edit_inputhobby2").find(':selected').data('element1');
+
+            var hobby3category = $("#edit_inputhobby3category").val();
+            var hobby3 = $("#edit_inputhobby3").val();
+            var hobby3quesId = $("#edit_inputhobby3").find(':selected').data('element');
+            var hobby3quesOptId = $("#edit_inputhobby3").find(':selected').data('element1');
+
+            var hobbiesArrObj = [
+                {
+                  "optionId": hobby1quesOptId,
+                  "optionType": 1,
+                  "quesAnsId": 0,
+                  "quesId": hobby1quesId,
+                  "selectionStatus": 1,
+                  "userOptionDesc": ""
+                },
+                {
+                  "optionId": hobby2quesOptId,
+                  "optionType": 1,
+                  "quesAnsId": 0,
+                  "quesId": hobby2quesId,
+                  "selectionStatus": 1,
+                  "userOptionDesc": ""
+                },
+                {
+                  "optionId": hobby3quesOptId,
+                  "optionType": 1,
+                  "quesAnsId": 0,
+                  "quesId": hobby3quesId,
+                  "selectionStatus": 1,
+                  "userOptionDesc": ""
+                }
+              ];
+
+            console.log(" @@@@@@@@@@@@@@ hobbiesArrObj @@@@@@@@@@@@@@@@@@@@@@ ");
+            console.log(hobbiesArrObj);
+
+
+            console.log(" @@@@@@@@@@@@@@ selectedAgegroup @@@@@@@@@@@@@@@@@@@@@@ ");
+            console.log(that.filter_preference.get("selectedAgegroup"));
+
+
+            var familyper =
+            {
+                "age": that.filter_preference.get("selectedAge"),
+                "gender": parseInt(gender),
+                "imageUrl": "",
+                "memberId": parseInt(memberId),
+                "memberName": name
+              };
+
+
+            var  user_members = that.user_members;
+            user_members = user_members.toJSON();
+
+            console.log("@@@@@@@@@@@@@@ user_members @@@@@@@@@@@@@@@@@@@");
+            console.log(user_members);
+
+            if(typeof(user_members) !== 'undefined'){
+                user_members[0].userQuesAns.familyPerson = familyper;
+
+                _.each(user_members[0].userQuesAns.memberQuestionnaireList, function(userQuesdtl, j){
+                    if(userQuesdtl.name == "Occupation"){
+                        userQuesdtl.memberSelectedAnswer = wobj;
+                    }
+
+                    if(userQuesdtl.name == "hobbies"){
+                        userQuesdtl.memberSelectedAnswer = hobbiesArrObj;
+                    }
+
+                    if(userQuesdtl.name == "age"){
+                        userQuesdtl.memberSelectedAnswer = that.filter_preference.get("selectedAgegroup");
+                    }
+                });
+
+
+                console.log("@@@@@@@@@@@@@@ Final user_members data for saving@@@@@@@@@@@@@@@@@@@");
+
+
+                var formData = user_members[0].userQuesAns;
+                console.log(JSON.stringify(formData));
+
+                var userId = sessionStorage.userId;
+                that.saveuser_members.saveUserMembers(userId,{
+                   async: true,
+                   crossDomain: true,
+                   method: "POST",
+                   headers:{
+                       "authorization": "Bearer "+ sessionStorage.authtoken,
+                       "Content-Type": "application/json"
+                   },
+                   data: JSON.stringify(formData),
+                   success:function(response) {
+                      console.log("Successfully saved Family Members");
+                      console.log(response);
+
+                      var memberList = response.toJSON();
+
+                      var smemberId = memberList[0].memberId;
+
+                      that.filter_preference.set({
+                           'savedMemberId':smemberId
+                       }, {
+                           silent: true
+                       });
+
+                      $("#addMember-modal").modal('hide');
+
+                      /*$("#snackbar").html("Successfully saved Family Members");
+                      var x = document.getElementById("snackbar")
+                      x.className = "show";
+                      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                      that.render();
+                      return;
+    */
+                  },
+                  error:function(model, response, options) {
+
+                      console.log(" +++++++++++++++ User Members save- Errrorr ++++++++++++++++++ ");
+                      console.log(JSON.stringify(response));
+
+                      $("#addMember-modal").modal('hide');
+
+
+                      /* $("#snackbar").html(response.responseJSON.errorMessage);
+                       var x = document.getElementById("snackbar")
+                       x.className = "show";
+                       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                       return;*/
+
+                  }
+              });
+
+            }
+            //return;
+
+        }
   });
   return UserProfilePage;
 });
