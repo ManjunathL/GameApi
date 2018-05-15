@@ -38,7 +38,7 @@ define([
                 var tagArrObj = conceptObj.tags;
                 var tagArr = tagArrObj.split(",");
                 for (var i=0; i < tagArr.length; i++) {
-                    if (tagArr[i] == selectedTag.toLowerCase())
+                    if (tagArr[i].toLowerCase() == selectedTag.toLowerCase())
                         return true;
                 }
             }

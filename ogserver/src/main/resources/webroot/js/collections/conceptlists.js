@@ -34,13 +34,13 @@ define([
             }), function (concept) {return concept });
         },
         concepWithTags: function (conceptObj, selectedTag) {
-        if(typeof(conceptObj.conceptTag) !== 'undefined' && conceptObj.conceptTag !== null){
-            var tagArrObj = conceptObj.conceptTag;
-            var tagArr = tagArrObj.split(",");
-            for (var i=0; i < tagArr.length; i++) {
-                if (tagArr[i] == selectedTag)
-                    return true;
-            }
+            if(typeof(conceptObj.conceptTag) !== 'undefined' && conceptObj.conceptTag !== null){
+                var tagArrObj = conceptObj.conceptTag;
+                var tagArr = tagArrObj.split(",");
+                for (var i=0; i < tagArr.length; i++) {
+                    if (tagArr[i].toLowerCase() == selectedTag.toLowerCase())
+                        return true;
+                }
             }
         },
         filterByElement:function (conceptlist,selectedElement){

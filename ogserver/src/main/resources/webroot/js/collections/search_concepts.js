@@ -24,11 +24,11 @@ define([
             }), function (concept) {return concept });
         },
         searchconceptWithTags: function (conceptObj, selectedSearchTag) {
-            if(typeof(conceptObj.tags) !== 'undefined'){
+            if(typeof(conceptObj.tags) !== 'undefined' && conceptObj.tags !== null){
                 var tagArrObj = conceptObj.tags;
                 var tagArr = tagArrObj.split(",");
                 for (var i=0; i < tagArr.length; i++) {
-                    if (tagArr[i] == selectedSearchTag)
+                    if (tagArr[i].toLowerCase() == selectedSearchTag.toLowerCase())
                         return true;
                 }
             }

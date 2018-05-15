@@ -642,7 +642,8 @@ define([
 
               $("#addcboard-modalForImage").modal('hide');
 
-              $(".modal-backdrop").css('display','none');
+              $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
 
                 $("#snackbar").html("Successfully save user Concept ...");
                 var x = document.getElementById("snackbar")

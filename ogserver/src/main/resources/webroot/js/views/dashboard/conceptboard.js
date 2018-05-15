@@ -401,7 +401,9 @@ define([
               console.log("++++ I m here +");
 
               $("#addcboard-modal").modal('hide');
-              $(".modal-backdrop").css('display','none');
+
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
 
               $("#snackbar").html("Successfully save Concept board through template selection... ");
               var x = document.getElementById("snackbar")
@@ -452,7 +454,9 @@ define([
                         console.log(response);
 
                          $("#addcboard-modal").modal('hide');
-                         $(".modal-backdrop").css('display','none');
+
+                         $('body').removeClass('modal-open');
+                         $('.modal-backdrop').remove();
 
                           $("#snackbar").html("Successfully save Concept board through template selection... ");
                           var x = document.getElementById("snackbar")
