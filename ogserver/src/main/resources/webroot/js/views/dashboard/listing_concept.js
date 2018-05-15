@@ -535,7 +535,7 @@ define([
         }));
 
     },
-    viewAddCboard: function(){
+    viewAddCboard: function(event){
         $('#addcboard-modalForImage').modal('show');
         return;
     },
@@ -733,8 +733,17 @@ define([
            success:function(response) {
                console.log("Successfully save Concept to Concept board- ");
                console.log(response);
-               $("#pin-modal").modal('hide');
+               //$("#pin-modal").modal('hide');
                $("#pin-modal-conceptdtls").modal('hide');
+
+               $("#snackbar").html("Successfully save Concept Note");
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                that.render();
+
+               //$('body').removeClass('modal-open');
+              //$('.modal-backdrop').remove();
 
                //return;
            },
@@ -774,6 +783,10 @@ define([
            data: JSON.stringify(formData),
            success:function(response) {
                  $("#details-modal").modal('hide');
+
+                 $('body').removeClass('modal-open');
+                                $('.modal-backdrop').remove();
+
                  $("#snackbar").html("Successfully save Concept Note");
                  var x = document.getElementById("snackbar")
                  x.className = "show";
@@ -1309,10 +1322,6 @@ define([
                      console.log(" ============= Related Concept =============== ");
                      console.log(response);
                      resolve();
-
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-
                  },
                  error:function(response) {
                      console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");

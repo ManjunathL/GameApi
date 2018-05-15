@@ -235,7 +235,9 @@
                                         <% }); %>
                                     </div>
                                     <% } %>
-                                    <div id="spaceTemp111"></div>
+                                    <div id="spaceTemp111">
+
+                                    </div>
                                 </div>
                             </div>
                      <!--       <div class="col-md-12 col-lg-12">
@@ -321,6 +323,44 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="pin-modal-conceptdtls" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="pin-container" style="height:615px;">
+                <div class="col-sm-12 col-md-12">
+                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add Concept To Board</h3>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <div class="col-sm-3 col-md-3">
+                        <div class="pin-model-img">
+                            <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg1" alt="pin image"> </a>
+                            <h4 id="concNm1" style="color: #333;font-weight: 500;font-size: 18px;">Excepteur sint occaecat cupidatat non proident </h4>
+                            <input type="hidden" id="ConcCod">
+                        </div>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8 ">
+                        <div>
+                            <h4 style="font-size: 18px;font-weight: 300;color: #333;">Identity Room </h4>
+                        </div>
+                        <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                        <div id="owl-sptype1" class="owl-carousel owl-theme">
+                            <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(splst, i){ %>
+                            <div class="item boardlst"
+                                 data-element="<%= splst.id %>" data-element1="<%= splst.spaceTypeCode %>" >
+                                <img src="<%= splst.imgUrl %>" alt="<%= splst.code %>" class="img-responsive img-centered" style="display: block; width: 106px; height: 75px;" >
+                                <h5  style="color: #333;font-size: 17px; font-weight: 100;"><%= splst.name %></h5>
+                            </div>
+                            <% }); %>
+                        </div>
+                        <% } %>
+                        <div id="spaceTemp11"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </div>
     </div>
     <!--    <div style=" margin-bottom: 138px;"></div>-->
@@ -351,7 +391,8 @@
         $('#myCarousel112 .item:first').addClass('active');
         $('#myCarousel112').carousel({
             interval: false
-        })
+        });
+
     });
 
     function getTagsView(selTag){
@@ -420,4 +461,5 @@
       });
         $("#frmsec").fadeOut();
     });
+
 </script>
