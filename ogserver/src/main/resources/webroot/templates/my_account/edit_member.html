@@ -8,7 +8,7 @@
             <input type="Name" class="form-control" id="edit_inputname" placeholder="Name" value="<%= editfamilymembers[0].userQuesAns.familyPerson.memberName %>">
         </div>
     </div>
-    <input type="hidden1" id="edit_memberId" value="<%= editfamilymembers[0].userQuesAns.familyPerson.memberId %>" />
+    <input type="hidden" id="edit_memberId" value="<%= editfamilymembers[0].userQuesAns.familyPerson.memberId %>" />
     <div class="col-md-12">
         <h2>Gender</h2>
         <div class="form-group col-md-6 gender-style">
@@ -122,7 +122,7 @@
                 <option selected>Choose...</option>
                 <% _.each(memberQuesdtl.category, function(occupCat, b2){ %>
                 <% _.each(memberQuesdtl.category[b2].options, function(occupopt, k){ %>
-                <option class="hob2<%= b2 %> hobnm2" value="<%= b2 %>" data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>"  <% if(memberQuesdtl.memberSelectedAnswer[0].optionId == occupopt.quesOptionid ){%> selected="selected" <% } %>>
+                <option class="hob2<%= b2 %> hobnm2" value="<%= b2 %>" data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>"  <% if(memberQuesdtl.memberSelectedAnswer[1].optionId == occupopt.quesOptionid ){%> selected="selected" <% } %>>
                     <%= occupopt.name %>
                 </option>
                 <% }); %>
@@ -151,15 +151,9 @@
                 <option selected>Choose...</option>
                 <% _.each(memberQuesdtl.category, function(occupCat, b3){ %>
                 <% _.each(memberQuesdtl.category[b3].options, function(occupopt, k){ %>
-                <%  if(memberQuesdtl.memberSelectedAnswer[2].quesId == occupCat.questionDetails.quesId ){%>
-                <option class="hob3<%= b3 %> hobnm3" value="<%= b3 %>"  data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>" selected="selected">
+                <option class="hob3<%= b3 %> hobnm3" value="<%= b3 %>"  data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>" <% if(memberQuesdtl.memberSelectedAnswer[2].optionId == occupopt.quesOptionid ){%> selected="selected" <% } %>>
                     <%= occupopt.name %>
                 </option>
-                <% }else{ %>
-                <option class="hob3<%= b3 %> hobnm3" value="<%= b3 %>"  data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>">
-                    <%= occupopt.name %>
-                </option>
-                <% } %>
                 <% }); %>
                 <% }); %>
             </select>

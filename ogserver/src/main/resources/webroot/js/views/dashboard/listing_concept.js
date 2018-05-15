@@ -624,7 +624,8 @@ define([
 
               $("#addcboard-modalForImage").modal('hide');
 
-              $(".modal-backdrop").css('display','none');
+               $('body').removeClass('modal-open');
+               $('.modal-backdrop').remove();
 
               $("#snackbar").html("Successfully save user Concept ...");
               var x = document.getElementById("snackbar")
@@ -643,7 +644,8 @@ define([
               $("#addcboard-modalForImage").modal('hide');
 
               $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();
+              $('.modal-backdrop').remove();
+
 
                 $("#snackbar").html("Successfully save user Concept ...");
                 var x = document.getElementById("snackbar")
@@ -938,6 +940,9 @@ define([
 
      var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
      var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
+/*
+      $(".modal-backdrop").css('display','none');
+*/
 
      Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
          console.log("@@@@@@@@@@@@@ In side Concept Promise @@@@@@@@@@@@@@@@@@");
@@ -1304,6 +1309,10 @@ define([
                      console.log(" ============= Related Concept =============== ");
                      console.log(response);
                      resolve();
+
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+
                  },
                  error:function(response) {
                      console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
