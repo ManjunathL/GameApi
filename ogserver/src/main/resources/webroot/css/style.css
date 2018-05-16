@@ -62,6 +62,9 @@ hr {
 .mt15{
     margin-top:15px;
 }
+.ml15{
+    margin-left:15px;
+}
 .mb15{
     margin-bottom:15px;
 }
@@ -453,19 +456,21 @@ hr {
         color: white;
         }
 .sidenav {
-   box-shadow: 0px 2px 10px #555;
+        box-shadow: 0px 2px 10px #555;
        width: 255px;
        position: fixed;
        /* z-index: 1; */
-       top: 275px;
+       /*top: 275px;
        margin-left: -53px;
        margin-top: -83px;
        background: white;
        overflow-x: hidden;
        padding: 8px 0;
-}
+}*/
+
+
 .filterOption:hover{
-background: #ec5136 ;
+    background: #ec5136 ;
 }
 
 
@@ -1224,7 +1229,7 @@ ul.spaceTypelst li{
 .boardlst:focus,
 .boardlst:active{
     min-height:30px;
-    background: #FFFF00;
+    background: #FFFFFF;
     color: #2A9FD8;
     padding: 10px 20px;
     text-align: left;
@@ -1528,7 +1533,14 @@ footer {
     border-top: 1px solid #ccc;
     text-align:center;
 }
-
+.spaceElmntDv h5{
+    width: 100%;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #666;
+}
 /* Main design of Concept Board */
 
 .page{

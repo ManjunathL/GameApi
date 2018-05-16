@@ -112,6 +112,9 @@ define([
         var conceptboardId = currentTarget.data('element');
         var spaceTypeCode = currentTarget.data('element1');
 
+        $("#owl-sptype1 .item").removeClass("active-Stypebox");
+        $(currentTarget).addClass("active-Stypebox");
+
         console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
         console.log(spaceTypeCode);
 
@@ -605,6 +608,7 @@ define([
       formData.append("description",cboarddescTxt);
       formData.append("userId",userId);
       formData.append("conceptboardId",conceptboardIdtxt);
+      formData.append("spaceelementcode","SE-BASECABINET");
         console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
         console.log(formData);
 
@@ -915,6 +919,8 @@ define([
      var relconceptCode = cconceptCode;
 
      $("#concNmm").text(cnpnm);
+     $("#concNm").text(cnpnm);
+     $("#concNm1").text(cnpnm);
      $("#concDes").html(concDes);
      $("#concFullDes").html(concFullDes);
      $("#ConcCod").val(cconceptCode);
@@ -1016,6 +1022,8 @@ define([
      var relconceptCode = cconceptCode;
 
      $("#concNmm").text(cnpnm);
+     $("#concNm").text(cnpnm);
+     $("#concNm1").text(cnpnm);
      $("#concDes").html(concDes);
      $("#ConcCod").val(cconceptCode);
      $("#show_description").attr("data-element",cconceptId);
@@ -1234,6 +1242,8 @@ define([
      var relconceptCode = cconceptCode;
 
      $("#concNmm").text(cnpnm);
+     $("#concNm").text(cnpnm);
+     $("#concNm1").text(cnpnm);
      $("#concDes").html(concDes);
      $("#ConcCod").val(cconceptCode);
      $("#show_description").attr("data-element",cconceptId);
