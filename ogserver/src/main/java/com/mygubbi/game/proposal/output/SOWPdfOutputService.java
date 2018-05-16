@@ -48,7 +48,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
 
     public DriveServiceProvider serviceProvider;
     List<SpaceRoom> spaceRooms = new ArrayList<>();
-
+    String FooterText;
 
     @Override
     public void start(Future<Void> startFuture) throws Exception
@@ -98,8 +98,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             LOG.debug("Inside service: CREATE_MERGED_PDF_OUTPUT");
 
             MergePdfsRequest mergePdfReq = (MergePdfsRequest) LocalCache.getInstance().remove(message.body());
-            mergePdfReq.mergePdfFiles();
-
+            mergePdfReq.mergePdfFiles(FooterText);
             sendResponse(message, new JsonObject().put("quoteFile",mergePdfReq.getMergedAndPageNumberedFileName() ));
         }).completionHandler(res -> {
             LOG.info("setup PDf Merger Output started." + res.succeeded());
@@ -119,6 +118,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
                     else
                     {
                         ProposalHeader proposalHeader = new ProposalHeader(resultData.rows.get(0));
+                        FooterText=proposalHeader.getCrmId()+ "/" +proposalHeader.getQuoteNumNew()+"/"+quoteRequest.getToVersion();
                         this.getProposalProducts(proposalHeader, quoteRequest, message,pdf_name);
 //                        this.getProposalAddons(quoteRequest, proposalHeader, null, message,pdf_name);
                     }

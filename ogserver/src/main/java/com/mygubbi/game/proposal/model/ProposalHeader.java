@@ -60,6 +60,7 @@ public class ProposalHeader extends JsonObject
     private static final String DEEP_CLEARING_FLAG="deepClearingChargesApplied";
     private static final String FLOOR_PROTECTION_FLAG="floorProtectionChargesApplied";
     public static final String  EXPECTED_DELIVERY_DATE= "expectedDeliveryDate";
+    public static final String  VERSION= "version";
 
     private Date priceDate;
     private String designerName;
@@ -68,6 +69,7 @@ public class ProposalHeader extends JsonObject
     private String projectHandlingChargesApplied;
     private String floorProtectionChargesApplied;
     private String offerCode;
+    private String version;
     private Date expectedDeliveryDate;
 
     public ProposalHeader(JsonObject json)
@@ -141,7 +143,7 @@ public class ProposalHeader extends JsonObject
         return this.getString(BEFORE_PRODUCTION_SPECIFICATION);
     }
     public int getNoOfDaysforworkcompletion() {return this.getInteger(NO_OF_DAYSFORWORKCOMPLETION);}
-
+    public String getVersion(){return  this.getString(VERSION);}
 
     public String getDeepClearingChargesApplied() {
         return deepClearingChargesApplied;
@@ -241,6 +243,7 @@ public class ProposalHeader extends JsonObject
 
     }
 
+    public void setVersion(String version){this.version=version;}
     public void setExpectedDeliveryDate(Date expectedDeliveryDate) {
         this.expectedDeliveryDate = expectedDeliveryDate;
     }
