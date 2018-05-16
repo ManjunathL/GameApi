@@ -53,7 +53,7 @@ public class PdfQuoteCreator implements ProposalOutputCreator {
                     new QuotationPdfCreatorForPackageRoomWise(quoteData,proposalHeader,proposalVersion,spaceRoomList).createpdf(targetFile,isValid_Sow);
             }else
             {
-                new QuotationPdfCreatorForPackage(quoteData,proposalHeader).createpdf(targetFile);
+                new QuotationPdfCreatorForPackage(quoteData,proposalHeader,proposalVersion).createpdf(targetFile);
             }
 
             //here take target file as input

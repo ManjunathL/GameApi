@@ -1,6 +1,7 @@
 package com.mygubbi.game.proposal.quote;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -34,8 +35,8 @@ public class QuotationPdfCreatorForPackageRoomWise
     ProposalVersion proposalVersion;
     ProposalHeader proposalHeader;
     List<SpaceRoom> spaceRoomsList;
-    Document document = new Document();
-    Font fsize1=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.BOLD);
+    //Document document = new Document();
+    Document document = new Document(PageSize.A4, 36, 36, 36, 60);
     String series;
     double amt;
     int unitSequence;
@@ -45,19 +46,6 @@ public class QuotationPdfCreatorForPackageRoomWise
     List<QuotationPdfCreatorForPackageRoomWise.customeclass> li,li2;
     List<GSTForProducts> finalmovableList=new ArrayList<>();
     Paragraph p;
-    Font fsize3=new Font(Font.FontFamily.TIMES_ROMAN,9,Font.BOLD);
-    Font fsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
-
-    Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8, Font.BOLD, BaseColor.RED);
-    Font roomNameSizeBOLD=new Font(Font.FontFamily.TIMES_ROMAN,15,Font.BOLD,BaseColor.BLACK);
-    Font size3=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.BOLD,BaseColor.BLACK);
-
-    Font roomSummarySize=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.NORMAL,BaseColor.RED);
-    Font headingSize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD,BaseColor.RED);
-    Font headingSizeNew=new com.itextpdf.text.Font(Font.FontFamily.TIMES_ROMAN,10, com.itextpdf.text.Font.BOLD);
-    Font roomNameSize=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.BOLD,BaseColor.BLACK);
-
-    Font Size=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.BOLD,BaseColor.BLACK);
     private static final String[] ALPHABET_SEQUENCE = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"};
     private static final String[] BOLD_ALPHABET_SEQUENCE = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"};
     private static final String[] ROMAN_SEQUENCE = new String[]{"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii", "xiv", "xv"};
@@ -99,8 +87,6 @@ public class QuotationPdfCreatorForPackageRoomWise
     double misctotalPrice=0,misctotalDAP=0,misctotalTaxAmt=0, misctotalPriceAfterTax=0;
     double addontotalproductPrice=0,addontotalDAP=0,addontotalTaxAmt=0,addontotalPriceAfterTax=0;
     double set2totalproductPrice=0,set2totalDAP=0,set2totalTaxAmt=0,set2totalPriceAfterTax=0;
-    Font bookingformfsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
-    Font bookingformfsize1=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.BOLD,BaseColor.ORANGE);
     Font zapfdingbats = new Font(Font.FontFamily.ZAPFDINGBATS, 16);
     List<String> customAddonAccessoryList=new ArrayList<>();
     List<String> customAddonAppliancesList=new ArrayList<>();
@@ -108,10 +94,14 @@ public class QuotationPdfCreatorForPackageRoomWise
     List<String> customAddonServicesList=new ArrayList<>();
     List<String> customAddonLooseFurnitureList=new ArrayList<>();
     List<AddonsList> customaddonsList=new ArrayList<>();
-
+    BaseFont basefontforMontserrat;
+    Font fsize3,fsize,fsize1,headingSizeNew,size1,roomNameSizeBOLD,size3,bookingformfsize,headingSizeNewWhite,tableheadingWhite;
+    BaseColor baseColor= new BaseColor(234, 92, 54); //rgb(234, 92, 54)
+    public static String[][] FONTS = {
+            {"Montserrat-Regular.ttf", BaseFont.WINANSI}
+    };
     QuotationPdfCreatorForPackageRoomWise(QuoteData quoteData, ProposalHeader proposalHeader, ProposalVersion proposalVersion, List<SpaceRoom> spaceRooms)
     {
-        LOG.info("quotation package room wise");
         this.date=proposalHeader.getPriceDate();
         this.quoteData=quoteData;
         this.proposalHeader=proposalHeader;
@@ -160,6 +150,26 @@ public class QuotationPdfCreatorForPackageRoomWise
         customAddonServicesList.add("Wall Panelling");
         customAddonServicesList.add("Wall paper");
         customAddonLooseFurnitureList.add("Loose Furniture");
+        try
+        {
+            for (int i = 0; i < FONTS.length; i++) {
+                basefontforMontserrat = BaseFont.createFont(FONTS[i][0], FONTS[i][1], BaseFont.NOT_EMBEDDED);
+                fsize3=new Font(basefontforMontserrat,9,Font.BOLD);
+                fsize=new Font(basefontforMontserrat,8,Font.NORMAL);
+                fsize1=new Font(basefontforMontserrat,7,Font.BOLD);
+                headingSizeNew=new com.itextpdf.text.Font(basefontforMontserrat,10, com.itextpdf.text.Font.BOLD);
+                headingSizeNewWhite=new com.itextpdf.text.Font(basefontforMontserrat,10, com.itextpdf.text.Font.BOLD,BaseColor.WHITE);
+                tableheadingWhite=new com.itextpdf.text.Font(basefontforMontserrat,7, com.itextpdf.text.Font.BOLD,BaseColor.WHITE);
+                size1=new Font(basefontforMontserrat,8, Font.BOLD,baseColor);
+                roomNameSizeBOLD=new Font(basefontforMontserrat,15,Font.BOLD,BaseColor.BLACK);
+                size3=new Font(basefontforMontserrat,10,Font.BOLD,BaseColor.BLACK);
+                bookingformfsize=new Font(basefontforMontserrat,8,Font.BOLD);
+            }
+        }
+        catch (Exception e)
+        {
+            LOG.info("Exception in font in quotation pdf for package room wise " +e);
+        }
     }
 
     public void  createpdf(String destination,boolean isValid_Sow)
@@ -174,9 +184,9 @@ public class QuotationPdfCreatorForPackageRoomWise
 
             if(quoteData.getBookingFormFlag().equals("Yes"))
             {
-                Image img = Image.getInstance("logo.png");
+                Image img = Image.getInstance("MG_logo-04.png");
                 img.setAlignment(Image.MIDDLE);
-                img.scaleAbsolute(100,50);
+                img.scaleAbsolute(130,30);
                 document.add(img);
 
                 if(proposalHeader.getProjectCity().equals("Chennai"))
@@ -185,42 +195,42 @@ public class QuotationPdfCreatorForPackageRoomWise
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
-                    p = new Paragraph("Chennai 600 096, India Phone +91 80888 60860", fsize);
+                    p = new Paragraph("Chennai 600 096, India Phone +91 80888 60860", bookingformfsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
                 }else if(proposalHeader.getProjectCity().equals("Pune"))
                 {
-                    p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", fsize);
+                    p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", bookingformfsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
-                    p = new Paragraph("Nr.Kapil Malhar Society, Baner", fsize);
+                    p = new Paragraph("Nr.Kapil Malhar Society, Baner", bookingformfsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
-                    p = new Paragraph("Pune:411045", fsize);
+                    p = new Paragraph("Pune:411045", bookingformfsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
                 }else if(proposalHeader.getProjectCity().equals("Mangalore"))
                 {
-                    p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", fsize);
+                    p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", bookingformfsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
-                    p = new Paragraph("Hampankatta Mangalore Pincode :575001, India Phone +91 80888 60860", fsize);
+                    p = new Paragraph("Hampankatta Mangalore Pincode :575001, India Phone +91 80888 60860", bookingformfsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
                 }
                 else
                 {
-                    p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", fsize);
+                    p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", bookingformfsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
 
-                    p = new Paragraph("Bangalore 560 102, India Phone +91 80888 60860", fsize);
+                    p = new Paragraph("Bangalore 560 102, India Phone +91 80888 60860", bookingformfsize);
                     p.setAlignment(Element.ALIGN_CENTER);
                     document.add(p);
                 }
@@ -230,9 +240,6 @@ public class QuotationPdfCreatorForPackageRoomWise
 
                 p = new Paragraph(" BOOKING FORM ", headingSizeNew);
                 p.setAlignment(Element.ALIGN_CENTER);
-                document.add(p);
-
-                p = new Paragraph(" ");
                 document.add(p);
 
                 p = new Paragraph("Date:_________________", bookingformfsize);
@@ -250,11 +257,12 @@ public class QuotationPdfCreatorForPackageRoomWise
 
                 PdfPTable Appdetails = new PdfPTable(1);
                 Appdetails.setWidthPercentage(100);
-                p=new Paragraph("APPLICANT'S DETAILS",headingSizeNew);
+                p=new Paragraph("APPLICANT'S DETAILS",headingSizeNewWhite);
                 p.setAlignment(Element.ALIGN_CENTER);
                 PdfPCell scell1 = new PdfPCell();
+                scell1.setFixedHeight(25f);
                 scell1.addElement(p);
-                scell1.setBackgroundColor(BaseColor.ORANGE);
+                scell1.setBackgroundColor(baseColor);
                 Appdetails.addCell(scell1);
                 document.add(Appdetails);
 
@@ -270,7 +278,7 @@ public class QuotationPdfCreatorForPackageRoomWise
 
                 if(proposalHeader.getProjectAddress1()== "null" || proposalHeader.getProjectAddress1().length() == 0 )
                 {
-                    p=new Paragraph("Project Address : __________________________________________________________________________________________________",bookingformfsize);
+                    p=new Paragraph("Project Address : ________________________________________________________________________________________________________________",bookingformfsize);
                 }else {
                     p = new Paragraph("Project Address:" + proposalHeader.getProjectAddress1(), bookingformfsize);
                 }
@@ -310,7 +318,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                 p = new Paragraph(" ");
                 document.add(p);
 
-                p = new Paragraph("Post/Designation : ______________________________________________________" + "             " + "Company's Name : _________________________________", bookingformfsize);
+                p = new Paragraph("Post/Designation : ______________________________________________________    " +   "Company's Name : _________________________________", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -366,7 +374,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                 p = new Paragraph(" ");
                 document.add(p);
 
-                p = new Paragraph("Landline : ___________________________________" + "                     " +  " Mobile(1) : " + proposalHeader.getContact() + "                       " +"   Mobile(2) : _________________________ ", bookingformfsize);
+                p = new Paragraph("Landline : ___________________________________" + "                " +  " Mobile(1) : " + proposalHeader.getContact() + "                 " +"   Mobile(2) : _________________________ ", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -384,19 +392,19 @@ public class QuotationPdfCreatorForPackageRoomWise
                 p = new Paragraph(" ");
                 document.add(p);
 
-                p = new Paragraph("Address for Communication : ________________________________________________________________________________________________________", bookingformfsize);
+                p = new Paragraph("Address for Communication : ___________________________________________________________________________________________________", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
                 document.add(p);
 
-                p = new Paragraph("Office Address:(if applicable) _______________________________________________________________________________________________________", bookingformfsize);
+                p = new Paragraph("Office Address:(if applicable) ____________________________________________________________________________________________________", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
                 document.add(p);
 
-                p = new Paragraph("_________________________________________________________________________________________________" + "  PAN Number:__________________", bookingformfsize);
+                p = new Paragraph("_________________________________________________________________________________________________" + "  PAN Number:_________________", bookingformfsize);
                 document.add(p);
 
                 p = new Paragraph(" ");
@@ -404,11 +412,12 @@ public class QuotationPdfCreatorForPackageRoomWise
 
                 PdfPTable orderdetails = new PdfPTable(1);
                 orderdetails.setWidthPercentage(100);
-                p=new Paragraph("ORDER DETAILS",headingSizeNew);
+                p=new Paragraph("ORDER DETAILS",headingSizeNewWhite);
                 p.setAlignment(Element.ALIGN_CENTER);
                 scell1 = new PdfPCell();
+                scell1.setFixedHeight(25f);
                 scell1.addElement(p);
-                scell1.setBackgroundColor(BaseColor.ORANGE);
+                scell1.setBackgroundColor(baseColor);
                 orderdetails.addCell(scell1);
                 document.add(orderdetails);
 
@@ -431,30 +440,32 @@ public class QuotationPdfCreatorForPackageRoomWise
                 document.add(p);
             }
 
+
             document.newPage();
 
-            Image img1 = Image.getInstance("myGubbi_Logo.png");
-            img1.setWidthPercentage(50);
+            Image img1 = Image.getInstance("MG_logo-04.png");
+            img1.setAlignment(Image.LEFT);
+            img1.scaleAbsolute(130,30);
             document.add(img1);
 
             if(proposalHeader.getProjectCity().equals("Chennai"))
             {
-                p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor", fsize);
+                p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", fsize);
+                p = new Paragraph("Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Chennai 600 096, India", fsize);
+                p = new Paragraph("Chennai 600 096, India", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Phone +91 80888 60860", fsize);
+                p = new Paragraph("Phone +91 80888 60860", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
-                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
+                p = new Paragraph("Annexure - A : QUOTATION",bookingformfsize);
                 p.setAlignment(Element.ALIGN_CENTER);
                 fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
@@ -465,23 +476,23 @@ public class QuotationPdfCreatorForPackageRoomWise
 
             }else if(proposalHeader.getProjectCity().equals("Pune"))
             {
-                p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", fsize);
+                p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Nr.Kapil Malhar Society, Baner", fsize);
+                p = new Paragraph("Nr.Kapil Malhar Society, Baner", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Pune:411045", fsize);
+                p = new Paragraph("Pune:411045", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Phone +91 80888 60860", fsize);
+                p = new Paragraph("Phone +91 80888 60860", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
+                p = new Paragraph("Annexure - A : QUOTATION",bookingformfsize);
                 p.setAlignment(Element.ALIGN_CENTER);
                 fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
@@ -492,19 +503,19 @@ public class QuotationPdfCreatorForPackageRoomWise
 
             }else if(proposalHeader.getProjectCity().equals("Mangalore"))
             {
-                p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", fsize);
+                p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Hampankatta Mangalore Pincode :575001, India", fsize);
+                p = new Paragraph("Hampankatta Mangalore Pincode :575001, India", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Phone +91 80888 60860", fsize);
+                p = new Paragraph("Phone +91 80888 60860", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
+                p = new Paragraph("Annexure - A : QUOTATION",bookingformfsize);
                 p.setAlignment(Element.ALIGN_CENTER);
                 fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
@@ -516,19 +527,19 @@ public class QuotationPdfCreatorForPackageRoomWise
             else
             {
 
-                p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", fsize);
+                p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Bangalore 560 102, India", fsize);
+                p = new Paragraph("Bangalore 560 102, India", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Phone +91 80888 60860", fsize);
+                p = new Paragraph("Phone +91 80888 60860", bookingformfsize);
                 p.setAlignment(Element.ALIGN_LEFT);
                 document.add(p);
 
-                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
+                p = new Paragraph("Annexure - A : QUOTATION",bookingformfsize);
                 p.setAlignment(Element.ALIGN_CENTER);
                 fsize3.setColor(BaseColor.GRAY);
                 document.add(p);
@@ -543,20 +554,19 @@ public class QuotationPdfCreatorForPackageRoomWise
             table.setWidthPercentage(100);
 
             Phrase phrase = new Phrase();
-            phrase.add(new Chunk("Quotation For: ",fsize1));
-            //phrase.add(new Chunk(proposalHeader.getQuotationFor(),fsize1));
-            phrase.add(new Chunk(proposalVersion.getTitle(),fsize1));
+            phrase.add(new Chunk("Quotation For: ",bookingformfsize));
+            phrase.add(new Chunk(proposalVersion.getTitle(),bookingformfsize));
 
             Phrase phrase1 = new Phrase();
-            phrase1.add(new Chunk("Date: ",fsize1));
+            phrase1.add(new Chunk("Date: ",bookingformfsize));
             phrase1.add(new Chunk(DateFormatUtils.format(new Date(), "dd-MMM-yyyy"),fsize));
 
             Phrase phrase2 = new Phrase();
-            phrase2.add(new Chunk("Name: ",fsize1));
+            phrase2.add(new Chunk("Name: ",bookingformfsize));
             phrase2.add(new Chunk(proposalHeader.getName(),fsize));
 
             Phrase phrase3 = new Phrase();
-            phrase3.add(new Chunk("CRM ID: ",fsize1));
+            phrase3.add(new Chunk("CRM ID: ",bookingformfsize));
             phrase3.add(new Chunk(proposalHeader.getCrmId(),fsize));
 
             String strqnum= quoteData.fromVersion;
@@ -571,11 +581,11 @@ public class QuotationPdfCreatorForPackageRoomWise
             }
 
             Phrase phrase4 = new Phrase();
-            phrase4.add(new Chunk("Quotation #: ",fsize1));
+            phrase4.add(new Chunk("Quotation #: ",bookingformfsize));
             phrase4.add(new Chunk(qnum,fsize));
 
             Phrase phrase5 = new Phrase();
-            phrase5.add(new Chunk("Project Address: ",fsize1));
+            phrase5.add(new Chunk("Project Address: ",bookingformfsize));
             phrase5.add(new Chunk(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","),fsize));
 
             table.addCell(phrase);
@@ -592,17 +602,17 @@ public class QuotationPdfCreatorForPackageRoomWise
 
             PdfPTable stable = new PdfPTable(3);
             stable.setWidthPercentage(100);
-            PdfPCell scell1 = new PdfPCell(new Paragraph("Sales/Design",fsize1));
-            scell1.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell scell2 = new PdfPCell(new Paragraph("Sales Person Number",fsize1));
-            scell2.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell scell3 = new PdfPCell(new Paragraph("Email Id",fsize1));
-            scell3.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell scell1 = new PdfPCell(new Paragraph("Sales/Design",tableheadingWhite));
+            scell1.setBackgroundColor(baseColor);
+            PdfPCell scell2 = new PdfPCell(new Paragraph("Sales Person Number",tableheadingWhite));
+            scell2.setBackgroundColor(baseColor);
+            PdfPCell scell3 = new PdfPCell(new Paragraph("Email Id",tableheadingWhite));
+            scell3.setBackgroundColor(baseColor);
             stable.addCell(scell1);
             stable.addCell(scell2);
             stable.addCell(scell3);
 
-            Font ffsize=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.NORMAL);
+            Font ffsize=new Font(basefontforMontserrat,7,Font.NORMAL);
             PdfPCell scell4 = new PdfPCell(new Paragraph(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/"),ffsize));
             ffsize.setColor(BaseColor.BLUE);
             PdfPCell scell5 = new PdfPCell(new Paragraph(proposalHeader.getSalesPhone(),ffsize));
@@ -631,18 +641,18 @@ public class QuotationPdfCreatorForPackageRoomWise
             PdfPTable miscellaneousTable = new PdfPTable(addonsWidths1);
             miscellaneousTable.setWidthPercentage(100);
 
-            PdfPCell Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-            Cell1.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-            Cell2.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell Cell6=new PdfPCell(new Paragraph("UOM",fsize1));
-            Cell6.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell Cell3 = new PdfPCell(new Paragraph("QTY",fsize1));
-            Cell3.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell Cell4 = new PdfPCell(new Paragraph("PRICE",fsize1));
-            Cell4.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell Cell5 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-            Cell5.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+            Cell1.setBackgroundColor(baseColor);
+            PdfPCell Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+            Cell2.setBackgroundColor(baseColor);
+            PdfPCell Cell6=new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+            Cell6.setBackgroundColor(baseColor);
+            PdfPCell Cell3 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+            Cell3.setBackgroundColor(baseColor);
+            PdfPCell Cell4 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+            Cell4.setBackgroundColor(baseColor);
+            PdfPCell Cell5 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+            Cell5.setBackgroundColor(baseColor);
 
             miscellaneousTable.addCell(Cell1);
             miscellaneousTable.addCell(Cell2);
@@ -654,7 +664,7 @@ public class QuotationPdfCreatorForPackageRoomWise
             double val2=quoteData.getTotalCost();
             double val3=val2-val2%10;
 
-            p=new Paragraph("MISCELLANEOUS CHARGES \n",fsize1);
+            p=new Paragraph("MISCELLANEOUS CHARGES \n",bookingformfsize);
             p.setAlignment(Element.ALIGN_LEFT);
             document.add(p);
 
@@ -673,21 +683,21 @@ public class QuotationPdfCreatorForPackageRoomWise
             document.add(p);
 
             miscCharges=proposalVersion.getProjectHandlingAmount()+proposalVersion.getDeepClearingAmount()+proposalVersion.getFloorProtectionAmount();
-            p = new Paragraph("TOTAL MISCELLANEOUS PRICE " +miscCharges.intValue(),fsize1);
+            p = new Paragraph("TOTAL MISCELLANEOUS PRICE " +miscCharges.intValue(),bookingformfsize);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
             p=new Paragraph(" ");
             document.add(p);
 
-            p = new Paragraph("TOTAL PRICE :" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost() + miscCharges.intValue())) ,fsize1);
+            p = new Paragraph("TOTAL PRICE :" +this.getRoundOffValue(String.valueOf((int)quoteData.getTotalCost() + miscCharges.intValue())) ,bookingformfsize);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
             p=new Paragraph(" ");
             document.add(p);
 
-            p = new Paragraph("DISCOUNT :" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), fsize1);
+            p = new Paragraph("DISCOUNT :" + this.getRoundOffValue(String.valueOf((int) quoteData.discountAmount)), bookingformfsize);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
@@ -697,7 +707,7 @@ public class QuotationPdfCreatorForPackageRoomWise
             Double val = (quoteData.getTotalCost() + miscCharges.intValue()) - quoteData.getDiscountAmount();
 
             Double res = val - val % 10;
-            p = new Paragraph("TOTAL PRICE AFTER DISCOUNT : " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,fsize1);
+            p = new Paragraph("TOTAL PRICE AFTER DISCOUNT : " +this.getRoundOffValue(String.valueOf(res.intValue())) + "\n" ,bookingformfsize);
             p.setAlignment(Element.ALIGN_RIGHT);
             document.add(p);
 
@@ -708,7 +718,7 @@ public class QuotationPdfCreatorForPackageRoomWise
             PdfPTable table2=new PdfPTable(1);
             table2.setWidthPercentage(100);
 
-            p=new Paragraph("In words: " +word.convertNumberToWords(res.intValue()) + " Rupees Only" ,fsize1);
+            p=new Paragraph("In words: " +word.convertNumberToWords(res.intValue()) + " Rupees Only" ,bookingformfsize);
             table2.addCell(new Paragraph(p));
             document.add(table2);
 
@@ -736,7 +746,6 @@ public class QuotationPdfCreatorForPackageRoomWise
 
             if(proposalHeader.getOfferCode().equalsIgnoreCase("OF-CDO"))
             {
-                LOG.info("inside chill deal offer");
                 PdfPCell ocel6=new PdfPCell();
                 p = new Paragraph("Chill Deal Offer: ",fsize1);
                 p.setAlignment(Element.ALIGN_LEFT);
@@ -841,7 +850,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                 PdfPTable tab=new PdfPTable(1);
                 tab.setWidthPercentage(100);
 
-                Font size2=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.NORMAL);
+                Font size2=new Font(basefontforMontserrat,7,Font.NORMAL);
                 p = new Paragraph("Terms and Conditions:\n",size2);
                 p.setAlignment(Element.ALIGN_MIDDLE);
                 PdfPCell cel9=new PdfPCell();
@@ -1082,163 +1091,12 @@ public class QuotationPdfCreatorForPackageRoomWise
                 PdfPTable gstTable1 = new PdfPTable(gtcolumnWidths1);
                 gstTable1.setWidthPercentage(100);
                 this.createRowAndFillDataForGSTtotal(gstTable1, "TOTAL", totalproductPrice, totalDAP, totalTaxAmt, String.valueOf(round(totalPriceAfterTax, 2)));
-                //document.add(gstTable1);
-
-                /*if(quoteData.fromVersion.equals("1.0") || quoteData.fromVersion.startsWith("0."))
-                {
-
-                }
-                else {
-                    if(!gstTextChangeDateValue)
-                    {
-                        p = new Paragraph("\n");
-                        document.add(p);
-
-                        p = new Paragraph("\n");
-                        document.add(p);
-
-                        document.newPage();
-
-                        p = new Paragraph("PRICE BREAKUP",fsize3);
-                        p.setAlignment(Element.ALIGN_CENTER);
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-
-                        p=new Paragraph("The detailed price break-up(post Discount) with the split-up of design, consultancy and GST charges are as follows: ",fsize);
-                        document.add(p);
-
-
-                        p=new Paragraph( "\n A. Furniture And Appliances\n",fsize1);
-                        document.add(p);
-
-                        p=new Paragraph("  ");
-                        document.add(p);
-
-                        document.add(individualTable);
-                        document.add(gsttotalTableFormovable);
-
-                        p=new Paragraph( "\nB. Interior Works\n",fsize1);
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-                        document.add(nonMovableTable);
-                        document.add(gsttotalTableFornonmovable);
-
-
-                        p=new Paragraph( "\n C. Services And Civil Works\n",fsize1);
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-                        document.add(scwTable);
-                        document.add(gsttotalTableForscw);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-
-                        p=new Paragraph("\nD. Summary\n",fsize1);
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-                        document.add(gsttotalTable);
-                        document.add(designTable);
-                    }else
-                    {
-                        p = new Paragraph("\n");
-                        document.add(p);
-
-                        p = new Paragraph("\n");
-                        document.add(p);
-
-                        document.newPage();
-
-                        p = new Paragraph("PRICE BREAKUP",fsize3);
-                        p.setAlignment(Element.ALIGN_CENTER);
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-
-                        p=new Paragraph("The detailed price break-up(post Discount) with the split-up of design, consultancy and GST charges are as follows: ",fsize);
-                        document.add(p);
-
-
-                        p=new Paragraph( "\n A. Appliances\n",fsize1);
-                        document.add(p);
-
-                        p=new Paragraph("  ");
-                        document.add(p);
-
-                        document.add(individualTable);
-                        document.add(gsttotalTableFormovable);
-
-                        p=new Paragraph( "\nB. Interior Works And Furniture\n",fsize1);
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-                        document.add(nonMovableTable);
-                        document.add(gsttotalTableFornonmovable);
-
-
-                        p=new Paragraph( "\n C. Services And Civil Works\n",fsize1);
-                        document.add(p);
-
-                        p=new Paragraph(" ");
-                        document.add(p);
-                        document.add(scwTable);
-                        document.add(gsttotalTableForscw);
-
-                        if(mscTextChangeDateValue)
-                        {
-                            p=new Paragraph( "\n D. Miscellaneous Charges:\n",fsize1);
-                            document.add(p);
-
-                            p=new Paragraph(" ");
-                            document.add(p);
-                            document.add(mscTable);
-                            document.add(gsttotalTableFormsc);
-
-                            p=new Paragraph(" ");
-                            document.add(p);
-
-                            p=new Paragraph("\nE. Summary\n",fsize1);
-                            document.add(p);
-
-                            p=new Paragraph(" ");
-                            document.add(p);
-                            document.add(gsttotalTable);
-                            document.add(designTable);
-
-                        }else
-                        {
-                            p=new Paragraph(" ");
-                            document.add(p);
-
-                            p=new Paragraph("\nD. Summary\n",fsize1);
-                            document.add(p);
-
-                            p=new Paragraph(" ");
-                            document.add(p);
-                            document.add(gsttotalTable);
-                            document.add(designTable);
-                        }
-                    }
-
-                }*/
             }
             document.close();
         }
         catch (Exception e)
         {
-            LOG.info("Exception in quote test" +e);
+            LOG.info("Exception in package quote room wise" +e);
             e.printStackTrace();
         }
     }
@@ -1254,18 +1112,18 @@ public class QuotationPdfCreatorForPackageRoomWise
         PdfPTable miscellaneousTable = new PdfPTable(addonsWidths1);
         miscellaneousTable.setWidthPercentage(100);
 
-        PdfPCell Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-        Cell1.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-        Cell2.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell Cell6=new PdfPCell(new Paragraph("UOM",fsize1));
-        Cell6.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell Cell3 = new PdfPCell(new Paragraph("QTY",fsize1));
-        Cell3.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell Cell4 = new PdfPCell(new Paragraph("PRICE",fsize1));
-        Cell4.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell Cell5 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-        Cell5.setBackgroundColor(BaseColor.ORANGE);
+        PdfPCell Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+        Cell1.setBackgroundColor(baseColor);
+        PdfPCell Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+        Cell2.setBackgroundColor(baseColor);
+        PdfPCell Cell6=new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+        Cell6.setBackgroundColor(baseColor);
+        PdfPCell Cell3 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+        Cell3.setBackgroundColor(baseColor);
+        PdfPCell Cell4 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+        Cell4.setBackgroundColor(baseColor);
+        PdfPCell Cell5 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+        Cell5.setBackgroundColor(baseColor);
 
         miscellaneousTable.addCell(Cell1);
         miscellaneousTable.addCell(Cell2);
@@ -1278,24 +1136,24 @@ public class QuotationPdfCreatorForPackageRoomWise
         PdfPTable itemsTable=new PdfPTable(columnWidths1);
         itemsTable.setWidthPercentage(100);
 
-        PdfPCell itemsCell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-        itemsCell1.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell2 = new PdfPCell(new Paragraph("ROOM NAME",fsize1));
-        itemsCell2.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell3 = new PdfPCell(new Paragraph("MODULAR PRODUCT",fsize1));
-        itemsCell3.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell4 = new PdfPCell(new Paragraph("ADD ON ACCESSORIES",fsize1));
-        itemsCell4.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell5 = new PdfPCell(new Paragraph("APPLIANCES",fsize1));
-        itemsCell5.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell6 = new PdfPCell(new Paragraph("COUNTER TOP",fsize1));
-        itemsCell6.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell7 = new PdfPCell(new Paragraph("SERVICES",fsize1));
-        itemsCell7.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell8 = new PdfPCell(new Paragraph("LOOSE FURNITURE",fsize1));
-        itemsCell8.setBackgroundColor(BaseColor.ORANGE);
-        PdfPCell itemsCell10 = new PdfPCell(new Paragraph("PRICE",fsize1));
-        itemsCell10.setBackgroundColor(BaseColor.ORANGE);
+        PdfPCell itemsCell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+        itemsCell1.setBackgroundColor(baseColor);
+        PdfPCell itemsCell2 = new PdfPCell(new Paragraph("ROOM NAME",tableheadingWhite));
+        itemsCell2.setBackgroundColor(baseColor);
+        PdfPCell itemsCell3 = new PdfPCell(new Paragraph("MODULAR PRODUCT",tableheadingWhite));
+        itemsCell3.setBackgroundColor(baseColor);
+        PdfPCell itemsCell4 = new PdfPCell(new Paragraph("ADD ON ACCESSORIES",tableheadingWhite));
+        itemsCell4.setBackgroundColor(baseColor);
+        PdfPCell itemsCell5 = new PdfPCell(new Paragraph("APPLIANCES",tableheadingWhite));
+        itemsCell5.setBackgroundColor(baseColor);
+        PdfPCell itemsCell6 = new PdfPCell(new Paragraph("COUNTER TOP",tableheadingWhite));
+        itemsCell6.setBackgroundColor(baseColor);
+        PdfPCell itemsCell7 = new PdfPCell(new Paragraph("SERVICES",tableheadingWhite));
+        itemsCell7.setBackgroundColor(baseColor);
+        PdfPCell itemsCell8 = new PdfPCell(new Paragraph("LOOSE FURNITURE",tableheadingWhite));
+        itemsCell8.setBackgroundColor(baseColor);
+        PdfPCell itemsCell10 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+        itemsCell10.setBackgroundColor(baseColor);
 
         itemsTable.addCell(itemsCell1);
         itemsTable.addCell(itemsCell2);
@@ -1553,16 +1411,16 @@ public class QuotationPdfCreatorForPackageRoomWise
             PdfPTable itemsTable = new PdfPTable(columnWidths1);
             itemsTable.setWidthPercentage(100);
 
-            PdfPCell itemsCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
-            itemsCell1.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell2 = new PdfPCell(new Paragraph("DESCRIPTION", fsize1));
-            itemsCell2.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell3 = new PdfPCell(new Paragraph("QTY", fsize1));
-            itemsCell3.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell4 = new PdfPCell(new Paragraph("PRICE", fsize1));
-            itemsCell4.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell5 = new PdfPCell(new Paragraph("AMOUNT", fsize1));
-            itemsCell5.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell itemsCell1 = new PdfPCell(new Paragraph("SL.NO", tableheadingWhite));
+            itemsCell1.setBackgroundColor(baseColor);
+            PdfPCell itemsCell2 = new PdfPCell(new Paragraph("DESCRIPTION", tableheadingWhite));
+            itemsCell2.setBackgroundColor(baseColor);
+            PdfPCell itemsCell3 = new PdfPCell(new Paragraph("QTY", tableheadingWhite));
+            itemsCell3.setBackgroundColor(baseColor);
+            PdfPCell itemsCell4 = new PdfPCell(new Paragraph("PRICE", tableheadingWhite));
+            itemsCell4.setBackgroundColor(baseColor);
+            PdfPCell itemsCell5 = new PdfPCell(new Paragraph("AMOUNT", tableheadingWhite));
+            itemsCell5.setBackgroundColor(baseColor);
 
             itemsTable.addCell(itemsCell1);
             itemsTable.addCell(itemsCell2);
@@ -1593,22 +1451,22 @@ public class QuotationPdfCreatorForPackageRoomWise
             PdfPTable AccessoryTable = new PdfPTable(columnWidthsForAccessories);
             AccessoryTable.setWidthPercentage(100);
 
-            PdfPCell itemsCell1ForAccessory = new PdfPCell(new Paragraph("SL.NO", fsize1));
-            itemsCell1ForAccessory.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell7ForAccessory = new PdfPCell(new Paragraph("CATEGORY", fsize1));
-            itemsCell7ForAccessory.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell2ForAccessory = new PdfPCell(new Paragraph("DESCRIPTION", fsize1));
-            itemsCell2ForAccessory.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell6ForAccessory = new PdfPCell(new Paragraph("UOM", fsize1));
-            itemsCell6ForAccessory.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell3ForAccessory = new PdfPCell(new Paragraph("QTY", fsize1));
-            itemsCell3ForAccessory.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell4ForAccessory = new PdfPCell(new Paragraph("PRICE", fsize1));
-            itemsCell4ForAccessory.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell8ForAccessory = new PdfPCell(new Paragraph("INSTALLATION PRICE", fsize1));
-            itemsCell8ForAccessory.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell5ForAccessory = new PdfPCell(new Paragraph("AMOUNT", fsize1));
-            itemsCell5ForAccessory.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell itemsCell1ForAccessory = new PdfPCell(new Paragraph("SL.NO", tableheadingWhite));
+            itemsCell1ForAccessory.setBackgroundColor(baseColor);
+            PdfPCell itemsCell7ForAccessory = new PdfPCell(new Paragraph("CATEGORY", tableheadingWhite));
+            itemsCell7ForAccessory.setBackgroundColor(baseColor);
+            PdfPCell itemsCell2ForAccessory = new PdfPCell(new Paragraph("DESCRIPTION", tableheadingWhite));
+            itemsCell2ForAccessory.setBackgroundColor(baseColor);
+            PdfPCell itemsCell6ForAccessory = new PdfPCell(new Paragraph("UOM", tableheadingWhite));
+            itemsCell6ForAccessory.setBackgroundColor(baseColor);
+            PdfPCell itemsCell3ForAccessory = new PdfPCell(new Paragraph("QTY", tableheadingWhite));
+            itemsCell3ForAccessory.setBackgroundColor(baseColor);
+            PdfPCell itemsCell4ForAccessory = new PdfPCell(new Paragraph("PRICE", tableheadingWhite));
+            itemsCell4ForAccessory.setBackgroundColor(baseColor);
+            PdfPCell itemsCell8ForAccessory = new PdfPCell(new Paragraph("INSTALLATION PRICE", tableheadingWhite));
+            itemsCell8ForAccessory.setBackgroundColor(baseColor);
+            PdfPCell itemsCell5ForAccessory = new PdfPCell(new Paragraph("AMOUNT", tableheadingWhite));
+            itemsCell5ForAccessory.setBackgroundColor(baseColor);
 
             AccessoryTable.addCell(itemsCell1ForAccessory);
             AccessoryTable.addCell(itemsCell7ForAccessory);
@@ -1727,8 +1585,7 @@ public class QuotationPdfCreatorForPackageRoomWise
 
     private void createProductTitleRow(PdfPTable tabname,String index, String title)
     {
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
-        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Paragraph Pindex=new Paragraph(index,size1);
@@ -1749,6 +1606,29 @@ public class QuotationPdfCreatorForPackageRoomWise
         cell.setColspan(3);
         tabname.addCell(cell);
     }
+    private void createAccRow(PdfPTable tabname,String index, String title)
+    {
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Paragraph Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        PdfPCell cell2=new PdfPCell();
+        Paragraph paragraph=new Paragraph(title,fsize);
+        cell2.addElement(paragraph);
+        tabname.addCell(cell2);
+
+        PdfPCell cell = new PdfPCell();
+        Paragraph p=new Paragraph("");
+        p.setAlignment(Element.ALIGN_RIGHT);
+        cell.addElement(p);
+        cell.setColspan(3);
+        tabname.addCell(cell);
+    }
+
     private void fillAssembledProductInfo(PdfPTable tabname,int sequenceNumber, AssembledProductInQuote product)
     {
         int num;
@@ -2010,7 +1890,6 @@ public class QuotationPdfCreatorForPackageRoomWise
                     KBfinishtype = product.getProduct().getFinishType();
                     KBcolorgroupCode=product.getProduct().getColorgroupCode();
                     KBhinge=product.getProduct().getHingeType();
-                    // LOG.info("title" +unit.moduleCategory + "amount" +unit.amount);
                     KBamount += unit.amount;
 
                     if(cname.equals("Kitchen"))
@@ -2455,7 +2334,7 @@ public class QuotationPdfCreatorForPackageRoomWise
         {
             if(accessory.category.equals("Primary") || accessory.category.equals("Add on")|| accessory.category.equals("Standalone add on"))
             {
-                this.createProductTitleRow(tabname,ROMAN_SEQUENCE[acSequence], accessory.title);
+                this.createAccRow(tabname,ROMAN_SEQUENCE[acSequence], accessory.title);
                 acSequence++;
                 if (acSequence == ROMAN_SEQUENCE.length) acSequence = 0;
             }
@@ -2635,7 +2514,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                             ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
                             ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
-                    this.createSubHeadingRow(li.get(index).getTabName(), null, text);
+                    this.createSubHeadingRowFont(li.get(index).getTabName(), null, text);
 
                 }else {
                     String text = "unit consists of " + li.get(index).getModulecount() +
@@ -2644,7 +2523,7 @@ public class QuotationPdfCreatorForPackageRoomWise
                             ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
                             ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
-                    this.createSubHeadingRow(li.get(index).getTabName(), null, text);
+                    this.createSubHeadingRowFont(li.get(index).getTabName(), null, text);
                 }
 
                 unitSequence++;
@@ -2667,16 +2546,32 @@ public class QuotationPdfCreatorForPackageRoomWise
                         ((isNotNullorEmpty(li.get(index).getColorGroupCode())) ?  "\n" +"Color : " +li.get(index).getColorGroupCode():"" )+
                         ((isNotNullorEmpty(li.get(index).getHingeType())) ? "\n" + "Hinge : " +li.get(index).getHingeType():"");
 
-                this.createSubHeadingRow(li.get(index).getTabName(), null, text);
+                this.createSubHeadingRowFont(li.get(index).getTabName(), null, text);
                 unitSequence++;
                 if (unitSequence == ALPHABET_SEQUENCE.length) unitSequence = 0;
             }
         }
         return num;
     }
+    private void createSubHeadingRowFont(PdfPTable tabname,String index, String title)
+    {
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
+
+        PdfPCell cell1=new PdfPCell();
+        Paragraph Pindex=new Paragraph(index,size1);
+        Pindex.setAlignment(Element.ALIGN_CENTER);
+        cell1.addElement(Pindex);
+        tabname.addCell(cell1);
+
+        PdfPCell cell2=new PdfPCell();
+        Paragraph Ptitle=new Paragraph(title,fsize);
+        cell2.setColspan(4);
+        cell2.addElement(Ptitle);
+        tabname.addCell(cell2);
+    }
     private void createSubHeadingRow(PdfPTable tabname,String index, String title)
     {
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Paragraph Pindex=new Paragraph(index,size1);
@@ -2694,7 +2589,7 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2756,7 +2651,7 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2800,8 +2695,7 @@ public class QuotationPdfCreatorForPackageRoomWise
     }
     private void createProductTitleRowForAddon(PdfPTable tabname,String index, String category,String title)
     {
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
-        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Paragraph Pindex=new Paragraph(index,size1);
@@ -2830,7 +2724,7 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2889,7 +2783,7 @@ public class QuotationPdfCreatorForPackageRoomWise
         }
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -3253,7 +3147,7 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -3294,14 +3188,9 @@ public class QuotationPdfCreatorForPackageRoomWise
     private void createRowForDataForProposalServices(PdfPTable tabname,int count,String GSTCategory,String categoryType, double PriceAfterDiscount, double DesignpriceAfterDsicount,double currentpriceAfterTax,String tax)
     {
         double tax_amount = round(DesignpriceAfterDsicount - currentpriceAfterTax, 2);
-        /*producttotalPrice+=PriceAfterDiscount;
-        producttotalDAP+=DesignpriceAfterDsicount;
-        producttotalTaxAmt+=currentpriceAfterTax;
-        producttotalPriceAfterTax+=tax_amount;*/
-
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+        Font size1 = new Font(basefontforMontserrat, 8, Font.BOLD);
 
         PdfPCell cell1 = new PdfPCell();
         Pindex = new Paragraph(Integer.valueOf(count).toString(), size1);
@@ -3345,11 +3234,10 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph();
-        cell1.setBackgroundColor(BaseColor.ORANGE);
+        cell1.setBackgroundColor(baseColor);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell1.addElement(Pindex);
         tabname.addCell(cell1);
@@ -3358,27 +3246,27 @@ public class QuotationPdfCreatorForPackageRoomWise
 
         cell=new PdfPCell();
         Pindex=new Paragraph(GSTCategory,fsize);
-        cell.setBackgroundColor(BaseColor.ORANGE);
+        cell.setBackgroundColor(baseColor);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(Pindex);
         tabname.addCell(cell);
 
         PdfPCell cell2=new PdfPCell();
         Pindex=new Paragraph();
-        cell2.setBackgroundColor(BaseColor.ORANGE);
+        cell2.setBackgroundColor(baseColor);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
 
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(tax,fsize);
-        cell5.setBackgroundColor(BaseColor.ORANGE);
+        cell5.setBackgroundColor(baseColor);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell5.addElement(Pindex);
         tabname.addCell(cell5);
 
         PdfPCell cell7=new PdfPCell();
-        cell7.setBackgroundColor(BaseColor.ORANGE);
+        cell7.setBackgroundColor(baseColor);
         Pindex=new Paragraph(Double.toString(round(currentpriceAfterTax,2)),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
@@ -3386,7 +3274,7 @@ public class QuotationPdfCreatorForPackageRoomWise
         //count++;
 
         PdfPCell cell4=new PdfPCell();
-        cell4.setBackgroundColor(BaseColor.ORANGE);
+        cell4.setBackgroundColor(baseColor);
         Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell4.addElement(Pindex);
@@ -3397,7 +3285,6 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph("1",fsize);
@@ -3477,7 +3364,7 @@ public class QuotationPdfCreatorForPackageRoomWise
 
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(sequence,size1);
@@ -3523,7 +3410,6 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph("2",fsize);
@@ -3593,7 +3479,7 @@ public class QuotationPdfCreatorForPackageRoomWise
 
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+        Font size1 = new Font(basefontforMontserrat, 8, Font.BOLD);
 
         PdfPCell cell1 = new PdfPCell();
         Pindex = new Paragraph(Integer.valueOf(count).toString(), size1);
@@ -3636,7 +3522,7 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -3677,7 +3563,7 @@ public class QuotationPdfCreatorForPackageRoomWise
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(Integer.toString(finalcount),size1);
@@ -3758,174 +3644,4 @@ public class QuotationPdfCreatorForPackageRoomWise
         finalmovableList.add(productslist);
     }
 }
-/*
-class roomSummary
-{
-    PdfPTable tableName;
-    String roomName;
-    double productCost,accessoryCost,appliancesCost,CounterTopCost,servicesCost,looseFurniturecost,customAddonCost,totalRoomCost;
 
-    public roomSummary( String roomName, double productCost, double accessoryCost, double appliancesCost, double counterTopCost, double servicesCost, double looseFurniturecost,double totalRoomCost) {
-        this.roomName = roomName;
-        this.productCost = productCost;
-        this.accessoryCost = accessoryCost;
-        this.appliancesCost = appliancesCost;
-        CounterTopCost = counterTopCost;
-        this.servicesCost = servicesCost;
-        this.looseFurniturecost = looseFurniturecost;
-        this.totalRoomCost=totalRoomCost;
-    }
-
-    public double getTotalRoomCost() {
-        return totalRoomCost;
-    }
-
-    public void setTotalRoomCost(double totalRoomCost) {
-        this.totalRoomCost = totalRoomCost;
-    }
-
-    public PdfPTable getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(PdfPTable tableName) {
-        this.tableName = tableName;
-    }
-
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    public double getProductCost() {
-        return productCost;
-    }
-
-    public void setProductCost(double productCost) {
-        this.productCost = productCost;
-    }
-
-    public double getAccessoryCost() {
-        return accessoryCost;
-    }
-
-    public void setAccessoryCost(double accessoryCost) {
-        this.accessoryCost = accessoryCost;
-    }
-
-    public double getAppliancesCost() {
-        return appliancesCost;
-    }
-
-    public void setAppliancesCost(double appliancesCost) {
-        this.appliancesCost = appliancesCost;
-    }
-
-    public double getCounterTopCost() {
-        return CounterTopCost;
-    }
-
-    public void setCounterTopCost(double counterTopCost) {
-        CounterTopCost = counterTopCost;
-    }
-
-    public double getServicesCost() {
-        return servicesCost;
-    }
-
-    public void setServicesCost(double servicesCost) {
-        this.servicesCost = servicesCost;
-    }
-
-    public double getLooseFurniturecost() {
-        return looseFurniturecost;
-    }
-
-    public void setLooseFurniturecost(double looseFurniturecost) {
-        this.looseFurniturecost = looseFurniturecost;
-    }
-
-    public double getCustomAddonCost() {
-        return customAddonCost;
-    }
-
-    public void setCustomAddonCost(double customAddonCost) {
-        this.customAddonCost = customAddonCost;
-    }
-}
-class AddonsList
-{
-    String category,description,uom,extendedTitle;
-    Double qty,price,amount;
-
-    public AddonsList(String category,String description,String extendedTitle, String uom, Double qty, Double price, Double amount) {
-        this.category=category;
-        this.description = description;
-        this.extendedTitle=extendedTitle;
-        this.uom = uom;
-        this.qty = qty;
-        this.price = price;
-        this.amount = amount;
-    }
-
-    public String getExtendedTitle() {
-        return extendedTitle;
-    }
-
-    public void setExtendedTitle(String extendedTitle) {
-        this.extendedTitle = extendedTitle;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUom() {
-        return uom;
-    }
-
-    public void setUom(String uom) {
-        this.uom = uom;
-    }
-
-    public Double getQty() {
-        return qty;
-    }
-
-    public void setQty(Double qty) {
-        this.qty = qty;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-}
-
-*/

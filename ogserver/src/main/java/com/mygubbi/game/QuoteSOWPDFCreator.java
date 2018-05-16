@@ -31,13 +31,36 @@ import java.util.List;
  */
 
 class CustomBorder extends PdfPageEventHelper {
-    public void onEndPage(PdfWriter writer, Document document) {
+    Image image;
+    CustomBorder()
+    {
+        try
+        {
+            image = Image.getInstance("pneumonic_strip-1415.png");
+        }
+        catch (Exception e)
+        {
 
-        PdfContentByte canvas = writer.getDirectContent();
-        Rectangle rect = new Rectangle(28, 28, 820, 580);
-        rect.setBorder(Rectangle.BOX);
-        rect.setBorderWidth(2);
-        canvas.rectangle(rect);
+        }
+    }
+    public void onEndPage(PdfWriter writer, Document document) {
+        try
+        {
+            PdfContentByte canvas = writer.getDirectContent();
+            Rectangle rect = new Rectangle(28, 28, 820, 580);
+            rect.setBorder(Rectangle.BOX);
+            rect.setBorderWidth(2);
+            canvas.rectangle(rect);
+
+            PdfContentByte content = writer.getDirectContent();
+            image.setAbsolutePosition(14f, -3f);
+            //image.setWidthPercentage(1);
+            content.addImage(image);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
 public class QuoteSOWPDFCreator
@@ -49,23 +72,38 @@ public class QuoteSOWPDFCreator
     PdfPTable sowitemsTable,B1Table;
     private String sowversion;
     private String remarks;
-
-    Font fsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
-    Font fsize1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
-    Font fsize3=new Font(Font.FontFamily.TIMES_ROMAN,9,Font.BOLD);
-
     private ProposalHeader proposalHeader;
     private QuoteData quoteData;
     List<SOWPdf> proposalSOWs = new ArrayList<SOWPdf>();
-    Document document = new Document(PageSize.A4.rotate());
+    //Document document = new Document(PageSize.A4.rotate());
+    Document document = new Document(PageSize.A4.rotate(), 36, 36, 36, 60);
 
     FileOutputStream fout ;
+    Font fsize,fsize1,fsize3;
+    BaseFont basefontforMontserrat;
+    BaseColor baseColor= new BaseColor(234, 92, 54); //rgb(234, 92, 54)
+    public static String[][] FONTS = {
+            {"Montserrat-Regular.ttf", BaseFont.WINANSI}
+    };
     public QuoteSOWPDFCreator(ProposalHeader proposalHeader, QuoteData quoteData,List<SOWPdf> proposalSOWs)
     {
-        LOG.info("proposal Sow " +proposalSOWs.size());
         this.proposalHeader=proposalHeader;
         this.quoteData=quoteData;
         this.proposalSOWs = proposalSOWs;
+        try
+        {
+            for (int i = 0; i < FONTS.length; i++) {
+                basefontforMontserrat = BaseFont.createFont(FONTS[i][0], FONTS[i][1], BaseFont.NOT_EMBEDDED);
+                fsize3=new Font(basefontforMontserrat,9,Font.BOLD);
+                fsize=new Font(basefontforMontserrat,8,Font.NORMAL);
+                fsize1=new Font(basefontforMontserrat,8,Font.BOLD);
+            }
+        }
+        catch (Exception e)
+        {
+            LOG.info("Exception in font quote sow pdf creator " +e);
+        }
+
     }
     public void createSOWPDf(String destination)
     {
@@ -97,7 +135,6 @@ public class QuoteSOWPDFCreator
             }
             finally {
                 LOG.info("In finally");
-//                document.close();;
             }
     }
 
@@ -154,13 +191,6 @@ public class QuoteSOWPDFCreator
         table.addCell(phrase4);
         table.addCell(phrase5);
 
-                /*PdfPTable pdfPTable=new PdfPTable(1);
-                pdfPTable.setWidthPercentage(100);
-                Phrase phrase6 = new Phrase();
-                phrase6.add(new Chunk("Project Address: ",fsize1));
-                phrase6.add(new Chunk(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","),fsize));
-                pdfPTable.addCell(phrase6);*/
-
         document.add(table);
 
         Paragraph p1=new Paragraph(" ");
@@ -170,21 +200,21 @@ public class QuoteSOWPDFCreator
         sowitemsTable = new PdfPTable(columnWidths1);
         sowitemsTable.setWidthPercentage(100);
         PdfPCell itemsCell1 = new PdfPCell(new Paragraph("SPACE TYPE",fsize1));
-        itemsCell1.setBackgroundColor(BaseColor.ORANGE);
+        itemsCell1.setBackgroundColor(baseColor);
         PdfPCell itemsCell2 = new PdfPCell(new Paragraph("ROOM",fsize1));
-        itemsCell2.setBackgroundColor(BaseColor.ORANGE);
+        itemsCell2.setBackgroundColor(baseColor);
         PdfPCell itemsCell3 = new PdfPCell(new Paragraph("SERVICES",fsize1));
         Paragraph Pindex=new Paragraph("SERVICES",fsize1);
         Pindex.setAlignment(Element.ALIGN_CENTER);
         itemsCell3.addElement(Pindex);
-        itemsCell3.setBackgroundColor(BaseColor.ORANGE);
+        itemsCell3.setBackgroundColor(baseColor);
         itemsCell3.setColspan(2);
 
         PdfPCell itemsCell4 = new PdfPCell();
         Paragraph Pindex1=new Paragraph("RELATED SERVICES",fsize1);
         Pindex1.setAlignment(Element.ALIGN_CENTER);
         itemsCell4.addElement(Pindex1);
-        itemsCell4.setBackgroundColor(BaseColor.ORANGE);
+        itemsCell4.setBackgroundColor(baseColor);
         itemsCell4.setColspan(12);
 
 
@@ -205,14 +235,13 @@ public class QuoteSOWPDFCreator
             if (currentroom==null)
             {
                 currentroom = "NA";
-                LOG.info("Room code is null");
+                // Room code is null
             }
             if (currentspaceType==null)
             {
                 currentspaceType = "NA";
-                LOG.info("Space Type is null");
+                //Space Type is null
             }
-
 
            if(currentroom.equals(prevroom) && currentspaceType.equals(prevspaceType))
             {
@@ -240,7 +269,6 @@ public class QuoteSOWPDFCreator
             para = new Paragraph(new Paragraph("THANKS for considering Gubbi!                                                                                                                                                                                                                                                                                                   " + "\t"  + "\t" + "\t" + "\t" + "\t" +"\tAccepted (Sign) ",fsize));
             document.add(para);
 
-
             this.fout.flush();
             document.close();
             this.fout.close();
@@ -255,7 +283,6 @@ public class QuoteSOWPDFCreator
     }
     private void createRowAndFillData(PdfPTable tabname,String spaceType, String room, String service, String serviceValue, String  relatedService1,String  relatedService1value,String  relatedService2,String  relatedService2value,String  relatedService3,String  relatedService3value,String  relatedService4,String  relatedService4value,String  relatedService5,String  relatedService5value,String  relatedService6,String  relatedService6value)
     {
-        //LOG.info("inside create row n fill data");
         PdfPCell cell;
         Paragraph Pindex;
         Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
@@ -356,7 +383,6 @@ public class QuoteSOWPDFCreator
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell16.addElement(Pindex);
         tabname.addCell(cell16);
-
     }
 }
 

@@ -2,19 +2,19 @@
   "version": "0.0.0a",
   "jdbc":[ {
     "driver_class": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://localhost/report?autoReconnect=true",
+    "url": "jdbc:mysql://202.83.18.99/prod_copy?autoReconnect=true",
     "max_pool_size": 20,
-    "user": "root",
-    "password": "",
+    "user": "admin",
+    "password": "OG$#gubi32",
     "pool_Name":"mygubbi"
   },
     {
       "driver_class": "com.mysql.jdbc.Driver",
-      "url": "jdbc:mysql://localhost/report?autoReconnect=true",
+      "url": "jdbc:mysql://202.83.18.99/prod_copy?autoReconnect=true",
       "max_pool_size": 20,
-      "user": "root",
-      "password": "",
-      "pool_Name":"ods"
+      "user": "admin",
+      "password": "OG$#gubi32",
+      "pool_Name":"mygubbi"
     }],
   "urlwithssl": "",
 
@@ -31,7 +31,7 @@
   "SENDGRID_KEY":"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",
   "FROM_EMAIL":"game@mygubbi.com",
   "App_url_for_proposal":"http://192.168.104.156:8080/#!New%20Quotation/",
-  "sendEmail":"yes",
+  "sendEmail":"no",
   "http_port" : 1445,
   "https_port" : 1446,
   "proposal_docs_folder" : "c:/Users/Public/game_files",

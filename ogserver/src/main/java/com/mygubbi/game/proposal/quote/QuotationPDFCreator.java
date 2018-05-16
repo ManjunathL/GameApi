@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.quote;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 import com.mygubbi.game.proposal.*;
 import com.mygubbi.game.proposal.model.*;
 import com.mygubbi.game.proposal.price.RateCardService;
@@ -22,15 +23,45 @@ import java.util.Objects;
 /**
  * Created by user on 02-Nov-16.
  */
-
+/*class MyEvent extends PdfPageEventHelper
+{
+    Image image;
+    public  void OnEndPage(PdfWriter writer, Document document) {
+        writer.DirectContent.AddImage(image);
+        }
+}*/
 class CustomBorder extends PdfPageEventHelper {
+    Image image;
+    CustomBorder()
+    {
+        try
+        {
+            image = Image.getInstance("stripwith_pneumonic-13.png");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     public void onEndPage(PdfWriter writer, Document document) {
+        try
+        {
+            PdfContentByte canvas = writer.getDirectContent();
+            Rectangle rect = new Rectangle(28, 28, 580, 830);
+            rect.setBorder(Rectangle.BOX);
+            rect.setBorderWidth(2);
+            canvas.rectangle(rect);
 
-        PdfContentByte canvas = writer.getDirectContent();
-        Rectangle rect = new Rectangle(28, 28, 580, 830);
-        rect.setBorder(Rectangle.BOX);
-        rect.setBorderWidth(2);
-        canvas.rectangle(rect);
+            PdfContentByte content = writer.getDirectContent();
+            image.setAbsolutePosition(-0f, -1f);
+            image.setWidthPercentage(90);
+            content.addImage(image);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception " +e);
+        }
+
     }
 }
 public class QuotationPDFCreator
@@ -69,20 +100,12 @@ public class QuotationPDFCreator
     public static final String FONT = "src/main/resources/webroot/fonts/FreeSans.ttf";
     public static final String TEXT = "this string contains special characters like this  \u2208, \u2229, \u2211, \u222b, \u2206";
 
-
-
     PdfPTable itemsTable,B1Table;
     QuoteData quoteData;
-
-    Font fsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
-    Font bookingformfsize=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
-    Font bookingformfsize1=new Font(Font.FontFamily.TIMES_ROMAN,10,Font.BOLD,BaseColor.ORANGE);
-    Font fsize1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
-    Font fsize3=new Font(Font.FontFamily.TIMES_ROMAN,9,Font.BOLD);
-    Font headingSize=new com.itextpdf.text.Font(Font.FontFamily.TIMES_ROMAN,10, com.itextpdf.text.Font.BOLD);
     Font zapfdingbats = new Font(Font.FontFamily.ZAPFDINGBATS, 16);
     private ProposalHeader proposalHeader;
     private ProposalVersion proposalVersion;
+
     double totalproductPrice=0,totalDAP=0,totalTaxAmt=0,totalPriceAfterTax=0;
     double set1totalproductPrice=0,set1totalDAP=0,set1totalTaxAmt=0,set1totalPriceAfterTax=0;
     double movabletotalproductPrice=0,movabletotalDAP=0,movabletotalTaxAmt=0,movabletotalPriceAfterTax=0;
@@ -112,8 +135,13 @@ public class QuotationPDFCreator
     Boolean gstTextChangeDateValue;
     Boolean mscTextChangeDateValue;
     List<SpaceRoom> spaceRoomsList;
-
+    BaseFont basefontforMontserrat;
     PriceMaster designServicePrice, nonMovablePrice, movablePrice, nonMovablePriceTax, movablePriceTax,scwTax,designServiceTax,projectHandlingTax,floorProtectionTax,deepClearingTax,projectHandlingAmount,floorProtectionAmount,deepClearingAmount;
+    BaseColor baseColor= new BaseColor(234, 92, 54); //rgb(234, 92, 54)
+    Font fsize3,fsize,fsize1,headingSizeNew,size1,roomNameSizeBOLD,size3,bookingformfsize,headingSizeNewWhite,tableheadingWhite;
+    public static String[][] FONTS = {
+            {"Montserrat-Regular.ttf", BaseFont.WINANSI}
+    };
 
     QuotationPDFCreator(QuoteData quoteData, ProposalHeader proposalHeader, ProposalVersion proposalVersion, List<SpaceRoom> spaceRooms)
     {
@@ -142,6 +170,26 @@ public class QuotationPDFCreator
         {
             mscTextChangeDateValue=new Boolean(false);
         }
+        try
+        {
+            for (int i = 0; i < FONTS.length; i++) {
+                basefontforMontserrat = BaseFont.createFont(FONTS[i][0], FONTS[i][1], BaseFont.NOT_EMBEDDED);
+                fsize3=new Font(basefontforMontserrat,9,Font.BOLD);
+                fsize=new Font(basefontforMontserrat,8,Font.NORMAL);
+                fsize1=new Font(basefontforMontserrat,7,Font.BOLD);
+                headingSizeNew=new com.itextpdf.text.Font(basefontforMontserrat,10, com.itextpdf.text.Font.BOLD);
+                headingSizeNewWhite=new com.itextpdf.text.Font(basefontforMontserrat,10, com.itextpdf.text.Font.BOLD,BaseColor.WHITE);
+                tableheadingWhite=new com.itextpdf.text.Font(basefontforMontserrat,7, com.itextpdf.text.Font.BOLD,BaseColor.WHITE);
+                size1=new Font(basefontforMontserrat,8, Font.BOLD,baseColor);
+                roomNameSizeBOLD=new Font(basefontforMontserrat,15,Font.BOLD,BaseColor.BLACK);
+                size3=new Font(basefontforMontserrat,10,Font.BOLD,BaseColor.BLACK);
+                bookingformfsize=new Font(basefontforMontserrat,8,Font.BOLD);
+            }
+        }
+        catch (Exception e)
+        {
+            LOG.info("Exception in font in quotepdfcreator " +e);
+        }
 
     }
 
@@ -149,7 +197,8 @@ public class QuotationPDFCreator
     {
 
                 try {
-                    Document document = new Document();
+                    //Document document = new Document();
+                    Document document = new Document(PageSize.A4, 36, 36, 36, 60);
                     PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(destination));
                     writer.setPdfVersion(PdfWriter.VERSION_1_7);
                     writer.createXmpMetadata();
@@ -157,397 +206,392 @@ public class QuotationPDFCreator
                     writer.setPageEvent(new CustomBorder());
                     Paragraph p;
 
-            char checked='\u00FE';
-            char unchecked='\u00A8';
+                    char checked='\u00FE';
+                    char unchecked='\u00A8';
 
-            if(quoteData.getBookingFormFlag().equals("Yes")) {
-                Image img = Image.getInstance("logo.png");
-                img.setAlignment(Image.MIDDLE);
-                img.scaleAbsolute(100,50);
-                document.add(img);
+                    if(quoteData.getBookingFormFlag().equals("Yes"))
+                    {
+                        Image img = Image.getInstance("MG_logo-04.png");
+                        img.setAlignment(Image.MIDDLE);
+                        img.scaleAbsolute(130,30);
+                        document.add(img);
 
-                if(proposalHeader.getProjectCity().equals("Chennai"))
-                {
-                    p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", bookingformfsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
+                        if(proposalHeader.getProjectCity().equals("Chennai"))
+                        {
+                            p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
 
-                    p = new Paragraph("Chennai 600 096, India Phone +91 80888 60860", fsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
+                            p = new Paragraph("Chennai 600 096, India Phone +91 80888 60860", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
 
-                }else if(proposalHeader.getProjectCity().equals("Pune"))
-                {
-                    p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", fsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
+                        }else if(proposalHeader.getProjectCity().equals("Pune"))
+                        {
+                            p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
 
-                    p = new Paragraph("Nr.Kapil Malhar Society, Baner", fsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
+                            p = new Paragraph("Nr.Kapil Malhar Society, Baner", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
 
-                    p = new Paragraph("Pune:411045", fsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
+                            p = new Paragraph("Pune:411045", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
 
+                        }else if(proposalHeader.getProjectCity().equals("Mangalore"))
+                        {
+                            p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
+
+                            p = new Paragraph("Hampankatta Mangalore Pincode :575001, India Phone +91 80888 60860", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
+
+                        }
+                        else
+                        {
+                            p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
+
+                            p = new Paragraph("Bangalore 560 102, India Phone +91 80888 60860", bookingformfsize);
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            document.add(p);
+                        }
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph(" BOOKING FORM ", headingSizeNew);
+                        p.setAlignment(Element.ALIGN_CENTER);
+                        document.add(p);
+
+                        p = new Paragraph("Date:_________________", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_RIGHT);
+                        document.add(p);
+
+                        p = new Paragraph("Name : Mr/Mrs/Ms/Dr : " + " " + proposalHeader.getName(), bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph("Quotation ID: " + proposalHeader.getQuoteNumNew(), bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        PdfPTable Appdetails = new PdfPTable(1);
+                        Appdetails.setWidthPercentage(100);
+                        p=new Paragraph("APPLICANT'S DETAILS",headingSizeNewWhite);
+                        p.setAlignment(Element.ALIGN_CENTER);
+                        PdfPCell scell1 = new PdfPCell();
+                        scell1.setFixedHeight(25f);
+                        scell1.addElement(p);
+                        scell1.setBackgroundColor(baseColor);
+                        Appdetails.addCell(scell1);
+                        document.add(Appdetails);
+
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("Project Name : " + proposalHeader.getProjectName() + "                                                                                    " +" Apartment No : __________         Floor No : __________ ", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        if(proposalHeader.getProjectAddress1()== "null" || proposalHeader.getProjectAddress1().length() == 0 )
+                        {
+                            p=new Paragraph("Project Address : ________________________________________________________________________________________________________________",bookingformfsize);
+                        }else {
+                            p = new Paragraph("Project Address:" + proposalHeader.getProjectAddress1(), bookingformfsize);
+                        }
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        Phrase ph1=new Phrase();
+                        ph1.add(new Chunk("Project/Apartment Possession :     ",bookingformfsize));
+                        ph1.add(new Chunk("  Less than 60 days*  ",bookingformfsize));
+                        ph1.add(new Chunk("  o  ", zapfdingbats));
+                        ph1.add(new Chunk("     ", zapfdingbats));
+                        ph1.add(new Chunk("  More than 60 days*  ",bookingformfsize));
+                        ph1.add(new Chunk("  o  ", zapfdingbats));
+                        ph1.add(new Chunk("     ", bookingformfsize));
+                        ph1.add(new Chunk("*(Mandatory to be filled)",bookingformfsize ));
+                        p=new Paragraph();
+                        p.add(ph1);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        Phrase ph2=new Phrase();
+                        ph2.add(new Chunk("Profession:    ",bookingformfsize));
+                        ph2.add(new Chunk("  Salaried  ",bookingformfsize));
+                        ph2.add(new Chunk("  o  ", zapfdingbats));
+                        ph2.add(new Chunk("  Bussiness  ",bookingformfsize));
+                        ph2.add(new Chunk("  o  ", zapfdingbats));
+                        ph2.add(new Chunk("  Others  ",bookingformfsize));
+                        ph2.add(new Chunk("  o  ", zapfdingbats));
+                        p=new Paragraph();
+                        p.add(ph2);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("Post/Designation : ______________________________________________________    " +   "Company's Name : _________________________________", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        Phrase ph3=new Phrase();
+                        ph3.add(new Chunk("Professional Details:   ",bookingformfsize));
+                        ph3.add(new Chunk("  IT  ",bookingformfsize));
+                        ph3.add(new Chunk("  o  ", zapfdingbats));
+                        ph3.add(new Chunk("  ITES/BPO  ",bookingformfsize));
+                        ph3.add(new Chunk("  o  ", zapfdingbats));
+                        ph3.add(new Chunk("  Doctor  ",bookingformfsize));
+                        ph3.add(new Chunk("  o  ", zapfdingbats));
+                        ph3.add(new Chunk("  Govt. Services/PSU  ",bookingformfsize));
+                        ph3.add(new Chunk("  o  ", zapfdingbats));
+                        p=new Paragraph();
+                        p.add(ph3);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        Phrase ph4=new Phrase();
+                        ph4.add(new Chunk("Banking & Finance  ",bookingformfsize));
+                        ph4.add(new Chunk("  o  ", zapfdingbats));
+                        ph4.add(new Chunk("  Manufacturing/Distribution  ",bookingformfsize));
+                        ph4.add(new Chunk("  o  ", zapfdingbats));
+                        ph4.add(new Chunk("  Others,please specify  ",bookingformfsize));
+                        ph4.add(new Chunk("  ______________________  ", bookingformfsize));
+                        p=new Paragraph();
+                        p.add(ph4);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        Phrase ph5=new Phrase();
+                        ph5.add(new Chunk("Annual Income (in Rs. Lacs) ",bookingformfsize));
+                        ph5.add(new Chunk("  Less than 15  ",bookingformfsize));
+                        ph5.add(new Chunk("  o  ", zapfdingbats));
+                        ph5.add(new Chunk("  16-25  ",bookingformfsize));
+                        ph5.add(new Chunk("  o  ", zapfdingbats));
+                        ph5.add(new Chunk("  26-35  ",bookingformfsize));
+                        ph5.add(new Chunk("  o  ", zapfdingbats));
+                        ph5.add(new Chunk("  36-50  ",bookingformfsize));
+                        ph5.add(new Chunk("  o  ", zapfdingbats));
+                        ph5.add(new Chunk("  51 & above  ",bookingformfsize));
+                        ph5.add(new Chunk("  o  ", zapfdingbats));
+                        p=new Paragraph();
+                        p.add(ph5);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("Landline : ___________________________________" + "                " +  " Mobile(1) : " + proposalHeader.getContact() + "                 " +"   Mobile(2) : _________________________ ", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("Email ID(1) : ____________________________________________________________________________________________________________________", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("Email ID(2) : ____________________________________________________________________________________________________________________", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("Address for Communication : ___________________________________________________________________________________________________", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("Office Address:(if applicable) ____________________________________________________________________________________________________", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("_________________________________________________________________________________________________" + "  PAN Number:_________________", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        PdfPTable orderdetails = new PdfPTable(1);
+                        orderdetails.setWidthPercentage(100);
+                        p=new Paragraph("ORDER DETAILS",headingSizeNewWhite);
+                        p.setAlignment(Element.ALIGN_CENTER);
+                        scell1 = new PdfPCell();
+                        scell1.setFixedHeight(25f);
+                        scell1.addElement(p);
+                        scell1.setBackgroundColor(baseColor);
+                        orderdetails.addCell(scell1);
+                        document.add(orderdetails);
+
+                        p = new Paragraph(" ");
+                        document.add(p);
+
+                        p = new Paragraph("Sales Order ID : " + proposalHeader.getCrmId(), bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph("Order Date : ____________________________________________________________________________________________________________________", bookingformfsize);
+                        document.add(p);
+
+                        p = new Paragraph("Remarks : ______________________________________________________________________________________________________________________", bookingformfsize);
+                        document.add(p);
+
+                        Double val =( quoteData.getTotalCost() + miscCharges.intValue() )- quoteData.getDiscountAmount();
+
+                        Double res = val - val % 10;
+                        p = new Paragraph("Total Quotation Value Rs. " + this.getRoundOffValue(String.valueOf(res.intValue())), bookingformfsize);
+                        document.add(p);
+                    }
+
+                    document.newPage();
+
+                    Image img1 = Image.getInstance("MG_logo-04.png");
+                    img1.setAlignment(Image.LEFT);
+                    img1.scaleAbsolute(130,30);
+                    document.add(img1);
+
+                    if(proposalHeader.getProjectCity().equals("Chennai"))
+                    {
+                        p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Chennai 600 096, India", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Phone +91 80888 60860", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+                        p = new Paragraph("Annexure - A : QUOTATION",bookingformfsize);
+                        p.setAlignment(Element.ALIGN_CENTER);
+                        fsize3.setColor(BaseColor.GRAY);
+                        document.add(p);
+
+                        p = new Paragraph("      ");
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+                    }else if(proposalHeader.getProjectCity().equals("Pune"))
+                    {
+                        p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Nr.Kapil Malhar Society, Baner", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Pune:411045", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Phone +91 80888 60860", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Annexure - A : QUOTATION",bookingformfsize);
+                        p.setAlignment(Element.ALIGN_CENTER);
+                        fsize3.setColor(BaseColor.GRAY);
+                        document.add(p);
+
+                        p = new Paragraph("      ");
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
                 }else if(proposalHeader.getProjectCity().equals("Mangalore"))
                 {
-                    p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", fsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
+                        p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
 
-                    p = new Paragraph("Hampankatta Mangalore Pincode :575001, India Phone +91 80888 60860", fsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
+                        p = new Paragraph("Hampankatta Mangalore Pincode :575001, India", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
 
+                        p = new Paragraph("Phone +91 80888 60860", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Annexure - A : QUOTATION",bookingformfsize);
+                        p.setAlignment(Element.ALIGN_CENTER);
+                        fsize3.setColor(BaseColor.GRAY);
+                        document.add(p);
+
+                        p = new Paragraph("      ");
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
                 }
                 else
                 {
-                    p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", fsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
 
-                    p = new Paragraph("Bangalore 560 102, India Phone +91 80888 60860", fsize);
-                    p.setAlignment(Element.ALIGN_CENTER);
-                    document.add(p);
+                        p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Bangalore 560 102, India", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Phone +91 80888 60860", bookingformfsize);
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
+                        p = new Paragraph("Annexure - A : QUOTATION",bookingformfsize);
+                        p.setAlignment(Element.ALIGN_CENTER);
+                        fsize3.setColor(BaseColor.GRAY);
+                        document.add(p);
+
+                        p = new Paragraph("      ");
+                        p.setAlignment(Element.ALIGN_LEFT);
+                        document.add(p);
+
                 }
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph(" BOOKING FORM ", headingSize);
-                p.setAlignment(Element.ALIGN_CENTER);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Date:_________________", bookingformfsize);
-                p.setAlignment(Element.ALIGN_RIGHT);
-                document.add(p);
-
-                p = new Paragraph("Name : Mr/Mrs/Ms/Dr : " + " " + proposalHeader.getName(), bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph("Quotation ID: " + proposalHeader.getQuoteNumNew(), bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                PdfPTable Appdetails = new PdfPTable(1);
-                Appdetails.setWidthPercentage(100);
-                p=new Paragraph("APPLICANT'S DETAILS",headingSize);
-                p.setAlignment(Element.ALIGN_CENTER);
-                PdfPCell scell1 = new PdfPCell();
-                scell1.addElement(p);
-                scell1.setBackgroundColor(BaseColor.ORANGE);
-                Appdetails.addCell(scell1);
-                document.add(Appdetails);
-
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Project Name : " + proposalHeader.getProjectName() + "                                                                                    " +" Apartment No : __________         Floor No : __________ ", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                if(proposalHeader.getProjectAddress1()== "null" || proposalHeader.getProjectAddress1().length() == 0 )
-                {
-                    p=new Paragraph("Project Address : __________________________________________________________________________________________________",bookingformfsize);
-                }else {
-                    p = new Paragraph("Project Address:" + proposalHeader.getProjectAddress1(), bookingformfsize);
-                }
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                Phrase ph1=new Phrase();
-                ph1.add(new Chunk("Project/Apartment Possession :     ",bookingformfsize));
-                ph1.add(new Chunk("  Less than 60 days*  ",bookingformfsize));
-                ph1.add(new Chunk("  o  ", zapfdingbats));
-                ph1.add(new Chunk("     ", zapfdingbats));
-                ph1.add(new Chunk("  More than 60 days*  ",bookingformfsize));
-                ph1.add(new Chunk("  o  ", zapfdingbats));
-                ph1.add(new Chunk("     ", bookingformfsize));
-                ph1.add(new Chunk("*(Mandatory to be filled)",bookingformfsize ));
-                p=new Paragraph();
-                p.add(ph1);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                Phrase ph2=new Phrase();
-                ph2.add(new Chunk("Profession:    ",bookingformfsize));
-                ph2.add(new Chunk("  Salaried  ",bookingformfsize));
-                ph2.add(new Chunk("  o  ", zapfdingbats));
-                ph2.add(new Chunk("  Bussiness  ",bookingformfsize));
-                ph2.add(new Chunk("  o  ", zapfdingbats));
-                ph2.add(new Chunk("  Others  ",bookingformfsize));
-                ph2.add(new Chunk("  o  ", zapfdingbats));
-                p=new Paragraph();
-                p.add(ph2);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Post/Designation : ______________________________________________________" + "             " + "Company's Name : _________________________________", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                Phrase ph3=new Phrase();
-                ph3.add(new Chunk("Professional Details:   ",bookingformfsize));
-                ph3.add(new Chunk("  IT  ",bookingformfsize));
-                ph3.add(new Chunk("  o  ", zapfdingbats));
-                ph3.add(new Chunk("  ITES/BPO  ",bookingformfsize));
-                ph3.add(new Chunk("  o  ", zapfdingbats));
-                ph3.add(new Chunk("  Doctor  ",bookingformfsize));
-                ph3.add(new Chunk("  o  ", zapfdingbats));
-                ph3.add(new Chunk("  Govt. Services/PSU  ",bookingformfsize));
-                ph3.add(new Chunk("  o  ", zapfdingbats));
-                p=new Paragraph();
-                p.add(ph3);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                Phrase ph4=new Phrase();
-                ph4.add(new Chunk("Banking & Finance  ",bookingformfsize));
-                ph4.add(new Chunk("  o  ", zapfdingbats));
-                ph4.add(new Chunk("  Manufacturing/Distribution  ",bookingformfsize));
-                ph4.add(new Chunk("  o  ", zapfdingbats));
-                ph4.add(new Chunk("  Others,please specify  ",bookingformfsize));
-                ph4.add(new Chunk("  ______________________  ", bookingformfsize));
-                p=new Paragraph();
-                p.add(ph4);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                Phrase ph5=new Phrase();
-                ph5.add(new Chunk("Annual Income (in Rs. Lacs) ",bookingformfsize));
-                ph5.add(new Chunk("  Less than 15  ",bookingformfsize));
-                ph5.add(new Chunk("  o  ", zapfdingbats));
-                ph5.add(new Chunk("  16-25  ",bookingformfsize));
-                ph5.add(new Chunk("  o  ", zapfdingbats));
-                ph5.add(new Chunk("  26-35  ",bookingformfsize));
-                ph5.add(new Chunk("  o  ", zapfdingbats));
-                ph5.add(new Chunk("  36-50  ",bookingformfsize));
-                ph5.add(new Chunk("  o  ", zapfdingbats));
-                ph5.add(new Chunk("  51 & above  ",bookingformfsize));
-                ph5.add(new Chunk("  o  ", zapfdingbats));
-                p=new Paragraph();
-                p.add(ph5);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Landline : ___________________________________" + "                     " +  " Mobile(1) : " + proposalHeader.getContact() + "                       " +"   Mobile(2) : _________________________ ", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Email ID(1) : ____________________________________________________________________________________________________________________", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Email ID(2) : ____________________________________________________________________________________________________________________", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Address for Communication : ________________________________________________________________________________________________________", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Office Address:(if applicable) _______________________________________________________________________________________________________", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("_________________________________________________________________________________________________" + "  PAN Number:__________________", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                PdfPTable orderdetails = new PdfPTable(1);
-                orderdetails.setWidthPercentage(100);
-                p=new Paragraph("ORDER DETAILS",headingSize);
-                p.setAlignment(Element.ALIGN_CENTER);
-                scell1 = new PdfPCell();
-                scell1.addElement(p);
-                scell1.setBackgroundColor(BaseColor.ORANGE);
-                orderdetails.addCell(scell1);
-                document.add(orderdetails);
-
-                p = new Paragraph(" ");
-                document.add(p);
-
-                p = new Paragraph("Sales Order ID : " + proposalHeader.getCrmId(), bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph("Order Date : ____________________________________________________________________________________________________________________", bookingformfsize);
-                document.add(p);
-
-                p = new Paragraph("Remarks : ______________________________________________________________________________________________________________________", bookingformfsize);
-                document.add(p);
-
-                Double val = (quoteData.getTotalCost() + miscCharges.intValue()) - quoteData.getDiscountAmount();
-
-                Double res = val - val % 10;
-                p = new Paragraph("Total Quotation Value Rs. " + this.getRoundOffValue(String.valueOf(res.intValue())), bookingformfsize);
-                document.add(p);
-            }
-
-            document.newPage();
-
-            Image img1 = Image.getInstance("myGubbi_Logo.png");
-            img1.setWidthPercentage(50);
-            document.add(img1);
-
-            if(proposalHeader.getProjectCity().equals("Chennai"))
-            {
-                p = new Paragraph("Ramaniyam Ocean - Isha, No.11, Second Floor", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Rajiv Gandhi Salai, Old Mahabalipuram road, Okkiyam Thoraipakkam", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Chennai 600 096, India", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Phone +91 80888 60860", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
-                p.setAlignment(Element.ALIGN_CENTER);
-                fsize3.setColor(BaseColor.GRAY);
-                document.add(p);
-
-                p = new Paragraph("      ");
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-            }else if(proposalHeader.getProjectCity().equals("Pune"))
-            {
-                p = new Paragraph("\"The Mint \" Building, Office No.101 ,2nd Floor", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Nr.Kapil Malhar Society, Baner", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Pune:411045", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Phone +91 80888 60860", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
-                p.setAlignment(Element.ALIGN_CENTER);
-                fsize3.setColor(BaseColor.GRAY);
-                document.add(p);
-
-                p = new Paragraph("      ");
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-            }else if(proposalHeader.getProjectCity().equals("Mangalore"))
-            {
-                p = new Paragraph("CRYSTAL ARC ( Building Name) Commercial shop premises No F11 & F 12 First Floor Door No 14-4-511/34 & 14-4-511/35 Balmatta Road", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Hampankatta Mangalore Pincode :575001, India", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Phone +91 80888 60860", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
-                p.setAlignment(Element.ALIGN_CENTER);
-                fsize3.setColor(BaseColor.GRAY);
-                document.add(p);
-
-                p = new Paragraph("      ");
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-            }
-            else
-            {
-
-                p = new Paragraph("No 1502, 1st Floor, 19th Main, Sector 1, HSR Layout", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Bangalore 560 102, India", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Phone +91 80888 60860", fsize);
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-                p = new Paragraph("Annexure - A : QUOTATION",fsize3);
-                p.setAlignment(Element.ALIGN_CENTER);
-                fsize3.setColor(BaseColor.GRAY);
-                document.add(p);
-
-                p = new Paragraph("      ");
-                p.setAlignment(Element.ALIGN_LEFT);
-                document.add(p);
-
-            }
-            if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
-            {
-                return;
-            }
             float[] columnWidths2 = {4,2};
             PdfPTable table = new PdfPTable(columnWidths2);
             table.setWidthPercentage(100);
 
             Phrase phrase = new Phrase();
-            phrase.add(new Chunk("Quotation For: ",fsize1));
+            phrase.add(new Chunk("Quotation For: ",bookingformfsize));
             //phrase.add(new Chunk(proposalHeader.getQuotationFor(),fsize1));
-            phrase.add(new Chunk(proposalVersion.getTitle(),fsize1));
+            phrase.add(new Chunk(proposalVersion.getTitle(),bookingformfsize));
 
             Phrase phrase1 = new Phrase();
-            phrase1.add(new Chunk("Date: ",fsize1));
+            phrase1.add(new Chunk("Date: ",bookingformfsize));
             phrase1.add(new Chunk(DateFormatUtils.format(new Date(), "dd-MMM-yyyy"),fsize));
 
             Phrase phrase2 = new Phrase();
-            phrase2.add(new Chunk("Name: ",fsize1));
+            phrase2.add(new Chunk("Name: ",bookingformfsize));
             phrase2.add(new Chunk(proposalHeader.getName(),fsize));
 
             Phrase phrase3 = new Phrase();
-            phrase3.add(new Chunk("CRM ID: ",fsize1));
+            phrase3.add(new Chunk("CRM ID: ",bookingformfsize));
             phrase3.add(new Chunk(proposalHeader.getCrmId(),fsize));
 
             String strqnum= quoteData.fromVersion;
@@ -562,11 +606,11 @@ public class QuotationPDFCreator
             }
 
             Phrase phrase4 = new Phrase();
-            phrase4.add(new Chunk("Quotation #: ",fsize1));
+            phrase4.add(new Chunk("Quotation #: ",bookingformfsize));
             phrase4.add(new Chunk(qnum,fsize));
 
             Phrase phrase5 = new Phrase();
-            phrase5.add(new Chunk("Project Address: ",fsize1));
+            phrase5.add(new Chunk("Project Address: ",bookingformfsize));
             phrase5.add(new Chunk(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.PROJECT_NAME, ProposalHeader.PROJECT_ADDRESS1, ProposalHeader.PROJECT_ADDRESS2, ProposalHeader.PROJECT_CITY}, ","),fsize));
 
             table.addCell(phrase);
@@ -583,17 +627,17 @@ public class QuotationPDFCreator
 
             PdfPTable stable = new PdfPTable(3);
             stable.setWidthPercentage(100);
-            PdfPCell scell1 = new PdfPCell(new Paragraph("Sales/Design",fsize1));
-            scell1.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell scell2 = new PdfPCell(new Paragraph("Sales Person Number",fsize1));
-            scell2.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell scell3 = new PdfPCell(new Paragraph("Email Id",fsize1));
-            scell3.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell scell1 = new PdfPCell(new Paragraph("Sales/Design",tableheadingWhite));
+            scell1.setBackgroundColor(baseColor);
+            PdfPCell scell2 = new PdfPCell(new Paragraph("Sales Person Number",tableheadingWhite));
+            scell2.setBackgroundColor(baseColor);
+            PdfPCell scell3 = new PdfPCell(new Paragraph("Email Id",tableheadingWhite));
+            scell3.setBackgroundColor(baseColor);
             stable.addCell(scell1);
             stable.addCell(scell2);
             stable.addCell(scell3);
 
-            Font ffsize=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.NORMAL);
+            Font ffsize=new Font(basefontforMontserrat,7,Font.NORMAL);
             PdfPCell scell4 = new PdfPCell(new Paragraph(quoteData.concatValuesFromKeys(new String[]{ProposalHeader.SALESPERSON_NAME, ProposalHeader.DESIGNER_NAME}, "/"),ffsize));
             ffsize.setColor(BaseColor.BLUE);
             PdfPCell scell5 = new PdfPCell(new Paragraph(proposalHeader.getSalesPhone(),ffsize));
@@ -609,11 +653,6 @@ public class QuotationPDFCreator
             itemsTable = new PdfPTable(columnWidths1);
             itemsTable.setWidthPercentage(100);
 
-            if(Objects.equals(proposalHeader.getPackageFlag(), "Yes"))
-            {
-                return;
-            }
-
             PdfPCell cel=new PdfPCell();
             p=new Paragraph("KITCHEN & OTHER BASE UNITS",fsize1);
             p.setAlignment(Element.ALIGN_LEFT);
@@ -623,16 +662,16 @@ public class QuotationPDFCreator
             cel.setBorder(Rectangle.NO_BORDER);
             itemsTable.addCell(cel);
 
-            PdfPCell itemsCell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-            itemsCell1.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-            itemsCell2.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell3 = new PdfPCell(new Paragraph("QTY",fsize1));
-            itemsCell3.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell4 = new PdfPCell(new Paragraph("PRICE",fsize1));
-            itemsCell4.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell itemsCell5 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-            itemsCell5.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell itemsCell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+            itemsCell1.setBackgroundColor(baseColor);
+            PdfPCell itemsCell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+            itemsCell2.setBackgroundColor(baseColor);
+            PdfPCell itemsCell3 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+            itemsCell3.setBackgroundColor(baseColor);
+            PdfPCell itemsCell4 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+            itemsCell4.setBackgroundColor(baseColor);
+            PdfPCell itemsCell5 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+            itemsCell5.setBackgroundColor(baseColor);
 
             itemsTable.addCell(itemsCell1);
             itemsTable.addCell(itemsCell2);
@@ -664,18 +703,18 @@ public class QuotationPDFCreator
             cel1.setBorder(Rectangle.NO_BORDER);
             B1Table.addCell(cel1);
 
-            PdfPCell B1Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-            B1Cell1.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell B1Cell2 = new PdfPCell(new Paragraph("Description",fsize1));
-                    B1Cell2.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell B1Cell6 = new PdfPCell(new Paragraph("UOM",fsize1));
-                    B1Cell6.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell B1Cell3 = new PdfPCell(new Paragraph("QTY",fsize1));
-                    B1Cell3.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell B1Cell4 = new PdfPCell(new Paragraph("PRICE",fsize1));
-                    B1Cell4.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell B1Cell5 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-                    B1Cell5.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B1Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+            B1Cell1.setBackgroundColor(baseColor);
+            PdfPCell B1Cell2 = new PdfPCell(new Paragraph("Description",tableheadingWhite));
+            B1Cell2.setBackgroundColor(baseColor);
+            PdfPCell B1Cell6 = new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+            B1Cell6.setBackgroundColor(baseColor);
+            PdfPCell B1Cell3 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+            B1Cell3.setBackgroundColor(baseColor);
+            PdfPCell B1Cell4 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+            B1Cell4.setBackgroundColor(baseColor);
+            PdfPCell B1Cell5 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+            B1Cell5.setBackgroundColor(baseColor);
             B1Table.addCell(B1Cell1);
             B1Table.addCell(B1Cell2);
             B1Table.addCell(B1Cell6);
@@ -697,18 +736,18 @@ public class QuotationPDFCreator
             cel2.setBorder(Rectangle.NO_BORDER);
             B2Table.addCell(cel2);
 
-            PdfPCell B2Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-                    B2Cell1.setBackgroundColor(BaseColor.ORANGE);
-            PdfPCell B2Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-            PdfPCell B2Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
-            PdfPCell B2Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
-            PdfPCell B2Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
-            PdfPCell B2Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-                    B2Cell2.setBackgroundColor(BaseColor.ORANGE);
-                    B2Cell3.setBackgroundColor(BaseColor.ORANGE);
-                    B2Cell4.setBackgroundColor(BaseColor.ORANGE);
-                    B2Cell5.setBackgroundColor(BaseColor.ORANGE);
-                    B2Cell6.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B2Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+            B2Cell1.setBackgroundColor(baseColor);
+            PdfPCell B2Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+            PdfPCell B2Cell3 = new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+            PdfPCell B2Cell4 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+            PdfPCell B2Cell5 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+            PdfPCell B2Cell6 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+            B2Cell2.setBackgroundColor(baseColor);
+            B2Cell3.setBackgroundColor(baseColor);
+            B2Cell4.setBackgroundColor(baseColor);
+            B2Cell5.setBackgroundColor(baseColor);
+            B2Cell6.setBackgroundColor(baseColor);
             B2Table.addCell(B2Cell1);
             B2Table.addCell(B2Cell2);
             B2Table.addCell(B2Cell3);
@@ -730,30 +769,30 @@ public class QuotationPDFCreator
             cel3.setBorder(Rectangle.NO_BORDER);
             B3Table.addCell(cel3);
 
-            PdfPCell B3Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-            PdfPCell B3Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-            PdfPCell B3Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
-            PdfPCell B3Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
-            PdfPCell B3Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
-            PdfPCell B3Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-                    B3Cell1.setBackgroundColor(BaseColor.ORANGE);
-                    B3Cell2.setBackgroundColor(BaseColor.ORANGE);
-                    B3Cell3.setBackgroundColor(BaseColor.ORANGE);
-                    B3Cell4.setBackgroundColor(BaseColor.ORANGE);
-                    B3Cell5.setBackgroundColor(BaseColor.ORANGE);
-                    B3Cell6.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B3Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+            PdfPCell B3Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+            PdfPCell B3Cell3 = new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+            PdfPCell B3Cell4 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+            PdfPCell B3Cell5 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+            PdfPCell B3Cell6 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+            B3Cell1.setBackgroundColor(baseColor);
+            B3Cell2.setBackgroundColor(baseColor);
+            B3Cell3.setBackgroundColor(baseColor);
+            B3Cell4.setBackgroundColor(baseColor);
+            B3Cell5.setBackgroundColor(baseColor);
+            B3Cell6.setBackgroundColor(baseColor);
             B3Table.addCell(B3Cell1);
-        B3Table.addCell(B3Cell2);
-        B3Table.addCell(B3Cell3);
-        B3Table.addCell(B3Cell4);
-        B3Table.addCell(B3Cell5);
-        B3Table.addCell(B3Cell6);
+            B3Table.addCell(B3Cell2);
+            B3Table.addCell(B3Cell3);
+            B3Table.addCell(B3Cell4);
+            B3Table.addCell(B3Cell5);
+            B3Table.addCell(B3Cell6);
 
-        this.fillAddons(B3Table, this.quoteData.getCounterTops(), "No countertops.");
-        document.add(B3Table);
+            this.fillAddons(B3Table, this.quoteData.getCounterTops(), "No countertops.");
+            document.add(B3Table);
 
             PdfPTable B4Table = new PdfPTable(addonsWidths1);
-        B4Table.setWidthPercentage(100);
+            B4Table.setWidthPercentage(100);
 
             PdfPCell cel4=new PdfPCell();
             p = new Paragraph("SERVICES",fsize1);
@@ -763,27 +802,27 @@ public class QuotationPDFCreator
             cel4.setBorder(Rectangle.NO_BORDER);
             B4Table.addCell(cel4);
 
-            PdfPCell B4Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-            PdfPCell B4Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-            PdfPCell B4Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
-            PdfPCell B4Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
-            PdfPCell B4Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
-            PdfPCell B4Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-                    B4Cell1.setBackgroundColor(BaseColor.ORANGE);
-                    B4Cell2.setBackgroundColor(BaseColor.ORANGE);
-                    B4Cell3.setBackgroundColor(BaseColor.ORANGE);
-                    B4Cell4.setBackgroundColor(BaseColor.ORANGE);
-                    B4Cell5.setBackgroundColor(BaseColor.ORANGE);
-                    B4Cell6.setBackgroundColor(BaseColor.ORANGE);
-        B4Table.addCell(B4Cell1);
-        B4Table.addCell(B4Cell2);
-        B4Table.addCell(B4Cell3);
-        B4Table.addCell(B4Cell4);
-        B4Table.addCell(B4Cell5);
-        B4Table.addCell(B4Cell6);
+            PdfPCell B4Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+            PdfPCell B4Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+            PdfPCell B4Cell3 = new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+            PdfPCell B4Cell4 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+            PdfPCell B4Cell5 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+            PdfPCell B4Cell6 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+            B4Cell1.setBackgroundColor(baseColor);
+            B4Cell2.setBackgroundColor(baseColor);
+            B4Cell3.setBackgroundColor(baseColor);
+            B4Cell4.setBackgroundColor(baseColor);
+            B4Cell5.setBackgroundColor(baseColor);
+            B4Cell6.setBackgroundColor(baseColor);
+            B4Table.addCell(B4Cell1);
+            B4Table.addCell(B4Cell2);
+            B4Table.addCell(B4Cell3);
+            B4Table.addCell(B4Cell4);
+            B4Table.addCell(B4Cell5);
+            B4Table.addCell(B4Cell6);
 
-        this.fillAddons(B4Table, this.quoteData.getServices(), "No additional services.");
-        document.add(B4Table);
+            this.fillAddons(B4Table, this.quoteData.getServices(), "No additional services.");
+            document.add(B4Table);
 
             PdfPTable B5Table = new PdfPTable(addonsWidths1);
             B5Table.setWidthPercentage(100);
@@ -796,18 +835,18 @@ public class QuotationPDFCreator
             cel5.setBorder(Rectangle.NO_BORDER);
             B5Table.addCell(cel5);
 
-            PdfPCell B5Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-            PdfPCell B5Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-            PdfPCell B5Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
-            PdfPCell B5Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
-            PdfPCell B5Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
-            PdfPCell B5Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-                    B5Cell1.setBackgroundColor(BaseColor.ORANGE);
-                    B5Cell2.setBackgroundColor(BaseColor.ORANGE);
-                    B5Cell3.setBackgroundColor(BaseColor.ORANGE);
-                    B5Cell4.setBackgroundColor(BaseColor.ORANGE);
-                    B5Cell5.setBackgroundColor(BaseColor.ORANGE);
-                    B5Cell6.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B5Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+            PdfPCell B5Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+            PdfPCell B5Cell3 = new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+            PdfPCell B5Cell4 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+            PdfPCell B5Cell5 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+            PdfPCell B5Cell6 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+            B5Cell1.setBackgroundColor(baseColor);
+            B5Cell2.setBackgroundColor(baseColor);
+            B5Cell3.setBackgroundColor(baseColor);
+            B5Cell4.setBackgroundColor(baseColor);
+            B5Cell5.setBackgroundColor(baseColor);
+            B5Cell6.setBackgroundColor(baseColor);
             B5Table.addCell(B5Cell1);
             B5Table.addCell(B5Cell2);
             B5Table.addCell(B5Cell3);
@@ -823,7 +862,7 @@ public class QuotationPDFCreator
 
             PdfPCell cell6=new PdfPCell();
             p = new Paragraph("CUSTOM ADDON ACCESSORIES",fsize1);
-                    p.setAlignment(Element.ALIGN_LEFT);
+            p.setAlignment(Element.ALIGN_LEFT);
             p.setAlignment(Element.ALIGN_LEFT);
             cell6.addElement(p);
             cell6.setColspan(6);
@@ -831,18 +870,18 @@ public class QuotationPDFCreator
             cell6.setBorder(Rectangle.NO_BORDER);
             B6Table.addCell(cell6);
 
-            PdfPCell B6Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-            PdfPCell B6Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-            PdfPCell B6Cell3 = new PdfPCell(new Paragraph("UOM",fsize1));
-            PdfPCell B6Cell4 = new PdfPCell(new Paragraph("QTY",fsize1));
-            PdfPCell B6Cell5 = new PdfPCell(new Paragraph("PRICE",fsize1));
-            PdfPCell B6Cell6 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-                    B6Cell1.setBackgroundColor(BaseColor.ORANGE);
-                    B6Cell2.setBackgroundColor(BaseColor.ORANGE);
-                    B6Cell3.setBackgroundColor(BaseColor.ORANGE);
-                    B6Cell4.setBackgroundColor(BaseColor.ORANGE);
-                    B6Cell5.setBackgroundColor(BaseColor.ORANGE);
-                    B6Cell6.setBackgroundColor(BaseColor.ORANGE);
+            PdfPCell B6Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+            PdfPCell B6Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+            PdfPCell B6Cell3 = new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+            PdfPCell B6Cell4 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+            PdfPCell B6Cell5 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+            PdfPCell B6Cell6 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+            B6Cell1.setBackgroundColor(baseColor);
+            B6Cell2.setBackgroundColor(baseColor);
+            B6Cell3.setBackgroundColor(baseColor);
+            B6Cell4.setBackgroundColor(baseColor);
+            B6Cell5.setBackgroundColor(baseColor);
+            B6Cell6.setBackgroundColor(baseColor);
             B6Table.addCell(B6Cell1);
             B6Table.addCell(B6Cell2);
             B6Table.addCell(B6Cell3);
@@ -855,24 +894,24 @@ public class QuotationPDFCreator
 
             p = new Paragraph("Estimated Cost(B):" +this.getRoundOffValue(String.valueOf((int)quoteData.addonsCost)),fsize1);
             p.setAlignment(Element.ALIGN_RIGHT);
-        document.add(p);
+            document.add(p);
 
 
                     PdfPTable miscellaneousTable = new PdfPTable(addonsWidths1);
                     miscellaneousTable.setWidthPercentage(100);
 
-                    PdfPCell Cell1 = new PdfPCell(new Paragraph("SL.NO",fsize1));
-                    Cell1.setBackgroundColor(BaseColor.ORANGE);
-                    PdfPCell Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",fsize1));
-                    Cell2.setBackgroundColor(BaseColor.ORANGE);
-                    PdfPCell Cell6=new PdfPCell(new Paragraph("UOM",fsize1));
-                    Cell6.setBackgroundColor(BaseColor.ORANGE);
-                    PdfPCell Cell3 = new PdfPCell(new Paragraph("QTY",fsize1));
-                    Cell3.setBackgroundColor(BaseColor.ORANGE);
-                    PdfPCell Cell4 = new PdfPCell(new Paragraph("PRICE",fsize1));
-                    Cell4.setBackgroundColor(BaseColor.ORANGE);
-                    PdfPCell Cell5 = new PdfPCell(new Paragraph("AMOUNT",fsize1));
-                    Cell5.setBackgroundColor(BaseColor.ORANGE);
+                    PdfPCell Cell1 = new PdfPCell(new Paragraph("SL.NO",tableheadingWhite));
+                    Cell1.setBackgroundColor(baseColor);
+                    PdfPCell Cell2 = new PdfPCell(new Paragraph("DESCRIPTION",tableheadingWhite));
+                    Cell2.setBackgroundColor(baseColor);
+                    PdfPCell Cell6=new PdfPCell(new Paragraph("UOM",tableheadingWhite));
+                    Cell6.setBackgroundColor(baseColor);
+                    PdfPCell Cell3 = new PdfPCell(new Paragraph("QTY",tableheadingWhite));
+                    Cell3.setBackgroundColor(baseColor);
+                    PdfPCell Cell4 = new PdfPCell(new Paragraph("PRICE",tableheadingWhite));
+                    Cell4.setBackgroundColor(baseColor);
+                    PdfPCell Cell5 = new PdfPCell(new Paragraph("AMOUNT",tableheadingWhite));
+                    Cell5.setBackgroundColor(baseColor);
 
                     miscellaneousTable.addCell(Cell1);
                     miscellaneousTable.addCell(Cell2);
@@ -974,10 +1013,6 @@ public class QuotationPDFCreator
                         document.add(p);
 
                     }
-
-
-
-
         p=new Paragraph("* The quoted price is an all inclusive price including design, consultancy and GST charges.",fsize);
         p.setAlignment(Element.ALIGN_LEFT);
         document.add(p);
@@ -985,12 +1020,9 @@ public class QuotationPDFCreator
         p=new Paragraph(" ");
         document.add(p);
 
-       /* if(isValid_Sow) {*/
-            p = new Paragraph("* The interiors and services will be delivered within " +noOfDaysWorkCompletion +" days of the design sign off, 50% payment or site readiness whichever is later. ", fsize);
-            p.setAlignment(Element.ALIGN_LEFT);
-            document.add(p);
-
-        //}
+        p = new Paragraph("* The interiors and services will be delivered within " +noOfDaysWorkCompletion +" days of the design sign off, 50% payment or site readiness whichever is later. ", fsize);
+        p.setAlignment(Element.ALIGN_LEFT);
+        document.add(p);
 
             p = new Paragraph("      ");
             p.setAlignment(Element.ALIGN_LEFT);
@@ -1070,7 +1102,7 @@ public class QuotationPDFCreator
             PdfPTable tab=new PdfPTable(1);
             tab.setWidthPercentage(100);
 
-            Font size2=new Font(Font.FontFamily.TIMES_ROMAN,7,Font.NORMAL);
+            Font size2=new Font(basefontforMontserrat,7,Font.NORMAL);
             p = new Paragraph("Terms and Conditions:\n",size2);
             p.setAlignment(Element.ALIGN_MIDDLE);
             PdfPCell cel9=new PdfPCell();
@@ -1240,16 +1272,12 @@ public class QuotationPDFCreator
             mscTable.setWidthPercentage(100);
             PdfPCell mscCell1 = new PdfPCell(new Paragraph("SL.NO", fsize1));
             PdfPCell mscCell2 = new PdfPCell(new Paragraph("ITEM", fsize1));
-            //PdfPCell scwCell3 = new PdfPCell(new Paragraph("Annexure", fsize1));
             PdfPCell mscCell5 = new PdfPCell(new Paragraph("GST RATE", fsize1));
             PdfPCell mscCell6 = new PdfPCell(new Paragraph("GST", fsize1));
             PdfPCell mscCell7 = new PdfPCell(new Paragraph("ITEM PRICE", fsize1));
             PdfPCell mscCell4 = new PdfPCell(new Paragraph("TOTAL PRICE", fsize1));
-            //PdfPCell gstCell7 = new PdfPCell(new Paragraph("CURRENT PRICE AFTER TAX",fsize1));
             mscTable.addCell(mscCell1);
             mscTable.addCell(mscCell2);
-            //scwTable.addCell(scwCell3);
-            //gstTable.addCell(gstCell3)
             mscTable.addCell(mscCell5);
             mscTable.addCell(mscCell6);
             mscTable.addCell(mscCell7);
@@ -1259,13 +1287,7 @@ public class QuotationPDFCreator
             for(GSTForProducts proposalServiceList:proposalservicesList)
             {
                 this.createRowForDataForProposalServices(mscTable,count, proposalServiceList.getProducttitle(),proposalServiceList.getCategoryType(),this.round(proposalServiceList.getPriceAfterDiscount(),2), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax(), proposalServiceList.getTax());
-                //this.createRowAndFillDataTemp(mscTable,count,proposalServiceList.getProducttitle(),proposalServiceList.getTax(),proposalServiceList.getPriceAfterDiscount(), proposalServiceList.getPrice(), proposalServiceList.getPriceAfterTax());
             }
-            /*this.createRowAndFillDataTemp(mscTable,"1"," Project Handling Charges","18%","15.25","84.75","100");
-            this.createRowAndFillDataTemp(mscTable,"2"," Transportation Charges","18%","15.25","84.75","100");
-            this.createRowAndFillDataTemp(mscTable,"3"," Deep Clearing Charges","18%","15.25","84.75","100");
-            this.createRowAndFillDataTemp(mscTable,"4"," Floor Protection Charges","18%","15.25","84.75","100");
-*/
             PdfPTable gsttotalTableFormsc = new PdfPTable(gstcolumnWidths1);
             gsttotalTableFormsc.setWidthPercentage(100);
             this.createRowAndFillDataForGSTtotalProductAndAddon(gsttotalTableFormsc, "TOTAL"," ", misctotalPrice,misctotalDAP,misctotalTaxAmt, String.valueOf(round(misctotalPriceAfterTax, 2)));
@@ -1322,14 +1344,12 @@ public class QuotationPDFCreator
             PdfPTable gstTable1 = new PdfPTable(gtcolumnWidths1);
             gstTable1.setWidthPercentage(100);
             this.createRowAndFillDataForGSTtotal(gstTable1, "TOTAL", totalproductPrice, totalDAP, totalTaxAmt, String.valueOf(round(totalPriceAfterTax, 2)));
-            //document.add(gstTable1);
 
             if(quoteData.fromVersion.equals("1.0") || quoteData.fromVersion.startsWith("0."))
             {
 
             }
             else {
-                //LOG.info("gstTextChangeDateValue" +gstTextChangeDateValue);
                 if(!gstTextChangeDateValue)
                 {
                     p = new Paragraph("\n");
@@ -1535,8 +1555,7 @@ public class QuotationPDFCreator
 
     private void createProductTitleRow(PdfPTable tabname,String index, String title)
     {
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
-        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Paragraph Pindex=new Paragraph(index,size1);
@@ -1560,8 +1579,7 @@ public class QuotationPDFCreator
 
     private void createProductTitleRowForAddon(PdfPTable tabname,String index, String title)
     {
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
-        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Paragraph Pindex=new Paragraph(index,size1);
@@ -1583,31 +1601,6 @@ public class QuotationPDFCreator
         tabname.addCell(cell);
     }
 
-    private void specificationRow(PdfPTable tabname,String index,String title)
-    {
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.NORMAL);
-        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
-
-        PdfPCell cell1=new PdfPCell();
-        Paragraph Pindex=new Paragraph(index,size1);
-        Pindex.setAlignment(Element.ALIGN_CENTER);
-        cell1.addElement(Pindex);
-        tabname.addCell(cell1);
-
-        PdfPCell cell2=new PdfPCell();
-        Paragraph paragraph=new Paragraph(title,size1);
-        cell2.addElement(paragraph);
-        tabname.addCell(cell2);
-
-
-        PdfPCell cell = new PdfPCell();
-        Paragraph p=new Paragraph("");
-        p.setAlignment(Element.ALIGN_RIGHT);
-        cell.addElement(p);
-        cell.setColspan(3);
-        tabname.addCell(cell);
-
-    }
     private boolean isNotNullorEmpty(String s){
         if ((s == null )||( s.length() == 0)){
             return false;
@@ -2350,7 +2343,7 @@ public class QuotationPDFCreator
 
     private void createSubHeadingRow(PdfPTable tabname,String index, String title)
     {
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Paragraph Pindex=new Paragraph(index,size1);
@@ -2369,7 +2362,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2384,7 +2377,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2425,7 +2418,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2461,7 +2454,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2503,7 +2496,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2546,7 +2539,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(index,size1);
@@ -2580,7 +2573,7 @@ public class QuotationPDFCreator
     private void createRowAndFillData(PdfPTable tabname,String index, String title)
     {
         PdfPCell cell;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Paragraph Pindex=new Paragraph(index,size1);
@@ -2658,8 +2651,7 @@ public class QuotationPDFCreator
 
     private void createSubHeadingRowForCatalog(PdfPTable tabname, String index, String title,Double quantity, Double amount, Double total)
     {
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
-        Font size2=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD|Font.UNDERLINE);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell;
         Paragraph p;
@@ -2669,7 +2661,6 @@ public class QuotationPDFCreator
         Pindex.setAlignment(Element.ALIGN_CENTER);
         cell1.addElement(Pindex);
         tabname.addCell(cell1);
-
 
         cell=new PdfPCell();
         p=new Paragraph(title,size1);
@@ -3138,7 +3129,7 @@ public class QuotationPDFCreator
 
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(sequence,size1);
@@ -3184,7 +3175,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph("1",fsize);
@@ -3249,7 +3240,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(Integer.toString(finalcount),size1);
@@ -3300,7 +3291,7 @@ public class QuotationPDFCreator
 
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+        Font size1 = new Font(basefontforMontserrat, 8, Font.BOLD);
 
         PdfPCell cell1 = new PdfPCell();
         Pindex = new Paragraph(Integer.valueOf(count).toString(), size1);
@@ -3366,7 +3357,7 @@ public class QuotationPDFCreator
 
             PdfPCell cell;
             Paragraph Pindex;
-            Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+            Font size1 = new Font(basefontforMontserrat, 8, Font.BOLD);
 
             PdfPCell cell1 = new PdfPCell();
             Pindex = new Paragraph(Integer.valueOf(count).toString(), size1);
@@ -3451,7 +3442,7 @@ public class QuotationPDFCreator
             }
             PdfPCell cell;
             Paragraph Pindex;
-            Font size1 = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+            Font size1 = new Font(basefontforMontserrat, 8, Font.BOLD);
 
             PdfPCell cell1 = new PdfPCell();
             Pindex = new Paragraph(Integer.valueOf(individualcountforAddon).toString(), size1);
@@ -3504,11 +3495,10 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph();
-        cell1.setBackgroundColor(BaseColor.ORANGE);
+        cell1.setBackgroundColor(baseColor);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell1.addElement(Pindex);
         tabname.addCell(cell1);
@@ -3517,27 +3507,27 @@ public class QuotationPDFCreator
 
         cell=new PdfPCell();
         Pindex=new Paragraph(GSTCategory,fsize);
-        cell.setBackgroundColor(BaseColor.ORANGE);
+        cell.setBackgroundColor(baseColor);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell.addElement(Pindex);
         tabname.addCell(cell);
 
         PdfPCell cell2=new PdfPCell();
         Pindex=new Paragraph();
-        cell2.setBackgroundColor(BaseColor.ORANGE);
+        cell2.setBackgroundColor(baseColor);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell2.addElement(Pindex);
         tabname.addCell(cell2);
 
         PdfPCell cell5=new PdfPCell();
         Pindex=new Paragraph(tax,fsize);
-        cell5.setBackgroundColor(BaseColor.ORANGE);
+        cell5.setBackgroundColor(baseColor);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell5.addElement(Pindex);
         tabname.addCell(cell5);
 
         PdfPCell cell7=new PdfPCell();
-        cell7.setBackgroundColor(BaseColor.ORANGE);
+        cell7.setBackgroundColor(baseColor);
         Pindex=new Paragraph(Double.toString(round(currentpriceAfterTax,2)),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell7.addElement(Pindex);
@@ -3545,7 +3535,7 @@ public class QuotationPDFCreator
         //count++;
 
         PdfPCell cell4=new PdfPCell();
-        cell4.setBackgroundColor(BaseColor.ORANGE);
+        cell4.setBackgroundColor(baseColor);
         Pindex=new Paragraph(Double.toString(DesignpriceAfterDsicount),fsize);
         Pindex.setAlignment(Element.ALIGN_LEFT);
         cell4.addElement(Pindex);
@@ -3557,7 +3547,6 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph("2",fsize);
@@ -3605,7 +3594,7 @@ public class QuotationPDFCreator
     {
         PdfPCell cell;
         Paragraph Pindex;
-        Font size1=new Font(Font.FontFamily.TIMES_ROMAN,8,Font.BOLD);
+        Font size1=new Font(basefontforMontserrat,8,Font.BOLD);
 
         PdfPCell cell1=new PdfPCell();
         Pindex=new Paragraph(String.valueOf(index),size1);
