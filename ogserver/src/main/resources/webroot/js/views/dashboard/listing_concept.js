@@ -10,6 +10,7 @@ define([
   'text!templates/dashboard/similarconcepts.html',
   'text!templates/dashboard/relatedconcepts.html',
   'text!templates/dashboard/spaceelements.html',
+  'text!templates/dashboard/spaceTempUploadImagePageTemplate.html',
   'text!templates/dashboard/view_conceptDesc.html',
   'collections/conceptlists',
   'collections/needconceptlists',
@@ -27,7 +28,7 @@ define([
   'collections/spaceelements',
   'collections/spacetemplates',
   'collections/uploaduserconcepts'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,spaceTempPageTemplate, view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements, SpaceTemplates, UploadUserConcepts){
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,spaceTempPageTemplate, spaceTempUploadImagePageTemplate, view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements, SpaceTemplates, UploadUserConcepts){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
@@ -149,6 +150,10 @@ define([
           "spacetemplates": spaceelements.toJSON(),
           "selectedconceptboardId": conceptboardId
       }));
+       $("#spaceTempUpload").html(_.template(spaceTempPageTemplate)({
+              "spacetemplates": spaceelements.toJSON(),
+              "selectedconceptboardId": conceptboardId
+             }));
     },
     getConcepts: function(conceptboardId){
         var that = this;
@@ -537,6 +542,16 @@ define([
     },
     viewAddCboard: function(event){
         $('#addcboard-modalForImage').modal('show');
+        var that = this;
+        var conceptboardId = that.filter.get("selectedconceptboardId");
+        //that.fetchSpacetypesAndRender(conceptboardId);
+         //var that = this;
+                var spaceelements = that.spaceelements;
+
+                $("#spaceTempUpload").html(_.template(spaceTempUploadImagePageTemplate)({
+                   "spacetemplates": spaceelements.toJSON(),
+                   "selectedconceptboardId": conceptboardId
+               }));
         return;
     },
     getuploadedFileDtls: function (evt) {
@@ -586,7 +601,6 @@ define([
                 e.preventDefault();
 
       var that = this;
-
       var userId = sessionStorage.userId;
       var conceptboardIdtxt = that.filter.get("selectedconceptboardId");
       var cboardnameTxt = $('#cboardcnameTxt').val();
@@ -594,7 +608,7 @@ define([
       //var conceptfileupload= $( '#conceptfileupload' ).get(0).files[0];
       var conceptfileupload= that.filter.get('imgData');
       //var conceptfileupload= $( '#conceptfileupload' ).val();
-
+      var spaceElementCode = $('#spltemstCode').val();
       console.log("@@@@@@@ conceptfileupload @@@@@@");
       console.log(conceptfileupload);
 
@@ -605,6 +619,7 @@ define([
       formData.append("description",cboarddescTxt);
       formData.append("userId",userId);
       formData.append("conceptboardId",conceptboardIdtxt);
+      formData.append("spaceElementCode",spaceElementCode);
         console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
         console.log(formData);
 
@@ -623,6 +638,8 @@ define([
               console.log(JSON.stringify(response));
 
               $("#addcboard-modalForImage").modal('hide');
+
+
 
                $('body').removeClass('modal-open');
                $('.modal-backdrop').remove();
