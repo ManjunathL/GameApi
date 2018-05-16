@@ -501,7 +501,7 @@ define([
         console.log(that.filter_preference.get("selectedUsage"));
 
 
-        var  user_home_preferences = that.user_family_preferences;
+        var  user_home_preferences = that.user_home_preferences;
         user_home_preferences = user_home_preferences.toJSON();
 
          console.log("@@@@@@@@@@@@@@ user_home_preferences @@@@@@@@@@@@@@@@@@@");
@@ -535,14 +535,14 @@ define([
                 }
          });
 
-         var user_pref_for_saving = {};
-         user_pref_for_saving = user_home_preferences[0].userQues;
+         var user_homepref_for_saving = {};
+         user_homepref_for_saving = user_home_preferences[0].userQues;
 
          console.log("@@@@@@@@@@@@@@ Final user_home_preferences object to save @@@@@@@@@@@@@@@@@@@");
          console.log(user_home_preferences);
 
           that.filter_preference.set({
-                         'selectedHomePreference':user_pref_for_saving
+                         'selectedHomePreference':user_homepref_for_saving
                      }, {
                          silent: true
                      });
@@ -663,12 +663,17 @@ define([
 
             if(typeof(quesName) !== 'undefined' && quesName == "Adults"){
 
+                $(".Adults").css('background-color','');
+                $(".Adults").css('color','#000');
+                $("#butt"+quesOptionid).css('background-color','#634e42');
+                $("#butt"+quesOptionid).css('color','#fff');
+
                 adults['optionId'] = quesOptionid;
                 adults['optionType'] = 2;
                 adults['quesAnsId'] = quesOptionid;
                 adults['quesId'] = quesId;
                 adults['selectionStatus'] = 1;
-                adults['userOptionDesc'] = "Added by tushar";
+                adults['userOptionDesc'] = "";
 
 
                 that.filter_preference.set({
@@ -680,6 +685,11 @@ define([
             }
 
              if(typeof(quesName) !== 'undefined' && quesName == "Teenagers / Young Adults"){
+
+                $(".Teenagers").css('background-color','');
+                $(".Teenagers").css('color','#000');
+                $("#butt"+quesOptionid).css('background-color','#634e42');
+                $("#butt"+quesOptionid).css('color','#fff');
 
                 teenagers['optionId'] = quesOptionid;
                 teenagers['optionType'] = 2;
@@ -697,6 +707,10 @@ define([
             }
 
             if(typeof(quesName) !== 'undefined' && quesName == "Kids"){
+                $(".Kids").css('background-color','');
+                $(".Kids").css('color','#000');
+                $("#butt"+quesOptionid).css('background-color','#634e42');
+                $("#butt"+quesOptionid).css('color','#fff');
                 kids['optionId'] = quesOptionid;
                 kids['optionType'] = 2;
                 kids['quesAnsId'] = quesOptionid;
@@ -713,6 +727,10 @@ define([
             }
 
             if(typeof(quesName) !== 'undefined' && quesName == "Senior Citizens"){
+                $(".Senior").css('background-color','');
+                $(".Senior").css('color','#000');
+                $("#butt"+quesOptionid).css('background-color','#634e42');
+                $("#butt"+quesOptionid).css('color','#fff');
                 seniorCitizens['optionId'] = quesOptionid;
                 seniorCitizens['optionType'] = 2;
                 seniorCitizens['quesAnsId'] = quesOptionid;
@@ -832,17 +850,17 @@ define([
 
              });
 
-             var user_pref_for_saving = {};
-             user_pref_for_saving = user_family_preferences[0].userQues;
+             var user_familypref_for_saving = {};
+             user_familypref_for_saving = user_family_preferences[0].userQues;
 
              console.log("_____________Tushar LINE______________");
-             console.log(user_pref_for_saving);
+             console.log(user_familypref_for_saving);
 
              console.log("@@@@@@@@@@@@@@ Final user_family_preferences object to save @@@@@@@@@@@@@@@@@@@");
              console.log(user_family_preferences);
 
               that.filter_preference.set({
-                             'selectedFamilyPreference':user_pref_for_saving
+                             'selectedFamilyPreference':user_familypref_for_saving
                          }, {
                              silent: true
                          });
