@@ -66,13 +66,13 @@ define([
         var that = this;
 
         var createConceptBoardPromise = that.createConceptBoard();
-        var getConceptBoardsPromise = that.getConceptBoards();
+        //var getConceptBoardsPromise = that.getConceptBoards();
         //var getConceptsPromise = that.getConcepts();
         //var getDesignsPromise = that.getDesigns();
 
-        Promise.all([getConceptBoardsPromise]).then(function() {
+        Promise.all([createConceptBoardPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
-            that.fetchConceptsAndRender();
+
         });
     },
     createConceptBoard: function(){
@@ -101,6 +101,7 @@ define([
                     }else{
                         sessionStorage.defaultMindboardId = "";
                     }
+                    that.getConceptBoards();
                     resolve();
                 },
                 error:function(response) {
@@ -119,7 +120,7 @@ define([
       var pageno = 0;
       var itemPerPage = 20;
       var filterId = 1;
-      return new Promise(function(resolve, reject) {
+      //return new Promise(function(resolve, reject) {
            that.conceptboards.getConceptBoardList(userId, userMindboardId, pageno, itemPerPage,filterId, {
                async: true,
                crossDomain: true,
@@ -130,15 +131,15 @@ define([
                success:function(data) {
                    //console.log(" +++++++++++++++ Concept Boards ++++++++++++++++++ ");
                    //console.log(data);
-                   resolve();
+                    that.fetchConceptsAndRender();
                },
                error:function(response) {
                    //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
                    //console.log(response);
-                   reject();
+                   return false;
                }
            });
-      });
+      //});
     },
     getConcepts: function(){
         var that = this;
