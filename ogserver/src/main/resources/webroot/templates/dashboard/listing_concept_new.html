@@ -58,7 +58,29 @@
       right: 0;
       top: 0;
       }
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
 
+.btnImage {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
 </style>
 <link href="css/layout.css" rel="stylesheet">
 <button id="addCBoard" title="Add Concept Board"><i class="fa fa-cloud-upload"></i></button>
@@ -303,10 +325,20 @@
         <div class="modal fade" id="addcboard-modalForImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div id="addcboard-dtls" class="addcboard-container" style="width: 63%;min-height: 150px">
+                    <div class="col-sm-12 col-md-12">
+                        <h3 class="addcboard-heading" style="margin-left: -16px;">Add User Concept Image </h3>
+                    </div>
                     <form id="userconceptfrm" method="post" name="userconceptfrm" enctype="multipart/form-data">
                     <div class="form-group">
-                        Upload
+
+<!--
                         <input id="conceptfileupload" type="file" name="conceptfile"/>
+-->
+                        <div class="upload-btn-wrapper">
+                            <button class="btnImage">Upload a file</button>
+                            <input id="conceptfileupload" type="file" name="conceptfile"/>
+                            <label id="file-name"></label>
+                        </div>
                         <!--<input type="button" id="showImg" class="btn addcboard-btn" value="Show">-->
                         <div id="list1">
                         </div>
@@ -445,12 +477,15 @@
     });
 
    $(document).ready(function () {
+
          $('#sidebarCollapse').on('click', function () {
              $('#sidebar').toggleClass('active');
          });
      });
 
-
+$("#conceptfileupload").change(function(){
+  $("#file-name").text(this.files[0].name);
+});
     $(function() {
       $("#owl-sptype").owlCarousel({
         autoPlay: 3000,
