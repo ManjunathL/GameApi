@@ -82,7 +82,7 @@ public class OfficeUseOnlyPdf
             p = new Paragraph(" ");
             document.add(p);
 
-            p = new Paragraph("Advance Money Paid : Rs :  ___________________________________" +" /- " +"     "+ " VideCheque/DD/Pay Order Number :  ______________________", bookingformfsize);
+            p = new Paragraph("Advance Money Paid : Rs :  ___________________________________" +" /- " +"     "+ " Cheque/DD/Pay Order Number :  ______________________", bookingformfsize);
             document.add(p);
 
             p = new Paragraph(" ");
