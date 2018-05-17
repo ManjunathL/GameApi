@@ -98,7 +98,7 @@ public class SOWPdfOutputService extends AbstractVerticle {
             LOG.debug("Inside service: CREATE_MERGED_PDF_OUTPUT");
 
             MergePdfsRequest mergePdfReq = (MergePdfsRequest) LocalCache.getInstance().remove(message.body());
-            mergePdfReq.mergePdfFiles(FooterText);
+            mergePdfReq.mergePdfFiles();
             sendResponse(message, new JsonObject().put("quoteFile",mergePdfReq.getMergedAndPageNumberedFileName() ));
         }).completionHandler(res -> {
             LOG.info("setup PDf Merger Output started." + res.succeeded());

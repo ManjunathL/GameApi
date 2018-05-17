@@ -2,6 +2,7 @@ package com.mygubbi.game.proposal.quote;
 
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.io.font.FontProgramFactory;
+import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.font.*;
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.io.font.FontProgram;
@@ -37,15 +38,19 @@ public class MergePdfsRequest {
     private String mergedFileName;
     private String mergedAndPageNumberedFileName;
     private String VersionStatus;
+    private String crmId;
+    private String quoteNo;
+    private String versionNo;
     private final static Logger LOG = LogManager.getLogger(MergePdfsRequest.class);
-    public MergePdfsRequest(List<String> pdfs,String mergedFileName,String mergedAndPageNumberedFileName,String VersionStatus){
+    public MergePdfsRequest(List<String> pdfs,String mergedFileName,String mergedAndPageNumberedFileName,String VersionStatus,String crmId,String quoteNo,String versionNo){
         this.inputPdfs = pdfs;
         this.mergedFileName = mergedFileName;
         this.mergedAndPageNumberedFileName = mergedAndPageNumberedFileName;
         this.VersionStatus=VersionStatus;
+        this.crmId=crmId;
+        this.quoteNo=quoteNo;
+        this.versionNo=versionNo;
     }
-
-
     public String getMergedFileName() {
         return mergedFileName;
     }
@@ -61,9 +66,10 @@ public class MergePdfsRequest {
     public void setMergedAndPageNumberedFileName(String mergedAndPageNumberedFileName) {
         this.mergedAndPageNumberedFileName = mergedAndPageNumberedFileName;
     }
-    public void mergePdfFiles(String FooterText){
+    public void mergePdfFiles(){
         try {
             Document PDFCombineUsingJava = new Document();
+            String FooterText=crmId+ "/" +quoteNo+ "/" +versionNo;
             PdfCopy copy = new PdfCopy(PDFCombineUsingJava, new FileOutputStream(mergedFileName));
             PDFCombineUsingJava.open();
             PdfReader ReadInputPDF;
@@ -80,7 +86,7 @@ public class MergePdfsRequest {
             addPageNumberToPdf(FooterText);
             if(VersionStatus.equals("Draft"))
             {
-                addWaterMark();
+                addPageNumberwithwatermarkToPdf(FooterText);
             }
         }
 
@@ -92,6 +98,7 @@ public class MergePdfsRequest {
     }
 
     private void addPageNumberToPdf (String FooterText) {
+        LOG.info("Footer text inside add page numbers" +FooterText);
         String FONTS = "Montserrat-Regular.ttf";
         try {
             com.itextpdf.kernel.pdf.PdfDocument pdfDoc = new com.itextpdf.kernel.pdf.PdfDocument(new com.itextpdf.kernel.pdf.PdfReader(this.mergedFileName), new com.itextpdf.kernel.pdf.PdfWriter(mergedAndPageNumberedFileName));
@@ -99,7 +106,6 @@ public class MergePdfsRequest {
             FontProgram fontProgram = FontProgramFactory.createFont(FONTS);
             PdfFont font = PdfFontFactory.createFont(fontProgram, PdfEncodings.WINANSI, true);
 
-            //PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
             int n = pdfDoc.getNumberOfPages();
             com.itextpdf.kernel.pdf.PdfPage page;
             com.itextpdf.kernel.pdf.PdfNumber rotate;
@@ -116,11 +122,50 @@ public class MergePdfsRequest {
                     x1= 585;
                     y = 785;
                     y1= 180;
-                    //angle = PageSize.A4.rotate().getRotation()-13;
                     angle = (float) 76.97;
-                    LOG.info("angle " +angle);//77
-                    //angle = 0;
                 }
+                doc.showTextAligned(new Paragraph(String.format("Page %s of %s", i, n)).setFont(font), x, y, i, TextAlignment.CENTER, VerticalAlignment.BOTTOM, angle);
+                doc.showTextAligned(new Paragraph(String.format("Client ref : "+FooterText, i, n)).setFont(font), x1, y1, i, TextAlignment.CENTER, VerticalAlignment.BOTTOM, angle);
+            }
+            doc.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void addPageNumberwithwatermarkToPdf (String FooterText) {
+        String FONTS = "Montserrat-Regular.ttf";
+        try {
+            Rectangle pagesize;
+            com.itextpdf.kernel.pdf.PdfDocument pdfDoc = new com.itextpdf.kernel.pdf.PdfDocument(new com.itextpdf.kernel.pdf.PdfReader(this.mergedFileName), new com.itextpdf.kernel.pdf.PdfWriter(mergedAndPageNumberedFileName));
+            com.itextpdf.layout.Document doc = new com.itextpdf.layout.Document(pdfDoc);
+            FontProgram fontProgram = FontProgramFactory.createFont(FONTS);
+            PdfFont font = PdfFontFactory.createFont(fontProgram, PdfEncodings.WINANSI, true);
+            Font f2 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 12);
+
+            int n = pdfDoc.getNumberOfPages();
+            com.itextpdf.kernel.pdf.PdfPage page;
+            com.itextpdf.kernel.pdf.PdfNumber rotate;
+            Paragraph p=new Paragraph("Draft copy not for circulation");
+            p.setFont(font);
+            p.setFontSize(30);
+            p.setFontColor(Color.GRAY);
+            for (int i = 1; i <= n; i++) {
+                page = pdfDoc.getPage(i);
+                rotate = page.getPdfObject().getAsNumber(com.itextpdf.kernel.pdf.PdfName.Rotate);
+                int x = 536;
+                int x1=180;
+                int y = 10;
+                int y1=10;
+                float angle = 0;
+                if (rotate != null && rotate.toString().equalsIgnoreCase("90")) {
+                    x = 585;
+                    x1= 585;
+                    y = 785;
+                    y1= 180;
+                    angle = (float) 76.97;
+                }
+                doc.showTextAligned(p, 297, 420, i, TextAlignment.CENTER, VerticalAlignment.BOTTOM, 45);
                 doc.showTextAligned(new Paragraph(String.format("Page %s of %s", i, n)).setFont(font), x, y, i, TextAlignment.CENTER, VerticalAlignment.BOTTOM, angle);
                 doc.showTextAligned(new Paragraph(String.format("Client ref : "+FooterText, i, n)).setFont(font), x1, y1, i, TextAlignment.CENTER, VerticalAlignment.BOTTOM, angle);
             }
@@ -154,7 +199,9 @@ public class MergePdfsRequest {
                 Phrase pageNumber=new Phrase("Page " +i + " of " +n,f1);
                 pagesize = reader.getPageSizeWithRotation(i);
                 x = (pagesize.getLeft() + pagesize.getRight()) / 2;
+                LOG.info("X in draft " +x);
                 y = (pagesize.getTop() + pagesize.getBottom()) / 2;
+                LOG.info("Y in draft " +y);
                 over = stamper.getOverContent(i);
                 over.saveState();
                 over.setGState(gs1);

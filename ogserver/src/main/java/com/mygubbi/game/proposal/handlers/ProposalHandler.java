@@ -1164,6 +1164,9 @@ public class ProposalHandler extends AbstractRouteHandler
         {
             JsonObject jsonObj = routingContext.getBodyAsJson();
             String status=routingContext.getBodyAsJson().getString("status");
+            String quoteNumber=routingContext.getBodyAsJson().getString("quoteNumber");
+            String crmId=routingContext.getBodyAsJson().getString("crmId");
+            String version=routingContext.getBodyAsJson().getString("toVersion");
             LOG.info("jsonObj.containsKey(\"bookingFormFlag\") = "+jsonObj.containsKey("bookingFormFlag"));
             Boolean bookingFormFlag = false;
             if(jsonObj.containsKey("bookingFormFlag") && (jsonObj.getValue("bookingFormFlag") != null)){
@@ -1186,11 +1189,7 @@ public class ProposalHandler extends AbstractRouteHandler
                             createSowOutputInPdf(routingContext,response,IsBookingFormFlag,jsonObj);
                         }else if(IsBookingFormFlag){
                             createBookingFormInPdf(routingContext,response,new JsonObject(),jsonObject);
-//                        sendJsonResponse(routingContext, response.toString());
                         }else{
-                            /*//sendJsonResponse(routingContext, response.toString());
-                            if(Objects.equals("QUOTEPDF",ProposalOutputCreator.OutputType.QUOTEPDF.name()))
-                            {*/
                                 LOG.info("inside quote pdf");
                                 List<String> inputPdfs = new ArrayList<>();
                                 inputPdfs.add(response.getString("quoteFile"));
@@ -1198,7 +1197,7 @@ public class ProposalHandler extends AbstractRouteHandler
                                 String merged_pdf = ConfigHolder.getInstance().getStringValue("merged_pdf","merged.pdf" );
                                 String outputFileName = location_folder+"/"+"ver1_"+merged_pdf;
                                 String outputFileNameAfterPageNum = location_folder+"/"+merged_pdf;
-                                Integer id1 = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status));
+                                Integer id1 = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status,crmId,quoteNumber,version));
                                 VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id1,
                                         (AsyncResult<Message<Integer>> result1) -> {
                                             JsonObject response1 = (JsonObject) LocalCache.getInstance().remove(result1.result().body());
@@ -1319,6 +1318,8 @@ public class ProposalHandler extends AbstractRouteHandler
         String status=routingContext.getBodyAsJson().getString("status");
         String quoteNumber=routingContext.getBodyAsJson().getString("quoteNo") + version;
         String bookingFormFlag=routingContext.getBodyAsJson().getString("bookingFormFlag");
+        String quoteNo=routingContext.getBodyAsJson().getString("quoteNumber");
+        String crmId=routingContext.getBodyAsJson().getString("crmId");
         List<String> inputPdfs = new ArrayList<>();
 
         Boolean workContractFlag = false;
@@ -1380,7 +1381,7 @@ public class ProposalHandler extends AbstractRouteHandler
         if (uploadToS3)
         {
             uploadToS3=false;
-            Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status));
+            Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status,crmId,quoteNo,version));
             VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                     (AsyncResult<Message<Integer>> result) -> {
                         JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
@@ -1399,7 +1400,7 @@ public class ProposalHandler extends AbstractRouteHandler
         }
         else
         {
-            Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status));
+            Integer id = LocalCache.getInstance().store(new MergePdfsRequest(inputPdfs, outputFileName,outputFileNameAfterPageNum,status,crmId,quoteNo,version));
             VertxInstance.get().eventBus().send(SOWPdfOutputService.CREATE_MERGED_PDF_OUTPUT, id,
                     (AsyncResult<Message<Integer>> result) -> {
                         JsonObject response = (JsonObject) LocalCache.getInstance().remove(result.result().body());
