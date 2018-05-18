@@ -230,10 +230,16 @@
       "id": "proposal.update.onconfirm",
       "type": "update",
       "table": "proposal",
+      "query": "update proposal set amount = ?, status = ?, version = ? where id = ?",
+      "params": ["amount", "status", "version","id"]
+    },
+    {
+      "id": "proposal.update.bookingamount",
+      "type": "update",
+      "table": "proposal",
       "query": "update proposal set amount = ?, status = ?, version = ?,bookingOrderMonth=? where id = ?",
       "params": ["amount", "status", "version","bookingOrderMonth","id"]
     },
-
     {
       "id": "proposal.folder.update",
       "type": "update",

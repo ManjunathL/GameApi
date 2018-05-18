@@ -1001,6 +1001,7 @@ public class ProposalHandler extends AbstractRouteHandler
             case "1.0":{
                 queryDatas.add(new QueryData("version.lockallpresalesversions",proposalVersion));
                 queryDatas.add(new QueryData("proposal.sow.version.copy",proposalVersion));
+                queryDatas.add(new QueryData("proposal.update.bookingamount",proposalHeaderJson));
                 break;
             }
             case "2.0":{
