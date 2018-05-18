@@ -550,14 +550,11 @@ define([
         $('#addcboard-modalForImage').modal('show');
         var that = this;
         var conceptboardId = that.filter.get("selectedconceptboardId");
-        //that.fetchSpacetypesAndRender(conceptboardId);
-         //var that = this;
-                var spaceelements = that.spaceelements;
-
-                $("#spaceTempUpload").html(_.template(spaceTempUploadImagePageTemplate)({
-                   "spacetemplates": spaceelements.toJSON(),
-                   "selectedconceptboardId": conceptboardId
-               }));
+        var spaceelements = that.spaceelements;
+        $("#spaceTempUpload").html(_.template(spaceTempUploadImagePageTemplate)({
+           "spacetemplates": spaceelements.toJSON(),
+           "selectedconceptboardId": conceptboardId
+       }));
         return;
     },
     getuploadedFileDtls: function (evt) {

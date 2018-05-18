@@ -109,7 +109,8 @@
                                     <% var uniqnm = ""; %>
                                     <% if(typeof(conceptdetails) !== 'undefined'){ %>
                                     <% _.each(conceptdetails[0].listOfConceptBoardConcept, function(conceptdtls, i){ %>
-                                    <% var spaceElementTitle = conceptdtls.spaceElementTitle %>
+                                    <% var spaceElementTitle = conceptdtls.spaceElementTitle ? conceptdtls.spaceElementTitle : '' %>
+                                       <% if(spaceElementTitle !== ""){ %>
                                         <% if(uniqnm != spaceElementTitle){ %>
                                         <li class="active" style="height: 70px;">
                                             <a onclick="getElementsView('<%= conceptdtls.spaceElementCode %>')">
@@ -126,6 +127,7 @@
                                         <% }else{ %>
                                         <% } %>
                                         <% uniqnm = spaceElementTitle; %>
+                                        <% } %>
                                     <% }); %>
                                     <% } %>
                                 </ul>
@@ -259,7 +261,7 @@
                                     <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
                                     <div id="owl-sptype" class="owl-carousel owl-theme ml15">
                                         <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(splst, i){ %>
-                                        <div class="item boardlst <% if(splst.name == conceptBoardName){ %> active-Stypebox <% } %>"
+                                        <div class="item boardlst" <% if(splst.name == conceptBoardName){ %> style="border:1px solid red;" <% } %>
                                              data-element="<%= splst.id %>" data-element1="<%= splst.spaceTypeCode %>" >
                                             <img src="<%= splst.imgUrl %>" alt="<%= splst.code %>" class="img-responsive img-centered">
                                             <h5><%= splst.name %></h5>
