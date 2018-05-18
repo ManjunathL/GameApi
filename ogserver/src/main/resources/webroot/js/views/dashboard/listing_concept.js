@@ -607,9 +607,24 @@ define([
       var userId = sessionStorage.userId;
       var conceptboardIdtxt = that.filter.get("selectedconceptboardId");
       var cboardnameTxt = $('#cboardcnameTxt').val();
-      var cboarddescTxt = $('#cboarddescTxt').val();
+
+      if(cboardnameTxt.length == 0){
+        $('#cboardnameTxt').focus();
+        $("#addUploadImage_error").html("Please Enter the Concept Name ");
+        return false;
+        }
+       var cboarddescTxt = $('#cboarddescTxt').val();
+       if(cboarddescTxt == 0){
+        $('#cboarddescTxt').focus();
+        $("#addUploadImagedesc_error").html("Please Enter the Concept Description ");
+        return false;
+      }
       //var conceptfileupload= $( '#conceptfileupload' ).get(0).files[0];
       var conceptfileupload= that.filter.get('imgData');
+      if(conceptfileupload == undefined){
+          $("#addUpload_error").html("Please Upload Image ");
+          return false;
+      }
       //var conceptfileupload= $( '#conceptfileupload' ).val();
       var spaceElementCode = $('#spltemstCode').val();
       console.log("@@@@@@@ conceptfileupload @@@@@@");

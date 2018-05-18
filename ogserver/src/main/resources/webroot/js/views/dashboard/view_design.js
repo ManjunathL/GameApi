@@ -231,8 +231,22 @@ define([
           var userId = sessionStorage.userId;
           var conceptboardId = that.filter.get("selectedconceptboardId");
           var cboardnameTxt = $('#cboardcnameTxt').val();
+          if(cboardnameTxt.length == 0){
+              $('#cboardnameTxt').focus();
+              $("#addUploadImage_error").html("Please Enter the Concept Name ");
+              return false;
+          }
           var cboarddescTxt = $('#cboarddescTxt').val();
+          if(cboarddescTxt == 0){
+              $('#cboarddescTxt').focus();
+              $("#addUploadImagedesc_error").html("Please Enter the Concept Description ");
+              return false;
+            }
           var conceptfileupload= that.filter.get('imgData');
+          if(conceptfileupload == undefined){
+                $("#addUpload_error").html("Please Upload Image ");
+                return false;
+            }
           console.log("@@@@@@@ conceptfileupload @@@@@@");
           console.log(conceptfileupload);
 
