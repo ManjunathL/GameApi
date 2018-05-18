@@ -3,19 +3,27 @@ package com.mygubbi.game.proposal.handlers;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.mygubbi.game.proposal.model.CustomerDocument;
+import com.mygubbi.common.VertxInstance;
 import com.mygubbi.provider.CrmDataProvider;
 import com.mygubbi.provider.DataProviderMode;
 import com.mygubbi.provider.RestDataProvider;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.crm.CrmApiHandler;
+import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.FileUpload;
+import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.monoid.json.JSONArray;
 import us.monoid.json.JSONException;
 import us.monoid.json.JSONObject;
+
+import java.util.Set;
 
 /**
  * Created by User on 09-10-2017.
@@ -33,6 +41,9 @@ public class CCAHandler extends AbstractRouteHandler{
         mapper = new ObjectMapper();
         dataProviderMode = new RestDataProvider();
         crmDataProvider = new CrmDataProvider();
+
+        this.route().handler(BodyHandler.create().setUploadsDirectory("c:/Users/Public/uploads"));
+
 
         this.post("/getdocuments").handler(this::getDocuments);
         this.post("/getprofile").handler(this::getOpportunity);
@@ -138,6 +149,13 @@ public class CCAHandler extends AbstractRouteHandler{
 
         String crmId = routingContext.request().getParam("opportunity_id");
 
+        MultiMap attributes = routingContext.request().formAttributes();
+        Set<FileUpload> uploads = routingContext.fileUploads();
+        LOG.debug("uploads :" + uploads.size());
+        LOG.debug("uploads :" + attributes.size());
+
+
+
         LOG.debug("SAL ID in get Issue details:" + crmId);
 
         JSONArray documents = crmDataProvider.getCustomerIssues(crmId);
@@ -154,11 +172,17 @@ public class CCAHandler extends AbstractRouteHandler{
 
 
     private void createCustomerIssue(RoutingContext routingContext){
-        JsonObject proposalData = routingContext.getBodyAsJson();
-        LOG.debug("proposalData : " +  proposalData.encodePrettily());
-        LOG.debug("context : " +  routingContext.getBodyAsJson());
-        LOG.debug("name : " + routingContext.getBodyAsJson());
-        LOG.debug("issue : " + routingContext.request().getParam("issue"));
+
+        routingContext.response().putHeader("Content-Type", "text/plain");
+
+        routingContext.response().setChunked(true);
+
+        Set<FileUpload> fileUploads = routingContext.fileUploads();
+
+        for (FileUpload fileUpload : fileUploads)
+        {
+            LOG.debug("File upload : " + fileUpload.fileName());
+        }
 
 
         String crmId = "opportunity_name";
@@ -201,11 +225,30 @@ public class CCAHandler extends AbstractRouteHandler{
 
         LOG.debug("SAL ID in get updates details:" + crmId);
 
+        JsonArray responseArray = new JsonArray();
+
         JSONArray documents = crmDataProvider.getUpdates(crmId);
+
+        try {
+            for(int i = 0; i < documents.length() ; i++)
+            {
+                JSONObject jsonObject = (JSONObject) documents.get(i);
+                String room = jsonObject.keys().next();
+                int value = Integer.parseInt(jsonObject.getString(room));
+
+                JsonObject newResponse = new JsonObject();
+                newResponse.put("name",room);
+                newResponse.put("status",value);
+                responseArray.add(newResponse);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         if (documents.length() != 0)
         {
-            sendJsonResponse(routingContext, documents.toString());
+            sendJsonResponse(routingContext, responseArray.toString());
         }
         else {
             sendError(routingContext, "No updates found for this opportunity");
