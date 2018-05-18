@@ -8,21 +8,23 @@ define([
   'collections/viewDesigns',
   'models/filter',
   'collections/save_shortlist_designs',
-  'collections/roomlayouts'
-], function($, _, Backbone, Bootstrap, pinterest_grid, viewDesignPageTemplate,viewDesigns, Filter, SaveShortListDesigns, RoomLayouts){
+  'collections/roomlayouts',
+  'collections/uploaduserdesigns'
+], function($, _, Backbone, Bootstrap, pinterest_grid, viewDesignPageTemplate,viewDesigns, Filter, SaveShortListDesigns, RoomLayouts, UploadUserDesigns){
   var ViewDesignPage = Backbone.View.extend({
     el: '.page',
     viewDesigns: null,
     filter: null,
     save_shortlist_designs:null,
     roomlayouts:null,
+    uploaduserdesigns:null,
     initialize: function() {
         this.viewDesigns = new viewDesigns();
         this.roomlayouts = new RoomLayouts();
         this.filter = new Filter();
         this.save_shortlist_designs=new SaveShortListDesigns();
-
         this.filter.on('change', this.render, this);
+        this.uploaduserdesigns = new UploadUserDesigns();
         this.listenTo(Backbone);
         _.bindAll(this, 'render');
     },
@@ -49,6 +51,11 @@ define([
     },
     events: {
         "click .shortListdesign": "saveShortListDesigns",
+        "change #conceptfileupload": "getuploadedFileDtls",
+         "click #showImg": "showuploadedFileDtls",
+        "click #addCBoard": "viewAddDesign",
+        "submit #userconceptfrmImage": "submitUploadConceptBoard"
+
     },
     getDesigns: function(conceptboardId){
         var that = this;
@@ -170,12 +177,139 @@ define([
           }
         });
     },
+    viewAddDesign: function(event){
+            $('#addcboard-modalForImage').modal('show');
+            return;
+    },
+    getuploadedFileDtls: function (evt) {
+            var that = this;
+
+            var files = evt.target.files;
+
+            for (var i = 0, f; f = files[i]; i++) {
+
+                if (!f.type.match('image.*')) {
+                continue;
+                }
+
+                var reader = new FileReader();
+                reader.readAsDataURL(f);
+            }
+
+           // var formData = new FormData();
+
+                console.log("file:");
+                console.log(files[0]);
+                console.log(files[0].name)
+                //formData.append('file', files[ff]);
+                var fileObj = {};
+                //var fileMnObj = new File();
+                if(files[0].name != ""){
+                    that.filter.set({
+                        'imgData': files[0]
+                    }, {
+                        silent: true
+                    });
+                }
+
+            console.log("++++++++++++ Image Data +++++++++++++++++++");
+            console.log(that.filter.get('imgData'));
+            return false;
+        },
+    showuploadedFileDtls: function (e) {
+                var that = this;
+                var dataImage = that.filter.get('imgData');
+                $('#imgtt').attr('src',dataImage);
+                return false;
+            },
+    submitUploadConceptBoard: function (e) {
+
+            if (e.isDefaultPrevented()) return;
+                    e.preventDefault();
+
+          var that = this;
+          var userId = sessionStorage.userId;
+          var conceptboardId = that.filter.get("selectedconceptboardId");
+          var cboardnameTxt = $('#cboardcnameTxt').val();
+          var cboarddescTxt = $('#cboarddescTxt').val();
+          var conceptfileupload= that.filter.get('imgData');
+          console.log("@@@@@@@ conceptfileupload @@@@@@");
+          console.log(conceptfileupload);
+
+          var formData = new FormData();
+
+          formData.append("file",conceptfileupload);
+          formData.append("name",cboardnameTxt);
+          formData.append("description",cboarddescTxt);
+          formData.append("userId",userId);
+          formData.append("conceptboardId",conceptboardId);
+          formData.append("spaceelementcode","");
+            console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+            console.log(formData);
+
+            that.uploaduserdesigns.fetch({
+               async: true,
+               crossDomain: true,
+               method: "POST",
+               headers:{
+                   "authorization": "Bearer "+ sessionStorage.authtoken,
+               },
+               processData: false,
+               contentType: false,
+               data: formData,
+               success:function(response) {
+                  console.log("Successfully save user Concept  .. ");
+                  console.log(JSON.stringify(response));
+
+                  $("#addcboard-modalForImage").modal('hide');
+
+
+
+                   $('body').removeClass('modal-open');
+                   $('.modal-backdrop').remove();
+
+                  $("#snackbar").html("Successfully save user Concept ...");
+                  var x = document.getElementById("snackbar")
+                  x.className = "show";
+                  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                  that.render();
+                  //return;
+                  //$(e.currentTarget).closest('article').remove();
+                  //return false;
+
+              },
+              error:function(model, response, options) {
+                  console.log(" +++++++++++++++ save save user Concept image- Errrorr ++++++++++++++++++ ");
+                  console.log(JSON.stringify(response));
+
+                  $("#addcboard-modalForImage").modal('hide');
+
+                  $('body').removeClass('modal-open');
+                  $('.modal-backdrop').remove();
+
+
+                    $("#snackbar").html("Successfully save user Concept ...");
+                    var x = document.getElementById("snackbar")
+                    x.className = "show";
+                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    that.render();
+              }
+          });
+          return;
+        },
+
     rendersub: function(){
         var that = this;
         var viewDesigns = that.viewDesigns;
         var roomlayouts = that.roomlayouts;
         viewDesigns = viewDesigns.toJSON();
 
+         var conceptboardId = that.model.id;
+            this.filter.set({
+                'selectedconceptboardId':conceptboardId
+            }, {
+                silent: true
+            });
 
         if (typeof(that.filter.get('selectedStyleName')) == 'undefined') {
             //var arrSt = new Array();
