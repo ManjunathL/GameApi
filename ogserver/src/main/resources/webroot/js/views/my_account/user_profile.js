@@ -16,6 +16,9 @@ define([
         _.bindAll(this, 'renderWithUserProfCallback', 'render');
     },
     renderWithUserProfCallback: function (userProfData, provider) {
+        console.log("+++++++++++++ userProfData +++++++++++++++");
+                console.log(userProfData);
+
         $(this.el).html(_.template(UserProfileTemplate)({
             'userProfile': userProfData,
             'provider': provider
