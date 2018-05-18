@@ -56,6 +56,9 @@ hr {
 .mn0{
     margin:0px !important;
 }
+.mt0{
+    margin-top:0px !important;
+}
 .ml0{
     margin-left:0px !important;
 }
@@ -1962,6 +1965,10 @@ margin-bottom: 25px;
 .p-style1{
 margin-top: 25px;
 }
+#userProf > .form-horizontal .form-group {
+    margin-right: 10px !important;
+}
+
 .user-profile-content h3{
     color: #ea5c36;
     font-weight: bold;
