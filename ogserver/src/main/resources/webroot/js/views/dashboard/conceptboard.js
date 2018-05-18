@@ -358,7 +358,14 @@ define([
         var CheckConceptBoard = $('#templateCodeTxt').val();
 
         console.log(" Hello Tushar ");
-        console.log(CheckConceptBoard);
+        console.log($('#cboardnameTxt').val());
+        if($('#cboardnameTxt').val() !== null){
+        console.log(" Hello Eoor ");
+        $('#cboardnameTxt').focus();
+        $("#addConcptBoardName_error").html("Please Enter the Concept Board Name ");
+
+                  return false;
+                  }
 
 
         //var formData = new FormData();
