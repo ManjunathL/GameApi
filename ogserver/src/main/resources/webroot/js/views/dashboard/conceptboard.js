@@ -356,11 +356,9 @@ define([
         //var userId = "user1234600";
         var userMindboardId = sessionStorage.defaultMindboardId;
         var CheckConceptBoard = $('#templateCodeTxt').val();
-
-        console.log(" Hello Tushar ");
+         var conName=$('#cboardnameTxt').val()
         console.log($('#cboardnameTxt').val());
-        if($('#cboardnameTxt').val() !== null){
-        console.log(" Hello Eoor ");
+        if(conName.length == 0){
         $('#cboardnameTxt').focus();
         $("#addConcptBoardName_error").html("Please Enter the Concept Board Name ");
 

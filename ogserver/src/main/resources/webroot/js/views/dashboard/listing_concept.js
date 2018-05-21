@@ -614,7 +614,7 @@ define([
         return false;
         }
        var cboarddescTxt = $('#cboarddescTxt').val();
-       if(cboarddescTxt == 0){
+       if(cboarddescTxt.length == 0){
         $('#cboarddescTxt').focus();
         $("#addUploadImagedesc_error").html("Please Enter the Concept Description ");
         return false;
