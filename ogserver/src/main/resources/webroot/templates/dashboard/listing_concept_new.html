@@ -150,7 +150,7 @@
                                                 <% } %>
                                                 <% if(typeof(concepttags) !== 'undefined'){ %>
                                                 <% var clsarr = ['tgf','tgs','tgt','tgfr']; %>
-                                                <% var icols = 10; %>
+                                                <% var icols = 7; %>
                                                 <% _.each(concepttags[0].conceptboardtagList, function(concepttgs, i){ %>
                                                 <% var tagnm = concepttgs.tag %>
                                                 <% if( (++i)%icols == 1 ) {  %>
@@ -171,7 +171,7 @@
                                                 <% } %>
                                             </div>
                                         </div>
-                                        <% if(concepttags[0].conceptboardtagList.length > 11){ %>
+                                        <% if(concepttags[0].conceptboardtagList.length > 7){ %>
                                         <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x" style="color: #33434E;"></i></a>
                                         <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x" style="color: #33434E;"></i></a>
                                         <% } %>
