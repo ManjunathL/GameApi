@@ -1,1 +1,214 @@
-<h1>Project Listing Page</h1>
+<style>
+.imgholder{
+    text-align: center;
+    font-size: 203px;
+    }
+ .gridProject{
+    border-radius: 6px;
+	width:100%;
+	min-height:100px;
+	padding: 0px 0px 15px 0px;
+	background:#fff;
+	margin:8px;
+	font-size:12px;
+	float:left;
+	box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-webkit-transition: top 1s ease, left 1s ease;
+    box-sizing: border-box;
+    }
+     .gridProjectTest{
+    border-radius: 6px;
+	width:100%;
+	min-height:100px;
+	padding: 0px 0px 15px 0px;
+	background:#fff;
+	font-size:12px;
+	float:left;
+	box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-webkit-transition: top 1s ease, left 1s ease;
+    box-sizing: border-box;
+    }
+    .sub-title {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	margin-top: 10px;
+	text-align: left;
+}
+
+.title {
+	font-family: 'Libre Baskerville', "Times New Roman", Times, Baskerville, Georgia, serif;
+	font-size: 32px;
+	font-weight: 400;
+	line-height: 40px;
+	text-align: left;
+	text-transform: initial;
+	color: #fff;
+}
+
+.divider {
+	background-color: #fff;
+	height: 1px;
+	width: 35px;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .portfolio-container {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.image {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+.overlay {
+	background-color: #000;
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	transition: .5s ease;
+	top: 0;
+	width: 100%;
+}
+
+.cell-container:hover .overlay {
+	opacity: .75;
+}
+
+.text {
+	color: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	text-transform: uppercase;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+</style>
+<section class="main-conceptboard-sec bg-light-gray">
+    <div class="container">
+        <div class="mt20">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container" style="border: 1px dashed #333;text-align: center;">
+                    <span class="imgholder">&#43;</span>
+                    <a class="overlay" href="/listofconcepts" target="_blank">
+                        <div class="text">
+                            <p class="title">Create New Project</p>
+                        </div>
+                    </a>
+               </div>
+               <!-- <div class="col-sm-6 col-md-4 col-lg-4 pd0" style="padding-right: 0px;padding-left: 0px;">
+                <div class="gridProject overflow-hidden" style="padding: 0px 0px 0px 0px;">
+                    <div class="imgholder">
+                        <a href="/listofconcepts">
+                            <img style="height:283px; width:100%;" src="img/everything/everything.jpg"/>
+                        </a>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 pd0" style="padding-right: 0px;padding-left: 0px;">
+                    <div class="gridProject overflow-hidden" style="padding: 0px 0px 0px 0px;">
+                        <div class="imgholder">
+                            <a href="/listofconcepts">
+                                <img style="height:283px; width:100%;" src="img/everything/everything.jpg"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 pd0" style="margin-bottom: 30px;padding-right: 0px;padding-left: 0px;padding-top: 0px;padding-bottom: 0px;">
+                    <div class="gridProjectTest overflow-hidden" style="padding: 0px 0px 0px 0px;margin:0px;">
+                        <div class="imgholder">
+                            <a href="/listofconcepts">
+                                <img style="height:283px; width:100%;" src="img/everything/everything.jpg"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>-->
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
+                    <img class="image" src="http://www.bigart.design/images/other/stephanie-mccabe-24620-600x600.jpg">
+                    <a class="overlay" href="/listofconcepts" target="_blank">
+                    <div class="text">
+                        <p class="title">Firework</p>
+                    </div></a>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
+                    <img class="image" src="http://www.bigart.design/images/other/sticker-mule-197248-600x600.jpg">
+                    <a class="overlay" href="/listofconcepts" " target="_blank">
+                    <div class="text">
+                        <p class="title">Catch of the day</p>
+                    </div></a>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
+                    <img class="image" src="http://www.bigart.design/images/other/scott-webb-258983-600x600.jpg">
+                    <a class="overlay" href="/listofconcepts"  target="_blank">
+                    <div class="text">
+                        <p class="title">Abstracting Details</p>
+                    </div></a>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
+                    <img class="image" src="http://www.bigart.design/images/other/matthew-kane-205235-600x600.jpg">
+                    <a class="overlay" href="/listofconcepts"  target="_blank">
+                    <div class="text">
+                        <p class="title">Snow Monkey</p>
+                    </div></a>
+                </div>
+
+
+                <div class="portfolio-container">
+                    <div class="portfolio-row text-center">
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
+                            <img class="image" src="http://www.bigart.design/images/other/joshua-earle-157231-600x600.jpg">
+                            <a class="overlay" href="/listofconcepts"  target="_blank">
+                            <div class="text">
+                                <p class="title">Ice Land</p>
+                            </div></a>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
+                            <img class="image" src="http://www.bigart.design/images/other/joshua-sortino-228788-600x600.jpg">
+                            <a class="overlay" href="/listofconcepts"  target="_blank">
+                            <div class="text">
+                                <p class="title">Emergence from the Clouds</p>
+                            </div></a>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
+                            <img class="image" src="http://www.bigart.design/images/other/derick-anies-120213-600x600.jpg">
+                            <a class="overlay" href="/listofconcepts"  target="_blank">
+                            <div class="text">
+                                <p class="title">Man</p>
+                            </div></a>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container" style="margin-bottom: 30px;">
+                            <img class="image" src="http://www.bigart.design/images/other/joshua-newton-275881-600x600.jpg">
+                            <a class="overlay" href="/listofconcepts"  target="_blank">
+                            <div class="text">
+                                <p class="title">Flame</p>
+                            </div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
