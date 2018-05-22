@@ -228,12 +228,17 @@ define([
                   console.log("Successfully updated Concept ... ");
                   console.log(response);
                   $("#editcboard-modal").modal('hide');
+
+                  $('body').removeClass('modal-open');
+                  $('.modal-backdrop').remove();
+
+
                   $("#snackbar").html("Successfully updated Concept ...");
                   var x = document.getElementById("snackbar")
                   x.className = "show";
                   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                   that.render();
-                  return;
+                  //return;
 
               },
               error:function(model, response, options) {
