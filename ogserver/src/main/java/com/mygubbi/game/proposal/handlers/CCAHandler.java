@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.mygubbi.game.proposal.model.CustomerDocument;
 import com.mygubbi.common.VertxInstance;
+import com.mygubbi.config.ConfigHolder;
 import com.mygubbi.provider.CrmDataProvider;
 import com.mygubbi.provider.DataProviderMode;
 import com.mygubbi.provider.RestDataProvider;
@@ -149,14 +150,6 @@ public class CCAHandler extends AbstractRouteHandler{
 
         String crmId = routingContext.request().getParam("opportunity_id");
 
-        MultiMap attributes = routingContext.request().formAttributes();
-        Set<FileUpload> uploads = routingContext.fileUploads();
-        LOG.debug("uploads :" + uploads.size());
-        LOG.debug("uploads :" + attributes.size());
-
-
-
-        LOG.debug("SAL ID in get Issue details:" + crmId);
 
         JSONArray documents = crmDataProvider.getCustomerIssues(crmId);
 
@@ -173,6 +166,11 @@ public class CCAHandler extends AbstractRouteHandler{
 
     private void createCustomerIssue(RoutingContext routingContext){
 
+        String amazon_uploads_directory = ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "c:/Users/Public/uploads");
+        this.route().handler(BodyHandler.create().setUploadsDirectory(amazon_uploads_directory));
+
+
+
         routingContext.response().putHeader("Content-Type", "text/plain");
 
         routingContext.response().setChunked(true);
@@ -185,8 +183,8 @@ public class CCAHandler extends AbstractRouteHandler{
         }
 
 
-        String crmId = "opportunity_name";
-        String issue = "issue";
+        String crmId = routingContext.request().getFormAttribute("opportunity_id");
+        String issue = routingContext.request().getFormAttribute("issue");
         String documents = "documents";
 
         LOG.debug("CUSTOMER ISSUE LOG PAR+AMS : " + crmId + ":" + issue);
