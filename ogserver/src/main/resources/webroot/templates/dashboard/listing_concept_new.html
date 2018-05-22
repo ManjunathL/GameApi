@@ -286,59 +286,12 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog" style="width:980px;">
                     <div id="concept-dtls" class="dtls-container" style="">
                     </div>
                 </div>
             </div>
-
-        <div class="modal fade" id="addcboard-modalForImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div id="addcboard-dtls" class="addcboard-container" style="width: 63%;min-height: 150px">
-                    <div class="col-sm-12 col-md-12">
-                        <h3 class="addcboard-heading" style="margin-left: -16px;">Add User Concept Image </h3>
-                    </div>
-                    <form id="userconceptfrm" method="post" name="userconceptfrm" enctype="multipart/form-data">
-                    <div class="form-group">
-
-<!--
-                        <input id="conceptfileupload" type="file" name="conceptfile"/>
--->
-                        <div class="upload-btn-wrapper">
-                            <button class="btnImage">Upload a file</button>
-                            <input id="conceptfileupload" type="file" name="conceptfile"/>
-                            <label id="file-name"></label>
-                        </div>
-                        <!--<input type="button" id="showImg" class="btn addcboard-btn" value="Show">-->
-                        <div id="list1">
-                        </div>
-                        <div class="row display-none" id="addUpload_error_row" style="text-align: center;">
-                            <p class="margin0 error-text blankTxtbox" id="addUpload_error"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h4>Concept Board Name:</h4>
-                        <input type="text" class="form-control" id="cboardcnameTxt" name="cboardname" />
-                    </div>
-                    <div class="row display-none" id="addUploadImage_error_row" style="text-align: center;">
-                        <p class="margin0 error-text blankTxtbox" id="addUploadImage_error"></p>
-                    </div>
-                    <div class="form-group">
-                        <h4>Concept Board Desc:</h4>
-                        <input type="text" class="form-control" id="cboarddescTxt" name="cboarddesc" />
-                    </div>
-                    <div class="row display-none" id="addUploadImagedesc_error_row" style="text-align: center;">
-                        <p class="margin0 error-text blankTxtbox" id="addUploadImagedesc_error"></p>
-                    </div>
-                        <div id="spaceTempUpload"></div>
-                    <div class="mt15" style="text-align:right;">
-                        <input type="submit" id="save_uploadConceptBoard" class="btn addcboard-btn" value="Submit">
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         <div class="modal fade" id="editcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div id="editcboard-dtls" class="addcboard-container">
@@ -386,7 +339,55 @@
 
     </div>
     </div>
-    <!--    <div style=" margin-bottom: 138px;"></div>-->
+    <div class="modal fade" id="addcboard-modalForImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div id="addcboardImg-dtls" class="adduserconcept-container">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <div class="col-sm-12 col-md-12">
+                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add User Concept</h3>
+                </div>
+                <div class=" col-sm-12 col-md-12">
+                    <form id="userconceptfrm" method="post" name="userconceptfrm" enctype="multipart/form-data">
+                            <div class="form-group">
+
+                                <!--
+                                                        <input id="conceptfileupload" type="file" name="conceptfile"/>
+                                -->
+                                <div class="upload-btn-wrapper">
+                                    <button class="btnImage">Upload a file</button>
+                                    <input id="conceptfileupload" type="file" name="conceptfile"/>
+                                    <label id="file-name"></label>
+                                </div>
+                                <!--<input type="button" id="showImg" class="btn addcboard-btn" value="Show">-->
+                                <div id="list1">
+                                </div>
+                                <div class="row display-none" id="addUpload_error_row" style="text-align: center;">
+                                    <p class="margin0 error-text blankTxtbox" id="addUpload_error"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h4>Concept Board Name:</h4>
+                                <input type="text" class="form-control" id="cboardcnameTxt" name="cboardname" />
+                            </div>
+                            <div class="row display-none" id="addUploadImage_error_row" style="text-align: center;">
+                                <p class="margin0 error-text blankTxtbox" id="addUploadImage_error"></p>
+                            </div>
+                            <div class="form-group">
+                                <h4>Concept Board Desc:</h4>
+                                <input type="text" class="form-control" id="cboarddescTxt" name="cboarddesc" />
+                            </div>
+                            <div class="row display-none" id="addUploadImagedesc_error_row" style="text-align: center;">
+                                <p class="margin0 error-text blankTxtbox" id="addUploadImagedesc_error"></p>
+                            </div>
+                            <div id="spaceTempUpload"></div>
+                            <div class="mt15" style="text-align:right;">
+                                <input type="submit" id="save_uploadConceptBoard" class="btn addcboard-btn" value="Submit">
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
@@ -461,11 +462,15 @@
          $('#sidebarCollapse').on('click', function () {
              $('#sidebar').toggleClass('active');
          });
+         $('.close').on('click', function () {
+             $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();
+         });
+
+         $("#conceptfileupload").change(function(){
+          $("#file-name").text(this.files[0].name);
+        });
      });
 
-$("#conceptfileupload").change(function(){
-  $("#file-name").text(this.files[0].name);
-});
     $(function() {
       $("#owl-sptype").owlCarousel({
         autoPlay: 3000,

@@ -1,24 +1,14 @@
 <%= console.log("++++++++++++++++++++++++++spacet elements details+++++++++++++++++++++++++++++") %>
 <%= console.log(spacetemplates) %>
 <style>
-    #owl-sptype .item{
+    .owl-sptmpltype .item{
         margin: 3px;
         padding: 10px;
     }
-    #owl-sptype .item img{
+    .owl-sptmpltype .item img{
         display: block;
         width: 106px;
         height: 75px;
-    }
-
-    .owl-tmpltype .item{
-        margin: 3px;
-        padding: 10px;
-    }
-    .owl-tmpltype .item img{
-        display: block;
-        width: 145px;
-        height: 96px;
     }
     .owl-prev{
         position: absolute;
@@ -35,13 +25,13 @@
     <h4 style="font-size: 18px;font-weight: 300;color: #333;">Identity Room Area</h4>
 </div>
 <% if(typeof(spacetemplates) !== 'undefined'){ %>
-<div  class="owl-carousel owl-theme owl-tmpltype">
+<div  class="owl-carousel owl-theme owl-sptmpltype spaceElmntDv">
     <% _.each(spacetemplates[0].spaceElementList, function(spltemst, i){ %>
     <div class="item selTemp"
          data-element="<%= spltemst.code %>"  >
         <input type="hidden" id="spltemstCode" value="<%= spltemst.code %>">
         <img src="<%= spltemst.imageUrl %>" alt="<%= spltemst.code %>" class="img-responsive img-centered">
-        <h5 style="color: #333;font-size: 16px;font-weight: 400;"><%= spltemst.title %></h5>
+        <h5><%= spltemst.title %></h5>
     </div>
     <% }); %>
 </div>
@@ -65,7 +55,7 @@
 <script src="js/libs/owl.carousel/dist/owl.carousel.min.js"></script>
 <script>
    $(document).ready(function() {
-      $(".owl-tmpltype").owlCarousel({
+      $(".owl-sptmpltype").owlCarousel({
         autoPlay: 3000,
         items : 4,
         itemsDesktop : [1199,3],

@@ -536,7 +536,13 @@ define([
 
     },
     viewAddCboard: function(event){
-        $('#addcboard-modalForImage').modal('show');
+        //$('#addcboard-modalForImage').modal('show');
+
+        $("#addcboard-modalForImage").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
         var that = this;
         var conceptboardId = that.filter.get("selectedconceptboardId");
         var spaceelements = that.spaceelements;

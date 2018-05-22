@@ -3,7 +3,7 @@ define([
     'backbone'
 ], function($, Backbone){
     var UploadUserConcept = Backbone.Model.extend({
-        urlRoot:baseRestApiUrl + '/MyGubbiApi/upload/web/usercreatedconcept/'
+        urlRoot:baseRestApiUrl + '/MyGubbiApi/userupload/concept/'
     });
     return UploadUserConcept;
 });

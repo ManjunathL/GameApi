@@ -6,9 +6,9 @@ define([
 ], function($, _, Backbone, UploadUserConcept){
     var UploadUserConcepts = Backbone.Collection.extend({
         model: UploadUserConcept,
-        url: baseRestApiUrl +  'MyGubbiApi/upload/web/usercreatedconcept',
+        url: baseRestApiUrl +  'MyGubbiApi/userupload/concept/',
         uploadUserConceptBoard: function(userId,conceptboardId, options) {
-            var urllnk = baseRestApiUrl + '/MyGubbiApi/upload/web/usercreatedconcept/';
+            var urllnk = baseRestApiUrl + '/MyGubbiApi/userupload/concept/';
             this.url = urllnk + userId + '/' + conceptboardId;
             return this.fetch(options);
         },
