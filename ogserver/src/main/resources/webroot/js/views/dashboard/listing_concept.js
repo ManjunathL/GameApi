@@ -27,8 +27,9 @@ define([
   'collections/add_concepttags',
   'collections/spaceelements',
   'collections/spacetemplates',
-  'collections/uploaduserconcepts'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,spaceTempPageTemplate, spaceTempUploadImagePageTemplate, view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements, SpaceTemplates, UploadUserConcepts){
+  'collections/uploaduserconcepts',
+  'collections/removerecommndedconcepts'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, conceptsPageTemplate, conceptdetailsPageTemplate, similarconceptPageTemplate, relatedconceptPageTemplate,spaceTempPageTemplate, spaceTempUploadImagePageTemplate, view_conceptDesc, ConceptLists, NeedConceptLists, Filter, ConceptBoards, ConceptTags, SimilarConcepts, RelatedConcepts, AddConceptboards, AddConceptboard, AddConceptToCboards, RemoveConceptFromCboards, AddConceptnotes, AddConcepttags ,SpaceElements, SpaceTemplates, UploadUserConcepts, RemovereCommndedConcepts){
   var ListingConceptPage = Backbone.View.extend({
     el: '.page',
     conceptlists: null,
@@ -46,6 +47,7 @@ define([
     spacetemplates: null,
     remove_conceptFromCboards:null,
     uploaduserconcepts:null,
+    removerecommndedconcept:null,
     initialize: function() {
         this.conceptlists = new ConceptLists();
         this.needconceptlists = new NeedConceptLists();
@@ -62,6 +64,7 @@ define([
         this.remove_conceptFromCboards = new RemoveConceptFromCboards();
         this.spacetemplates = new SpaceTemplates();
         this.uploaduserconcepts= new UploadUserConcepts();
+        this.removerecommndedconcept= new RemovereCommndedConcepts();
         this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
         _.bindAll(this, 'render','fetchConceptListsAndRender');
@@ -528,7 +531,9 @@ define([
          "click #saveSpaveElement":"addConcept2Cboard",
          "change #conceptfileupload": "getuploadedFileDtls",
          "click #showImg": "showuploadedFileDtls",
-         "submit #userconceptfrm": "submitUploadConceptBoard"
+         "submit #userconceptfrm": "submitUploadConceptBoard",
+         "click #removeRecommnded": "removeRecommndedConcept",
+
 
     },
     viewDescription:function(evt){
@@ -732,6 +737,65 @@ define([
        });
        }
     },
+    removeRecommndedConcept: function (e) {
+            e.preventDefault();
+             var that = this;
+            var conceptboardId = that.filter.get("selectedconceptboardId");
+            var userId = sessionStorage.userId;
+            var currentTarget = $(e.currentTarget);
+            var conceptId = currentTarget.data('element');
+
+
+           if (confirm("Are you sure to delete the concept?")) {
+
+            var formData = new FormData();
+
+                 formData.append("conceptBoardId",conceptboardId);
+                 formData.append("conceptCode",conceptId);
+                 formData.append("recommendationType",0);
+                 formData.append("status",0);
+                 formData.append("userId",userId);
+
+                 var obj={
+                           "conceptBoardId": conceptboardId,
+                           "conceptCode": conceptId,
+                           "recommendationType": 0,
+                           "status": 0,
+                           "userId": userId
+                         }
+                   console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+                   console.log(obj);
+
+
+            that.removerecommndedconcept.fetch( {
+               async: true,
+               crossDomain: true,
+               method: "POST",
+               headers:{
+                   "authorization": "Bearer "+ sessionStorage.authtoken,
+                   "Content-Type": "application/json"
+               },
+               data: JSON.stringify(obj),
+               success:function(response) {
+                   console.log("Successfully deleted Recommneded From Concept board- ");
+                   console.log(response);
+
+                   $("#snackbar").html("Successfully deleted Recommneded From Concept board ...");
+                  var x = document.getElementById("snackbar")
+                  x.className = "show";
+                  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    that.render();
+                  //$(e.currentTarget).closest('article').remove();
+                  // return;
+               },
+               error:function(response) {
+                   console.log(" +++++++++++++++ deleted Recommneded Concept to Concept board- Errrorr ++++++++++++++++++ ");
+                   console.log(response);
+               }
+           });
+           }
+        },
+
     addConcept2Cboard: function (e) {
         if (e.isDefaultPrevented()) return;
         e.preventDefault();

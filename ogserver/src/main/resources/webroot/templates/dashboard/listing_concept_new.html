@@ -4,6 +4,8 @@
 <%= console.log(filterTag) %>
 <%= console.log("@@@####################### conceptboardsDtls @@@@@@@@@@@@@@@@@") %>
 <%= console.log(conceptboardsDtls) %>
+<%= console.log("@@@####################### Recommneded @@@@@@@@@@@@@@@@@") %>
+<%= console.log(needconceptlisting) %>
 <style>
      #owl-sptype .item{
         margin: 3px;
@@ -219,11 +221,12 @@
                                                     <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= needconceptdtls.conceptTitle %>">
                                                     <% } %>
                                                 </a>
+
                                                 <div class="recomnd"><div>Recommended</div></div>
                                                 <!--<div class="recomnd"><div>Must Try</div></div>-->
                                                 <h4>
                                                     <span><a href="javascript:void(0);"> <%= needconceptdtls.conceptTitle %> </a></span>
-                                                    <span><a class="pull-right remove-pin" data-element="<%= needconceptdtls.id %>"><i class="fa fa-trash" aria-hidden="true"></i></a></span>
+                                                    <span><a class="pull-right remove-pin" data-element="<%= needconceptdtls.id %>"><i id="removeRecommnded"  class="fa fa-trash" aria-hidden="true" data-element="<%= needconceptdtls.conceptCode %>"></i></a></span>
                                                 </h4>
                                             </article>
                                             <% }); %>
