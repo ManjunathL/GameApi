@@ -11,6 +11,7 @@ define([
             '': 'dashboard',
             'viewconceptboards(/)': 'viewconceptboard',
             ':name-conceptlist-:id(/)':'listing_concepts',
+            'projects(/)':'listing_projects',
             'l1_form(/)': 'l1_form',
             'edit_design-:id(/)': 'editdesign',
             'edit_product-:id(/)': 'editproduct',
@@ -61,29 +62,29 @@ define([
         });
 
         router.on('route:listing_designs', function(spaceTypeCode,conceptboardId) {
-                   require(['views/dashboard/view_design'], function(ViewDesignPage) {
-                         var options = {
-                            model: {
-                                "id": conceptboardId,
-                                "spaceTypeCode": spaceTypeCode
-                            }
-                        };
+           require(['views/dashboard/view_design'], function(ViewDesignPage) {
+                 var options = {
+                    model: {
+                        "id": conceptboardId,
+                        "spaceTypeCode": spaceTypeCode
+                    }
+                };
 
-                        VM.create(VM.VIEWDESIGNSPAGE, ViewDesignPage,options).render();
-                    });
-                });
+                VM.create(VM.VIEWDESIGNSPAGE, ViewDesignPage,options).render();
+            });
+        });
 
          router.on('route:listing_everything', function(spaceTypeCode) {
-                           require(['views/dashboard/everything_concepts'], function(EverythingConceptPage) {
-                                 var options = {
-                                    model: {
-                                        "spaceTypeCode": spaceTypeCode
-                                    }
-                                };
+           require(['views/dashboard/everything_concepts'], function(EverythingConceptPage) {
+                 var options = {
+                    model: {
+                        "spaceTypeCode": spaceTypeCode
+                    }
+                };
 
-                                VM.create(VM.EVERYTHINGCONCEPTPAGE, EverythingConceptPage,options).render();
-                            });
-                        });
+                VM.create(VM.EVERYTHINGCONCEPTPAGE, EverythingConceptPage,options).render();
+            });
+        });
 
 
         router.on('route:user-profile', function(actions) {
@@ -109,6 +110,12 @@ define([
                     }
                 };
                 VM.create(VM.LISTINGCONCEPTPAGE, ListingConceptPage, options).render();
+            });
+        });
+
+        router.on('route:listing_projects', function(actions) {
+           require(['views/project/listing_project'], function(ListingProjectPage) {
+                VM.create(VM.LISTINGPROJECTPAGE, ListingProjectPage).render();
             });
         });
 
