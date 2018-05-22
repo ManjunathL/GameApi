@@ -93,6 +93,21 @@ public class CCAHandler extends AbstractRouteHandler{
         getHandover(routingContext);
     }
 
+    private void getQuestions(RoutingContext routingContext) {
+        if (isAuthenticated(routingContext)) return;
+        getCCAQuestions(routingContext);
+    }
+
+    private void getQuestionOption(RoutingContext routingContext) {
+        if (isAuthenticated(routingContext)) return;
+        getCCAQuestionOption(routingContext);
+    }
+
+    private void insertQuestionAnswer(RoutingContext routingContext) {
+        if (isAuthenticated(routingContext)) return;
+        insertCCAQuestionAnswer(routingContext);
+    }
+
 
     private boolean isAuthenticated(RoutingContext routingContext) {
         CrmApiHandler crmApiHandler = new CrmApiHandler(vertx);
@@ -260,7 +275,7 @@ public class CCAHandler extends AbstractRouteHandler{
             sendError(routingContext, "No updates found for this opportunity");
         }
     }
-    private void getQuestions(RoutingContext routingContext)
+    private void getCCAQuestions(RoutingContext routingContext)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("cca.questions.select"));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -283,7 +298,7 @@ public class CCAHandler extends AbstractRouteHandler{
                 });
     }
 
-    private void getQuestionOption(RoutingContext routingContext)
+    private void getCCAQuestionOption(RoutingContext routingContext)
     {
         Integer id = LocalCache.getInstance().store(new QueryData("cca.questionsoption.select"));
         VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
@@ -306,7 +321,7 @@ public class CCAHandler extends AbstractRouteHandler{
                 });
     }
 
-    private void insertQuestionAnswer(RoutingContext routingContext) {
+    private void insertCCAQuestionAnswer(RoutingContext routingContext) {
         for(int i=0;i<routingContext.getBodyAsJsonArray().size();i++){
             JsonObject questionanswerList=routingContext.getBodyAsJsonArray().getJsonObject(i);
             Integer id = LocalCache.getInstance().store(new QueryData("cca.insert.questionanswer", questionanswerList));
