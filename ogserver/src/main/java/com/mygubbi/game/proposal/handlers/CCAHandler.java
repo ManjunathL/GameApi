@@ -3,14 +3,19 @@ package com.mygubbi.game.proposal.handlers;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.mygubbi.game.proposal.model.CustomerDocument;
+import com.mygubbi.common.LocalCache;
 import com.mygubbi.common.VertxInstance;
+import com.mygubbi.db.DatabaseService;
+import com.mygubbi.db.QueryData;
 import com.mygubbi.provider.CrmDataProvider;
 import com.mygubbi.provider.DataProviderMode;
 import com.mygubbi.provider.RestDataProvider;
 import com.mygubbi.route.AbstractRouteHandler;
 import com.mygubbi.si.crm.CrmApiHandler;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
@@ -51,6 +56,9 @@ public class CCAHandler extends AbstractRouteHandler{
         this.post("/getupdates").handler(this::getDailyUpdates);
         this.post("/createissue").handler(this::createIssue);
         this.post("/gethandoverdetails").handler(this::getHandoverDetails);
+        this.get("/getfeedbackquestions").handler(this::getQuestions);
+        this.get("/getfeedbackquestionoption").handler(this::getQuestionOption);
+        this.post("/addfeedbackquestionanswer").handler(this::insertQuestionAnswer);
     }
 
     private void getDocuments(RoutingContext routingContext) {
@@ -254,8 +262,66 @@ public class CCAHandler extends AbstractRouteHandler{
             sendError(routingContext, "No updates found for this opportunity");
         }
     }
+    private void getQuestions(RoutingContext routingContext)
+    {
+        Integer id = LocalCache.getInstance().store(new QueryData("cca.questions.select"));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag ||resultData.rows.isEmpty() )
+                    {
+                        sendError(routingContext, "Error in fetching the data");
+                        LOG.error("Error in fetching the data " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        JsonArray firstResJson = new JsonArray();
+                        for (JsonObject jsonObject : resultData.rows)
+                        {
+                            firstResJson.add(jsonObject);
+                        }
+                        sendJsonResponse(routingContext, firstResJson.toString());
+                    }
+                });
+    }
 
+    private void getQuestionOption(RoutingContext routingContext)
+    {
+        Integer id = LocalCache.getInstance().store(new QueryData("cca.questionsoption.select"));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag ||resultData.rows.isEmpty() )
+                    {
+                        sendError(routingContext, "Error in fetching the data");
+                        LOG.error("Error in fetching the data " + resultData.errorMessage, resultData.error);
+                    }
+                    else
+                    {
+                        JsonArray firstResJson = new JsonArray();
+                        for (JsonObject jsonObject : resultData.rows)
+                        {
+                            firstResJson.add(jsonObject);
+                        }
+                        sendJsonResponse(routingContext, firstResJson.toString());
+                    }
+                });
+    }
 
-
-
+    private void insertQuestionAnswer(RoutingContext routingContext) {
+        for(int i=0;i<routingContext.getBodyAsJsonArray().size();i++){
+            JsonObject questionanswerList=routingContext.getBodyAsJsonArray().getJsonObject(i);
+            Integer id = LocalCache.getInstance().store(new QueryData("cca.insert.questionanswer", questionanswerList));
+            VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                    (AsyncResult<Message<Integer>> selectResult) -> {
+                        QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                        if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                        {
+                            sendError(routingContext, "Error in inserting question ans answer");
+                            return;
+                        }
+                    });
+        }
+        sendJsonResponse(routingContext, "succesfully inserted");
+    }
 }

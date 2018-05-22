@@ -31,7 +31,6 @@ public class GameApiServerVerticle extends AbstractVerticle
     {
         Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(GameApiServerVerticle.class.getCanonicalName(), new DeploymentOptions().setInstances(4));
-
     }
 
     @Override

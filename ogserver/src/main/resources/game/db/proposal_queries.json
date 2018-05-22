@@ -2217,6 +2217,27 @@
       "table": "offer_product_mapping",
       "query": "select * from offer_product_mapping where offerCode=? order by minOrderValue",
       "params": ["offerCode"]
+    },
+    {
+      "id":"cca.questions.select",
+      "type":"select",
+      "table":"cca_questions",
+      "query":"select * from cca_questions",
+      "params":[]
+    },
+    {
+      "id":"cca.questionsoption.select",
+      "type":"select",
+      "table":"cca_answers",
+      "query":"select * from cca_answers",
+      "params":[]
+    },
+    {
+      "id": "cca.insert.questionanswer",
+      "type": "insert",
+      "table": "cca_question_answers",
+      "query": "insert into cca_question_answers(opportunity_id, question_code, answer_code) values (?, ?, ?)",
+      "params": ["opportunity_id", "question_code", "answer_code"]
     }
   ]
 }
