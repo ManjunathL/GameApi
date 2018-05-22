@@ -527,28 +527,12 @@ define([
          "click #save_CNote": "submitConceptNote",
          "click #save_CTag": "submitConceptTag",
          "click .remove-pin": "removeConceptFromCboard",
-         "click. #show_description":"viewDescription",
          "click #saveSpaveElement":"addConcept2Cboard",
          "change #conceptfileupload": "getuploadedFileDtls",
          "click #showImg": "showuploadedFileDtls",
          "submit #userconceptfrm": "submitUploadConceptBoard",
          "click #removeRecommnded": "removeRecommndedConcept",
 
-
-    },
-    viewDescription:function(evt){
-         var currentTarget = $(evt.currentTarget);
-          var conceptId = currentTarget.data('element');
-          var cnpnm = currentTarget.data('element1');
-
-
-        $('#show_description-modal').modal('show');
-
-        $('#show_description-dtls').html(_.template(view_conceptDesc)({
-            "conceptId": conceptId,
-            "conceptDesc": cnpnm
-
-        }));
 
     },
     viewAddCboard: function(event){
@@ -987,7 +971,7 @@ define([
         var consTitle = conceptdtls[0].conceptDetails;
         var n = consTitle.length;
         if (n > 60){
-        concDes = consTitle.slice(0, 60) +' <a  href="javascript:void(0);" class="color-orange read_full sidebar-box black" ><a href="javascript:void(0);" onclick="showDesc()" class="button readMore" style="">Read More...</a></p></a>';
+        concDes = consTitle.slice(0, 60) +' <a href="javascript:void(0);" class="color-orange read_full sidebar-box black" ><a href="javascript:void(0);" onclick="showDesc()" class="button readMore" style="">Read More...</a></p></a>';
 
         } else {
         concDes = consTitle;
@@ -1019,8 +1003,8 @@ define([
      $("#concDes").html(concDes);
      $("#concFullDes").html(concFullDes);
      $("#ConcCod").val(cconceptCode);
-     $("#show_description").attr("data-element",cconceptId);
-     $("#show_description").attr("data-element1",consTitle);
+     $("#show_description11").attr("data-element",cconceptId);
+     $("#show_description11").attr("data-element1",consTitle);
 
 
      $("#conId").val(cconceptId);
@@ -1064,81 +1048,83 @@ define([
      });
     },
     getNeedConceptDetails: function(evt){
-     var currentTarget = $(evt.currentTarget);
+        var currentTarget = $(evt.currentTarget);
 
-     var cconceptId = currentTarget.data('element3');
+        var cconceptId = currentTarget.data('element3');
 
-     var that = this;
-     var needconceptlists = that.needconceptlists;
-     needconceptlists = needconceptlists.toJSON();
+        var that = this;
+        var needconceptlists = that.needconceptlists;
+        needconceptlists = needconceptlists.toJSON();
 
-     console.log("@@@@@@@@@@@@@@@@@ needconceptlists @@@@@@@@@@@@@@@@@@@@");
-     console.log(needconceptlists);
+        console.log("@@@@@@@@@@@@@@@@@ needconceptlists @@@@@@@@@@@@@@@@@@@@");
+        console.log(needconceptlists);
 
 
-       var conceptdtls = that.needconceptlists.getConcept(needconceptlists[0].youMayNeedItConceptList,cconceptId);
+        var conceptdtls = that.needconceptlists.getConcept(needconceptlists[0].youMayNeedItConceptList,cconceptId);
 
-    console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
-    console.log(conceptdtls);
-    console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
-    console.log(conceptdtls[0].conceptCode);
+        console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
+        console.log(conceptdtls);
+        console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
+        console.log(conceptdtls[0].conceptCode);
 
-    var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
-    if(typeof(conceptdtls) !== 'undefined'){
+        var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
+        if(typeof(conceptdtls) !== 'undefined'){
         imgnm = conceptdtls[0].imgURL;
 
-//        var consTitle = conceptdtls[0].conceptTitle;
-//        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
+        //        var consTitle = conceptdtls[0].conceptTitle;
+        //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
         var consTitle = conceptdtls[0].conceptTypeDescription;
         var n = consTitle.length;
-        /*if (n > 160){
-        concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+        if (n > 60){
+        concDes = consTitle.slice(0, 60) +' <a href="javascript:void(0);" class="color-orange read_full sidebar-box black" ><a href="javascript:void(0);" onclick="showDesc()" class="button readMore" style="">Read More...</a></p></a>';
 
         } else {
         concDes = consTitle;
-        }*/
+        }
 
+        concFullDes = consTitle;
 
         cnpnm = conceptdtls[0].conceptTitle;
-//        cnpnm = conceptdtls[0].conceptTitle;
+        //        cnpnm = conceptdtls[0].conceptTitle;
         cconceptCode = conceptdtls[0].conceptCode;
         userNote = conceptdtls[0].userNote;
         userTag = conceptdtls[0].userTag;
-    }
+        }
 
-     var pageno = 0;
-     var itemPerPage = 20;
+        var pageno = 0;
+        var itemPerPage = 20;
 
-     var conceptboardId = that.filter.get('selectedconceptboardId');
-     var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
-
-
-     var vconceptCode = cconceptCode;
-     var relconceptCode = cconceptCode;
-
-     $("#concNmm").text(cnpnm);
-     $("#concNm").text(cnpnm);
-     $("#concNm1").text(cnpnm);
-     $("#concDes").html(concDes);
-     $("#ConcCod").val(cconceptCode);
-     $("#show_description").attr("data-element",cconceptId);
-     $("#show_description").attr("data-element1",consTitle);
+        var conceptboardId = that.filter.get('selectedconceptboardId');
+        var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
 
 
-     $("#conId").val(cconceptId);
-     $("#mastImgg").attr("src",imgnm);
-     $("#mastImg1").attr("src",imgnm);
+        var vconceptCode = cconceptCode;
+        var relconceptCode = cconceptCode;
 
-     if(typeof(userNote) != 'undefined' && userNote != null){
+        $("#concNmm").text(cnpnm);
+        $("#concNm").text(cnpnm);
+        $("#concNm1").text(cnpnm);
+        $("#concDes").html(concDes);
+        $("#concFullDes").html(concFullDes);
+        $("#ConcCod").val(cconceptCode);
+        $("#show_description").attr("data-element",cconceptId);
+        $("#show_description").attr("data-element1",consTitle);
+
+
+        $("#conId").val(cconceptId);
+        $("#mastImgg").attr("src",imgnm);
+        $("#mastImg1").attr("src",imgnm);
+
+        if(typeof(userNote) != 'undefined' && userNote != null){
         $("#conceptNotetxt").html(userNote);
         $("#save_CNote").text("Edit Notes");
-     }else{
+        }else{
         $("#conceptNotetxt").html('');
         $("#save_CNote").text("Add Notes");
-     }
-//     $("#conceptNotetxt").text(userNote);
+        }
+        //     $("#conceptNotetxt").text(userNote);
 
-     if(typeof(userTag) != 'undefined' && userTag != null){
+        if(typeof(userTag) != 'undefined' && userTag != null){
         var arr = userTag.split(",");
         var taglists = '';
         for( var i=0; i< arr.length; i++ ){
@@ -1146,109 +1132,111 @@ define([
         }
         $("#tagtxt").val(userTag);
         $("#taglists").html(taglists);
-     }else{
+        }else{
         $("#tagtxt").html('');
-     }
+        }
 
-     $('#details-modal').modal('show');
+        $('#details-modal').modal('show');
 
 
-     var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
-     var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
+        var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
+        var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
 
-     Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
+        Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
          console.log("@@@@@@@@@@@@@ In side Concept Promise @@@@@@@@@@@@@@@@@@");
          that.fetchRelatedConceptAndRender();
-     });
+        });
     },
     getRelatedConceptDetails: function(evt){
-     var currentTarget = $(evt.currentTarget);
+        var currentTarget = $(evt.currentTarget);
 
-     var cconceptId = currentTarget.data('element4');
+        var cconceptId = currentTarget.data('element4');
 
-     var cconceptCode = currentTarget.data('element5');
-     var that = this;
+        var cconceptCode = currentTarget.data('element5');
+        var that = this;
 
-     var relatedConceptsListObj = that.related_concepts;
-     relatedConceptsListObj = relatedConceptsListObj.toJSON();
+        var relatedConceptsListObj = that.related_concepts;
+        relatedConceptsListObj = relatedConceptsListObj.toJSON();
 
         console.log("@@@@@@@@@@@@@@@@@ relatedConceptsList @@@@@@@@@@@@@@@@@@@@");
         console.log(relatedConceptsListObj);
-     console.log("@@@@@@@@@@@@@@@@@ cconceptCode @@@@@@@@@@@@@@@@@@@@");
-     console.log(cconceptCode);
+        console.log("@@@@@@@@@@@@@@@@@ cconceptCode @@@@@@@@@@@@@@@@@@@@");
+        console.log(cconceptCode);
 
 
 
-    /*if(typeof(cconceptCode) !== 'undefined' && relatedConceptsListObj != ""){
+        /*if(typeof(cconceptCode) !== 'undefined' && relatedConceptsListObj != ""){
         var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
         console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
-    }else{
-       var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
-    }*/
+        }else{
+        var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
+        }*/
 
-    if(typeof(cconceptCode) !== 'undefined'){
+        if(typeof(cconceptCode) !== 'undefined'){
         var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
         console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
-      }
-    console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
-    console.log(conceptdtls);
-    console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
-    console.log(conceptdtls[0].conceptCode);
+        }
+        console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
+        console.log(conceptdtls);
+        console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
+        console.log(conceptdtls[0].conceptCode);
 
-    var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
-    if(typeof(conceptdtls) !== 'undefined'){
+        var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
+        if(typeof(conceptdtls) !== 'undefined'){
         imgnm = conceptdtls[0].imgURL;
 
-//        var consTitle = conceptdtls[0].conceptTitle;
-//        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
+        //        var consTitle = conceptdtls[0].conceptTitle;
+        //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
         var consTitle = conceptdtls[0].conceptDetails;
         var n = consTitle.length;
-        if (n > 160){
-        concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+        if (n > 60){
+        concDes = consTitle.slice(0, 60) +' <a href="javascript:void(0);" class="color-orange read_full sidebar-box black" ><a href="javascript:void(0);" onclick="showDesc()" class="button readMore" style="">Read More...</a></p></a>';
 
         } else {
         concDes = consTitle;
         }
 
+        concFullDes = consTitle;
 
         cnpnm = conceptdtls[0].conceptTitle;
-//        cnpnm = conceptdtls[0].conceptTitle;
+        //        cnpnm = conceptdtls[0].conceptTitle;
         cconceptCode = conceptdtls[0].conceptCode;
         userNote = conceptdtls[0].userNote;
         userTag = conceptdtls[0].userTag;
-    }
+        }
 
-     var pageno = 0;
-     var itemPerPage = 50;
+        var pageno = 0;
+        var itemPerPage = 50;
 
-     var conceptboardId = that.filter.get('selectedconceptboardId');
-     var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
-
-
-     var vconceptCode = cconceptCode;
-     var relconceptCode = cconceptCode;
-
-     $("#concNmm").text(cnpnm);
-     $("#concDes").html(concDes);
-     $("#ConcCod").val(cconceptCode);
-     $("#show_description").attr("data-element",cconceptId);
-     $("#show_description").attr("data-element1",consTitle);
+        var conceptboardId = that.filter.get('selectedconceptboardId');
+        var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
 
 
-     $("#conId").val(cconceptId);
-     $("#mastImgg").attr("src",imgnm);
-     $("#mastImg1").attr("src",imgnm);
+        var vconceptCode = cconceptCode;
+        var relconceptCode = cconceptCode;
 
-     if(typeof(userNote) != 'undefined' && userNote != null){
+        $("#concNmm").text(cnpnm);
+        $("#concDes").html(concDes);
+        $("#concFullDes").html(concFullDes);
+        $("#ConcCod").val(cconceptCode);
+        $("#show_description11").attr("data-element",cconceptId);
+        $("#show_description11").attr("data-element1",consTitle);
+
+
+        $("#conId").val(cconceptId);
+        $("#mastImgg").attr("src",imgnm);
+        $("#mastImg1").attr("src",imgnm);
+
+        if(typeof(userNote) != 'undefined' && userNote != null){
         $("#conceptNotetxt").html(userNote);
         $("#save_CNote").text("Edit Notes");
-     }else{
+        }else{
         $("#conceptNotetxt").html('');
         $("#save_CNote").text("Add Notes");
-     }
-//     $("#conceptNotetxt").text(userNote);
+        }
+        //     $("#conceptNotetxt").text(userNote);
 
-     if(typeof(userTag) != 'undefined' && userTag != null){
+        if(typeof(userTag) != 'undefined' && userTag != null){
         var arr = userTag.split(",");
         var taglists = '';
         for( var i=0; i< arr.length; i++ ){
@@ -1256,109 +1244,110 @@ define([
         }
         $("#tagtxt").val(userTag);
         $("#taglists").html(taglists);
-     }else{
+        }else{
         $("#tagtxt").html('');
-     }
+        }
 
-     $('#details-modal').modal('show');
+        $('#details-modal').modal('show');
 
 
-     var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
-     var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
+        var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
+        var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
 
-     Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
+        Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
          console.log("@@@@@@@@@@@@@ In side Concept Promise @@@@@@@@@@@@@@@@@@");
          that.fetchRelatedConceptAndRender();
-     });
+        });
     },
     getSimilarConceptDetails: function(evt){
-     var currentTarget = $(evt.currentTarget);
+        var currentTarget = $(evt.currentTarget);
 
-     var cconceptId = currentTarget.data('element4');
+        var cconceptId = currentTarget.data('element4');
 
-     var cconceptCode = currentTarget.data('element5');
-     var that = this;
+        var cconceptCode = currentTarget.data('element5');
+        var that = this;
 
-      var similarConceptsListObj = {};
+        var similarConceptsListObj = {};
 
-     var similarConceptsListObj = that.similar_concepts;
+        var similarConceptsListObj = that.similar_concepts;
              similarConceptsListObj = similarConceptsListObj.toJSON();
 
              console.log("@@@@@@@@@@@@@@@@@ similarConceptsList @@@@@@@@@@@@@@@@@@@@");
                   console.log(similarConceptsListObj);
 
-   /*if(typeof(cconceptCode) !== 'undefined' && relatedConceptsListObj != ""){
+        /*if(typeof(cconceptCode) !== 'undefined' && relatedConceptsListObj != ""){
         var conceptdtls = that.related_concepts.getRelatedConcept(relatedConceptsListObj[0].relatedConceptsList,cconceptCode);
         console.log("@@@@@@@@@@@@@@@@@ Inside Related Concept @@@@@@@@@@@@@@@@@@@@");
-    }else{
-       var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
-    }*/
+        }else{
+        var conceptdtls = that.conceptlists.getConcept(conceptlists[0].listOfConceptBoardConcept,cconceptId);
+        }*/
 
-    if(typeof(cconceptCode) !== 'undefined'){
+        if(typeof(cconceptCode) !== 'undefined'){
         var conceptdtls = that.similar_concepts.getSimilarConcept(similarConceptsListObj[0].similarConceptsList,cconceptCode);
         console.log("@@@@@@@@@@@@@@@@@ Inside Similar Concept @@@@@@@@@@@@@@@@@@@@");
-    }
-    console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
-    console.log(conceptdtls);
-    console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
-    console.log(conceptdtls[0].conceptCode);
+        }
+        console.log("@@@@@@@@@@@@@@@@@ conceptdtls @@@@@@@@@@@@@@@@@@@@");
+        console.log(conceptdtls);
+        console.log("@@@@@@@@@@@@@@@@@ conceptCode @@@@@@@@@@@@@@@@@@@@");
+        console.log(conceptdtls[0].conceptCode);
 
-    var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
-    if(typeof(conceptdtls) !== 'undefined'){
+        var imgnm = '', concDes = '', cnpnm = '', cconceptCode = '', userNote = '', userTag = '';
+        if(typeof(conceptdtls) !== 'undefined'){
         imgnm = conceptdtls[0].imgURL;
 
-//        var consTitle = conceptdtls[0].conceptTitle;
-//        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
+        //        var consTitle = conceptdtls[0].conceptTitle;
+        //        var consTitle = "Chilika Lake is a brackish water lagoon, spread over the Puri, Khurda and Ganjam districts of Odisha state on the east coast of India, at the mouth of the Daya River, flowing into the Bay of Bengal, covering an area of over 1,100 km";
         var consTitle = conceptdtls[0].conceptDetails;
         var n = consTitle.length;
-        if (n > 160){
-        concDes = consTitle.slice(0, 160) +' <a id="show_description" href="javascript:void(0);" class="color-orange read_full" >Read More...</a>';
+        if (n > 60){
+        concDes = consTitle.slice(0, 60) +' <a href="javascript:void(0);" class="color-orange read_full sidebar-box black" ><a href="javascript:void(0);" onclick="showDesc()" class="button readMore" style="">Read More...</a></p></a>';
 
         } else {
         concDes = consTitle;
         }
-
+        concFullDes = consTitle;
 
         cnpnm = conceptdtls[0].conceptTitle;
-//        cnpnm = conceptdtls[0].conceptTitle;
+        //        cnpnm = conceptdtls[0].conceptTitle;
         cconceptCode = conceptdtls[0].conceptCode;
         userNote = conceptdtls[0].userNote;
         userTag = conceptdtls[0].userTag;
-    }
+        }
 
-     var pageno = 0;
-     var itemPerPage = 20;
+        var pageno = 0;
+        var itemPerPage = 20;
 
-     var conceptboardId = that.filter.get('selectedconceptboardId');
-     var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
-
-
-     var vconceptCode = cconceptCode;
-     var relconceptCode = cconceptCode;
-
-     $("#concNmm").text(cnpnm);
-     $("#concNm").text(cnpnm);
-     $("#concNm1").text(cnpnm);
-     $("#concDes").html(concDes);
-     $("#ConcCod").val(cconceptCode);
-     $("#show_description").attr("data-element",cconceptId);
-     $("#show_description").attr("data-element1",consTitle);
+        var conceptboardId = that.filter.get('selectedconceptboardId');
+        var sspaceTypeCode = that.filter.get('selectedspaceTypeCode');
 
 
-     $("#conId").val(cconceptId);
-     $("#mastImgg").attr("src",imgnm);
-     $("#mastImg1").attr("src",imgnm);
+        var vconceptCode = cconceptCode;
+        var relconceptCode = cconceptCode;
 
-     if(typeof(userNote) != 'undefined' && userNote != null){
+        $("#concNmm").text(cnpnm);
+        $("#concNm").text(cnpnm);
+        $("#concNm1").text(cnpnm);
+        $("#concDes").html(concDes);
+        $("#concFullDes").html(concFullDes);
+        $("#ConcCod").val(cconceptCode);
+        $("#show_description11").attr("data-element",cconceptId);
+        $("#show_description11").attr("data-element1",consTitle);
+
+
+        $("#conId").val(cconceptId);
+        $("#mastImgg").attr("src",imgnm);
+        $("#mastImg1").attr("src",imgnm);
+
+        if(typeof(userNote) != 'undefined' && userNote != null){
         $("#conceptNotetxt").html(userNote);
         $("#save_CNote").text("Edit Notes");
-     }else{
+        }else{
         $("#conceptNotetxt").html('');
         $("#save_CNote").text("Add Notes");
-     }
-//     $("#conceptNotetxt").text(userNote);
+        }
+        //     $("#conceptNotetxt").text(userNote);
 
-     if(typeof(userTag) != 'undefined' && userTag != null){
+        if(typeof(userTag) != 'undefined' && userTag != null){
         var arr = userTag.split(",");
         var taglists = '';
         for( var i=0; i< arr.length; i++ ){
@@ -1366,20 +1355,20 @@ define([
         }
         $("#tagtxt").val(userTag);
         $("#taglists").html(taglists);
-     }else{
+        }else{
         $("#tagtxt").html('');
-     }
+        }
 
-     $('#details-modal').modal('show');
+        $('#details-modal').modal('show');
 
 
-     var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
-     var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
+        var similarConceptDtlsPromise = that.getsimilarConcepts(conceptboardId, vconceptCode, pageno, itemPerPage);
+        var relatedConceptDtlsPromise = that.getrelateConcepts(conceptboardId, relconceptCode, sspaceTypeCode, pageno, itemPerPage);
 
-     Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
+        Promise.all([similarConceptDtlsPromise,relatedConceptDtlsPromise]).then(function() {
          console.log("@@@@@@@@@@@@@ In side Concept Promise @@@@@@@@@@@@@@@@@@");
          that.fetchRelatedConceptAndRender();
-     });
+        });
     },
     getsimilarConcepts: function(conceptboardId, vconceptCode, pageno, itemPerPage){
      var that = this;

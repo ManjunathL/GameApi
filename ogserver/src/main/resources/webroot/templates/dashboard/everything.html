@@ -40,17 +40,22 @@
         top: 25px;
     }
 </style>
+<% var conceptboardtagList = [] %>
 <section>
     <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;">
         <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;">Home</h2>
 
         <div class="col-md-12 col-lg-12" >
+            <% if(typeof(conceptalltags) !== 'undefined' && conceptalltags.length > 0){ %>
+            <% console.log("Inside Lopp ") %>
+            <% console.log(conceptalltags.length) %>
             <div id="myCarousel112" class="carousel slide mt30">
                 <div class="tagicos">
                     <div class="tagicos clearfix carousel-inner">
-                        <% if(typeof(conceptalltags) !== 'undefined'){ %>
                         <% var tagnmArr = [] %>
-                        <% _.each(conceptalltags[0].conceptboardtagList, function(conceptdtls, i){ %>
+                        <% var conceptboardtagList = conceptalltags[0].conceptboardtagList %>
+                        <% if(typeof(conceptboardtagList) !== 'undefined' && conceptboardtagList != []){ %>
+                        <% _.each(conceptboardtagList, function(conceptdtls, i){ %>
                         <% tagnmArr.push('.'+conceptdtls.tag) %>
                         <% }); %>
                         <% } %>
@@ -75,13 +80,17 @@
                         <% } %>
                         <% }); %>
                         <% } %>
+
                     </div>
                 </div>
-                <% if(conceptalltags[0].conceptboardtagList.length > 11){ %>
+                <% if(typeof(conceptboardtagList) !== 'undefined' && conceptboardtagList != []){ %>
+                <% if(conceptboardtagList.length > 11){ %>
                 <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x" style="color: #33434E;"></i></a>
                 <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x" style="color: #33434E;"></i></a>
                 <% } %>
+                <% } %>
             </div>
+            <% } %>
             <div class="position-relative" style="height:auto;">
                 <div class="pinBoot bg-white" id="listOfConceptspinBoot" style="margin-top: 15px;margin-bottom: 130px;k">
 

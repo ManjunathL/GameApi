@@ -93,6 +93,15 @@ hr {
    margin-right:30px;
 }
 
+.bg-lightGrey{
+    background: #f2f4f4;
+}
+.blankTxtbox{
+    color: #e80602;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 15px;
+}
 .panelTitletxt{
     padding: 10px 20px;
     font-size: 22px;
@@ -584,7 +593,7 @@ hr {
     border-width: 1px;
     /* border-color: #333; */
     height: 35px;
-    border: 1px solid #eee;
+    border: 1px solid #7b7b7a69;
 }
 .input-group .form-control:not(:first-child):not(:last-child), .input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child) {
     border-radius: 50px 0px 0px 50px;    
@@ -596,9 +605,9 @@ hr {
 }
 .filter-box-top .search-ico{
 	background: #fff;
-    border: 1px solid #eee;
+    border: 1px solid #7b7b7a69;
     border-radius: 0px 50px 50px 0px;
-    padding: 5px 20px;
+    padding: 5.5px 20px;
     font-size: 16px;
     background: #fff;
     color:#888888;;

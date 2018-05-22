@@ -277,43 +277,9 @@
                                     </div>
                                 </div>
                             </div>
-                     <!--       <div class="col-md-12 col-lg-12">
-
-                                <% if(typeof(spacetemplates) !== 'undefined'){ %>
-                                <div id="owl-tmpltype" class="owl-carousel owl-theme">
-                                    <% _.each(spacetemplates[0].spaceTemplateList, function(spltemst, i){ %>
-                                    <div class="item selTemp"
-                                         data-element="<%= spltemst.templateCode %>"  >
-                                        <img src="<%= spltemst.imgUrl %>" alt="<%= spltemst.templateCode %>" class="img-responsive img-centered">
-                                        <h5><%= spltemst.templateTitle %></h5>
-                                    </div>
-                                    <% }); %>
-                                </div>
-                                <% } %>
-                                <div class="clearfix"></div>
-                            </div>-->
                             <div class="col-sm-6 col-md-6">
                                 <div class="new-pin">
-                                    <!--<form>
-                                        <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="Mood Board Name">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="submit" name="pin" class="btn btn-defalt pin-submit" value="Submit">
-                                        </div>
-                                    </form>-->
                                 </div>
-                              <!--  <div>
-                                    <label class="moodboard-lbl">All Concept Boards</label>
-                                    <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
-                                    <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
-                                    <div class="boardlst" data-element="<%= conceptdtl.id %>"><%= conceptdtl.name %></div>
-                                    <% }); %>
-                                    <% } %>
-                                </div>-->
-
-
                             </div>
                         </div>
                     </div>
@@ -348,7 +314,7 @@
                         <div id="list1">
                         </div>
                         <div class="row display-none" id="addUpload_error_row" style="text-align: center;">
-                            <p class="margin0 error-text align-center" id="addUpload_error" style="color: darkred;"></p>
+                            <p class="margin0 error-text blankTxtbox" id="addUpload_error"></p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -356,14 +322,14 @@
                         <input type="text" class="form-control" id="cboardcnameTxt" name="cboardname" />
                     </div>
                     <div class="row display-none" id="addUploadImage_error_row" style="text-align: center;">
-                        <p class="margin0 error-text align-center" id="addUploadImage_error" style="color: darkred;"></p>
+                        <p class="margin0 error-text blankTxtbox" id="addUploadImage_error"></p>
                     </div>
                     <div class="form-group">
                         <h4>Concept Board Desc:</h4>
                         <input type="text" class="form-control" id="cboarddescTxt" name="cboarddesc" />
                     </div>
                     <div class="row display-none" id="addUploadImagedesc_error_row" style="text-align: center;">
-                        <p class="margin0 error-text align-center" id="addUploadImagedesc_error" style="color: darkred;"></p>
+                        <p class="margin0 error-text blankTxtbox" id="addUploadImagedesc_error"></p>
                     </div>
                         <div id="spaceTempUpload"></div>
                     <div class="mt15" style="text-align:right;">
