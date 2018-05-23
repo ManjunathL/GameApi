@@ -2236,8 +2236,8 @@
       "id": "cca.insert.questionanswer",
       "type": "insert",
       "table": "cca_question_answers",
-      "query": "insert into cca_question_answers(opportunity_id, question_code, answer_code) values (?, ?, ?)",
-      "params": ["opportunity_id", "question_code", "answer_code"]
+      "query": "insert into cca_question_answers(opportunity_id,question_group_code,question_code, answer_code) values (?,? ,?, ?)",
+      "params": ["opportunity_id","question_group_code","question_code", "answer_code"]
     }
   ]
 }
