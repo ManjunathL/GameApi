@@ -4,6 +4,9 @@ define([
   'backbone',
   'bootstrap',
   'text!templates/my_account/user_preference.html',
+  'text!templates/my_account/home_preference.html',
+  'text!templates/my_account/family_preference.html',
+  'text!templates/my_account/member_preference.html',
   'text!templates/my_account/edit_member.html',
   'collections/user_preferences',
   'collections/user_members',
@@ -13,7 +16,7 @@ define([
   'models/filter',
   'collections/family_preferences',
   'collections/editfamilymembers'
-], function($, _, Backbone, Bootstrap, UserProfileTemplate, editMemberPageTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter,FamilyPreferences,EditFamilyMembers){
+], function($, _, Backbone, Bootstrap, UserPreferenceTemplate, HomePreferenceTemplate, FamilyPreferenceTemplate, MemberPreferenceTemplate, editMemberPageTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter,FamilyPreferences,EditFamilyMembers){
   var UserProfilePage = Backbone.View.extend({
     el: '.page',
     user_home_preferences: null,
@@ -51,10 +54,6 @@ define([
         }else{
             var memberId = 0;
         }
-
-
-
-
 
         var getUserHomePreferencesPromise = that.getUserHomePreferences();
         var getUserFamilyPreferencesPromise = that.getUserFamilyPreferences();
@@ -162,7 +161,7 @@ define([
       });
 
     },
-     getAllFamilyPreferences: function(){
+    getAllFamilyPreferences: function(){
             var that = this;
 
             var userId = sessionStorage.userId;
@@ -211,12 +210,23 @@ define([
         console.log("@@@@@@@@@@@@@@@@@@ user_members @@@@@@@@@@@@@@@@@@2222");
         console.log(user_members);
 
-        $(this.el).html(_.template(UserProfileTemplate)({
+        $(this.el).html(_.template(UserPreferenceTemplate)({
            'userHomePreferencesDtls':user_home_preferences.toJSON(),
            'userFamilyPreferencesDtls':user_family_preferences.toJSON(),
            'userMemebersPreferencesDtls':user_members.toJSON(),
-           'allFamilyPreference':family_preference.toJSON(),
-           //'editFamilyPreference':editfamilymembers.toJSON()
+           'allFamilyPreference':family_preference.toJSON()
+       }));
+
+        $("#home").html(_.template(HomePreferenceTemplate)({
+           'userHomePreferencesDtls':user_home_preferences.toJSON()
+       }));
+       $("#family").html(_.template(FamilyPreferenceTemplate)({
+           'userFamilyPreferencesDtls':user_family_preferences.toJSON()
+       }));
+
+       $("#members").html(_.template(MemberPreferenceTemplate)({
+           'userMemebersPreferencesDtls':user_members.toJSON(),
+            'allFamilyPreference':family_preference.toJSON()
        }));
     },
     events: {
@@ -227,8 +237,50 @@ define([
         "click .userMember":"getSelectedMember",
         "click #save_familyMemebr":"saveFamilyMembers",
         "click #update_familyMemebr":"updateFamilyMembers",
-        "click #edit_familyMemebr":"editFamilyMembers"
+        "click #edit_familyMemebr":"editFamilyMembers",
+        "click #HomeTab":"ViewHomeTabPanel",
+        "click #FamilyTab":"ViewFamilyTabPanel",
+        "click #MemberTab":"ViewMemberTabPanel"
 
+    },
+    ViewHomeTabPanel:function(){
+
+        var that = this;
+        var user_home_preferences = that.user_home_preferences;
+
+        console.log("@@@@@@@@@@@@ Inside Home Panel @@@@@@@@@@@@@@@");
+
+        $("#home").html('');
+
+        $("#home").html(_.template(HomePreferenceTemplate)({
+           'userHomePreferencesDtls':user_home_preferences.toJSON()
+       }));
+    },
+    ViewFamilyTabPanel:function(){
+
+        var that = this;
+        var user_family_preferences = that.user_family_preferences;
+
+        console.log("@@@@@@@@@@@@ Inside Family Panel @@@@@@@@@@@@@@@");
+
+        $("#family").html('');
+        $("#family").html(_.template(FamilyPreferenceTemplate)({
+           'userFamilyPreferencesDtls':user_family_preferences.toJSON()
+       }));
+    },
+    ViewMemberTabPanel:function(){
+
+        var that = this;
+        var user_members = that.user_members;
+        var family_preference = that.family_preference;
+
+        console.log("@@@@@@@@@@@@ Inside Member Panel @@@@@@@@@@@@@@@");
+
+        $("#members").html('');
+        $("#members").html(_.template(MemberPreferenceTemplate)({
+           'userMemebersPreferencesDtls':user_members.toJSON(),
+            'allFamilyPreference':family_preference.toJSON()
+       }));
     },
     editFamilyMembers: function(evt){
               var that = this;
@@ -257,7 +309,7 @@ define([
              });
 
     },
-     fetchEditAndRender: function(){
+    fetchEditAndRender: function(){
          var that = this;
          var editfamilymembers = that.editfamilymembers;
 

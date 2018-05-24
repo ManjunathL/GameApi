@@ -1,0 +1,252 @@
+<% var selOPTFID = ''; %>
+<% if(typeof(userFamilyPreferencesDtls) !== 'undefined' && userFamilyPreferencesDtls.length > 0){ %>
+<% _.each(userFamilyPreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
+
+<% if(userQuesdtl.questionnaire.questionDetails.name == "We would like our home to be"){ %>
+<div class="col-md-12">
+    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+    <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
+    <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
+    <div class="form-group col-md-4">
+        <figure>
+            <img  id="<%= userOptsdtl.quesOptionid %>" src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" class="wrap img-circle multiselectFamily clickAction userquesfamily"  width="300px" height="250px">
+            <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined'){ %>
+            <% _.each(userQuesdtl.userSelectedOption, function(userSelOptsdtl, k){ %>
+            <% if(typeof(userSelOptsdtl) !== 'undefined' && userSelOptsdtl.optionId == userOptsdtl.quesOptionid){ %>
+            <i id="idIcon<%= userOptsdtl.quesOptionid %>" class="fa fa-check-circle selFmIco" aria-hidden="true"
+
+               style="display:block;"
+
+            ></i>
+            <% } %>
+            <% }); %>
+            <% } %>
+            <i id="idIcon<%= userOptsdtl.quesOptionid %>" class="fa fa-check-circle selFmIco" aria-hidden="true"
+
+               style="display:none;"
+
+            ></i>
+
+
+            <figcaption><%= userOptsdtl.name %></figcaption>
+        </figure>
+    </div>
+    <% }else{ %>
+    <div class="form-group col-xs-2">
+        <figure>
+            <div class="form-group">
+                <button class="btn btn-light btn-circle btn-labeltxt userquesfamily" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"><%= userOptsdtl.name %></button>
+            </div>
+        </figure>
+    </div>
+    <% } %>
+
+    <% }); %>
+</div>
+<div class="clearfix"></div>
+<% }else{ %>
+<% if(userQuesdtl.questionnaire.questionDetails.name == "We love to" || userQuesdtl.questionnaire.questionDetails.name == "We usually do"){ %>
+<div class="col-md-12">
+    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+    <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
+
+    <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
+    <div class="form-group col-md-2">
+        <figure>
+
+                                         <span  id="IconImage<%= userOptsdtl.quesOptionid %>" class="btn btn-labeltxt clickAction userquesfamily multiselectFam" style="padding: 0px 0px 0px 0px;
+                                        <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined'){ %>
+                                            <% _.each(userQuesdtl.userSelectedOption, function(userSelOptsdtl, k){ %>
+                                               <% if(typeof(userSelOptsdtl.optionId) !== 'undefined' && userSelOptsdtl.optionId == userOptsdtl.quesOptionid){ %> background-color: rgb(99, 78, 66); <% } %>
+                                            <% }); %>
+                                        <% } %>
+                                        " data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>">
+                                        <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle "  width="80px" height="80px">
+                                         </span>
+            <figcaption><%= userOptsdtl.name %></figcaption>
+        </figure>
+    </div>
+    <% }else{ %>
+    <div class="form-group col-xs-2">
+        <figure>
+            <div class="form-group ">
+                <button id="butt<%= userOptsdtl.quesOptionid %>" name="<%= userOptsdtl.name %>" class="btn btn-light btn-circle btn-labeltxt multibutton userquesfamily cirbtn <%= userOptsdtl.name %>"  data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" ><%= userOptsdtl.name %></button>
+            </div>
+        </figure>
+    </div>
+    <% } %>
+
+    <% }); %>
+</div>
+<div class="clearfix"></div>
+<% }else{ %>
+<div class="col-md-6">
+    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+    <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
+
+    <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined' && userQuesdtl.userSelectedOption != ""){ %>
+    <% var selOPTFID = userQuesdtl.userSelectedOption[0].optionId %>
+    <% } %>
+
+    <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
+    <div class="form-group col-md-2">
+        <figure> <span  id="IconImage<%= userOptsdtl.quesOptionid %>"   class="btn btn-labeltxt clickAction userquesfamily multiselectFam" style="padding: 0px 0px 0px 0px;" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>">
+                                                <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" class="wrap img-circle "  width="80px" height="80px"></span>
+            <figcaption><%= userOptsdtl.name %></figcaption>
+        </figure>
+    </div>
+    <% }else{ %>
+    <div class="form-group col-xs-2">
+        <figure>
+            <div class="form-group ">
+                <button id="butt<%= userOptsdtl.quesOptionid %>"
+                        name="<%= userOptsdtl.name %>"
+                        class="btn btn-light btn-circle btn-labeltxt userquesfamily <%= userQuesdtl.questionnaire.questionDetails.name %>"
+                        data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>"
+                        data-element1="<%= userOptsdtl.quesOptionid %>"
+                        data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>"
+                <% if(selOPTFID == userOptsdtl.quesOptionid){ %> style="color: rgb(255, 255, 255); background-color: rgb(99, 78, 66);"<% } %>
+                >
+                <%= userOptsdtl.name  %>
+                </button>
+            </div>
+        </figure>
+    </div>
+    <% } %>
+
+    <% }); %>
+</div>
+<% } %>
+<% } %>
+<% }); %>
+<div class="saveHome">
+    <input type="submit" id="save_familyId" class="btn addcboard-btn" value="Save">
+    <a href="/projects" class="btn">SKIP</a>
+</div>
+<% } %>
+
+
+<script type="text/javascript">
+var arr = new Array();
+var ourhomearr = new Array();
+
+var i=0;
+$('.multiselectFamily').click(function (e) {
+
+    var currentTarget = $(e.currentTarget);
+    var familyoptId = currentTarget.attr('id');
+
+    var quesid = currentTarget.data('element');
+    var quesOptionid = currentTarget.data('element1');
+    var quesName = currentTarget.data('element2');
+
+        if($.inArray(familyoptId, arr) != '-1') {
+            $("#"+familyoptId).css("border","0px solid black ");
+            $("#idIcon"+familyoptId).css("display", "none");
+            var weWouldLikeOurHomeToBe = {};
+            arr.pop(familyoptId);
+            weWouldLikeOurHomeToBe['optionId'] = quesOptionid;
+            weWouldLikeOurHomeToBe['quesAnsId'] = quesOptionid;
+            weWouldLikeOurHomeToBe['quesName'] = quesName;
+            weWouldLikeOurHomeToBe['optionType'] = 2;
+            weWouldLikeOurHomeToBe['selectionStatus'] = 1;
+            weWouldLikeOurHomeToBe['userOptionDesc'] = "";
+            ourhomearr.pop(weWouldLikeOurHomeToBe);
+        } else {
+            $("#"+familyoptId).css("border","0px solid black");
+            $("#idIcon"+familyoptId).css("display", "block");
+            var weWouldLikeOurHomeToBe = {};
+            arr.push(familyoptId);
+            weWouldLikeOurHomeToBe['optionId'] = quesOptionid;
+            weWouldLikeOurHomeToBe['optionType'] = 2;
+            weWouldLikeOurHomeToBe['quesAnsId'] = quesOptionid;
+            weWouldLikeOurHomeToBe['quesName'] = quesName;
+            weWouldLikeOurHomeToBe['selectionStatus'] = 1;
+            weWouldLikeOurHomeToBe['userOptionDesc'] = "";
+            ourhomearr.push(weWouldLikeOurHomeToBe);
+        }
+
+        console.log("+++++++++++++ Tushar weWouldLikeOurHomeToBe +++++++++++++++++");
+        console.log(ourhomearr);
+        console.log("+++++++++++++++++++++++++++++++++++++++++");
+
+         filter.set({'selectedArr': ourhomearr});
+         filter.trigger('change');
+});
+
+
+var ourweLoveTO = new Array();
+var ourweusallyDo = new Array();
+$('.multiselectFam').click(function (e) {
+    var currentTarget = $(e.currentTarget);
+    var familyoptId = currentTarget.attr('id');
+
+    var Optionid = currentTarget.data('element');
+    var quesOptionid = currentTarget.data('element1');
+    var quesName = currentTarget.data('element2');
+
+        if($.inArray(familyoptId, arr) != '-1') {
+            $("#"+familyoptId).css("background-color","");
+
+            var weLoveTO = {};
+            var weusallyDo = {};
+            arr.pop(familyoptId);
+            if(quesName== "We love to"){
+                weLoveTO['optionId'] = quesOptionid;
+                weLoveTO['quesAnsId'] = quesOptionid;
+                weLoveTO['quesName'] = quesName;
+                weLoveTO['optionType'] = 2;
+                weLoveTO['selectionStatus'] = 1;
+                weLoveTO['userOptionDesc'] = "";
+                ourweLoveTO.pop(weLoveTO);
+             }
+            if(quesName=="We usually do"){
+
+                weusallyDo['optionId'] = quesOptionid;
+                weusallyDo['quesAnsId'] = quesOptionid;
+                weusallyDo['quesName'] = quesName;
+                weusallyDo['optionType'] = 2;
+                weusallyDo['selectionStatus'] = 1;
+                weusallyDo['userOptionDesc'] = "";
+                ourweusallyDo.pop(weusallyDo);
+            }
+        } else {
+            $("#"+familyoptId).css("background-color","rgba(99,78,66,1)");
+
+            var weLoveTO = {};
+            var weusallyDo = {};
+            arr.push(familyoptId);
+               if(quesName== "We love to"){
+                weLoveTO['optionId'] = quesOptionid;
+                weLoveTO['quesAnsId'] = quesOptionid;
+                weLoveTO['quesName'] = quesName;
+                weLoveTO['optionType'] = 2;
+                weLoveTO['selectionStatus'] = 1;
+                weLoveTO['userOptionDesc'] = "";
+                ourweLoveTO.push(weLoveTO);
+             }
+            if(quesName=="We usually do"){
+                weusallyDo['optionId'] = quesOptionid;
+                weusallyDo['quesAnsId'] = quesOptionid;
+                weusallyDo['quesName'] = quesName;
+                weusallyDo['optionType'] = 2;
+                weusallyDo['selectionStatus'] = 1;
+                weusallyDo['userOptionDesc'] = "";
+                ourweusallyDo.push(weusallyDo);
+            }
+        }
+
+        console.log("+++++++++++++Tushar+++++++++++++++++");
+        console.log(ourweLoveTO);
+        console.log("+++++++++++++++++++++++++++++++++++++++++");
+                console.log(ourweusallyDo);
+
+
+         filter.set({'selectedweLoveTO': ourweLoveTO});
+         filter.set({'selectedweusallyDo': ourweusallyDo});
+         filter.trigger('change');
+});
+
+
+
+</script>

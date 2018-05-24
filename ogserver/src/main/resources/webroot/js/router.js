@@ -11,7 +11,9 @@ define([
             '': 'dashboard',
             'viewconceptboards(/)': 'viewconceptboard',
             ':name-conceptlist-:id(/)':'listing_concepts',
+            'page(/)':'view_page',
             'projects(/)':'listing_projects',
+            'rooms(/)':'listing_rooms',
             'l1_form(/)': 'l1_form',
             'edit_design-:id(/)': 'editdesign',
             'edit_product-:id(/)': 'editproduct',
@@ -113,9 +115,19 @@ define([
             });
         });
 
+        router.on('route:view_page', function(actions) {
+           require(['views/project/page'], function(ListingProjectPage) {
+                VM.create(VM.LISTINGPROJECTPAGE, ListingProjectPage).render();
+            });
+        });
         router.on('route:listing_projects', function(actions) {
            require(['views/project/listing_project'], function(ListingProjectPage) {
                 VM.create(VM.LISTINGPROJECTPAGE, ListingProjectPage).render();
+            });
+        });
+        router.on('route:listing_rooms', function(actions) {
+           require(['views/project/listing_rooms'], function(ListingRoomPage) {
+                VM.create(VM.LISTINGROOMPAGE, ListingRoomPage).render();
             });
         });
 

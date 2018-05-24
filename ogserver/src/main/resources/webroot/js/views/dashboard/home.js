@@ -138,7 +138,7 @@ define([
 
                     //window.location = "/viewconceptboards";
 
-                    window.App.router.navigate("/viewconceptboards", {
+                    window.App.router.navigate("/page", {
                         trigger: true
                     });
                     that.getAuthentication(emailId,pwd);
@@ -213,7 +213,7 @@ define([
 
          //$("#accessToken").val(sessionStorage.authtoken);
          //window.location.href = "/viewconceptboards";
-         window.App.router.navigate("/viewconceptboards", {
+         window.App.router.navigate("/page", {
              trigger: true
          });
      }
