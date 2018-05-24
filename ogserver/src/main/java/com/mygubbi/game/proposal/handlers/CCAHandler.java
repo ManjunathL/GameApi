@@ -29,6 +29,8 @@ import us.monoid.json.JSONArray;
 import us.monoid.json.JSONException;
 import us.monoid.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -285,25 +287,61 @@ public class CCAHandler extends AbstractRouteHandler{
 
     private void getQuestionOption(RoutingContext routingContext)
     {
-        Integer id = LocalCache.getInstance().store(new QueryData("cca.questionsoption.select"));
-        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+        QueryData value = new QueryData("cca.questionsoption.select");
+        QueryData value1 = new QueryData("cca.question.distinct.select");
+        List<QueryData> queryList = new ArrayList<>();
+        queryList.add(value);
+        queryList.add(value1);
+        Integer id = LocalCache.getInstance().store(queryList);
+        VertxInstance.get().eventBus().send(DatabaseService.MULTI_DB_QUERY, id,
                 (AsyncResult<Message<Integer>> selectResult) -> {
-                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
-                    if (resultData.errorFlag ||resultData.rows.isEmpty() )
+                    List<QueryData> resultData = (ArrayList<QueryData>) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.get(0).errorFlag ||resultData.get(0).rows.isEmpty() )
                     {
                         sendError(routingContext, "Error in fetching the data");
-                        LOG.error("Error in fetching the data " + resultData.errorMessage, resultData.error);
+                        LOG.error("Error in fetching the data " + resultData.get(0).errorMessage, resultData.get(0).error);
                     }
                     else
                     {
-                        JsonArray firstResJson = new JsonArray();
-                        for (JsonObject jsonObject : resultData.rows)
-                        {
-                            firstResJson.add(jsonObject);
-                        }
-                        sendJsonResponse(routingContext, firstResJson.toString());
+                        List<JsonObject> questions =  resultData.get(1).rows;
+                        List<JsonObject> options =  resultData.get(0).rows;
+                        manipulateOptions(routingContext,questions,options );
                     }
                 });
+    }
+
+    private void manipulateOptions(RoutingContext routingContext, List<JsonObject> questions, List<JsonObject> options)
+    {
+        JsonArray whole_array = new JsonArray();
+        for (JsonObject question_object : questions)
+        {
+            JsonObject jsonGroup = new JsonObject();
+            JsonArray options_new = new JsonArray();
+            String questionCode = question_object.getString("questionCode");
+            String questionGroupCode1 = question_object.getString("questionGroupCode");
+
+            JsonObject jsonObject1 ;
+
+            for (JsonObject optionsObject : options)
+            {
+                String questionCode1 = optionsObject.getString("questionCode");
+                String questionGroupCode = optionsObject.getString("questionGroupCode");
+
+                if (questionCode1.equals(questionCode) && questionGroupCode.equals(questionGroupCode1))
+                {
+                    jsonObject1 = new JsonObject();
+                    jsonObject1.put("answer_code",optionsObject.getString("answerCode"));
+                    jsonObject1.put("answer_icon",optionsObject.getString("answerIcon"));
+                    options_new.add(jsonObject1);
+                }
+            }
+            jsonGroup.put("question_code",questionCode);
+            jsonGroup.put("options",options_new);
+            whole_array.add(jsonGroup);
+        }
+
+        sendJsonResponse(routingContext,whole_array.toString());
+
     }
 
     private void insertQuestionAnswer(RoutingContext routingContext) {

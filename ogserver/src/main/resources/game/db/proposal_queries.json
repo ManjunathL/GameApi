@@ -2233,6 +2233,13 @@
       "params":[]
     },
     {
+      "id":"cca.question.distinct.select",
+      "type":"select",
+      "table":"cca_questions",
+      "query":"select * from cca_questions",
+      "params":[]
+    },
+    {
       "id": "cca.insert.questionanswer",
       "type": "insert",
       "table": "cca_question_answers",
