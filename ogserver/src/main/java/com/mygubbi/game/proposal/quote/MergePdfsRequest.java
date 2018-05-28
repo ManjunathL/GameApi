@@ -84,7 +84,9 @@ public class MergePdfsRequest {
             }
             PDFCombineUsingJava.close();
             addPageNumberToPdf(FooterText);
-            if(VersionStatus.equals("Draft"))
+            if (VersionStatus == null || VersionStatus.length() == 0) {
+                LOG.info("Version status empty");
+            }else if(VersionStatus.equals("Draft"))
             {
                 addPageNumberwithwatermarkToPdf(FooterText);
             }
