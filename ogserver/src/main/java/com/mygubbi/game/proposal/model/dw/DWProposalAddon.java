@@ -109,7 +109,7 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setRoom(productAddon.getRoomCode());
         dwProposalAddon.setAddonId(productAddon.getId());
         dwProposalAddon.setCode(productAddon.getCode());
-        if(productAddon.getCategoryCode().equalsIgnoreCase("Custom Addon")) {
+       /* if(productAddon.getCategoryCode().equalsIgnoreCase("Custom Addon")) {
             dwProposalAddon.setType("Custom");
             dwProposalAddon.setSubCategory(productAddon.getCustomAddonCategory());
             if (productAddon.getCustomAddonCategory().equalsIgnoreCase("Accessories") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Appliances") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Chimney") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Hob") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Sink"))
@@ -124,8 +124,69 @@ public class DWProposalAddon extends JsonObject {
                 dwProposalAddon.setCategory("Services");
             else
                 dwProposalAddon.setCategory("BP");
+        }*/
+        //reporting column changes
+        if(productAddon.getCategoryCode().equalsIgnoreCase("Custom Addon")) {
+            dwProposalAddon.setType("Custom");
+            dwProposalAddon.setSubCategory(productAddon.getCustomAddonCategory());
+            if(productAddon.getCustomAddonCategory().equalsIgnoreCase("Appliances") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Chimney") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Hob") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Sink"))
+            {
+                dwProposalAddon.setCategory("Appliances");
+            }
+            else if(productAddon.getCustomAddonCategory().equalsIgnoreCase("Loose Furniture"))
+            {
+                dwProposalAddon.setCategory("Loose Furniture");
+            }else if(productAddon.getCustomAddonCategory().equalsIgnoreCase("Accessories"))
+            {
+                dwProposalAddon.setCategory("Modular product");
+            }else if(productAddon.getCustomAddonCategory().equalsIgnoreCase("Granite Counter top") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Electrical") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Dado") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Granite/ Marble") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Counter Top"))
+            {
+                dwProposalAddon.setCategory("Services - Aux");
+            }
+            else if(productAddon.getCustomAddonCategory().equalsIgnoreCase("False Ceiling") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Wall paper") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Wall Panelling") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Acrylic/Metal Ceiling") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Wall Cladding") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Decorative Partition"))
+            {
+                dwProposalAddon.setCategory("Services - Core");
+            }
+            else if(productAddon.getCustomAddonCategory().equalsIgnoreCase("Flooring") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Door") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Soft Board") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Lighting") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Glass Partitions") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Partitions") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Others") )
+            {
+                dwProposalAddon.setCategory("Services - Others");
+            }
+            else
+            {
+                dwProposalAddon.setCategory("Not mapped");
+            }
         }
+        else {
+            dwProposalAddon.setType("Regular");
+            dwProposalAddon.setSubCategory(productAddon.getCategoryCode());
 
+            if (productAddon.getCategoryCode().equals("Appliances"))
+            {
+                dwProposalAddon.setCategory("Appliances");
+            }else if(productAddon.getCategoryCode().equals("Accessories"))
+            {
+                dwProposalAddon.setCategory("Modular Product");
+            }else if(productAddon.getCategoryCode().equals("Loose Furniture"))
+            {
+                dwProposalAddon.setCategory("Loose Furniture");
+            }
+            else if(productAddon.getProductTypeCode().equalsIgnoreCase("Corian") || productAddon.getProductTypeCode().equalsIgnoreCase("Cutting Charges") || productAddon.getProductTypeCode().equalsIgnoreCase("Granite") || productAddon.getProductTypeCode().equalsIgnoreCase("Quartz") || productAddon.getProductTypeCode().equalsIgnoreCase("Electrical") || productAddon.getProductTypeCode().equalsIgnoreCase("Kitchen civil work") || productAddon.getProductTypeCode().equalsIgnoreCase("Plumbing"))
+            {
+                dwProposalAddon.setCategory("Services - Aux");
+            }
+            else if(productAddon.getProductTypeCode().equalsIgnoreCase("False Ceiling") || productAddon.getProductTypeCode().equalsIgnoreCase("Wall Panelling") || productAddon.getProductTypeCode().equalsIgnoreCase("Wall Paper"))
+            {
+                dwProposalAddon.setCategory("Services - Core");
+            }
+            else if(productAddon.getProductTypeCode().equalsIgnoreCase("Lighting") || productAddon.getProductTypeCode().equalsIgnoreCase("Painting") || productAddon.getProductTypeCode().equalsIgnoreCase("Partitions") || productAddon.getProductTypeCode().equalsIgnoreCase("Wooden Flooring") || productAddon.getProductTypeCode().equalsIgnoreCase("Window Dressing"))
+            {
+                dwProposalAddon.setCategory("Services - Others");
+            }
+            else
+            {
+                dwProposalAddon.setCategory("Not mapped");
+            }
+        }
 
         dwProposalAddon.setProductTypeCode(productAddon.getProductTypeCode());
         dwProposalAddon.setProductSubTypeCode(productAddon.getProductSubtypeCode());
