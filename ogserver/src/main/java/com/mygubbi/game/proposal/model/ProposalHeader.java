@@ -61,6 +61,7 @@ public class ProposalHeader extends JsonObject
     private static final String FLOOR_PROTECTION_FLAG="floorProtectionChargesApplied";
     public static final String  EXPECTED_DELIVERY_DATE= "expectedDeliveryDate";
     public static final String  VERSION= "version";
+    public static final String  BOOKING_ORDER_MONTH= "bookingOrderMonth";
 
     private Date priceDate;
     private String designerName;
@@ -197,6 +198,12 @@ public class ProposalHeader extends JsonObject
         return this;
     }
 
+    public ProposalHeader setBookingOrderMonth(String bookingOrderMonth)
+    {
+        put(bookingOrderMonth,BOOKING_ORDER_MONTH);
+        return this;
+    }
+
     public ProposalHeader setNoOfDaysforworkcompletion(String noOfDaysforworkcompletion)
     {
         put(noOfDaysforworkcompletion,NO_OF_DAYSFORWORKCOMPLETION);
@@ -251,6 +258,10 @@ public class ProposalHeader extends JsonObject
     public String getCrmId()
     {
         return this.getString(CRMID);
+    }
+    public String getBookingOrderMonth()
+    {
+        return this.getString(BOOKING_ORDER_MONTH);
     }
 
     public int getId()

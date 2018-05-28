@@ -132,6 +132,7 @@ public class DWProductModule extends JsonObject {
     private static final String DESIGNER_EMAIL ="designerEmail" ;
     private static final String DESIGNER_PHONE ="designerPhone" ;
     private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
+    private static final String BOOKING_ORDER_MONTH ="bookingOrderMonth" ;
 
     public DWProductModule() {}
 
@@ -143,11 +144,13 @@ public class DWProductModule extends JsonObject {
     public String getSalesName() {return this.getString(SALES_NAME);}
     public String getSource() {return this.getString(SOURCE);}
     public String getFromProduct() {return this.getString(FROM_PRODUCT);}
+    public String getBookingOrderMonth() {return this.getString(BOOKING_ORDER_MONTH);}
     public String getBefProdSpec() {return this.getString(BEF_PROD_SPEC);}
     public Integer getFromProposal() {return this.getInteger(FROM_PROPOSAL);}
     public String getOfferType() {return this.getString(OFFER_TYPE);}
     public String getPackageFlag() {return this.getString(PACKAGE_FLAG);}
     public DWProductModule setDesignerName(String dname) {this.put(DESIGNER_NAME, dname);return this;}
+    public DWProductModule setBookingOrderMonth(String bookingOrderMonth) {this.put(BOOKING_ORDER_MONTH, bookingOrderMonth);return this;}
     public DWProductModule setSalesName(String sname) {this.put(SALES_NAME, sname);return this;}
     public DWProductModule setSource(String sname) {this.put(SOURCE, sname);return this;}
     public DWProductModule setFromProduct(Integer val) {this.put(FROM_PRODUCT, val);return this;}
@@ -218,6 +221,15 @@ public class DWProductModule extends JsonObject {
         dwProductModule.setSalesPhone(proposalHeader.getSalesPhone());
         dwProductModule.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwProductModule.setDesignerPhone(proposalHeader.getDesignerPhone());
+
+        if (proposalHeader.getBookingOrderMonth().equals("") || proposalHeader.getBookingOrderMonth() == null)
+        {
+            dwProductModule.setBookingOrderMonth("NA");
+        }
+        else
+        {
+            dwProductModule.setBookingOrderMonth(proposalHeader.getBookingOrderMonth());
+        }
 
         String finishCode = productModule.getFinishCode();
         /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){

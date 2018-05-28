@@ -146,6 +146,8 @@ public class DWProposalProduct extends JsonObject {
     private static final String DESIGNER_PHONE ="designerPhone" ;
     private static final String PROJECT_NAME = "projectName";
     private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
+    private static final String BOOKING_ORDER_MONTH ="bookingOrderMonth" ;
+
 
     public DWProposalProduct setExpectedDeliveryDate(Date dt) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -1306,6 +1308,16 @@ public class DWProposalProduct extends JsonObject {
         return this;
     }
 
+
+    public String getBookingOrderMonth() {return this.getString(BOOKING_ORDER_MONTH);}
+
+    public DWProposalProduct setBookingOrderMonth(String bookingOrderMonth)
+    {
+        this.put(BOOKING_ORDER_MONTH, bookingOrderMonth);
+        return this;
+    }
+
+
     public DWProposalProduct setDwProductObjects(ProductPriceHolder productPriceHolder, ProposalHeader proposalHeader, ProposalVersion proposalVersion, ProductLineItem productLineItem) {
         DWProposalProduct dwProposalProduct = new DWProposalProduct();
 
@@ -1338,6 +1350,14 @@ public class DWProposalProduct extends JsonObject {
         dwProposalProduct.setSalesPhone(proposalHeader.getSalesPhone());
         dwProposalProduct.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwProposalProduct.setDesignerPhone(proposalHeader.getDesignerPhone());
+        if (proposalHeader.getBookingOrderMonth().equals("") || proposalHeader.getBookingOrderMonth() == null)
+        {
+            dwProposalProduct.setBookingOrderMonth("NA");
+        }
+        else
+        {
+            dwProposalProduct.setBookingOrderMonth(proposalHeader.getBookingOrderMonth());
+        }
 
         dwProposalProduct.setQuoteNo(proposalHeader.getQuoteNumNew());
         dwProposalProduct.setSalesName(proposalHeader.getSalespersonName());

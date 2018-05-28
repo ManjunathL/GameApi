@@ -101,6 +101,7 @@ public class DWModuleComponent extends JsonObject {
     private static final String DESIGNER_PHONE ="designerPhone" ;
     private static final String PROJECT_NAME = "projectName";
     private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
+    private static final String BOOKING_ORDER_MONTH ="bookingOrderMonth" ;
 
     public DWModuleComponent(JsonObject json) {
         super(json.getMap());
@@ -722,6 +723,15 @@ public class DWModuleComponent extends JsonObject {
         this.put(COMPONENT_MARGIN, componentMargin);
         return this;
     }
+
+    public String getBookingOrderMonth() {
+        return this.getString(BOOKING_ORDER_MONTH);
+    }
+
+    public DWModuleComponent setBookingOrderMonth(String bookingOrderMonth) {
+        this.put(BOOKING_ORDER_MONTH,bookingOrderMonth);
+        return this;
+    }
     public String getDesignerName() {return this.getString(DESIGNER_NAME);}
     public String getSalesName() {return this.getString(SALES_NAME);}
     public String getSource() {return this.getString(SOURCE);}
@@ -866,6 +876,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setComponentTitle(panelComponent.getTitle());
         dwModuleComponent.setComponentQty(panelComponent.getQuantity());
         dwModuleComponent.setExpectedDeliveryDate(proposalHeader.getExpectedDeliveryDate());
+        dwModuleComponent.setBookingOrderMonth(setBookingOrderMonth(proposalHeader));
         //calculatePanelPriceAndCost(productModule, panelComponent, nonStandardloadingFactorCard, nStdLoadingSourceFactorBasedOnProduct, stdManufacturingCost, nStdManufacturingCost, rate, stdSourceRate, nStdSourceRate, moduleType);
 
         if (panelComponent.isExposed()) {
@@ -1015,6 +1026,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
         dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
+        dwModuleComponent.setBookingOrderMonth(setBookingOrderMonth(proposalHeader));
 
 
         String finishCode = finish.getFinishCode();
@@ -1164,6 +1176,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
         dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
+        dwModuleComponent.setBookingOrderMonth(setBookingOrderMonth(proposalHeader));
 
         String finishCode = finish.getFinishCode();
       /*  if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
@@ -1303,6 +1316,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
         dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
+        dwModuleComponent.setBookingOrderMonth(setBookingOrderMonth(proposalHeader));
 
         String finishCode = finish.getFinishCode();
         /*if(finishCode.equalsIgnoreCase(OLD_MATT_SOLID_FINISH)){
@@ -1462,6 +1476,7 @@ public class DWModuleComponent extends JsonObject {
         dwModuleComponent.setSalesPhone(proposalHeader.getSalesPhone());
         dwModuleComponent.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwModuleComponent.setDesignerPhone(proposalHeader.getDesignerPhone());
+        dwModuleComponent.setBookingOrderMonth(setBookingOrderMonth(proposalHeader));
 
 
         String finishCode = finish.getFinishCode();
@@ -1557,6 +1572,19 @@ public class DWModuleComponent extends JsonObject {
                 break;
         }
         return woTaxFactor;
+    }
+
+    private String setBookingOrderMonth(ProposalHeader proposalHeader)
+    {
+        if (proposalHeader.getBookingOrderMonth().equals("") || proposalHeader.getBookingOrderMonth() == null)
+        {
+            return "NA";
+        }
+        else
+        {
+            return proposalHeader.getBookingOrderMonth();
+        }
+
     }
 
 

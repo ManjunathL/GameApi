@@ -148,6 +148,8 @@ public class DwProposalVersion extends JsonObject {
     private static final String FLOOR_PROTECTION_AMT ="floorProtectionAmount" ;
     private static final String PROJECT_HANDLING_AMT ="projectHandlingAmount" ;
     private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
+    private static final String BOOKING_ORDER_MONTH ="bookingOrderMonth" ;
+
 
     public DwProposalVersion() {
     }
@@ -1304,6 +1306,16 @@ public class DwProposalVersion extends JsonObject {
         this.put(HIKE_MODULE_COST,cost);
         return this;
     }
+
+    public String getBookingOrderMonth() {return this.getString(BOOKING_ORDER_MONTH);}
+
+    public DwProposalVersion setBookingOrderMonth(String bookingOrderMonth)
+    {
+        this.put(BOOKING_ORDER_MONTH, bookingOrderMonth);
+        return this;
+    }
+
+
     public DwProposalVersion setDwVersionObjects(ProposalHeader proposalHeader, ProposalVersion proposalVersion, VersionPriceHolder versionPriceHolder) {
         DwProposalVersion dwProposalVersion = new DwProposalVersion();
 
@@ -1344,6 +1356,14 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setSalesPhone(proposalHeader.getSalesPhone());
         dwProposalVersion.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwProposalVersion.setDesignerPhone(proposalHeader.getDesignerPhone());
+        if (proposalHeader.getBookingOrderMonth().equals("") || proposalHeader.getBookingOrderMonth() == null)
+        {
+            dwProposalVersion.setBookingOrderMonth("NA");
+        }
+        else
+        {
+            dwProposalVersion.setBookingOrderMonth(proposalHeader.getBookingOrderMonth());
+        }
 
         dwProposalVersion.setDiscountAmount(proposalVersion.getDiscountAmount());
         dwProposalVersion.setDiscountAmountPerc(proposalVersion.getDiscountPercentage());

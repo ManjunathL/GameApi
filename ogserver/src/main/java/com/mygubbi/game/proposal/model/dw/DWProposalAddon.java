@@ -80,6 +80,8 @@ public class DWProposalAddon extends JsonObject {
     private static final String EXPECTED_DELIVERY_DATE ="expectedDeliveryDate" ;
     private static final String INSTALLATION_PRICE ="installationPrice" ;
     private static final String INSTALLATION_SOURCE_PRICE ="installationSourcePrice" ;
+    private static final String BOOKING_ORDER_MONTH ="bookingOrderMonth" ;
+
 
     public DWProposalAddon()
     {}
@@ -105,6 +107,14 @@ public class DWProposalAddon extends JsonObject {
         dwProposalAddon.setOfferType(proposalHeader.getOfferType());
         dwProposalAddon.setPackageFlag(proposalHeader.getPackageFlag());
         dwProposalAddon.setDesignerName(proposalHeader.getDesignerName());
+        if (proposalHeader.getBookingOrderMonth().equals("") || proposalHeader.getBookingOrderMonth() == null)
+        {
+            dwProposalAddon.setBookingOrderMonth("NA");
+        }
+        else
+        {
+            dwProposalAddon.setBookingOrderMonth(proposalHeader.getBookingOrderMonth());
+        }
         dwProposalAddon.setSpaceType(productAddon.getSpaceType());
         dwProposalAddon.setRoom(productAddon.getRoomCode());
         dwProposalAddon.setAddonId(productAddon.getId());
@@ -775,5 +785,14 @@ public class DWProposalAddon extends JsonObject {
         put(MARGIN,margin);
         return this;
     }
+
+    public String getBookingOrderMonth() {return this.getString(BOOKING_ORDER_MONTH);}
+
+    public DWProposalAddon setBookingOrderMonth(String bookingOrderMonth)
+    {
+        this.put(BOOKING_ORDER_MONTH, bookingOrderMonth);
+        return this;
+    }
+
 
 }
