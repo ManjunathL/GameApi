@@ -69,9 +69,9 @@ define([
         var getEverythingConceptBoardPromise = that.getEverythingConceptBoard();
         var getConceptAllTagsPromise = that.getConceptAllTags();
         var getConceptBoardsPromise = that.getConceptBoards();
-        var getSpaceElementPromise = that.getSpaceElement(spaceTypeCode);
+       // var getSpaceElementPromise = that.getSpaceElement(spaceTypeCode);
 
-        Promise.all([getEverythingConceptBoardPromise, getConceptAllTagsPromise, getConceptBoardsPromise, getSpaceElementPromise]).then(function() {
+        Promise.all([getEverythingConceptBoardPromise, getConceptAllTagsPromise, getConceptBoardsPromise]).then(function() {
             console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
             that.rendersub();
         });
@@ -395,11 +395,12 @@ define([
            var userId = sessionStorage.userId;
            //var userId = "user1234600";
            var userMindboardId = sessionStorage.defaultMindboardId;
+            var userProjectId = 170;
            var pageno = 0;
            var itemPerPage = 50;
            var filterId = 1;
            return new Promise(function(resolve, reject) {
-                that.conceptboards.getConceptBoardList(userId, userMindboardId, pageno, itemPerPage,filterId, {
+                that.conceptboards.getConceptBoardList(userId, userProjectId, pageno, itemPerPage,filterId, {
                     async: true,
                     crossDomain: true,
                     method: "GET",

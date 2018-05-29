@@ -12,6 +12,9 @@ define([
             this.url = urllnk + userId + '/' + pageno + '/' + itemPerPage;
             return this.fetch(options);
         },
+        getProjectDetails: function (id) {
+            return this.find(function(GetProject){ return GetProject.get('id') === id; });
+        },
         initialize: function(models) {
           _.each(models, function (getproject){
             getproject = new ConceptBoard(getproject);

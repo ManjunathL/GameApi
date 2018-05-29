@@ -19,7 +19,7 @@ define([
     getConceptBoards: function(){
         var that = this;
         var userId = sessionStorage.userId;
-        var userProjectId = 110;
+        var userProjectId = 170;
         var pageno = 0;
         var itemPerPage = 20;
         var filter = 1;

@@ -60,7 +60,7 @@ define([
           //var userId = "user1234600";
           var userId = sessionStorage.userId
           var userMindboardId = sessionStorage.defaultMindboardId;
-          var userProjectId = 29;
+          var userProjectId = 170;
           var pageno = 0;
           var itemPerPage = 20;
           var filterId = 1;
