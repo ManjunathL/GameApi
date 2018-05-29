@@ -91,9 +91,6 @@ dependencies {
     compile 'org.apache.lucene:lucene-expressions:4.10.4'
     compile 'com.google.guava:guava:19.0'
     compile 'org.apache.httpcomponents:fluent-hc:4.5.2'
-    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
-
-
 
     compile group: 'com.firebase', name: 'firebase-client-jvm', version: '2.5.2'
     compile 'com.google.firebase:firebase-server-sdk:3.0.1'
