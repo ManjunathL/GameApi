@@ -104,9 +104,9 @@
                         </div>
                         <a href="javascript:void(0);" class="conceptImg1" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>"  data-element3="<%= conceptdtls.conceptCode %>" data-element4="<%= conceptdtls.id %>" data-element5="<%= conceptdtls.userConceptBoardId %>" data-element6="<%= conceptdtls.spaceTypeCode %>">
                             <% if(typeof(conceptdtls.imgURL) != 'undefined' && conceptdtls.imgURL != null){ %>
-                            <img src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>">
+                            <img class="conceptImgListcls" src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>">
                             <% }else{ %>
-                            <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
+                            <img class="conceptImgListcls" src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
                             <% } %>
                         </a>
                         <h4>

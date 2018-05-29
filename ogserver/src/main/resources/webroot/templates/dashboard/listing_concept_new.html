@@ -192,9 +192,9 @@
                                                 </div>
                                                 <a href="javascript:void(0);" class="conceptImg" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>"  data-element3="<%= conceptdtls.conceptCode %>" data-element4="<%= conceptdtls.id %>">
                                                     <% if(typeof(conceptdtls.imgURL) != 'undefined' && conceptdtls.imgURL != null){ %>
-                                                    <img src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>">
+                                                    <img class="conceptImgLST" src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>">
                                                     <% }else{ %>
-                                                    <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
+                                                    <img class="conceptImgLST" src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
                                                     <% } %>
                                                 </a>
                                                 <h4>

@@ -1,38 +1,115 @@
-<% var selOPTID = ''; %>
-<% if(typeof(userHomePreferencesDtls) !== 'undefined' && userHomePreferencesDtls.length > 0){ %>
-<% _.each(userHomePreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
-<div class="col-md-12">
-    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+<style>
+    .homelist li{
+        display:inline-block;
+        margin-left: 15px;
+    }
+    /*.homelist li div{
+        display:inline-block;
+    }*/
+    .homelist{
+        list-style: none;
+        border: 1px solid #cccccc61;
+        box-shadow: 0px 2px 10px #eee;
+        padding-top: 25px;
+        width: 495px;
+    }
+    .immgtxt{
+        text-align:center;
+        font-size:10px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <!--<% var selOPTID = ''; %>
+            <% if(typeof(userHomePreferencesDtls) !== 'undefined' && userHomePreferencesDtls.length > 0){ %>
+            <% _.each(userHomePreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
+            <div class="<% if(userQuesdtl.questionnaire.questionDetails.name == 'Usage'){ %> col-md-12 <% }else{ %> col-md-6 <% } %>">
+                <h4><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
 
-    <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
-    <div class="form-group <% if(userQuesdtl.questionnaire.questionDetails.name == 'Room'){ %> col-xs-2 <% }else{ %> col-xs-3 <% } %>">
-        <figure>
-            <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined' && userQuesdtl.userSelectedOption != ""){ %>
-            <% var selOPTID = userQuesdtl.userSelectedOption[0].optionId %>
-            <% } %>
-            <% var idd = userOptsdtl.quesOptionid; %>
-            <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
-            <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>"  id="<%= idd %>" class="wrap img-circle userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" width="100px" height="100px" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="color: rgb(255, 255, 255); background-color: rgb(99, 78, 66);" <% } %> >
-            <figcaption><%= userOptsdtl.name %></figcaption>
-            <% }else{ %>
-            <% if((userQuesdtl.questionnaire.questionDetails.name == "Interiors Budget") || (userQuesdtl.questionnaire.questionDetails.name == "Size")){ %>
-            <div class="form-group">
-                <button type="button" id="<%= idd %>" class="btn btn-light button4 btn-labeltxt userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="width: 90px;color: rgb(255, 255, 255);background-color: rgb(99, 78, 66);" <% }else{%> style="width: 90px;" <% } %> ><%= userOptsdtl.name %></button>
+                <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
+                <div class="form-group <% if(userQuesdtl.questionnaire.questionDetails.name == 'Room' || userQuesdtl.questionnaire.questionDetails.name == 'Usage' ){ %> col-xs-2 <% }else{ %> col-xs-3 <% } %>">
+
+                        <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined' && userQuesdtl.userSelectedOption != ""){ %>
+                        <% var selOPTID = userQuesdtl.userSelectedOption[0].optionId %>
+                        <% } %>
+                        <% var idd = userOptsdtl.quesOptionid; %>
+                        <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
+                        <figure class="mt0">
+                            <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>"  id="<%= idd %>" class="wrap img-circle userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" width="50px" height="50px" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="color: rgb(255, 255, 255); background-color: rgb(99, 78, 66);" <% } %> >
+                            <figcaption><%= userOptsdtl.name %></figcaption>
+                        </figure>
+                        <% }else{ %>
+                        <figure>
+                            <% if((userQuesdtl.questionnaire.questionDetails.name == "Interiors Budget") || (userQuesdtl.questionnaire.questionDetails.name == "Size")){ %>
+                            <div class="form-group">
+                                <button type="button" id="<%= idd %>" class="btn btn-light button4 btn-labeltxt userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="width: 90px;color: rgb(255, 255, 255);background-color: rgb(99, 78, 66);" <% }else{%> style="width: 90px;" <% } %> ><%= userOptsdtl.name %></button>
+                            </div>
+                            <% }else{ %>
+                            <div class="form-group">
+                                <button type="button" id="<%= idd %>" class="btn btn-light btn-circle btn-labeltxt  userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="color: rgb(255, 255, 255); background-color: rgb(99, 78, 66);" <% } %> ><%= userOptsdtl.name %></button>
+                            </div>
+                            <% } %>
+                        </figure>
+                        <% } %>
+
+                </div>
+                <% }); %>
+
             </div>
-            <% }else{ %>
-            <div class="form-group">
-                <button type="button" id="<%= idd %>" class="btn btn-light btn-circle btn-labeltxt  userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="color: rgb(255, 255, 255); background-color: rgb(99, 78, 66);" <% } %> ><%= userOptsdtl.name %></button>
+            <% }); %>
+            <div class="col-md-12 saveHome align-center">
+                <input type="submit" id="save_homeId" class="btn addcboard-btn" value="Save">
+                <a href="/projects">SKIP</a>
+            </div>
+            <% } %>-->
+            <% var selOPTID = ''; %>
+            <% if(typeof(userHomePreferencesDtls) !== 'undefined' && userHomePreferencesDtls.length > 0){ %>
+            <% _.each(userHomePreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
+            <div class="<% if(userQuesdtl.questionnaire.questionDetails.name == 'Usage'){ %> col-md-12 <% }else{ %> col-md-6 <% } %>">
+                <h4 class="formTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
+                <ul class="form-group homelist" style="list-style:none;">
+                <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
+
+
+                    <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined' && userQuesdtl.userSelectedOption != ""){ %>
+                    <% var selOPTID = userQuesdtl.userSelectedOption[0].optionId %>
+                    <% } %>
+                    <% var idd = userOptsdtl.quesOptionid; %>
+                    <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
+                    <li class="mt0">
+                        <div>
+                            <img src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>"  id="<%= idd %>" class="wrap img-circle userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" width="50px" height="50px" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="color: rgb(255, 255, 255); background-color: rgb(99, 78, 66);" <% } %> >
+                        </div>
+                        <div class="immgtxt">
+                            <label><%= userOptsdtl.name %></label>
+                        </div>
+                    </li>
+                    <% }else{ %>
+                    <li>
+                        <% if((userQuesdtl.questionnaire.questionDetails.name == "Interiors Budget") || (userQuesdtl.questionnaire.questionDetails.name == "Size")){ %>
+                        <div class="form-group">
+                            <button type="button" id="<%= idd %>" class="btn btn-light button4 btn-labeltxt userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="width: 90px;color: rgb(255, 255, 255);background-color: rgb(99, 78, 66);" <% }else{%> style="width: 90px;" <% } %> ><%= userOptsdtl.name %></button>
+                        </div>
+                        <% }else{ %>
+                        <div class="form-group">
+                            <button type="button" id="<%= idd %>" class="btn btn-light btn-circle btn-labeltxt  userques <%= userQuesdtl.questionnaire.questionDetails.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" <% if(selOPTID == userOptsdtl.quesOptionid){ %> style="color: rgb(255, 255, 255); background-color: rgb(99, 78, 66);" <% } %> ><%= userOptsdtl.name %></button>
+                        </div>
+                        <% } %>
+                    </li>
+                    <% } %>
+
+
+                <% }); %>
+                </ul>
+
+            </div>
+            <% }); %>
+            <div class="col-md-12 saveHome" style="text-align:center;">
+                <input type="submit" id="save_homeId" class="btn btn-primary btn-save" value="Save" style="background-color: #ea5c36;">
+                <a href="/projects" style="float: right;margin-right: 80px;">SKIP</a>
             </div>
             <% } %>
-            <% } %>
-        </figure>
+        </div>
     </div>
-    <% }); %>
-
 </div>
-<% }); %>
-<div class="saveHome">
-    <input type="submit" id="save_homeId" class="btn addcboard-btn" value="Save">
-    <a href="/projects">SKIP</a>
-</div>
-<% } %>

@@ -4,7 +4,7 @@
 
 <% if(userQuesdtl.questionnaire.questionDetails.name == "We would like our home to be"){ %>
 <div class="col-md-12">
-    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+    <h4 class="formTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
     <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
     <div class="form-group col-md-4">
@@ -47,7 +47,7 @@
 <% }else{ %>
 <% if(userQuesdtl.questionnaire.questionDetails.name == "We love to" || userQuesdtl.questionnaire.questionDetails.name == "We usually do"){ %>
 <div class="col-md-12">
-    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+    <h4 class="formTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
 
     <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
@@ -81,7 +81,7 @@
 <div class="clearfix"></div>
 <% }else{ %>
 <div class="col-md-6">
-    <h2><%= userQuesdtl.questionnaire.questionDetails.name %></h2>
+    <h4 class="formTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
 
     <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined' && userQuesdtl.userSelectedOption != ""){ %>
@@ -119,10 +119,11 @@
 <% } %>
 <% } %>
 <% }); %>
-<div class="saveHome">
-    <input type="submit" id="save_familyId" class="btn addcboard-btn" value="Save">
+<div class="col-md-12 saveHome text-center">
+    <input type="submit" id="save_familyId" class="btn btn-primary btn-save" value="Save" style="background-color: #ea5c36;">
     <a href="/projects" class="btn">SKIP</a>
 </div>
+<div class="clearfix"></div>
 <% } %>
 
 

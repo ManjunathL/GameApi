@@ -1016,7 +1016,7 @@ ul.spaceTypelst li{
 .pinBoot {
     max-width: 100%;
     width: 100%;
-    height: auto;
+    height:auto;
 }
 
 .pinBoot img {
@@ -2170,4 +2170,10 @@ textarea.form-control {
 }
 .filters a:hover{
     text-decoration:none;
+}
+
+.formTit{
+    color: #ea5c36;
+    font-weight: 600;
+    margin-bottom:30px;
 }

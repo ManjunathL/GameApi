@@ -1,0 +1,24 @@
+<% if(typeof(conceptdetails) !== 'undefined'){ %>
+<div class="pinBoot bg-white" id="searchpinBoot222">
+<% _.each(conceptdetails.conceptList, function(conceptdtls, i){ %>
+<% var tagnm = conceptdetails.tagList %>
+
+<article class="white-panel">
+    <div class="pin">
+        <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.imgURL %>','<%= conceptdtls.conceptTitle %>','<%= conceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+    </div>
+    <a href="javascript:void(0);" class="conceptImgg" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>" data-element3="<%= conceptdtls.conceptCode %>" data-element4="<%= conceptdtls.conceptTypeCode %>" data-element5="<%= conceptdtls.conceptTypeDescription %>" data-element6="<%= conceptdtls.spaceElementCodes %>" data-element7="<%= conceptdtls.spaceTypeCodes %>">
+        <% if(typeof(conceptdtls.imgURL) != 'undefined' && conceptdtls.imgURL != null){ %>
+        <img class="simgaa2" src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>" >
+        <% }else{ %>
+        <img class="simgaa2" src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
+        <% } %>
+    </a>
+    <h4>
+        <span><a href="javascript:void(0);"> <%= conceptdtls.conceptTitle %> </a></span>
+    </h4>
+</article>
+<% }); %>
+</div>
+<% } %>
+

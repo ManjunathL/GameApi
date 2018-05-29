@@ -6,11 +6,12 @@ define([
   'pinterest_grid',
    'text!templates/dashboard/search_concept.html',
    'text!templates/dashboard/searchConceptdetails.html',
+   'text!templates/dashboard/searchConceptlists.html',
    'models/filter',
   'collections/search_concepts',
   'collections/conceptboards',
   'collections/add_conceptToCboards'
-], function($, _, Backbone, Bootstrap, pinterest_grid, SearchConceptTemplate,searchConceptdetailsPageTemplate, Filter,SearchConcepts,ConceptBoards,AddConceptToCboards){
+], function($, _, Backbone, Bootstrap, pinterest_grid, SearchConceptTemplate,searchConceptdetailsPageTemplate, searchConceptlitsPageTemplate, Filter,SearchConcepts,ConceptBoards,AddConceptToCboards){
   var SearchConceptPage = Backbone.View.extend({
     el: '.page',
     search_concepts:null,
@@ -27,6 +28,9 @@ define([
     },
     render: function () {
         var that = this;
+
+        $("#searchpinBoot111").html('');
+
         window.filter = that.filter;
         console.log("+++++++++++++ search term ++++++++++++++");
         console.log(that.model.searchTerm);
@@ -56,11 +60,12 @@ define([
           //var userId = "user1234600";
           var userId = sessionStorage.userId
           var userMindboardId = sessionStorage.defaultMindboardId;
+          var userProjectId = 29;
           var pageno = 0;
           var itemPerPage = 20;
           var filterId = 1;
           return new Promise(function(resolve, reject) {
-               that.conceptboards.getConceptBoardList(userId, userMindboardId, pageno, itemPerPage,filterId, {
+               that.conceptboards.getConceptBoardList(userId, userProjectId, pageno, itemPerPage,filterId, {
                    async: true,
                    crossDomain: true,
                    method: "GET",
@@ -220,22 +225,44 @@ define([
              "conceptboardsDtls":conceptboards.toJSON(),
              "filterTag":filterTag
          }));
+         $('#srchlist').html(_.template(searchConceptlitsPageTemplate)({
+                      "conceptdetails": searchedConcepts[0].conceptSearchList,
+                      "conceptboardId": "1111",
+                      "conceptboardsDtls":conceptboards.toJSON(),
+                      "filterTag":filterTag
+                  }));
         $('#concept-dtls').html(_.template(searchConceptdetailsPageTemplate));
         that.ready();
 
     },
     ready: function(){
         $(function() {
-            //$(".simg").load(function() {
-               $("#searchpinBoot").pinterest_grid({
+           // alert($(".simgaa").length);
+            /*if($(".simgaa").length > 0){
+
+                //$("#searchpinBoot111").css("display","block");
+               $("#searchpinBoot111").pinterest_grid({
                     no_columns: 5,
                     padding_x: 20,
                     padding_y: 20,
                     margin_bottom: 50,
                     single_column_breakpoint: 700
                 });
-            //});
+            }*/
         });
+
+         //alert($(".simgaa2").length);
+         if($(".simgaa2").length > 0){
+            $("#searchpinBoot222").pinterest_grid({
+                 no_columns: 5,
+                 padding_x: 20,
+                 padding_y: 20,
+                 margin_bottom: 50,
+                 single_column_breakpoint: 700
+             });
+         }
+         //this.filter.set({'selectedSearchTag': ''});
+         //this.filter.trigger('change');
      },
      events: {
           "click .boardlst": "addConcept2Cboard",

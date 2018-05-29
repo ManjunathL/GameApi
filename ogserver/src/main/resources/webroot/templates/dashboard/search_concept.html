@@ -5,127 +5,137 @@
 <%= console.log(filterTag) %>
 
 <link href="css/layout.css" rel="stylesheet">
+<style>
+    .page-hgt {
+        min-height: 1539px!important;
+    }
+</style>
 <section>
     <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;">
-        <div class="col-md-12 col-lg-12" >
-    <div id="myCarousel112" class="carousel slide mt30">
-        <div class="tagicos">
-            <div  class="tagicos clearfix carousel-inner">
-                <% if(typeof(conceptdetails.tagList) !== 'undefined'){ %>
-                <% var tagnmArr = [] %>
-                <% _.each(conceptdetails.tagList, function(conceptdtls, i){ %>
-                <% tagnmArr.push('.'+conceptdtls) %>
-                <% }); %>
-                <% } %>
-                <% if(typeof(conceptdetails.tagList) !== 'undefined'){ %>
-                <% var clsarr = ['tgf','tgs','tgt','tgfr']; %>
-                <% var icols = 8; %>
-                <% _.each(conceptdetails.tagList, function(concepttgs, i){ %>
-                <% var tagnm = concepttgs %>
-                <% if( (++i)%icols == 1 ) {  %>
-                <div class="tagicos-cnt item">
+        <div class="row">
+            <div class="col-md-12 col-lg-12" >
+                <div id="myCarousel112" class="carousel slide mt30">
+            <div class="tagicos">
+                <div  class="tagicos clearfix carousel-inner">
+                    <% if(typeof(conceptdetails.tagList) !== 'undefined'){ %>
+                    <% var tagnmArr = [] %>
+                    <% _.each(conceptdetails.tagList, function(conceptdtls, i){ %>
+                    <% tagnmArr.push('.'+conceptdtls) %>
+                    <% }); %>
                     <% } %>
-                    <% if( i == 1) {  %>
-                    <div class="tgico">
-                        <span class="active  <%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) == 'undefined') || (filterTag == "")){ %> style="background-color: #fff;color: #666;box-shadow: 0px 5px 10px #555;" <% } %> onclick="getTagsView('all')" title="All" >All</span>
+                    <% if(typeof(conceptdetails.tagList) !== 'undefined'){ %>
+                    <% var clsarr = ['tgf','tgs','tgt','tgfr']; %>
+                    <% var icols = 8; %>
+                    <% _.each(conceptdetails.tagList, function(concepttgs, i){ %>
+                    <% var tagnm = concepttgs %>
+                    <% if( (++i)%icols == 1 ) {  %>
+                    <div class="tagicos-cnt item">
+                        <% } %>
+                        <% if( i == 1) {  %>
+                        <div class="tgico">
+                            <span class="active  <%= clsarr[i%4] %> tgico-link" <% if((typeof(filterTag) == 'undefined') || (filterTag == "")){ %> style="background-color: #fff;color: #666;box-shadow: 0px 5px 10px #555;" <% } %> onclick="getTagsView('all')" title="All" >All</span>
+                        </div>
+                        <% } %>
+                        <div class="tgico">
+                            <span class="<%= clsarr[i%4] %> tgico-link" onclick="getTagsView('<%= tagnm %>')" <% if((typeof(filterTag) !== 'undefined') && (filterTag == tagnm)){ %> style="background-color: #fff;color: #666;box-shadow: 0px 5px 10px #555;" <% } %> title="<%= tagnm %>"><%= tagnm %></span>
+                        </div>
+                        <% if( i%icols == 0 || i== conceptdetails.tagList.length ) { %>
                     </div>
                     <% } %>
-                    <div class="tgico">
-                        <span class="<%= clsarr[i%4] %> tgico-link" onclick="getTagsView('<%= tagnm %>')" <% if((typeof(filterTag) !== 'undefined') && (filterTag == tagnm)){ %> style="background-color: #fff;color: #666;box-shadow: 0px 5px 10px #555;" <% } %> title="<%= tagnm %>"><%= tagnm %></span>
-                    </div>
-                    <% if( i%icols == 0 || i== conceptdetails.tagList.length ) { %>
-                </div>
-                <% } %>
-                <% }); %>
-                <% } %>
-            </div>
-        </div>
-        <% if(conceptdetails.tagList.length > 9){ %>
-        <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x"></i></a>
-        <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x"></i></a>
-        <% } %>
-    </div>
-    <input type="hidden" id="conceptboardIdVl" value="<%= conceptboardId %>" />
-            <div class="position-relative" style="height:auto;">
-    <div class="pinBoot bg-white" id="searchpinBoot" style="margin-top: 15px;min-height:835px;">
-        <% if(typeof(conceptdetails) !== 'undefined'){ %>
-        <% _.each(conceptdetails.conceptList, function(conceptdtls, i){ %>
-        <% var tagnm = conceptdetails.tagList %>
-
-        <article class="white-panel">
-            <div class="pin">
-                <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.imgURL %>','<%= conceptdtls.conceptTitle %>','<%= conceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
-            </div>
-            <a href="javascript:void(0);" class="conceptImgg" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>" data-element3="<%= conceptdtls.conceptCode %>" data-element4="<%= conceptdtls.conceptTypeCode %>" data-element5="<%= conceptdtls.conceptTypeDescription %>" data-element6="<%= conceptdtls.spaceElementCodes %>" data-element7="<%= conceptdtls.spaceTypeCodes %>">
-                <% if(typeof(conceptdtls.imgURL) != 'undefined' && conceptdtls.imgURL != null){ %>
-                <img class="simg" src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>" >
-                <% }else{ %>
-                <img class="simg" src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
-                <% } %>
-            </a>
-            <h4>
-                <span><a href="javascript:void(0);"> <%= conceptdtls.conceptTitle %> </a></span>
-            </h4>
-        </article>
-        <% }); %>
-        <% } %>
-
-    </div>
-            </div>
-                <div class="clearfix"></div>
-
-
-
-    <div class="modal fade" id="pin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="pin-container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6">
-                        <div class="pin-model-img">
-                            <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg" alt="pin image"> </a>
-                            <h4 id="concNm">Excepteur sint occaecat cupidatat non proident </h4>
-                            <input type="hidden" id="ConcCod" value="">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6">
-                        <div class="new-pin">
-                            <!--<form>
-                                <div class="form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Mood Board Name">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="submit" name="pin" class="btn btn-defalt pin-submit" value="Submit">
-                                </div>
-                            </form>-->
-                        </div>
-                        <div>
-                            <label class="moodboard-lbl">All Concept Boards</label>
-                            <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
-                            <%= console.log("================== conceptboardsDtls ===================") %>
-                            <%= console.log(conceptboardsDtls) %>
-                            <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
-                            <div class="boardlst" data-element="<%= conceptdtl.id %>"><%= conceptdtl.name %></div>
-                            <% }); %>
-                            <% } %>
-
-                        </div>
-                    </div>
+                    <% }); %>
+                    <% } %>
                 </div>
             </div>
+            <% if(conceptdetails.tagList.length > 9){ %>
+            <a class="left carousel-control" href="#myCarousel112" data-slide="prev"><i class="fa fa-angle-left fa-2x"></i></a>
+            <a class="right carousel-control" href="#myCarousel112" data-slide="next"><i class="fa fa-angle-right fa-2x"></i></a>
+            <% } %>
         </div>
-    </div>
-
-    <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div id="concept-dtls" class="dtls-container" style="">
+                <input type="hidden" id="conceptboardIdVl" value="<%= conceptboardId %>" />
             </div>
-        </div>
-    </div>
-
         </div>
     </div>
 </section>
+<section>
+    <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 position-relative" id="srchlist" style="height:1539px!important;">
+                <div class="pinBoot bg-white" id="searchpinBoot111" style="margin-top: 15px;">
+
+                    <% if(typeof(conceptdetails) !== 'undefined'){ %>
+                    <% _.each(conceptdetails.conceptList, function(conceptdtls, i){ %>
+                    <% var tagnm = conceptdetails.tagList %>
+
+                    <article class="white-panel">
+                        <div class="pin">
+                            <a href="javascript:void(0);" onclick="showModal('<%= conceptdtls.imgURL %>','<%= conceptdtls.conceptTitle %>','<%= conceptdtls.conceptCode %>')" class="btn btn-pin"> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+                        </div>
+                        <a href="javascript:void(0);" class="conceptImgg" data-element="<%= conceptdtls.imgURL %>" data-element1="<%= conceptdtls.conceptTypeTitle %>" data-element2="<%= conceptdtls.conceptTitle %>" data-element3="<%= conceptdtls.conceptCode %>" data-element4="<%= conceptdtls.conceptTypeCode %>" data-element5="<%= conceptdtls.conceptTypeDescription %>" data-element6="<%= conceptdtls.spaceElementCodes %>" data-element7="<%= conceptdtls.spaceTypeCodes %>">
+                            <% if(typeof(conceptdtls.imgURL) != 'undefined' && conceptdtls.imgURL != null){ %>
+                            <img class="simgaa" src="<%= conceptdtls.imgURL %>" alt="<%= conceptdtls.conceptTitle %>" >
+                            <% }else{ %>
+                            <img class="simgaa" src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= conceptdtls.conceptTitle %>">
+                            <% } %>
+                        </a>
+                        <h4>
+                            <span><a href="javascript:void(0);"> <%= conceptdtls.conceptTitle %> </a></span>
+                        </h4>
+                    </article>
+                    <% }); %>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="pin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="pin-container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="pin-model-img">
+                        <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg" alt="pin image"> </a>
+                        <h4 id="concNm">Excepteur sint occaecat cupidatat non proident </h4>
+                        <input type="hidden" id="ConcCod" value="">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="new-pin">
+                        <!--<form>
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" placeholder="Mood Board Name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" name="pin" class="btn btn-defalt pin-submit" value="Submit">
+                            </div>
+                        </form>-->
+                    </div>
+                    <div>
+                        <label class="moodboard-lbl">All Concept Boards</label>
+                        <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                        <%= console.log("================== conceptboardsDtls ===================") %>
+                        <%= console.log(conceptboardsDtls) %>
+                        <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtl, j){ %>
+                        <div class="boardlst" data-element="<%= conceptdtl.id %>"><%= conceptdtl.name %></div>
+                        <% }); %>
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div id="concept-dtls" class="dtls-container" style="">
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript" src="js/libs/jquery.mixitup.min.js"></script>

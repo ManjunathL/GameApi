@@ -3,152 +3,284 @@
 <%= console.log(userProfile) %>
 <% } %>
 <style>
-    .bg-lightGrey{
+    /*.bg-lightGrey{
         background:#fff;
+    }*/
+    .form-control {
+        width: 100%;
+        height: 35px;
+        padding: 10px 13px;
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid #00000042;
+        border-radius: 20px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+    .txtrgt{
+        text-align:right;
+    }
+    .prf-mn-dv{
+        width:100%;
+        border:1px solid #ccc;
+        margin:40px 0px;
+        padding:30px;
+        height:500px;
+        background: #fff;
+        box-shadow: 0px 2px 10px #555;
+    }
+    .loginmodal-container input[type=text], input[type=email], input[type=password] {
+        height: 35px;
+        font-size: 16px;
+        width: 100%;
+        margin-bottom: 0px;
+        -webkit-appearance: none;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 0 8px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        letter-spacing: 0px;
+        padding-left: 15px;
+        color: #555;
+    }
+    label{
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+        font-size:12px;
+    }
+    .formTit{
+        color: #ea5c36;
+        font-weight: 600;
+        margin-bottom:30px;
     }
 </style>
 <div class="container user-profile-content">
     <form method="post" class="form-horizontal">
-        <h3 class="p-style">Basic Information</h3>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputname">Name*</label>
-                <input type="text" class="form-control" id="inputname" placeholder="Name" value="<%=userProfile ? userProfile.name : ''%>" required />
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="prf-mn-dv">
+                    <div class="col-sm-6 col-md-6 col-lg-6" style="border-right:1px solid #ccc;">
+
+                            <h4 class="formTit">Basic Information</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputname">Name*</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="inputname" placeholder="Name" value="<%=userProfile ? userProfile.name : ''%>" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputsurname">Surname</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="inputsurname" placeholder="Surname" value="<%=userProfile ? userProfile.surName : ''%>" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputmobilenumber">Mobile Number*</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="number" class="form-control" id="inputmobilenumber" placeholder="Mobile Number" value="<%=userProfile ? userProfile.mobileNumber : ''%>" maxlength="10" pattern="[1-9]{1}[0-9]{9}" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputemail">Additional Email</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="email" class="form-control" id="inputemail" placeholder="Additional Email" value="<%=userProfile ? userProfile.additionalEmail : ''%>" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputdob">Date of Birth</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="date" class="form-control" id="inputdob" placeholder="Date of Birth" value="<%=userProfile ? userProfile.dob : ''%>" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label class="form-check-label" style="margin-right: 9px;">Gender  </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="form-check-input" type="radio" id="inlineradio1" value="option1" name="gender" <% if(typeof(userProfile) !== 'undefined' && userProfile.gender == "male"){ %> checked="checked" <% } %> required />
+                                        <label class="form-check-label" for="inlineradio1">
+                                            <i style=" font-size: 30px;margin-right: 13px; " class="fa fa-male" aria-hidden="true"></i>
+                                        </label>
+                                        <input class="form-check-input" type="radio" id="inlineradio2" value="option1" name="gender" <% if(typeof(userProfile) !== 'undefined' &&    userProfile.gender == "female"){ %> checked="checked" <% } %> >
+                                        <label class="form-check-label" for="inlineradio1">
+                                            <i style=" font-size: 30px;margin-right: 8px; " class="fa fa-female" aria-hidden="true"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <h4 class="formTit">Communication Address</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="col-md-3 txtrgt">
+                                <label for="inputCommunicationAddress">Address</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputCommunicationAddress" placeholder="1234 Main St" value="<%=userProfile ? userProfile.communicataionAddress.houseNoStreet : ''%>" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 txtrgt">
+                                <label for="inputCommunicationCity">City</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputCommunicationCity" value="<%=userProfile ? userProfile.communicataionAddress.city : ''%>" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="col-md-3 txtrgt">
+                                <label for="inputCommunicationState">State</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputCommunicationState" value="<%=userProfile ? userProfile.communicataionAddress.state : ''%>"  required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 txtrgt">
+                                <label for="inputCommunicationpincode">Pin Code</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" id="inputCommunicationpincode" maxlength="6" value="<%=userProfile ? userProfile.communicataionAddress.pincode : ''%>" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!--<div class="clearfix"></div>
+                    <div class="col-sm-6 col-md-6 col-lg-6" style="border-right:1px solid #ccc;">
+
+                            <h4 class="formTit">Project Details</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputcity">City</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="inputcity" placeholder="City" value="<%=userProfile ? userProfile.projectDetail.city : ''%>" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputbuilder">Builder</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="inputbuilder" placeholder="Builder" value="<%=userProfile ? userProfile.projectDetail.builder : ''%>" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputproject">Project</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="inputproject" placeholder="Project" value="<%=userProfile ? userProfile.projectDetail.project : ''%>" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputprojecttower">Project Tower</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="inputprojecttower" placeholder="Project Tower" value="<%=userProfile ? userProfile.projectDetail.projecttower : ''%>" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="col-md-3 txtrgt">
+                                        <label for="inputplan">Plan</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="inputplan" placeholder="Plan" value="<%=userProfile ? userProfile.projectDetail.plan : ''%>" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <h4 class="formTit">Project Address</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="col-md-3 txtrgt">
+                                <label for="inputProjectAddress">Project Address</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputProjectAddress" placeholder="1234 Main St" value="<%=userProfile ? userProfile.projectAddress.houseNoStreet : ''%>" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 txtrgt">
+                                <label for="inputProjectCity">City</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputProjectCity" value="<%=userProfile ? userProfile.projectAddress.city : ''%>" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="col-md-3 txtrgt">
+                                <label for="inputProjectState">State</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputProjectState" placeholder="State" value="<%=userProfile ? userProfile.projectAddress.state : ''%>" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 txtrgt">
+                                <label for="inputCommunicationpincode">Pin Code</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" id="inputpincode" maxlength="6" value="<%=userProfile ? userProfile.projectAddress.pincode : ''%>" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top:40px;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="col-md-3 txtrgt">
+                                    &nbsp;
+                                </div>
+                                <div class="col-md-7 pull-right">
+                                    <button style="background-color: #ea5c36;" type="submit" class="btn btn-primary btn-save" id="save_details">Next</button>
+                                    <a href="/user_preference" class="btn" style="margin-left: 350px;" name="skip">SKIP</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputsurname">Sur Name</label>
-                <input type="text" class="form-control" id="inputsurname" placeholder="Sur Name" value="<%=userProfile ? userProfile.surName : ''%>" required />
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputmobilenumber">Mobile Number*</label>
-                <input type="number" class="form-control" id="inputmobilenumber" placeholder="Mobile Number" value="<%=userProfile ? userProfile.mobileNumber : ''%>" maxlength="10" pattern="[1-9]{1}[0-9]{9}" required />
-            </div>
+
         </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputemail">Additional Email</label>
-                <input type="email" class="form-control" id="inputemail" placeholder="Additional Email" value="<%=userProfile ? userProfile.additionalEmail : ''%>" required />
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputdob">Date Of Birth</label>
-                <input type="date" class="form-control" id="inputdob" placeholder="Date Of Birth" value="<%=userProfile ? userProfile.dob : ''%>" required />
-            </div>
-            <div class="form-group col-md-4">
-                <label class="form-check-label" style="margin-right: 9px;">Gender  </label>
-
-                <input class="form-check-input" type="radio" id="inlineradio1" value="option1" name="gender" <% if(typeof(userProfile) !== 'undefined' && userProfile.gender == "male"){ %> checked="checked" <% } %> required />
-                <label class="form-check-label" for="inlineradio1">
-                    <i style=" font-size: 46px;margin-right: 13px; " class="fa fa-male" aria-hidden="true"></i>
-                </label>
-                <input class="form-check-input" type="radio" id="inlineradio2" value="option1" name="gender" <% if(typeof(userProfile) !== 'undefined' &&    userProfile.gender == "female"){ %> checked="checked" <% } %> >
-                <label class="form-check-label" for="inlineradio1">
-                    <i style=" font-size: 46px;margin-right: 8px; " class="fa fa-female" aria-hidden="true"></i>
-                </label>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <h3 class="p-style">Project Details</h3>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputcity">City</label>
-                <input type="text" class="form-control" id="inputcity" placeholder="City" value="<%=userProfile ? userProfile.projectDetail.city : ''%>" required />
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputbuilder">Builder</label>
-                <input type="text" class="form-control" id="inputbuilder" placeholder="Builder" value="<%=userProfile ? userProfile.projectDetail.builder : ''%>" required />
-                <!--<select id="inputbuilder" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>-->
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputproject">Project</label>
-                <input type="text" class="form-control" id="inputproject" placeholder="Project" value="<%=userProfile ? userProfile.projectDetail.project : ''%>" required />
-                <!--<select id="inputproject" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>-->
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputprojecttower">Project Tower</label>
-                <!--<select id="inputprojecttower" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>-->
-                <input type="text" class="form-control" id="inputprojecttower" placeholder="Project Tower" value="<%=userProfile ? userProfile.projectDetail.projecttower : ''%>" required />
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputplan">Plan</label>
-                <!--<select id="inputplan" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>-->
-                <input type="text" class="form-control" id="inputplan" placeholder="Plan" value="<%=userProfile ? userProfile.projectDetail.plan : ''%>" required />
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-        <h3 class="p-style">Project Address</h3>
-
-
-        <div class="form-group address-style ml0">
-            <label for="inputProjectAddress">Project Address</label>
-            <input type="text" class="form-control" id="inputProjectAddress" placeholder="1234 Main St" value="<%=userProfile ? userProfile.projectAddress.houseNoStreet : ''%>" required />
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputProjectCity">City</label>
-                <input type="text" class="form-control" id="inputProjectCity" value="<%=userProfile ? userProfile.projectAddress.city : ''%>" required />
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputProjectState">State</label>
-                <input type="text" class="form-control" id="inputProjectState" placeholder="State" value="<%=userProfile ? userProfile.projectAddress.state : ''%>" required />
-                <!--<select id="inputProjectState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>-->
-            </div>
-            <div class="form-group col-md-2">
-                <label for="inputpincode">Pin Code</label>
-                <input type="number" class="form-control" id="inputpincode" maxlength="6" value="<%=userProfile ? userProfile.projectAddress.pincode : ''%>" required />
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <h3 class="p-style">Communication Address</h3>
-
-        <div class="form-group address-style ml0">
-            <label for="inputCommunicationAddress">Communication Address</label>
-            <input type="text" class="form-control" id="inputCommunicationAddress" placeholder="1234 Main St" value="<%=userProfile ? userProfile.communicataionAddress.houseNoStreet : ''%>" required />
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputCommunicationCity">City</label>
-                <input type="text" class="form-control" id="inputCommunicationCity" value="<%=userProfile ? userProfile.communicataionAddress.city : ''%>" required />
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputCommunicationState">State</label>
-                <input type="text" class="form-control" id="inputCommunicationState" value="<%=userProfile ? userProfile.communicataionAddress.state : ''%>"  required />
-                <!--<select id="inputCommunicationState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>-->
-            </div>
-            <div class="form-group col-md-2">
-                <label for="inputCommunicationpincode">Pin Code</label>
-                <input type="number" class="form-control" id="inputCommunicationpincode" maxlength="6" value="<%=userProfile ? userProfile.communicataionAddress.pincode : ''%>" required />
-            </div>
-        </div>
-
-        <button style="margin-left: 475px;background-color: #ea5c36;" type="submit" class="btn btn-primary btn-save" id="save_details">Next</button>
-        <a href="/user_preference" class="btn" name="skip">SKIP</a>
     </form>
 </div>
+
 <!--
 <script>
 $(document).ready(function() {
