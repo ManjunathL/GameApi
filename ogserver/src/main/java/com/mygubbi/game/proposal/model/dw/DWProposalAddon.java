@@ -149,7 +149,7 @@ public class DWProposalAddon extends JsonObject {
             }else if(productAddon.getCustomAddonCategory().equalsIgnoreCase("Accessories"))
             {
                 dwProposalAddon.setCategory("Modular product");
-            }else if(productAddon.getCustomAddonCategory().equalsIgnoreCase("Granite Counter top") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Electrical") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Dado") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Granite/ Marble") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Counter Top"))
+            }else if(productAddon.getCustomAddonCategory().equalsIgnoreCase("Granite Counter top") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Electrical") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Dado") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Granite/Marble") || productAddon.getCustomAddonCategory().equalsIgnoreCase("Counter Top"))
             {
                 dwProposalAddon.setCategory("Services - Aux");
             }
