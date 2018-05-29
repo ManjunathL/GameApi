@@ -534,9 +534,19 @@ define([
          "click #showImg": "showuploadedFileDtls",
          "submit #userconceptfrm": "submitUploadConceptBoard",
          "click #removeRecommnded": "removeRecommndedConcept",
+         "click .spltemstCls": "userConceptSpaceElement"
 
 
     },
+    userConceptSpaceElement: function (e) {
+          /*  if (e.isDefaultPrevented()) return;
+            e.preventDefault();*/
+
+            var currentTarget = $(e.currentTarget);
+            var spaceElementCode = currentTarget.data('element');
+            $("#spltemstCode").val(spaceElementCode);
+            return false;
+            },
     viewAddCboard: function(event){
         //$('#addcboard-modalForImage').modal('show');
 

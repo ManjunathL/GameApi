@@ -1,3 +1,9 @@
+<%= console.log("@@@@@@@@@@@@@@@ getprojects @@@@@@@@@@@@@@@@@") %>
+<%= console.log(getprojects) %>
+
+<%= console.log("@@@@@@@@@@@@@@@ spacetypelists @@@@@@@@@@@@@@@@@") %>
+<%= console.log(spacetypelists) %>
+
 <style>
 .imgholder{
     text-align: center;
@@ -41,12 +47,25 @@
 	text-align: left;
 }
 
+.form-option{
+  width: 100%;
+  height: 45px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #eee;
+  border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
 .title {
 	font-family: 'Libre Baskerville', "Times New Roman", Times, Baskerville, Georgia, serif;
 	font-size: 32px;
 	font-weight: 400;
 	line-height: 40px;
-	text-align: center;
+	text-align: left;
 	text-transform: initial;
 	color: #fff;
 }
@@ -94,59 +113,57 @@
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 }
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btnImage {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
 </style>
 <section class="main-conceptboard-sec bg-light-gray">
     <div class="container">
         <div class="mt20">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container" style="border: 1px dashed #333;text-align: center;">
+                <div id="createProject" class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container" style="border: 1px dashed #333;text-align: center;">
                     <span class="imgholder">&#43;</span>
-                    <a class="overlay" href="/listofconcepts" target="_blank">
+                    <div class="overlay"  target="_blank">
                         <div class="text">
-                            <p class="title">Create New Project</p>
+                            <p class="title">Create Project</p>
                         </div>
-                    </a>
+                    </div>
                </div>
-               <!-- <div class="col-sm-6 col-md-4 col-lg-4 pd0" style="padding-right: 0px;padding-left: 0px;">
-                <div class="gridProject overflow-hidden" style="padding: 0px 0px 0px 0px;">
-                    <div class="imgholder">
-                        <a href="/listofconcepts">
-                            <img style="height:283px; width:100%;" src="img/everything/everything.jpg"/>
-                        </a>
-                    </div>
-                </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 pd0" style="padding-right: 0px;padding-left: 0px;">
-                    <div class="gridProject overflow-hidden" style="padding: 0px 0px 0px 0px;">
-                        <div class="imgholder">
-                            <a href="/listofconcepts">
-                                <img style="height:283px; width:100%;" src="img/everything/everything.jpg"/>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 pd0" style="margin-bottom: 30px;padding-right: 0px;padding-left: 0px;padding-top: 0px;padding-bottom: 0px;">
-                    <div class="gridProjectTest overflow-hidden" style="padding: 0px 0px 0px 0px;margin:0px;">
-                        <div class="imgholder">
-                            <a href="/listofconcepts">
-                                <img style="height:283px; width:100%;" src="img/everything/everything.jpg"/>
-                            </a>
-                        </div>
-                    </div>
-                </div>-->
-
+                <% if(typeof(getprojects) !== 'undefined'){ %>
+                <% _.each(getprojects[0].userProjects, function(allProjects, i){ %>
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
                     <img class="image" src="http://www.bigart.design/images/other/stephanie-mccabe-24620-600x600.jpg">
-                    <a class="overlay" href="/rooms">
+                    <a class="overlay" href="/listofconcepts" target="_blank">
                     <div class="text">
-                        <p class="title">Firework</p>
-                        <button type="button" style="border:2px solid #fff;padding:10px 20px;background: #000;font-weight:600;">View Details</button>
+                        <p class="title"><%= allProjects.projectName %></p>
                     </div></a>
                 </div>
+                <% }); %>
+                <% } %>
 
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
+               <!-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
                     <img class="image" src="http://www.bigart.design/images/other/sticker-mule-197248-600x600.jpg">
-                    <a class="overlay" href="/rooms" target="_blank">
+                    <a class="overlay" href="/listofconcepts" " target="_blank">
                     <div class="text">
                         <p class="title">Catch of the day</p>
                     </div></a>
@@ -155,7 +172,7 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
                     <img class="image" src="http://www.bigart.design/images/other/scott-webb-258983-600x600.jpg">
-                    <a class="overlay" href="/viewconceptboards"  target="_blank">
+                    <a class="overlay" href="/listofconcepts"  target="_blank">
                     <div class="text">
                         <p class="title">Abstracting Details</p>
                     </div></a>
@@ -164,7 +181,7 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
                     <img class="image" src="http://www.bigart.design/images/other/matthew-kane-205235-600x600.jpg">
-                    <a class="overlay" href="/viewconceptboards"  target="_blank">
+                    <a class="overlay" href="/listofconcepts"  target="_blank">
                     <div class="text">
                         <p class="title">Snow Monkey</p>
                     </div></a>
@@ -208,8 +225,181 @@
                             </div></a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="createProject-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="width:850px;">
+        <div id="createProject-dtls" class="createProject-container">
+            <form id="userconceptfrmImage" method="post" name="userconceptfrm" enctype="multipart/form-data">
+            <div class="col-sm-12 col-md-12">
+                <h4 class="addcboard-heading">New Project</h4>
+                    <div class="form-group">
+                        <div id="list1">
+                            <div class="row display-none" id="addUpload_error_row" style="text-align: center;;">
+                                <p class="margin0 error-text align-center" id="addUpload_error" style="color: darkred;"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectName">Project Name:</label>
+                        <input type="text" class="form-control" id="projectName" name="projectName" required/>
+                        <div  id="projectNama-error_row" style="font-size: 10px;">
+                            <p  class="err" id="projectNama-error" style="color: darkred;"></p>
+                        </div>
+                    </div>
+                    <h4 class="p-style">Project Details</h4>
+                    <div class="form-row">
+                        <div class="form-group  col-md-4">
+                            <label for="inputbuilder">Builder</label>
+                            <input type="text" class="form-control" id="inputbuilder" placeholder="Builder" required />
+                            <div id="inputbuilder-error_row" style="font-size: 10px;">
+                                <p  class="err" id="inputbuilder-error" style="color: darkred;margin-bottom: -10px;"></p>
+                            </div>
+                        </div>
+                        <div class="form-group address-style col-md-6">
+                            <label for="inputprojecttower">Project Tower</label>
+                            <input type="text" class="form-control" id="inputprojecttower" placeholder="Project Tower"  required />
+                            <div id="inputprojecttower-error_row" style="font-size: 10px;">
+                                <p  class="err" id="inputprojecttower-error" style="color: darkred;"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group address-style ml0 col-md-6"  style="margin-right: 14px;">
+                            <label for="inputProjectAddress">Project Address</label>
+                            <input type="text" class="form-control" id="inputProjectAddress" placeholder="1234 Main St" required />
+                            <div id="inputProjectAddress-error_row" style="font-size: 10px;">
+                                <p class="err" id="inputProjectAddress-error" style="color: darkred;margin-bottom: -10px;"></p>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputProjectCity">City</label>
+                            <input type="text" class="form-control" id="inputProjectCity"  required />
+                            <div id="inputProjectCity-error_row" style="font-size: 10px;">
+                                <p class="err" id="inputProjectCity-error" style="color: darkred;"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputProjectState">State</label>
+                            <input type="text" class="form-control" id="inputProjectState" placeholder="State"  required />
+                            <div id="inputProjectState-error_row" style="font-size: 10px;">
+                                <p class="err" id="inputProjectState-error" style="color: darkred;"></p>
+                            </div>
+                        </div>
+                        <div class="form-group address-style col-md-3">
+                            <label for="inputpincode">Pin Code</label>
+                            <input type="number" class="form-control" id="inputpincode" maxlength="6"  required />
+                            <div id="inputpincode-error_row" style="font-size: 10px;">
+                                <p class="err" id="inputpincode-error" style="color: darkred;"></p>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputplan">Plan</label>
+                            <input type="text" class="form-control" id="inputplan" placeholder="Plan" required />
+                            <div id="inputplan-error_row" style="font-size: 10px;">
+                                <p class="err" id="inputplan-error" style="color: darkred;"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 upload-btn-wrapper">
+                            <button class="btnImage">Upload a file</button>
+                            <input id="conceptfileupload" type="file" name="conceptfile"/>
+                            <label id="file-name"></label>
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="mt15 col-md-12" style="text-align:right;">
+                <input type="submit" id="save_conceptfileupload" class="btn addcboard-btn" value="Submit">
+            </div>
+            </form>
+        </div>
+
+    </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addRoomConcept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="addcboard-container">
+            <div>
+                <h4 class="addcboard-heading">Add Room Concept</h4>
+                <div class="spaceElemenetPanel"  id="elements" style="">
+                    <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;">
+                        <div class="form-group col-md-2">
+                             <label for="inputcategory">SpaceType</label>
+                            <select id="inputcategory" class="form-option">
+                                <option selected>Choose...</option>
+                                <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                                <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                                <option value="<%= j %>" data-element="<%= spaceElement.title %>"><%= spaceElement.title %></option>
+                                <% }); %>
+                                <% } %>
+                            </select>
+                         </div>
+                        <div class="form-row">
+                            <div class="form-group address-style col-md-4">
+                                <label for="inputname">Name</label>
+                                <input type="Name" class="form-control" id="inputname" placeholder="Name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputname">Description</label>
+                                <input type="Name" class="form-control" id="description" placeholder="Name">
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12" style="text-align:right;">
+                    <span  id="btn1">
+                        <input type="submit" id="save_roomConcept" class="btn addcboard-btn" value="Submit">
+                    </span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <h3>Add Space Type <span  id="addSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+ var current_id = 0;
+ var cntclick = 0;
+    $('#addSpaceElement').click(function(){
+        console.log("add family button clicked  "+cntclick);
+        if(cntclick >= 2){
+            $("#elements").css("overflow-y","scroll");
+            $("#elements").css("height","380px");
+        }
+        nextElement($('#copyspaceElemenet'));
+        cntclick++;
+    })
+
+    function nextElement(element){
+       console.log("inside next element" +element);
+        var newElement = element.clone();
+        var id = current_id+1;
+        current_id = id;
+        newElement.attr("id","member-panel"+current_id);
+        var field = $('input', newElement).attr("id");
+        $('input.inputname', newElement).attr("id","NAME"+current_id );
+        $('input.description', newElement).attr("id","description"+current_id );
+
+        newElement.appendTo($("#elements"));
+    }
+</script>

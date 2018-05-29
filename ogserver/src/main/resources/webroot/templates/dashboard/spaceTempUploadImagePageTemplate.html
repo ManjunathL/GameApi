@@ -27,14 +27,15 @@
 <% if(typeof(spacetemplates) !== 'undefined'){ %>
 <div  class="owl-carousel owl-theme owl-sptmpltype spaceElmntDv">
     <% _.each(spacetemplates[0].spaceElementList, function(spltemst, i){ %>
-    <div class="item selTemp"
+    <div class="item selTemp spltemstCls"
          data-element="<%= spltemst.code %>"  >
-        <input type="hidden" id="spltemstCode" value="<%= spltemst.code %>">
+
         <img src="<%= spltemst.imageUrl %>" alt="<%= spltemst.code %>" class="img-responsive img-centered">
         <h5><%= spltemst.title %></h5>
     </div>
     <% }); %>
 </div>
+<input type="hidden" id="spltemstCode" value="">
 <% }else{ %>
 <div>
     <p>No Related Space Element</p>
