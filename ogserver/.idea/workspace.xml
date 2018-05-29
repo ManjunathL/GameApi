@@ -2,56 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e68c2c5-4694-42bf-88c0-cd9b930ffff9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/FFApiHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/GSTForProducts.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/ProductCategoryMap.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/VersionPricingService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/apiserver/GameApiServerVerticle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleForPrice.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleForPrice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductAddon.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductAddon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductLineItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProductLineItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQSheetCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/BOQSheetCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOCreatorService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOCreatorService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOSheetCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/erp/SOSheetCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/DistinctModule.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/DistinctModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/Module.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/Module.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/RateCard.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/RateCard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/SOPart.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/SOPart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWModuleComponent.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWModuleComponent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWProductModule.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWProductModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWProposalProduct.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/model/dw/DWProposalProduct.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/output/ProposalOutputService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/output/ProposalOutputService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/output/SOWPdfOutputService.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/output/SOWPdfOutputService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/AddonPriceHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/AddonPriceHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ProductPriceHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ProductPriceHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/VersionPriceHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/VersionPriceHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuotationPDFCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuotationPDFCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteData.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/QuoteRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/crm/CrmApiHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/si/crm/CrmApiHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" afterPath="$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/dev.services.json" afterPath="$PROJECT_DIR$/src/main/resources/game/dev.services.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/game.base.json" afterPath="$PROJECT_DIR$/src/main/resources/game/game.base.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/prod.services.json" afterPath="$PROJECT_DIR$/src/main/resources/game/prod.services.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/uat.conf.game.json" afterPath="$PROJECT_DIR$/src/main/resources/game/uat.conf.game.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/game/uat.services.json" afterPath="$PROJECT_DIR$/src/main/resources/game/uat.services.json" />
-    </list>
-    <list id="d1c8cd9a-1633-405e-852e-aa524b0854f2" name="New changelist" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__co_paralleluniverse_quasar_core_jdk8_0_7_5.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules/ogserver_main.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/shelf/config_json.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ogserver.iml" afterPath="$PROJECT_DIR$/ogserver.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/handlers/CCAHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/handlers/CCAHandler.java" />
     </list>
-    <list id="e4aece55-dfff-413b-b221-8664bd0128a8" name="Failed commit: Default" comment="Merge remote-tracking branch 'remotes/origin/game_boq' into gameuat_merge&#10;&#10;# Conflicts:&#10;#&#9;ogserver/src/main/java/com/mygubbi/db/QueryData.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/model/Handle.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java&#10;#&#9;ogserver/src/main/resources/game/db/proposal_queries.json&#10;#&#9;ogserver/src/main/resources/game/dev.services.json&#10;#&#9;ogserver/src/main/resources/game/game.base.json&#10;#&#9;ogserver/src/main/resources/game/prod.services.json&#10;#&#9;ogserver/src/main/resources/game/uat.services.json&#10;" />
-    <list id="fa8387a9-778f-4951-ae25-84bdc6695045" name="Failed commit: Default (2)" comment="Merge remote-tracking branch 'remotes/origin/gameuat_merge' into gameprod_merge&#10;&#10;# Conflicts:&#10;#&#9;ogserver/src/main/java/com/mygubbi/db/DatabaseService.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/db/QueryData.java&#10;#&#9;ogserver/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java&#10;#&#9;ogserver/src/main/resources/game/game.base.json&#10;#&#9;ogserver/src/main/resources/game/uat.conf.game.json&#10;" />
+    <list id="d1c8cd9a-1633-405e-852e-aa524b0854f2" name="New changelist" comment="" />
     <ignored path="ogserver.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="D:\Mygubbi GAME\GAME\apidevelopment\ogserver\.idea\shelf/" />
+    <ignored path="D:\Mygubbi\Mygubbi GAME\GAME\apidevelopment\ogserver\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,62 +99,70 @@
       <file leaf-file-name="game.base.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/game/game.base.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="12.423077">
               <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestDataProvider.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/provider/RestDataProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CCAHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/handlers/CCAHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5509434">
+              <caret line="215" column="0" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
               <folding>
-                <marker date="1508732550245" expanded="true" signature="0:3276" placeholder="{&quot;version&quot;: &quot;0.0.0a&quot;...}" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DriveServiceProvider.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveServiceProvider.java">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="161" column="58" selection-start-line="161" selection-start-column="58" selection-end-line="161" selection-end-column="58" />
+            <state vertical-scroll-proportion="-7.827586">
+              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModulePriceHolder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/price/ModulePriceHolder.java">
+      <file leaf-file-name="FileUploadHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/Upload/FileUploadHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+              <caret line="70" column="39" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModuleDataService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java">
+      <file leaf-file-name="AmazonS3FileUploadClient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/Upload/AmazonS3FileUploadClient.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="620" column="43" selection-start-line="620" selection-start-column="43" selection-end-line="620" selection-end-column="43" />
+              <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SOWWriteToDatabaseHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/sow/SOWWriteToDatabaseHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DwReportingService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DwReportingService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7685185">
-              <caret line="452" column="75" selection-start-line="452" selection-start-column="75" selection-end-line="452" selection-end-column="75" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="438" column="37" selection-start-line="438" selection-start-column="37" selection-end-line="438" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -198,10 +173,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-              <folding>
-                <marker date="1508732568007" expanded="true" signature="0:3069" placeholder="{&quot;version&quot;: &quot;0.0.0a&quot;...}" />
-                <marker date="1508732568007" expanded="true" signature="2318:2419" placeholder="[...]" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -210,10 +182,61 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="596" column="76" selection-start-line="596" selection-start-column="76" selection-end-line="596" selection-end-column="76" />
+              <caret line="596" column="13" selection-start-line="596" selection-start-column="13" selection-end-line="596" selection-end-column="13" />
               <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1802#1803#0" expanded="false" />
+                <element signature="e#1839#1840#0" expanded="false" />
+                <element signature="e#1873#1874#0" expanded="false" />
+                <element signature="e#1905#1906#0" expanded="false" />
+                <element signature="e#1941#1942#0" expanded="false" />
+                <element signature="e#1987#1988#0" expanded="false" />
                 <element signature="e#2032#2033#0" expanded="false" />
                 <element signature="e#2088#2089#0" expanded="false" />
+                <element signature="e#2129#2130#0" expanded="false" />
+                <element signature="e#2179#2180#0" expanded="false" />
+                <element signature="e#2609#2610#0" expanded="false" />
+                <element signature="e#2659#2660#0" expanded="false" />
+                <element signature="e#2694#2695#0" expanded="false" />
+                <element signature="e#2743#2744#0" expanded="false" />
+                <element signature="e#2786#2787#0" expanded="false" />
+                <element signature="e#2842#2843#0" expanded="false" />
+                <element signature="e#2966#2967#0" expanded="false" />
+                <element signature="e#3006#3007#0" expanded="false" />
+                <element signature="e#3048#3049#0" expanded="false" />
+                <element signature="e#3095#3096#0" expanded="false" />
+                <element signature="e#3145#3146#0" expanded="false" />
+                <element signature="e#3224#3225#0" expanded="false" />
+                <element signature="e#3267#3268#0" expanded="false" />
+                <element signature="e#3307#3308#0" expanded="false" />
+                <element signature="e#3358#3359#0" expanded="false" />
+                <element signature="e#3397#3398#0" expanded="false" />
+                <element signature="e#3455#3456#0" expanded="false" />
+                <element signature="e#3500#3501#0" expanded="false" />
+                <element signature="e#3558#3559#0" expanded="false" />
+                <element signature="e#3624#3625#0" expanded="false" />
+                <element signature="e#3689#3690#0" expanded="false" />
+                <element signature="e#3755#3756#0" expanded="false" />
+                <element signature="e#4264#4265#0" expanded="false" />
+                <element signature="e#4336#4337#0" expanded="false" />
+                <element signature="e#4396#4397#0" expanded="false" />
+                <element signature="e#4464#4465#0" expanded="false" />
+                <element signature="e#4662#4663#0" expanded="false" />
+                <element signature="e#4727#4728#0" expanded="false" />
+                <element signature="e#5444#5445#0" expanded="false" />
+                <element signature="e#5479#5480#0" expanded="false" />
+                <element signature="e#5519#5520#0" expanded="false" />
+                <element signature="e#5552#5553#0" expanded="false" />
+                <element signature="e#27493#27494#0" expanded="false" />
+                <element signature="e#27530#27531#0" expanded="false" />
+                <element signature="e#27581#27582#0" expanded="false" />
+                <element signature="e#27629#27630#0" expanded="false" />
+                <element signature="e#34896#34897#0" expanded="false" />
+                <element signature="e#34941#34942#0" expanded="false" />
+                <element signature="e#36018#36019#0" expanded="false" />
+                <element signature="e#36062#36063#0" expanded="false" />
+                <element signature="e#41277#41278#0" expanded="false" />
+                <element signature="e#41365#41366#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -223,37 +246,9 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="421" column="99" selection-start-line="421" selection-start-column="99" selection-end-line="421" selection-end-column="99" />
+              <caret line="421" column="90" selection-start-line="421" selection-start-column="90" selection-end-line="421" selection-end-column="90" />
               <folding>
                 <element signature="imports" expanded="false" />
-                <marker date="1508732091426" expanded="true" signature="786:828" placeholder="/**...*/" />
-                <marker date="1508732091426" expanded="true" signature="1316:1449" placeholder="{...}" />
-                <marker date="1508732091426" expanded="true" signature="1481:1613" placeholder="{...}" />
-                <marker date="1508732091426" expanded="true" signature="1678:1854" placeholder="{...}" />
-                <marker date="1508732091426" expanded="true" signature="1931:2400" placeholder="{...}" />
-                <marker date="1508732091426" expanded="true" signature="2454:2843" placeholder="{...}" />
-                <marker date="1508732091426" expanded="true" signature="2941:3517" placeholder="{...}" />
-                <marker date="1508732091426" expanded="true" signature="28909:29250" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="proposal_queries.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1363" column="6" selection-start-line="1363" selection-start-column="6" selection-end-line="1363" selection-end-column="6" />
-              <folding>
-                <marker date="1508732091770" expanded="true" signature="0:105706" placeholder="{...}" />
-                <marker date="1508732091770" expanded="true" signature="21:368" placeholder="{&quot;id&quot;: &quot;proposal.list.status&quot;...}" />
-                <marker date="1508732091770" expanded="true" signature="375:737" placeholder="{&quot;id&quot;: &quot;proposal.list.all&quot;...}" />
-                <marker date="1508732091770" expanded="true" signature="744:1141" placeholder="{&quot;id&quot;: &quot;proposal.list.sales&quot;...}" />
-                <marker date="1508732091770" expanded="true" signature="1148:1551" placeholder="{&quot;id&quot;: &quot;proposal.list.designer&quot;...}" />
-                <marker date="1508732091770" expanded="true" signature="1558:1937" placeholder="{&quot;id&quot;: &quot;proposal.list.designpartner&quot;...}" />
-                <marker date="1508732091770" expanded="true" signature="1944:2127" placeholder="{&quot;id&quot;: &quot;proposal.list.crmid&quot;...}" />
-                <marker date="1508732091770" expanded="true" signature="2135:2839" placeholder="{&quot;id&quot;: &quot;proposal.updateversion&quot;...}" />
-                <marker date="1508732091770" expanded="true" signature="3076:3242" placeholder="{&quot;id&quot;: &quot;proposal.header&quot;...}" />
               </folding>
             </state>
           </provider>
@@ -436,7 +431,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="2993559626643" />
+        <entry key="$PROJECT_DIR$" value="3055159541317" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -499,6 +494,10 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/19.0/6ce200f6b23222af3d8abb6b6459e6c44f4bb0e9/guava-19.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/fluent-hc/4.5.2/f781b5655323b13c67d2ddb89b2a3b0cded7fe37/fluent-hc-4.5.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/fluent-hc/4.5.2/7bfdfa49de6d720ad3c8cedb6a5238eec564dfed/fluent-hc-4.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-httpclient/commons-httpclient/3.1/8f95b134ed1222d9ea5c0c34cdad0b470fa9bf9d/commons-httpclient-3.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-httpclient/commons-httpclient/3.1/964cd74171f427720480efdec40a7c7f6e58426a/commons-httpclient-3.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch.web/restful-user-manager/1.2/f12b9dbb5b499e931cbb2053b93a8ea292976cd/restful-user-manager-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch.web/restful-user-manager/1.2/2ee349f5cf0050ad8f757bfe2580af5e4fd4f9a/restful-user-manager-1.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.5.2/1cdd156a35d5f8ca0bc5c77e8e1c745acfb922f0/firebase-client-jvm-2.5.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.5.2/91731b8f5868a3e8a8a773f29b8d06b5c358f5bb/firebase-client-jvm-2.5.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-server-sdk/3.0.1/5d0414fd79612f86f7827af4b0b184cb931c45f2/firebase-server-sdk-3.0.1-sources.jar" />
@@ -519,6 +518,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-drive/v3-rev76-1.22.0/e963292eb8083eaae05c147b32d44e127b34da9e/google-api-services-drive-v3-rev76-1.22.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-sheets/v4-rev478-1.22.0/584497ab9fac252211f22a8024ba70e1a7f48736/google-api-services-sheets-v4-rev478-1.22.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.apis/google-api-services-sheets/v4-rev478-1.22.0/a9363ad0a21357edefd003a590350c3eab26db69/google-api-services-sheets-v4-rev478-1.22.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/us.monoid.web/resty/0.3.2/8c9aa167072d3d1c51eabbe9d3d492b92b5c0e23/resty-0.3.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/us.monoid.web/resty/0.3.2/1c83ff064daf6ecf736cff3b0012ffbacabefd7c/resty-0.3.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/677abe279b68c5e7490d6d50c6951376238d7d3e/log4j-1.2.17-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/5af35056b4d257e4b64b9e8069c0746e8b08629f/log4j-1.2.17.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.1.8.Final/2af1bbac4a9f572a26de6709ae8a0c50f95c0d47/netty-common-4.1.8.Final-sources.jar" />
@@ -606,6 +607,24 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/4.1/f8b86f4ee6e02082f63a658e00eb5506821253c6/asm-commons-4.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-ext/1.6.2/6d0f0fa6c6eb6c4f024b5226ba1891f97fd62780/slf4j-ext-1.6.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-ext/1.6.2/24c6fe85fb67ac06873b81f4251f2cfa45fc0cfe/slf4j-ext-1.6.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.6.2/f1d6a191e0e09278a1f114e5812044b1f2faa459/jcl-over-slf4j-1.6.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.6.2/ac4cd2d6d0cf4342b4e8fd520c686851fc681912/jcl-over-slf4j-1.6.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jul-to-slf4j/1.6.2/ed37d1179b894d40ded221608584ba8e98fbd2c3/jul-to-slf4j-1.6.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jul-to-slf4j/1.6.2/fe7126d6dc4b2543dc72a6e4baecbba2b52f2375/jul-to-slf4j-1.6.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.util/configuration-api/0.2/36d53ce9baccad2c24fa8650c80d128eaf90f472/configuration-api-0.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.util/configuration-api/0.2/29de1e1e7921c44dd12768ca9d81a2ef8f519727/configuration-api-0.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.util/configuration-dotconf/0.2/155cf071e07c709a700434a91a780241c9f9bc42/configuration-dotconf-0.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.util/configuration-dotconf/0.2/37e1a257ce59012e0d851775126aebd3b85131cf/configuration-dotconf-0.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.web/json-serialization/0.2/aec3656f350c4070a64d4d157e829090816b9894/json-serialization-0.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.web/json-serialization/0.2/ac5ff7045d656b73c877101cbec3aaa35e8c710e/json-serialization-0.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch/shiro-couch/1.2/f2de5da2273ef15d2513f8591d1d466852eceb5/shiro-couch-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch/shiro-couch/1.2/bd90c0f7dba3ed3f9837e3794842687484ed8f0d/shiro-couch-1.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch/couch-user-manager/1.2/7f35b2ec428ee5e4ba08d3f3d065ff62c6abdf0b/couch-user-manager-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch/couch-user-manager/1.2/56ce899f0a943c21f7fd0b1fbb4799febe9ed634/couch-user-manager-1.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.util/logging/1.1/f84334ae4cf3490451b9534d1136745ab9e41aba/logging-1.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.util/logging/1.1/7f28ef8076ed20fcf9be08f5fac738aa4cb46063/logging-1.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/tubesock/0.0.12/d228b46549e72fd0e7e3b3dfbfa271b329d7164/tubesock-0.0.12-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/tubesock/0.0.12/6ec0bbd3e161a73ed672284b587fd32309a86d7a/tubesock-0.0.12.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client-gson/1.21.0/3e5f630600a029dd3803348ecc0e0a59f5e64832/google-api-client-gson-1.21.0-sources.jar" />
@@ -632,6 +651,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.oauth-client/google-oauth-client-java6/1.22.0/6cbd19cd33d55bcaac2d842a57f5ade9260bed99/google-oauth-client-java6-1.22.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty/6.1.26/9e275882f6d3400b05674c79e97014a255dfaf43/jetty-6.1.26-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty/6.1.26/2f546e289fddd5b1fab1d4199fbb6e9ef43ee4b0/jetty-6.1.26.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.java.dev.javacc/javacc/4.1/6c1852f4e2d2709fbc2b8e107d2fb735933178fa/javacc-4.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.java.dev.javacc/javacc/4.1/915805643a5651cfe0e2db40c689c6dc211db97d/javacc-4.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.8.Final/59b160860925caf62d471dcec25befb8c5fb9ece/netty-codec-4.1.8.Final-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.8.Final/1bd0a2d032e5c7fc3f42c1b483d0f4c57eb516a3/netty-codec-4.1.8.Final.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-socks/4.1.8.Final/8977ad65c8e2370da542cfd5e3426ea3d7c34ae3/netty-codec-socks-4.1.8.Final-sources.jar" />
@@ -649,6 +670,14 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.xmlbeans/xmlbeans/2.6.0/29e80d2dd51f9dcdef8f9ffaee0d4dc1c9bbfc87/xmlbeans-2.6.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.spatial4j/spatial4j/0.4.1/c51cd6b83293a5e26993bd9848e2766654dfdddb/spatial4j-0.4.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.spatial4j/spatial4j/0.4.1/4234d12b1ba4d4b539fb3e29edd948a99539d9eb/spatial4j-0.4.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.cal10n/cal10n-api/0.7.4/995bc582ad5ba0568e6ec0ef10b78f0e8c03764c/cal10n-api-0.7.4-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.cal10n/cal10n-api/0.7.4/132b7e1702af0335cf4259d30aaf959264db688f/cal10n-api-0.7.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch/couch-app-support/1.2/a92305c7a3edb633808d18508b5ff19ea999652d/couch-app-support-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch/couch-app-support/1.2/5776fdf087d8d7e5449683ac1b5a1d72e053f799/couch-app-support-1.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.shiro/shiro-web/1.1.0/3036648829e4959e7358b1cf078617e868990194/shiro-web-1.1.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.shiro/shiro-web/1.1.0/f3115e0e3624f17b60177b792b8235cf7b45854b/shiro-web-1.1.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch/rbac-api/1.2/be24ae8782c8210bc913ef2759c004444e397895/rbac-api-1.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.commonjava.couch/rbac-api/1.2/7412811aafde75358a2e694a74ec08bd6ae353e3/rbac-api-1.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.ion/ion-java/1.0.2/3077203a7e79dd126a480da0491ec60238bbb872/ion-java-1.0.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.ion/ion-java/1.0.2/ee9dacea7726e495f8352b81c12c23834ffbc564/ion-java-1.0.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.dataformat/jackson-dataformat-cbor/2.6.6/c9553dec78895e09e133bcd340fe5b1300f1e72b/jackson-dataformat-cbor-2.6.6-sources.jar" />
@@ -679,6 +708,8 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20160212/a742e3f85161835b95877478c5dd5b405cefaab9/json-20160212.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/6d8591dcd32b4b97808d3ed78d76c6272299309c/gson-2.6.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.xbean/xbean-reflect/3.8/6abed8e482ef718eab52b64b0c7280e3f85e2cac/xbean-reflect-3.8-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.xbean/xbean-reflect/3.8/66a534b1512b5fe6263adb18871b256b150f02e8/xbean-reflect-3.8.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client/1.22.0/354d5dd5f75febe40347abfa2d9517bae6281e73/google-http-client-1.22.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.http-client/google-http-client/1.22.0/d441fc58329c4a4c067acec04ac361627f66ecc8/google-http-client-1.22.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.4/c5c19e3e6af6b452def290cde12a3ee4c35c893c/httpcore-4.4.4-sources.jar" />
@@ -852,6 +883,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/handlers/CCAHandler.java" />
       </list>
     </option>
   </component>
@@ -893,8 +926,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -915,10 +946,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
-  <component name="RunManager">
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RunManager" selected="Application.GAME SERVER VERTICLE">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -1005,6 +1042,24 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="false" name="GAME SERVER VERTICLE" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="com.mygubbi.ServerVerticle" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="game/game.base.json,game/dev.services.json,game/resturls.json" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="ogserver" />
+      <envs />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.GAME SERVER VERTICLE" />
+    </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
@@ -1027,9 +1082,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32807016" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33846155" sideWeight="0.4969651" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33846155" sideWeight="0.5030349" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3965812" sideWeight="0.50458014" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3982906" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3965812" sideWeight="0.49541986" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4991453" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5623932" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24885496" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1038,15 +1094,14 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24961714" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4991453" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44273505" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1068,7 +1123,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1077,39 +1132,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/excel/ExcelSheetProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="226" column="0" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/game/db/proposal_queries.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1824" column="23" selection-start-line="1824" selection-start-column="23" selection-end-line="1824" selection-end-column="23" />
-          <folding>
-            <marker date="1508732091770" expanded="true" signature="0:105706" placeholder="{...}" />
-            <marker date="1508732091770" expanded="true" signature="21:368" placeholder="{&quot;id&quot;: &quot;proposal.list.status&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="375:737" placeholder="{&quot;id&quot;: &quot;proposal.list.all&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="744:1141" placeholder="{&quot;id&quot;: &quot;proposal.list.sales&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="1148:1551" placeholder="{&quot;id&quot;: &quot;proposal.list.designer&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="1558:1937" placeholder="{&quot;id&quot;: &quot;proposal.list.designpartner&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="1944:2127" placeholder="{&quot;id&quot;: &quot;proposal.list.crmid&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="2135:2839" placeholder="{&quot;id&quot;: &quot;proposal.updateversion&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="3076:3242" placeholder="{&quot;id&quot;: &quot;proposal.header&quot;...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/pipeline/PipelineResponseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1164,11 +1186,7 @@
         <state vertical-scroll-proportion="15.620689">
           <caret line="114" column="49" selection-start-line="114" selection-start-column="49" selection-end-line="114" selection-end-column="49" />
           <folding>
-            <element signature="e#15244#15245#0" expanded="false" />
-            <element signature="e#15421#15422#0" expanded="false" />
-            <element signature="e#24712#24713#0" expanded="false" />
             <element signature="e#26304#26305#0" expanded="false" />
-            <element signature="e#26530#26531#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1232,7 +1250,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="325" column="46" selection-start-line="325" selection-start-column="46" selection-end-line="325" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1240,7 +1257,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="158" column="18" selection-start-line="158" selection-start-column="18" selection-end-line="158" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1343,53 +1359,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="181" column="5" selection-start-line="181" selection-start-column="5" selection-end-line="181" selection-end-column="5" />
           <folding>
-            <element signature="e#1975#1976#0" expanded="false" />
-            <element signature="e#2011#2012#0" expanded="false" />
-            <element signature="e#2050#2051#0" expanded="false" />
-            <element signature="e#2125#2126#0" expanded="false" />
-            <element signature="e#2287#2288#0" expanded="false" />
-            <element signature="e#2330#2331#0" expanded="false" />
-            <element signature="e#2367#2368#0" expanded="false" />
-            <element signature="e#2412#2413#0" expanded="false" />
-            <element signature="e#2450#2451#0" expanded="false" />
-            <element signature="e#2501#2502#0" expanded="false" />
-            <element signature="e#2531#2532#0" expanded="false" />
-            <element signature="e#2573#2574#0" expanded="false" />
-            <element signature="e#2616#2617#0" expanded="false" />
-            <element signature="e#2674#2675#0" expanded="false" />
-            <element signature="e#2714#2715#0" expanded="false" />
-            <element signature="e#2763#2764#0" expanded="false" />
-            <element signature="e#2807#2808#0" expanded="false" />
-            <element signature="e#2860#2861#0" expanded="false" />
-            <element signature="e#2895#2896#0" expanded="false" />
-            <element signature="e#2938#2939#0" expanded="false" />
-            <element signature="e#2980#2981#0" expanded="false" />
-            <element signature="e#3031#3032#0" expanded="false" />
-            <element signature="e#3071#3072#0" expanded="false" />
-            <element signature="e#3120#3121#0" expanded="false" />
             <element signature="e#3160#3161#0" expanded="false" />
-            <element signature="e#3207#3208#0" expanded="false" />
-            <element signature="e#3242#3243#0" expanded="false" />
-            <element signature="e#3284#3285#0" expanded="false" />
-            <element signature="e#3324#3325#0" expanded="false" />
             <element signature="e#3392#3393#0" expanded="false" />
-            <element signature="e#3432#3433#0" expanded="false" />
             <element signature="e#3500#3501#0" expanded="false" />
-            <element signature="e#3544#3545#0" expanded="false" />
-            <element signature="e#3618#3619#0" expanded="false" />
-            <element signature="e#3659#3660#0" expanded="false" />
-            <element signature="e#3728#3729#0" expanded="false" />
-            <element signature="e#3874#3875#0" expanded="false" />
-            <element signature="e#3945#3946#0" expanded="false" />
-            <element signature="e#3981#3982#0" expanded="false" />
-            <element signature="e#4025#4026#0" expanded="false" />
-            <element signature="e#4281#4282#0" expanded="false" />
-            <element signature="e#5141#5142#0" expanded="false" />
-            <element signature="e#5229#5230#0" expanded="false" />
-            <element signature="e#5264#5265#0" expanded="false" />
-            <element signature="e#5310#5311#0" expanded="false" />
             <element signature="e#5363#5364#0" expanded="false" />
-            <element signature="e#5409#5410#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1405,15 +1378,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="152" column="13" selection-start-line="152" selection-start-column="13" selection-end-line="152" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ProposalHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="591" column="93" selection-start-line="591" selection-start-column="93" selection-end-line="591" selection-end-column="93" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1428,17 +1392,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1363" column="6" selection-start-line="1363" selection-start-column="6" selection-end-line="1363" selection-end-column="6" />
-          <folding>
-            <marker date="1508732091770" expanded="true" signature="0:105706" placeholder="{...}" />
-            <marker date="1508732091770" expanded="true" signature="21:368" placeholder="{&quot;id&quot;: &quot;proposal.list.status&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="375:737" placeholder="{&quot;id&quot;: &quot;proposal.list.all&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="744:1141" placeholder="{&quot;id&quot;: &quot;proposal.list.sales&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="1148:1551" placeholder="{&quot;id&quot;: &quot;proposal.list.designer&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="1558:1937" placeholder="{&quot;id&quot;: &quot;proposal.list.designpartner&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="1944:2127" placeholder="{&quot;id&quot;: &quot;proposal.list.crmid&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="2135:2839" placeholder="{&quot;id&quot;: &quot;proposal.updateversion&quot;...}" />
-            <marker date="1508732091770" expanded="true" signature="3076:3242" placeholder="{&quot;id&quot;: &quot;proposal.header&quot;...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1463,7 +1417,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1474,21 +1427,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8168761">
-          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/si/gdrive/DriveServiceProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="161" column="58" selection-start-line="161" selection-start-column="58" selection-end-line="161" selection-end-column="58" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1496,25 +1441,234 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#5638#5639#0" expanded="false" />
+            <element signature="e#5682#5683#0" expanded="false" />
+            <element signature="e#23697#23698#0" expanded="false" />
+            <element signature="e#23740#23741#0" expanded="false" />
+            <element signature="e#29931#29932#0" expanded="false" />
+            <element signature="e#29999#30000#0" expanded="false" />
+            <element signature="e#30039#30040#0" expanded="false" />
+            <element signature="e#30073#30074#0" expanded="false" />
+            <element signature="e#32233#32234#0" expanded="false" />
+            <element signature="e#32275#32276#0" expanded="false" />
+            <element signature="e#32343#32344#0" expanded="false" />
+            <element signature="e#32397#32398#0" expanded="false" />
+            <element signature="e#32451#32452#0" expanded="false" />
+            <element signature="e#32492#32493#0" expanded="false" />
+            <element signature="e#32566#32567#0" expanded="false" />
+            <element signature="e#32627#32628#0" expanded="false" />
+            <element signature="e#36338#36339#0" expanded="false" />
+            <element signature="e#36376#36377#0" expanded="false" />
+            <element signature="e#43341#43342#0" expanded="false" />
+            <element signature="e#43372#43373#0" expanded="false" />
+            <element signature="e#43423#43424#0" expanded="false" />
+            <element signature="e#43459#43460#0" expanded="false" />
+            <element signature="e#43510#43511#0" expanded="false" />
+            <element signature="e#43546#43547#0" expanded="false" />
+            <element signature="e#43597#43598#0" expanded="false" />
+            <element signature="e#43633#43634#0" expanded="false" />
+            <element signature="e#43689#43690#0" expanded="false" />
+            <element signature="e#43735#43736#0" expanded="false" />
+            <element signature="e#43782#43783#0" expanded="false" />
+            <element signature="e#43820#43821#0" expanded="false" />
+            <element signature="e#43874#43875#0" expanded="false" />
+            <element signature="e#43918#43919#0" expanded="false" />
+            <element signature="e#43972#43973#0" expanded="false" />
+            <element signature="e#44016#44017#0" expanded="false" />
+            <element signature="e#44077#44078#0" expanded="false" />
+            <element signature="e#44128#44129#0" expanded="false" />
+            <element signature="e#44189#44190#0" expanded="false" />
+            <element signature="e#44240#44241#0" expanded="false" />
+            <element signature="e#44275#44276#0" expanded="false" />
+            <element signature="e#44378#44379#0" expanded="false" />
+            <element signature="e#44444#44445#0" expanded="false" />
+            <element signature="e#44490#44491#0" expanded="false" />
+            <element signature="e#44558#44559#0" expanded="false" />
+            <element signature="e#44605#44606#0" expanded="false" />
+            <element signature="e#44942#44943#0" expanded="false" />
+            <element signature="e#44974#44975#0" expanded="false" />
+            <element signature="e#45022#45023#0" expanded="false" />
+            <element signature="e#45068#45069#0" expanded="false" />
+            <element signature="e#45110#45111#0" expanded="false" />
+            <element signature="e#45144#45145#0" expanded="false" />
+            <element signature="e#45191#45192#0" expanded="false" />
+            <element signature="e#45230#45231#0" expanded="false" />
+            <element signature="e#45278#45279#0" expanded="false" />
+            <element signature="e#45318#45319#0" expanded="false" />
+            <element signature="e#45362#45363#0" expanded="false" />
+            <element signature="e#45398#45399#0" expanded="false" />
+            <element signature="e#45442#45443#0" expanded="false" />
+            <element signature="e#45478#45479#0" expanded="false" />
+            <element signature="e#45522#45523#0" expanded="false" />
+            <element signature="e#45556#45557#0" expanded="false" />
+            <element signature="e#45603#45604#0" expanded="false" />
+            <element signature="e#45642#45643#0" expanded="false" />
+            <element signature="e#45690#45691#0" expanded="false" />
+            <element signature="e#45730#45731#0" expanded="false" />
+            <element signature="e#45774#45775#0" expanded="false" />
+            <element signature="e#45810#45811#0" expanded="false" />
+            <element signature="e#45854#45855#0" expanded="false" />
+            <element signature="e#45890#45891#0" expanded="false" />
+            <element signature="e#45938#45939#0" expanded="false" />
+            <element signature="e#45978#45979#0" expanded="false" />
+            <element signature="e#46031#46032#0" expanded="false" />
+            <element signature="e#46076#46077#0" expanded="false" />
+            <element signature="e#46130#46131#0" expanded="false" />
+            <element signature="e#46176#46177#0" expanded="false" />
+            <element signature="e#46226#46227#0" expanded="false" />
+            <element signature="e#46268#46269#0" expanded="false" />
+            <element signature="e#46318#46319#0" expanded="false" />
+            <element signature="e#46360#46361#0" expanded="false" />
+            <element signature="e#46400#46401#0" expanded="false" />
+            <element signature="e#46432#46433#0" expanded="false" />
+            <element signature="e#46477#46478#0" expanded="false" />
+            <element signature="e#46514#46515#0" expanded="false" />
+            <element signature="e#46560#46561#0" expanded="false" />
+            <element signature="e#46598#46599#0" expanded="false" />
+            <element signature="e#46640#46641#0" expanded="false" />
+            <element signature="e#46674#46675#0" expanded="false" />
+            <element signature="e#46716#46717#0" expanded="false" />
+            <element signature="e#46750#46751#0" expanded="false" />
+            <element signature="e#46793#46794#0" expanded="false" />
+            <element signature="e#46828#46829#0" expanded="false" />
+            <element signature="e#46876#46877#0" expanded="false" />
+            <element signature="e#46916#46917#0" expanded="false" />
+            <element signature="e#46965#46966#0" expanded="false" />
+            <element signature="e#47006#47007#0" expanded="false" />
+            <element signature="e#47051#47052#0" expanded="false" />
+            <element signature="e#47088#47089#0" expanded="false" />
+            <element signature="e#47133#47134#0" expanded="false" />
+            <element signature="e#47170#47171#0" expanded="false" />
+            <element signature="e#47214#47215#0" expanded="false" />
+            <element signature="e#47250#47251#0" expanded="false" />
+            <element signature="e#47299#47300#0" expanded="false" />
+            <element signature="e#47340#47341#0" expanded="false" />
+            <element signature="e#47390#47391#0" expanded="false" />
+            <element signature="e#47432#47433#0" expanded="false" />
+            <element signature="e#47478#47479#0" expanded="false" />
+            <element signature="e#47516#47517#0" expanded="false" />
+            <element signature="e#47562#47563#0" expanded="false" />
+            <element signature="e#47600#47601#0" expanded="false" />
+            <element signature="e#47641#47642#0" expanded="false" />
+            <element signature="e#47674#47675#0" expanded="false" />
+            <element signature="e#47720#47721#0" expanded="false" />
+            <element signature="e#47758#47759#0" expanded="false" />
+            <element signature="e#47805#47806#0" expanded="false" />
+            <element signature="e#47844#47845#0" expanded="false" />
+            <element signature="e#47887#47888#0" expanded="false" />
+            <element signature="e#47922#47923#0" expanded="false" />
+            <element signature="e#47965#47966#0" expanded="false" />
+            <element signature="e#48000#48001#0" expanded="false" />
+            <element signature="e#48046#48047#0" expanded="false" />
+            <element signature="e#48083#48084#0" expanded="false" />
+            <element signature="e#48129#48130#0" expanded="false" />
+            <element signature="e#48167#48168#0" expanded="false" />
+            <element signature="e#48209#48210#0" expanded="false" />
+            <element signature="e#48243#48244#0" expanded="false" />
+            <element signature="e#48285#48286#0" expanded="false" />
+            <element signature="e#48319#48320#0" expanded="false" />
+            <element signature="e#48356#48357#0" expanded="false" />
+            <element signature="e#48396#48397#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/ModuleDataService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="620" column="43" selection-start-line="620" selection-start-column="43" selection-end-line="620" selection-end-column="43" />
-          <folding />
+          <caret line="620" column="5" selection-start-line="620" selection-start-column="5" selection-end-line="620" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2519#2520#0" expanded="false" />
+            <element signature="e#2541#2542#0" expanded="false" />
+            <element signature="e#29161#29162#0" expanded="false" />
+            <element signature="e#29207#29208#0" expanded="false" />
+            <element signature="e#29257#29258#0" expanded="false" />
+            <element signature="e#29308#29309#0" expanded="false" />
+            <element signature="e#29379#29380#0" expanded="false" />
+            <element signature="e#29434#29435#0" expanded="false" />
+            <element signature="e#30139#30140#0" expanded="false" />
+            <element signature="e#30186#30187#0" expanded="false" />
+            <element signature="e#30244#30245#0" expanded="false" />
+            <element signature="e#30299#30300#0" expanded="false" />
+            <element signature="e#30360#30361#0" expanded="false" />
+            <element signature="e#30417#30418#0" expanded="false" />
+            <element signature="e#30487#30488#0" expanded="false" />
+            <element signature="e#30540#30541#0" expanded="false" />
+            <element signature="e#30603#30604#0" expanded="false" />
+            <element signature="e#30658#30659#0" expanded="false" />
+            <element signature="e#30719#30720#0" expanded="false" />
+            <element signature="e#30776#30777#0" expanded="false" />
+            <element signature="e#32643#32644#0" expanded="false" />
+            <element signature="e#32695#32696#0" expanded="false" />
+            <element signature="e#32754#32755#0" expanded="false" />
+            <element signature="e#32806#32807#0" expanded="false" />
+            <element signature="e#32864#32865#0" expanded="false" />
+            <element signature="e#32913#32914#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/quote/AssembledProductInQuote.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="596" column="76" selection-start-line="596" selection-start-column="76" selection-end-line="596" selection-end-column="76" />
+          <caret line="596" column="13" selection-start-line="596" selection-start-column="13" selection-end-line="596" selection-end-column="13" />
           <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1802#1803#0" expanded="false" />
+            <element signature="e#1839#1840#0" expanded="false" />
+            <element signature="e#1873#1874#0" expanded="false" />
+            <element signature="e#1905#1906#0" expanded="false" />
+            <element signature="e#1941#1942#0" expanded="false" />
+            <element signature="e#1987#1988#0" expanded="false" />
             <element signature="e#2032#2033#0" expanded="false" />
             <element signature="e#2088#2089#0" expanded="false" />
+            <element signature="e#2129#2130#0" expanded="false" />
+            <element signature="e#2179#2180#0" expanded="false" />
+            <element signature="e#2609#2610#0" expanded="false" />
+            <element signature="e#2659#2660#0" expanded="false" />
+            <element signature="e#2694#2695#0" expanded="false" />
+            <element signature="e#2743#2744#0" expanded="false" />
+            <element signature="e#2786#2787#0" expanded="false" />
+            <element signature="e#2842#2843#0" expanded="false" />
+            <element signature="e#2966#2967#0" expanded="false" />
+            <element signature="e#3006#3007#0" expanded="false" />
+            <element signature="e#3048#3049#0" expanded="false" />
+            <element signature="e#3095#3096#0" expanded="false" />
+            <element signature="e#3145#3146#0" expanded="false" />
+            <element signature="e#3224#3225#0" expanded="false" />
+            <element signature="e#3267#3268#0" expanded="false" />
+            <element signature="e#3307#3308#0" expanded="false" />
+            <element signature="e#3358#3359#0" expanded="false" />
+            <element signature="e#3397#3398#0" expanded="false" />
+            <element signature="e#3455#3456#0" expanded="false" />
+            <element signature="e#3500#3501#0" expanded="false" />
+            <element signature="e#3558#3559#0" expanded="false" />
+            <element signature="e#3624#3625#0" expanded="false" />
+            <element signature="e#3689#3690#0" expanded="false" />
+            <element signature="e#3755#3756#0" expanded="false" />
+            <element signature="e#4264#4265#0" expanded="false" />
+            <element signature="e#4336#4337#0" expanded="false" />
+            <element signature="e#4396#4397#0" expanded="false" />
+            <element signature="e#4464#4465#0" expanded="false" />
+            <element signature="e#4662#4663#0" expanded="false" />
+            <element signature="e#4727#4728#0" expanded="false" />
+            <element signature="e#5444#5445#0" expanded="false" />
+            <element signature="e#5479#5480#0" expanded="false" />
+            <element signature="e#5519#5520#0" expanded="false" />
+            <element signature="e#5552#5553#0" expanded="false" />
+            <element signature="e#27493#27494#0" expanded="false" />
+            <element signature="e#27530#27531#0" expanded="false" />
+            <element signature="e#27581#27582#0" expanded="false" />
+            <element signature="e#27629#27630#0" expanded="false" />
+            <element signature="e#34896#34897#0" expanded="false" />
+            <element signature="e#34941#34942#0" expanded="false" />
+            <element signature="e#36018#36019#0" expanded="false" />
+            <element signature="e#36062#36063#0" expanded="false" />
+            <element signature="e#41277#41278#0" expanded="false" />
+            <element signature="e#41365#41366#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1522,27 +1676,9 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/jobcard/ModuleSheetCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="421" column="99" selection-start-line="421" selection-start-column="99" selection-end-line="421" selection-end-column="99" />
+          <caret line="421" column="90" selection-start-line="421" selection-start-column="90" selection-end-line="421" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="false" />
-            <marker date="1508732091426" expanded="true" signature="786:828" placeholder="/**...*/" />
-            <marker date="1508732091426" expanded="true" signature="1316:1449" placeholder="{...}" />
-            <marker date="1508732091426" expanded="true" signature="1481:1613" placeholder="{...}" />
-            <marker date="1508732091426" expanded="true" signature="1678:1854" placeholder="{...}" />
-            <marker date="1508732091426" expanded="true" signature="1931:2400" placeholder="{...}" />
-            <marker date="1508732091426" expanded="true" signature="2454:2843" placeholder="{...}" />
-            <marker date="1508732091426" expanded="true" signature="2941:3517" placeholder="{...}" />
-            <marker date="1508732091426" expanded="true" signature="28909:29250" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/game/game.base.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-          <folding>
-            <marker date="1508732550245" expanded="true" signature="0:3276" placeholder="{&quot;version&quot;: &quot;0.0.0a&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -1551,18 +1687,65 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-          <folding>
-            <marker date="1508732568007" expanded="true" signature="0:3069" placeholder="{&quot;version&quot;: &quot;0.0.0a&quot;...}" />
-            <marker date="1508732568007" expanded="true" signature="2318:2419" placeholder="[...]" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/report/DwReportingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7685185">
-          <caret line="452" column="75" selection-start-line="452" selection-start-column="75" selection-end-line="452" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="438" column="37" selection-start-line="438" selection-start-column="37" selection-end-line="438" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/game/game.base.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="12.423077">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/provider/RestDataProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/Upload/FileUploadHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="39" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/Upload/AmazonS3FileUploadClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.827586">
+          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mygubbi/game/proposal/handlers/CCAHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5509434">
+          <caret line="215" column="0" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -16,19 +16,35 @@ import com.mygubbi.si.crm.CrmApiHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.http.HttpServerFileUpload;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.commonjava.auth.couch.data.UserDataManager;
 import us.monoid.json.JSONArray;
 import us.monoid.json.JSONException;
 import us.monoid.json.JSONObject;
 
+import java.io.*;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -180,20 +196,38 @@ public class CCAHandler extends AbstractRouteHandler{
         this.route().handler(BodyHandler.create().setUploadsDirectory(amazon_uploads_directory));
 
 
-
         routingContext.response().putHeader("Content-Type", "text/plain");
 
         routingContext.response().setChunked(true);
 
         Set<FileUpload> fileUploads = routingContext.fileUploads();
 
-        for (FileUpload fileUpload : fileUploads)
-        {
-            LOG.debug("File upload : " + fileUpload.fileName());
+
+        File file = null;
+
+        String newFile = null;
+
+
+        for (FileUpload fileUpload : fileUploads) {
+            newFile = fileUpload.uploadedFileName();
+            fileUpload.fileName();
+            fileUpload.contentType();
+
+
         }
 
 
         String crmId = routingContext.request().getFormAttribute("opportunity_id");
+        String issue = routingContext.request().getFormAttribute("issue");
+
+
+        if (newFile != null) {
+            createIssueInCrmNew(routingContext,newFile,issue,crmId);
+        }
+
+
+
+    /*    String crmId = routingContext.request().getFormAttribute("opportunity_id");
         String issue = routingContext.request().getFormAttribute("issue");
         String documents = "documents";
 
@@ -208,7 +242,7 @@ public class CCAHandler extends AbstractRouteHandler{
         else
         {
             sendError(routingContext,"Issue could not be created");
-        }
+        }*/
     }
 
     private void getHandover(RoutingContext routingContext) {
@@ -359,5 +393,64 @@ public class CCAHandler extends AbstractRouteHandler{
                     });
         }
         sendJsonResponse(routingContext, "succesfully inserted");
+    }
+
+    private void createIssueInCrm(RoutingContext routingContext,File file, String issue, String crmId)
+    {
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+
+        HttpPost post = new HttpPost("https://suite.mygubbi.com/mygubbi_crm29102017/test-api/create_customer_issue.php");
+        FileBody fileBody = new FileBody(file, ContentType.DEFAULT_BINARY);
+        StringBody stringBody1 = new StringBody(crmId, ContentType.MULTIPART_FORM_DATA);
+        StringBody stringBody2 = new StringBody(issue, ContentType.MULTIPART_FORM_DATA);
+//
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        builder.addPart("opportunity_name", stringBody1);
+        builder.addPart("name", stringBody2);
+        builder.addPart("documents", fileBody);
+        HttpEntity entity = builder.build();
+//
+        post.setEntity(entity);
+        try {
+            HttpResponse response = client.execute(post);
+            if (response != null)
+            {
+                LOG.debug(response.getEntity());
+                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("Success","Hi")));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void createIssueInCrmNew(RoutingContext routingContext,String imageFileName, String issue, String crmId)
+    {
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+
+        HttpPost post = new HttpPost("https://suite.mygubbi.com/mygubbi_crm29102017/test-api/create_customer_issue.php");
+
+        File fileNew = new File(imageFileName);
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        builder.addBinaryBody("documents", fileNew, ContentType.DEFAULT_BINARY, imageFileName);
+        builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
+        builder.addTextBody("issue", issue, ContentType.TEXT_PLAIN);
+//
+        HttpEntity entity = builder.build();
+        post.setEntity(entity);
+        try {
+            HttpResponse response = client.execute(post);
+            if (response != null)
+            {
+                LOG.debug(response.getEntity());
+                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("Success","Hi")));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
