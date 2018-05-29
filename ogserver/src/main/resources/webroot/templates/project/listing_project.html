@@ -153,9 +153,10 @@
                 <% _.each(getprojects[0].userProjects, function(allProjects, i){ %>
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
                     <img class="image" src="http://www.bigart.design/images/other/stephanie-mccabe-24620-600x600.jpg">
-                    <a class="overlay" href="/listofconcepts" target="_blank">
+                    <a class="overlay" href="/rooms">
                     <div class="text">
                         <p class="title"><%= allProjects.projectName %></p>
+                        <button type="button" style="border:2px solid #fff;padding:10px 20px;background: #000;font-weight:600;">View Details</button>
                     </div></a>
                 </div>
                 <% }); %>
