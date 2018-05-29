@@ -1356,7 +1356,7 @@ public class DwProposalVersion extends JsonObject {
         dwProposalVersion.setSalesPhone(proposalHeader.getSalesPhone());
         dwProposalVersion.setDesignerEmail(proposalHeader.getDesignerEmail());
         dwProposalVersion.setDesignerPhone(proposalHeader.getDesignerPhone());
-        if (proposalHeader.getBookingOrderMonth().equals("") || proposalHeader.getBookingOrderMonth() == null)
+        if ( proposalHeader.getBookingOrderMonth() == null || proposalHeader.getBookingOrderMonth().equals(""))
         {
             dwProposalVersion.setBookingOrderMonth("NA");
         }
