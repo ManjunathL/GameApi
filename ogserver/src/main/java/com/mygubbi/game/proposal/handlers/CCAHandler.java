@@ -33,6 +33,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+
+import java.io.*;
+import java.net.URLDecoder;
+
 /**
  * Created by User on 09-10-2017.
  */
@@ -187,28 +202,26 @@ public class CCAHandler extends AbstractRouteHandler{
 
         Set<FileUpload> fileUploads = routingContext.fileUploads();
 
-        for (FileUpload fileUpload : fileUploads)
-        {
-            LOG.debug("File upload : " + fileUpload.fileName());
+        File file = null;
+
+        String newFile = null;
+
+
+        for (FileUpload fileUpload : fileUploads) {
+            newFile = fileUpload.uploadedFileName();
+            fileUpload.fileName();
+            fileUpload.contentType();
+
+
         }
 
 
         String crmId = routingContext.request().getFormAttribute("opportunity_id");
         String issue = routingContext.request().getFormAttribute("issue");
-        String documents = "documents";
-
-        LOG.debug("CUSTOMER ISSUE LOG PAR+AMS : " + crmId + ":" + issue);
-
-        JSONObject createIssue = crmDataProvider.createCustomerIssue(crmId,issue,documents);
-
-        if (createIssue != null)
-        {
-            sendJsonResponse(routingContext,createIssue.toString());
+        if (newFile != null) {
+            createIssueInCrmNew(routingContext,newFile,issue,crmId);
         }
-        else
-        {
-            sendError(routingContext,"Issue could not be created");
-        }
+
     }
 
     private void getHandover(RoutingContext routingContext) {
@@ -359,5 +372,33 @@ public class CCAHandler extends AbstractRouteHandler{
                     });
         }
         sendJsonResponse(routingContext, "succesfully inserted");
+    }
+
+    private void createIssueInCrmNew(RoutingContext routingContext,String imageFileName, String issue, String crmId)
+    {
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+
+        HttpPost post = new HttpPost("https://suite.mygubbi.com/mygubbi_crm29102017/test-api/create_customer_issue.php");
+
+        File fileNew = new File(imageFileName);
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        builder.addBinaryBody("documents", fileNew, ContentType.DEFAULT_BINARY, imageFileName);
+        builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
+        builder.addTextBody("issue", issue, ContentType.TEXT_PLAIN);
+//
+        HttpEntity entity = builder.build();
+        post.setEntity(entity);
+        try {
+            HttpResponse response = client.execute(post);
+            if (response != null)
+            {
+                LOG.debug(response.getEntity());
+                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("Success","Hi")));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
