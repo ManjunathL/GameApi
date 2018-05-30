@@ -8,15 +8,18 @@ define([
   'text!templates/project/listing_rooms.html',
   'collections/getprojects',
   'collections/conceptboards',
-  'views/dashboard/add_conceptboard'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate, GetProjects, ConceptBoards,AddConceptboard){
+  'views/dashboard/add_conceptboard',
+  'collections/add_conceptboards'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate, GetProjects, ConceptBoards,AddConceptboard, AddConceptboards){
   var ListingRoomPage = Backbone.View.extend({
     el: '.page',
     project: null,
     conceptboards: null,
+    add_conceptboards: null,
     initialize: function() {
         this.project = new GetProjects();
         this.conceptboards = new ConceptBoards();
+        this.add_conceptboards = new AddConceptboards();
 
         this.listenTo(Backbone);
         _.bindAll(this, 'render','fetchViewProjectRender');
@@ -42,12 +45,155 @@ define([
                 });
     },
     events: {
-            "click .addCBoard1": "viewAddCboard"
+        "click .addCBoard1": "viewAddCboard",
+        "click #save_Cboard": "submitBoard"
+    },
+    submitBoard: function (e) {
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+
+            var userId = sessionStorage.userId;
+            var userMindboardId = sessionStorage.defaultMindboardId;
+            var CheckConceptBoard = $('#templateCodeTxt').val();
+             var conName=$('#cboardnameTxt').val()
+            console.log($('#cboardnameTxt').val());
+            if(conName.length == 0){
+                $('#cboardnameTxt').focus();
+                $("#addConcptBoardName_error").html("Please Enter the Concept Board Name ");
+
+                return false;
+            }
+           if(CheckConceptBoard != "blank"){
+           var formData = {
+                "completionPercentage": 0,
+                "description": "",
+                "id": $('#spaceIdTxt').val(),
+                "imgUrl": "",
+                "name": $('#cboardnameTxt').val(),
+                "noOfConceptsAdded": 0,
+                "spaceTypeCategory": 0,
+                "spaceTypeCode": $('#spaceTypeCodeTxt').val(),
+                "templateCode": $('#templateCodeTxt').val(),
+                "type": "",
+                "userId": userId,
+                "userMindboardId": 0,
+                "userNote": "",
+                "userProjectId": userMindboardId
+           };
+
+
+            var that = this;
+            console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+            console.log(formData);
+
+            that.add_conceptboards.fetch({
+               async: true,
+               crossDomain: true,
+               method: "POST",
+               headers:{
+                   "authorization": "Bearer "+ sessionStorage.authtoken,
+                   "Content-Type": "application/json"
+               },
+               data: JSON.stringify(formData),
+               success:function(response) {
+                  console.log("Successfully save Concept board through template selection... ");
+                  console.log(response);
+                  console.log("++++ I m here +");
+
+                  $("#addcboard-modal").modal('hide');
+
+                  $('body').removeClass('modal-open');
+                  $('.modal-backdrop').remove();
+
+                  $("#snackbar").html("Successfully save Concept board through template selection... ");
+                  var x = document.getElementById("snackbar")
+                  x.className = "show";
+                  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                  that.render();
+                  //return;
+
+              },
+              error:function(model, response, options) {
+
+                  console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
+                  console.log(JSON.stringify(response));
+                  console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+                  console.log(response.responseJSON.errorMessage);
+                    return;
+
+              }
+          });
+          }else{
+                 var formData = {
+                          "id": 0,
+                          "userId": userId,
+                          "name": $('#cboardnameTxt').val(),
+                          "spaceTypeCode":$('#spaceTypeCodeTxt').val(),
+                          "description": 'blank',
+                         /* "templateCode": $('#templateCodeTxt').val(),*/
+                          "userMindboardId": userMindboardId,
+                          /*"imgUrl":'none',
+                          "noOfConceptsAdded": 1,*/
+                          "userNote": 'blank'
+                     };
+                      var that = this;
+                      console.log("++++++++++++++++++++++++++ formData ++++++++++++++++++++++++++++++");
+                      console.log(formData);
+
+                      that.add_blankboards.fetch({
+                         async: true,
+                         crossDomain: true,
+                         method: "POST",
+                         headers:{
+                             "authorization": "Bearer "+ sessionStorage.authtoken,
+                             "Content-Type": "application/json"
+                         },
+                         data: JSON.stringify(formData),
+                         success:function(response) {
+                            console.log("Successfully save Concept board through template selection... ");
+                            console.log(response);
+
+                             $("#addcboard-modal").modal('hide');
+
+                             $('body').removeClass('modal-open');
+                             $('.modal-backdrop').remove();
+
+                              $("#snackbar").html("Successfully save Concept board through template selection... ");
+                              var x = document.getElementById("snackbar")
+                              x.className = "show";
+                              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                              that.render();
+                            return;
+
+                        },
+                        error:function(model, response, options) {
+
+                            console.log(" +++++++++++++++ save Concept to Concept board- Errrorr ++++++++++++++++++ ");
+                            console.log(JSON.stringify(response));
+                            console.log("%%%%%%%%% response%%%%%%%%%%%%%%%%");
+                            console.log(response.responseJSON.errorMessage);
+
+                             $("#snackbar").html(response.responseJSON.errorMessage);
+                             var x = document.getElementById("snackbar")
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                             return;
+
+                        }
+                    });
+                }
         },
-        viewAddCboard: function(){
-                $('#addcboard-modal').modal('show');
-                AddConceptboard.apply();
-            },
+    viewAddCboard: function(evt){
+        var that = this;
+
+        evt.preventDefault();
+        var currentTarget = $(evt.currentTarget);
+        var spaceTypeCode = currentTarget.data('element');
+        var spaceId = currentTarget.data('element1');
+
+        $('#addcboard-modal').modal('show');
+        AddConceptboard.apply(spaceTypeCode,spaceId);
+    },
     viewProjects: function(){
         var that = this;
         var userId = sessionStorage.userId;

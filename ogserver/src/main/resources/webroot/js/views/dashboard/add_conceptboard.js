@@ -9,18 +9,18 @@ define([
         el: '#addcboard-dtls',
         spacetypelists: null,
         spacetemplates: null,
-        apply: function() {
-            this.spacetypelists = new SpaceTypeLists();
+        apply: function(spaceTypeCode,spaceId) {
+            //this.spacetypelists = new SpaceTypeLists();
             this.spacetemplates = new SpaceTemplates();
             var that = this;
-            var spaceTypeCode = '';
-            var getSpaceTypeListPromise = that.getSpaceTypeList();
-            var viewSpaceTemplates = that.viewSpaceTemplates();
+            //var spaceTypeCode = '';
+           // var getSpaceTypeListPromise = that.getSpaceTypeList();
+            var viewSpaceTemplates = that.viewSpaceTemplates(spaceTypeCode,spaceId);
 
-            Promise.all([getSpaceTypeListPromise, viewSpaceTemplates]).then(function() {
+            Promise.all([ viewSpaceTemplates]).then(function() {
                 console.log("@@@@@@@@@@@@@ In side Promiseeeeeeeeeeeeee @@@@@@@@@@@@@@@@@@");
                 console.log("@@@@@@@@@@@@@ spaceTypeCode @@@@@@@@@@@@@@@@@@ "+spaceTypeCode);
-                that.fetchSpacetypesAndRender(spaceTypeCode);
+                that.fetchSpacetypesAndRender(spaceTypeCode,spaceId);
             });
         },
         getSpaceTypeList: function(){
@@ -48,13 +48,10 @@ define([
                  }
             });
         },
-        viewSpaceTemplates: function(spaceTypeCode){
+        viewSpaceTemplates: function(spaceTypeCode,spaceId){
             var that = this;
             console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
             console.log(spaceTypeCode);
-            if(typeof(spaceTypeCode) == 'undefined'){
-                var spaceTypeCode = 'SP-KITCHEN';
-            }
 
             that.spacetemplates.getSpaceTemplateList(spaceTypeCode,{
                 async: true,
@@ -66,7 +63,7 @@ define([
                 success: function(response) {
                     console.log(" +++++++++++++++ Space Type Templates++++++++++++++++++ ");
                     console.log(response);
-                    that.fetchSpacetypesAndRender(spaceTypeCode);
+                    that.fetchSpacetypesAndRender(spaceTypeCode,spaceId);
                     //resolve();
                 },
                 error: function(model, response, options) {
@@ -77,9 +74,8 @@ define([
             });
 
         },
-        fetchSpacetypesAndRender: function(spaceTypeCode){
+        fetchSpacetypesAndRender: function(spaceTypeCode,spaceId){
             var that = this;
-            var spacetypelists = that.spacetypelists;
             var spacetemplates = that.spacetemplates;
 
             if(typeof(spaceTypeCode) == 'undefined'){
@@ -87,9 +83,9 @@ define([
             }
 
             $(this.el).html(_.template(AddConceptboardPageTemplate)({
-               "spacetypelists": spacetypelists.toJSON(),
                "spacetemplates": spacetemplates.toJSON(),
-               "selectedspaceTypeCode": spaceTypeCode
+               "selectedspaceTypeCode": spaceTypeCode,
+               "selectedspaceId": spaceId
            }));
         }
     };

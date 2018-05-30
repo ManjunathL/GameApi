@@ -32,8 +32,8 @@
     }*/
     .manufacturing-box {
         background: #ffffff;
-        padding: 15px 15px;
-        height: 235px;
+        padding: 0px;
+        height: 230px;
         width: 100%;
         margin-bottom: 30px;
         box-shadow: 0px 2px 10px #666;
@@ -98,12 +98,14 @@
         left:43%!important;
     }
 </style>
-
+<%= console.log("********* conceptboardsDtls ********") %>
+<%= console.log(conceptboardsDtls) %>
+<% if(typeof(projectDtls) !== 'undefined'){ %>
 <section class="bg-lightgrey">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-lg-12">
-                <h1 style="text-align:center;">Project 1</h1>
+                <h1 style="text-align:center;"><%= projectDtls[0].projectName %></h1>
                 <div class="col-sm-12 col-md-12 col-lg-12 text-center"  style="padding: 20px 0px 45px 0px;">
                     <div class="p-service-bg">
                         <div class="text-center">
@@ -111,21 +113,21 @@
                                 <div class="tab-content p-service-tab" style="background: #fff;padding: 40px 10px;box-shadow:0px 2px 10px #555;">
                                     <div id="surfaces" class="tab-pane fade in active">
                                         <div class="row">
-                                            <!--<div class="col-sm-4 col-md-3 col-lg-3">
-                                                <div class="p-stacked-tab">
-                                                    <ul class="nav nav-pills nav-stacked">
-                                                        <li class="active"><a href="#wallpaper" data-toggle="tab" aria-expanded="false"> Project1 </a></li>
-                                                        <li class=""><a href="#vinyal" data-toggle="tab" aria-expanded="false"> Project2 </a></li>
-                                                        <li class=""><a href="#glass" data-toggle="tab" aria-expanded="true"> Project3 </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>-->
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="tab-content">
                                                     <div id="wallpaper" class="tab-pane fade in active">
                                                         <div class="col-md-8 ser-about">
                                                             <h3 class="mt0">Description</h3>
-                                                            Add interest to any room with our collection of wallpapers. The intricate patterns, textures and colours add an enchanting feel to your living space. Work around your creativity to add interest to the walls surrounding you.
+                                                            <p>
+                                                                <%= projectDtls[0].description %>
+                                                            </p>
+
+                                                            <h4 class="formTit mb0">Project Address</h4>
+                                                            <div><%= projectDtls[0].projectAddress %></div>
+                                                            <h4 class="formTit mb0">Project Tower</h4>
+                                                            <div><%= projectDtls[0].projectTower %></div>
+                                                            <h4 class="formTit mb0">Builder</h4>
+                                                            <div><%= projectDtls[0].builder %></div>
                                                         </div>
                                                         <div class="col-md-4 ser-img">
                                                             <img class="img-responsive img-centered" src="https://res.cloudinary.com/mygubbi/image/upload/v1479324528/platinum_home/wallpaper_03.jpg" alt="wall paper">
@@ -155,8 +157,10 @@
                                                                             <div class="manufacturing-box">
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <i class="fa fa-plus fa-5x addCBoard1" aria-hidden="true" style="margin-top:45px;color: #ea5c36;"></i>
-                                                                                        <h4 style="margin-top:46px;"> Concept Board </h4>
+                                                                                        <a href="/listofconcepts">
+                                                                                            <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-ease-of-selection.png">
+                                                                                            <h4> Concept Board </h4>
+                                                                                        </a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -197,20 +201,22 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                                                        <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(conceptdtls, i){ %>
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Kitchen</a>
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>"><%= conceptdtls.name %></a>
                                                                 <i class="indicator glyphicon pull-right glyphicon-chevron-down"></i>
                                                             </h4>
                                                         </div>
-                                                        <div id="collapse1" class="panel-collapse collapse">
+                                                        <div id="collapse<%= i %>" class="panel-collapse collapse">
                                                             <div class="panel-body bg-lightgrey">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     <div class="row">
                                                                         <div class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
                                                                             <p style="font-size:14px;color: #555;">
-                                                                                Setting up a modular kitchen design is a long-term investment that requires careful thought and consideration. This is why we ensure that you have a hassle-free service that gives you a kitchen interior that you will love with a few easy steps. Once you have an idea of your dream kitchen interior, reach out to our designers to determine if it is the right choice for your space.
+                                                                                <%= conceptdtls.description %>
                                                                             </p>
                                                                         </div>
                                                                     </div>
@@ -219,9 +225,15 @@
                                                                             <div class="manufacturing-box">
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 col-md-12 col-lg-12">
-
-                                                                                        <i class="fa fa-plus fa-5x addCBoard1" aria-hidden="true" style="margin-top:45px;color: #ea5c36;"></i>
-                                                                                        <h4 style="margin-top:46px;"> Concept Board </h4>
+                                                                                        <% if(conceptdtls.noOfConceptsAdded == 0){ %>
+                                                                                            <i class="fa fa-plus fa-5x addCBoard1" data-element="<%= conceptdtls.spaceTypeCode %>" data-element1="<%= conceptdtls.id %>" aria-hidden="true" style="margin-top:45px;color: #ea5c36;"></i>
+                                                                                            <h4 style="margin-top:46px;"> Concept Board </h4>
+                                                                                        <% }else{ %>
+                                                                                        <a href="/<%= conceptdtls.spaceTypeCode %>-conceptlist-<%= conceptdtls.id %>">
+                                                                                            <img src="<%= conceptdtls.imgUrl %>" alt="roomImg" style="height:230px; width:100%;" />
+                                                                                            <!--<h4> Concept Board </h4>-->
+                                                                                        </a>
+                                                                                        <% } %>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -230,8 +242,10 @@
                                                                             <div class="manufacturing-box">
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                                        <a href="/<%= conceptdtls.spaceTypeCode %>-viewdesign-<%= conceptdtls.id %>">
                                                                                         <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-guardians-remote.png">
                                                                                         <h4 class="bordtxt"> Looks </h4>
+                                                                                        </a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -262,171 +276,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Living</a>
-                                                                <i class="indicator glyphicon  pull-right glyphicon-chevron-down"></i>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse2" class="panel-collapse collapse">
-                                                            <div class="panel-body bg-lightgrey">
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
-                                                                                    <p style="font-size:14px;color: #555;">
-                                                                                        Setting up a modular kitchen design is a long-term investment that requires careful thought and consideration. This is why we ensure that you have a hassle-free service that gives you a kitchen interior that you will love with a few easy steps. Once you have an idea of your dream kitchen interior, reach out to our designers to determine if it is the right choice for your space.
-                                                                                    </p>
-                                                                                </div>
-                                                                                <!--<div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
-                                                                                    <label>Upload your Image</label>
-                                                                                    <input type="file" name="file">
-                                                                                </div>-->
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
-                                                                            <div class="manufacturing-box">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <i class="fa fa-plus fa-5x addCBoard1" aria-hidden="true" style="margin-top:45px;color: #ea5c36;"></i>
-                                                                                        <h4 style="margin-top:46px;"> Concept Board </h4>
-                                                                                    </div>
-                                                                                    <!--<div class="col-sm-12 col-md-8 col-lg-8 text-left">
-                                                                                        <h4 class="mob-text-center"> Ease of Selection </h4>
-                                                                                        <p class="mob-text-center"> Get customized designs based on your personal style or get inspiration through our showcased designs online, from the comfort of your home. </p>
-                                                                                    </div>-->
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
-                                                                            <div class="manufacturing-box">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-guardians-remote.png">
-                                                                                        <h4 class="bordtxt"> Looks </h4>
-                                                                                    </div>
-                                                                                    <!--<div class="col-sm-12 col-md-8 col-lg-8 text-left">
-                                                                                        <h4 class="mob-text-center"> Active Customer Support </h4>
-                                                                                        <p class="mob-text-center"> Connect with us over mail, video or phone call as per your convenience &amp; time zone, to help us understand your design requirements better and give you the right look for your home interiors. </p>
-                                                                                    </div>-->
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
-                                                                            <div class="manufacturing-box">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-diligent-design.png">
-                                                                                        <h4 class="bordtxt"> 2D/3D </h4>
-                                                                                    </div>
-                                                                                    <!--<div class="col-sm-12 col-md-8 col-lg-8 text-left">
-                                                                                        <h4 class="mob-text-center"> Additional Support Services </h4>
-                                                                                        <p class="mob-text-center"> Avail end-to-end services, to ensure that all additional work like electrical or plumbing is done onsite by the right professional! </p>
-                                                                                    </div>-->
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--<div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
-                                                                            <div class="manufacturing-box">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-regular-updates.png">
-                                                                                        <h4 style="left:35%;"> Quotation </h4>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Bedroom
-                                                                </a>
-                                                                <i class="indicator glyphicon  pull-right glyphicon-chevron-down"></i>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse3" class="panel-collapse collapse">
-                                                            <div class="panel-body bg-lightgrey">
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
-                                                                                    <p style="font-size:14px;color: #555;">
-                                                                                        Setting up a modular kitchen design is a long-term investment that requires careful thought and consideration. This is why we ensure that you have a hassle-free service that gives you a kitchen interior that you will love with a few easy steps. Once you have an idea of your dream kitchen interior, reach out to our designers to determine if it is the right choice for your space.
-                                                                                    </p>
-                                                                                </div>
-                                                                                <!--<div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
-                                                                                    <label>Upload your Image</label>
-                                                                                    <input type="file" name="file">
-                                                                                </div>-->
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
-                                                                            <div class="manufacturing-box">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <i class="fa fa-plus fa-5x addCBoard1" aria-hidden="true" style="margin-top:45px;color: #ea5c36;"></i>
-                                                                                        <h4 style="margin-top:46px;"> Concept Board </h4>
-                                                                                    </div>
-                                                                                    <!--<div class="col-sm-12 col-md-8 col-lg-8 text-left">
-                                                                                        <h4 class="mob-text-center"> Ease of Selection </h4>
-                                                                                        <p class="mob-text-center"> Get customized designs based on your personal style or get inspiration through our showcased designs online, from the comfort of your home. </p>
-                                                                                    </div>-->
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
-                                                                            <div class="manufacturing-box">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-guardians-remote.png">
-                                                                                        <h4 class="bordtxt"> Looks </h4>
-                                                                                    </div>
-                                                                                    <!--<div class="col-sm-12 col-md-8 col-lg-8 text-left">
-                                                                                        <h4 class="mob-text-center"> Active Customer Support </h4>
-                                                                                        <p class="mob-text-center"> Connect with us over mail, video or phone call as per your convenience &amp; time zone, to help us understand your design requirements better and give you the right look for your home interiors. </p>
-                                                                                    </div>-->
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
-                                                                            <div class="manufacturing-box">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-diligent-design.png">
-                                                                                        <h4 class="bordtxt"> 2D/3D </h4>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--<div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
-                                                                            <div class="manufacturing-box">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                        <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-regular-updates.png">
-                                                                                        <h4 style="left:32%;"> Quotation </h4>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        <% }); %>
+                                                        <% } %>
                                                 </div>
                                                 </div>
                                             </div>
@@ -441,11 +292,7 @@
         </div>
     </div>
 </section>
-<section style="margin-top:40px;">
-    <div class="container-fluid">
-
-    </div>
-</section>
+<% } %>
 <div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" style="width:850px;">
         <div id="addcboard-dtls" class="addcboard-container">
