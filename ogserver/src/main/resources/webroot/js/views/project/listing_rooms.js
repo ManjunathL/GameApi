@@ -7,8 +7,9 @@ define([
   'owlcarousel',
   'text!templates/project/listing_rooms.html',
   'collections/getprojects',
-  'collections/conceptboards'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate, GetProjects, ConceptBoards){
+  'collections/conceptboards',
+  'views/dashboard/add_conceptboard'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate, GetProjects, ConceptBoards,AddConceptboard){
   var ListingRoomPage = Backbone.View.extend({
     el: '.page',
     project: null,
@@ -23,23 +24,30 @@ define([
     render: function () {
         var that = this;
 
-        var userprojectId = that.model.projectId;
+                var userprojectId = that.model.projectId;
 
-        if(typeof(userprojectId) != 'undefined'){
-            sessionStorage.defaultMindboardId = userprojectId;
-        }else{
-            sessionStorage.defaultMindboardId = "";
-        }
+                if(typeof(userprojectId) != 'undefined'){
+                    sessionStorage.defaultMindboardId = userprojectId;
+                }else{
+                    sessionStorage.defaultMindboardId = "";
+                }
 
-        var getProjectPromise = that.viewProjects();
-        var getConceptBoardsPromise = that.getConceptBoards(userprojectId);
+                var getProjectPromise = that.viewProjects();
+                var getConceptBoardsPromise = that.getConceptBoards(userprojectId);
 
-        Promise.all([getProjectPromise,getConceptBoardsPromise]).then(function() {
-            console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
-            that.fetchViewProjectRender();
+                Promise.all([getProjectPromise,getConceptBoardsPromise]).then(function() {
+                    console.log("@@@@@@@@@@@@@ In side Promise @@@@@@@@@@@@@@@@@@");
+                    that.fetchViewProjectRender();
 
-        });
+                });
     },
+    events: {
+            "click .addCBoard1": "viewAddCboard"
+        },
+        viewAddCboard: function(){
+                $('#addcboard-modal').modal('show');
+                AddConceptboard.apply();
+            },
     viewProjects: function(){
         var that = this;
         var userId = sessionStorage.userId;
