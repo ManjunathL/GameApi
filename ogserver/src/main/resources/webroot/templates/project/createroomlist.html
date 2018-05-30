@@ -1,0 +1,127 @@
+<%= console.log("@@@@@@@@@@@@@@@ roomListCreate @@@@@@@@@@@@@@@@@") %>
+<%= console.log(roomListCreate) %>
+
+<%= console.log(" **************** spacetypelists ************** ") %>
+<%= console.log(spacetypelists) %>
+
+
+<div class="spaceElemenetPanel"  id="elements" style="overflow-y:scroll;height:380px;">
+
+    <% if(typeof(roomListCreate) !== 'undefined'){ %>
+    <% _.each(roomListCreate[0].listOfUserConceptBoard, function(roomlst, j){ %>
+    <div class="col-md-12" style="margin-top: 20px;">
+        <div class="form-group col-md-2">
+            <label for="inputcategory">SpaceType</label>
+            <select id="inputcategory<%= roomlst.id %>" class="form-option">
+                <option selected>Choose...</option>
+                <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"
+                <% if(roomlst.name == spaceElement.title){ %> selected="selected" <% } %>
+                <% if(roomlst.name == "Living Room" && spaceElement.title == "Living"){ %> selected="selected" <% } %>
+                <% if(roomlst.name == "Bed Room - 1" && spaceElement.title == "Master Bed Room"){ %> selected="selected" <% } %>
+                <% if(roomlst.name == "Bed Room - 2" && spaceElement.title == "Kids Bed Room"){ %> selected="selected" <% } %>
+
+                ><%= spaceElement.title %></option>
+
+                <% }); %>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group address-style col-md-3">
+                <label for="inputname">Name</label>
+                <input type="Name" class="form-control inputname" id="inputname<%= roomlst.id %>" placeholder="NAME">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputname">Description</label>
+                <input type="Name" class="form-control description" id="description<%= roomlst.id %>" placeholder="DESCRIPTION">
+            </div>
+            <div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
+                    <input type="submit" id="<%= roomlst.id %>"  class="btn addcboard-btn updatecreateRoom" value="Update">
+            </div>
+        </div>
+    </div>
+    <% }); %>
+    <% } %>
+
+    <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
+        <div class="form-group col-md-2">
+            <label for="inputcategory">SpaceType</label>
+            <select id="inputcategory" class="form-option">
+                <option selected>Choose...</option>
+                <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"><%= spaceElement.title %></option>
+                <% }); %>
+                <% } %>
+            </select>
+        </div>
+        <div class="form-row">
+            <div class="form-group address-style col-md-3">
+                <label for="inputname">Name</label>
+                <input type="Name" class="form-control inputname" id="inputname" placeholder="NAME">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputname">Description</label>
+                <input type="Name" class="form-control description" id="description" placeholder="DESCRIPTION">
+            </div>
+            <div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
+                <input type="submit" id="add" class="btn addcboard-btn addMoreRoom" value="add">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <!--<div class="form-group col-md-12" style="text-align:right;">
+        <span  id="btn1">
+            <input type="submit" id="save_roomConcept" class="btn addcboard-btn" value="Submit">
+        </span>
+    </div>-->
+</div>
+<div class="form-row">
+    <div class="form-group col-md-12">
+        <h3>Add Space Type <span id="addSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
+        <input type="hidden" value="<%= projectId %>" id="projectId" />
+    </div>
+</div>
+
+<script>
+ var current_id = 0;
+ var cntclick = 0;
+ var cntAdd = 0;
+     $('#addSpaceElement').click(function(){
+        console.log("add family button clicked  "+cntclick);
+        /*if(cntclick >= 2){
+            $("#elements").css("overflow-y","scroll");
+            $("#elements").css("height","380px");
+        }*/
+        $('#copyspaceElemenet').css("display","block");
+        nextElement($('#copyspaceElemenet'));
+        cntclick++;
+
+      });
+
+    function nextElement(element){
+       console.log("inside next element" +element);
+        var newElement = element.clone();
+
+        console.log("current_id"+cntclick);
+        var id = current_id+1;
+
+        cntAdd = current_id;
+        cntAdd = cntAdd + 1;
+
+
+        newElement.attr("id","member-panel"+current_id);
+        var field = $('input', newElement).attr("id");
+        $('#inputcategory', newElement).attr("id","inputcategory"+cntclick );
+        $('#inputname', newElement).attr("id","inputname"+cntclick );
+        $('#description', newElement).attr("id","description"+cntclick );
+        $('#add', newElement).attr("id","add"+cntclick );
+
+        newElement.appendTo($("#elements"));
+    }
+</script>
+</script>

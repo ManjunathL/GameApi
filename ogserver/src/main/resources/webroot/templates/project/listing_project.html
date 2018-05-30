@@ -150,14 +150,12 @@
                     </div>
                </div>
                 <% if(typeof(getprojects) !== 'undefined'){ %>
-                <%= console.log("@@@@@@@@@@ getprojects @@@@@@@@@@@") %>
-                <%= console.log(getprojects) %>
-
                 <% _.each(getprojects[0].userProjects, function(allProjects, i){ %>
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
                     <img class="image" src="http://www.bigart.design/images/other/stephanie-mccabe-24620-600x600.jpg">
                     <a class="overlay" href="/rooms-<%= allProjects.id %>">
-                    <div class="text">
+                        <i class="fa fa-times-circle" aria-hidden="true" style="font-size: 25px;float:right;color: white;" id="deleteProject" data-element="<%= allProjects.id %>"></i>
+                        <div class="text">
                         <p class="title"><%= allProjects.projectName %></p>
                         <button type="button" style="border:2px solid #fff;padding:10px 20px;background: #000;font-weight:600;">View Details</button>
                     </div></a>
@@ -269,46 +267,9 @@
 <div class="modal fade" id="addRoomConcept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="addcboard-container">
-            <div>
                 <h4 class="addcboard-heading">Add Room Concept</h4>
-                <div class="spaceElemenetPanel"  id="elements" style="">
-                    <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;">
-                        <div class="form-group col-md-2">
-                             <label for="inputcategory">SpaceType</label>
-                            <select id="inputcategory" class="form-option">
-                                <option selected>Choose...</option>
-                                <% if(typeof(spacetypelists) !== 'undefined'){ %>
-                                <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
-                                <option value="<%= j %>" data-element="<%= spaceElement.title %>"><%= spaceElement.title %></option>
-                                <% }); %>
-                                <% } %>
-                            </select>
-                         </div>
-                        <div class="form-row">
-                            <div class="form-group address-style col-md-4">
-                                <label for="inputname">Name</label>
-                                <input type="Name" class="form-control" id="inputname" placeholder="Name">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputname">Description</label>
-                                <input type="Name" class="form-control" id="description" placeholder="Name">
-                            </div>
-                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12" style="text-align:right;">
-                    <span  id="btn1">
-                        <input type="submit" id="save_roomConcept" class="btn addcboard-btn" value="Submit">
-                    </span>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <h3>Add Space Type <span  id="addSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
-                </div>
-            </div>
+                <div id="createroomlist">
+
         </div>
     </div>
 </div>
@@ -318,7 +279,7 @@
 <script>
  var current_id = 0;
  var cntclick = 0;
-    $('#addSpaceElement').click(function(){
+     $('#addSpaceElement').click(function(){
         console.log("add family button clicked  "+cntclick);
         if(cntclick >= 2){
             $("#elements").css("overflow-y","scroll");
@@ -326,17 +287,17 @@
         }
         nextElement($('#copyspaceElemenet'));
         cntclick++;
-    })
+      });
 
     function nextElement(element){
        console.log("inside next element" +element);
         var newElement = element.clone();
         var id = current_id+1;
-        current_id = id;
         newElement.attr("id","member-panel"+current_id);
         var field = $('input', newElement).attr("id");
-        $('input.inputname', newElement).attr("id","NAME"+current_id );
-        $('input.description', newElement).attr("id","description"+current_id );
+        $('#inputcategory', newElement).attr("id","NAME"+current_id );
+        $('#inputname', newElement).attr("id","NAME"+current_id );
+        $('#description', newElement).attr("id","DESCRIPTION"+current_id );
 
         newElement.appendTo($("#elements"));
     }
