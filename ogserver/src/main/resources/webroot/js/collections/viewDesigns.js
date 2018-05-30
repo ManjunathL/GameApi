@@ -6,10 +6,10 @@ define([
 ], function($, _, Backbone, ViewDesign){
     var ViewDesigns = Backbone.Collection.extend({
         model: ViewDesign,
-        url: baseRestApiUrl + 'MyGubbiApi/designs/getdesignsperspace/',
-        getDesigns: function(spaceTypeCode, options) {
-            var urllnk = baseRestApiUrl + 'MyGubbiApi/designs/getdesignsperspace/';
-            this.url = urllnk + spaceTypeCode +'?filteredStyles=&createdByFilter=1&myFavFilter=false';
+        url: baseRestApiUrl + 'MyGubbiApi/looks/getlooksperspace/',
+        getDesigns: function(userId, spaceTypeCode,conceptboardId, options) {
+            var urllnk = baseRestApiUrl + 'MyGubbiApi/looks/getlooksperspace/';
+            this.url = urllnk + userId + "/" + spaceTypeCode +'?conceptboardId='+conceptboardId+'&filteredStyles=&createdByFilter=1&myFavFilter=false';
             return this.fetch(options);
         },
         initialize: function(models) {

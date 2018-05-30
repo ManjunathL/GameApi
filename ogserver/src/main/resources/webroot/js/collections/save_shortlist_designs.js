@@ -6,9 +6,9 @@ define([
 ], function($, _, Backbone, SaveShortListDesign){
     var SaveShortListDesigns = Backbone.Collection.extend({
         model: SaveShortListDesign,
-        url: baseRestApiUrl + 'MyGubbiApi/designs/save/userSelected/',
+        url: baseRestApiUrl + 'MyGubbiApi/looks/save/userSelected/',
         saveShortListDesigns: function(conceptboardId, designCode, options) {
-            var urllnk = baseRestApiUrl + 'MyGubbiApi/designs/save/userSelected/';
+            var urllnk = baseRestApiUrl + 'MyGubbiApi/looks/save/userSelected/';
             this.url = urllnk + conceptboardId +"/" +designCode;
             return this.fetch(options);
         },

@@ -38,10 +38,17 @@ define([
         var conceptboardId = that.model.id;
         var spaceTypeCode = that.model.spaceTypeCode;
 
+
+        console.log("**** spaceTypeCode ***********")
+        console.log(spaceTypeCode)
+
+
+        //return false;
+
 //        alert("that.model.name = "+that.model.spaceTypeCode);
 //        var spaceTypeCode = "SP-LIVING";
 
-        var getDesignsPromise = that.getDesigns(conceptboardId);
+        var getDesignsPromise = that.getDesigns(conceptboardId,spaceTypeCode);
         var getRoomLayoutsPromise = that.getRoomLayouts(spaceTypeCode);
 
         Promise.all([getDesignsPromise,getRoomLayoutsPromise]).then(function() {
@@ -57,11 +64,14 @@ define([
         "submit #userconceptfrmImage": "submitUploadConceptBoard"
 
     },
-    getDesigns: function(conceptboardId){
+    getDesigns: function(conceptboardId,spaceTypeCode){
         var that = this;
+
+        var userId = sessionStorage.userId;
+
         return new Promise(function(resolve, reject) {
             if(!that.viewDesigns.get('id')){
-                that.viewDesigns.getDesigns(conceptboardId, {
+                that.viewDesigns.getDesigns(userId, spaceTypeCode, conceptboardId, {
                    async: true,
                    crossDomain: true,
                    method: "GET",

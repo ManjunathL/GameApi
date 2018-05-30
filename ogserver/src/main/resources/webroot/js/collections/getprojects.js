@@ -12,12 +12,19 @@ define([
             this.url = urllnk + userId + '/' + pageno + '/' + itemPerPage;
             return this.fetch(options);
         },
-        getProjectDetails: function (id) {
-            return this.find(function(GetProject){ return GetProject.get('id') === id; });
+        getProjectDetails: function (getProjectlist, id) {
+            var that = this;
+             return _.map(getProjectlist.filter(function(project){
+                 return that.getpeojectDetails(project, id);
+             }), function (project) {return project });
+        },
+        getpeojectDetails:function(project, id){
+             if (project.id == id)
+                 return true;
         },
         initialize: function(models) {
           _.each(models, function (getproject){
-            getproject = new ConceptBoard(getproject);
+            getproject = new GetProject(getproject);
           });
         }
     });

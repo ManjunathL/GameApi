@@ -3,7 +3,7 @@ define([
     'backbone'
 ], function($, Backbone){
     var SaveShortListDesign = Backbone.Model.extend({
-      urlRoot:baseRestApiUrl + 'MyGubbiApi/designs/save/userSelected/'
+      urlRoot:baseRestApiUrl + 'MyGubbiApi/looks/save/userSelected/'
     });
     return SaveShortListDesign;
 });

@@ -150,10 +150,13 @@
                     </div>
                </div>
                 <% if(typeof(getprojects) !== 'undefined'){ %>
+                <%= console.log("@@@@@@@@@@ getprojects @@@@@@@@@@@") %>
+                <%= console.log(getprojects) %>
+
                 <% _.each(getprojects[0].userProjects, function(allProjects, i){ %>
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
                     <img class="image" src="http://www.bigart.design/images/other/stephanie-mccabe-24620-600x600.jpg">
-                    <a class="overlay" href="/rooms">
+                    <a class="overlay" href="/rooms-<%= allProjects.id %>">
                     <div class="text">
                         <p class="title"><%= allProjects.projectName %></p>
                         <button type="button" style="border:2px solid #fff;padding:10px 20px;background: #000;font-weight:600;">View Details</button>
@@ -161,72 +164,6 @@
                 </div>
                 <% }); %>
                 <% } %>
-
-               <!-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
-                    <img class="image" src="http://www.bigart.design/images/other/sticker-mule-197248-600x600.jpg">
-                    <a class="overlay" href="/listofconcepts" " target="_blank">
-                    <div class="text">
-                        <p class="title">Catch of the day</p>
-                    </div></a>
-                </div>
-
-
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
-                    <img class="image" src="http://www.bigart.design/images/other/scott-webb-258983-600x600.jpg">
-                    <a class="overlay" href="/listofconcepts"  target="_blank">
-                    <div class="text">
-                        <p class="title">Abstracting Details</p>
-                    </div></a>
-                </div>
-
-
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
-                    <img class="image" src="http://www.bigart.design/images/other/matthew-kane-205235-600x600.jpg">
-                    <a class="overlay" href="/listofconcepts"  target="_blank">
-                    <div class="text">
-                        <p class="title">Snow Monkey</p>
-                    </div></a>
-                </div>
-
-
-                <div class="portfolio-container">
-                    <div class="portfolio-row text-center">
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
-                            <img class="image" src="http://www.bigart.design/images/other/joshua-earle-157231-600x600.jpg">
-                            <a class="overlay" href="/listofconcepts"  target="_blank">
-                            <div class="text">
-                                <p class="title">Ice Land</p>
-                            </div></a>
-                        </div>
-
-
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
-                            <img class="image" src="http://www.bigart.design/images/other/joshua-sortino-228788-600x600.jpg">
-                            <a class="overlay" href="/listofconcepts"  target="_blank">
-                            <div class="text">
-                                <p class="title">Emergence from the Clouds</p>
-                            </div></a>
-                        </div>
-
-
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
-                            <img class="image" src="http://www.bigart.design/images/other/derick-anies-120213-600x600.jpg">
-                            <a class="overlay" href="/listofconcepts"  target="_blank">
-                            <div class="text">
-                                <p class="title">Man</p>
-                            </div></a>
-                        </div>
-
-
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container" style="margin-bottom: 30px;">
-                            <img class="image" src="http://www.bigart.design/images/other/joshua-newton-275881-600x600.jpg">
-                            <a class="overlay" href="/listofconcepts"  target="_blank">
-                            <div class="text">
-                                <p class="title">Flame</p>
-                            </div></a>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>
