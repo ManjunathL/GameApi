@@ -5,17 +5,27 @@ define([
   'bootstrap',
   'pinterest_grid',
   'owlcarousel',
-  'text!templates/project/listing_rooms.html'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate){
+  'text!templates/project/listing_rooms.html',
+  'views/dashboard/add_conceptboard'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate,AddConceptboard){
   var ListingRoomPage = Backbone.View.extend({
     el: '.page',
+    add_concept2boards: null,
     initialize: function() {
+
         this.listenTo(Backbone);
         _.bindAll(this, 'render');
     },
     render: function () {
         $(this.el).html(_.template(listingRoomPageTemplate));
     },
+    events: {
+            "click .addCBoard1": "viewAddCboard"
+        },
+        viewAddCboard: function(){
+                $('#addcboard-modal').modal('show');
+                AddConceptboard.apply();
+            },
     getConceptBoards: function(){
         var that = this;
         var userId = sessionStorage.userId;
