@@ -377,6 +377,8 @@ public class CCAHandler extends AbstractRouteHandler{
     private void createIssueInCrmNew(RoutingContext routingContext,String imageFileName, String issue, String crmId)
     {
         CloseableHttpClient client = HttpClientBuilder.create().build();
+        String open_assigned = "Open_Assigned";
+
 
         HttpPost post = new HttpPost("https://suite.mygubbi.com/mygubbi_crm29102017/test-api/create_customer_issue.php");
 
@@ -385,7 +387,8 @@ public class CCAHandler extends AbstractRouteHandler{
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         builder.addBinaryBody("documents", fileNew, ContentType.DEFAULT_BINARY, imageFileName);
         builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
-        builder.addTextBody("issue", issue, ContentType.TEXT_PLAIN);
+        builder.addTextBody("name", issue, ContentType.TEXT_PLAIN);
+        builder.addTextBody("status", open_assigned, ContentType.TEXT_PLAIN);
 //
         HttpEntity entity = builder.build();
         post.setEntity(entity);
