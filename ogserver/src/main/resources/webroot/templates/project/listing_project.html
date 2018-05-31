@@ -83,7 +83,7 @@
 
 .image {
 	display: block;
-	height: auto;
+    height: 265px;
 	width: 100%;
 }
 
@@ -141,7 +141,7 @@
     <div class="container">
         <div class="mt20">
             <div class="row">
-                <div id="createProject" class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container" style="border: 1px dashed #333;text-align: center;">
+                <div id="createProject" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 cell-container" style="border: 1px dashed #333;text-align: center;height: 265px;">
                     <span class="imgholder">&#43;</span>
                     <div class="overlay"  target="_blank">
                         <div class="text">
@@ -150,9 +150,10 @@
                     </div>
                </div>
                 <% if(typeof(getprojects) !== 'undefined'){ %>
+                <% var cnt=1; %>
                 <% _.each(getprojects[0].userProjects, function(allProjects, i){ %>
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 cell-container">
-                    <img class="image" src="http://www.bigart.design/images/other/stephanie-mccabe-24620-600x600.jpg">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 cell-container">
+                    <img class="image" src="/img/building<%= cnt %>.jpg">
                     <a class="overlay" href="/rooms-<%= allProjects.id %>">
                         <i class="fa fa-times-circle" aria-hidden="true" style="font-size: 25px;float:right;color: white;" id="deleteProject" data-element="<%= allProjects.id %>"></i>
                         <div class="text">
@@ -160,7 +161,8 @@
                         <button type="button" style="border:2px solid #fff;padding:10px 20px;background: #000;font-weight:600;">View Details</button>
                     </div></a>
                 </div>
-                <% }); %>
+                <% if(cnt > 5){ cnt=1; } %>
+                <% cnt++; }); %>
                 <% } %>
             </div>
         </div>
