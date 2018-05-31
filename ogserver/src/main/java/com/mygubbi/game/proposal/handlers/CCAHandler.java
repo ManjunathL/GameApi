@@ -31,6 +31,7 @@ import us.monoid.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.http.HttpEntity;
@@ -202,10 +203,7 @@ public class CCAHandler extends AbstractRouteHandler{
 
         Set<FileUpload> fileUploads = routingContext.fileUploads();
 
-        File file = null;
-
         String newFile = null;
-
 
         for (FileUpload fileUpload : fileUploads) {
             newFile = fileUpload.uploadedFileName();
@@ -215,11 +213,13 @@ public class CCAHandler extends AbstractRouteHandler{
 
         }
 
-
         String crmId = routingContext.request().getFormAttribute("opportunity_id");
         String issue = routingContext.request().getFormAttribute("issue");
         if (newFile != null) {
             createIssueInCrmNew(routingContext,newFile,issue,crmId);
+        }
+        else {
+            createIssueInCrmNew(routingContext,"",issue,crmId);
         }
 
     }
@@ -382,13 +382,28 @@ public class CCAHandler extends AbstractRouteHandler{
 
         HttpPost post = new HttpPost("https://suite.mygubbi.com/mygubbi_crm29102017/test-api/create_customer_issue.php");
 
-        File fileNew = new File(imageFileName);
-        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-        builder.addBinaryBody("documents", fileNew, ContentType.DEFAULT_BINARY, imageFileName);
-        builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
-        builder.addTextBody("name", issue, ContentType.TEXT_PLAIN);
-        builder.addTextBody("status", open_assigned, ContentType.TEXT_PLAIN);
+        MultipartEntityBuilder builder;
+
+        if (Objects.equals(imageFileName, ""))
+        {
+            builder = MultipartEntityBuilder.create();
+            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+            builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
+            builder.addTextBody("name", issue, ContentType.TEXT_PLAIN);
+            builder.addTextBody("status", open_assigned, ContentType.TEXT_PLAIN);
+        }
+        else
+        {
+            File fileNew = new File(imageFileName);
+            builder = MultipartEntityBuilder.create();
+            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+            builder.addBinaryBody("documents", fileNew, ContentType.DEFAULT_BINARY, imageFileName);
+            builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
+            builder.addTextBody("name", issue, ContentType.TEXT_PLAIN);
+            builder.addTextBody("status", open_assigned, ContentType.TEXT_PLAIN);
+        }
+
+
 //
         HttpEntity entity = builder.build();
         post.setEntity(entity);
