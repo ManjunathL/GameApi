@@ -51,10 +51,76 @@ define([
             "click #deleteProject": "deleteProjects",
             "click #submitConceptDetail": "submitConceptDetail",
             "click .updatecreateRoom": "updateDefaultRoom",
-            "click .addMoreRoom": "checkRoom"
+            "click .addMoreRoom": "checkRoom",
+            "click #save_roomConcept": "saveRoomConcept"
     },
     createNewProject: function(){
         $('#createProject-modal').modal('show');
+    },
+    saveRoomConcept: function(){
+
+        var that = this;
+      //  var currentTarget = $(e.currentTarget);
+        var common = $('.common').length;
+        var userId = sessionStorage.userId;
+
+
+        $( ".roomId" ).each(function( i ) {
+            var roomId = $(this).val();
+            console.log("roomId");
+            console.log(roomId);
+                if(roomId !== ""){
+                    var spaceTypeId = roomId;
+                    var inputname = $('#inputname'+spaceTypeId).val();
+                    var description = $('#description'+spaceTypeId).val();
+                    var spaceTypeCode = $('#inputcategory'+spaceTypeId).val();
+
+                    var body={
+                       "description": description,
+                       "id": spaceTypeId,
+                       "name": inputname,
+                       "spaceTypeCode": spaceTypeCode
+                     };
+
+                    if(inputname != ""){
+                     that.updateDefaultRoom(body);
+                     }
+
+                    console.log("@@@@@@@@@@@@@ spaceTypeId @@@@@@@@@@@@@@@"+spaceTypeId);
+                    console.log("inputname === "+inputname+"==== description ====="+description+"=========spaceTypeCode========="+spaceTypeCode);
+                }else{
+                    var id = $(this).attr('id');
+                     var currIdArr = id.replace("roomID","");
+                     console.log("currIdArr");
+                     console.log(currIdArr);
+                     var inputname = $('#inputname'+currIdArr).val();
+                     var spaceTypeCode = $('#inputcategory'+currIdArr).val();
+                     var projectId = $('#projectId').val();
+                     var description = $('#description'+currIdArr).val();
+
+                     var body={
+                         "description": description,
+                          "id": 0,
+                          "name": inputname,
+                          "spaceTypeCode": spaceTypeCode,
+                          "userId": userId,
+                          "userMindboardId": 0,
+                          "userNote": "null",
+                          "userProjectId": projectId
+                      };
+
+                      if(inputname != ""){
+                        that.checkRoom(body);
+                        }
+                     console.log("@@@@@@@@@@@@@ spaceTypeId @@@@@@@@@@@@@@@"+currIdArr);
+                     console.log("inputname === "+inputname+"==== description ====="+description+"=========spaceTypeCode========="+spaceTypeCode);
+
+                }
+
+          });
+
+        return false;
+
     },
     viewProjects: function(){
         var that = this;
@@ -120,8 +186,8 @@ define([
                                     }
                                 });
                   },
-    updateDefaultRoom: function(e){
-         if (e.isDefaultPrevented()) return;
+    updateDefaultRoom: function(body){
+         /*if (e.isDefaultPrevented()) return;
          e.preventDefault();
          var that = this;
          var currentTarget = $(e.currentTarget);
@@ -134,7 +200,9 @@ define([
            "id": spaceTypeId,
            "name": inputname,
            "spaceTypeCode": spaceTypeCode
-         }
+         }*/
+
+         var that = this;
          var userId = sessionStorage.userId;
                 that.updatedefaultroom.addUserDefaultRoomList({
                       async: true,
@@ -146,32 +214,21 @@ define([
                       },
                       data: JSON.stringify(body),
                       success:function(response) {
-                         console.log("Successfully Add Room in  Project ... ");
+                         console.log("Successfully Update Room in  Project ... ");
                          console.log(response);
-                         $("#snackbar").html("Successfully Add Room in Project selection... ");
-                         var x = document.getElementById("snackbar")
-                         x.className = "show";
-                         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-                         return false;
                 },
                    error:function(response) {
-                        console.log(" +++++++++++++++ Delete Add Room - Errrorr ++++++++++++++++++ ");
+                        console.log(" +++++++++++++++ Error Update Default Room - Errrorr ++++++++++++++++++ ");
                         console.log(JSON.stringify(response));
-                        console.log("%%%%%%%%% response %%%%%%%%%%%%%%%%");
-                        console.log(response.responseJSON.errorMessage);
-
-                         $("#snackbar").html(response.responseJSON.errorMessage);
-                         var x = document.getElementById("snackbar")
-                         x.className = "show";
-                         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                    }
                });
     },
-    checkRoom: function(e){
-             if (e.isDefaultPrevented()) return;
-             e.preventDefault();
-             var that = this;
-             var currentTarget = $(e.currentTarget);
+    checkRoom: function(body){
+             /*if (e.isDefaultPrevented()) return;
+             e.preventDefault();*/
+
+
+             /*var currentTarget = $(e.currentTarget);
              var id = currentTarget.attr('id');
              var currIdArr = id.replace("add","");
              console.log("currIdArr");
@@ -181,21 +238,15 @@ define([
              var spaceTypeId = $('#inputcategory'+currIdArr).val();
              var projectId = $('#projectId').val();
              var description = $('#description'+currIdArr).val();
-             var userId = sessionStorage.userId;
+             var userId = sessionStorage.userId;*/
 
 
-             var body={
-                "description": description,
-                 "id": 0,
-                 "name": inputname,
-                 "spaceTypeCode": spaceTypeId,
-                 "userId": userId,
-                 "userMindboardId": 0,
-                 "userNote": "null",
-                 "userProjectId": projectId
-             }
+             var that = this;
+             var userId = body.userId;
+             var projectId = body.userProjectId;
+
              nameExists={
-             "name":inputname
+             "name":body.name
              }
              that.checknameformorerooms.checkNameForMoreRoom(userId,projectId,{
                    async: true,
@@ -224,14 +275,14 @@ define([
                                 success:function(response) {
                                    console.log("Successfully Add Room in  Project ... ");
                                    console.log(response);
-                                   $("#snackbar").html("Successfully Add Room in Project selection... ");
+                                   $("#snackbar").html("Successfully Add Room... ");
                                    var x = document.getElementById("snackbar")
                                    x.className = "show";
                                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                                    return false;
                           },
                              error:function(response) {
-                                  console.log(" +++++++++++++++ Delete Add Room - Errrorr ++++++++++++++++++ ");
+                                  console.log(" +++++++++++++++ Error by adding  Room - Errrorr ++++++++++++++++++ ");
                                   console.log(JSON.stringify(response));
                                   return false;
                              }
@@ -240,9 +291,7 @@ define([
              },
                 error:function(response) {
                      console.log(" +++++++++++++++ check Room - Errrorr ++++++++++++++++++ ");
-                     console.log(JSON.stringify(response));
-                     console.log("%%%%%%%%% response %%%%%%%%%%%%%%%%");
-                     console.log(response.responseJSON.errorMessage);
+                     console.log(JSON.stringify(response));return false;
                 }
             });
 

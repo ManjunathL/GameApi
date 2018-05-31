@@ -232,37 +232,36 @@ define([
                       "filterTag":filterTag
                   }));
         $('#concept-dtls').html(_.template(searchConceptdetailsPageTemplate));
-        that.ready();
 
+        that.overlap();
     },
+     overlap: function(){
+          var that = this;
+          var srcimages =  $(".simgaa2");
+          var srcloadedImgNum = 0;
+          srcimages.on('load', function(){
+            srcloadedImgNum += 1;
+            if (srcloadedImgNum == srcimages.length) {
+              // here all images loaded, do your stuff
+              console.log("here");
+              that.ready();
+            }
+          });
+     },
+
     ready: function(){
         $(function() {
-           // alert($(".simgaa").length);
-            /*if($(".simgaa").length > 0){
-
-                //$("#searchpinBoot111").css("display","block");
-               $("#searchpinBoot111").pinterest_grid({
+           if($(".simgaa2").length > 0){
+               $("#searchpinBoot222").pinterest_grid({
                     no_columns: 5,
                     padding_x: 20,
                     padding_y: 20,
                     margin_bottom: 50,
                     single_column_breakpoint: 700
                 });
-            }*/
+            }
         });
 
-         //alert($(".simgaa2").length);
-         if($(".simgaa2").length > 0){
-            $("#searchpinBoot222").pinterest_grid({
-                 no_columns: 5,
-                 padding_x: 20,
-                 padding_y: 20,
-                 margin_bottom: 50,
-                 single_column_breakpoint: 700
-             });
-         }
-         //this.filter.set({'selectedSearchTag': ''});
-         //this.filter.trigger('change');
      },
      events: {
           "click .boardlst": "addConcept2Cboard",

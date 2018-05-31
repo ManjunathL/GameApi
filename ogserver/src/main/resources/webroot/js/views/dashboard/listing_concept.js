@@ -462,7 +462,6 @@ define([
         console.log(filteredConcepts);
         console.log("@@@@@@@@@@@@@@@@@@");
 
-
         $(this.el).html(_.template(conceptsPageTemplate)({
             "conceptdetails": conceptlists,
             "needconceptlisting": needconceptlists,
@@ -478,10 +477,51 @@ define([
             'conceptboardsDtls':conceptboards.toJSON()
 
         }));
-
-
-        that.ready(conceptboardId);
+       // that.ready(conceptboardId);
+        that.overlap(conceptboardId);
     },
+    overlap: function(conceptboardId){
+          var that = this;
+            var conceptlists = that.conceptlists;
+            conceptlists = conceptlists.toJSON();
+
+            var needconceptlists = that.needconceptlists;
+            needconceptlists = needconceptlists.toJSON();
+
+            var concepts = conceptlists[0].listOfConceptBoardConcept;
+            var recomconcepts = needconceptlists[0].youMayNeedItConceptList;
+
+            var images =  $(".conceptImgLST");
+            var loadedImgNum = 0;
+            images.on('load', function(){
+              loadedImgNum += 1;
+              if (loadedImgNum == images.length) {
+                // here all images loaded, do your stuff
+                console.log("here");
+                that.ready(conceptboardId);
+              }
+            });
+
+         /* $('.conceptImgLST').on('load', function() {
+              // do whatever you want
+              console.log("hi");
+              console.log($('.conceptImgLST').length);
+              console.log("conceptlists");
+
+
+              var totalLength = concepts.length + recomconcepts.length;
+              console.log(totalLength);
+
+              if(totalLength == $('.conceptImgLST').length){
+                console.log("here");
+                that.ready(conceptboardId);
+              }
+
+
+          });*/
+
+          //that.ready(conceptboardId);
+     },
     ready: function(conceptboardId){
         $(function() {
             //alert($(".conceptImgLST").length);

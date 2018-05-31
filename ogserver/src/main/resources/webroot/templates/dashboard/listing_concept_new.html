@@ -216,9 +216,9 @@
                                                 </div>
                                                 <a href="javascript:void(0);" class="needconceptImg" data-element="<%= needconceptdtls.imgURL %>" data-element1="<%= needconceptdtls.conceptTypeTitle %>" data-element2="<%= needconceptdtls.conceptTitle %>"  data-element3="<%= needconceptdtls.conceptCode %>" data-element4="<%= needconceptdtls.id %>">
                                                     <% if(typeof(needconceptdtls.imgURL) != 'undefined' && needconceptdtls.imgURL != null){ %>
-                                                    <img src="<%= needconceptdtls.imgURL %>" alt="<%= needconceptdtls.conceptTitle %>">
+                                                    <img class="conceptImgLST" src="<%= needconceptdtls.imgURL %>" alt="<%= needconceptdtls.conceptTitle %>">
                                                     <% }else{ %>
-                                                    <img src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= needconceptdtls.conceptTitle %>">
+                                                    <img class="conceptImgLST" src="http://designwhimages.mygubbi.com/no-img.png" alt="<%= needconceptdtls.conceptTitle %>">
                                                     <% } %>
                                                 </a>
 

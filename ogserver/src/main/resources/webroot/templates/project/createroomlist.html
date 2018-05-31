@@ -12,7 +12,8 @@
     <div class="col-md-12" style="margin-top: 20px;">
         <div class="form-group col-md-2">
             <label for="inputcategory">SpaceType</label>
-            <select id="inputcategory<%= roomlst.id %>" class="form-option">
+            <input type="hidden1" value="<%= roomlst.id %>" id="roomID<%= roomlst.id %>" class="roomId" />
+            <select id="inputcategory<%= roomlst.id %>" class="form-option common">
                 <option selected>Choose...</option>
                 <% if(typeof(spacetypelists) !== 'undefined'){ %>
                 <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
@@ -38,9 +39,9 @@
                 <label for="inputname">Description</label>
                 <input type="Name" class="form-control description" id="description<%= roomlst.id %>" placeholder="DESCRIPTION">
             </div>
-            <div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
+            <!--<div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
                     <input type="submit" id="<%= roomlst.id %>"  class="btn addcboard-btn updatecreateRoom" value="Update">
-            </div>
+            </div>-->
         </div>
     </div>
     <% }); %>
@@ -49,7 +50,8 @@
     <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
         <div class="form-group col-md-2">
             <label for="inputcategory">SpaceType</label>
-            <select id="inputcategory" class="form-option">
+            <input type="hidden1" value="" id="roomID" class="roomId" />
+            <select id="inputcategory" class="form-option common">
                 <option selected>Choose...</option>
                 <% if(typeof(spacetypelists) !== 'undefined'){ %>
                 <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
@@ -67,23 +69,23 @@
                 <label for="inputname">Description</label>
                 <input type="Name" class="form-control description" id="description" placeholder="DESCRIPTION">
             </div>
-            <div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
+           <!-- <div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
                 <input type="submit" id="add" class="btn addcboard-btn addMoreRoom" value="add">
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
 <div class="form-row">
-    <!--<div class="form-group col-md-12" style="text-align:right;">
+    <div class="form-group col-md-12" style="text-align:right;">
         <span  id="btn1">
             <input type="submit" id="save_roomConcept" class="btn addcboard-btn" value="Submit">
         </span>
-    </div>-->
+    </div>
 </div>
 <div class="form-row">
     <div class="form-group col-md-12">
         <h3>Add Space Type <span id="addSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
-        <input type="hidden" value="<%= projectId %>" id="projectId" />
+        <input type="hidden1" value="<%= projectId %>" id="projectId" />
     </div>
 </div>
 
@@ -120,6 +122,7 @@
         $('#inputname', newElement).attr("id","inputname"+cntclick );
         $('#description', newElement).attr("id","description"+cntclick );
         $('#add', newElement).attr("id","add"+cntclick );
+        $('#roomID', newElement).attr("id","roomID"+cntclick );
 
         newElement.appendTo($("#elements"));
     }

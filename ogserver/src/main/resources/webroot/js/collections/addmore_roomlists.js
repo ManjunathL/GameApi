@@ -6,9 +6,9 @@ define([
 ], function($, _, Backbone, AddMoreRoomList){
     var AddMoreRoomLists = Backbone.Collection.extend({
         model: AddMoreRoomList,
-        url: baseRestApiUrl +  'MyGubbiApi/conceptboard/create/blank/',
+        url: baseRestApiUrl +  'MyGubbiApi/conceptboard/create/',
         addUserMoreRoomList: function(options) {
-            var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboard/create/blank';
+            var urllnk = baseRestApiUrl + 'MyGubbiApi/conceptboard/create/';
             this.url = urllnk;
             return this.fetch(options);
         },
