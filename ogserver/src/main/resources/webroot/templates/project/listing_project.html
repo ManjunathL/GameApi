@@ -156,6 +156,7 @@
                     <img class="image" src="/img/building<%= cnt %>.jpg">
                     <a class="overlay" href="/rooms-<%= allProjects.id %>">
                         <i class="fa fa-times-circle" aria-hidden="true" style="font-size: 25px;float:right;color: white;" id="deleteProject" data-element="<%= allProjects.id %>"></i>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 25px;float:right;color: white;margin-right: 8px;" id="edit_roomList" data-element="<%= allProjects.id %>"></i>
                         <div class="text">
                         <p class="title"><%= allProjects.projectName %></p>
                         <button type="button" style="border:2px solid #fff;padding:10px 20px;background: #000;font-weight:600;">View Details</button>
@@ -269,7 +270,7 @@
 <div class="modal fade" id="addRoomConcept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="addcboard-container">
-                <h4 class="addcboard-heading">Add Room Concept</h4>
+                <h4 class="addcboard-heading">Add Rooms</h4>
                 <div id="createroomlist">
 
         </div>

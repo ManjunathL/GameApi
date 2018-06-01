@@ -12,7 +12,7 @@
     <div class="col-md-12" style="margin-top: 20px;">
         <div class="form-group col-md-2">
             <label for="inputcategory">SpaceType</label>
-            <input type="hidden1" value="<%= roomlst.id %>" id="roomID<%= roomlst.id %>" class="roomId" />
+            <input type="hidden" value="<%= roomlst.id %>" id="roomID<%= roomlst.id %>" class="roomId" />
             <select id="inputcategory<%= roomlst.id %>" class="form-option common">
                 <option selected>Choose...</option>
                 <% if(typeof(spacetypelists) !== 'undefined'){ %>
@@ -50,7 +50,7 @@
     <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
         <div class="form-group col-md-2">
             <label for="inputcategory">SpaceType</label>
-            <input type="hidden1" value="" id="roomID" class="roomId" />
+            <input type="hidden" value="" id="roomID" class="roomId" />
             <select id="inputcategory" class="form-option common">
                 <option selected>Choose...</option>
                 <% if(typeof(spacetypelists) !== 'undefined'){ %>
