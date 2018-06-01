@@ -61,7 +61,34 @@ define([
         "change #conceptfileupload": "getuploadedFileDtls",
          "click #showImg": "showuploadedFileDtls",
         "click #addCBoard": "viewAddDesign",
-        "submit #userconceptfrmImage": "submitUploadConceptBoard"
+        "submit #userconceptfrmImage": "submitUploadConceptBoard",
+        "click .lookImg": "viewFullImg",
+        "click .close": "closeModal"
+
+    },
+    closeModal: function(e){
+        document.getElementById('myLookImgModal').style.display = "none";
+    },
+    viewFullImg: function(e){
+        if (e.isDefaultPrevented()) return;
+        e.preventDefault();
+
+        var currentTarget = $(e.currentTarget);
+        var imgId = currentTarget.attr('id');
+
+        // Get the modal
+        var modal = document.getElementById('myLookImgModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById(imgId);
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+
+        modal.style.display = "block";
+        modalImg.src = currentTarget.attr('src');
+        captionText.innerHTML = currentTarget.attr('alt');
+
+        return;
 
     },
     getDesigns: function(conceptboardId,spaceTypeCode){

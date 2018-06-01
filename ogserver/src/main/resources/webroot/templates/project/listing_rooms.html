@@ -209,6 +209,9 @@
                                                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>"><%= conceptdtls.name %></a>
                                                                 <i class="indicator glyphicon pull-right glyphicon-chevron-down"></i>
                                                             </h4>
+                                                            <% if(conceptdtls.completionPercentage != 0){ %>
+                                                            <div style="float: right;margin-right: 90px;margin-top: -20px;font-weight: 900;color: lime;"><%= conceptdtls.completionPercentage %>% Completed</div>
+                                                            <% } %>
                                                         </div>
                                                         <div id="collapse<%= i %>" class="panel-collapse collapse">
                                                             <div class="panel-body bg-lightgrey">
