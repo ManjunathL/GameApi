@@ -213,7 +213,7 @@
                         <article class="white-panel">
                             <a href="javascript:void(0);" class="conceptImg" >
                                 <% if(typeof(conceptdtls.impUrl) != 'undefined' && conceptdtls.impUrl != null){ %>
-                                <img id="myImg" src="<%= conceptdtls.impUrl %>" style="height:230px; width:100%;" alt="<%= conceptdtls.title %>">
+                                <img class="lookImg" src="<%= conceptdtls.impUrl %>" style="height:230px; width:100%;" alt="<%= conceptdtls.title %>">
                                 <% }else{ %>
                                 <img src="http://designwhimages.mygubbi.com/no-img.png" style="height:230px; width:100%;"  alt="<%= conceptdtls.title %>">
                                 <% } %>
@@ -318,7 +318,7 @@
 }
 </style>
 
-<div id="myModal" class="modal">
+<div id="myLookImgModal" class="modal">
     <span class="close">&times;</span>
     <img class="modal-content" id="img01">
     <div id="caption"></div>
@@ -363,28 +363,4 @@ $('.shortList').click(function (e) {
          filter.set({'shortedList': familyoptId});
          filter.trigger('change');
 });
-</script>
-
-
-<script>
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById('myImg');
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
-}
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
 </script>
