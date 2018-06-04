@@ -7,6 +7,7 @@ define([
   'owlcarousel',
   'text!templates/project/listing_project.html',
   'text!templates/project/createroomlist.html',
+  'text!templates/project/editprojectandroom.html',
   'collections/getprojects',
   'collections/createprojects',
   'collections/spacetypelists',
@@ -15,7 +16,7 @@ define([
   'collections/updatedefaultrooms',
   'collections/addmore_roomlists',
   'collections/checknameformorerooms'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingProjectPageTemplate, roomListTempPageTemplate, GetProjects, CreateProjects, SpaceTypeLists, DeleteProjects, ConceptBoards, UpdateDefaultRooms, AddMoreRoomLists, CheckNameForMoreRoomLists){
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingProjectPageTemplate, roomListTempPageTemplate, editprojectandroomTempPageTemplate, GetProjects, CreateProjects, SpaceTypeLists, DeleteProjects, ConceptBoards, UpdateDefaultRooms, AddMoreRoomLists, CheckNameForMoreRoomLists){
   var ListingProjectPage = Backbone.View.extend({
     el: '.page',
     getprojects: null,
@@ -33,7 +34,7 @@ define([
         this.addmore_roomlists = new AddMoreRoomLists();
         this.checknameformorerooms = new CheckNameForMoreRoomLists();
         this.listenTo(Backbone);
-        _.bindAll(this, 'render','fetchViewProjectRender','fetchRoomsAndRender');
+        _.bindAll(this, 'render','fetchViewProjectRender','fetchRoomsAndRender', 'fetchEditProjectAndRommRender');
     },
     render: function () {
         var that = this;
@@ -48,12 +49,15 @@ define([
     events: {
         "click #createProject": "createNewProject",
         "click #save_conceptfileupload": "saveConceptFileupload",
+        "click #save_project": "editProjectAndRoomSaved",
         "click #deleteProject": "deleteProjects",
         "click #submitConceptDetail": "submitConceptDetail",
         "click .updatecreateRoom": "updateDefaultRoom",
         "click .addMoreRoom": "checkRoom",
         "click #save_roomConcept": "saveRoomConcept",
-        "click #edit_roomList": "editRoomList"
+        "click #edit_roomConcept": "editRoomConcept",
+        "click #edit_roomList": "editRoomList",
+        "change #uploadHomelayout": "getuploadedFileDtls"
     },
     createNewProject: function(){
         $('#createProject-modal').modal('show');
@@ -116,6 +120,64 @@ define([
 
     return false;
   },
+    editRoomConcept: function(){
+        var that = this;
+        var common = $('.editcommon').length;
+        var userId = sessionStorage.userId;
+        $( ".editroomID" ).each(function( i ) {
+            var roomId = $(this).val();
+            console.log("editroomID");
+            console.log(roomId);
+            if(roomId !== ""){
+                var spaceTypeId = roomId;
+                var inputname = $('#editinputname'+spaceTypeId).val();
+                var description = $('#editdescription'+spaceTypeId).val();
+                var spaceTypeCode = $('#editinputcategory'+spaceTypeId).val();
+
+                var body={
+                    "description": description,
+                    "id": spaceTypeId,
+                    "name": inputname,
+                    "spaceTypeCode": spaceTypeCode
+                };
+                if(inputname != ""){
+                    that.updateDefaultRoom(body);
+                }
+                console.log("@@@@@@@@@@@@@ spaceTypeId @@@@@@@@@@@@@@@"+spaceTypeId);
+                console.log("inputname === "+inputname+"==== description ====="+description+"=========spaceTypeCode========="+spaceTypeCode);
+                }else{
+                    var id = $(this).attr('id');
+                    var currIdArr = id.replace("editroomID","");
+                    console.log("currIdArr");
+                    console.log(currIdArr);
+                    var inputname = $('#editinputname'+currIdArr).val();
+                    var spaceTypeCode = $('#editinputcategory'+currIdArr).val();
+                    var projectId = $('#editprojectId').val();
+                    var description = $('#editdescription'+currIdArr).val();
+
+                    var body={
+                        "description": description,
+                        "id": 0,
+                        "name": inputname,
+                        "spaceTypeCode": spaceTypeCode,
+                        "userId": userId,
+                        "userMindboardId": 0,
+                        "userNote": "null",
+                        "userProjectId": projectId
+                    };
+
+                    if(inputname != ""){
+                        that.checkRoom(body);
+                    }
+                    console.log("@@@@@@@@@@@@@ spaceTypeId @@@@@@@@@@@@@@@"+currIdArr);
+                    console.log("inputname === "+inputname+"==== description ====="+description+"=========spaceTypeCode========="+spaceTypeCode);
+
+                }
+
+        });
+
+        return false;
+      },
     viewProjects: function(){
         var that = this;
         var userId = sessionStorage.userId;
@@ -394,6 +456,141 @@ define([
         });
         return false;
     },
+    editProjectAndRoomSaved: function(e){
+            var that = this;
+            if (e.isDefaultPrevented()) return;
+            e.preventDefault();
+            $(".err").html('');
+
+            var userId = sessionStorage.userId;
+            var pageno = 0;
+            var itemPerPage = 10;
+            var projectName = $('#editprojectName').val();
+            $('#projectName').focus();
+            if(projectName.length == 0){
+                $("#projectNama-error").html("Please Enter the Project Name ");
+                return false;
+            }
+            var builder = $('#editinputbuilder').val();
+            $('#inputbuilder').focus();
+            if(builder.length == 0){
+                $("#inputbuilder-error").html("Please Enter the Builder Name ");
+                return false;
+            }
+            var projecttower= $('#editinputprojecttower').val();
+            $('#inputprojecttower').focus();
+            if(projecttower.length == 0){
+                $("#inputprojecttower-error").html("Please Enter the Project Tower ");
+                return false;
+            }
+            var ProjectAddress= $('#editinputProjectAddress').val();
+            $('#inputProjectAddress').focus();
+            if(ProjectAddress.length == 0){
+                $("#inputProjectAddress-error").html("Please Enter the Project Address ");
+                return false;
+            }
+            var city = $('#editinputProjectCity').val();
+            $('#inputProjectCity').focus();
+            if(city.length == 0){
+                $("#inputProjectCity-error").html("Please Enter the City ");
+                return false;
+            }
+            var state = $('#editinputProjectState').val();
+            $('#inputProjectState').focus();
+            if(state.length == 0){
+                $("#inputProjectState-error").html("Please Enter the State ");
+                return false;
+            }
+            var pincode = $('#editinputpincode').val();
+            $('#inputpincode').focus();
+            if(pincode.length == 0){
+                $("#inputpincode-error").html("Please Enter the Pin Code ");
+                return false;
+            }
+            var plan = $('#editinputplan').val();
+            $('#inputplan').focus();
+            if(plan.length == 0){
+                $("#inputpincode-error").html("Please Enter the Plan ");
+                return false;
+            }
+
+            var formdata={
+                "builder": $('#inputbuilder').val(),
+                "city": $('#inputcity').val(),
+                "description": "",
+                "id": 0,
+                "planCode": $('#inputplan').val(),
+                "projectTower": $('#inputprojecttower').val(),
+                "projectAddress": $('#inputProjectAddress').val(),
+                "city": $('#inputProjectCity').val(),
+                "state": $('#inputProjectState').val(),
+                "pin": $('#inputpincode').val(),
+                "projectId": 0,
+                "projectName": $('#projectName').val(),
+                "refrencedUserId": 0,
+                "shareStatus": 0,
+                "state": "string",
+                "type": 0,
+                "userUploadedPlanId": 0
+            }
+            that.createprojects.createNewProject(userId,{
+                async: true,
+                crossDomain: true,
+                method: "POST",
+                headers:{
+                    "authorization": "Bearer "+ sessionStorage.authtoken,
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify(formdata),
+                success:function(response) {
+                    console.log("Successfully create new project- ");
+                    console.log(response);
+                    var resDefProjects = response.toJSON();
+                    var currentInsertedProjectId = resDefProjects[0].id ;
+                    console.log("currentInsertedProjectId");
+                    console.log(currentInsertedProjectId);
+                    $("#snackbar").html("Successfully create new project...");
+                    var x = document.getElementById("snackbar")
+                    x.className = "show";
+                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                },
+                error:function(response) {
+                    console.log(" +++++++++++++++create new project- Errrorr ++++++++++++++++++ ");
+                    console.log(response);
+                    return;
+                }
+            });
+            return false;
+        },
+    getuploadedFileDtls: function (evt) {
+        var that = this;
+
+        var files = evt.target.files;
+
+        for (var i = 0, f; f = files[i]; i++) {
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+            var reader = new FileReader();
+            reader.readAsDataURL(f);
+        }
+        console.log("file:");
+        console.log(files[0]);
+        console.log(files[0].name)
+        //formData.append('file', files[ff]);
+        var fileObj = {};
+        //var fileMnObj = new File();
+        if(files[0].name != ""){
+            that.filter.set({
+                'imgData': files[0]
+            }, {
+                silent: true
+            });
+        }
+        console.log("++++++++++++ Image Data +++++++++++++++++++");
+        console.log(that.filter.get('imgData'));
+        return false;
+    },
     getConceptBoards: function(currentInsertedProjectId){
         var that = this;
         var userId = sessionStorage.userId;
@@ -442,7 +639,7 @@ define([
             success:function(data) {
                 console.log(" +++++++++++++++ Room List ++++++++++++++++++ ");
                 console.log(data);
-                that.fetchRoomsAndRender(projectId);
+                that.fetchEditProjectAndRommRender(projectId);
             },
             error:function(response) {
                 //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
@@ -496,9 +693,32 @@ define([
            "spacetypelists": spacetypelists.toJSON(),
            "projectId": projectId
        }));
+        $("#createroomlist").html(_.template(roomListTempPageTemplate)({
+                  "roomListCreate":conceptboards.toJSON(),
+                  "spacetypelists": spacetypelists.toJSON(),
+                  "projectId": projectId
+              }));
         $('#createProject-modal').modal('hide');
         $('#addRoomConcept').modal('show');
-    }
+    },
+    fetchEditProjectAndRommRender: function(projectId) {
+            var that = this;
+            var conceptboards = that.conceptboards;
+            var getprojects = this.getprojects;
+            getprojects = getprojects.toJSON();
+            var spacetypelists = that.spacetypelists;
+             var projectDtls = that.getprojects.getProjectDetails(getprojects[0].userProjects,projectId);
+
+             console.log(" %%%%%%%%%%%%%% Project Details %%%%%%%%%%%%%% ");
+                     console.log(projectDtls);
+            $("#editRoomeroomlist").html(_.template(editprojectandroomTempPageTemplate)({
+                      "roomListCreate":conceptboards.toJSON(),
+                       "getprojects": projectDtls,
+                       "spacetypelists": spacetypelists.toJSON(),
+                       "projectId": projectId
+                  }));
+            $('#editRoomandProject').modal('show');
+        }
     });
     return ListingProjectPage;
 });
