@@ -31,23 +31,24 @@
   opacity: 0;
 }
 </style>
-<section class="main-conceptboard-sec bg-light-gray pb40">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
+<button type="button" class="closeedit close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
 
-                <div class="tab container">
+            <div class="tab">
 
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#project" data-toggle="tab" id="HomeTab">Project Details</a></li>
-                        <li><a href="#rooms" data-toggle="tab" id="FamilyTab">Rooms Details</a></li>
-                    </ul>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#project" data-toggle="tab" id="ProjectTab">Project Details</a></li>
+                    <li><a href="#rooms" data-toggle="tab" id="RoomTab">Rooms Details</a></li>
+                </ul>
 
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="project">
-                            <div  class="createProject-container">
-                                <form id="userconceptfrmImage" method="post" name="userconceptfrm" enctype="multipart/form-data">
-                                    <div class="col-sm-12 col-md-12">
+                <div class="tab-content" style="padding: 20px 20px;">
+                    <div class="tab-pane active" id="project">
+                        <div>
+                            <form id="userconceptfrmImage" method="post" name="userconceptfrm" enctype="multipart/form-data">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-row">
                                         <div class="form-group">
                                             <div id="list1">
                                                 <div class="row display-none" id="addUpload_error_row" style="text-align: center;;">
@@ -55,6 +56,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-row">
                                         <div class="form-group">
                                             <label for="editprojectName">Project Name:</label>
                                             <input type="text" class="form-control" id="editprojectName" name="projectName" value="<%=getprojects ? getprojects[0].projectName : ''%>" required/>
@@ -62,165 +65,164 @@
                                                 <p  class="err" id="projectNama-error" style="color: darkred;"></p>
                                             </div>
                                         </div>
-                                        <h4 class="p-style">Project Details</h4>
-                                        <div class="form-row">
-                                            <div class="form-group  col-md-4">
-                                                <label for="editinputbuilder">Builder</label>
-                                                <input type="text" class="form-control" id="editinputbuilder" placeholder="Builder" value="<%=getprojects ? getprojects[0].builder : ''%>" required />
-                                                <div id="inputbuilder-error_row" style="font-size: 10px;">
-                                                    <p  class="err" id="inputbuilder-error" style="color: darkred;margin-bottom: -10px;"></p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group address-style col-md-6">
-                                                <label for="editinputprojecttower">Project Tower</label>
-                                                <input type="text" class="form-control" id="editinputprojecttower" placeholder="Project Tower" value="<%=getprojects ? getprojects[0].projectTower : ''%>"  required />
-                                                <div id="inputprojecttower-error_row" style="font-size: 10px;">
-                                                    <p  class="err" id="inputprojecttower-error" style="color: darkred;"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group address-style ml0 col-md-6"  style="margin-right: 14px;">
-                                                <label for="editinputProjectAddress">Project Address</label>
-                                                <input type="text" class="form-control" id="editinputProjectAddress" placeholder="1234 Main St"  value="<%=getprojects ? getprojects[0].projectAddress : ''%>" required />
-                                                <div id="inputProjectAddress-error_row" style="font-size: 10px;">
-                                                    <p class="err" id="inputProjectAddress-error" style="color: darkred;margin-bottom: -10px;"></p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label for="editinputProjectCity">City</label>
-                                                <input type="text" class="form-control" id="editinputProjectCity" value="<%=getprojects ? getprojects[0].city : ''%>"  required />
-                                                <div id="inputProjectCity-error_row" style="font-size: 10px;">
-                                                    <p class="err" id="inputProjectCity-error" style="color: darkred;"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-4">
-                                                <label for="editinputProjectState">State</label>
-                                                <input type="text" class="form-control" id="editinputProjectState" value="<%=getprojects ? getprojects[0].state : ''%>" placeholder="State"  required />
-                                                <div id="inputProjectState-error_row" style="font-size: 10px;">
-                                                    <p class="err" id="inputProjectState-error" style="color: darkred;"></p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group address-style col-md-3">
-                                                <label for="editinputpincode">Pin Code</label>
-                                                <input type="number" class="form-control" id="editinputpincode" value="<%=getprojects ? getprojects[0].pin : ''%>" maxlength="6"  required />
-                                                <div id="inputpincode-error_row" style="font-size: 10px;">
-                                                    <p class="err" id="inputpincode-error" style="color: darkred;"></p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="editinputplan">Plan</label>
-                                                <input type="text" class="form-control" id="editinputplan" value="<%=getprojects ? getprojects[0].planCode : ''%>" placeholder="Plan" required />
-                                                <div id="inputplan-error_row" style="font-size: 10px;">
-                                                    <p class="err" id="inputplan-error" style="color: darkred;"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col-md-4 upload-btn-wrapper">
-                                                <button class="btnImage">Upload a file</button>
-                                                <input id="uploadHomelayout" type="file" name="uploadHome"/>
-                                                <label id="file-name"></label>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="mt15 col-md-4" style="text-align:right;">
-                                        <input type="submit" id="save_project" class="btn addcboard-btn" value="Submit">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="rooms" >
-                            <div class="spaceElemenetPanel"  id="editelements" style="overflow-y:scroll;height:380px;">
-
-                                <% if(typeof(roomListCreate) !== 'undefined'){ %>
-                                <% _.each(roomListCreate[0].listOfUserConceptBoard, function(roomlst, j){ %>
-                                <div class="col-md-12" style="margin-top: 20px;">
-                                    <div class="form-group col-md-2">
-                                        <label for="editinputcategory">SpaceType</label>
-                                        <input type="hidden" value="<%= roomlst.id %>" id="editroomID<%= roomlst.id %>" class="editroomID" />
-                                        <select id="editinputcategory<%= roomlst.id %>" class="form-option editcommon">
-                                            <option selected>Choose...</option>
-                                            <% if(typeof(spacetypelists) !== 'undefined'){ %>
-                                            <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
-                                            <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"
-                                            <% if(roomlst.spaceTypeCode == spaceElement.code){ %> selected= "<% spaceElement.title%>" <% } %>
-                                            <% if(roomlst.name == "Living Room" && spaceElement.title == "Living"){ %> selected="selected" <% } %>
-                                            <% if(roomlst.name == "Bed Room - 1" && spaceElement.title == "Master Bed Room"){ %> selected="selected" <% } %>
-                                            <% if(roomlst.name == "Bed Room - 2" && spaceElement.title == "Kids Bed Room"){ %> selected="selected" <% } %>
-
-                                            ><%= spaceElement.title %></option>
-
-                                            <% }); %>
-                                            <% } %>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-group address-style col-md-3">
-                                            <label for="editinputname">Name</label>
-                                            <input type="Name" class="form-control editinputname" id="editinputname<%= roomlst.id %>" placeholder="NAME" value="<%=roomlst.name %>">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="editinputname">Description</label>
-                                            <input type="Name" class="form-control editdescription" id="editdescription<%= roomlst.id %>" placeholder="DESCRIPTION" value="<%=roomlst.description %>">
-                                        </div>
-                                    </div>
-                                </div>
-                                <% }); %>
-                                <% } %>
-
-                                <div id="editroomspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
-                                    <div class="form-group col-md-2">
-                                        <label for="editinputcategory">SpaceType</label>
-                                        <input type="hidden" value="" id="editroomID" class="editroomID" />
-                                        <select id="editinputcategory" class="form-option editcommon">
-                                            <option selected>Choose...</option>
-                                            <% if(typeof(spacetypelists) !== 'undefined'){ %>
-                                            <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
-                                            <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"><%= spaceElement.title %></option>
-                                            <% }); %>
-                                            <% } %>
-                                        </select>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group address-style col-md-3">
-                                            <label for="editinputname">Name</label>
-                                            <input type="Name" class="form-control editinputname" id="editinputname" placeholder="NAME">
+                                        <div class="form-group col-md-5 pdn0">
+                                            <label for="editinputbuilder">Builder</label>
+                                            <input type="text" class="form-control" id="editinputbuilder" placeholder="Builder" value="<%=getprojects ? getprojects[0].builder : ''%>" required />
+                                            <div id="inputbuilder-error_row" style="font-size: 10px;">
+                                                <p  class="err" id="inputbuilder-error" style="color: darkred;margin-bottom: -10px;"></p>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="editinputname">Description</label>
-                                            <input type="Name" class="form-control description" id="editdescription" placeholder="DESCRIPTION">
+                                        <div class="form-group address-style col-md-5">
+                                            <label for="editinputprojecttower">Project Tower</label>
+                                            <input type="text" class="form-control" id="editinputprojecttower" placeholder="Project Tower" value="<%=getprojects ? getprojects[0].projectTower : ''%>"  required />
+                                            <div id="inputprojecttower-error_row" style="font-size: 10px;">
+                                                <p  class="err" id="inputprojecttower-error" style="color: darkred;"></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <span  id="btn1">
-                                        <input type="submit" id="edit_roomConcept" class="btn addcboard-btn" value="Submit">
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <h3>Add Space Type <span id="editSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
-                                    <input type="hidden" value="<%= projectId %>" id="editprojectId" />
-                                </div>
-                            </div>
+                                    <div class="form-row">
+                                        <div class="form-group address-style ml0 col-md-6 pdn0"  style="margin-right: 14px;">
+                                            <label for="editinputProjectAddress">Project Address</label>
+                                            <input type="text" class="form-control" id="editinputProjectAddress" placeholder="1234 Main St"  value="<%=getprojects ? getprojects[0].projectAddress : ''%>" required />
+                                            <div id="inputProjectAddress-error_row" style="font-size: 10px;">
+                                                <p class="err" id="inputProjectAddress-error" style="color: darkred;margin-bottom: -10px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="editinputProjectCity">City</label>
+                                            <input type="text" class="form-control" id="editinputProjectCity" value="<%=getprojects ? getprojects[0].city : ''%>"  required />
+                                            <div id="inputProjectCity-error_row" style="font-size: 10px;">
+                                                <p class="err" id="inputProjectCity-error" style="color: darkred;"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4 pdn0">
+                                            <label for="editinputProjectState">State</label>
+                                            <input type="text" class="form-control" id="editinputProjectState" value="<%=getprojects ? getprojects[0].state : ''%>" placeholder="State"  required />
+                                            <div id="inputProjectState-error_row" style="font-size: 10px;">
+                                                <p class="err" id="inputProjectState-error" style="color: darkred;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group address-style col-md-3">
+                                            <label for="editinputpincode">Pin Code</label>
+                                            <input type="number" class="form-control" id="editinputpincode" value="<%=getprojects ? getprojects[0].pin : ''%>" maxlength="6"  required />
+                                            <div id="inputpincode-error_row" style="font-size: 10px;">
+                                                <p class="err" id="inputpincode-error" style="color: darkred;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="editinputplan">Plan</label>
+                                            <input type="text" class="form-control" id="editinputplan" value="<%=getprojects ? getprojects[0].planCode : ''%>" placeholder="Plan" required />
+                                            <div id="inputplan-error_row" style="font-size: 10px;">
+                                                <p class="err" id="inputplan-error" style="color: darkred;"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 upload-btn-wrapper">
+                                            <button class="btnImage">Upload a file</button>
+                                            <input id="uploadHomelayout" type="file" name="uploadHome"/>
+                                            <label id="file-name"></label>
+                                        </div>
+                                    </div>
 
+                                </div>
+
+                                <div class="mt15" style="text-align:right;">
+                                    <input type="submit" id="save_project" class="btn addcboard-btn" value="Save">
+                                </div>
+                            </form>
                         </div>
                     </div>
+                    <div class="tab-pane" id="rooms" >
+                        <div class="spaceElemenetPanel"  id="editelements" style="overflow-y:scroll;height:380px;">
 
+                            <% if(typeof(roomListCreate) !== 'undefined'){ %>
+                            <% _.each(roomListCreate[0].listOfUserConceptBoard, function(roomlst, j){ %>
+                            <div class="col-md-12" style="margin-top: 20px;">
+                                <div class="form-group col-md-3">
+                                    <label for="editinputcategory">SpaceType</label>
+                                    <input type="hidden" value="<%= roomlst.id %>" id="editroomID<%= roomlst.id %>" class="editroomID" />
+                                    <select id="editinputcategory<%= roomlst.id %>" class="form-option editcommon">
+                                        <option selected>Choose...</option>
+                                        <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                                        <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                                        <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"
+                                        <% if(roomlst.spaceTypeCode == spaceElement.code){ %> selected= "<% spaceElement.title%>" <% } %>
+                                        <% if(roomlst.name == "Living Room" && spaceElement.title == "Living"){ %> selected="selected" <% } %>
+                                        <% if(roomlst.name == "Bed Room - 1" && spaceElement.title == "Master Bed Room"){ %> selected="selected" <% } %>
+                                        <% if(roomlst.name == "Bed Room - 2" && spaceElement.title == "Kids Bed Room"){ %> selected="selected" <% } %>
+
+                                        ><%= spaceElement.title %></option>
+
+                                        <% }); %>
+                                        <% } %>
+                                    </select>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group address-style col-md-3">
+                                        <label for="editinputname">Name</label>
+                                        <input type="Name" class="form-control editinputname" id="editinputname<%= roomlst.id %>" placeholder="NAME" value="<%=roomlst.name %>">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="editinputname">Description</label>
+                                        <input type="Name" class="form-control editdescription" id="editdescription<%= roomlst.id %>" placeholder="DESCRIPTION" value="<%=roomlst.description %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                            <% } %>
+
+                            <div id="editroomspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
+                                <div class="form-group col-md-2">
+                                    <label for="editinputcategory">SpaceType</label>
+                                    <input type="hidden" value="" id="editroomID" class="editroomID" />
+                                    <select id="editinputcategory" class="form-option editcommon">
+                                        <option selected>Choose...</option>
+                                        <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                                        <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                                        <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"><%= spaceElement.title %></option>
+                                        <% }); %>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group address-style col-md-3">
+                                        <label for="editinputname">Name</label>
+                                        <input type="Name" class="form-control editinputname" id="editinputname" placeholder="NAME">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="editinputname">Description</label>
+                                        <input type="Name" class="form-control description" id="editdescription" placeholder="DESCRIPTION">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12 text-right">
+                                <span  id="btn1">
+                                    <input type="submit" id="edit_roomConcept" class="btn addcboard-btn" value="Save">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <h3>Add Space Type <span id="editSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
+                                <input type="hidden" value="<%= projectId %>" id="editprojectId" />
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <script>
   var current_id = 0;

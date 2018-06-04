@@ -98,6 +98,7 @@
 	transition: .5s ease;
 	top: 0;
 	width: 100%;
+	z-index:1;
 }
 
 .cell-container:hover .overlay {
@@ -154,15 +155,15 @@
                 <% _.each(getprojects[0].userProjects, function(allProjects, i){ %>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 cell-container">
                     <img class="image" src="/img/building<%= cnt %>.jpg">
-                    <a class="overlay" href="/rooms-<%= allProjects.id %>">
-                        <i class="fa fa-times-circle" aria-hidden="true" style="font-size: 25px;float:right;color: white;" id="deleteProject" data-element="<%= allProjects.id %>"></i>
-                        <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 25px;float:right;color: white;" id="edit_roomList" data-element="<%= allProjects.id %>"></i>
-                        <div ><div class="text">
+                    <a class="overlay" href="javascript:void(0);">
+                        <i class="fa fa-times-circle deleteProject" aria-hidden="true" style="font-size: 25px;float:left;color: white;z-index:9;" data-element="<%= allProjects.id %>"></i>
+                        <i class="fa fa-pencil-square-o edit_roomList" aria-hidden="true" style="font-size: 25px;float:right;color: white;z-index:9;" data-element="<%= allProjects.id %>"></i>
+                        <div><div class="text">
                         <p class="title"><%= allProjects.projectName %></p>
-                        <button type="button" style="border:2px solid #fff;padding:10px 20px;background: #000;font-weight:600;">View Details</button>
+                        <button type="button" style="border:2px solid #fff;padding:10px 20px;background: #000;font-weight:600;" onclick="viewDtls('<%= allProjects.id %>')">View Details</button>
                     </div></div></a>
                 </div>
-                <% if(cnt > 5){ cnt=1; } %>
+                <% if(cnt >= 5){ cnt=1; } %>
                 <% cnt++; }); %>
                 <% } %>
             </div>
@@ -270,16 +271,15 @@
 <div class="modal fade" id="addRoomConcept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="addcboard-container">
-                <h4 class="addcboard-heading">Add Room Concept</h4>
+            <h4 class="addcboard-heading">Add Rooms</h4>
             <div id="createroomlist"></div>
-
         </div>
     </div>
 </div>
 <div class="modal fade" id="editRoomandProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
-        <div class="addcboard-container">
-            <div id="editRoomeroomlist">
+        <div class="editProject-container">
+            <div class="editContain" id="editRoomeroomlist">
             </div>
         </div>
     </div>
@@ -311,5 +311,12 @@
         $('#description', newElement).attr("id","DESCRIPTION"+current_id );
 
         newElement.appendTo($("#elements"));
+    }
+
+    function viewDtls(projectId){
+        //alert(projectId);
+        window.App.router.navigate("/rooms-"+projectId, {
+             trigger: true
+         });
     }
 </script>

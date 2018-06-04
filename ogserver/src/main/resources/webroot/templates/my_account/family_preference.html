@@ -1,10 +1,21 @@
+<style>
+    .formFmTit {
+        color: #ea5c36;
+        font-weight: 600;
+        margin-bottom: 0px !important;
+    }
+    .form-group {
+        margin-bottom: 0px !important;
+    }
+</style>
+
 <% var selOPTFID = ''; %>
 <% if(typeof(userFamilyPreferencesDtls) !== 'undefined' && userFamilyPreferencesDtls.length > 0){ %>
 <% _.each(userFamilyPreferencesDtls[0].userQues, function(userQuesdtl, j){ %>
 
 <% if(userQuesdtl.questionnaire.questionDetails.name == "We would like our home to be"){ %>
 <div class="col-md-12">
-    <h4 class="formTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
+    <h4 class="formFmTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
     <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
     <div class="form-group col-md-4">
@@ -47,7 +58,7 @@
 <% }else{ %>
 <% if(userQuesdtl.questionnaire.questionDetails.name == "We love to" || userQuesdtl.questionnaire.questionDetails.name == "We usually do"){ %>
 <div class="col-md-12">
-    <h4 class="formTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
+    <h4 class="formFmTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
 
     <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
@@ -81,7 +92,7 @@
 <div class="clearfix"></div>
 <% }else{ %>
 <div class="col-md-6">
-    <h4 class="formTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
+    <h4 class="formFmTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
 
     <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined' && userQuesdtl.userSelectedOption != ""){ %>

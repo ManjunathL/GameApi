@@ -9,20 +9,17 @@ define([
   'collections/getprojects',
   'collections/conceptboards',
   'views/dashboard/add_conceptboard',
-  'collections/add_conceptboards',
-  'collections/deleteroomlists'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate, GetProjects, ConceptBoards,AddConceptboard, AddConceptboards, DeleteRoomLists){
+  'collections/add_conceptboards'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate, GetProjects, ConceptBoards,AddConceptboard, AddConceptboards){
   var ListingRoomPage = Backbone.View.extend({
     el: '.page',
     project: null,
     conceptboards: null,
     add_conceptboards: null,
-    deleteroomlists: null,
     initialize: function() {
         this.project = new GetProjects();
         this.conceptboards = new ConceptBoards();
         this.add_conceptboards = new AddConceptboards();
-        this.deleteroomlists = new DeleteRoomLists();
 
         this.listenTo(Backbone);
         _.bindAll(this, 'render','fetchViewProjectRender');
@@ -49,8 +46,7 @@ define([
     },
     events: {
         "click .addCBoard1": "viewAddCboard",
-        "click #save_Cboard": "submitBoard",
-        "click #deleteroom": "removeRoomList"
+        "click #save_Cboard": "submitBoard"
     },
     submitBoard: function (e) {
             if (e.isDefaultPrevented()) return;
@@ -253,41 +249,6 @@ define([
            }
         });
         });
-    },
-    removeRoomList: function(e){
-        if (e.isDefaultPrevented()) return;
-        e.preventDefault();
-        var that = this;
-        var currentTarget = $(e.currentTarget);
-        var projectId = currentTarget.data('element');
-        var userId = sessionStorage.userId;
-        that.deleteroomlists.removeRoomLists(projectId, {
-            async: true,
-            crossDomain: true,
-            method: "POST",
-            headers:{
-                "authorization": "Bearer "+ sessionStorage.authtoken,
-                "Content-Type": "application/json"
-            },
-            success:function(response) {
-                console.log("Successfully removed Project ... ");
-                console.log(response);
-                $("#snackbar").html("Successfully Deleted Room selection... ");
-                var x = document.getElementById("snackbar")
-                x.className = "show";
-                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-                that.render();
-                //              return;
-            },
-            error:function(response) {
-                console.log(" +++++++++++++++  Deleted Room- Errrorr ++++++++++++++++++ ");
-                console.log(JSON.stringify(response));
-                $("#snackbar").html(response.responseJSON.errorMessage);
-                var x = document.getElementById("snackbar")
-                x.className = "show";
-                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-            }
-    });
     },
     fetchViewProjectRender: function(){
         var that = this;

@@ -76,19 +76,23 @@
             <div id="addMember-dtls" class="addcboard-container">
                 <form>
                     <div class="col-md-12">
-                        <h2>Name</h2>
+                        <h4 class="formTit">Name</h4>
                         <div class="form-group col-md-6">
                             <input type="Name" class="form-control" id="inputname" placeholder="Name">
                         </div>
                     </div>
                     <!--<input type="hidden" id="memberId" value="0" />-->
                     <div class="col-md-12">
-                        <h2>Gender</h2>
-                        <div class="form-group col-md-6 gender-style">
+                        <h4 class="formTit">Gender</h4>
+                        <div class="form-group col-md-6">
                             <input class="form-check-input" type="radio" name="gender" id="male" value="0">
-                            <label class="form-check-label" for="male">Male</label>
+                            <label class="form-check-label" for="male">
+                                <i style=" font-size: 30px;margin-right: 13px; " class="fa fa-male" aria-hidden="true"></i>
+                            </label>
                             <input class="form-check-input" type="radio" name="gender" id="female" value="1">
-                            <label class="form-check-label" for="female">Female</label>
+                            <label class="form-check-label" for="female">
+                                <i style=" font-size: 30px;margin-right: 8px; " class="fa fa-female" aria-hidden="true"></i>
+                            </label>
                         </div>
                     </div>
                     <% if(typeof(userMemebersPreferencesDtls) !== 'undefined' && userMemebersPreferencesDtls.length > 0){ %>
@@ -97,7 +101,7 @@
 
                     <% if(memberQuesdtl.name == 'age'){ %>
                     <div class="col-md-12">
-                        <h2><%= memberQuesdtl.category[0].questionDetails.name %></h2>
+                        <h4 class="formTit"><%= memberQuesdtl.category[0].questionDetails.name %></h4>
                         <% _.each(memberQuesdtl.category[0].options, function(catopt, j){ %>
                         <div class="form-group col-xs-1" style="width: 13.333333%;padding: 0px 15px 0px 0px;">
                             <figure>
@@ -111,11 +115,11 @@
                     <% } %>
                     <% if(memberQuesdtl.name == 'Occupation'){ %>
                     <div class="col-md-12">
-                        <h2>Work</h2>
+                        <h4 class="formTit">Work</h4>
                         <div class="form-group col-md-6">
                             <label for="inputcategory">Category</label>
                             <select id="inputcategory" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected>Select...</option>
                                 <% _.each(memberQuesdtl.category, function(occupCat, j){ %>
                                 <option value="<%= j %>" data-element="<%= occupCat.questionDetails.quesId %>"><%= occupCat.questionDetails.name %></option>
                                 <% }); %>
@@ -124,7 +128,7 @@
                         <div class="form-group col-md-6">
                             <label for="inputoccupation">Occupation</label>
                             <select id="inputoccupation" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected>Select...</option>
                                 <% _.each(memberQuesdtl.category, function(occupCat, i){ %>
                                 <% _.each(memberQuesdtl.category[i].options, function(occupopt, k){ %>
                                 <option class="occ<%= i %> occnm" value="<%= i %>" data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>">
@@ -138,11 +142,11 @@
                     <% } %>
                     <% if(memberQuesdtl.name == 'hobbies'){ %>
                     <div class="col-md-12">
-                        <h2>Hobby1</h2>
+                        <h4 class="formTit">Hobby1</h4>
                         <div class="form-group col-md-6">
                             <label for="inputhobby1category">Category</label>
                             <select id="inputhobby1category" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected>Select...</option>
                                 <% _.each(memberQuesdtl.category, function(occupCat, a){ %>
 
                                 <option value="<%= a %>"><%= occupCat.questionDetails.name %></option>
@@ -152,7 +156,7 @@
                         <div class="form-group col-md-6">
                             <label for="inputhobby1">Hobbies</label>
                             <select id="inputhobby1" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected>Select...</option>
                                 <% _.each(memberQuesdtl.category, function(occupCat, b1){ %>
                                 <% _.each(memberQuesdtl.category[b1].options, function(occupopt, k){ %>
                                 <option class="hob1<%= b1 %> hobnm1" value="<%= b1 %>" data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>">
@@ -164,11 +168,11 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <h2>Hobby2</h2>
+                        <h4 class="formTit">Hobby2</h4>
                         <div class="form-group col-md-6">
                             <label for="inputhobby2category">Category</label>
                             <select id="inputhobby2category" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected>Select...</option>
                                 <% _.each(memberQuesdtl.category, function(occupCat, a2){ %>
 
                                 <option value="<%= a2 %>"><%= occupCat.questionDetails.name %></option>
@@ -178,7 +182,7 @@
                         <div class="form-group col-md-6">
                             <label for="inputhobby2">Hobbies</label>
                             <select id="inputhobby2" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected>Select...</option>
                                 <% _.each(memberQuesdtl.category, function(occupCat, b2){ %>
                                 <% _.each(memberQuesdtl.category[b2].options, function(occupopt, k){ %>
                                 <option class="hob2<%= b2 %> hobnm2" value="<%= b2 %>" data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>">
@@ -190,11 +194,11 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <h2>Hobby3</h2>
+                        <h4 class="formTit">Hobby3</h4>
                         <div class="form-group col-md-6">
                             <label for="inputhobby3category">Category</label>
                             <select id="inputhobby3category" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected>Select...</option>
                                 <% _.each(memberQuesdtl.category, function(occupCat, a3){ %>
 
                                 <option value="<%= a3 %>"><%= occupCat.questionDetails.name %></option>
@@ -204,7 +208,7 @@
                         <div class="form-group col-md-6">
                             <label for="inputhobby3">Hobbies</label>
                             <select id="inputhobby3" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected>Select...</option>
                                 <% _.each(memberQuesdtl.category, function(occupCat, b3){ %>
                                 <% _.each(memberQuesdtl.category[b3].options, function(occupopt, k){ %>
                                 <option class="hob3<%= b3 %> hobnm3" value="<%= b3 %>"  data-element="<%= occupCat.questionDetails.quesId %>" data-element1="<%= occupopt.quesOptionid %>">

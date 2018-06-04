@@ -50,14 +50,21 @@ define([
         "click #createProject": "createNewProject",
         "click #save_conceptfileupload": "saveConceptFileupload",
         "click #save_project": "editProjectAndRoomSaved",
-        "click #deleteProject": "deleteProjects",
+        "click .deleteProject": "deleteProjects",
         "click #submitConceptDetail": "submitConceptDetail",
         "click .updatecreateRoom": "updateDefaultRoom",
         "click .addMoreRoom": "checkRoom",
         "click #save_roomConcept": "saveRoomConcept",
         "click #edit_roomConcept": "editRoomConcept",
-        "click #edit_roomList": "editRoomList",
-        "change #uploadHomelayout": "getuploadedFileDtls"
+        "click .edit_roomList": "editRoomList",
+        "change #uploadHomelayout": "getuploadedFileDtls",
+        "click .closeedit": "closeEditModal"
+    },
+    closeEditModal: function(e){
+        document.getElementById('editRoomandProject').style.display = "none";
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+
     },
     createNewProject: function(){
         $('#createProject-modal').modal('show');
@@ -622,6 +629,13 @@ define([
     },
     editRoomList: function(e){
         var that = this;
+
+        if (e.isDefaultPrevented()) return;
+        e.preventDefault();
+
+
+
+
         var userId = sessionStorage.userId;
         var currentTarget = $(e.currentTarget);
         var projectId = currentTarget.data('element');;
@@ -640,6 +654,7 @@ define([
                 console.log(" +++++++++++++++ Room List ++++++++++++++++++ ");
                 console.log(data);
                 that.fetchEditProjectAndRommRender(projectId);
+                return false;
             },
             error:function(response) {
                 //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
@@ -647,6 +662,7 @@ define([
                 return false;
             }
         });
+        return false;
     },
 
     getSpaceTypeList: function(){
@@ -704,20 +720,26 @@ define([
     fetchEditProjectAndRommRender: function(projectId) {
             var that = this;
             var conceptboards = that.conceptboards;
-            var getprojects = this.getprojects;
+            var getprojects = that.getprojects;
             getprojects = getprojects.toJSON();
             var spacetypelists = that.spacetypelists;
              var projectDtls = that.getprojects.getProjectDetails(getprojects[0].userProjects,projectId);
 
              console.log(" %%%%%%%%%%%%%% Project Details %%%%%%%%%%%%%% ");
-                     console.log(projectDtls);
-            $("#editRoomeroomlist").html(_.template(editprojectandroomTempPageTemplate)({
-                      "roomListCreate":conceptboards.toJSON(),
-                       "getprojects": projectDtls,
-                       "spacetypelists": spacetypelists.toJSON(),
-                       "projectId": projectId
-                  }));
-            $('#editRoomandProject').modal('show');
+             console.log(projectDtls);
+            $(".editContain").html(_.template(editprojectandroomTempPageTemplate)({
+                "roomListCreate":conceptboards.toJSON(),
+                "getprojects": projectDtls,
+                "spacetypelists": spacetypelists.toJSON(),
+                "projectId": projectId
+            }));
+            //return false;
+            //$('#editRoomandProject').modal('show');
+            $("#editRoomandProject").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            return false;
         }
     });
     return ListingProjectPage;
