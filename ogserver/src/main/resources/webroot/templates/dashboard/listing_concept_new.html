@@ -7,7 +7,9 @@
 <%= console.log("@@@####################### Recommneded @@@@@@@@@@@@@@@@@") %>
 <%= console.log(needconceptlisting) %>
 <style>
-
+    #searchForm1{
+        display:block;
+    }
      #owl-sptype .item{
         margin: 3px;
         padding: 10px;
@@ -106,7 +108,7 @@
                                     <li class="active"  style="height: 70px;">
                                         <a onclick="getElementsView('all')">
                                             <div class="col-md-3"><img src="http://designwhimages.mygubbi.com/SE-EVERYTHING.png" alt="Everything" width="50px" height="50px"/></div>
-                                            <div class="col-md-8 tit">Room</div>
+                                            <div class="col-md-8 tit">All Area</div>
                                         </a>
                                     </li>
                                     <% var uniqnm = ""; %>
@@ -345,7 +347,7 @@
             <div id="addcboardImg-dtls" class="adduserconcept-container">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <div class="col-sm-12 col-md-12">
-                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add User Concept</h3>
+                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add Personal Concept</h3>
                 </div>
                 <div class=" col-sm-12 col-md-12">
                     <form id="userconceptfrm" method="post" name="userconceptfrm" enctype="multipart/form-data">
@@ -367,14 +369,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h4>Concept Board Name:</h4>
+                                <h4>Concept Name:</h4>
                                 <input type="text" class="form-control" id="cboardcnameTxt" name="cboardname" />
                             </div>
                             <div class="row display-none" id="addUploadImage_error_row" style="text-align: center;">
                                 <p class="margin0 error-text blankTxtbox" id="addUploadImage_error"></p>
                             </div>
                             <div class="form-group">
-                                <h4>Concept Board Desc:</h4>
+                                <h4>Concept Description:</h4>
                                 <input type="text" class="form-control" id="cboarddescTxt" name="cboarddesc" />
                             </div>
                             <div class="row display-none" id="addUploadImagedesc_error_row" style="text-align: center;">

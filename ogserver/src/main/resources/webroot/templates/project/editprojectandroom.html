@@ -32,8 +32,7 @@
 }
 </style>
 <button type="button" class="closeedit close" data-dismiss="modal" aria-hidden="true">&times;</button>
-<div class="container">
-    <div class="row">
+
         <div class="col-sm-12 col-md-12">
 
             <div class="tab">
@@ -131,14 +130,14 @@
 
                                 </div>
 
-                                <div class="mt15" style="text-align:right;">
-                                    <input type="submit" id="save_project" class="btn addcboard-btn" value="Save">
+                                <div class="mt15 text-center">
+                                    <input type="submit" id="save_project" class="btn btn-primary btn-save" value="Save">
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="tab-pane" id="rooms" >
-                        <div class="spaceElemenetPanel"  id="editelements" style="overflow-y:scroll;height:380px;">
+                        <div class="spaceElemenetPanel"  id="editelements" style="overflow-y:scroll;height:350px;">
 
                             <% if(typeof(roomListCreate) !== 'undefined'){ %>
                             <% _.each(roomListCreate[0].listOfUserConceptBoard, function(roomlst, j){ %>
@@ -203,9 +202,9 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-12 text-right">
+                            <div class="form-group col-md-12 text-center">
                                 <span  id="btn1">
-                                    <input type="submit" id="edit_roomConcept" class="btn addcboard-btn" value="Save">
+                                    <input type="submit" id="edit_roomConcept" class="btn btn-primary btn-save" value="Save">
                                 </span>
                             </div>
                         </div>
@@ -221,8 +220,6 @@
 
             </div>
         </div>
-    </div>
-</div>
 
 <script>
   var current_id = 0;

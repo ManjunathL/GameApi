@@ -1795,6 +1795,7 @@ footer {
 .btn-save{
     border-radius: 20px !important;
     padding: 8px 69px !important;
+    background-color: #ea5c36;
 }
 .btn {
      display: inline-block;
@@ -2203,4 +2204,8 @@ textarea.form-control {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     min-height: 350px;
+}
+
+#searchForm1{
+    display:none;
 }

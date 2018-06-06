@@ -1,27 +1,47 @@
 <%= console.log("@@@@@@@@@@@@@@@@@@@@@@@ editfamilymembers @@@@@@@@@@@@@@@@@@@@@@@@@") %>
 <%= console.log(editfamilymembers) %>
+<style>
+.form-control {
+width: 100%;
+height: 36px;
+padding: 10px 13px;
+background-color: transparent;
+background-image: none;
+border: 1px solid #00000042;
+border-radius: 20px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.btn-save{
+    border-radius: 20px !important;
+    padding: 8px 69px !important;
+    background-color: #ea5c36;
+}
+</style>
 <form>
     <% if(typeof(editfamilymembers) !== 'undefined'){ %>
-    <div class="col-md-12">
-        <h2>Name</h2>
-        <div class="form-group col-md-6">
+    <div class="col-md-6">
+        <h4 class="formTit">Name</h4>
+        <div class="form-group">
             <input type="Name" class="form-control" id="edit_inputname" placeholder="Name" value="<%= editfamilymembers[0].userQuesAns.familyPerson.memberName %>">
         </div>
     </div>
     <input type="hidden" id="edit_memberId" value="<%= editfamilymembers[0].userQuesAns.familyPerson.memberId %>" />
-    <div class="col-md-12">
-        <h2>Gender</h2>
-        <div class="form-group col-md-6 gender-style">
+    <div class="col-md-6">
+        <h4 class="formTit">Gender</h4>
+        <div class="form-group col-md-6">
             <% if(editfamilymembers[0].userQuesAns.familyPerson.gender=='0'){ %>
             <input class="form-check-input" type="radio" name="edit_gender" id="edit_male" value="0" checked>
-            <label class="form-check-label" for="edit_male">Male</label>
+            <label class="form-check-label" for="edit_male"><i style=" font-size: 30px;margin-right: 13px; " class="fa fa-male" aria-hidden="true"></i></label>
             <input class="form-check-input" type="radio" name="edit_gender" id="edit_female" value="1" >
-            <label class="form-check-label" for="edit_female">Female</label>
+            <label class="form-check-label" for="edit_female"><i style=" font-size: 30px;margin-right: 8px; " class="fa fa-female" aria-hidden="true"></i></label>
             <%}else if(editfamilymembers[0].userQuesAns.familyPerson.gender=='1'){ %>
             <input class="form-check-input" type="radio" name="edit_gender" id="edit_male" value="0">
-            <label class="form-check-label" for="edit_male">Male</label>
+            <label class="form-check-label" for="edit_male"><i style=" font-size: 30px;margin-right: 13px; " class="fa fa-male" aria-hidden="true"></i></label>
             <input class="form-check-input" type="radio" name="edit_gender" id="edit_female" value="1" checked>
-            <label class="form-check-label" for="edit_female">Female</label>
+            <label class="form-check-label" for="edit_female"><i style=" font-size: 30px;margin-right: 8px; " class="fa fa-female" aria-hidden="true"></i></label>
             <%} %>
         </div>
     </div>
@@ -32,7 +52,7 @@
 
     <% if(memberQuesdtl.name == 'age'){ %>
     <div class="col-md-12">
-        <h2><%= memberQuesdtl.category[0].questionDetails.name %></h2>
+        <h4 class="formTit"><%= memberQuesdtl.category[0].questionDetails.name %></h4>
         <% _.each(memberQuesdtl.category[0].options, function(catopt, j){ %>
         <div class="form-group col-xs-1" style="width: 13.333333%;padding: 0px 15px 0px 0px;">
             <figure>
@@ -46,7 +66,7 @@
     <% } %>
     <% if(memberQuesdtl.name == 'Occupation'){ %>
     <div class="col-md-12">
-        <h2>Work</h2>
+        <h4 class="formTit">Work</h4>
         <div class="form-group col-md-6">
             <label for="edit_inputcategory">Category</label>
             <select id="edit_inputcategory" class="form-control">
@@ -73,7 +93,7 @@
     <% } %>
     <% if(memberQuesdtl.name == 'hobbies'){ %>
     <div class="col-md-12">
-        <h2>Hobby1</h2>
+        <h4 class="formTit">Hobby1</h4>
         <div class="form-group col-md-6">
             <label for="edit_inputhobby1category">Category</label>
             <select id="edit_inputhobby1category" class="form-control">
@@ -102,7 +122,7 @@
         </div>
     </div>
     <div class="col-md-12">
-        <h2>Hobby2</h2>
+        <h4 class="formTit">Hobby2</h4>
         <div class="form-group col-md-6">
             <label for="edit_inputhobby2category">Category</label>
             <select id="edit_inputhobby2category" class="form-control">
@@ -131,7 +151,7 @@
         </div>
     </div>
     <div class="col-md-12">
-        <h2>Hobby3</h2>
+        <h4 class="formTit">Hobby3</h4>
         <div class="form-group col-md-6">
             <label for="edit_inputhobby3category">Category</label>
             <select id="edit_inputhobby3category" class="form-control">
@@ -163,8 +183,8 @@
     <% }); %>
     <% } %>
     <div class="form-row">
-        <div class="form-group col-md-12">
-            <input type="button" id="update_familyMemebr" class="btn addcboard-btn" value="Save">
+        <div class="form-group col-md-12 text-center">
+            <input type="button" id="update_familyMemebr" class="btn btn-primary btn-save" value="Save">
         </div>
     </div>
 </form>
