@@ -259,7 +259,16 @@
 @media only screen and (max-width: 990px){
     .progress{ margin-bottom: 20px; }
 }
-
+.numberItemCnp{
+    contain: content;
+    width: 130px;
+    position: absolute;
+    height: 30px;
+    padding: 5px 10px;
+    right: 15px;
+    top: 10px;
+    font-size: 16px;
+}
 
 </style>
 <%= console.log("********* conceptboardsDtls ********") %>
@@ -397,16 +406,8 @@
                                                                                             <h4 style="margin-top:46px;"> Concept Board </h4>
                                                                                         <% }else{ %>
                                                                                         <a href="/<%= conceptdtls.spaceTypeCode %>-conceptlist-<%= conceptdtls.id %>">
+                                                                                            <div class="numberItemCnp recomnd"><div><%= conceptdtls.noOfConceptsAdded %> Concpets</div></div>
                                                                                             <img src="<%= conceptdtls.imgUrl %>" alt="roomImg" style="height:230px; width:100%;" />
-                                                                                            <!--<h4> Concept Board </h4>-->
-                                                                                            <!--<% if((conceptdtls.completionPercentage > 0) && (conceptdtls.completionPercentage < 50)){ %>
-                                                                                            <div class="recomnd" style="background-color:red;"><div><%= conceptdtls.completionPercentage %>% Completed</div></div>
-                                                                                            <% }else if((conceptdtls.completionPercentage >= 50) && (conceptdtls.completionPercentage < 70)){  %>
-                                                                                            <div class="recomnd" style="background-color:yellow;"><div><%= conceptdtls.completionPercentage %>% Completed</div></div>
-                                                                                            <% }else if((conceptdtls.completionPercentage >= 70) && (conceptdtls.completionPercentage <= 100)){ %>
-                                                                                            <div class="recomnd" style="background-color:yellow;"><div><%= conceptdtls.completionPercentage %>% Completed</div></div>
-                                                                                            <% } %>-->
-
                                                                                             <!--<div class="progress skill-bar">
                                                                                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%= conceptdtls.completionPercentage %>" aria-valuemin="0" aria-valuemax="100">
                                                                                                     <span class="skill"><i class="val"><%= conceptdtls.completionPercentage %>%</i>Completed</span>
