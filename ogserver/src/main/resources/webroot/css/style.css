@@ -28,7 +28,6 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: capitalize;
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
     letter-spacing: 1px;
@@ -2193,6 +2192,11 @@ textarea.form-control {
     color: #ea5c36;
     font-weight: 600;
     margin-bottom:30px;
+}
+
+.formTit1{
+    color: #ea5c36;
+    font-weight: 600;
 }
 
 .editProject-container{

@@ -7,6 +7,19 @@
 <%= console.log("@@@####################### Recommneded @@@@@@@@@@@@@@@@@") %>
 <%= console.log(needconceptlisting) %>
 <style>
+.form-control {
+        width: 100%;
+        height: 36px;
+        padding: 10px 13px;
+        background-color: transparent;
+        background-image: none;
+        border-radius: 20px;
+        box-shadow:none !important;
+        border-left: 1px solid #555 !important;
+        border-top: 1px solid #555  !important;
+        border-right: 1px solid #555!important;
+        border-bottom: 1px solid #555!important;
+    }
     #searchForm1{
         display:block;
     }
@@ -17,6 +30,7 @@
     #owl-sptype .item img{
         display: block;
         width: 106px;
+        margin: 3px;
         height: 75px;
     }
 
@@ -108,7 +122,7 @@
                                     <li class="active"  style="height: 70px;">
                                         <a onclick="getElementsView('all')">
                                             <div class="col-md-3"><img src="http://designwhimages.mygubbi.com/SE-EVERYTHING.png" alt="Everything" width="50px" height="50px"/></div>
-                                            <div class="col-md-8 tit">All Area</div>
+                                            <div class="col-md-8 tit">Room</div>
                                         </a>
                                     </li>
                                     <% var uniqnm = ""; %>
@@ -347,7 +361,7 @@
             <div id="addcboardImg-dtls" class="adduserconcept-container">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <div class="col-sm-12 col-md-12">
-                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add Personal Concept</h3>
+                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add user concept</h3>
                 </div>
                 <div class=" col-sm-12 col-md-12">
                     <form id="userconceptfrm" method="post" name="userconceptfrm" enctype="multipart/form-data">
@@ -369,14 +383,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h4>Concept Name:</h4>
+                                <h4>Name:</h4>
                                 <input type="text" class="form-control" id="cboardcnameTxt" name="cboardname" />
                             </div>
                             <div class="row display-none" id="addUploadImage_error_row" style="text-align: center;">
                                 <p class="margin0 error-text blankTxtbox" id="addUploadImage_error"></p>
                             </div>
                             <div class="form-group">
-                                <h4>Concept Description:</h4>
+                                <h4>Description:</h4>
                                 <input type="text" class="form-control" id="cboarddescTxt" name="cboarddesc" />
                             </div>
                             <div class="row display-none" id="addUploadImagedesc_error_row" style="text-align: center;">
