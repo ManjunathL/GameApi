@@ -167,7 +167,6 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
                                     <option value='cityName'>City</option>
                                     <option value='Bangalore'> Bangalore </option>
                                     <option value='Pune'> Pune </option>
-                                    <option value='Mangalore'> Mangalore </option>
                                     <option value='Chennai'> Chennai </option>
                                     <option value='Other' >Other</option>
                                 </select>
@@ -238,7 +237,6 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
                                 <option value='cityName'>City</option>
                                 <option value='Bangalore'> Bangalore </option>
                                 <option value='Pune'> Pune </option>
-                                <option value='Mangalore'> Mangalore </option>
                                 <option value='Chennai'> Chennai </option>
                                 <option value='Other' >Other</option>
                             </select>
@@ -316,7 +314,7 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
                             <div class="de_count">
                                 <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1499824580/landing_page/double-bonanza/01_05.jpg" alt="completed project" class="img-responsive img-centered">
                             </div>
-                            <h4><strong>500+</strong> <br/> Completed Homes </h4>
+                            <h4><strong>800+</strong> <br/> Completed Homes </h4>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
                             <div class="de_count">

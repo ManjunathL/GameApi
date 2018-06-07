@@ -168,7 +168,6 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
                                     <option value='cityName'>City</option>
                                     <option value='Bangalore'> Bangalore </option>
                                     <option value='Pune'> Pune </option>
-                                    <option value='Mangalore'> Mangalore </option>
                                     <option value='Chennai'> Chennai </option>
                                     <option value='Other' >Other</option>
                                 </select>
@@ -243,7 +242,6 @@ window._fbq.push(['track', '6031737483829', {'value':'0.00','currency':'INR'}]);
                                 <option value='cityName'>City</option>
                                 <option value='Bangalore'> Bangalore </option>
                                 <option value='Pune'> Pune </option>
-                                <option value='Mangalore'> Mangalore </option>
                                 <option value='Chennai'> Chennai </option>
                                 <option value='Other' >Other</option>
                             </select>

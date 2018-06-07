@@ -173,7 +173,6 @@
                                 <option value='cityName'>City Name</option>
                                 <option value='Bangalore'> Bangalore </option>
                                 <option value='Pune'> Pune </option>
-                                <option value='Mangalore'> Mangalore </option>
                                 <option value='Chennai'> Chennai </option>
                                 <option value='Other' >Other</option>
                             </select>
@@ -228,7 +227,6 @@
                                 <option value='cityName'>City Name</option>
                                 <option value='Bangalore'> Bangalore </option>
                                 <option value='Pune'> Pune </option>
-                                <option value='Mangalore'> Mangalore </option>
                                 <option value='Chennai'> Chennai </option>
                                 <option value='Other' >Other</option>
                             </select>
