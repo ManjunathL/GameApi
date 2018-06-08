@@ -203,14 +203,14 @@ public class CCAHandler extends AbstractRouteHandler{
 
         Set<FileUpload> fileUploads = routingContext.fileUploads();
 
+        LOG.debug("FILE uploads : " + fileUploads.size());
+
         String newFile = null;
 
         for (FileUpload fileUpload : fileUploads) {
             newFile = fileUpload.uploadedFileName();
             fileUpload.fileName();
             fileUpload.contentType();
-
-
         }
 
         String crmId = routingContext.request().getFormAttribute("opportunity_id");
@@ -396,6 +396,7 @@ public class CCAHandler extends AbstractRouteHandler{
         }
         else
         {
+
             File fileNew = new File(imageFileName);
             builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
