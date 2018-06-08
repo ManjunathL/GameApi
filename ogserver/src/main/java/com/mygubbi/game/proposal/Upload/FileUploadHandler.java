@@ -21,28 +21,37 @@ public class FileUploadHandler extends AbstractRouteHandler {
 
     private String defaultUrl = "https://s3.ap-south-1.amazonaws.com/mygubbigame/";
 
+    String bucketName_game = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname_game", "mygubbigame");
+    String accessKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key_game", "AKIAIX6TVPJXWC7C2WCA") ;
+    String secretKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key_game", "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") ;
+    String amazon_uploads_directory = ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "c:/Users/Public/uploads");
+
+
+
+    String bucketName_web = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname_imaginest", "mygubbigame");
+    String accessKey_web = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key_imaginest", "AKIAIX6TVPJXWC7C2WCA") ;
+    String secretKey_web = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key_imaginest", "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") ;
+    String web_uploads_directory = ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "c:/Users/Public/uploads");
+
+
 
     AmazonS3FileUploadClient amazonS3FileUploadClient;
 
     public FileUploadHandler(Vertx vertx) {
 
         super(vertx);
-        String amazon_uploads_directory = ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "c:/Users/Public/uploads");
-        LOG.debug("path : " + amazon_uploads_directory);
-        this.route().handler(BodyHandler.create().setUploadsDirectory("c:/Users/Public/uploads"));
 
         this.post("/file").handler(this::fileToAmazon);
         this.post("/uploadimage/*").handler(this::uploadFileImaginest);
-        String bucketName_game = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname_game", "mygubbigame");
-        String accessKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key_game", "AKIAIX6TVPJXWC7C2WCA") ;
-        String secretKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key_game", "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") ;
-
-        amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName_game,accessKey_game,secretKey_game);
 
     }
 
     private void fileToAmazon(RoutingContext routingContext) {
         LOG.info("Inside file upload ");
+
+        this.route().handler(BodyHandler.create().setUploadsDirectory(amazon_uploads_directory));
+
+        amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName_game,accessKey_game,secretKey_game);
 
         routingContext.response().putHeader("Content-Type", "text/plain");
 
@@ -76,13 +85,20 @@ public class FileUploadHandler extends AbstractRouteHandler {
     public void uploadFileImaginest(RoutingContext routingContext)
     {
 
+        this.route().handler(BodyHandler.create().setUploadsDirectory(web_uploads_directory));
+
+        routingContext.response().putHeader("Content-Type", "text/plain");
+
+        routingContext.response().setChunked(true);
+        JsonArray urlJsonArray = new JsonArray();
+
+
+        Set<FileUpload> fileUploads = routingContext.fileUploads();
+
         String fileName = routingContext.request().getParam("imageUrl");
 
-        String bucketName_game = ConfigHolder.getInstance().getStringValue("amazon_s3_bucketname_imaginest", "mygubbigame");
-        String accessKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_access_key_imaginest", "AKIAIX6TVPJXWC7C2WCA") ;
-        String secretKey_game = ConfigHolder.getInstance().getStringValue("amazon_s3_secret_key_imaginest", "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") ;
 
-        amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName_game,accessKey_game,secretKey_game);
+        amazonS3FileUploadClient = new AmazonS3FileUploadClient(bucketName_web,accessKey_web,secretKey_web);
 
         amazonS3FileUploadClient.uploadFile(fileName,fileName);
 
