@@ -5,10 +5,10 @@
 
         <div class="navbar-header page-scroll pull-left">
             <a class="navbar-toggle collapsed toggle-icon-left" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1519902006/home/logo/mygubbi_logo_mobile_1.png" class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg burger-logo" alt="mygubbi">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1528355104/home/logo/MyGubbi_logo_white-06_1.png" class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg burger-logo" alt="mygubbi">
             </a>
             <a href="/" class="navbar-brand page-scroll padding0 hidden-xs hidden-sm">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1519896558/home/logo/mygubbi_logo.png" class="full_logo width80" alt="mygubbi">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1528354642/home/logo/MyGubbi_logo_whiteoutline-06_1.png" class="full_logo" alt="mygubbi">
             </a>
         </div>
 
@@ -52,11 +52,11 @@
         <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0 .visible-xs-block .visible-sm-block hidden-md hidden-lg">
             <a href="/consult"><span class="pe-7s-help1 header-icon consult_icon pe-fw color-white"></span></a>
 
-            <span class="pe-7s-search search-ico header-icon pe-fw mob-search"></span>
+           <!-- <span class="pe-7s-search search-ico header-icon pe-fw mob-search"></span>-->
 
-            <a href="/shortlist">
+            <!--<a href="/shortlist">
                 <span id="wishlist-ico1" class="pe-7s-like wishlist header-icon pe-fw"><span id="shortlistSuperScript1" class="super-script1"></span></span>
-            </a>
+            </a>-->
 
             <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
             <a  href="javascript:void(0);"
@@ -98,15 +98,15 @@
         <div class="nav navbar-nav navbar-right right-side-menu hidden-xs hidden-sm margin-top10">
            <!-- add code here -->
             <ul class="menu-address">
-                <li class="menu-banglore">Bangalore</li>
-                <li class="menu-pune">Pune</li>
-                <li class="menu-chennai">Chennai</li>
+                <li class="menu-banglore"><a style="color:#fff" href="/mygubbi-studio"> MyGubbi Studio </a></li>
+                <li class="menu-pune"><a style="color:#fff" href="/nri-services-bangalore">NRI Zone</a></li>
+                <li class="menu-chennai"><a style="color:#fff" href="/stories-all">Stories</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right" style="margin-top: 0px;">
-                <li>
+                <!--<li>
                     <span class="pe-7s-search search-ico pe-fw"></span>
-                </li>
+                </li>-->
                 <li style="padding-left: 10px;">
                     <a href="tel:+91-808-886-0860" class="page-scroll font-size18 txt-color-white" style="padding-top: 17px;">
                         <!--<span class="fa-stack fa-sm">
@@ -118,13 +118,13 @@
                         <span> +91 8088 860 860 </span>
                     </a>
                 </li>
-                <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">
+                <!--<li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">
                     <a href="/shortlist">
                         <span id="wishlist-ico" class="pe-7s-like wishlist header-icon pe-fw">
                             <span id="shortlistSuperScript" class="super-script"></span>
                         </span>
                     </a>
-                </li>
+                </li>-->
                 <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
                 <li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
                     <a  href="javascript:void(0);"
@@ -183,77 +183,296 @@
                         <li class="gubbi-list-desk gubbi-list-mob hidden-lg hidden-md menu-li">
                             <a href="/" id="home-lnk" class="page-scroll">Home</a>
                         </li>
+                        <li class="gubbi-list-desk gubbi-list-mob menu-li">
+                            <a class="page-scroll" href="/platinum-home-interiors">Platinum Homes</a>
+                        </li>
                         <li class="dropdown mega-dropdown hidden-xs hidden-sm">
-                            <a href="/kitchen-cabinet-design" class="dropdown-toggle" data-toggle="dropdown"> Kitchen <span class="caret"></span></a>
-                            <ul class="row dropdown-menu mega-dropdown-menu">
-                                <li class="col-sm-3">
-                                    <ul>
-                                        <li>
-                                            <a href="/l-shaped-kitchen-design">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/L-shape_1.jpg" alt="L Shaped Kitchen">
+                            <a href="/kitchen-cabinet-design" class="dropdown-toggle" data-toggle="dropdown"> Kitchen & Wardrobe<span class="caret"></span></a>
+                            <ul class="row dropdown-menu mega-dropdown-menu" style="border-radius: 0px;">
+                                <li class="col-md-4 dropdown mega-dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Kitchen</a>
+                                    <ul class="row dropdown-menu mega-dropdown-menu" style="top:99%">
+                                        <li class="col-sm-3">
+                                            <ul>
+                                                <li>
+                                                    <a href="/l-shaped-kitchen-design">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/L-shape_1.jpg" alt="L Shaped Kitchen">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/l-shaped-kitchen-design">L Shaped Kitchen</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-3">
+                                            <ul>
+                                                <li>
+                                                    <a href="/u-shaped-kitchen-design">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/U-shape_1.jpg" alt="U Shaped Kitchen">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/u-shaped-kitchen-design"> U Shaped Kitchen </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-3">
+                                            <ul>
+                                                <li>
+                                                    <a href="/parallel-kitchen-design">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/Parellel_1.jpg" alt="Parallel Kitchen">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/parallel-kitchen-design"> Parallel Kitchen </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-3">
+                                            <ul>
+                                                <li>
+                                                    <a href="/straight-kitchen-design">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/Straight_1.jpg" alt="Straight Kitchen">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/straight-kitchen-design"> Straight Kitchen </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-12">
+                                            <hr>
+                                        </li>
+                                        <li class="col-sm-3">
+                                            <a href="/know-your-kitchen">
+                                                <div class="row">
+                                                    <div class="col-sm-3 prn">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1490184889/home/icon/know-your-kitchen.png" class="img-responsive" alt="kitchn">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <span class="kyk-ioc-list"> Kitchen Buying Guide </span>
+                                                    </div>
+                                                </div>
                                             </a>
                                         </li>
-                                        <li><a href="/l-shaped-kitchen-design">L Shaped Kitchen</a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-3">
-                                    <ul>
-                                        <li>
-                                            <a href="/u-shaped-kitchen-design">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/U-shape_1.jpg" alt="U Shaped Kitchen">
+                                        <li class="col-sm-3">
+                                            <a href="/stories-kitchen">
+                                                <div class="row">
+                                                    <div class="col-sm-3 prn">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1490184889/home/icon/trend-and-style.png" class="img-responsive" alt="kitchn">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <span class="kyk-ioc-list"> Trends and Style </span>
+                                                    </div>
+                                                </div>
                                             </a>
                                         </li>
-                                        <li><a href="/u-shaped-kitchen-design"> U Shaped Kitchen </a></li>
                                     </ul>
                                 </li>
-                                <li class="col-sm-3">
-                                    <ul>
-                                        <li>
-                                            <a href="/parallel-kitchen-design">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/Parellel_1.jpg" alt="Parallel Kitchen">
+                                <li class="col-md-4 dropdown mega-dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Wardrobe</a>
+                                    <ul style="top:99%" class="row dropdown-menu mega-dropdown-menu">
+                                        <li class="col-sm-3">
+                                            <ul>
+                                                <li>
+                                                    <a href="/swing-wardrobe-online">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1490877847/home/new_design/swing.jpg" alt="Swing Wardrobe">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/swing-wardrobe-online"> Swing Wardrobe </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-3">
+                                            <ul>
+                                                <li>
+                                                    <a href="/sliding-wardrobe-online">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1490877846/home/new_design/sliding.jpg" alt="Sliding Wardrobe">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/sliding-wardrobe-online"> Sliding Wardrobe </a></li>
+                                            </ul>
+                                        </li>
+
+                                        <!--<li class="col-sm-4">
+                                            <ul>
+                                                <li>
+                                                    <a href="#">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1490960650/product_collection/wardrobe-style.jpg" alt="Wardrobe">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <a class="text-center wardrobe-collection-link" href="#"> Explore Wardrobe Collection </a>
+                                        </li>-->
+                                        <!--<li class="col-sm-3">
+                                            <ul>
+                                                <li>
+                                                    <a href="/straight-kitchen-design">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/Straight_1.jpg" alt="Straight Kitchen">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/straight-kitchen-design"> Straight Kitchen </a></li>
+                                            </ul>
+                                        </li>-->
+                                        <li class="col-sm-12">
+                                            <hr>
+                                        </li>
+                                        <li class="col-sm-3">
+                                            <a href="/know-your-wardrobe">
+                                                <div class="row">
+                                                    <div class="col-sm-3 prn">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1490184889/home/icon/know-your-wardrobe.png" class="img-responsive" alt="kitchn">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <span class="kyk-ioc-list"> Wardrobe Buying Guide </span>
+                                                    </div>
+                                                </div>
                                             </a>
                                         </li>
-                                        <li><a href="/parallel-kitchen-design"> Parallel Kitchen </a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-3">
-                                    <ul>
-                                        <li>
-                                            <a href="/straight-kitchen-design">
-                                                <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1488883474/home/new_design/Straight_1.jpg" alt="Straight Kitchen">
+                                        <li class="col-sm-3">
+                                            <a href="/stories-living">
+                                                <div class="row">
+                                                    <div class="col-sm-3 prn">
+                                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/v1490184889/home/icon/trend-and-style.png" class="img-responsive" alt="kitchn">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <span class="kyk-ioc-list"> Trends and Style </span>
+                                                    </div>
+                                                </div>
                                             </a>
                                         </li>
-                                        <li><a href="/straight-kitchen-design"> Straight Kitchen </a></li>
                                     </ul>
                                 </li>
-                                <li class="col-sm-12">
-                                    <hr>
-                                </li>
-                                <li class="col-sm-3">
-                                    <a href="/know-your-kitchen">
-                                        <div class="row">
-                                            <div class="col-sm-3 prn">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1490184889/home/icon/know-your-kitchen.png" class="img-responsive" alt="kitchn">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <span class="kyk-ioc-list"> Kitchen Buying Guide </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="col-sm-3">
-                                    <a href="/stories-kitchen">
-                                        <div class="row">
-                                            <div class="col-sm-3 prn">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1490184889/home/icon/trend-and-style.png" class="img-responsive" alt="kitchn">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <span class="kyk-ioc-list"> Trends and Style </span>
-                                            </div>
-                                        </div>
-                                    </a>
+                                <li class="col-md-4 dropdown mega-dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Storage Solutions</a>
+                                    <ul style="top:99%" class="row dropdown-menu mega-dropdown-menu mega-dropdown-menu-ss">
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/tv-unit-cabinet">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766476/home/new_design/TV-unit.jpg" alt="Swing Wardrobe">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/tv-unit-cabinet"> Entertainment Unit </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/crockery-unit-designs">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766679/home/new_design/crockery.jpg" alt="Swing Wardrobe">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/crockery-unit-designs"> Crockery Unit </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/side-table-design-online">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766475/home/new_design/Side-table.jpg" alt="Side Table">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/side-table-design-online"> Side Table </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/study-table-designs-online">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766237/home/new_design/Study-table.jpg" alt="Study Table">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/study-table-designs-online"> Study Table </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/book-shelf">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487594201/Bookrack.jpg" alt="Book Rack">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/book-shelf"> Book Rack </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/shoe-rack-online">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766404/home/new_design/Shoe-rack.jpg" alt="Shoe Rack">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/shoe-rack-online"> Shoe Rack </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/foyer-design">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766748/home/new_design/Foyr.jpg" alt="Swing Wardrobe">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/foyer-design"> Foyer Unit </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/coffee-tables-online">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766679/home/new_design/Coffee-table.jpg" alt="Coffee Table">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/coffee-tables-online"> Coffee Table </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/buy-chest-of-drawers-online">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766748/home/new_design/chest-of-drawyer.jpg" alt="Chest of Drawer">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/buy-chest-of-drawers-online"> Chest of Drawer </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/nest-of-tables-online">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766863/home/new_design/nest-of-table.jpg" alt="Nest of Table">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/nest-of-tables-online"> Nest of Table </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/sideboard">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1487766749/home/new_design/SIDEBOARD.jpg" alt="Side Board">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/sideboard"> Side Board </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/console-tables">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1486364932/home/new_design/Console_1.jpg" alt="Console Tables">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/console-tables"> Console Table </a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="col-sm-2">
+                                            <ul>
+                                                <li>
+                                                    <a href="/dressers">
+                                                        <img class="img-responsive width100" src="https://res.cloudinary.com/mygubbi/image/upload/v1486364932/home/new_design/Dresser_1.jpg" alt="Dresser">
+                                                    </a>
+                                                </li>
+                                                <li><a href="/dressers"> Dresser </a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
+
                         </li>
                         <!--<li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
                             <a href="/kitchen-cabinet-design" class="dropdown-toggle" id="dropdownMenu_lg_kitchen" data-toggle="dropdown" data-hover="dropdown">
@@ -408,7 +627,7 @@
                             </ul>
                         </li>
 
-                        <li class="dropdown mega-dropdown hidden-xs hidden-sm">
+                        <!--<li class="dropdown mega-dropdown hidden-xs hidden-sm">
                             <a href="/wardrobe-designs-online" class="dropdown-toggle" data-toggle="dropdown"> Wardrobe <span class="caret"></span></a>
                             <ul class="row dropdown-menu mega-dropdown-menu">
                                 <li class="col-sm-3">
@@ -432,7 +651,7 @@
                                     </ul>
                                 </li>
 
-                                <!--<li class="col-sm-4">
+                                &lt;!&ndash;<li class="col-sm-4">
                                     <ul>
                                         <li>
                                             <a href="#">
@@ -443,8 +662,8 @@
                                 </li>
                                 <li class="col-sm-2">
                                     <a class="text-center wardrobe-collection-link" href="#"> Explore Wardrobe Collection </a>
-                                </li>-->
-                                <!--<li class="col-sm-3">
+                                </li>&ndash;&gt;
+                                &lt;!&ndash;<li class="col-sm-3">
                                     <ul>
                                         <li>
                                             <a href="/straight-kitchen-design">
@@ -453,7 +672,7 @@
                                         </li>
                                         <li><a href="/straight-kitchen-design"> Straight Kitchen </a></li>
                                     </ul>
-                                </li>-->
+                                </li>&ndash;&gt;
                                 <li class="col-sm-12">
                                     <hr>
                                 </li>
@@ -482,7 +701,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>-->
 
                         <!--<li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
                             <a href="/storage-solutions" class="dropdown-toggle" id="dropdownMenu_lg_livndin" data-toggle="dropdown" data-hover="dropdown">
@@ -676,7 +895,7 @@
 
                         </li>-->
 
-                        <li class="dropdown mega-dropdown hidden-xs hidden-sm">
+                        <!--<li class="dropdown mega-dropdown hidden-xs hidden-sm">
                             <a href="/storage-solutions" class="dropdown-toggle" data-toggle="dropdown">
                                 Storage Solutions
                                 <span class="caret"></span>
@@ -813,7 +1032,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </li>
+                        </li>-->
 
                         <li class="hidden-lg hidden-md gubbi-list-desk gubbi-list-mob">
                             <a
@@ -851,6 +1070,10 @@
                         </li>
 
                         <li class="gubbi-list-desk gubbi-list-mob menu-li">
+                            <a class="page-scroll" href="/recent-projects">Our Work</a>
+                        </li>
+
+                        <!--<li class="gubbi-list-desk gubbi-list-mob menu-li">
                             <a class="page-scroll" href="/platinum-home-interiors">Platinum Homes</a>
                         </li>
                         <li class="gubbi-list-desk gubbi-list-mob menu-li">
@@ -861,8 +1084,8 @@
                         </li>
                         <li class="gubbi-list-desk gubbi-list-mob menu-li">
                             <a class="page-scroll" href="/nri-services-bangalore">NRI Zone</a>
-                        </li>
-                        <li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
+                        </li>-->
+                        <!--<li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
                             <a  href="/stories-all"
                                 class="dropdown-toggle"
                                 id="dropdownMenu_lg_blogpost"
@@ -931,11 +1154,12 @@
 
                             </ul>
                         </li>
+                       -->
                         <li class="gubbi-list-desk gubbi-list-mob">
                             <a class="page-scroll" href="/consult">Contact</a>
                         </li>
                         <li id="storeLnk" class="gubbi-list-desk gubbi-list-mob menu-li">
-                            <a class="page-scroll last-item" href="https://store.mygubbi.com/" target="_blank">Furniture</a>
+                            <a class="page-scroll last-item" href="https://store.mygubbi.com/" target="_blank">eStore</a>
                         </li>
                     </ul>
                 </div>
@@ -1177,10 +1401,10 @@
         <!-- Modal content-->
         <div class="contact-form">
             <div class="row">
-                <h2 class="align-center">
+                <h4 class="align-center">
                     <span class="pe-7s-note"></span>
-                    Contact Us
-                </h2>
+                    Book Design Consultation
+                </h4>
             </div>
             <div class="row">
 
@@ -1280,7 +1504,7 @@
         <span class="contact-us-side-inner hidden-xs hidden-sm">
             <span class="pe-7s-note"></span>
             <span class="vertical-line"></span>
-            <span>Contact Us</span>
+            <span>Book Design Consultation</span>
         </span>
     </div>
 </div>

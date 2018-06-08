@@ -234,12 +234,16 @@ define([
             var popHeight = $('.contact-us-pop').height() - contactUsSideHeight;
             var popHeightMore = popHeight > windowHeight;
             $('.contact-us-pop').css('top', popHeightMore ? 0 : (windowHeight / 2 - popHeight / 2) + 'px');
-            $('.contact-us-side').css('top', ((popHeight / 2 > windowHeight) ? (-popHeight * 3 / 4 + contactUsSideWidth / 2) : (-popHeight / 2 + contactUsSideWidth / 2)) + 'px');
+            //$('.contact-us-side').css('top', ((popHeight / 2 > windowHeight) ? (-popHeight * 3 / 4 + contactUsSideWidth / 2) : (-popHeight / 2 + contactUsSideWidth / 2)) + 'px');
 
-            var currLeft = $('.contact-us-pop').position().left;
+            $('.contact-us-side').css('bottom','0px');
+            $('.contact-form').hide();
+            //$('.contact-us-pop').toggle('hide');
+
+            /*var currLeft = $('.contact-us-pop').position().left;
             if (currLeft < 0) {
-                $('.contact-us-pop').css('left', -$('.contact-us-pop').width() + 'px');
-            }
+                $('.contact-us-pop').css('left', '400px');
+            }*/
         },
 
         closeContactForm: function(ev) {
@@ -343,15 +347,17 @@ define([
         },
 
         toggleContactUsPop: function() {
-            var currLeft = $('.contact-us-pop').position().left;
+            $('.contact-form').hide();
+            /*var currLeft = $('.contact-us-pop').position().left;
             if (currLeft < 0) {
-                $('.contact-us-pop').css('left', '0px');
+                $('.contact-us-pop').css('top', '110px');
                 $('.contact-us-pop').toggleClass('overflowHeight');
 
             } else {
-                $('.contact-us-pop').css('left', -$('.contact-us-pop').width() + 'px');
+                $('.contact-us-pop').css('top', '110px');
+                $('.contact-us-pop').css('left', '-400px');
                 $('.contact-us-pop').toggleClass('overflowHeight');
-            }
+            }*/
         },
         showUserPop: function() {
             $('#login_error').html('');
@@ -489,7 +495,10 @@ define([
 
                 $('#contact-us-side-btn').click(function(e) {
                     e.stopPropagation();
-                    that.toggleContactUsPop();
+                    //that.toggleContactUsPop();
+
+                    $('.contact-form').show();
+
                     $('#contact_error').html('');
                     $('#contact_error_row').css("display", 'none');
                 });
@@ -728,7 +737,9 @@ define([
                 $(document).on("click", null, function(e) {
                     var contactpopup = $("#contactuspop");
                     if (!$('#contact-us-side-btn').is(e.target) && !contactpopup.is(e.target) && contactpopup.has(e.target).length == 0) {
-                        $("#contactuspop").css('left', -$("#contactuspop").width() + 'px');
+                        //$("#contactuspop").css('left', -$("#contactuspop").width() + 'px');
+                         $('.contact-form').hide();
+
                     }
                     var popup = $(".userpop");
                     if (!$('#user-icon').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {

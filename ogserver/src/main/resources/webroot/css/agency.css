@@ -21,7 +21,7 @@
 }
 
 .burger-logo {
-    height: 34px;
+    height: 43px;
 }
 
 /* Header Section */
@@ -505,13 +505,21 @@
     border-right: 1px solid #fff;
     padding-right: 10px;
 }
+.menu-banglore a{
+    font-size:13px;
+    font-family: 'Lato', sans-serif;
+}
 .menu-pune{
-display: inline-block;
+    display: inline-block;
     padding-left: 10px;
     color: #fff;
     font-weight: 600;
     border-right: 1px solid #fff;
     padding-right: 10px;
+}
+.menu-pune a{
+    font-size:13px;
+    font-family: 'Lato', sans-serif;
 }
 .menu-chennai{
     display: inline-block;
@@ -519,7 +527,10 @@ display: inline-block;
     color: #fff;
     font-weight: 600;
 }
-
+.menu-chennai a{
+    font-size:13px;
+    font-family: 'Lato', sans-serif;
+}
 
 .thought-txt{
     position:absolute;
@@ -605,7 +616,7 @@ display: inline-block;
 /* Completed Project Section */
 
 .c-project-description{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/v1485354677/completed_projects/Desktop_banner.jpg");
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528459931/recent_projects/3_Living_05022018-01.jpg");
     background-repeat: no-repeat;
     background-position: center 100%;
     min-height: 740px;
@@ -3001,7 +3012,7 @@ fieldset[disabled] .btn-xl.active {
     top: 110px;
     position: fixed;
     z-index: 2000;
-    left: -400px;
+    left: 450px;
     -webkit-transition: all .5s ease-in-out;
     -moz-transition: all .5s ease-in-out;
     -ms-transition: all .5s ease-in-out;
@@ -3013,13 +3024,14 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .contact-us-side {
-    position: relative;
-    width: 150px;
-    top: -175px;
-    left: 100%;
+    position: fixed;
+    width: 245px;
+    bottom:0px;
+    left: 40%;
     z-index: 2000;
-    transform: rotate(270deg);
+    /*transform: rotate(270deg);*/
     transform-origin: left top;
+    margin:0 auto;
 }
 
 .contact-us-side-inner {
@@ -8279,7 +8291,7 @@ html .ui-button.ui-state-disabled:active {
 .onbanner-txt{
     position:absolute;
     bottom:10%;
-    left:8%;
+    left:6%;
 }
 .onbanner-txt h2{
     font-family:'Montserrat', sans-serif;
@@ -8292,7 +8304,7 @@ html .ui-button.ui-state-disabled:active {
     font-family:'Montserrat', sans-serif;
     color:#ffffff;
     font-size:32px;
-    font-weight: 200;
+    font-weight: 300;
     text-transform: none!important;
 }
 .ugadiIcon{
@@ -8817,8 +8829,7 @@ html .ui-button.ui-state-disabled:active {
     }*/
 
     .burger-logo {
-        height: 24px;
-        margin-left: -7px;
+        margin-left: 0px;
     }
 
     .footer-bg {
@@ -8950,3 +8961,48 @@ html .ui-button.ui-state-disabled:active {
     opacity: 0.7;
 }
 /* CEP design code End */
+
+
+.testihead{
+    font-size: 18px;
+    font-weight: 500;
+}
+.nwhm-testimonial-section{
+    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528448664/home/website_image-06.jpg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    min-height: 475px;;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 70px 0 70px 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.nwhm-testimonial-section .carousel-control .fa-angle-left,
+.nwhm-testimonial-section .carousel-control .fa-angle-right {
+    font-size: 22px;
+    background-color: transparent;
+    line-height: 30px;
+    text-shadow: none;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+}
+
+.nwhm-testimonial-section .carousel-control.left,
+.nwhm-testimonial-section .carousel-control.right{
+    background: transparent;
+}
+@media screen and (min-width: 768px){
+    .nwhm-testimonial-section .carousel-indicators {
+        bottom: -45px;
+    }
+}
