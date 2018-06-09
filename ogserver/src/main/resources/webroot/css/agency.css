@@ -1905,7 +1905,7 @@ fieldset[disabled] .btn-xl.active {
 
 .menu-icon {
     position: absolute;
-    left: 80%;
+    left: 70%;
     top: 8px;
     padding: 2px;
     min-width: 180px;
@@ -3008,11 +3008,13 @@ fieldset[disabled] .btn-xl.active {
 
 .contact-us-pop {
     width: 100%;
-    max-width: 400px;
+    /*max-width: 400px;*/
     top: 110px;
     position: fixed;
     z-index: 2000;
-    left: 450px;
+    /*left: 450px;*/
+    display: flex;
+    justify-content: center;
     -webkit-transition: all .5s ease-in-out;
     -moz-transition: all .5s ease-in-out;
     -ms-transition: all .5s ease-in-out;
@@ -3025,7 +3027,7 @@ fieldset[disabled] .btn-xl.active {
 
 .contact-us-side {
     position: fixed;
-    width: 245px;
+    width: 325px;
     bottom:0px;
     left: 40%;
     z-index: 2000;
@@ -3040,7 +3042,7 @@ fieldset[disabled] .btn-xl.active {
     top: 0px;
     cursor: pointer;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 22px;
     background-color: #f1591f;
     padding: 2px 15px 5px 15px;
     -webkit-transition: color 0.3s, opacity 0.2s;
@@ -3502,10 +3504,11 @@ a.button-orange:hover {
 
 .contact-form {
     margin: auto;
-    width: 100%;
+    width: 70%;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.9);
     padding: 20px;
+    position: relative;
 }
 
 .banner-form-row {
@@ -3910,12 +3913,18 @@ a.button-orange:hover {
         display: block;
         padding: 18% 5% 5%;
     }
+    .contact-form{
+        width:100%;
+    }
 }
 
 @media (max-width: 320px) {
     .image-meta {
         display: block;
         padding: 8% 5% 5%;
+    }
+    .contact-form{
+        width:100%;
     }
 }
 
@@ -8285,7 +8294,7 @@ html .ui-button.ui-state-disabled:active {
     background-color:#ea5c36;
 }
 .nav-menu-height-fx{
-    min-height:75px;
+    min-height:76px;
 }
 
 .onbanner-txt{
@@ -8801,10 +8810,10 @@ html .ui-button.ui-state-disabled:active {
         left: auto !important;
         right: 20px;
     }*/
-    .menu-icon {
+    /*.menu-icon {
         left: auto !important;
         right: 0px;
-    }
+    }*/
 
     .all {
         text-align: left !important;
@@ -8988,13 +8997,17 @@ html .ui-button.ui-state-disabled:active {
 
 .nwhm-testimonial-section .carousel-control .fa-angle-left,
 .nwhm-testimonial-section .carousel-control .fa-angle-right {
-    font-size: 22px;
+    font-size: 48px;
     background-color: transparent;
     line-height: 30px;
     text-shadow: none;
     color: #ffffff;
     position: absolute;
     top: 50%;
+}
+.nwhm-testimonialImg{
+    width:474px;
+    height:282px;
 }
 
 .nwhm-testimonial-section .carousel-control.left,
