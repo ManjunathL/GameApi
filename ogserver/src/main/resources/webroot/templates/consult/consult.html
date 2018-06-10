@@ -4,7 +4,7 @@
         <div class="consult-form-maindiv" style="margin-top: -70px;">
             <div class="row">
                 <div class="col-md-6 bg-white align-center margin-bottom20">
-                    <p id="form-heading" class="consult-form-heading"> Design Your my <span class="color-orange"> gubbi </span> Home </p>
+                    <p id="form-heading" class="consult-form-heading"> Design Your my<span class="color-orange">gubbi</span> Home </p>
 
                     <div class="row display-none" id="contact_error_row">
                         <p class="margin0 error-text align-center" id="contact_error"></p>
@@ -48,11 +48,20 @@
                                 <input type="text" class="width100 form-control" placeholder="Property Name"
                                        id='mx_Street2' name='mx_Street2' maxlength='256' value='' autocomplete='off' />
                             </div>
-                            <div class="margin-bottom20 form-group">
+                            <div class="form-group">
+                                <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                    <option value='cityName'>City Name</option>
+                                    <option value='Bangalore'> Bangalore </option>
+                                    <option value='Pune'> Pune </option>
+                                    <option value='Chennai'> Chennai </option>
+                                    <option value='Other' >Other</option>
+                                </select>
+                            </div>
+                            <!--<div class="margin-bottom20 form-group">
                                 <label for='exclude_FileUpload_1' class="text-floorplan">Upload Floorplan</label>
                                 <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
                                 <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
-                            </div>
+                            </div>-->
                             <div class="align-center form-group">
                                 <button class="button-orange margin-top20 margin-bottom20 consult-submit-orange"
                                         id="form-submit-button"
@@ -75,58 +84,58 @@
 
                 </div>
                 <div class="col-md-6">
-                    <!--<div class="row consult-margin bg-white padding15">
-                        <h3 class="consult-h3 align-center">
+                    <div class="row consult-margin bg-white padding15">
+                        <h3 class="consult-h3 align-center" style="margin-top:0px!important;">
                             Contact Us
                         </h3>
                         <div class="row align-left">
-                            <a href="https://www.google.co.in/maps/place/Orange+Gubbi+technologies/@12.9174948,77.6451492,15z"
-                               target="_blank">
-                                <div class="col-md-2 col-sm-2 col-xs-2">
-                                    <img src="<%= imgBase %>contact/L_03.png" alt="address-icon">
+                            <div class="col-md-6" style="border-right: 1px solid #ccc;">
+                                <h5>Bangalore</h5>
+                                <div class="row align-left">
+                                    <div class="col-md-12">
+                                        <div>
+                                        <h6 class="address1" data-element="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.965496292687!2d77.5966596143753!3d12.974058690854246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae176a5ac3bf5b%3A0x1fde9fa5b2464507!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528435814751"> Lavelle EC </h6>
+                                        <p class="address1" data-element="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.965496292687!2d77.5966596143753!3d12.974058690854246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae176a5ac3bf5b%3A0x1fde9fa5b2464507!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528435814751">
+                                            No. 38, Maini Sadan, 1st Floor, 7th Main, Lavelle Road, Bangalore - 560001
+                                        </p>
+                                        </div>
+                                        <div>
+                                        <h6 class="address1" data-element="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.843200887464!2d77.64269661437463!3d12.917797490891132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1485ccf273c9%3A0xf76b78427043983d!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528434453689"> HSR EC </h6>
+                                        <p class="address1" data-element="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.843200887464!2d77.64269661437463!3d12.917797490891132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1485ccf273c9%3A0xf76b78427043983d!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528434453689">
+                                            1502, 2nd Floor, 19th Main Road, Sector 4, HSR Layout, Bangalore - 560102
+                                        </p>
+                                        </div>
+                                        <div>
+                                        <h6 class="address1" data-element="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8025742218274!2d77.74741431437536!3d12.984475690847457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0f4dfc37f49f%3A0xdb268b736f077a56!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528435762870"> Whitefield EC </h6>
+                                        <p  class="address1" data-element="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8025742218274!2d77.74741431437536!3d12.984475690847457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae0f4dfc37f49f%3A0xdb268b736f077a56!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528435762870">
+                                            No. 92, 2nd Floor, (Landmark- Bank Of Baroda) Whitefield Main Road, Kadugodi  Colony, Prasanth Extension, Kadugodi, Bangalore - 560066
+                                        </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-10 col-sm-10 col-xs-10">
-                                    <p>
-                                        1502, 2nd Floor,
-                                        19th Main Road,
-                                        Sector 4, HSR Layout,
-                                        Bangalore 560102
+                            </div>
+                            <div class="col-md-6" style="padding:0px 30px;">
+                                <div class="row align-left">
+                                <h5>Chennai</h5>
+                                    <p class="address1" data-element="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.4370625744345!2d80.23572161437488!3d12.943860990874079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525cfdfc024649%3A0x3da1f81a0bd675a7!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528435877051">
+                                        Ramaniyam Ocean - Isha, No.11, Second Floor, Rajiv Gandhi Salai, Old Mahabalipuram Road, Okkiyam Thoraipakkam,<br/> Chennai - 600096
                                     </p>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="row align-left">
-                            <a href="tel:+91-808-886-0860">
-                                <div class="col-md-2 col-sm-2 col-xs-2">
-                                    <img src="<%= imgBase %>contact/P_07.png" alt="phone-icon">
+                                <div class="row align-left">
+                                <h5>Pune</h5>
+                                    <p  class="address1" data-element="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.3376748472606!2d73.78991241445874!3d18.558809087386642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bed7851811e7%3A0xb4bb2e62814970b4!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528436561363">
+                                        101, 1st Floor, The Mint Building, Behind K Factory, Opp. Kapil Malhar Society, Baner, Pune - 411045
+                                    </p>
                                 </div>
-                                <div class="col-md-10 col-sm-10 col-xs-10 paddingtop10">
-                                    +91 8088 860 860
-                                </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="row align-left">
-                            <a href="mailto:reach@mygubbi.com" target="_blank">
-                                <div class="col-md-2 col-sm-2 col-xs-2">
-                                    <img src="<%= imgBase %>contact/M_07.png" alt="mail-icon">
-                                </div>
-                                <div class="col-md-10 col-sm-10 col-xs-10 paddingtop10">
-                                    reach@mygubbi.com
-                                </div>
-                            </a>
-                        </div>
-                        <h3 class="consult-h3 align-center">Social Networks</h3>
-                        <div class="paddingtop10 align-center">
-                                    <span>
-                                        <a href="http://www.facebook.com/mygubbi" target="_blank"><span><img
-                                                src="<%= imgBase %>contact/F_11.png" alt="facebook"></span></a>
-                                        <a href="https://twitter.com/@my_gubbi" target="_blank"
-                                           class="margin-left-10"><span><img src="<%= imgBase %>contact/T_13.png"
-                                                                             alt="twitter"></span></a>
-                                    </span>
-                        </div>
+                    </div>
+                   <!-- <div class="row consult-margin bg-white" style="margin-top: 15px !important;">
+                        <iframe id="addresslocator" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.843200887464!2d77.64269661437463!3d12.917797490891132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1485ccf273c9%3A0xf76b78427043983d!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528434453689"
+                                width="100%" height="200px" frameborder="0" style="border:0"
+                                allowfullscreen></iframe>
                     </div>-->
-                    <div class="row consult-margin bg-white padding15"  style="width: 590px;">
+                    <!--<div class="row consult-margin bg-white padding15"  style="width: 590px;">
                         <div class="row">
                         <div class="col-md-6">
                             <H4 style="text-align: center;text-decoration: underline;margin-left: 219px;"> BANGALORE </h4>
@@ -180,9 +189,15 @@
                         <iframe id="addresslocator" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.843200887464!2d77.64269661437463!3d12.917797490891132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1485ccf273c9%3A0xf76b78427043983d!2sMyGubbi!5e0!3m2!1sen!2sin!4v1528434453689"
                                 width="152%" height="200px" frameborder="0" style="border:0"
                                 allowfullscreen></iframe>
-                    </div>
+                    </div>-->
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <iframe id="addresslocator" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15555.391651543143!2d77.6451492!3d12.9174948!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1484351ae6ef%3A0x5d9e93030c5e41ac!2sOrange+Gubbi+technologies%2C+1504%2C+19th+Main+Rd%2C+Sector+4%2C+HSR+Layout%2C+Bengaluru%2C+Karnataka+560102!5e0!3m2!1sen!2sin!4v1455611931443"
+                    width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
     </div>
     <div class="bg-white hidden-xs hidden-sm">
@@ -356,7 +371,7 @@
             </div>
         </div>
     </div>
-    <div class="container flip-container hidden-xs hidden-sm">
+    <!--<div class="container flip-container hidden-xs hidden-sm">
         <div class="row">
             <div class="col-lg-12 text-center margin-top25 margin-bottom20">
                 <h2 class="consult-h3" style="text-transform:initial;">What do we offer at
@@ -391,6 +406,7 @@
         </div>
         </div>
     </div>
+    -->
     <div class="bg-color-white hidden-xs hidden-sm">
         <div class="container padding-bottom15">
             <div class="row">
@@ -462,21 +478,20 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid hidden-xs hidden-sm">
-        <div class="row">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15555.391651543143!2d77.6451492!3d12.9174948!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1484351ae6ef%3A0x5d9e93030c5e41ac!2sOrange+Gubbi+technologies%2C+1504%2C+19th+Main+Rd%2C+Sector+4%2C+HSR+Layout%2C+Bengaluru%2C+Karnataka+560102!5e0!3m2!1sen!2sin!4v1455611931443"
-                    width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
-        </div>
-    </div>
 </div>
 <script>
 $(document).ready(function(){
 
-$(".address1").click(function(){
-var term = $(this).attr('data-element');
-document.getElementById("addresslocator").src = term;
-$(".address1").css('background','none');
-$(this).css('background','orangered');
-});
+    $(".address1").click(function(){
+        var term = $(this).attr('data-element');
+        document.getElementById("addresslocator").src = term;
+        $(".address1").css('background','none');
+        $(".address1").css('color','#555');
+        $(this).css('background','orangered');
+        $(this).css('color','white');
+         $('html, body').animate({
+            'scrollTop' : $("#addresslocator").position().top
+        });
+    });
 });
 </script>
