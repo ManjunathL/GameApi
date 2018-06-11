@@ -378,8 +378,7 @@ public class CCAHandler extends AbstractRouteHandler{
     {
         CloseableHttpClient client = HttpClientBuilder.create().build();
         String open_assigned = "Open_Assigned";
-        String issue_value = "issue";
-
+        String others = "Others";
 
         HttpPost post = new HttpPost("https://suite.mygubbi.com/mygubbi_crm29102017/test-api/create_customer_issue.php");
 
@@ -392,7 +391,7 @@ public class CCAHandler extends AbstractRouteHandler{
             builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
             builder.addTextBody("name", issue, ContentType.TEXT_PLAIN);
             builder.addTextBody("status", open_assigned, ContentType.TEXT_PLAIN);
-            builder.addTextBody("room_c", issue_value, ContentType.TEXT_PLAIN);
+            builder.addTextBody("room_c", others, ContentType.TEXT_PLAIN);
         }
         else
         {
@@ -404,7 +403,7 @@ public class CCAHandler extends AbstractRouteHandler{
             builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
             builder.addTextBody("name", issue, ContentType.TEXT_PLAIN);
             builder.addTextBody("status", open_assigned, ContentType.TEXT_PLAIN);
-            builder.addTextBody("room_c", issue_value, ContentType.TEXT_PLAIN);
+            builder.addTextBody("room_c", others, ContentType.TEXT_PLAIN);
         }
 
         HttpEntity entity = builder.build();
@@ -414,7 +413,7 @@ public class CCAHandler extends AbstractRouteHandler{
             if (response != null)
             {
                 LOG.debug(response.getEntity());
-                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("Success","Hi")));
+                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("Success","Image upload")));
             }
         } catch (IOException e) {
             e.printStackTrace();
