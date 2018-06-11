@@ -3009,7 +3009,7 @@ fieldset[disabled] .btn-xl.active {
 .contact-us-pop {
     width: 100%;
     /*max-width: 400px;*/
-    top: 110px;
+    top: 110px !important;
     position: fixed;
     z-index: 2000;
     /*left: 450px;*/
@@ -3029,7 +3029,9 @@ fieldset[disabled] .btn-xl.active {
     position: fixed;
     width: 325px;
     bottom:0px;
-    left: 40%;
+    /*left: 40%;*/
+    display: flex;
+    justify-content: center;
     z-index: 2000;
     /*transform: rotate(270deg);*/
     transform-origin: left top;
@@ -3503,6 +3505,15 @@ a.button-orange:hover {
 }
 
 .contact-form {
+    margin: auto;
+    width: 70%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    position: relative;
+}
+
+.Consultcontact-form {
     margin: auto;
     width: 70%;
     color: #fff;
@@ -8299,7 +8310,7 @@ html .ui-button.ui-state-disabled:active {
 
 .onbanner-txt{
     position:absolute;
-    bottom:10%;
+    bottom:25%;
     left:6%;
 }
 .onbanner-txt h2{
@@ -8665,7 +8676,7 @@ html .ui-button.ui-state-disabled:active {
     }
 
     .banner-icon-height{
-        min-height: 150px;
+        min-height: 115px;
     }
     .address_right_section{
         background: rgba(0,0,0,0.8);
@@ -8953,6 +8964,16 @@ html .ui-button.ui-state-disabled:active {
     .style-tab-bg > .nav-tabs>li.active>a:focus {
         background: #cfcfcf;
     }
+
+    .mobIco{
+            width:50%!important;
+    }
+    .mobIco12{
+        width:25%!important;
+    }
+    #livechat-compact-container{
+        bottom:30px!important;
+    }
 }
 
 /* CEP design code Start */
@@ -9024,9 +9045,24 @@ p.address1{
     font-size: 12px;
     line-height: 2.17;
     font-family: 'Lato', sans-serif;
+    cursor:pointer;
 }
 h6.address1{
     font-weight: 600;
     text-align: center;
     cursor:pointer;
+    text-transform: capitalize;
+}
+
+@media (max-width: 991px) {
+    .nwhm-testimonialImg {
+        width: 100%!important;
+        height: auto!important;
+    }
+    .nwhm-testimonial-section{
+        padding: 20px 0 20px 0;
+    }
+    .nwhm-testimonial-section .carousel-indicators {
+        bottom: -25px;
+    }
 }

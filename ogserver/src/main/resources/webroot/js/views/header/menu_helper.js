@@ -236,7 +236,7 @@ define([
             $('.contact-us-pop').css('top', popHeightMore ? 0 : (windowHeight / 2 - popHeight / 2) + 'px');
             //$('.contact-us-side').css('top', ((popHeight / 2 > windowHeight) ? (-popHeight * 3 / 4 + contactUsSideWidth / 2) : (-popHeight / 2 + contactUsSideWidth / 2)) + 'px');
 
-            $('.contact-us-side').css('bottom','0px');
+            //$('.contact-us-side').css('top','110px');
             $('.contact-form').hide();
             //$('.contact-us-pop').toggle('hide');
 

@@ -1,12 +1,10 @@
 <% if(typeof(lateststories3) !== 'undefined'){ %>
-
+<a href="/stories-interiors">
 <div class="col-lg-4 col-sm-4 col-md-4 padding5 hidden-xs hidden-sm">
     <div class="trend-image-overlay">
         <% var blog_main_image =lateststories3.blog_main_image; %>
         <img src="<%= blog_main_image %>"
              class="object-fit_fill" alt="Trend & Style" />
-        <!--<img src="<%= imgBase + 'c_fill,h_450,w_667' + '/stories/Studio_Apartments.jpg'%>"
-             class="cld-responsive hidden-lg hidden-md img-responsive width100" alt="Trend & Style" />-->
         <div class="txt-over-trendstyle-image">
             <div class="width100"><p class="font-size30 txt-color-orange text-uppercase"> Interior </p></div>
             <div class="width100 hidden-xs hidden-sm">
@@ -20,4 +18,5 @@
         </div>
     </div>
 </div>
+</a>
 <% } %>
