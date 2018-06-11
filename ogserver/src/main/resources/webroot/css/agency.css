@@ -3043,17 +3043,19 @@ fieldset[disabled] .btn-xl.active {
     display: inline-block;
     top: 0px;
     cursor: pointer;
-    color: #ffffff;
+    color: #fff;
     font-size: 22px;
-    background-color: #f1591f;
+    font-weight: 300;
+    background-color:#ea5c36;
     padding: 2px 15px 5px 15px;
-    -webkit-transition: color 0.3s, opacity 0.2s;
-    transition: color 0.3s, opacity 0.2s, transform 0.3s;
+
     box-shadow: -2px 2px 2px #333;
 }
 
 .contact-us-side-inner:hover {
-    background-color: #ff3200;
+    background-color: #ea5c36;
+    -webkit-transition: color 0.3s, opacity 0.2s;
+    transition: color 0.3s, opacity 0.2s, transform 0.3s;
 }
 
 .contact-us-side-inner:active {
@@ -8363,7 +8365,7 @@ html .ui-button.ui-state-disabled:active {
     }
 
     .menu-sec-mrg{
-        margin-top:60px !important;
+        margin-top:70px !important;
     }
 }
 
@@ -9054,6 +9056,10 @@ h6.address1{
     text-transform: capitalize;
 }
 
+.nwhm-testimonial-section .carousel-indicators {
+    z-index: 1;
+}
+
 @media (max-width: 991px) {
     .nwhm-testimonialImg {
         width: 100%!important;
@@ -9064,5 +9070,6 @@ h6.address1{
     }
     .nwhm-testimonial-section .carousel-indicators {
         bottom: -25px;
+        z-index: 1;
     }
 }

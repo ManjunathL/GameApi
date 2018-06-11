@@ -97,13 +97,13 @@
 
         <div class="nav navbar-nav navbar-right right-side-menu hidden-xs hidden-sm margin-top10">
            <!-- add code here -->
-            <ul class="menu-address" style="float:left;margin: 0px 218px 0px 0px!important;">
+            <ul class="menu-address" style="float:left;margin: 0px 205px 0px 0px!important;">
                 <li class="menu-banglore"><a style="color:#fff">Bangalore</a></li>
                 <li class="menu-pune"><a style="color:#fff">Pune</a></li>
                 <li class="menu-chennai"><a style="color:#fff">Chennai</a></li>
             </ul>
 
-            <ul class="menu-address"  style="float:right;">
+            <ul class="menu-address"  style="float:right;padding-right: 6px;">
                 <li class="menu-chennai"><a style="color:#fff" href="/mygubbi-studio"> MyGubbi Studio </a></li>
                 <li class="menu-chennai"><a style="color:#fff" href="/nri-services-bangalore">NRI Zone</a></li>
                 <li class="menu-chennai"><a style="color:#fff" href="/stories-all">Stories</a></li>
@@ -133,7 +133,7 @@
                     </a>
                 </li>-->
                 <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
-                <li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob">
+                <li class="hidden-xs hidden-sm gubbi-list-desk gubbi-list-mob" >
                     <a  href="javascript:void(0);"
                         class="dropdown-toggle last-item"
                         id="dropdownMenu_lg_userprofpost"
@@ -166,7 +166,7 @@
                     </ul>
                 </li>
                 <% }else{ %>
-                <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm">
+                <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm" style="margin-right: 7px;">
                     <span class="pe-7s-user user pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
                 </li>
                 <% } %>
@@ -1162,6 +1162,16 @@
                             </ul>
                         </li>
                        -->
+
+                        <li class="gubbi-list-desk gubbi-list-mob menu-li hidden-lg hidden-md">
+                            <a class="page-scroll" href="/mygubbi-studio"> MyGubbi Studio </a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob menu-li hidden-lg hidden-md">
+                            <a class="page-scroll" href="/nri-services-bangalore">NRI Zone</a>
+                        </li>
+                        <li class="gubbi-list-desk gubbi-list-mob menu-li hidden-lg hidden-md">
+                            <a class="page-scroll" href="/stories-all">Stories</a>
+                        </li>
                         <li class="gubbi-list-desk gubbi-list-mob">
                             <a class="page-scroll" href="/consult">Contact</a>
                         </li>
