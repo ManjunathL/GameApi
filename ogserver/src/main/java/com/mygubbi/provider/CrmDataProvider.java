@@ -1,5 +1,7 @@
 package com.mygubbi.provider;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import us.monoid.json.JSONArray;
 import us.monoid.json.JSONObject;
 
@@ -12,6 +14,9 @@ import java.util.HashMap;
 public class CrmDataProvider {
 
 private DataProviderMode dataProviderMode;
+
+    private final static Logger LOG = LogManager.getLogger(CrmDataProvider.class);
+
 
     public CrmDataProvider() {
         dataProviderMode = new RestDataProvider();
@@ -56,6 +61,22 @@ private DataProviderMode dataProviderMode;
         } catch (Exception e) {
             e.printStackTrace();
             return new JSONArray();
+        }
+    }
+
+    public JSONObject updateOpportunity(String opportunityId, String feedbackSubmitted) {
+
+        try {
+            LOG.debug("DD : " + opportunityId + ":" + feedbackSubmitted);
+            return dataProviderMode.postResourceWithFormData("update_opportunity_feedback.php", new HashMap<String, String>(){
+                {
+                    put("opportunity_name",opportunityId);
+                    put("feedback_submitted_c",feedbackSubmitted);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JSONObject();
         }
     }
 

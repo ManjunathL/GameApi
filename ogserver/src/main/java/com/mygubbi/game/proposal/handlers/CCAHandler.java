@@ -66,11 +66,12 @@ public class CCAHandler extends AbstractRouteHandler{
         dataProviderMode = new RestDataProvider();
         crmDataProvider = new CrmDataProvider();
 
-        this.route().handler(BodyHandler.create().setUploadsDirectory("c:/Users/Public/uploads"));
-
+        String amazon_uploads_directory = ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "c:/Users/Public/uploads");
+        this.route().handler(BodyHandler.create().setUploadsDirectory(amazon_uploads_directory));
 
         this.post("/getdocuments").handler(this::getDocuments);
         this.post("/getprofile").handler(this::getOpportunity);
+        this.post("/updateprofile").handler(this::updateOpportunity);
         this.post("/getcustomerissues").handler(this::getIssues);
         this.post("/getupdates").handler(this::getDailyUpdates);
         this.post("/createissue").handler(this::createIssue);
@@ -78,6 +79,7 @@ public class CCAHandler extends AbstractRouteHandler{
         this.get("/getfeedbackquestions").handler(this::getQuestions);
         this.get("/getfeedbackquestionoption").handler(this::getQuestionOption);
         this.post("/addfeedbackquestionanswer").handler(this::insertQuestionAnswer);
+        this.post("/uploaddocument").handler(this::uploadDocument);
     }
 
     private void getDocuments(RoutingContext routingContext) {
@@ -88,6 +90,11 @@ public class CCAHandler extends AbstractRouteHandler{
     private void getOpportunity(RoutingContext routingContext) {
         if (isAuthenticated(routingContext)) return;
         getOpportunityDetails(routingContext);
+    }
+
+    private void updateOpportunity(RoutingContext routingContext) {
+        if (isAuthenticated(routingContext)) return;
+        updateOpportunityInCrm(routingContext);
     }
 
     private void getIssues(RoutingContext routingContext) {
@@ -104,6 +111,11 @@ public class CCAHandler extends AbstractRouteHandler{
     private void createIssue(RoutingContext routingContext) {
         if (isAuthenticated(routingContext)) return;
         createCustomerIssue(routingContext);
+    }
+
+    private void uploadDocument(RoutingContext routingContext) {
+        if (isAuthenticated(routingContext)) return;
+        uploadHandoverDocument(routingContext);
     }
 
     private void getHandoverDetails(RoutingContext routingContext) {
@@ -154,6 +166,7 @@ public class CCAHandler extends AbstractRouteHandler{
 
         JSONObject detailsToImaginest = new JSONObject();
         try {
+            detailsToImaginest.put("id",opportunityDetails.getString("id"));
             detailsToImaginest.put("customerName",opportunityDetails.getString("customer_name_c"));
             detailsToImaginest.put("customerPhone",opportunityDetails.getString("customer_phone_c"));
             detailsToImaginest.put("salesStage",opportunityDetails.getString("sales_stage"));
@@ -164,6 +177,7 @@ public class CCAHandler extends AbstractRouteHandler{
             detailsToImaginest.put("updates",opportunityDetails.getString("comment"));
             detailsToImaginest.put("salesStage",opportunityDetails.getString("sales_stage"));
             detailsToImaginest.put("projectCompletionDate",opportunityDetails.getString("project_end_date_c"));
+            detailsToImaginest.put("feedbackSubmitted",opportunityDetails.getString("feedback_submitted_c"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -184,7 +198,24 @@ public class CCAHandler extends AbstractRouteHandler{
             sendJsonResponse(routingContext, documents.toString());
         }
         else {
-            sendError(routingContext, "No issues found for this opportunity");
+            sendError(routingContext, String.valueOf(new JsonObject().put("status","error").put("message","Error in retrieving issues")));
+        }
+
+    }
+
+    private void updateOpportunityInCrm(RoutingContext routingContext) {
+
+        String crmId = routingContext.request().getParam("opportunity_id");
+        String feedbackSubmitted = routingContext.request().getParam("feedbackSubmitted");
+
+        JSONObject documents = crmDataProvider.updateOpportunity(crmId,feedbackSubmitted);
+
+        if (documents != null)
+        {
+            sendJsonResponse(routingContext, documents.toString());
+        }
+        else {
+            sendError(routingContext, String.valueOf(new JsonObject().put("status","error").put("message","Could not update profile")));
         }
 
     }
@@ -194,8 +225,6 @@ public class CCAHandler extends AbstractRouteHandler{
 
         String amazon_uploads_directory = ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "c:/Users/Public/uploads");
         this.route().handler(BodyHandler.create().setUploadsDirectory(amazon_uploads_directory));
-
-
 
         routingContext.response().putHeader("Content-Type", "text/plain");
 
@@ -221,6 +250,61 @@ public class CCAHandler extends AbstractRouteHandler{
         else {
             createIssueInCrmNew(routingContext,"",issue,crmId);
         }
+
+    }
+
+    private void uploadHandoverDocument(RoutingContext routingContext){
+
+        String amazon_uploads_directory = ConfigHolder.getInstance().getStringValue("amazon_uploads_directory", "c:/Users/Public/uploads");
+        this.route().handler(BodyHandler.create().setUploadsDirectory(amazon_uploads_directory));
+
+        routingContext.response().putHeader("Content-Type", "text/plain");
+
+        routingContext.response().setChunked(true);
+
+        Set<FileUpload> fileUploads = routingContext.fileUploads();
+
+        LOG.debug("FILE uploads : " + fileUploads.size());
+        String crmId = routingContext.request().getFormAttribute("opportunity_id");
+
+
+        String newFile = null;
+
+        for (FileUpload fileUpload : fileUploads) {
+            newFile = fileUpload.uploadedFileName();
+            fileUpload.fileName();
+            fileUpload.contentType();
+        }
+
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+
+
+        HttpPost post = new HttpPost("https://suite.mygubbi.com/mygubbi_crm29102017/test-api/upload_completion_certificate.php");
+
+        MultipartEntityBuilder builder;
+
+        File fileNew = null;
+        if (newFile != null) {
+            fileNew = new File(newFile);
+        }
+        builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        builder.addBinaryBody("document", fileNew, ContentType.DEFAULT_BINARY, newFile);
+        builder.addTextBody("opportunity_name", crmId, ContentType.TEXT_PLAIN);
+
+        HttpEntity entity = builder.build();
+        post.setEntity(entity);
+        try {
+            HttpResponse response = client.execute(post);
+            if (response != null)
+            {
+                LOG.debug(response.getEntity());
+                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","success").put("message","Document uploaded")));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
