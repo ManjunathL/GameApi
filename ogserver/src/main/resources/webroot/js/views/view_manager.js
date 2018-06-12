@@ -17,6 +17,7 @@ define(function() {
         EVERYTHINGCONCEPTPAGE:"EverythingConceptPage",
         LISTINGPROJECTPAGE:"ListingProjectPage",
         LISTINGROOMPAGE:"ListingRoomPage",
+        VIEWHOMEDESIGNSPAGE:"ViewHomeDesignPage",
         Views: {},
         activeView: "",
         create: function(name, View, options) {

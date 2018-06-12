@@ -15,8 +15,9 @@ define([
   'collections/conceptboards',
   'collections/updatedefaultrooms',
   'collections/addmore_roomlists',
-  'collections/checknameformorerooms'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingProjectPageTemplate, roomListTempPageTemplate, editprojectandroomTempPageTemplate, GetProjects, CreateProjects, SpaceTypeLists, DeleteProjects, ConceptBoards, UpdateDefaultRooms, AddMoreRoomLists, CheckNameForMoreRoomLists){
+  'collections/checknameformorerooms',
+  'models/filter'
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingProjectPageTemplate, roomListTempPageTemplate, editprojectandroomTempPageTemplate, GetProjects, CreateProjects, SpaceTypeLists, DeleteProjects, ConceptBoards, UpdateDefaultRooms, AddMoreRoomLists, CheckNameForMoreRoomLists, Filter){
   var ListingProjectPage = Backbone.View.extend({
     el: '.page',
     getprojects: null,
@@ -24,6 +25,7 @@ define([
     updatedefaultroom: null,
     addmore_roomlists: null,
     checknameformorerooms: null,
+    filter: null,
     initialize: function() {
         this.getprojects = new GetProjects();
         this.createprojects = new CreateProjects();
@@ -33,11 +35,14 @@ define([
         this.updatedefaultroom = new UpdateDefaultRooms();
         this.addmore_roomlists = new AddMoreRoomLists();
         this.checknameformorerooms = new CheckNameForMoreRoomLists();
+        this.filter = new Filter();
+        this.filter.on('change', this.render, this);
         this.listenTo(Backbone);
         _.bindAll(this, 'render','fetchViewProjectRender','fetchRoomsAndRender', 'fetchEditProjectAndRommRender');
     },
     render: function () {
         var that = this;
+        window.filter = that.filter;
         var getProjectPromise = that.viewProjects();
         var getSpaceTypeListPromise = that.getSpaceTypeList();
         Promise.all([getProjectPromise,getSpaceTypeListPromise]).then(function() {
@@ -58,7 +63,9 @@ define([
         "click #edit_roomConcept": "editRoomConcept",
         "click .edit_roomList": "editRoomList",
         "change #uploadHomelayout": "getuploadedFileDtls",
-        "click .closeedit": "closeEditModal"
+        "click .closeedit": "closeEditModal",
+        "change #uploadHomelayoutedit": "edituploadedFileDtls"
+
     },
     closeEditModal: function(e){
         document.getElementById('editRoomandProject').style.display = "none";
@@ -215,6 +222,10 @@ define([
         if (e.isDefaultPrevented()) return;
         e.preventDefault();
         var that = this;
+
+        if(confirm("Are you sure you want to delete this project ?") == false){
+                return false;
+        }
         var currentTarget = $(e.currentTarget);
         var projectId = currentTarget.data('element');
         var userId = sessionStorage.userId;
@@ -414,6 +425,8 @@ define([
             return false;
         }
 
+        var fileupload= that.filter.get('imgData');
+
         var formdata={
             "builder": $('#inputbuilder').val(),
             "city": $('#inputcity').val(),
@@ -431,7 +444,9 @@ define([
             "shareStatus": 0,
             "state": "string",
             "type": 0,
-            "userUploadedPlanId": 0
+            "userUploadedPlanId": 0,
+            "fileupload": fileupload,
+
         }
         that.createprojects.createNewProject(userId,{
             async: true,
@@ -520,7 +535,7 @@ define([
                 $("#inputpincode-error").html("Please Enter the Plan ");
                 return false;
             }
-
+           var fileupload= that.filter.get('imgDataEdit');
             var formdata={
                 "builder": $('#inputbuilder').val(),
                 "city": $('#inputcity').val(),
@@ -538,7 +553,9 @@ define([
                 "shareStatus": 0,
                 "state": "string",
                 "type": 0,
-                "userUploadedPlanId": 0
+                "userUploadedPlanId": 0,
+                "fileupload": fileupload,
+
             }
             that.createprojects.createNewProject(userId,{
                 async: true,
@@ -571,7 +588,6 @@ define([
         },
     getuploadedFileDtls: function (evt) {
         var that = this;
-
         var files = evt.target.files;
 
         for (var i = 0, f; f = files[i]; i++) {
@@ -596,6 +612,34 @@ define([
         }
         console.log("++++++++++++ Image Data +++++++++++++++++++");
         console.log(that.filter.get('imgData'));
+        return false;
+    },
+    edituploadedFileDtls: function (evt) {
+        var that = this;
+        var files = evt.target.files;
+
+        for (var i = 0, f; f = files[i]; i++) {
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+            var reader = new FileReader();
+            reader.readAsDataURL(f);
+        }
+        console.log("file:");
+        console.log(files[0]);
+        console.log(files[0].name)
+        //formData.append('file', files[ff]);
+        var fileObj = {};
+        //var fileMnObj = new File();
+        if(files[0].name != ""){
+            that.filter.set({
+                'imgDataEdit': files[0]
+            }, {
+                silent: true
+            });
+        }
+        console.log("++++++++++++ Image Data Edit +++++++++++++++++++");
+        console.log(that.filter.get('imgDataEdit'));
         return false;
     },
     getConceptBoards: function(currentInsertedProjectId){
@@ -704,7 +748,12 @@ define([
         var conceptboards = that.conceptboards;
         var spacetypelists = that.spacetypelists;
 
-        $("#createroomlist").html(_.template(roomListTempPageTemplate)({
+         $("#rooms").html(_.template(listingProjectPageTemplate)({
+               "roomListCreate":conceptboards.toJSON(),
+               "spacetypelists": spacetypelists.toJSON(),
+               "projectId": projectId
+         }));
+       /* $("#createroomlist").html(_.template(roomListTempPageTemplate)({
            "roomListCreate":conceptboards.toJSON(),
            "spacetypelists": spacetypelists.toJSON(),
            "projectId": projectId
@@ -713,7 +762,7 @@ define([
                   "roomListCreate":conceptboards.toJSON(),
                   "spacetypelists": spacetypelists.toJSON(),
                   "projectId": projectId
-              }));
+              }));*/
         $('#createProject-modal').modal('hide');
         $('#addRoomConcept').modal('show');
     },
@@ -723,7 +772,7 @@ define([
             var getprojects = that.getprojects;
             getprojects = getprojects.toJSON();
             var spacetypelists = that.spacetypelists;
-             var projectDtls = that.getprojects.getProjectDetails(getprojects[0].userProjects,projectId);
+            var projectDtls = that.getprojects.getProjectDetails(getprojects[0].userProjects,projectId);
 
              console.log(" %%%%%%%%%%%%%% Project Details %%%%%%%%%%%%%% ");
              console.log(projectDtls);

@@ -215,7 +215,8 @@ define([
         });
     },
     viewAddDesign: function(event){
-            $('#addcboard-modalForImage').modal('show');
+            $('#addcboard-modalForImageDesign').modal('show');
+           $(".modal-backdrop").css("z-index", "0");
             return;
     },
     getuploadedFileDtls: function (evt) {

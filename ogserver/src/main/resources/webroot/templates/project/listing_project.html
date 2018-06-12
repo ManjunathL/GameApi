@@ -19,7 +19,9 @@
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
-
+#projectView{
+display:none;
+}
 .imgholder{
     text-align: center;
     font-size: 203px;
@@ -136,11 +138,11 @@
 }
 
 .btnImage {
-  border: 2px solid gray;
-  color: gray;
+  border: 1px solid #bdbdbd;
+  color: #bdbdbd;
   background-color: white;
-  padding: 8px 20px;
-  border-radius: 8px;
+  padding: 5px 32px;
+  border-radius: 40px;
   font-size: 20px;
   font-weight: bold;
 }
@@ -158,10 +160,10 @@
         <div class="mt20">
             <div class="row">
                 <div id="createProject" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 cell-container" style="border: 1px dashed #333;text-align: center;height: 265px;">
-                    <span class="imgholder">&#43;</span>
+                    <p class="title text" style="color: #000f; text-transform: none;">Create Project</p>
                     <div class="overlay"  target="_blank">
                         <div class="text">
-                            <p class="title">Create Project</p>
+                            <span class="imgholder">&#43;</span>
                         </div>
                     </div>
                </div>
@@ -187,109 +189,202 @@
 </section>
 
 <div class="modal fade" id="createProject-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog" style="width:850px;">
-        <div id="createProject-dtls" class="createProject-container">
-            <form id="userconceptfrmImage" method="post" name="userconceptfrm" enctype="multipart/form-data">
-            <div class="col-sm-12 col-md-12">
-                <h4 class="addcboard-heading">New project</h4>
-                    <div class="form-group">
-                        <div id="list1">
-                            <div class="row display-none" id="addUpload_error_row" style="text-align: center;;">
-                                <p class="margin0 error-text align-center" id="addUpload_error" style="color: darkred;"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="projectName">Project Name:</label>
-                        <input type="text" class="form-control" id="projectName" name="projectName" required/>
-                        <div  id="projectNama-error_row" style="font-size: 10px;">
-                            <p  class="err" id="projectNama-error" style="color: darkred;"></p>
-                        </div>
-                    </div>
+    <div class="modal-dialog" >
+        <div class="addcboard-container">
+                <div class="col-sm-12 col-md-12">
+                    <div class="tab">
+                        <ul class="nav nav-tabs">
+                        <li class="active"><a href="#project" data-toggle="tab" id="HomeTab">Project Details</a></li>
+                        <li><a href="#rooms" data-toggle="tab" id="FamilyTab">Rooms Details</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="project">
+                                <div id="createProject-dtls" class="createProject-container">
+                                    <form id="userconceptfrmImage" method="post" name="userconceptfrm" enctype="multipart/form-data">
+                                        <div class="col-sm-12 col-md-12">
+                                            <h4 class="addcboard-heading">New Project</h4>
+                                            <div class="form-group">
+                                                <div id="list1">
+                                                <div class="row display-none" id="addUpload_error_row" style="text-align: center;;">
+                                                <p class="margin0 error-text align-center" id="addUpload_error" style="color: darkred;"></p>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="projectName">Project Name:</label>
+                                                <input type="text" class="form-control" id="projectName" name="projectName" required/>
+                                                <div  id="projectNama-error_row" style="font-size: 10px;">
+                                                <p  class="err" id="projectNama-error" style="color: darkred;"></p>
+                                                </div>
+                                            </div>
+                                            <h4 class="p-style">Project Details</h4>
+                                            <div class="form-row">
+                                                <div class="form-group   col-md-7">
+                                                <label for="inputbuilder">Builder</label>
+                                                <input type="text" class="form-control" id="inputbuilder" placeholder="Builder" required />
+                                                <div id="inputbuilder-error_row" style="font-size: 10px;">
+                                                <p  class="err" id="inputbuilder-error" style="color: darkred;margin-bottom: -10px;"></p>
+                                                </div>
+                                                </div>
+                                                <div class="form-group address-style col-md-4">
+                                                <label for="inputprojecttower">Project Tower</label>
+                                                <input type="text" class="form-control" id="inputprojecttower" placeholder="Project Tower"  required />
+                                                <div id="inputprojecttower-error_row" style="font-size: 10px;">
+                                                <p  class="err" id="inputprojecttower-error" style="color: darkred;"></p>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group  ml0 col-md-7" >
+                                                    <label for="inputProjectAddress">Project Address</label>
+                                                    <input type="text" class="form-control" id="inputProjectAddress" placeholder="1234 Main St" required />
+                                                    <div id="inputProjectAddress-error_row" style="font-size: 10px;">
+                                                    <p class="err" id="inputProjectAddress-error" style="color: darkred;margin-bottom: -10px;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group address-style col-md-4">
+                                                    <label for="inputProjectCity">City</label>
+                                                    <input type="text" class="form-control" id="inputProjectCity"  required />
+                                                    <div id="inputProjectCity-error_row" style="font-size: 10px;">
+                                                    <p class="err" id="inputProjectCity-error" style="color: darkred;"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputProjectState">State</label>
+                                                    <input type="text" class="form-control" id="inputProjectState" placeholder="State"  required />
+                                                    <div id="inputProjectState-error_row" style="font-size: 10px;">
+                                                    <p class="err" id="inputProjectState-error" style="color: darkred;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group address-style col-md-3">
+                                                    <label for="inputpincode">Pin Code</label>
+                                                    <input type="number" class="form-control" id="inputpincode" maxlength="6"  required />
+                                                    <div id="inputpincode-error_row" style="font-size: 10px;">
+                                                    <p class="err" id="inputpincode-error" style="color: darkred;"></p>
+                                                    </div>
+                                                </div>
+                                                <!--<div class="form-group col-md-3">
+                                                    <label for="inputplan">Plan</label>
+                                                    <input type="text" class="form-control" id="inputplan" placeholder="Plan" required />
+                                                    <div id="inputplan-error_row" style="font-size: 10px;">
+                                                    <p class="err" id="inputplan-error" style="color: darkred;"></p>
+                                                    </div>
+                                                </div>-->
+                                                <div class="col-md-4 address-style upload-btn-wrapper" style="top: 28px;">
+                                                    <button class="btnImage">Upload Layout</button>
+                                                    <input id="uploadHomelayout" type="file" onchange="readURL(this);" name="uploadHome"/>
+                                                    <img style="margin-top: 11px;" id="blah" src="#" alt="your image"/>
+                                                    <div ><label id="file-nameUploadCreate"></label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                               <!-- <div class="col-md-4 upload-btn-wrapper">
+                                                    <button class="btnImage">Upload Layout</button>
+                                                    <input id="uploadHomelayout" type="file" onchange="readURL(this);" name="uploadHome"/>
+                                                    <img style="margin-top: 11px;" id="blah" src="#" alt="your image"/>
+                                                    <div ><label id="file-nameUploadCreate"></label></div>
+                                                </div>-->
+                                                <div class="mt15 col-md-12" style="text-align:center;">
+                                                    <input type="submit" id="save_conceptfileupload" class="btn addcboard-btn" value="Submit">
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    <h4 class="p-style">Project Details</h4>
-                    <div class="form-row">
-                        <div class="form-group col-md-5">
-                            <label for="inputbuilder">Builder</label>
-                            <input type="text" class="form-control" id="inputbuilder" placeholder="Builder" required />
-                            <div id="inputbuilder-error_row" style="font-size: 10px;">
-                                <p  class="err" id="inputbuilder-error" style="color: darkred;margin-bottom: -10px;"></p>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-2">
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label for="inputprojecttower">Project Tower</label>
-                            <input type="text" class="form-control" id="inputprojecttower" placeholder="Project Tower"  required />
-                            <div id="inputprojecttower-error_row" style="font-size: 10px;">
-                                <p  class="err" id="inputprojecttower-error" style="color: darkred;"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-5">
-                            <label for="inputProjectAddress">Project Address</label>
-                            <input type="text" class="form-control" id="inputProjectAddress" placeholder="1234 Main St" required />
-                            <div id="inputProjectAddress-error_row" style="font-size: 10px;">
-                                <p class="err" id="inputProjectAddress-error" style="color: darkred;margin-bottom: -10px;"></p>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-2">
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label for="inputProjectCity">City</label>
-                            <input type="text" class="form-control" id="inputProjectCity"  required />
-                            <div id="inputProjectCity-error_row" style="font-size: 10px;">
-                                <p class="err" id="inputProjectCity-error" style="color: darkred;"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="inputProjectState">State</label>
-                            <input type="text" class="form-control" id="inputProjectState" placeholder="State"  required />
-                            <div id="inputProjectState-error_row" style="font-size: 10px;">
-                                <p class="err" id="inputProjectState-error" style="color: darkred;"></p>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-1">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputpincode">Pin Code</label>
-                            <input type="number" class="form-control" id="inputpincode" maxlength="6"  required />
-                            <div id="inputpincode-error_row" style="font-size: 10px;">
-                                <p class="err" id="inputpincode-error" style="color: darkred;"></p>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-1">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputplan">Plan</label>
-                            <input type="text" class="form-control" id="inputplan" placeholder="Plan" required />
-                            <div id="inputplan-error_row" style="font-size: 10px;">
-                                <p class="err" id="inputplan-error" style="color: darkred;"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-4 upload-btn-wrapper">
-                            <button class="btnImage">Upload a file</button>
-                            <input id="conceptfileupload" type="file" name="conceptfile"/>
-                            <label id="file-name"></label>
-                        </div>
-                    </div>
+                            <div class="tab-pane" id="rooms" >
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <h3>Add Space Type <span id="addSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
+                                        <% if(typeof(projectId) !== 'undefined'){ %>
+                                        <input type="hidden" value="<%= projectId %>" id="projectId" />
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="spaceElemenetPanel"  id="elements" style="overflow-y:scroll;height:380px;">
+                                    <% if(typeof(roomListCreate) !== 'undefined'){ %>
+                                    <% _.each(roomListCreate[0].listOfUserConceptBoard, function(roomlst, j){ %>
+                                    <div class="col-md-12" style="margin-top: 20px;">
+                                        <div class="form-group col-md-2">
+                                            <label for="inputcategory">SpaceType</label>
+                                            <input type="hidden" value="<%= roomlst.id %>" id="roomID<%= roomlst.id %>" class="roomId" />
+                                            <select id="inputcategory<%= roomlst.id %>" class="form-option common">
+                                                <option selected>Choose...</option>
+                                                <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                                                <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                                                <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"
+                                                <% if(roomlst.name == spaceElement.title){ %> selected="selected" <% } %>
+                                                <% if(roomlst.name == "Living Room" && spaceElement.title == "Living"){ %> selected="selected" <% } %>
+                                                <% if(roomlst.name == "Bed Room - 1" && spaceElement.title == "Master Bed Room"){ %> selected="selected" <% } %>
+                                                <% if(roomlst.name == "Bed Room - 2" && spaceElement.title == "Kids Bed Room"){ %> selected="selected" <% } %>
 
+                                                ><%= spaceElement.title %></option>
+
+                                                <% }); %>
+                                                <% } %>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group address-style col-md-3">
+                                                <label for="inputname">Name</label>
+                                                <input type="Name" class="form-control inputname" id="inputname<%= roomlst.id %>" placeholder="NAME">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="inputname">Description</label>
+                                                <input type="Name" class="form-control description" id="description<%= roomlst.id %>" placeholder="DESCRIPTION">
+                                            </div>
+                                            <!--<div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
+                                                    <input type="submit" id="<%= roomlst.id %>"  class="btn addcboard-btn updatecreateRoom" value="Update">
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                                    <% } %>
+
+                                    <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
+                                        <div class="form-group col-md-2">
+                                            <label for="inputcategory">SpaceType</label>
+                                            <input type="hidden" value="" id="roomID" class="roomId" />
+                                            <select id="inputcategory" class="form-option common">
+                                                <option selected>Choose...</option>
+                                                <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                                                <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                                                <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"><%= spaceElement.title %></option>
+                                                <% }); %>
+                                                <% } %>
+                                            </select>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group address-style col-md-3">
+                                                <label for="inputname">Name</label>
+                                                <input type="Name" class="form-control inputname" id="inputname" placeholder="NAME">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="inputname">Description</label>
+                                                <input type="Name" class="form-control description" id="description" placeholder="DESCRIPTION">
+                                            </div>
+                                            <!-- <div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
+                                                 <input type="submit" id="add" class="btn addcboard-btn addMoreRoom" value="add">
+                                             </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12" style="text-align:center;">
+                                        <span  id="btn1">
+                                            <input type="submit" id="save_roomConcept" class="btn addcboard-btn" value="Submit">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="mt15 col-md-12" style="text-align:center;">
-                <input type="submit" id="save_conceptfileupload" class="btn btn-primary btn-save" style="background-color: #ea5c36;" value="Submit">
-            </div>
-            </form>
-        </div>
-
-    </div>
-
-        </div>
     </div>
 </div>
 <div class="modal fade" id="addRoomConcept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -303,8 +398,7 @@
 <div class="modal fade" id="editRoomandProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="editProject-container">
-            <div class="editContain" id="editRoomeroomlist">
-            </div>
+            <div class="editContain" id="editRoomeroomlist"></div>
         </div>
     </div>
 </div>
@@ -343,4 +437,32 @@
              trigger: true
          });
     }
+
+    $(document).ready(function () {
+         $("#uploadHomelayout").change(function(){
+          $("#file-nameUploadCreate").text(this.files[0].name);
+        });
+     });
+
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah')
+                .attr('src', e.target.result)
+                .width(100)
+                .height(100);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+    }
+     $(document).ready(function () {
+
+         $('.close').on('click', function () {
+             $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();
+         });
+
+     });
 </script>
