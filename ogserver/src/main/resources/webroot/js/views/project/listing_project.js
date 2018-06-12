@@ -129,7 +129,14 @@ define([
                 console.log("inputname === "+inputname+"==== description ====="+description+"=========spaceTypeCode========="+spaceTypeCode);
 
             }
-
+            $('#createProject-modal').modal('hide');
+            $("#snackbar").html("Successfully Room Create for project... ");
+            var x = document.getElementById("snackbar")
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            that.render();
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
     });
 
     return false;
@@ -187,6 +194,14 @@ define([
                     console.log("inputname === "+inputname+"==== description ====="+description+"=========spaceTypeCode========="+spaceTypeCode);
 
                 }
+                $('#editRoomandProject').modal('hide');
+                $("#snackbar").html("Successfully Room Updated for project... ");
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                that.render();
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
 
         });
 
@@ -419,11 +434,11 @@ define([
             return false;
         }
         var plan = $('#inputplan').val();
-        $('#inputplan').focus();
+       /* $('#inputplan').focus();
         if(plan.length == 0){
             $("#inputpincode-error").html("Please Enter the Plan ");
             return false;
-        }
+        }*/
 
         var fileupload= that.filter.get('imgData');
 
@@ -432,7 +447,7 @@ define([
             "city": $('#inputcity').val(),
             "description": "",
             "id": 0,
-            "planCode": $('#inputplan').val(),
+            "planCode": 'null',
             "projectTower": $('#inputprojecttower').val(),
             "projectAddress": $('#inputProjectAddress').val(),
             "city": $('#inputProjectCity').val(),
@@ -468,7 +483,7 @@ define([
                 var x = document.getElementById("snackbar")
                 x.className = "show";
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-                that.getConceptBoards(currentInsertedProjectId);
+                that.getConceptBoards(currentInsertedProjectId,projectName);
             },
             error:function(response) {
                 console.log(" +++++++++++++++create new project- Errrorr ++++++++++++++++++ ");
@@ -642,7 +657,7 @@ define([
         console.log(that.filter.get('imgDataEdit'));
         return false;
     },
-    getConceptBoards: function(currentInsertedProjectId){
+    getConceptBoards: function(currentInsertedProjectId,projectName){
         var that = this;
         var userId = sessionStorage.userId;
         //var userId = "user1234600";
@@ -661,7 +676,7 @@ define([
             success:function(data) {
                 console.log(" +++++++++++++++ Room List ++++++++++++++++++ ");
                 console.log(data);
-                that.fetchRoomsAndRender(projectId);
+                that.fetchRoomsAndRender(projectId,projectName);
             },
             error:function(response) {
                 //console.log(" +++++++++++++++ Errrorr ++++++++++++++++++ ");
@@ -743,16 +758,19 @@ define([
             "spacetypelists": spacetypelists.toJSON()
        }));
     },
-    fetchRoomsAndRender: function(projectId) {
+    fetchRoomsAndRender: function(projectId, projectName) {
         var that = this;
         var conceptboards = that.conceptboards;
         var spacetypelists = that.spacetypelists;
 
-         $("#rooms").html(_.template(listingProjectPageTemplate)({
+         $("#rooms").html(_.template(roomListTempPageTemplate)({
                "roomListCreate":conceptboards.toJSON(),
                "spacetypelists": spacetypelists.toJSON(),
-               "projectId": projectId
+               "projectId": projectId,
+               "projectName": projectName
          }));
+         $("#roomDisable").css('pointer-events','visible');
+         $("#addRoom").css('display','block');
        /* $("#createroomlist").html(_.template(roomListTempPageTemplate)({
            "roomListCreate":conceptboards.toJSON(),
            "spacetypelists": spacetypelists.toJSON(),
@@ -763,8 +781,8 @@ define([
                   "spacetypelists": spacetypelists.toJSON(),
                   "projectId": projectId
               }));*/
-        $('#createProject-modal').modal('hide');
-        $('#addRoomConcept').modal('show');
+        //$('#createProject-modal').modal('hide');
+        //$('#addRoomConcept').modal('show');
     },
     fetchEditProjectAndRommRender: function(projectId) {
             var that = this;

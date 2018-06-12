@@ -1,5 +1,16 @@
+<% if(typeof(getprojects) !== 'undefined'){ %>
 <%= console.log("@@@@@@@@@@@@@@@ getprojects @@@@@@@@@@@@@@@@@") %>
 <%= console.log(getprojects) %>
+<% } %>
+
+<% if(typeof(roomListCreate) !== 'undefined'){ %>
+<%= console.log("@@@@@@@@@@@@@@@ roomListCreate @@@@@@@@@@@@@@@@@") %>
+<%= console.log(roomListCreate) %>
+<% } %>
+<% if(typeof(projectName) !== 'undefined'){ %>
+<%= console.log("@@@@@@@@@@@@@@@ projectName @@@@@@@@@@@@@@@@@") %>
+<%= console.log(projectName) %>
+<% } %>
 
 <%= console.log("@@@@@@@@@@@@@@@ spacetypelists @@@@@@@@@@@@@@@@@") %>
 <%= console.log(spacetypelists) %>
@@ -21,6 +32,9 @@
 }
 #projectView{
 display:none;
+}
+#roomDisable{
+pointer-events: none;
 }
 .imgholder{
     text-align: center;
@@ -192,17 +206,17 @@ display:none;
     <div class="modal-dialog" >
         <div class="addcboard-container">
                 <div class="col-sm-12 col-md-12">
+                    <h4 class="addcboard-heading">New Project</h4>
                     <div class="tab">
                         <ul class="nav nav-tabs">
-                        <li class="active"><a href="#project" data-toggle="tab" id="HomeTab">Project Details</a></li>
-                        <li><a href="#rooms" data-toggle="tab" id="FamilyTab">Rooms Details</a></li>
+                            <li class="active"><a href="#project" data-toggle="tab" id="HomeTab">Project Details</a></li>
+                            <li id="roomDisable"><a href="#rooms" data-toggle="tab" id="FamilyTab">Rooms Details</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="project">
                                 <div id="createProject-dtls" class="createProject-container">
                                     <form id="userconceptfrmImage" method="post" name="userconceptfrm" enctype="multipart/form-data">
-                                        <div class="col-sm-12 col-md-12">
-                                            <h4 class="addcboard-heading">New Project</h4>
+                                        <div class="col-sm-12 col-md-12" style="margin-top: -25px">
                                             <div class="form-group">
                                                 <div id="list1">
                                                 <div class="row display-none" id="addUpload_error_row" style="text-align: center;;">
@@ -297,7 +311,7 @@ display:none;
                             </div>
                             <div class="tab-pane" id="rooms" >
                                 <div class="form-row">
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group ">
                                         <h3>Add Space Type <span id="addSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
                                         <% if(typeof(projectId) !== 'undefined'){ %>
                                         <input type="hidden" value="<%= projectId %>" id="projectId" />
@@ -307,8 +321,8 @@ display:none;
                                 <div class="spaceElemenetPanel"  id="elements" style="overflow-y:scroll;height:380px;">
                                     <% if(typeof(roomListCreate) !== 'undefined'){ %>
                                     <% _.each(roomListCreate[0].listOfUserConceptBoard, function(roomlst, j){ %>
-                                    <div class="col-md-12" style="margin-top: 20px;">
-                                        <div class="form-group col-md-2">
+                                    <div class="col-md-12">
+                                        <div class="form-group col-md-3">
                                             <label for="inputcategory">SpaceType</label>
                                             <input type="hidden" value="<%= roomlst.id %>" id="roomID<%= roomlst.id %>" class="roomId" />
                                             <select id="inputcategory<%= roomlst.id %>" class="form-option common">
@@ -318,8 +332,9 @@ display:none;
                                                 <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"
                                                 <% if(roomlst.name == spaceElement.title){ %> selected="selected" <% } %>
                                                 <% if(roomlst.name == "Living Room" && spaceElement.title == "Living"){ %> selected="selected" <% } %>
-                                                <% if(roomlst.name == "Bed Room - 1" && spaceElement.title == "Master Bed Room"){ %> selected="selected" <% } %>
-                                                <% if(roomlst.name == "Bed Room - 2" && spaceElement.title == "Kids Bed Room"){ %> selected="selected" <% } %>
+                                                <% if(roomlst.name == "Master Bedroom" && spaceElement.title == "Master Bed Room"){ %> selected="selected" <% } %>
+                                                <% if(roomlst.name == "Kids Bedroom" && spaceElement.title == "Kids Bed Room"){ %> selected="selected" <% } %>
+                                                <% if(roomlst.name == "Guest Bedroom" && spaceElement.title == "Bed Room ( others )"){ %> selected="selected" <% } %>
 
                                                 ><%= spaceElement.title %></option>
 
@@ -329,7 +344,7 @@ display:none;
                                         </div>
 
                                         <div class="form-row">
-                                            <div class="form-group address-style col-md-3">
+                                            <div class="form-group address-style col-md-4">
                                                 <label for="inputname">Name</label>
                                                 <input type="Name" class="form-control inputname" id="inputname<%= roomlst.id %>" placeholder="NAME">
                                             </div>
@@ -346,7 +361,7 @@ display:none;
                                     <% } %>
 
                                     <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="inputcategory">SpaceType</label>
                                             <input type="hidden" value="" id="roomID" class="roomId" />
                                             <select id="inputcategory" class="form-option common">

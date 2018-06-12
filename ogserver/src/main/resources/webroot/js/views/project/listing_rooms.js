@@ -110,7 +110,6 @@ define([
                   console.log("++++ I m here +");
 
                   $("#addcboard-modal").modal('hide');
-
                   $('body').removeClass('modal-open');
                   $('.modal-backdrop').remove();
 
