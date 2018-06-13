@@ -1,6 +1,6 @@
 <% if(typeof(userProfile) !== 'undefined'){ %>
-<%= console.log("@@@@@@@@@  userProfile @@@@@@@@@") %>
-<%= console.log(userProfile) %>
+    <%= console.log("@@@@@@@@@  userProfile @@@@@@@@@") %>
+    <%= console.log(userProfile) %>
 <% } %>
 <style>
     /*.bg-lightGrey{
@@ -121,11 +121,11 @@
                                         <label class="form-check-label" style="margin-top: 10px;">Gender  </label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input class="form-check-input" type="radio" id="inlineradio1" value="option1" name="gender" <% if(typeof(userProfile) !== 'undefined' && userProfile.gender == "male"){ %> checked="checked" <% } %> required />
+                                        <input class="form-check-input" type="radio" id="inlineradio1" value="male" name="gender" <% if(typeof(userProfile) !== 'undefined' && userProfile.gender == "male"){ %> checked="checked" <% } %> required />
                                         <label class="form-check-label" for="inlineradio1">
                                             <i style=" font-size: 30px;margin-right: 13px; " class="fa fa-male" aria-hidden="true"></i>
                                         </label>
-                                        <input class="form-check-input" type="radio" id="inlineradio2" value="option1" name="gender" <% if(typeof(userProfile) !== 'undefined' &&    userProfile.gender == "female"){ %> checked="checked" <% } %> >
+                                        <input class="form-check-input" type="radio" id="inlineradio2" value="female" name="gender" <% if(typeof(userProfile) !== 'undefined' &&    userProfile.gender == "female"){ %> checked="checked" <% } %> >
                                         <label class="form-check-label" for="inlineradio1">
                                             <i style=" font-size: 30px;margin-right: 8px; " class="fa fa-female" aria-hidden="true"></i>
                                         </label>
@@ -141,7 +141,7 @@
                                 <label for="inputCommunicationAddress">Address</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputCommunicationAddress" placeholder="1234 Main St" value="<%=userProfile ? userProfile.communicataionAddress.houseNoStreet : ''%>" required />
+                                <input type="text" class="form-control" id="inputCommunicationAddress" placeholder="1234 Main St" value="<%= userProfile ? userProfile.communicationAddress.houseNoStreet : ''%>" required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -149,7 +149,7 @@
                                 <label for="inputCommunicationCity">City</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputCommunicationCity" value="<%=userProfile ? userProfile.communicataionAddress.city : ''%>" required />
+                                <input type="text" class="form-control" id="inputCommunicationCity" value="<%= userProfile ? userProfile.communicationAddress.city : '' %>" required />
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                                 <label for="inputCommunicationState">State</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputCommunicationState" value="<%=userProfile ? userProfile.communicataionAddress.state : ''%>"  required />
+                                <input type="text" class="form-control" id="inputCommunicationState" value="<%=userProfile ? userProfile.communicationAddress.state : ''%>"  required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -167,101 +167,11 @@
                                 <label for="inputCommunicationpincode">Pin Code</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="number" class="form-control" id="inputCommunicationpincode" maxlength="6" value="<%=userProfile ? userProfile.communicataionAddress.pincode : ''%>" required />
+                                <input type="number" class="form-control" id="inputCommunicationpincode" maxlength="6" value="<%=userProfile ? userProfile.communicationAddress.pincode : ''%>" required />
                             </div>
                         </div>
                     </div>
                 </div>
-                    <!--<div class="clearfix"></div>
-                    <div class="col-sm-6 col-md-6 col-lg-6" style="border-right:1px solid #ccc;">
-
-                            <h4 class="formTit">Project Details</h4>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <div class="col-md-3 txtrgt">
-                                        <label for="inputcity">City</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="inputcity" placeholder="City" value="<%=userProfile ? userProfile.projectDetail.city : ''%>" required />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-3 txtrgt">
-                                        <label for="inputbuilder">Builder</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="inputbuilder" placeholder="Builder" value="<%=userProfile ? userProfile.projectDetail.builder : ''%>" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <div class="col-md-3 txtrgt">
-                                        <label for="inputproject">Project</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="inputproject" placeholder="Project" value="<%=userProfile ? userProfile.projectDetail.project : ''%>" required />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-3 txtrgt">
-                                        <label for="inputprojecttower">Project Tower</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="inputprojecttower" placeholder="Project Tower" value="<%=userProfile ? userProfile.projectDetail.projecttower : ''%>" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <div class="col-md-3 txtrgt">
-                                        <label for="inputplan">Plan</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="inputplan" placeholder="Plan" value="<%=userProfile ? userProfile.projectDetail.plan : ''%>" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                    <h4 class="formTit">Project Address</h4>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <div class="col-md-3 txtrgt">
-                                <label for="inputProjectAddress">Project Address</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputProjectAddress" placeholder="1234 Main St" value="<%=userProfile ? userProfile.projectAddress.houseNoStreet : ''%>" required />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-3 txtrgt">
-                                <label for="inputProjectCity">City</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputProjectCity" value="<%=userProfile ? userProfile.projectAddress.city : ''%>" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <div class="col-md-3 txtrgt">
-                                <label for="inputProjectState">State</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="inputProjectState" placeholder="State" value="<%=userProfile ? userProfile.projectAddress.state : ''%>" required />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-3 txtrgt">
-                                <label for="inputCommunicationpincode">Pin Code</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="number" class="form-control" id="inputpincode" maxlength="6" value="<%=userProfile ? userProfile.projectAddress.pincode : ''%>" required />
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
                     <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top:40px;">
                         <div class="form-row">
                             <div class="form-group">
@@ -281,39 +191,3 @@
         </div>
     </form>
 </div>
-
-<!--
-<script>
-$(document).ready(function() {
-    $('#taskForm')
-        .formValidation({
-            framework: 'bootstrap',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                task: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The task is required'
-                        }
-                    }
-                },
-                description: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The description is required'
-                        }
-                    }
-                }
-            }
-        })
-        .on('success.field.fv', function(e, data) {
-            if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
-                data.fv.disableSubmitButtons(true);
-            }
-        });
-});
-</script>-->

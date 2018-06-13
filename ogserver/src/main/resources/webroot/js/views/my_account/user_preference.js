@@ -556,23 +556,25 @@ define([
         var  user_home_preferences = that.user_home_preferences;
         user_home_preferences = user_home_preferences.toJSON();
 
+
          console.log("@@@@@@@@@@@@@@ user_home_preferences @@@@@@@@@@@@@@@@@@@");
          console.log(user_home_preferences);
 
          _.each(user_home_preferences[0].userQues, function(userQuesdtl, j){
                 if(j == 0){
-                    if(typeof(that.filter_preference.get("selectedInteriorBudget")) !== 'undefined'){
-                        userQuesdtl.userSelectedOption[0] = that.filter_preference.get("selectedInteriorBudget");
-                    }
-                }
-                if(j == 1){
                     if(typeof(that.filter_preference.get("selectedDwellingType")) !== 'undefined'){
                         userQuesdtl.userSelectedOption[0] = that.filter_preference.get("selectedDwellingType");
                     }
                 }
+                if(j == 1){
+                    if(typeof(that.filter_preference.get("selectedUsage")) !== 'undefined'){
+                        userQuesdtl.userSelectedOption[0] = that.filter_preference.get("selectedUsage");
+                    }
+
+                }
                 if(j == 2){
-                    if(typeof(that.filter_preference.get("selectedRoom")) !== 'undefined'){
-                        userQuesdtl.userSelectedOption[0]= that.filter_preference.get("selectedRoom");
+                    if(typeof(that.filter_preference.get("selectedInteriorBudget")) !== 'undefined'){
+                        userQuesdtl.userSelectedOption[0] = that.filter_preference.get("selectedInteriorBudget");
                     }
                 }
                 if(j == 3){
@@ -581,8 +583,8 @@ define([
                     }
                 }
                 if(j == 4){
-                    if(typeof(that.filter_preference.get("selectedUsage")) !== 'undefined'){
-                        userQuesdtl.userSelectedOption[0] = that.filter_preference.get("selectedUsage");
+                    if(typeof(that.filter_preference.get("selectedRoom")) !== 'undefined'){
+                        userQuesdtl.userSelectedOption[0]= that.filter_preference.get("selectedRoom");
                     }
                 }
          });

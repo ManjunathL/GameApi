@@ -12,12 +12,17 @@ define([
     ref: MGF.rootRef,
     refAuth: MGF.refAuth,
     initialize: function() {
-        this.listenTo(Backbone);
-        _.bindAll(this, 'renderWithUserProfCallback', 'render');
+        this.listenTo(Backbone, 'user.change', this.handleUserChange);
+        _.bindAll(this, 'renderWithUserProfCallback', 'render', 'submit');
+    },
+    handleUserChange: function () {
+        if (VM.activeView === VM.USER_PROFILE) {
+            window.location = '/';
+        }
     },
     renderWithUserProfCallback: function (userProfData, provider) {
         console.log("+++++++++++++ userProfData +++++++++++++++");
-                console.log(userProfData);
+        console.log(userProfData);
 
         $(this.el).html(_.template(UserProfileTemplate)({
             'userProfile': userProfData,
@@ -44,47 +49,37 @@ define([
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
             return;
-            return;
           }
 
           var communicationAddress={
-                        "houseNoStreet": $('#inputCommunicationAddress').val(),
-                        "city": $('#inputCommunicationCity').val(),
-                        "state": $('#inputCommunicationState').val(),
-                        "pincode": $('#inputCommunicationpincode').val()
-          } ;
+            "houseNoStreet": $('#inputCommunicationAddress').val(),
+            "city": $('#inputCommunicationCity').val(),
+            "state": $('#inputCommunicationState').val(),
+            "pincode": $('#inputCommunicationpincode').val()
+           };
 
-          var projectAddress={
-                    "houseNoStreet": $('#inputProjectAddress').val(),
-                    "city": $('#inputProjectCity').val(),
-                    "state": $('#inputProjectState').val(),
-                    "pincode": $('#inputpincode').val()
-          };
-          var projectDetails={
-                    "builder": $('#inputbuilder').val(),
-                    "city": $('#inputcity').val(),
-                    "plan": $('#inputplan').val(),
-                    "project": $('#inputproject').val(),
-                    "projecttower": $('#inputprojecttower').val()
-          };
           var formData = {
               "additionalEmail": $('#inputemail').val(),
-              "communicataionAddress":communicationAddress,
+              "communicationAddress":communicationAddress,
               "dob": $('#inputdob').val(),
-              /*"gender": $('#gender').val(),*/
-              "gender": "female",
+              "gender": $("input[name='gender']:checked").val(),
               "mobileNumber": $('#inputmobilenumber').val(),
               "name": $('#inputname').val(),
-              "projectAddress":projectAddress,
-              "projectDetail":projectDetails,
               "surName": $('#inputsurname').val()
           };
-          console.log("form Data ");
+
+          console.log("User Profile form Data ");
           console.log(formData);
+
           var that = this;
           MGF.updateProfile(formData).then(function () {
           console.log("inside update Profile ");
-              that.render()
+            $("#snackbar").html("Successfully updated profile details... ");
+            var x = document.getElementById("snackbar")
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            //return;
+              that.render();
           });
       }
 
