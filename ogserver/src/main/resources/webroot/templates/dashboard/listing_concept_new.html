@@ -100,6 +100,9 @@
       top: 0;
       opacity: 0;
     }
+    #blah{
+        display:none;
+    }
 </style>
 <link href="css/layout.css" rel="stylesheet">
 <button id="addCBoard" title="Add Concept Board"><i class="fa fa-cloud-upload"></i></button>
@@ -524,6 +527,8 @@
             reader.onload = function (e) {
                 $('#blah')
                     .attr('src', e.target.result)
+                    .css('display', 'block')
+                    .css('margin-top', '10px')
                     .width(100)
                     .height(100);
             };

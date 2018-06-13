@@ -90,7 +90,13 @@ pointer-events: none;
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
-
+#imageUploadCreate{
+    display:none;
+}
+.boxcart{
+    box-shadow: 0px 0px 10px 4px #ccc;
+    border: 20px solid #fff;
+}
 .title {
 	font-family: 'Libre Baskerville', "Times New Roman", Times, Baskerville, Georgia, serif;
 	font-size: 32px;
@@ -168,12 +174,19 @@ pointer-events: none;
   top: 0;
   opacity: 0;
 }
+#createProject{
+border: 1px dashed #333;
+text-align: center;
+height: 304px;
+box-shadow: 0px 0px 10px 4px #ccc;
+border: 20px solid #fff;
+}
 </style>
 <section class="main-conceptboard-sec bg-light-gray">
     <div class="container">
         <div class="mt20">
             <div class="row">
-                <div id="createProject" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 cell-container" style="border: 1px dashed #333;text-align: center;height: 265px;">
+                <div id="createProject" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 cell-container">
                     <p class="title text" style="color: #000f; text-transform: none;">Create Project</p>
                     <div class="overlay"  target="_blank">
                         <div class="text">
@@ -184,7 +197,7 @@ pointer-events: none;
                 <% if(typeof(getprojects) !== 'undefined'){ %>
                 <% var cnt=1; %>
                 <% _.each(getprojects[0].userProjects, function(allProjects, i){ %>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 cell-container">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 cell-container boxcart">
                     <img class="image" src="/img/building<%= cnt %>.jpg">
                     <a class="overlay" href="javascript:void(0);">
                         <i class="fa fa-times-circle deleteProject" aria-hidden="true" style="font-size: 25px;float:left;color: white;z-index:9;" data-element="<%= allProjects.id %>"></i>
@@ -289,7 +302,7 @@ pointer-events: none;
                                                 <div class="col-md-4 address-style upload-btn-wrapper" style="top: 28px;">
                                                     <button class="btnImage">Upload Layout</button>
                                                     <input id="uploadHomelayout" type="file" onchange="readURL(this);" name="uploadHome"/>
-                                                    <img style="margin-top: 11px;" id="blah" src="#" alt="your image"/>
+                                                    <img style="margin-top: 11px;" id="imageUploadCreate" src="#" alt="your image"/>
                                                     <div ><label id="file-nameUploadCreate"></label></div>
                                                 </div>
                                             </div>
@@ -310,91 +323,91 @@ pointer-events: none;
                                 </div>
                             </div>
                             <div class="tab-pane" id="rooms" >
-                                <div class="form-row">
-                                    <div class="form-group ">
-                                        <h3>Add Space Type <span id="addSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
-                                        <% if(typeof(projectId) !== 'undefined'){ %>
-                                        <input type="hidden" value="<%= projectId %>" id="projectId" />
+                                    <div class="form-row">
+                                        <div class="form-group ">
+                                            <h3>Add Space Type <span id="addSpaceElement" class="glyphicon glyphicon-plus" style="color: #634e42;"></span></h3>
+                                            <% if(typeof(projectId) !== 'undefined'){ %>
+                                            <input type="hidden" value="<%= projectId %>" id="projectId" />
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="spaceElemenetPanel"  id="elements" style="overflow-y:scroll;height:380px;">
+                                        <% if(typeof(roomListCreate) !== 'undefined'){ %>
+                                        <% _.each(roomListCreate[0].listOfUserConceptBoard, function(roomlst, j){ %>
+                                        <div class="col-md-12">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputcategory">SpaceType</label>
+                                                <input type="hidden" value="<%= roomlst.id %>" id="roomID<%= roomlst.id %>" class="roomId" />
+                                                <select id="inputcategory<%= roomlst.id %>" class="form-option common">
+                                                    <option selected>Choose...</option>
+                                                    <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                                                    <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                                                    <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"
+                                                    <% if(roomlst.name == spaceElement.title){ %> selected="selected" <% } %>
+                                                    <% if(roomlst.name == "Living Room" && spaceElement.title == "Living"){ %> selected="selected" <% } %>
+                                                    <% if(roomlst.name == "Master Bedroom" && spaceElement.title == "Master Bed Room"){ %> selected="selected" <% } %>
+                                                    <% if(roomlst.name == "Kids Bedroom" && spaceElement.title == "Kids Bed Room"){ %> selected="selected" <% } %>
+                                                    <% if(roomlst.name == "Guest Bedroom" && spaceElement.title == "Bed Room ( others )"){ %> selected="selected" <% } %>
+
+                                                    ><%= spaceElement.title %></option>
+
+                                                    <% }); %>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group address-style col-md-4">
+                                                    <label for="inputname">Name</label>
+                                                    <input type="Name" class="form-control inputname" id="inputname<%= roomlst.id %>" placeholder="NAME">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputname">Description</label>
+                                                    <input type="Name" class="form-control description" id="description<%= roomlst.id %>" placeholder="DESCRIPTION">
+                                                </div>
+                                                <!--<div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
+                                                        <input type="submit" id="<%= roomlst.id %>"  class="btn addcboard-btn updatecreateRoom" value="Update">
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                        <% }); %>
                                         <% } %>
-                                    </div>
-                                </div>
-                                <div class="spaceElemenetPanel"  id="elements" style="overflow-y:scroll;height:380px;">
-                                    <% if(typeof(roomListCreate) !== 'undefined'){ %>
-                                    <% _.each(roomListCreate[0].listOfUserConceptBoard, function(roomlst, j){ %>
-                                    <div class="col-md-12">
-                                        <div class="form-group col-md-3">
-                                            <label for="inputcategory">SpaceType</label>
-                                            <input type="hidden" value="<%= roomlst.id %>" id="roomID<%= roomlst.id %>" class="roomId" />
-                                            <select id="inputcategory<%= roomlst.id %>" class="form-option common">
-                                                <option selected>Choose...</option>
-                                                <% if(typeof(spacetypelists) !== 'undefined'){ %>
-                                                <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
-                                                <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"
-                                                <% if(roomlst.name == spaceElement.title){ %> selected="selected" <% } %>
-                                                <% if(roomlst.name == "Living Room" && spaceElement.title == "Living"){ %> selected="selected" <% } %>
-                                                <% if(roomlst.name == "Master Bedroom" && spaceElement.title == "Master Bed Room"){ %> selected="selected" <% } %>
-                                                <% if(roomlst.name == "Kids Bedroom" && spaceElement.title == "Kids Bed Room"){ %> selected="selected" <% } %>
-                                                <% if(roomlst.name == "Guest Bedroom" && spaceElement.title == "Bed Room ( others )"){ %> selected="selected" <% } %>
 
-                                                ><%= spaceElement.title %></option>
-
-                                                <% }); %>
-                                                <% } %>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group address-style col-md-4">
-                                                <label for="inputname">Name</label>
-                                                <input type="Name" class="form-control inputname" id="inputname<%= roomlst.id %>" placeholder="NAME">
+                                        <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputcategory">SpaceType</label>
+                                                <input type="hidden" value="" id="roomID" class="roomId" />
+                                                <select id="inputcategory" class="form-option common">
+                                                    <option selected>Choose...</option>
+                                                    <% if(typeof(spacetypelists) !== 'undefined'){ %>
+                                                    <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
+                                                    <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"><%= spaceElement.title %></option>
+                                                    <% }); %>
+                                                    <% } %>
+                                                </select>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label for="inputname">Description</label>
-                                                <input type="Name" class="form-control description" id="description<%= roomlst.id %>" placeholder="DESCRIPTION">
+                                            <div class="form-row">
+                                                <div class="form-group address-style col-md-3">
+                                                    <label for="inputname">Name</label>
+                                                    <input type="Name" class="form-control inputname" id="inputname" placeholder="NAME">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputname">Description</label>
+                                                    <input type="Name" class="form-control description" id="description" placeholder="DESCRIPTION">
+                                                </div>
+                                                <!-- <div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
+                                                     <input type="submit" id="add" class="btn addcboard-btn addMoreRoom" value="add">
+                                                 </div>-->
                                             </div>
-                                            <!--<div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
-                                                    <input type="submit" id="<%= roomlst.id %>"  class="btn addcboard-btn updatecreateRoom" value="Update">
-                                            </div>-->
                                         </div>
                                     </div>
-                                    <% }); %>
-                                    <% } %>
-
-                                    <div id="copyspaceElemenet" class="col-md-12" style="margin-top: 20px;display:none;">
-                                        <div class="form-group col-md-3">
-                                            <label for="inputcategory">SpaceType</label>
-                                            <input type="hidden" value="" id="roomID" class="roomId" />
-                                            <select id="inputcategory" class="form-option common">
-                                                <option selected>Choose...</option>
-                                                <% if(typeof(spacetypelists) !== 'undefined'){ %>
-                                                <% _.each(spacetypelists[0].spaceTypeList, function(spaceElement, j){ %>
-                                                <option value="<%= spaceElement.code %>" data-element="<%= spaceElement.title %>"><%= spaceElement.title %></option>
-                                                <% }); %>
-                                                <% } %>
-                                            </select>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group address-style col-md-3">
-                                                <label for="inputname">Name</label>
-                                                <input type="Name" class="form-control inputname" id="inputname" placeholder="NAME">
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label for="inputname">Description</label>
-                                                <input type="Name" class="form-control description" id="description" placeholder="DESCRIPTION">
-                                            </div>
-                                            <!-- <div class="form-group col-md-1" style="margin-left: 56px;margin-top: 28px;">
-                                                 <input type="submit" id="add" class="btn addcboard-btn addMoreRoom" value="add">
-                                             </div>-->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12" style="text-align:center;">
+                                            <span  id="btn1">
+                                                <input type="submit" id="save_roomConcept" class="btn addcboard-btn" value="Submit">
+                                            </span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12" style="text-align:center;">
-                                        <span  id="btn1">
-                                            <input type="submit" id="save_roomConcept" class="btn addcboard-btn" value="Submit">
-                                        </span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -464,8 +477,9 @@ pointer-events: none;
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#blah')
+            $('#imageUploadCreate')
                 .attr('src', e.target.result)
+                .css('display', 'block')
                 .width(100)
                 .height(100);
         };

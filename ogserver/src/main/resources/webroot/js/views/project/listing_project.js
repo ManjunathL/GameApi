@@ -544,19 +544,19 @@ define([
                 $("#inputpincode-error").html("Please Enter the Pin Code ");
                 return false;
             }
-            var plan = $('#editinputplan').val();
+           /* var plan = $('#editinputplan').val();
             $('#inputplan').focus();
             if(plan.length == 0){
                 $("#inputpincode-error").html("Please Enter the Plan ");
                 return false;
-            }
+            }*/
            var fileupload= that.filter.get('imgDataEdit');
             var formdata={
                 "builder": $('#inputbuilder').val(),
                 "city": $('#inputcity').val(),
                 "description": "",
                 "id": 0,
-                "planCode": $('#inputplan').val(),
+                "planCode": 'null',
                 "projectTower": $('#inputprojecttower').val(),
                 "projectAddress": $('#inputProjectAddress').val(),
                 "city": $('#inputProjectCity').val(),

@@ -41,6 +41,14 @@
   top: 0;
   opacity: 0;
 }
+#imageUpload{
+    display:none;
+}
+.close{
+    margin-top: -9%;
+    margin-right: -10%;
+    color: #555 !important;
+}
 </style>
 <section>
     <button id="addCBoard" title="Add Concept Board"><i class="fa fa-cloud-upload"></i></button>
@@ -160,13 +168,16 @@
         <div class="modal-dialog">
             <div id="addcboard-dtlsImage" class="addcboard-container" style="width: 63%;min-height: 150px">
                 <div class="col-sm-12 col-md-12">
+
                     <h3 class="addcboard-heading" style="margin-left: -16px;">Add User Design Image </h3>
+                    <button type="button"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <form id="userconceptfrmImage" method="post" name="userconceptfrm" enctype="multipart/form-data">
                     <div class="form-group">
                         <div class="upload-btn-design">
                             <button class="btnImagedesign">Upload a file</button>
-                            <input id="conceptfileupload" type="file" name="conceptfile"/>
+                            <input id="conceptfileupload" type="file" onchange="readURL(this);" name="conceptfile"/>
+                            <img id="imageUpload" src="#" alt="your image"/>
                             <label id="file-name"></label>
                         </div>
                         <div id="list1">
@@ -354,14 +365,36 @@
     $("#conceptfileupload").change(function(){
       $("#file-name").text(this.files[0].name);
     });
-var arr = new Array();
-$('.shortList').click(function (e) {
-    var currentTarget = $(e.currentTarget);
-    var familyoptId = currentTarget.attr('id');
+    var arr = new Array();
+    $('.shortList').click(function (e) {
+        var currentTarget = $(e.currentTarget);
+        var familyoptId = currentTarget.attr('id');
 
 
 
-         filter.set({'shortedList': familyoptId});
-         filter.trigger('change');
-});
+             filter.set({'shortedList': familyoptId});
+             filter.trigger('change');
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imageUpload')
+                    .attr('src', e.target.result)
+                    .css('display', 'block')
+                    .css('margin-top', '10px')
+                    .width(100)
+                    .height(100);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+     $(document).ready(function () {
+         $('.close').on('click', function () {
+             $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();
+         });
+     });
+
 </script>
