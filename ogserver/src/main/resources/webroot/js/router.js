@@ -26,6 +26,7 @@ define([
             'user-profile(/)':'user-profile',
             'user_preference(/)':'user_preference',
             'listofconcepts(/)':'listing_everything',
+            'listoflooks-:id(/)':'listing_looks',
             '*something': 'errorPage'
         }
     });
@@ -85,6 +86,18 @@ define([
                 };
 
                 VM.create(VM.EVERYTHINGCONCEPTPAGE, EverythingConceptPage,options).render();
+            });
+        });
+
+        router.on('route:listing_looks', function(projectId) {
+           require(['views/dashboard/view_home_design'], function(ViewHomeDesignPage) {
+                 var options = {
+                    model: {
+                        "id": projectId
+                    }
+                };
+
+                VM.create(VM.VIEWHOMEDESIGNSPAGE, ViewHomeDesignPage,options).render();
             });
         });
 

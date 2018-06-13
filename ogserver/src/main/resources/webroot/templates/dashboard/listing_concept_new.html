@@ -7,6 +7,19 @@
 <%= console.log("@@@####################### Recommneded @@@@@@@@@@@@@@@@@") %>
 <%= console.log(needconceptlisting) %>
 <style>
+.form-control {
+        width: 100%;
+        height: 36px;
+        padding: 10px 13px;
+        background-color: transparent;
+        background-image: none;
+        border-radius: 20px;
+        box-shadow:none !important;
+        border-left: 1px solid #555 !important;
+        border-top: 1px solid #555  !important;
+        border-right: 1px solid #555!important;
+        border-bottom: 1px solid #555!important;
+    }
     #searchForm1{
         display:block;
     }
@@ -17,6 +30,7 @@
     #owl-sptype .item img{
         display: block;
         width: 106px;
+        margin: 3px;
         height: 75px;
     }
 
@@ -86,6 +100,9 @@
       top: 0;
       opacity: 0;
     }
+    #blah{
+        display:none;
+    }
 </style>
 <link href="css/layout.css" rel="stylesheet">
 <button id="addCBoard" title="Add Concept Board"><i class="fa fa-cloud-upload"></i></button>
@@ -93,22 +110,27 @@
     <div class="container-fluid" style="background: #f2f4f4;padding-bottom:40px;padding-left:0px;">
 
         <div class="col-md-12 col-lg-12" style="padding-left:0px;" >
-                        <div class="wrapper">
+            <h2 class="" style="text-align: left; max-width: 100%; font-size: 18px;font-weight: bold;">View Concepts in <span style="font-size: 22px; color: #ec5136;"><%= conceptBoardName %></span></h2>
+
+            <div class="wrapper">
                             <!-- Sidebar Holder -->
                             <nav id="sidebar">
-                                <div class="sidebar-header">
+
+                               <!-- <div class="sidebar-header">-->
                                     <!--<h3>Filter Concept</h3>-->
                                     <!--<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn pull-left mr10">
                                         <i class="glyphicon glyphicon-align-left"></i>
                                     </button>-->
-                                    <h3 class="filterSPElement" style="color: #000;text-align:center;">Room Area</h3>
-                                </div>
+<!--
+                                    <h3 class="filterSPElement" style="color: #000;text-align:center;">View Concepts in <%= conceptBoardName %> </h3>
+-->
+                             <!--   </div>-->
 
                                 <ul class="list-unstyled components">
                                     <li class="active"  style="height: 70px;">
                                         <a onclick="getElementsView('all')">
                                             <div class="col-md-3"><img src="http://designwhimages.mygubbi.com/SE-EVERYTHING.png" alt="Everything" width="50px" height="50px"/></div>
-                                            <div class="col-md-8 tit">All Area</div>
+                                            <div class="col-md-8 tit">All</div>
                                         </a>
                                     </li>
                                     <% var uniqnm = ""; %>
@@ -141,9 +163,9 @@
                         <div class="container" style="width:1090px;">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;"><%= conceptBoardName %>
-
-                                    </h2>
+<!--
+                                    <h2 class="panelTitletxt" style="border-radius: 10px;align-items: center; max-width: 29%; margin: 20px auto;">View Concepts in <%= conceptBoardName %></h2>
+-->
                                     <div id="myCarousel112" class="carousel slide mt30">
                                         <div class="tagicos">
                                             <div class="tagicos clearfix carousel-inner">
@@ -248,7 +270,8 @@
                 <div class="modal-dialog">
                     <div class="pin-container"  style="height:615px;">
                         <div class="col-sm-12 col-md-12">
-                        <h3 class="addcboard-heading">Add Concept To Board</h3>
+                            <button type="button"  style="margin-top: -37px; margin-right: -23px;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="addcboard-heading">Add concept to</h3>
                         </div>
                         <div class="clearfix"></div>
                         <div class="row">
@@ -305,8 +328,9 @@
         <div class="modal fade" id="pin-modal-conceptdtls" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="pin-container" style="height:615px;">
+                <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">&times;</button>
                 <div class="col-sm-12 col-md-12">
-                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add Concept To Board</h3>
+                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add concept to</h3>
                 </div>
                 <div class="clearfix"></div>
                 <div class="row">
@@ -347,7 +371,7 @@
             <div id="addcboardImg-dtls" class="adduserconcept-container">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <div class="col-sm-12 col-md-12">
-                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add Personal Concept</h3>
+                    <h3 class="addcboard-heading" style="margin-left: -16px;">Add user concept</h3>
                 </div>
                 <div class=" col-sm-12 col-md-12">
                     <form id="userconceptfrm" method="post" name="userconceptfrm" enctype="multipart/form-data">
@@ -358,8 +382,9 @@
                                 -->
                                 <div class="upload-btn-wrapper">
                                     <button class="btnImage">Upload a file</button>
-                                    <input id="conceptfileupload" type="file" name="conceptfile"/>
-                                    <label id="file-name"></label>
+                                    <input id="conceptfileupload" type="file" onchange="readURL(this);"  name="conceptfile"/>
+                                    <img id="blah" src="#" alt="your image"/>
+                                    <div style="float: right;"><label id="file-name"></label></div>
                                 </div>
                                 <!--<input type="button" id="showImg" class="btn addcboard-btn" value="Show">-->
                                 <div id="list1">
@@ -369,14 +394,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h4>Concept Name:</h4>
+                                <h4>Name:</h4>
                                 <input type="text" class="form-control" id="cboardcnameTxt" name="cboardname" />
                             </div>
                             <div class="row display-none" id="addUploadImage_error_row" style="text-align: center;">
                                 <p class="margin0 error-text blankTxtbox" id="addUploadImage_error"></p>
                             </div>
                             <div class="form-group">
-                                <h4>Concept Description:</h4>
+                                <h4>Description:</h4>
                                 <input type="text" class="form-control" id="cboarddescTxt" name="cboarddesc" />
                             </div>
                             <div class="row display-none" id="addUploadImagedesc_error_row" style="text-align: center;">
@@ -495,5 +520,21 @@
       });
         $("#frmsec").fadeOut();
     });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .css('display', 'block')
+                    .css('margin-top', '10px')
+                    .width(100)
+                    .height(100);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
 </script>

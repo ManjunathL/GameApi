@@ -1,3 +1,6 @@
+<%= console.log("@@@####################### conceptboardsDtls @@@@@@@@@@@@@@@@@") %>
+<%= console.log(conceptboardsDtls) %>
+
 <link rel="stylesheet" href="js/libs/bootstrap-tagsinput.css">
 <script src="js/libs/bootstrap-tagsinput.js"></script>
 
@@ -9,6 +12,11 @@
     #owl-demo .item{
         margin: 3px;
     }
+    #owl-sptype .item img {
+    display: block;
+    width: 106px;
+    height: 75px;
+}
     #owl-demo .item img{
         display: block;
         width: 115px;
@@ -33,35 +41,189 @@
         right: -30px;
         top: 5px;
     }
+    .form-group {
+      position: relative;
+      margin-bottom: 15px;
+    }
+    .form-control{
+        color:#555;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 25px;
+    }
+    .form-control {
+      padding-left: 2px;
+      padding-right: 2px;
+      resize: none;
+      border-left: 0;
+      border-top: 0;
+      border-right: 0;
+    }
+
+    .form-control,.form-control:focus {
+      box-shadow: none;
+    }
+    .main-concept-img{
+        box-shadow: 0px 2px 10px;
+    }
+    .relConceptImg{
+        box-shadow: 0px 2px 10px #000;
+    }
+    .owl-carousel {
+        width: 98%;
+    }
+    .btn-container{
+      margin: auto;
+      height:44px;
+      width:166.23px;
+
+}
+.readMore{
+    color: #ea5c36;
+}
+ #owl-sptype .item{
+        margin: 3px;
+        padding: 10px;
+    }
+    #owl-sptype .item img{
+        display: block;
+        width: 130px;
+        height: 75px;
+    }
+
+    #owl-tmpltype .item{
+        margin: 3px;
+        padding: 10px;
+    }
+    #owl-tmpltype .item img{
+        display: block;
+        width: 145px;
+        height: 96px;
+    }
+    .owl-prev{
+        position: absolute;
+        left: -25px;
+        top: 25px;
+    }
+    .owl-next{
+        position: absolute;
+        right: -30px;
+        top: 25px;
+    }
 </style>
 
-<div class="row">
+<div class="row conceptdtlspg" id="place">
     <div class="col-sm-6 col-md-6">
         <div class="pin-model-img">
-            <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImgg" alt="pin image">
+            <img src="img/pnis/pin1.jpg" class="main-concept-img img-responsive" id="mastImgg" alt="pin image" width="100%">
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <p id="concDes">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+                </p>
+                <p id="concFullDes" style="display:none;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
+                </p>
+                <!--new div for add notes and add tags-->
+                <!--<div class="new-pin mt40">
+                    <div>
+                        <label class="txtwhite">My Tags</label><br>
+                        <div id="taglists" class="mb15"></div>
+                        <input class="form-control" type="text" id="tagtxt" placeholder="Type your tag here with comma separate" value="" data-role="tagsinput"/>
+                        <br/> <button id="save_CTag" class="btn btn-add mt15" type="submit">Add Tags</button>
+                    </div>
+
+                </div>-->
+            </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-6">
+    <!--<div class="col-sm-1 col-md-1"></div>-->
+    <div class="col-sm-6 col-md-6" style="padding-left:40px;">
+        <div class="pin" style="float:right;">
+            <a href="javascript:void(0);" onclick="showModalDeta(this)" class="btn btn-pin "> <i class="fa fa-thumb-tack" aria-hidden="true"></i> Add </a>
+        </div>
         <div class="new-pin">
             <h5 id="concNmm">Excepteur sint occaecat cupidatat non proident </h5>
-            <p id="concDes">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium, metus et scelerisque dignissim, ligula est imperdiet nisl, sit amet malesuada nunc felis in nisi. Nullam dapibus ligula dui, in rhoncus purus euismod nec. Duis in lacinia neque. Etiam tellus.
-            </p>
             <input type="hidden" id="conId">
+
         </div>
-        <!--new div for add notes and add tags-->
+        <div class="new-pin">
+            <div class="add_notes">
+                <div onclick="showTextArea()" title="Add Notes">
+                    <!--<label class="txtwhite">My Notes</label>-->
+                </div>
+                <div id="notes" class="notes-content form-group">
+                    <textarea id="conceptNotetxt" placeholder="Add a Note/Tags (Add tags using #)" rows="2" cols="38" required="required" class="form-control" maxlength="300">
+                    </textarea>
+                </div>
+                <button id="save_CNote" class="btn btn-add" type="submit">Add Notes</button>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h4>Similar Concepts </h4>
+                <div id="similarconceptdtls"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h4>Related Concepts </h4>
+                <div id="relatedconceptdtls"></div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="clearfix"></div>
 
-<div class="modal fade" id="show_description-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="pin-modal-conceptdtls" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
-        <button id ="show_description-close" type="button" class="close" data-dismiss="modal">&times;</button>
-        <div id="show_description-dtls" class="show_description-container">
+        <div class="pin-container" style="height:615px;">
+            <div class="col-sm-12 col-md-12">
+                <h3 class="addcboard-heading" style="margin-left: -16px;">Add Concept To Board</h3>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                <div class="col-sm-3 col-md-3">
+                    <div class="pin-model-img">
+                        <a href="detail.html">  <img src="img/pnis/pin1.jpg" class="img-responsive" id="mastImg1" alt="pin image"> </a>
+                        <h5 id="concNm1" style="color: #ea5c36;font-size: 18px;font-weight: 600;">Excepteur sint occaecat cupidatat non proident </h5>
+                        <input type="hidden" id="ConcCod">
+                    </div>
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-8 spaceElmntDv">
+                    <div>
+                        <h4 style="font-size: 18px;font-weight: 300;color: #333;">Identity Room </h4>
+                    </div>
+                    <% if(typeof(conceptboardsDtls) !== 'undefined'){ %>
+                    <div id="owl-sptype1" class="owl-carousel owl-theme ml15">
+                        <% _.each(conceptboardsDtls[0].listOfUserConceptBoard, function(splst, i){ %>
+                        <div class="item boardlst"
+                             data-element="<%= splst.id %>" data-element1="<%= splst.spaceTypeCode %>" >
+                            <img src="<%= splst.imgUrl %>" alt="<%= splst.code %>" class="img-responsive img-centered" style="display: block; width: 106px; height: 75px;" >
+                            <h5><%= splst.name %></h5>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <% } %>
+                    <div id="spaceTemp11"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<!--
+<div class="modal fade" id="addcboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div id="addcboard-dtls" class="addcboard-container">
+
+        </div>
+    </div>
+</div>
+-->
 
 <script>
     $(document).ready(function() {
@@ -81,4 +243,36 @@
         document.getElementById("tags").classList.toggle("show");
 
     }
+    function showModalDeta(event){
+        $("#pin-modal").modal('hide');
+        $('#pin-modal-conceptdtls').modal('show');
+    }
+  function showDesc(){
+   $('#concFullDes').css('display', 'block');
+    $('#concDes').css('display', 'none');
+  }
+
+   $(function() {
+      $("#owl-sptype1").owlCarousel({
+        autoPlay: 3000,
+        items : 5,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+      $("#owl-tmpltype").owlCarousel({
+        autoPlay: 3000,
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        nav    : true,
+        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+        dots: false
+      });
+        $("#frmsec").fadeOut();
+    });
+
+
 </script>

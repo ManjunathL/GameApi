@@ -3,7 +3,7 @@ define([
     'backbone'
 ], function($, Backbone){
     var EditFamilyMember = Backbone.Model.extend({
-      urlRoot:baseRestApiUrl + 'MyGubbiApi//questionnaire/get/members/ques/list/'
+      urlRoot:baseRestApiUrl + 'MyGubbiApi/questionnaire/get/members/ques/list/'
     });
     return EditFamilyMember;
 });

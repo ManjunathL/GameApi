@@ -3,6 +3,7 @@
         color: #ea5c36;
         font-weight: 600;
         margin-bottom: 0px !important;
+        text-transform: none !important;
     }
     .form-group {
         margin-bottom: 0px !important;
@@ -25,15 +26,15 @@
     <h4 class="formFmTit"><%= userQuesdtl.questionnaire.questionDetails.name %></h4>
     <% _.each(userQuesdtl.questionnaire.options, function(userOptsdtl, j){ %>
     <% if(typeof(userOptsdtl.imageURL) !== 'undefined' && userOptsdtl.imageURL != ""){ %>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
         <figure>
-            <img  id="<%= userOptsdtl.quesOptionid %>" src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" class="wrap img-circle multiselectFamily clickAction userquesfamily"  width="300px" height="250px">
+            <img  id="<%= userOptsdtl.quesOptionid %>" src="<%= userOptsdtl.imageURL %>" alt="<%= userOptsdtl.name %>" data-element="<%= userQuesdtl.questionnaire.questionDetails.quesId %>" data-element1="<%= userOptsdtl.quesOptionid %>" data-element2="<%= userQuesdtl.questionnaire.questionDetails.name %>" class="wrap img-circle multiselectFamily clickAction userquesfamily"  width="500px" height="300px">
             <% if(typeof(userQuesdtl.userSelectedOption) !== 'undefined'){ %>
             <% _.each(userQuesdtl.userSelectedOption, function(userSelOptsdtl, k){ %>
             <% if(typeof(userSelOptsdtl) !== 'undefined' && userSelOptsdtl.optionId == userOptsdtl.quesOptionid){ %>
             <i id="idIcon<%= userOptsdtl.quesOptionid %>" class="fa fa-check-circle selFmIco" aria-hidden="true"
 
-               style="display:block;"
+               style="display:block; font-size: 39px;"
 
             ></i>
             <% } %>
@@ -41,7 +42,7 @@
             <% } %>
             <i id="idIcon<%= userOptsdtl.quesOptionid %>" class="fa fa-check-circle selFmIco" aria-hidden="true"
 
-               style="display:none;"
+               style="display:none;font-size: 39px;"
 
             ></i>
 

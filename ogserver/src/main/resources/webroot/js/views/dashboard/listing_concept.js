@@ -1487,19 +1487,19 @@ define([
      });
     },
     fetchRelatedConceptAndRender: function(){
-     var that = this;
-     var related_concepts = that.related_concepts;
-     var similar_concepts = that.similar_concepts;
+          var that = this;
+          var related_concepts = that.related_concepts;
+          var similar_concepts = that.similar_concepts;
 
-     $('#similarconceptdtls').html(_.template(similarconceptPageTemplate)({
-         "similarConcepts": similar_concepts.toJSON()
-     }));
+          $('#similarconceptdtls').html(_.template(similarconceptPageTemplate)({
+              "similarConcepts": similar_concepts.toJSON()
+          }));
 
-     $('#relatedconceptdtls').html(_.template(relatedconceptPageTemplate)({
-         "relatedConcepts": related_concepts.toJSON()
-     }));
+          $('#relatedconceptdtls').html(_.template(relatedconceptPageTemplate)({
+              "relatedConcepts": related_concepts.toJSON()
+          }));
 
-    }
+         }
   });
   return ListingConceptPage;
 });

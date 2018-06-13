@@ -15,8 +15,9 @@ define([
   'models/filter_preference',
   'models/filter',
   'collections/family_preferences',
-  'collections/editfamilymembers'
-], function($, _, Backbone, Bootstrap, UserPreferenceTemplate, HomePreferenceTemplate, FamilyPreferenceTemplate, MemberPreferenceTemplate, editMemberPageTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter,FamilyPreferences,EditFamilyMembers){
+  'collections/editfamilymembers',
+  'collections/deletefamilymembers'
+], function($, _, Backbone, Bootstrap, UserPreferenceTemplate, HomePreferenceTemplate, FamilyPreferenceTemplate, MemberPreferenceTemplate, editMemberPageTemplate,UserPreferences,UserMembers,SaveUserPreferences,SaveUserMembers,FilterPreference,Filter, FamilyPreferences, EditFamilyMembers, DeleteFamilyMembers){
   var UserProfilePage = Backbone.View.extend({
     el: '.page',
     user_home_preferences: null,
@@ -28,6 +29,7 @@ define([
     filter: null,
     family_preference:null,
     editfamilymembers:null,
+    deletefamilymembers:null,
     initialize: function() {
         this.filter_preference = new FilterPreference();
         this.user_home_preferences = new UserPreferences();
@@ -40,6 +42,7 @@ define([
         this.filter.on('change', 'getSelectedQuestionFamily', this);
         this.family_preference = new FamilyPreferences();
         this.editfamilymembers = new EditFamilyMembers();
+        this.deletefamilymembers = new DeleteFamilyMembers();
         this.listenTo(Backbone);
         _.bindAll(this, 'render');
     },
@@ -238,6 +241,7 @@ define([
         "click #save_familyMemebr":"saveFamilyMembers",
         "click #update_familyMemebr":"updateFamilyMembers",
         "click #edit_familyMemebr":"editFamilyMembers",
+        "click #delete_familyMemebr":"deleteFamilyMembers",
         "click #HomeTab":"ViewHomeTabPanel",
         "click #FamilyTab":"ViewFamilyTabPanel",
         "click #MemberTab":"ViewMemberTabPanel"
@@ -307,6 +311,38 @@ define([
                      //console.log(response);
                  }
              });
+
+    },
+    deleteFamilyMembers: function(evt){
+         var that = this;
+         if(confirm("Are you sure you want to delete this project ?") == false){
+                         return false;
+                 }
+         evt.preventDefault();
+         var currentTarget = $(evt.currentTarget);
+         var memberId = currentTarget.data('element');
+         that.deletefamilymembers.deleteMembers(memberId,{
+             async: true,
+             crossDomain: true,
+             method: "POST",
+             headers:{
+                 "authorization": "Bearer "+ sessionStorage.authtoken
+             },
+             success:function(data) {
+
+                 console.log(" +++++++++++++++ deleteFamilyMembers ++++++++++++++++++ ");
+                 console.log(data);
+                 $("#snackbar").html("Successfully removed this member selection... ");
+                 var x = document.getElementById("snackbar")
+                 x.className = "show";
+                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                 that.render();
+             },
+             error:function(response) {
+                 console.log(" +++++++++++++++  deleteFamilyMembers- Errrorr ++++++++++++++++++ ");
+                 console.log(JSON.stringify(response));
+             }
+         });
 
     },
     fetchEditAndRender: function(){

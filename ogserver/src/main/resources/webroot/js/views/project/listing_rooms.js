@@ -9,17 +9,23 @@ define([
   'collections/getprojects',
   'collections/conceptboards',
   'views/dashboard/add_conceptboard',
-  'collections/add_conceptboards'
-], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate, GetProjects, ConceptBoards,AddConceptboard, AddConceptboards){
+  'collections/add_conceptboards',
+  'collections/deleteroomlists',
+  'collections/updatedefaultrooms',
+], function($, _, Backbone, Bootstrap, pinterest_grid, owlCarousel, listingRoomPageTemplate, GetProjects, ConceptBoards,AddConceptboard, AddConceptboards, DeleteRoomLists, UpdateDefaultRooms){
   var ListingRoomPage = Backbone.View.extend({
     el: '.page',
     project: null,
     conceptboards: null,
     add_conceptboards: null,
+    deleteroomlists: null,
+    updatedefaultrooms: null,
     initialize: function() {
         this.project = new GetProjects();
         this.conceptboards = new ConceptBoards();
         this.add_conceptboards = new AddConceptboards();
+        this.deleteroomlists = new DeleteRoomLists();
+        this.updatedefaultrooms = new UpdateDefaultRooms();
 
         this.listenTo(Backbone);
         _.bindAll(this, 'render','fetchViewProjectRender');
@@ -46,7 +52,10 @@ define([
     },
     events: {
         "click .addCBoard1": "viewAddCboard",
-        "click #save_Cboard": "submitBoard"
+        "click #save_Cboard": "submitBoard",
+        "click #deleteroom": "removeRoomList",
+        "click #editDesc": "editDescRoomList",
+        "click #save_Roomdesc": "UpdateDescRoom"
     },
     submitBoard: function (e) {
             if (e.isDefaultPrevented()) return;
@@ -101,7 +110,6 @@ define([
                   console.log("++++ I m here +");
 
                   $("#addcboard-modal").modal('hide');
-
                   $('body').removeClass('modal-open');
                   $('.modal-backdrop').remove();
 
@@ -194,6 +202,65 @@ define([
         $('#addcboard-modal').modal('show');
         AddConceptboard.apply(spaceTypeCode,spaceId);
     },
+    UpdateDescRoom: function(body){
+            var that = this;
+            var roomId = $('#editroomid').val();
+            var name = $('#editname').val();
+            var description = $('#editdescription').val();
+            var spaceTypeCode = $('#editspaceTypeCode').val();
+            var body={
+                "description": description,
+                "id": roomId,
+                "name": name,
+                "spaceTypeCode": spaceTypeCode
+            };
+            var userId = sessionStorage.userId;
+            that.updatedefaultrooms.addUserDefaultRoomList({
+                async: true,
+                crossDomain: true,
+                method: "POST",
+                headers:{
+                "authorization": "Bearer "+ sessionStorage.authtoken,
+                "Content-Type": "application/json"
+                },
+                data: JSON.stringify(body),
+                success:function(response) {
+                console.log("Successfully Update Room Description ... ");
+                console.log(response);
+                $("#snackbar").html("Successfully Update Room Description... ");
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                that.render();
+                $('#editDesc-modal').modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+
+                },
+                error:function(response) {
+                console.log(" +++++++++++++++ Error Update Room Description - Errrorr ++++++++++++++++++ ");
+                console.log(JSON.stringify(response));
+                }
+            });
+    },
+    editDescRoomList: function(evt){
+        var that = this;
+        var currentTarget = $(evt.currentTarget);
+        var id = currentTarget.data('element');
+        var desc = currentTarget.data('element1');
+        var name = currentTarget.data('element2');
+        var spaceTypeCode = currentTarget.data('element3');
+
+
+        $('#editroomid').val(id);
+        $('#editdescription').text(desc);
+        $('#editname').val(name);
+        $('#editspaceTypeCode').val(spaceTypeCode);
+        $('#editDesc-modal').modal('show');
+
+        return false;
+
+    },
     viewProjects: function(){
         var that = this;
         var userId = sessionStorage.userId;
@@ -249,6 +316,45 @@ define([
            }
         });
         });
+    },
+    removeRoomList: function(e){
+        if (e.isDefaultPrevented()) return;
+        e.preventDefault();
+        var that = this;
+
+        if(confirm("Are you sure you want to delete this room ?") == false){
+                return false;
+        }
+        var currentTarget = $(e.currentTarget);
+        var projectId = currentTarget.data('element');
+        var userId = sessionStorage.userId;
+        that.deleteroomlists.removeRoomLists(projectId, {
+            async: true,
+            crossDomain: true,
+            method: "POST",
+            headers:{
+                "authorization": "Bearer "+ sessionStorage.authtoken,
+                "Content-Type": "application/json"
+            },
+            success:function(response) {
+                console.log("Successfully removed Project ... ");
+                console.log(response);
+                $("#snackbar").html("Successfully Deleted Room selection... ");
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                that.render();
+                //              return;
+            },
+            error:function(response) {
+                console.log(" +++++++++++++++  Deleted Room- Errrorr ++++++++++++++++++ ");
+                console.log(JSON.stringify(response));
+                $("#snackbar").html(response.responseJSON.errorMessage);
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+    });
     },
     fetchViewProjectRender: function(){
         var that = this;

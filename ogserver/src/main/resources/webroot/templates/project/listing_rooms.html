@@ -1,3 +1,8 @@
+
+<%= console.log("@@@@@@@@@@@@@@@ desc @@@@@@@@@@@@@@@@@") %>
+<% if(typeof(desc) !== 'undefined'){ %>
+<%= console.log(desc) %>
+<% } %>
 <style>
     #searchForm1{
         display:block;
@@ -23,7 +28,8 @@
         text-align: left;
     }
     .ser-img img{
-        height: 200px;
+        height: 232px;
+        width: 833px;
     }
     /*.manufacturing-box {
         background: #ffffff;
@@ -37,7 +43,7 @@
     .manufacturing-box {
         background: #ffffff;
         padding: 0px;
-        height: 230px;
+        height: 270px;
         width: 100%;
         margin-bottom: 30px;
         box-shadow: 0px 2px 10px #666;
@@ -269,7 +275,12 @@
     top: 10px;
     font-size: 16px;
 }
-
+.img-thumbnail-shadow {
+    box-shadow: 0px 0px 10px 4px #ccc;
+}
+.thumbnail-img {
+    border: 20px solid #fff;
+}
 </style>
 <%= console.log("********* conceptboardsDtls ********") %>
 <%= console.log(conceptboardsDtls) %>
@@ -289,7 +300,10 @@
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="tab-content">
                                                     <div id="wallpaper" class="tab-pane fade in active">
-                                                        <div class="col-md-8 ser-about">
+                                                        <div class="col-md-6 ser-img">
+                                                            <img class="img-responsive img-centered" src="/img/Style_Boho_Indian.png" alt="wall paper">
+                                                        </div>
+                                                        <div class="col-md-6 ser-about">
                                                             <h3 class="mt0">Description</h3>
                                                             <p>
                                                                 <%= projectDtls[0].description %>
@@ -301,9 +315,6 @@
                                                             <div><%= projectDtls[0].projectTower %></div>
                                                             <h4 class="formTit mb0">Builder</h4>
                                                             <div><%= projectDtls[0].builder %></div>
-                                                        </div>
-                                                        <div class="col-md-4 ser-img">
-                                                            <img class="img-responsive img-centered" src="https://res.cloudinary.com/mygubbi/image/upload/v1479324528/platinum_home/wallpaper_03.jpg" alt="wall paper">
                                                         </div>
                                                     </div>
                                                     <div class="clearfix"></div>
@@ -342,8 +353,9 @@
                                                                             <div class="manufacturing-box">
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                                        <a href="/listoflooks-<%= projectDtls[0].id %>">
                                                                                         <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-guardians-remote.png">
-                                                                                        <h4 style="left:40%;"> Looks </h4>
+                                                                                        <h4 style="left:40%;">Shortlist Looks </h4></a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -353,7 +365,7 @@
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                                                         <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-diligent-design.png">
-                                                                                        <h4 style="left:40%;"> 2D/3D </h4>
+                                                                                        <h4 style="left:40%;">Sharing 2D/3D </h4>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -390,14 +402,24 @@
                                                             <div class="panel-body bg-lightgrey">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     <div class="row">
-                                                                        <div class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
+                                                                        <div class="col-sm-11 col-md-11 col-lg-11" style="margin-bottom:10px;">
                                                                             <p style="font-size:14px;color: #555;">
                                                                                 <%= conceptdtls.description %>
                                                                             </p>
                                                                         </div>
+                                                                        <div class="form-group col-md-12" style="text-align:right;font-size: 30px;color: #fe0821;top: -35px;">
+                                                                                <div  id="btn1">
+                                                                                    <i title="Delete this Room" id="deleteroom" class="fa fa-window-close-o" aria-hidden="true"  data-element="<%= conceptdtls.id %>"></i>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="form-group col-md-12" style="text-align:right;font-size: 30px;color: #fe0821;top: -94px; right: 65px;">
+                                                                            <div  id="btn2">
+                                                                                <i title="Edit Description" id="editDesc" class="fa fa-pencil-square-o" aria-hidden="true"  data-element="<%= conceptdtls.id %>"  data-element1="<%= conceptdtls.description %>" data-element2="<%= conceptdtls.name %>" data-element3="<%= conceptdtls.spaceTypeCode %>"></i>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12" style="margin-top: -100px;">
                                                                             <div class="manufacturing-box">
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -406,14 +428,22 @@
                                                                                             <h4 style="margin-top:46px;"> Concept Board </h4>
                                                                                         <% }else{ %>
                                                                                         <a href="/<%= conceptdtls.spaceTypeCode %>-conceptlist-<%= conceptdtls.id %>">
-                                                                                            <div class="numberItemCnp recomnd"><div><%= conceptdtls.noOfConceptsAdded %> Concpets</div></div>
-                                                                                            <img src="<%= conceptdtls.imgUrl %>" alt="roomImg" style="height:230px; width:100%;" />
+                                                                                            <img src="<%= conceptdtls.imgUrl %>" alt="roomImg" style="height:215px; width:100%;" />
                                                                                             <!--<div class="progress skill-bar">
                                                                                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<%= conceptdtls.completionPercentage %>" aria-valuemin="0" aria-valuemax="100">
                                                                                                     <span class="skill"><i class="val"><%= conceptdtls.completionPercentage %>%</i>Completed</span>
                                                                                                 </div>
                                                                                             </div>-->
-                                                                                            <div class="progress
+
+                                                                                        </a>
+                                                                                        <% } %>
+                                                                                    </div>
+                                                                                    <% if(conceptdtls.noOfConceptsAdded == 0){ %>
+                                                                                    <div class="numberItemCnp recomnd" style="position: relative;top: 116px;left: 19px;"><div><%= conceptdtls.noOfConceptsAdded %> Concpets</div></div>
+                                                                                    <% }else{ %>
+                                                                                    <div class="numberItemCnp recomnd" style="position: relative;bottom: -13px;left: 19px;"><div><%= conceptdtls.noOfConceptsAdded %> Concpets</div></div>
+                                                                                    <% } %>
+                                                                                    <div class="progress
                                                                                                 <% if((conceptdtls.completionPercentage > 0) && (conceptdtls.completionPercentage < 50)){ %>
                                                                                                             pink
                                                                                                 <% }else if((conceptdtls.completionPercentage >= 50) && (conceptdtls.completionPercentage < 70)){  %>
@@ -423,50 +453,42 @@
                                                                                                 <% }else{ %>
                                                                                                             green
                                                                                                 <% } %>
-                                                                                            ">
+                                                                                            " style="bottom: 33px ! important">
                                                                                                 <span class="progress-left">
                                                                                                     <span class="progress-bar"></span>
                                                                                                 </span>
-                                                                                                <span class="progress-right">
+                                                                                        <span class="progress-right">
                                                                                                     <span class="progress-bar"></span>
                                                                                                 </span>
-                                                                                                <div class="progress-value"><%= conceptdtls.completionPercentage %>%</div>
-                                                                                            </div>
-                                                                                        </a>
-                                                                                        <% } %>
+                                                                                        <div class="progress-value" style="color: #555;font-weight: 700;"><%= conceptdtls.completionPercentage %>%</div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12" style="margin-top: -100px;">
                                                                             <div class="manufacturing-box">
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                                                         <a href="/<%= conceptdtls.spaceTypeCode %>-viewdesign-<%= conceptdtls.id %>">
                                                                                         <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-guardians-remote.png">
-                                                                                        <h4 class="bordtxt"> Looks </h4>
                                                                                         </a>
                                                                                     </div>
+                                                                                    <div><h4 class=""> Shortlist Looks </h4></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                                                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12" style="margin-top: -100px;">
                                                                             <div class="manufacturing-box">
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                                                         <img alt="Manufacturing" class="img-responsive img-centered img-manufacturing" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1519976101/nri_page/v2/icon-nri-diligent-design.png">
-                                                                                        <h4 class="bordtxt"> 2D/3D </h4>
+                                                                                        <h4 class="bordtxt"> </h4>
                                                                                     </div>
+                                                                                    <div><h4 class="">  Sharing 2D/3D</h4></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="form-row">
-                                                                            <div class="form-group col-md-12" style="text-align:right;">
-                                                                                <span  id="btn1">
-                                                                                    <input type="submit" id="deleteroom" class="btn addcboard-btn" value="Delete" data-element="<%= conceptdtls.id %>" style="background-color: #fe0821;">
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
+
                                                                         <!--<div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
                                                                             <div class="manufacturing-box">
                                                                                 <div class="row">
@@ -507,6 +529,23 @@
         </div>
     </div>
 </div>
+</div>
+<div class="modal fade" id="editDesc-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="width:783px;">
+        <div class="addcboard-container" style="min-height: 0px;">
+            <div class="col-sm-12 col-md-12">
+                <button type="button"  style="margin-top: -37px; margin-right: -23px;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="addcboard-heading">Edit Room Description</h3>
+                <textarea rows="6" cols="96" id="editdescription"></textarea>
+                <input type="hidden" id="editroomid" name="editroomid"/>
+                <input type="hidden" id="editname" name="editname"/>
+                <input type="hidden" id="editspaceTypeCode" name="editspaceTypeCode"/>
+                <div class="mt15" style="text-align:center;">
+                    <input type="submit" id="save_Roomdesc" class="btn addcboard-btn"  value="Submit">
+                </div>
+        </div>
+    </div>
+</div>
 <script>
     function toggleIcon(e) {
     console.log("sssssssssssss");
@@ -525,5 +564,9 @@
                 }
         )
     });
-
+ $(document).ready(function () {
+         $('.close').on('click', function () {
+             $('body').removeClass().removeAttr('style');$('.modal-backdrop').remove();
+         });
+     });
 </script>
