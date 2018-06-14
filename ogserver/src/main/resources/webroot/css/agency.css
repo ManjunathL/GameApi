@@ -9066,8 +9066,8 @@ h6.address1{
     background-color: #fff;
     padding: 15px;
     border-radius: 3px;
-    min-height: 382px;
-    max-height: 382px;
+    min-height: 320px;
+    max-height: 320px;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
     transition: all 500ms ease-in-out;
     -webkit-transition: all 500ms ease-in-out;
@@ -9078,9 +9078,15 @@ h6.address1{
     -webkit-transition: all 500ms ease-in-out;
 }
 .htwboxImage{
-    width: 209px;
-    height: 38px;
-    font-size: 31px;
+    font-size: 18px;
+}
+
+.txtfff{
+    color:#fff!important;
+}
+.whyus{
+    height: 410px;
+    padding: 40px;
 }
 
 @media (max-width: 991px) {
@@ -9094,5 +9100,8 @@ h6.address1{
     .nwhm-testimonial-section .carousel-indicators {
         bottom: -25px;
         z-index: 1;
+    }
+    .whyus{
+        height: 587px;
     }
 }

@@ -49,8 +49,21 @@
             <% } %>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0 .visible-xs-block .visible-sm-block hidden-md hidden-lg">
-            <a href="/consult"><span class="pe-7s-help1 header-icon consult_icon pe-fw color-white"></span></a>
+        <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0 .visible-xs-block .visible-sm-block hidden-md hidden-lg" style="left: 54%;top: 20px;">
+
+            <a href="tel:+91-808-886-0860" class="page-scroll font-size18 txt-color-white" style="padding-top: 17px;">
+                <!--<span class="fa-stack fa-sm">
+                     <i class="fa fa-circle fa-stack-2x orange-background"></i>
+                     <i class="fa fa-phone fa-stack-1x txt-color-white"></i>
+                </span>-->
+
+                <i class="fa fa-phone txt-color-white"></i>
+                <span> +91 8088 860 860 </span>
+            </a>
+
+
+
+            <!--<a href="/consult"><span class="pe-7s-help1 header-icon consult_icon pe-fw color-white"></span></a>-->
 
            <!-- <span class="pe-7s-search search-ico header-icon pe-fw mob-search"></span>-->
 
@@ -58,7 +71,7 @@
                 <span id="wishlist-ico1" class="pe-7s-like wishlist header-icon pe-fw"><span id="shortlistSuperScript1" class="super-script1"></span></span>
             </a>-->
 
-            <% if (users.length > 0 && users.at(0).get('profileImage')) { %>
+            <!--<% if (users.length > 0 && users.at(0).get('profileImage')) { %>
             <a  href="javascript:void(0);"
                 class="dropdown-toggle last-item"
                 id="dropdownMenu_lg_userproflpost"
@@ -78,9 +91,9 @@
                 </a></li>
                 <% } %>
                 <% } %>
-                <!--<li><a href="/my_settings">
+                &lt;!&ndash;<li><a href="/my_settings">
                     Settings
-                </a></li>-->
+                </a></li>&ndash;&gt;
                 <li><a href="/shortlist">
                     Shortlist
                 </a></li>
@@ -91,7 +104,7 @@
             </ul>
             <% }else { %>
             <span class="pe-7s-user user header-icon pe-fw" style="padding:7px 5px!important;" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
-            <% } %>
+            <% } %>-->
 
         </div>
 
