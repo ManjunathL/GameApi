@@ -111,6 +111,8 @@ dependencies {
     compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
     compile 'com.google.apis:google-api-services-drive:v3-rev76-1.22.0'
     compile 'com.google.apis:google-api-services-sheets:v4-rev478-1.22.0'
+    compile 'com.google.apis:google-api-services-calendar:v3-rev305-1.23.0'
+
 
     compile group: 'us.monoid.web', name: 'resty', version: '0.3.2'
 

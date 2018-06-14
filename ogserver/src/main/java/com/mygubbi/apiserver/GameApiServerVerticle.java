@@ -127,6 +127,7 @@ public class GameApiServerVerticle extends AbstractVerticle
         router.mountSubRouter("/gapi/priceupdate", new VersionPriceUpdateHandler(VertxInstance.get()));
         router.mountSubRouter("/gapi/cloudinaryfileupload", new CloudinaryFileUploadHandler(VertxInstance.get()));
         router.mountSubRouter("/mygubbi/cca", new CCAHandler(VertxInstance.get()));
+        router.mountSubRouter("/mygubbi/googleapi", new GoogleAPIHandler(VertxInstance.get()));
 
         //LOG.info("Routes:" + router.getRoutes().toString());
     }
