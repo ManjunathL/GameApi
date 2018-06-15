@@ -115,11 +115,11 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
         String location = jsonObject.getString("mx_Custom_1");
         String description = jsonObject.getString("TaskDescription");
         String startTime = jsonObject.getString("DueDateUTCTime");
-        String endTime = jsonObject.getString("DueDateUTCTime");
+        String endTime = jsonObject.getString("EndDateUTCTime");
         String testTime = "2018-06-14T07:25:00Z";
         JSONObject lead = getLeadDetailsFromLeadSquared(jsonObject.getString("LeadId"));
 
-
+        LOG.debug("Start time before :" + startTime+ " : End time before : " + endTime);
         if (lead != null)
         {
             try {
@@ -128,14 +128,10 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
                 e.printStackTrace();
             }
         }
-        LOG.debug(summary);
-        LOG.debug(calendar_location);
-        LOG.debug(location);
-        LOG.debug(description);
+        LOG.debug("Summary :" + summary + " : Calendar location : " + calendar_location + " : Location :" + location + " : " + description);
         String startTimeNew = DateUtil.convertDateString(startTime);
-        LOG.debug(startTimeNew);
         String endTimeNew = DateUtil.convertDateString(endTime);
-        LOG.debug(endTimeNew);
+        LOG.debug("Start time after :" + startTime+ " : End time after : " + endTime);
 
         if (summary.contains("Meeting")){
             Event event = new Event()

@@ -25,7 +25,7 @@ public class DateUtil {
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         return sdf.format(startDate);
     }
 }
