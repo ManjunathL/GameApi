@@ -114,8 +114,8 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
         String calendar_location = jsonObject.getString("mx_Custom_1");
         String location = jsonObject.getString("mx_Custom_1");
         String description = jsonObject.getString("TaskDescription");
-        String startTime = jsonObject.getString("DueDateUTCTime");
-        String endTime = jsonObject.getString("EndDateUTCTime");
+        String startTime = jsonObject.getString("DueDateLocalTime");
+        String endTime = jsonObject.getString("EndDateLocalTime");
         String testTime = "2018-06-14T07:25:00Z";
         JSONObject lead = getLeadDetailsFromLeadSquared(jsonObject.getString("LeadId"));
 
