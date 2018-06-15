@@ -1,14 +1,20 @@
 <!--Navigation-->
-<nav id="mainNav" class="navbar navbar-shrink margin-bottom0 bg-color-orange navbar-fixed-top nav-menu-height-fx" style="z-index: 20 !important">
+<nav id="mainNav" class="navbar navbar-shrink margin-bottom0 bg-color-orange navbar-fixed-top nav-menu-height-fx nav-menu-height-min" style="z-index: 20 !important; background-color: #fff !important;top: -34px;">
     <div class="container mob-container">
         <!-- Brand and toggle get grouped for better mobile display -->
 
         <div class="navbar-header page-scroll pull-left">
             <a class="navbar-toggle collapsed toggle-icon-left" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+<!--
                 <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528701347/home/v2/MyGubbi_logo_white_mobile-11.png" class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg burger-logo" alt="mygubbi">
+-->
+                <img src="/img/MyGubbi_logo-04.png" class="small_logo .visible-xs-block .visible-sm-block hidden-md hidden-lg burger-logo" alt="mygubbi">
             </a>
             <a href="/" class="navbar-brand page-scroll padding0 hidden-xs hidden-sm">
+<!--
                 <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528701347/home/v2/MyGubbi_logo_white_website-11.png" class="full_logo" alt="mygubbi">
+-->
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1529042508/MyGubbi_logo-04.png" class="full_logo" alt="mygubbi" style="width: 256px;">
             </a>
         </div>
 
@@ -52,8 +58,8 @@
         <div class="nav navbar-nav navbar-right menu-icon float-right font-size18 margin0 .visible-xs-block .visible-sm-block hidden-md hidden-lg" style="left: 54%;top: 20px;">
 
             <a href="tel:+91-808-886-0860" class="page-scroll font-size18 txt-color-white" style="padding-top: 17px;">
-                <!--<span class="fa-stack fa-sm">
-                     <i class="fa fa-circle fa-stack-2x orange-background"></i>
+                <!--  <span class="fa-stack fa-sm">
+                      <i class="fa fa-circle fa-stack-2x orange-background"></i>
                      <i class="fa fa-phone fa-stack-1x txt-color-white"></i>
                 </span>-->
 
@@ -110,25 +116,26 @@
 
         <div class="nav navbar-nav navbar-right right-side-menu hidden-xs hidden-sm margin-top10">
            <!-- add code here -->
-            <ul class="menu-address" style="float:left;margin: 0px 205px 0px 0px!important;">
+            <!--<ul class="menu-address" style="float:left;margin: 0px 205px 0px 0px!important;">
                 <li class="menu-banglore"><a style="color:#fff">Bangalore</a></li>
                 <li class="menu-pune"><a style="color:#fff">Pune</a></li>
                 <li class="menu-chennai"><a style="color:#fff">Chennai</a></li>
-            </ul>
+            </ul>-->
 
             <ul class="menu-address"  style="float:right;padding-right: 6px;">
-                <li class="menu-chennai"><a style="color:#fff" href="/mygubbi-studio"> MyGubbi Studio </a></li>
-                <li class="menu-chennai"><a style="color:#fff" href="/nri-services-bangalore">NRI Zone</a></li>
-                <li class="menu-chennai"><a style="color:#fff" href="/stories-all">Stories</a></li>
+
 
             </ul>
 
-            <ul class="nav navbar-nav navbar-right" style="margin-top: 0px;position: fixed;right:85px;top: 30px;">
+            <ul class="nav navbar-nav navbar-right" style="margin-top: 0px;position: fixed;right:85px;top: 0px;">
                 <!--<li>
                     <span class="pe-7s-search search-ico pe-fw"></span>
                 </li>-->
+                <li class="menu-chennai" style="margin-top: 7px;"><a style="color:#8B4513" href="/mygubbi-studio"> MyGubbi Studio </a></li>
+                <li class="menu-chennai" style="margin-top: 7px;"><a style="color:#8B4513" href="/nri-services-bangalore">NRI Zone</a></li>
+                <li class="menu-chennai" style="margin-top: 7px;"><a style="color:#8B4513" href="/stories-all">Stories</a></li>
                 <li style="padding-left: 10px;">
-                    <a href="tel:+91-808-886-0860" class="page-scroll font-size18 txt-color-white" style="padding-top: 17px;">
+                    <a href="tel:+91-808-886-0860" class="page-scroll font-size18 " style="padding-top: 17px;">
                         <!--<span class="fa-stack fa-sm">
                              <i class="fa fa-circle fa-stack-2x orange-background"></i>
                              <i class="fa fa-phone fa-stack-1x txt-color-white"></i>
@@ -179,9 +186,9 @@
                     </ul>
                 </li>
                 <% }else{ %>
-                <li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm" style="margin-right: 7px;">
+                <!--<li class="gubbi-list-desk gubbi-list-mob hidden-xs hidden-sm" style="margin-right: 7px;">
                     <span class="pe-7s-user user pe-fw" id="user-icon" data-loading-text="<i class='fa fa-spinner fa-spin'></i>"></span>
-                </li>
+                </li>-->
                 <% } %>
             </ul>
         </div>
@@ -191,7 +198,7 @@
 </nav>
 <!-- Navigation End -->
 
-<nav class="navbar collapse navbar-collapse menu-sec-height nav-menu-bg navbar-fixed-top navbar-fixed-top-mg menu-sec-mrg" id="bs-example-navbar-collapse-1">
+<nav class="navbar collapse navbar-collapse menu-sec-height nav-menu-bg navbar-fixed-top navbar-fixed-top-mg menu-sec-mrg menu-sec-mrg-img menu-sec-image" id="bs-example-navbar-collapse-1" style="background-color: #fff;">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -204,10 +211,10 @@
                             <a href="/" id="home-lnk" class="page-scroll">Home</a>
                         </li>
                         <li class="gubbi-list-desk gubbi-list-mob menu-li">
-                            <a class="page-scroll" href="/platinum-home-interiors">Platinum Homes</a>
+                            <a class="page-scroll" href="/platinum-home-interiors" style="color: #8B4513;">Platinum Homes</a>
                         </li>
                         <li class="dropdown mega-dropdown hidden-xs hidden-sm">
-                            <a href="/kitchen-cabinet-design" class="dropdown-toggle" data-toggle="dropdown"> Kitchen & Wardrobe<span class="caret"></span></a>
+                            <a href="/kitchen-cabinet-design" class="dropdown-toggle" data-toggle="dropdown" style="color: #8B4513;"> Kitchen & Wardrobe<span class="caret"></span></a>
                             <ul class="row dropdown-menu mega-dropdown-menu" style="border-radius: 0px;">
                                 <li class="col-md-4 dropdown mega-dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown">Kitchen</a>
@@ -1068,7 +1075,7 @@
                         </li>
 
                         <li class="gubbi-list-desk gubbi-list-mob menu-li">
-                            <a class="page-scroll" href="/recent-projects">Our Work</a>
+                            <a class="page-scroll" href="/recent-projects" style="color: #8B4513;">Our Work</a>
                         </li>
 
                         <!--<li class="gubbi-list-desk gubbi-list-mob menu-li">
@@ -1164,10 +1171,10 @@
                             <a class="page-scroll" href="/stories-all">Stories</a>
                         </li>
                         <li class="gubbi-list-desk gubbi-list-mob">
-                            <a class="page-scroll" href="/consult">Contact</a>
+                            <a class="page-scroll" href="/consult" style="color: #8B4513;">Contact</a>
                         </li>
                         <li id="storeLnk" class="gubbi-list-desk gubbi-list-mob menu-li">
-                            <a class="page-scroll last-item" href="https://store.mygubbi.com/" target="_blank">eStore</a>
+                            <a class="page-scroll last-item" href="https://store.mygubbi.com/" target="_blank" style="color: #8B4513;">eStore</a>
                         </li>
                     </ul>
                 </div>
