@@ -68,6 +68,14 @@
   "localDriveFolder" : "/mnt/game/gdrive/",
   "amazon_s3_bucketname_game":"mygubbigame",
   "amazon_s3_access_key_game":"AKIAIX6TVPJXWC7C2WCA",
-  "amazon_s3_secret_key_game":"mp3+VuQeT9NKvXO+doCbH4GO/gEpGm/+/aMLoTpAu"
+  "amazon_s3_secret_key_game":"mp3+VuQeT9NKvXO+doCbH4GO/gEpGm/+/aMLoTpAu",
+
+  "urlForLeadSquared":"https://api.leadsquared.com/v2/LeadManagement.svc",
+
+  "leadsquared_access_key":"u$r1c221f1db494ffe457d25c16814685ce",
+  "leadsquared_secret_key":"894f1e8cbdc36c967504b9dc912905f1fc77c012",
+
+  "HSR EC":"mygubbi.com_pckif5fs90g049gv5okj2al8n8@group.calendar.google.com",
+  "Lavalle EC":"mygubbi.com_rq315ne97ondi0c9e38bpkv1ho@group.calendar.google.com"
 }
 
