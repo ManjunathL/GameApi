@@ -14,17 +14,26 @@ import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.EventReminder;
 import com.google.api.services.drive.DriveScopes;
+import com.mygubbi.common.DateUtil;
 import com.mygubbi.config.ConfigHolder;
+import com.mygubbi.provider.CrmDataProvider;
 import com.mygubbi.route.AbstractRouteHandler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.handler.BodyHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import us.monoid.json.JSONArray;
+import us.monoid.json.JSONException;
+import us.monoid.json.JSONObject;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.Arrays;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by User on 14-06-2018.
@@ -38,14 +47,14 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
     private static HttpTransport HTTP_TRANSPORT;
     String credentialsJson = null;
     private final String TIME_ZONE = "Asia/Calcutta";
+    private CrmDataProvider crmDataProvider;
 
-
-
-
-
+    private final static Logger LOG = LogManager.getLogger(GoogleAPIHandler.class);
 
     public GoogleAPIHandler(Vertx vertx) {
         super(vertx);
+        this.route().handler(BodyHandler.create());
+        crmDataProvider =  new CrmDataProvider();
         this.post("/calendar/insert").handler(this::insertCalendarEvent);
     }
 
@@ -57,7 +66,7 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
     private Credential authorize() throws IOException
     {
         this.APPLICATION_NAME = ConfigHolder.getInstance().getStringValue("driveAppName","GAME Drive App");
-        this.credentialsJson = ConfigHolder.getInstance().getStringValue("driveCredentials","/game/gamedrive.json");
+        this.credentialsJson = ConfigHolder.getInstance().getStringValue("calendarjson","/game/game_new_project.json");
         return GoogleCredential
                 .fromStream(this.getClass().getResourceAsStream(this.credentialsJson))
                 .createScoped(SCOPES);
@@ -94,73 +103,127 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
         }
 
         JsonObject jsonObject2 = routingContext.getBodyAsJson();
+        LOG.debug("Jsonobject:" + jsonObject2);
+
 
         JsonObject jsonObject = jsonObject2.getJsonObject("Data");
+        LOG.debug("Jsonobject:" + jsonObject);
 
-        String summary = jsonObject.getString("TaskDescription");
+
+        String summary = jsonObject.getString("TaskName");
         String calendar_location = jsonObject.getString("mx_Custom_1");
         String location = jsonObject.getString("mx_Custom_1");
-        String description = "";
+        String description = jsonObject.getString("TaskDescription");
         String startTime = jsonObject.getString("DueDateUTCTime");
         String endTime = jsonObject.getString("DueDateUTCTime");
         String testTime = "2018-06-14T07:25:00Z";
+        JSONObject lead = getLeadDetailsFromLeadSquared(jsonObject.getString("LeadId"));
 
 
-        Event event = new Event()
-                .setSummary(summary)
-                .setLocation(location)
-                .setDescription(description);
-
-        DateTime startDateTime = new DateTime(startTime);
-        EventDateTime start = new EventDateTime()
-                .setDateTime(startDateTime)
-                .setTimeZone(TIME_ZONE);
-        event.setStart(start);
-
-        DateTime endDateTime = new DateTime(endTime);
-        EventDateTime end = new EventDateTime()
-                .setDateTime(endDateTime)
-                .setTimeZone(TIME_ZONE);
-        event.setEnd(end);
-
-        String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
-        event.setRecurrence(Arrays.asList(recurrence));
-
-        EventAttendee[] attendees = new EventAttendee[] {
-
-                new EventAttendee().setEmail(ConfigHolder.getInstance().getStringValue(calendar_location,"")),
-        };
-
-
-        event.setAttendees(Arrays.asList(attendees));
-
-        EventReminder[] reminderOverrides = new EventReminder[] {
-                new EventReminder().setMethod("email").setMinutes(5),
-                new EventReminder().setMethod("popup").setMinutes(2),
-        };
-        Event.Reminders reminders = new Event.Reminders()
-                .setUseDefault(true);
-        event.setReminders(reminders);
-
-        String calendarId = "primary";
-        ;
-        try {
-            if (service != null) {
-                event = service.events().insert(calendarId, event).execute();
+        if (lead != null)
+        {
+            try {
+                description = description + " : " + lead.getString("EmailAddress") + " : " + lead.getString("Phone");
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
+        }
+        LOG.debug(summary);
+        LOG.debug(calendar_location);
+        LOG.debug(location);
+        LOG.debug(description);
+        String startTimeNew = DateUtil.convertDateString(startTime);
+        LOG.debug(startTimeNew);
+        String endTimeNew = DateUtil.convertDateString(endTime);
+        LOG.debug(endTimeNew);
+
+        if (summary.contains("Meeting")){
+            Event event = new Event()
+                    .setSummary(summary)
+                    .setLocation(location)
+                    .setDescription(description);
+
+            DateTime startDateTime = new DateTime(startTimeNew);
+            EventDateTime start = new EventDateTime()
+                    .setDateTime(startDateTime)
+                    .setTimeZone(TIME_ZONE);
+            event.setStart(start);
+
+            DateTime endDateTime = new DateTime(endTimeNew);
+            EventDateTime end = new EventDateTime()
+                    .setDateTime(endDateTime)
+                    .setTimeZone(TIME_ZONE);
+            event.setEnd(end);
+
+            String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
+            event.setRecurrence(Arrays.asList(recurrence));
+
+            EventAttendee[] attendees = new EventAttendee[] {
+                    new EventAttendee().setEmail(ConfigHolder.getInstance().getStringValue(calendar_location,"")),
+            };
+
+
+            event.setAttendees(Arrays.asList(attendees));
+
+            EventReminder[] reminderOverrides = new EventReminder[] {
+                    new EventReminder().setMethod("email").setMinutes(5),
+                    new EventReminder().setMethod("popup").setMinutes(2),
+            };
+            Event.Reminders reminders = new Event.Reminders()
+                    .setUseDefault(true);
+            event.setReminders(reminders);
+
+            String calendarId = "primary";
+            ;
+            try {
+                if (service != null) {
+                    event = service.events().insert(calendarId, event).execute();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (event != null)
+            {
+                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","Success").put("message","Event inserted")));
+            }
+            else
+            {
+                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","Failure").put("message","Event not inserted")));
+            }
+        }
+        else {
+            sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","Failure").put("message","Event not inserted")));
+
+        }
+
+
+    }
+
+    private JSONObject getLeadDetailsFromLeadSquared(String leadId){
+
+        String accessKey = ConfigHolder.getInstance().getStringValue("leadsquared_access_key","u$r1c221f1db494ffe457d25c16814685ce");
+        String secretKey = ConfigHolder.getInstance().getStringValue("leadsquared_secret_key","894f1e8cbdc36c967504b9dc912905f1fc77c012");
+
+        JSONArray jsonArray = crmDataProvider.getLeadDetails(accessKey,secretKey,leadId);
+
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject =  jsonArray.getJSONObject(0);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        if (event != null)
+        if (jsonObject != null)
         {
-            sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","Success").put("message","Event inserted")));
+            return jsonObject;
         }
         else
         {
-            sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","Failure").put("message","Event not inserted")));
+            return null;
         }
-        System.out.printf("Event created: %s\n", event.getHtmlLink());
+
     }
 
 }

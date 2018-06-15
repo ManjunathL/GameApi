@@ -123,4 +123,20 @@ private DataProviderMode dataProviderMode;
             return null;
         }
     }
+
+    public JSONArray getLeadDetails(String accessKey, String secretKey, String id) {
+
+        try {
+            return dataProviderMode.getResourceArray("Leads.GetById", new HashMap<String, String>(){
+                {
+                    put("accessKey",accessKey);
+                    put("secretKey",secretKey);
+                    put("id",id);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

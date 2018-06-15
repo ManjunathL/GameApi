@@ -41,7 +41,7 @@ public class RestDataProvider implements DataProviderMode {
     @Override
     public JSONArray getResourceArray(String urlFrag, Map<String, String> params) {
         try {
-            String string = getBaseURLForCrm() + "/" + urlFrag + "?" + queryParams(params);
+            String string = getBaseUrlForLeadSquared() + "/" + urlFrag + "?" + queryParams(params);
             LOG.debug("Hitting crm :" + string);
             return resty.json(string).array();
         } catch (IOException | JSONException e) {
@@ -142,6 +142,10 @@ public class RestDataProvider implements DataProviderMode {
 
     private String getBaseURLForCrm() {
         return ConfigHolder.getInstance().getStringValue("urlForCrm", "");
+    }
+
+    private String getBaseUrlForLeadSquared() {
+        return ConfigHolder.getInstance().getStringValue("urlForLeadSquared", "https://api.leadsquared.com/v2/LeadManagement.svc/");
     }
 
     private String getBaseURLforLdSqr()
