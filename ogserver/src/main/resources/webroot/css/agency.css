@@ -7809,6 +7809,11 @@ img.thumbnail {
     line-height: 150%;
 }
 
+.process-icon-height1{
+    min-height: 452px;
+    line-height: 150%;
+}
+
 .process-icon-height p{
     font-family: 'Lato', sans-serif;
 }
