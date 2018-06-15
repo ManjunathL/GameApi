@@ -8318,9 +8318,20 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .onbanner-txt{
-    position:absolute;
-    bottom:25%;
-    left:6%;
+    position: absolute;
+    bottom: 5%;
+    left: 0%;
+    width: 75%;
+}
+.onbanner-txtbg{
+    background-image: -webkit-linear-gradient(left, #000, #cccccc14 100%);
+    background-image: -o-linear-gradient(left, #000 0, #cccccc14 100%);
+    background-image: -webkit-gradient(linear, left right, color-stop(0, #000), to(#cccccc14b));
+    background-image: linear-gradient(left right, #000 0, #cccccc14b 100%);
+    background-repeat: repeat-x;
+}
+#mySpan{
+    padding: 20px 90px;
 }
 .onbanner-txt h2{
     font-family:'Montserrat', sans-serif;
@@ -9103,6 +9114,11 @@ h6.address1{
     height: 410px;
     padding: 40px;
 }
+.txtnumb{
+    padding-top:15px;
+    padding-bottom:0px!important;
+    line-height:1.5!important;
+}
 
 @media (max-width: 991px) {
     .nwhm-testimonialImg {
@@ -9116,27 +9132,7 @@ h6.address1{
         bottom: -25px;
         z-index: 1;
     }
-<<<<<<< Updated upstream
     .whyus{
         height: 587px;
     }
 }
-=======
-}
- .htw-box {
-    background-color: rgba(255,255,255, 1);
-    padding: 15px;
-    border-radius: 3px;
-    min-height: 382px;
-    max-height: 382px;
-}
-.htw-box:hover{
-    box-shadow: 0px 0px 10px 4px #555;
-    transform: scale(1.0);
-    }
-.htwboxImage{
-   width: 209px;
-   height: 38px;
-   font-size: 31px;
-   }
->>>>>>> Stashed changes
