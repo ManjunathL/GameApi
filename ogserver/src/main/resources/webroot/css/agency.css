@@ -529,12 +529,12 @@
 }
 .menu-chennai{
     display: inline-block;
-    padding-left: 10px;
+    /*padding-left: 10px;*/
     color: #fff;
     font-weight: 400;
 }
 .menu-chennai a{
-    font-size:13px;
+    font-size:12px;
     font-family: 'Lato', sans-serif;
 }
 
@@ -3051,7 +3051,7 @@ fieldset[disabled] .btn-xl.active {
     cursor: pointer;
     color: #fff;
     font-size: 22px;
-    font-weight: 300;
+    font-weight: 500;
     background-color:#ff3200;
     padding: 2px 15px 5px 15px;
     -webkit-transition: color 0.3s, opacity 0.2s;
@@ -7807,10 +7807,11 @@ img.thumbnail {
 .process-icon-height{
     min-height: 170px;
     line-height: 150%;
+    padding-top:15px;
 }
 
 .process-icon-height1{
-    min-height: 452px;
+    min-height: 430px;
     line-height: 150%;
 }
 
@@ -8364,8 +8365,22 @@ html .ui-button.ui-state-disabled:active {
 .menu-sec-image{
     margin-top:42px !important;
 }
+.mainNavbr{
+    background:#fff;
+    top:-34px;
+}
+.secmenubg{
+    background:#fff;
+}
 
 @media (max-width: 767px) {
+    .mainNavbr {
+        background: #fff;
+        top: 0px;
+    }
+    .secmenubg{
+        background:#fff;
+    }
     .onbanner-txt{
         position:absolute;
         bottom:8%;
@@ -8397,7 +8412,7 @@ html .ui-button.ui-state-disabled:active {
         margin-top:70px !important;
     }
     .menu-sec-mrg-img{
-        margin-top:37px !important;
+        margin-top:75px !important;
     }
 }
 
@@ -8991,6 +9006,14 @@ html .ui-button.ui-state-disabled:active {
 
 /* Mobile Responsive by Smruti on 7thDec2016 */
 
+
+.mobIco{
+    width:50%!important;
+}
+.mobIco12{
+    width:50%!important;
+}
+
 @media (max-width: 991px) {
     .style-tab-bg,
     .style-tab-bg > .nav-tabs>li.active>a,
@@ -9097,8 +9120,8 @@ h6.address1{
     background-color: #fff;
     padding: 15px;
     border-radius: 3px;
-    min-height: 320px;
-    max-height: 320px;
+    min-height: 340px;
+    max-height: 340px;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
     transition: all 500ms ease-in-out;
     -webkit-transition: all 500ms ease-in-out;
@@ -9110,6 +9133,7 @@ h6.address1{
 }
 .htwboxImage{
     font-size: 18px;
+    color:#555;
 }
 
 .txtfff{
@@ -9123,6 +9147,9 @@ h6.address1{
     padding-top:15px;
     padding-bottom:0px!important;
     line-height:1.5!important;
+}
+.txtmnuCol{
+    color: #8B4513!important;
 }
 
 @media (max-width: 991px) {
@@ -9138,6 +9165,15 @@ h6.address1{
         z-index: 1;
     }
     .whyus{
-        height: 587px;
+        height: 650px;
+    }
+    .home-interior{
+        width:90%!important;
+        min-height: 275px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .txtmnuCol{
+        color: #fff!important;
     }
 }

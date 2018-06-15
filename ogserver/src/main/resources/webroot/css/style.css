@@ -4248,7 +4248,7 @@ a.hideLink {
 }
 .home-interior{
     border: 20px solid #fff;
-    box-shadow: 0px 0px 10px 8px #ccc;
+    box-shadow: 0px 2px 10px #ccc;
     margin-left: 25px;
     margin-right: 25px;
     width: 46% !important;
