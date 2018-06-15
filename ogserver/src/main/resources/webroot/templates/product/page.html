@@ -763,7 +763,7 @@
                 if(document.documentElement.clientWidth < 900){
                     $('#filter-desc-container').addClass('stick').css({'top': '75px'});
                 }else{
-                    $('#filter-desc-container').addClass('stick').css({'top': '116px'});
+                    $('#filter-desc-container').addClass('stick').css({'top': '80px'});
                 }
                 //$('#filter-desc').css({'padding': '10px 0px'});
                 $('#filter-desc').css({'line-height': '2'});
@@ -777,7 +777,7 @@
                 if(document.documentElement.clientWidth < 900){
                    $('#filtered-list').removeClass('stick').css({'top': '75px'});
                 }else{
-                    $('#filtered-list').removeClass('stick').css({'top': '116px'});
+                    $('#filtered-list').removeClass('stick').css({'top': '80px'});
                 }
 
                 $('#filter-choose-container').removeClass('stick').slideDown();
@@ -793,7 +793,7 @@
         });
 
         $('#filter-desc-container').on('mouseenter', '.stick-tag', function () {
-            $('#filter-choose-container').addClass('stick').animate({'top': '116px'}, 500);
+            $('#filter-choose-container').addClass('stick').animate({'top': '80px'}, 500);
             $('#filter-choose-container').css('display', 'block');
         });
 
