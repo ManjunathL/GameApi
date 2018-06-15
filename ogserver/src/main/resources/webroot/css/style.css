@@ -695,6 +695,10 @@ input[type=checkbox] {
 .txt-color-white{
     color: #ffffff;
 }
+.txt-color-brown{
+    color: #8B4513!important;
+}
+
 .txt-color-black{
     color: #555;
 }
