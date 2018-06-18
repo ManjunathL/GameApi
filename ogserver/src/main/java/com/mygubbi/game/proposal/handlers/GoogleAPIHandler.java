@@ -116,14 +116,19 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
         String description = jsonObject.getString("TaskDescription");
         String startTime = jsonObject.getString("DueDateLocalTime");
         String endTime = jsonObject.getString("EndDateLocalTime");
+        String createdByEmail = jsonObject.getString("createdByEmail");
         String testTime = "2018-06-14T07:25:00Z";
         JSONObject lead = getLeadDetailsFromLeadSquared(jsonObject.getString("LeadId"));
+        String ownerEmailId = null;
+        String customerEmail = null;
 
         LOG.debug("Start time before :" + startTime+ " : End time before : " + endTime);
         if (lead != null)
         {
             try {
                 description = description + " : " + lead.getString("EmailAddress") + " : " + lead.getString("Phone");
+                ownerEmailId = lead.getString("OwnerIdEmailAddress");
+                customerEmail = lead.getString("EmailAddress");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -151,11 +156,14 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
                     .setTimeZone(TIME_ZONE);
             event.setEnd(end);
 
-           /* String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=1"};
+            String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=1"};
             event.setRecurrence(Arrays.asList(recurrence));
-*/
+
             EventAttendee[] attendees = new EventAttendee[] {
                     new EventAttendee().setEmail(ConfigHolder.getInstance().getStringValue(calendar_location,"")),
+                    new EventAttendee().setEmail(ownerEmailId),
+                    new EventAttendee().setEmail(customerEmail),
+                    new EventAttendee().setEmail(createdByEmail),
             };
 
 
