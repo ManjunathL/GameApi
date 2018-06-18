@@ -9202,41 +9202,6 @@ h6.address1{
     text-align:center;
 }
 
-@media (max-width: 991px) {
-    .ourworkpara{
-        text-align:justify;
-    }
-    .nwhm-testimonialImg {
-        width: 100%!important;
-        height: auto!important;
-    }
-    .nwhm-testimonial-section{
-        padding: 20px 0 20px 0;
-    }
-    .nwhm-testimonial-section .carousel-indicators {
-        bottom: -25px;
-        z-index: 1;
-    }
-    .whyus{
-        height: 690px;
-    }
-    .home-interior{
-        width:90%!important;
-        min-height: 275px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .txtmnuCol{
-        color: #fff!important;
-    }
-    .htw-box{
-        min-height: 375px;
-        max-height: 375px;
-    }
-    #mySpan {
-        padding: 20px 40px;
-    }
-}
 
 blockquote{
   width:100%;
@@ -9270,4 +9235,43 @@ blockquote span{
   font-style: normal;
   font-weight: bold;
   margin-top:1em;
+}
+
+@media (max-width: 991px) {
+    .ourworkpara{
+        text-align:justify;
+    }
+    .nwhm-testimonialImg {
+        width: 100%!important;
+        height: auto!important;
+    }
+    .nwhm-testimonial-section{
+        padding: 20px 0 20px 0;
+    }
+    .nwhm-testimonial-section .carousel-indicators {
+        bottom: -25px;
+        z-index: 1;
+    }
+    .whyus{
+        height: 625px;
+    }
+    .home-interior{
+        width:90%!important;
+        min-height: 275px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .txtmnuCol{
+        color: #fff!important;
+    }
+    .htw-box{
+        min-height: 375px;
+        max-height: 375px;
+    }
+    #mySpan {
+        padding: 20px 40px;
+    }
+    blockquote{
+        padding: 1.2em 0px 1.2em 0px;
+    }
 }
