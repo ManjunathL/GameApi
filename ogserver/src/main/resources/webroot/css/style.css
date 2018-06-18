@@ -4193,7 +4193,7 @@ a.hideLink {
     -o-background-size: cover;
     background-size: cover;
     padding: 0px;
-    text-align: center;
+    text-align: left;
     color: #3d4b54;
     position: relative;
 }
@@ -4743,7 +4743,7 @@ a.hideLink {
         -o-background-size: cover;
         background-size: cover;
         padding: 0px;
-        text-align: center;
+        text-align: left;
         color: #3d4b54;
     }
     .platinum-banner-band-head {
