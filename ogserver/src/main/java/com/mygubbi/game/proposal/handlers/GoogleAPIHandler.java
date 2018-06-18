@@ -151,9 +151,9 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
                     .setTimeZone(TIME_ZONE);
             event.setEnd(end);
 
-            String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
+           /* String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=1"};
             event.setRecurrence(Arrays.asList(recurrence));
-
+*/
             EventAttendee[] attendees = new EventAttendee[] {
                     new EventAttendee().setEmail(ConfigHolder.getInstance().getStringValue(calendar_location,"")),
             };
