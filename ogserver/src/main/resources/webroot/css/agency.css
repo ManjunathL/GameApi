@@ -7811,7 +7811,7 @@ img.thumbnail {
 }
 
 .process-icon-height1{
-    min-height: 430px;
+    min-height: 390px;
     line-height: 150%;
 }
 
@@ -9098,11 +9098,19 @@ html .ui-button.ui-state-disabled:active {
     background-color: #624e42;
     border: 1px solid #555;
 }
-
+.testimopd{
+    padding:0px 40px;
+}
+.Latofntfam{
+    font-family: 'Lato', sans-serif!important;
+}
 
 @media screen and (min-width: 768px){
     .nwhm-testimonial-section .carousel-indicators {
         bottom: -45px;
+    }
+    .testimopd{
+        padding:0px 20px;
     }
 }
 
