@@ -9055,10 +9055,10 @@ html .ui-button.ui-state-disabled:active {
     font-weight: 500;
 }
 .nwhm-testimonial-section{
-    background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528448664/home/website_image-06.jpg");
-    background-repeat: no-repeat;
+    /*background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528448664/home/website_image-06.jpg");
+    background-repeat: no-repeat;*/
     background-position: center 100%;
-    min-height: 475px;;
+    min-height: 389px;;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -9070,7 +9070,8 @@ html .ui-button.ui-state-disabled:active {
     background-size: cover;
     padding: 70px 0 70px 0;
     text-align: center;
-    color: #ffffff;
+    color: #555;
+    background: #f9f9f9;
 }
 
 .nwhm-testimonial-section .carousel-control .fa-angle-left,
@@ -9079,7 +9080,7 @@ html .ui-button.ui-state-disabled:active {
     background-color: transparent;
     line-height: 30px;
     text-shadow: none;
-    color: #ffffff;
+    color: #555;
     position: absolute;
     top: 50%;
 }
@@ -9092,6 +9093,13 @@ html .ui-button.ui-state-disabled:active {
 .nwhm-testimonial-section .carousel-control.right{
     background: transparent;
 }
+
+#nwhm-testimonial .carousel-indicators li{
+    background-color: #624e42;
+    border: 1px solid #555;
+}
+
+
 @media screen and (min-width: 768px){
     .nwhm-testimonial-section .carousel-indicators {
         bottom: -45px;
@@ -9122,12 +9130,12 @@ h6.address1{
     border-radius: 3px;
     min-height: 340px;
     max-height: 340px;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 2px 1px 0 rgba(0,0,0,0.1);
     transition: all 500ms ease-in-out;
     -webkit-transition: all 500ms ease-in-out;
 }
 .htw-box:hover{
-    box-shadow: 0 1px 10px 1px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 10px 1px rgba(0,0,0,0.3);
     transition: all 500ms ease-in-out;
     -webkit-transition: all 500ms ease-in-out;
 }
@@ -9150,6 +9158,21 @@ h6.address1{
 }
 .txtmnuCol{
     color: #8B4513!important;
+}
+
+.zoomeff {
+    width: 550px;
+    height: 240px;
+    transition: transform .2s;
+    overflow:hidden;
+}
+
+.zoomeff:hover {
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    transition: all 2s ease;
+    transform: scale(1.1);
 }
 
 @media (max-width: 991px) {
@@ -9175,5 +9198,12 @@ h6.address1{
     }
     .txtmnuCol{
         color: #fff!important;
+    }
+    .htw-box{
+        min-height: 375px;
+        max-height: 375px;
+    }
+    #mySpan {
+        padding: 20px 40px;
     }
 }

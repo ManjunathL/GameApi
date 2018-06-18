@@ -172,7 +172,7 @@ define([
                 return false;
             });
 
-            document.getElementById("myVideo").play();
+           // document.getElementById("myVideo").play();
         },
 /*
         autoPlayYouTubeModal: function (ev) {
