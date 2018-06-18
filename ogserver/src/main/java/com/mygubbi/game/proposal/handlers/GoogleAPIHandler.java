@@ -169,6 +169,8 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
             if (customerEmail != null) emailAttendees[emailAttendees.length+1]=customerEmail;
             if (createdByEmail != null) emailAttendees[emailAttendees.length+1]=createdByEmail;
 
+            LOG.debug("Email attendees : " + emailAttendees.length);
+
             EventAttendee[] attendees = new EventAttendee[] {
             };
 
