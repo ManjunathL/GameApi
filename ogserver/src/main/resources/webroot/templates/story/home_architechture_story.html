@@ -1,7 +1,7 @@
 <% if(typeof(lateststories2) !== 'undefined'){ %>
 <a href="/stories-architecture">
 <div class="col-lg-4 col-sm-12 col-md-4 padding5 mob-padding-0">
-    <div class="style-image-overlay">
+    <div class="style-image-overlay hidden-lg hidden-md">
         <% var blog_main_image =lateststories2.blog_main_image; %>
         <img src="<%= blog_main_image %>" class="hidden-xs hidden-sm object-fit_fill" alt="Trend & Style" />
         <img src="<%= blog_main_image %>" class="hidden-lg hidden-md object-fit_fill img-responsive width100" alt="Trend & Style" />
@@ -10,6 +10,24 @@
                 <p class="font-size30 txt-color-orange text-uppercase"> Architecture </p></div>
             <div class="width100 hidden-xs hidden-sm">
                 <p class="font-size12 font-weight400"> Get the right layout of building your home </p>
+            </div>
+            <div class="pull-right md-center">
+                <a href="/stories-architecture">
+                    <button class="btn btn-explore">EXPLORE</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="trend-image-overlay hidden-xs hidden-sm">
+        <% var blog_main_image =lateststories2.blog_main_image; %>
+        <img src="<%= blog_main_image %>" class="hidden-xs hidden-sm object-fit_fill" alt="Trend & Style" />
+        <img src="<%= blog_main_image %>" class="hidden-lg hidden-md object-fit_fill img-responsive width100" alt="Trend & Style" />
+
+        <div class="txt-over-trendstyle-image" style="width:60%;">
+            <div class="width100">
+                <p class="font-size30 txt-color-orange text-uppercase"> Architecture </p></div>
+            <div class="width60 hidden-xs hidden-sm">
+                <p class="font-size12 font-weight400"> Get the right layout of <br/>building your home </p>
             </div>
             <div class="pull-right md-center">
                 <a href="/stories-architecture">

@@ -8384,7 +8384,7 @@ html .ui-button.ui-state-disabled:active {
     .onbanner-txt{
         position:absolute;
         bottom:8%;
-        left:8%;
+        left:0%;
     }
     .onbanner-txt h2{
         font-family:'Montserrat', sans-serif;
@@ -9051,8 +9051,8 @@ html .ui-button.ui-state-disabled:active {
 
 
 .testihead{
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 22px;
+    font-weight: 900;
 }
 .nwhm-testimonial-section{
     /*background-image: url("https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528448664/home/website_image-06.jpg");
@@ -9182,6 +9182,22 @@ h6.address1{
     transition: all 2s ease;
     transform: scale(1.1);
 }
+.imgzoomin{
+    opacity: 0.7;
+    -webkit-transition: opacity 2s, -webkit-transform 2s;
+    transition: opacity 2s, transform 2s;
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+}
+.imgzoomin:hover{
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    transition: all 2s ease;
+}
 
 @media (max-width: 991px) {
     .nwhm-testimonialImg {
@@ -9196,7 +9212,7 @@ h6.address1{
         z-index: 1;
     }
     .whyus{
-        height: 650px;
+        height: 690px;
     }
     .home-interior{
         width:90%!important;
@@ -9214,4 +9230,38 @@ h6.address1{
     #mySpan {
         padding: 20px 40px;
     }
+}
+
+blockquote{
+  width:100%;
+  font-family: 'Lato', sans-serif;
+  font-style:italic;
+  color: #555555;
+  padding:1.2em 30px 1.2em 75px;
+  border-left:8px solid #78C0A8 ;
+  line-height:1.6;
+  position: relative;
+  font-size: 14px;
+}
+
+blockquote::before{
+  font-family:Arial;
+  content: "\201C";
+  color:#634E42;
+  font-size:4em;
+  position: absolute;
+  left: 10px;
+  top:-10px;
+}
+
+blockquote::after{
+  content: '';
+}
+
+blockquote span{
+  display:block;
+  color:#634E42;
+  font-style: normal;
+  font-weight: bold;
+  margin-top:1em;
 }
