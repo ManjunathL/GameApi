@@ -99,7 +99,7 @@ define([
                                         return Date.parse(story.date_of_publish);
                                     }).reverse();
                                     $("#latest_interior_blog_content1").html(_.template(homeTrendBlog)({
-                                      'lateststories1': lateststories1[1]
+                                      'lateststories1': lateststories1[0]
                                     }));
                                 },
                                 error: function(model, response, options) {
@@ -124,7 +124,7 @@ define([
                                         return Date.parse(story.date_of_publish);
                                     }).reverse();
                                     $("#latest_interior_blog_content2").html(_.template(homeArchBlog)({
-                                      'lateststories2': lateststories2[2]
+                                      'lateststories2': lateststories2[0]
                                     }));
                                 },
                                 error: function(model, response, options) {
@@ -174,6 +174,20 @@ define([
                 e.preventDefault();
                 var number = $(this).data('number');
                 gallerySlider.goToSlide(number);
+
+
+                $("#mySpan").animate({'opacity': 0}, 3000, function(){
+                    $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</span>');
+                });
+
+                setTimeout(function(){
+                    $("#mySpan").animate({'opacity': 0}, 3000, function(){
+                        $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;"><strong>Imagine. Do</strong></span>').animate({'opacity': 1}, 4000);
+                    });
+                },3000);
+
+
+
                 return false;
             });
 
