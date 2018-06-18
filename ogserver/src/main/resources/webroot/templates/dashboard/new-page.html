@@ -9,7 +9,6 @@
                         <a class="" href="#" data-number="0">
                             <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528992226/Banner_website-04.jpg" class="cld-responsive img-centered width100 hidden-xs hidden-sm" alt="mygubbi bedroom design" />
                             <div id="myMainSpan" class="onbanner-txt hidden-xs hidden-sm">
-                                <!--<h4 id=""><strong>Imagine </strong>what your home could be</h4>-->
                                 <div class="onbanner-txtbg">
                                     <h4 id="mySpan" class="wow fadeIn animated animated" data-wow-delay="1.5s" style="visibility: visible; animation-name: fadeIn; animation-delay: 1.5s; opacity: 0;"><strong>Imagine </strong>what your home could be</h4>
                                     <!--<h4 class="wow fadeIn animated animated" data-wow-delay="2.5s" style="visibility: visible; animation-delay:2.5s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</h4>
@@ -20,7 +19,7 @@
                             <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528992697/Livingroom_Banner1.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design" style="height:470px;"/>
                             <div class="onbanner-txt hidden-lg hidden-md">
                                 <div class="onbanner-txtbg">
-                                    <h2 id="mySpan" class="wow fadeIn animated animated" data-wow-delay="3s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;">Imagine. Do</h2>
+                                    <h2 id="mySpan" class="wow fadeIn animated animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;">Imagine. Do</h2>
                                     <!--<h4 class="wow fadeIn animated animated" data-wow-delay="2.5s" style="visibility: visible; animation-delay:2.5s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</h4>
                                     <h2 class="wow fadeIn animated animated" data-wow-delay="3s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;">Imagine. Do</h2>-->
                                 </div>
@@ -1319,15 +1318,15 @@
             $(this).css("background-color", "pink");
         });
 
-        $("#mySpan").animate({'opacity': 0}, 3000, function(){
-            $(this).html('<span>We will <strong>Do</strong> anything to make it real</span>').animate({'opacity': 1}, 4000);
+        $("#mySpan").animate({'opacity': 0}, 4000, function(){
+            $(this).html('<span class="wow fadeIn animated animated" data-wow-delay="2.5s" style="visibility: visible; animation-delay:2.5s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</span>');
         });
 
         setTimeout(function(){
             $("#mySpan").animate({'opacity': 0}, 4000, function(){
-                $(this).html('<strong>Imagine. Do</strong>').animate({'opacity': 1}, 4000);
+                $(this).html('<span class="wow fadeIn animated animated" data-wow-delay="3s" style="visibility: visible; animation-delay:2.5s; animation-name: fadeIn; opacity: 0;"><strong>Imagine. Do</strong></span>').animate({'opacity': 1}, 4000);
             });
-        },4000);
+        },5000);
 
         var  whyussect = $('#whyussect').position().top;
         whyussect = whyussect;

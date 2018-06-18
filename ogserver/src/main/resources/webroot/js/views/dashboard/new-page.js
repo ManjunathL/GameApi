@@ -79,7 +79,7 @@ define([
                             }).reverse();
 
                             $("#latest_interior_blog_content").html(_.template(homeInteriorBlog)({
-                              'lateststories3': lateststories3[0]
+                              'lateststories3': lateststories3[1]
                             }));
                         },
                         error: function(model, response, options) {
@@ -99,7 +99,7 @@ define([
                                         return Date.parse(story.date_of_publish);
                                     }).reverse();
                                     $("#latest_interior_blog_content1").html(_.template(homeTrendBlog)({
-                                      'lateststories1': lateststories1[0]
+                                      'lateststories1': lateststories1[1]
                                     }));
                                 },
                                 error: function(model, response, options) {
@@ -115,11 +115,16 @@ define([
                                  },
                                 success: function(result) {
                                     var lateststories2 = result.toJSON();
+
+
+                                    console.log("++++++++++++++++++++++lateststories2");
+                                    console.log(lateststories2);
+
                                     lateststories2 = _(lateststories2).sortBy(function(story) {
                                         return Date.parse(story.date_of_publish);
                                     }).reverse();
                                     $("#latest_interior_blog_content2").html(_.template(homeArchBlog)({
-                                      'lateststories2': lateststories2[0]
+                                      'lateststories2': lateststories2[2]
                                     }));
                                 },
                                 error: function(model, response, options) {
