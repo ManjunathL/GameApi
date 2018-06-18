@@ -159,13 +159,23 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
             String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=1"};
             event.setRecurrence(Arrays.asList(recurrence));
 
+            String locationEmail = ConfigHolder.getInstance().getStringValue(calendar_location,"");
+
+            LOG.debug("EMAIL attendees : " + ownerEmailId + " : " + customerEmail + " : " + createdByEmail );
+
+            String[] emailAttendees = new String[10];
+            if (locationEmail != null) emailAttendees[emailAttendees.length+1]=locationEmail;
+            if (ownerEmailId != null) emailAttendees[emailAttendees.length+1]=ownerEmailId;
+            if (customerEmail != null) emailAttendees[emailAttendees.length+1]=customerEmail;
+            if (createdByEmail != null) emailAttendees[emailAttendees.length+1]=createdByEmail;
+
             EventAttendee[] attendees = new EventAttendee[] {
-                    new EventAttendee().setEmail(ConfigHolder.getInstance().getStringValue(calendar_location,"")),
-                    new EventAttendee().setEmail(ownerEmailId),
-                    new EventAttendee().setEmail(customerEmail),
-                    new EventAttendee().setEmail(createdByEmail),
             };
 
+            for (int i=0; i <emailAttendees.length ; i++)
+            {
+                attendees[i]=new EventAttendee().setEmail(emailAttendees[i]);
+            }
 
             event.setAttendees(Arrays.asList(attendees));
 
