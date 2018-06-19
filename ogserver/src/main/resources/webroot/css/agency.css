@@ -3935,6 +3935,7 @@ a.button-orange:hover {
     }
     .contact-form{
         width:100%;
+        z-index:3999;
     }
 }
 
@@ -8914,8 +8915,9 @@ html .ui-button.ui-state-disabled:active {
     }
 
     .burger-logo {
-        margin-left: -20px;
+        margin-left: 0px;
         margin-top: 5px;
+        position: fixed;
     }
 
     .footer-bg {
@@ -9290,6 +9292,9 @@ blockquote span{
     }
     blockquote{
         padding: 1.2em 0px 1.2em 0px;
+    }
+    .Consultcontact-form{
+        width:100%;
     }
 }
 
