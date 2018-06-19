@@ -62,8 +62,6 @@
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '440911379430393');
-        fbq('track', 'PageView');
-        fbq('track', 'Lead');
     </script>
     <noscript>
         <img height="1" width="1" style="display:none"
@@ -82,13 +80,13 @@
         s.parentNode.insertBefore(t,s)}(window,document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '996915403798007');
-        fbq('track', 'PageView');
-        fbq('track', 'Lead');
+
+
     </script>
-    <!--<noscript>
+    <noscript>
         <img height="1" width="1"
              src="https://www.facebook.com/tr?id=996915403798007&ev=PageView&noscript=1"/>
-    </noscript>-->
+    </noscript>
     <!-- End MyGubbi Pixel Code -->
 
     <!--<script>
@@ -177,15 +175,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  var cururl = window.location.href;
     var durl = (window.location.href.indexOf("thankyou") > -1) ? 'thankyou' : 'general';
     (function() {
-        if(durl == 'general'){ console.log('============ general code ==============');
+        if(durl == 'general'){
+            console.log('============ general code ==============');
+            fbq('track', 'PageView');
             ga('set', 'page', location.pathname);
-            /*fbPixel('PageView');*/
         remTrack();
         }else if(durl == 'thankyou'){
-            /*fbPixel('Lead');*/
+             console.log('============ Thank u code ==============');
+            fbq('track', 'Lead');
             adwTrack();
 
-        }
+            }
         })();
     function adwTrack() {
         var img = new Image(1,1);
@@ -219,7 +219,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         #livechat-compact-view{
             visibility:hidden!important;
         }
+        #livechat-compact-container{
+            z-index:-1!important;
+        }
     }
+
 </style>
 
 

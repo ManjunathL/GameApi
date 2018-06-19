@@ -79,7 +79,7 @@ define([
                             }).reverse();
 
                             $("#latest_interior_blog_content").html(_.template(homeInteriorBlog)({
-                              'lateststories3': lateststories3[1]
+                              'lateststories3': lateststories3[2]
                             }));
                         },
                         error: function(model, response, options) {
@@ -117,8 +117,8 @@ define([
                                     var lateststories2 = result.toJSON();
 
 
-                                    console.log("++++++++++++++++++++++lateststories2");
-                                    console.log(lateststories2);
+                                    //console.log("++++++++++++++++++++++lateststories2");
+                                    //console.log(lateststories2);
 
                                     lateststories2 = _(lateststories2).sortBy(function(story) {
                                         return Date.parse(story.date_of_publish);
