@@ -182,6 +182,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         remTrack();
         }else if(durl == 'thankyou'){
              console.log('============ Thank u code ==============');
+             fbq('track', 'PageView');
             fbq('track', 'Lead');
             adwTrack();
 

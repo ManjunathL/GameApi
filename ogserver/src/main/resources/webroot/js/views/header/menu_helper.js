@@ -734,7 +734,7 @@ define([
 
                 that.positionSideContact();
 
-                $(document).on("click", null, function(e) {
+                /*$(document).on("click", null, function(e) {
                     var contactpopup = $("#contactuspop");
                     if (!$('#contact-us-side-btn').is(e.target) && !contactpopup.is(e.target) && contactpopup.has(e.target).length == 0) {
                         //$("#contactuspop").css('left', -$("#contactuspop").width() + 'px');
@@ -745,7 +745,7 @@ define([
                     if (!$('#user-icon').is(e.target) && !popup.is(e.target) && popup.has(e.target).length == 0) {
                         popup.css('right', '-800px');
                     }
-                });
+                });*/
 
                 $(document).on("click", "a[href^='/']", function(event) {
                     href = $(event.currentTarget).attr('href');
