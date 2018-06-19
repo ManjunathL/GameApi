@@ -21,7 +21,7 @@
 }
 
 .burger-logo {
-    height: 43px;
+    height: 50px;
 }
 
 /* Header Section */
@@ -36,7 +36,7 @@
 
 @media (max-width: 992px) {
    .page-cnt{
-       margin-top: 75px !important;
+       margin-top: 55px !important;
     }
 }
 .margin-top75{
@@ -5503,13 +5503,21 @@ a.tab-ico {
     width: 60%;
     position: absolute;
     left: 20%;
-    top: 15%;
+    top: 2%;
 }
 
 .consult-margin {
     margin-left: 0px !important;
     margin-right: 0px !important;
     margin-bottom: 0px !important;
+}
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 15px;
+    height: 1px;
+    border-radius: 1px;
+    background: #634e42;
 }
 
 @media (max-width: 991px) {
@@ -8412,7 +8420,7 @@ html .ui-button.ui-state-disabled:active {
         margin-top:70px !important;
     }
     .menu-sec-mrg-img{
-        margin-top:75px !important;
+        margin-top:55px !important;
     }
 }
 
@@ -8897,8 +8905,17 @@ html .ui-button.ui-state-disabled:active {
         height: 34px;
     }*/
 
+    .navbar-toggle .icon-bar {
+        display: block;
+        width: 15px;
+        height: 2px;
+        border-radius: 1px;
+        background: #634e42;
+    }
+
     .burger-logo {
-        margin-left: 0px;
+        margin-left: -20px;
+        margin-top: 5px;
     }
 
     .footer-bg {
@@ -9275,3 +9292,5 @@ blockquote span{
         padding: 1.2em 0px 1.2em 0px;
     }
 }
+
+

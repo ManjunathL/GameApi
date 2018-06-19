@@ -4287,7 +4287,7 @@ a.hideLink {
 
 @media (max-width: 480px) {
     .p-service-bg {
-        height: 960px;
+        height: 995px;
     }
 }
 
@@ -4395,7 +4395,7 @@ a.hideLink {
 .platinum-process-img{
     max-width: 265px;
     margin: 10px auto;
-    min-height: 140px;
+    height:180px;
 }
 
 .platinum-project-section{
