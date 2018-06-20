@@ -203,7 +203,7 @@ public class PaymentHandler extends AbstractRouteHandler
                                 .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Payment Done!")
                                 .setBodyTemplate("email/payment.success.vm")
                                 .setSubjectTemplate("email/payment.success.subject.vm");
-                        final String SENDGRID_APIKEY = "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";
+                                final String SENDGRID_APIKEY = "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";
 
                         SendGrid sendgrid = new SendGrid(SENDGRID_APIKEY);
                         SendGrid.Email email = new SendGrid.Email();
@@ -233,7 +233,7 @@ public class PaymentHandler extends AbstractRouteHandler
                                 .setHtmlBody(true).setParams(jsonData.getMap()).setSubject("Payment Done!")
                                 .setBodyTemplate("email/customer.payment.success.vm")
                                 .setSubjectTemplate("email/payment.success.subject.vm");
-                        final String SENDGRID_APIKEY = "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";
+                                final String SENDGRID_APIKEY = "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";
 
                         SendGrid sendgrid = new SendGrid(SENDGRID_APIKEY);
                         SendGrid.Email email = new SendGrid.Email();

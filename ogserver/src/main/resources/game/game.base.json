@@ -28,7 +28,7 @@
   "staticConfigPath": "",
 
   "robots.txt": "User-agent: *\nDisallow: /",
-  "SENDGRID_KEY":"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",
+  "SENDGRID_KEY":"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",
   "FROM_EMAIL":"game@mygubbi.com",
   "App_url_for_proposal":"http://192.168.104.156:8080/#!New%20Quotation/",
   "sendEmail":"no",
@@ -89,7 +89,7 @@
   "leadsquared_secret_key":"894f1e8cbdc36c967504b9dc912905f1fc77c012",
 
   "HSR EC":"mygubbi.com_pckif5fs90g049gv5okj2al8n8@group.calendar.google.com",
-  "Lavalle EC":"mygubbi.com_rq315ne97ondi0c9e38bpkv1ho@group.calendar.google.com",
+  "Lavelle EC":"mygubbi.com_rq315ne97ondi0c9e38bpkv1ho@group.calendar.google.com",
   "Whitefield EC":"mygubbi.com_gfiksu8eor5384g8u4e48akrr8@group.calendar.google.com",
   "Pune EC":"mygubbi.com_loru5p8scut7mb4hrh7g6nocso@group.calendar.google.com",
   "Chennai EC":"mygubbi.com_ihfj0o76snkqriga8o4506rrck@group.calendar.google.com",

@@ -862,7 +862,7 @@ public class ProposalHandler extends AbstractRouteHandler
         String subjectTemplate = emailParams.getString("subjectTemplate");
         String bodyTemplate = emailParams.getString("bodyTemplate");
 
-        String sendGridApiKey = ConfigHolder.getInstance().getStringValue("SENDGRID_KEY","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");
+        String sendGridApiKey = ConfigHolder.getInstance().getStringValue("SENDGRID_KEY","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");
         EmailData emailData = new EmailData().setFromEmail(fromEmail).setToEmails(toemails)
                 .setHtmlBody(true).setParams(params.getMap())
                 .setSubject(subject).setBodyTemplate(bodyTemplate)

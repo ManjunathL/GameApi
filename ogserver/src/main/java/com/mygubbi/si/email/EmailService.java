@@ -23,7 +23,7 @@ public class EmailService extends AbstractVerticle
     private final static Logger LOG = LogManager.getLogger(EmailService.class);
 
     public static final String SEND_EMAIL = "send.email";
-    private static final String SENDGRID_APIKEY = "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";
+    private static final String SENDGRID_APIKEY = "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";
 
     private SendGrid sendgrid;
 

@@ -15,10 +15,17 @@ import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.EventReminder;
 import com.google.api.services.drive.DriveScopes;
 import com.mygubbi.common.DateUtil;
+import com.mygubbi.common.LocalCache;
+import com.mygubbi.common.VertxInstance;
 import com.mygubbi.config.ConfigHolder;
+import com.mygubbi.db.DatabaseService;
+import com.mygubbi.db.QueryData;
+import com.mygubbi.game.proposal.model.EventAudit;
 import com.mygubbi.provider.CrmDataProvider;
 import com.mygubbi.route.AbstractRouteHandler;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -102,43 +109,33 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
             e.printStackTrace();
         }
 
-        JsonObject jsonObject2 = routingContext.getBodyAsJson();
-        LOG.debug("Jsonobject:" + jsonObject2);
-
-
-        JsonObject jsonObject = jsonObject2.getJsonObject("Data");
+        JsonObject jsonObject = routingContext.getBodyAsJson();
         LOG.debug("Jsonobject:" + jsonObject);
 
 
-        String summary = jsonObject.getString("TaskName");
-        String calendar_location = jsonObject.getString("mx_Custom_1");
-        String location = jsonObject.getString("mx_Custom_1");
-        String description = jsonObject.getString("TaskDescription");
-        String startTime = jsonObject.getString("DueDateLocalTime");
-        String endTime = jsonObject.getString("EndDateLocalTime");
+        String summary = jsonObject.getString("summary");
+        String calendar_location = jsonObject.getString("calendarLocation");
+        String location = jsonObject.getString("calendarLocation");
+        String description = jsonObject.getString("description");
+        String startTime = jsonObject.getString("startTime");
+        String endTime = jsonObject.getString("endTime");
         String createdByEmail = jsonObject.getString("createdByEmail");
+        String leadId = jsonObject.getString("LeadId");
+        String customerEmail = jsonObject.getString("customerEmail");
+        String customerPhone = jsonObject.getString("customerPhone");
+        String ownerEmailId = jsonObject.getString("ownerEmailId");
+        String customerName = jsonObject.getString("customerName");
         String testTime = "2018-06-14T07:25:00Z";
-        JSONObject lead = getLeadDetailsFromLeadSquared(jsonObject.getString("LeadId"));
-        String ownerEmailId = null;
-        String customerEmail = null;
+
 
         LOG.debug("Start time before :" + startTime+ " : End time before : " + endTime);
-        if (lead != null)
-        {
-            try {
-                description = description + " : " + lead.getString("EmailAddress") + " : " + lead.getString("Phone");
-                ownerEmailId = lead.getString("OwnerIdEmailAddress");
-                customerEmail = lead.getString("EmailAddress");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+
         LOG.debug("Summary :" + summary + " : Calendar location : " + calendar_location + " : Location :" + location + " : " + description);
         String startTimeNew = DateUtil.convertDateString(startTime);
         String endTimeNew = DateUtil.convertDateString(endTime);
         LOG.debug("Start time after :" + startTime+ " : End time after : " + endTime);
 
-        if (summary.contains("Meeting")){
+        if (summary.contains("Meeting") && location!= null){
             Event event = new Event()
                     .setSummary(summary)
                     .setLocation(location)
@@ -158,25 +155,23 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
 
             String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=1"};
             event.setRecurrence(Arrays.asList(recurrence));
-
             String locationEmail = ConfigHolder.getInstance().getStringValue(calendar_location,"");
 
-            LOG.debug("EMAIL attendees : " + ownerEmailId + " : " + customerEmail + " : " + createdByEmail );
+            LOG.debug("EMAIL attendees : " + locationEmail + " : " +  ownerEmailId + " : " + customerEmail + " : " + createdByEmail );
 
-            String[] emailAttendees = new String[10];
-            if (locationEmail != null) emailAttendees[emailAttendees.length+1]=locationEmail;
-            if (ownerEmailId != null) emailAttendees[emailAttendees.length+1]=ownerEmailId;
-            if (customerEmail != null) emailAttendees[emailAttendees.length+1]=customerEmail;
-            if (createdByEmail != null) emailAttendees[emailAttendees.length+1]=createdByEmail;
+            List<String> emailAttendees = new ArrayList<>();
+            if (locationEmail != null) emailAttendees.add(locationEmail);
+            if (ownerEmailId != null) emailAttendees.add(ownerEmailId);;
+            if (customerEmail != null) emailAttendees.add(customerEmail);;
+            if (createdByEmail != null) emailAttendees.add(createdByEmail);;
 
-            LOG.debug("Email attendees : " + emailAttendees.length);
+            LOG.debug("Email attendees : " + emailAttendees.size());
 
-            EventAttendee[] attendees = new EventAttendee[] {
-            };
+            EventAttendee[] attendees = new EventAttendee[10];
 
-            for (int i=0; i <emailAttendees.length ; i++)
+            for (int i=0; i <emailAttendees.size() ; i++)
             {
-                attendees[i]=new EventAttendee().setEmail(emailAttendees[i]);
+                attendees[i]=new EventAttendee().setEmail(emailAttendees.get(i));
             }
 
             event.setAttendees(Arrays.asList(attendees));
@@ -201,7 +196,7 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
 
             if (event != null)
             {
-                sendJsonResponse(routingContext, String.valueOf(new JsonObject().put("status","Success").put("message","Event inserted")));
+                insertEventStatus(routingContext,event,leadId,customerName,calendar_location,customerPhone,customerEmail);
             }
             else
             {
@@ -240,6 +235,34 @@ public class GoogleAPIHandler extends AbstractRouteHandler{
             return null;
         }
 
+    }
+
+    private void insertEventStatus(RoutingContext routingContext,Event event,String leadId,String customerName,String meetingLocation,String customerPhone, String customerEmail)
+    {
+        EventAudit eventAudit = new EventAudit();
+        eventAudit.setCustomerName(customerName);
+        eventAudit.setLeadId(leadId);
+        eventAudit.setMeetingLocation(meetingLocation);
+        eventAudit.setCustomerPhone(customerPhone);
+        eventAudit.setEventCreatedTime(event.getCreated());
+        eventAudit.setMeetingDateTime(event.getOriginalStartTime());
+        eventAudit.setEventStatus(event.getStatus());
+        eventAudit.setCustomerEmail(customerEmail);
+
+        LOG.debug("routing context :" + eventAudit.encodePrettily());
+        Integer id = LocalCache.getInstance().store(new QueryData("event.audit.insert", eventAudit));
+        VertxInstance.get().eventBus().send(DatabaseService.DB_QUERY, id,
+                (AsyncResult<Message<Integer>> selectResult) -> {
+                    QueryData resultData = (QueryData) LocalCache.getInstance().remove(selectResult.result().body());
+                    if (resultData.errorFlag || resultData.updateResult.getUpdated() == 0)
+                    {
+                        sendError(routingContext, "Error in creating version.");
+                    }
+                    else
+                    {
+                        sendJsonResponse(routingContext, eventAudit.toString());
+                    }
+                });
     }
 
 }

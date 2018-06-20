@@ -2245,6 +2245,15 @@
       "table": "cca_question_answers",
       "query": "insert into cca_question_answers(opportunityId,questionGroupCode,questionCode, answerCode) values (?,? ,?, ?)",
       "params": ["opportunityId","questionGroupCode","questionCode", "answerCode"]
+    },
+
+    //Event audit table
+    {
+      "id": "event.audit.insert",
+      "type": "insert",
+      "table": "event_audit",
+      "query": "insert into event_audit(leadId,customerName,meetingLocation, customerPhone, eventCreatedTime, meetingDateTime, eventStatus, customerEmail) values (?, ? ,?, ?, ?, ?, ?, ?)",
+      "params": ["leadId","customerName","meetingLocation", "customerPhone","eventCreatedTime","meetingDateTime","eventStatus","customerEmail"]
     }
   ]
 }
