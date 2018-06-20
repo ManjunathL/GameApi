@@ -3515,7 +3515,7 @@ a.button-orange:hover {
 
 .contact-form {
     margin: auto;
-    width: 70%;
+    width: 35%;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.9);
     padding: 20px;
@@ -3523,6 +3523,14 @@ a.button-orange:hover {
 }
 
 .Consultcontact-form {
+    margin: auto;
+    width: 70%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    position: relative;
+}
+.bookConsultcontact-form {
     margin: auto;
     width: 70%;
     color: #fff;
@@ -9294,6 +9302,9 @@ blockquote span{
         padding: 1.2em 0px 1.2em 0px;
     }
     .Consultcontact-form{
+        width:100%;
+    }
+    .bookConsultcontact-form{
         width:100%;
     }
 }

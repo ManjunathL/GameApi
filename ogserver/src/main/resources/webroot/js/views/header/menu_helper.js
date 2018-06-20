@@ -237,7 +237,7 @@ define([
             //$('.contact-us-side').css('top', ((popHeight / 2 > windowHeight) ? (-popHeight * 3 / 4 + contactUsSideWidth / 2) : (-popHeight / 2 + contactUsSideWidth / 2)) + 'px');
 
             //$('.contact-us-side').css('top','110px');
-            $('.contact-form').hide();
+            //$('.contact-form').hide();
             //$('.contact-us-pop').toggle('hide');
 
             /*var currLeft = $('.contact-us-pop').position().left;
@@ -248,6 +248,7 @@ define([
 
         closeContactForm: function(ev) {
             $('#contactuspop').modal('toggle');
+            $('#bookcontactform').modal('toggle');
         },
 
         getSuggestions: function(term) {
@@ -347,7 +348,8 @@ define([
         },
 
         toggleContactUsPop: function() {
-            $('.contact-form').hide();
+            //$('.contact-form').hide();
+            $('#bookcontactform').modal('toggle');
             /*var currLeft = $('.contact-us-pop').position().left;
             if (currLeft < 0) {
                 $('.contact-us-pop').css('top', '110px');
@@ -497,7 +499,7 @@ define([
                     e.stopPropagation();
                     //that.toggleContactUsPop();
 
-                    $('.contact-form').show();
+                    $('#bookcontactform').modal('show');
 
                     $('#contact_error').html('');
                     $('#contact_error_row').css("display", 'none');
@@ -730,9 +732,9 @@ define([
                     });
                 });
 
-                $(window).resize(that.positionSideContact);
+                //$(window).resize(that.positionSideContact);
 
-                that.positionSideContact();
+                //that.positionSideContact();
 
                 /*$(document).on("click", null, function(e) {
                     var contactpopup = $("#contactuspop");
