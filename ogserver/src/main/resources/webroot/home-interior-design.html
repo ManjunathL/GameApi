@@ -25,6 +25,8 @@
 
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/agency.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/fonts/pixeden/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
     <link rel="stylesheet" href="/fonts/pixeden/pe-icon-7-stroke/css/helper.css">
 
@@ -47,6 +49,7 @@
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,700' rel='stylesheet' type='text/css'>
     -->
 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type='text/css'>
 
     <script>
@@ -132,23 +135,30 @@
         });
 
     </script>
+    <style>
+    @media (max-width: 991px) {
+    .home-interior{
+    width:88%!important;
+    }
+    }
+    </style>
 </head>
 
 <body id="festive_lp">
 <header>
-    <nav class="navbar navbar-default navbar-festive">
+    <nav class="navbar navbar-default navbar-festive" style="background: #fff ! important; border-color: #fff; ! important">
         <div class="container festive-container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/w_auto/v1519896558/home/logo/mygubbi_logo.png" class="cld-responsive" alt="logo" />
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529042508/MyGubbi_logo-04.png" class="cld-responsive"  style="margin-top: 2px" alt="logo" />
                 </a>
             </div>
             <div class="navbar-right right-side-menu hidden-xs hidden-sm">
                 <div class="nav">
-                    <a href="tel:+91-730-487-3873" class="page-scroll font-size18 txt-color-white" style="padding-top: 17px;">
+                    <a href="tel:+91-730-487-3873" class="page-scroll font-size18 txt-color-white" style="color: #8B4513;background-color: #fff;padding-top: 17px;">
                         <i class="fa fa-phone txt-color-white"></i>
-                        <span> +91 7304 873 873 </span>
+                        <span> +91 8088 860 860 </span>
                     </a>
                 </div>
             </div>
@@ -160,7 +170,7 @@
     </nav>
 </header>
 
-
+<!--
 <section class="lp_banner_bg hidden-xs" >
     <div class="container festive-container hidden-xs">
         <div class="row">
@@ -231,553 +241,927 @@
         </div>
     </div>
 </section>
-<div class="hidden-xs" >
+<!--<div class="hidden-xs" >
     <img src="https://res.cloudinary.com/mygubbi/image/upload/v1525769500/landing_page/Logo_matchingMatching-02.png" class="matching-img-center-web"/>
-</div>
+</div>-->
 
 
 <section id="lp_banner" class="festive_banner_bg_mob">
     <a href="#cucu-form-mob" id="consultIco" class="hidden-lg hidden-md hidden-sm" title="Add Concept Board"><i class="fa fa-pencil-square-o"></i></a>
-    <div class="festive-banner-mob">
+    <!--<div class="festive-banner-mob">
         <img class="img-responsive hidden-lg hidden-md hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1499866008/landing_page/double-bonanza/mob/LV2_MOB.jpg" alt="Landing Banner" >
-    </div>
+    </div>-->
     <div class="container festive-container">
         <div class="row">
-            <div class="matchingcls hidden-lg hidden-md hidden-sm">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1525769500/landing_page/Logo_matchingMatching-02.png" class="matching-img-center" />
-            </div>
-            <div class="col-xs-12 hidden-lg hidden-md hidden-sm festive-mob-form">
-                <div class="cucumber-form mw text-left" id="cucu-form-mob">
-                    <h3 class="text-left"> Get a FREE Design Consultation </h3>
-                    <form method="post" enctype="multipart/form-data"
-                          action="https://web.mxradon.com/t/FormTracker.aspx"
-                          class="cucumber-form-wrapper">
-                        <div class="row">
-                            <div class="margin-bottom20 form-group">
-                                <input type='text' class="width100 form-control"
-                                       id='FirstName' name='FirstName'
-                                       placeholder="Name*" maxlength='100'
-                                       value="" autocomplete='off'
-                                       required='required'/>
-                            </div>
-                            <div class="margin-bottom20 form-group">
-                                <input type='text' class="width100 form-control"
-                                       id='EmailAddress'
-                                       name='EmailAddress' placeholder="Email*" maxlength='100'
-                                       value="" autocomplete='off'
-                                       required='required' pattern=".+@.+\..+"
-                                       title="<abc>@<xyz>.<com>"/>
-                            </div>
-                            <div class="margin-bottom20 form-group">
-                                <input type='text' class="width100 form-control" id='Phone'
-                                       name='Phone'
-                                       placeholder="Phone Number*" maxlength='20'
-                                       value="" autocomplete='off'
-                                       required='required' pattern="\d{10}"
-                                       title="e.g. 9876543210"/>
-                            </div>
-                            <div class="form-group">
-                                <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
-                                    <option value='cityName'>City Name</option>
-                                    <option value='Bangalore'> Bangalore </option>
-                                    <option value='Pune'> Pune </option>
-                                    <option value='Chennai'> Chennai </option>
-                                    <option value='Other' >Other</option>
-                                </select>
-                            </div>
-
-                            <div class="align-center form-group">
-                                <button class="btn btn-block btn-offers"
-                                        id="form-submit-button"
-                                        type="submit">Contact me with Best Offer
-                                </button>
-                                <br/>
-                                <input type="hidden" name="MXHOrgCode" value="9814" />
-                                <input type="hidden" name="MXHLandingPageId" value="5779bc96-3c62-11e6-b61b-22000aa8e760" />
-                                <input type="hidden" name="MXHFormBehaviour" value="1" />
-                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
-                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
-                                <input type="hidden" name="MXHAsc" value="5" />
-                                <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
-                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
-                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
-                            </div>
-                        </div>
-                    </form>
-                    <script type="text/javascript"> var MXLandingPageId = '5779bc96-3c62-11e6-b61b-22000aa8e760'; </script>
-
-                </div>
-            </div>
+            <!-- <div class="matchingcls hidden-lg hidden-md hidden-sm">
+                 <img src="https://res.cloudinary.com/mygubbi/image/upload/v1525769500/landing_page/Logo_matchingMatching-02.png" class="matching-img-center" />
+             </div>-->
         </div>
     </div>
 </section>
 
-<!-- Start How it work -->
-<section class="text-center mt30">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                <p class="mt40">
-                    Everyone has an imagination of how they would like their dream home to be done up. At MyGubbi,
-                    our experienced interior designers enable you to transform that imaginary home into a real home.
-                    It is a one-stop destination for anyone looking for personalized interior design & home decor products.
-                    We offer home interior solutions including modular kitchens, wardrobe units, entertainment units, shoe racks,
-                    tables and more.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="text-center">
-    <div class="container">
-        <div class="gethome-interior-need" style="margin:0px auto;">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 text-center">
-                    <h2>Get your dream home <br/> interiors designed</h2>
-                    <h5>by</h5>
-                    <h1> Mygubbi </h1>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                <div class="position-relative">
-                    <h1 class="mod-head mb30">
-                        <span class="mod-green"> Our </span>
-                        <span class="mod-red"> Services </span>
-                        <span class="mod-cer hidden-xs">
-                            <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1493377940/landing_page/modular-wardrobes/white-cer.jpg" alt="cir">
-                        </span>
-                    </h1>
-                </div>
-            </div>
-            <div class="col-md-10 col-md-offset-1 mt30 mb20 text-center">
 
-                <!--
-                                    <div class="row">
-                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn;">
-                                            <div class="de_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/20.png" alt="Explore The Designs" class="img-responsive img-centered"><br>
-                                                <span class="fact-des-works"> Explore The Designs </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
-                                            <div class="de_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/21.png" alt="Meet our Sales Associate" class="img-responsive cld-responsive img-centered"><br>
-                                                <span class="fact-des-works"> Meet our Sales Associate </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-                                            <div class="de_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/22.png" alt="Customize your home" class="img-responsive cld-responsive img-centered"><br>
-                                                <span class="fact-des-works"> Customize your home </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
-                                            <div class="de_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/23.png" alt="Get estimate & 3D Design" class="img-responsive cld-responsive img-centered"><br>
-                                                <span class="fact-des-works"> Get estimate & 3D Design </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="1.00s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
-                                            <div class="de_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/24.png" alt="Place Your Order" class="img-responsive cld-responsive img-centered"><br>
-                                                <span class="fact-des-works"> Place Your Order </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeIn animated" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
-                                            <div class="de_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/v1492672732/landing_page/modular-wardrobes/25.png" alt="Get Handover in 45 days" class="img-responsive cld-responsive img-centered"><br>
-                                                <span class="fact-des-works">  Get Handover in 45 days </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                -->
-                <div class="row offers-h4-txt">
-                    <div class="col-md-1"></div>
-                    <div class="col-xs-6 col-sm-6 col-md-2 pd0 wow fadeIn animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn;">
-                        <div class="de_count1 off-cnt">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2.png" alt="KITCHENS" class="img-centered">
-                        </div>
-                        <h4><strong> MODULAR <br/> KITCHENS </strong> </h4>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-2 pd0 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
-                        <div class="de_count1 off-cnt">
-                            <img src="http://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2_copy.png" alt="WARDROBES" class="img-centered">
-                        </div>
-                        <h4><strong> MODULAR <br/> WARDROBES </strong> </h4>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-2 pd0 wow fadeIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-                        <div class="de_count1 off-cnt">
-                            <img src="http://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2_copy_2.png" alt="STORAGE SOLUTIONS" class="img-centered">
-                        </div>
-                        <h4><strong> STORAGE <br/> SOLUTIONS </strong> </h4>
-                    </div>
-
-                    <div class="col-xs-6 col-sm-6 col-md-2 pd0 wow fadeIn animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
-                        <div class="de_count1 off-cnt">
-                            <img src="http://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2_copy_3.png" alt="FURNITURE" class="img-centered">
-                        </div>
-                        <h4><strong> MODULAR <br/> FURNITURE </strong> </h4>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-2 pd0 wow fadeIn animated" data-wow-delay="1.00s" style="visibility: visible; animation-delay: 1.00s; animation-name: fadeIn;">
-                        <div class="de_count1 off-cnt">
-                            <img src="http://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516339795/offer%20landingpage/Artboard_2_copy_4.png" alt="MORE" class="img-centered">
-                        </div>
-                        <h4><strong> MORE </strong> </h4>
-                    </div>
-
-                </div>
-
-                <!--<div class="row">
-                        <div class="col-md-12 mt30 mb20">
-                            <a href="#cucu-form-mob" class="btn btn-enquiry hidden-sm hidden-md hidden-lg"> Enquire Now </a>
-                            <a href="#cucu-form" class="btn btn-enquiry hidden-xs"> Enquire Now </a>
-                        </div>
-                    </div>-->
-
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End How it work -->
-
-<!-- End Gallery Section -->
-
-<div class="clearfix"></div>
-
-<!-- Start Gallery Section -->
-
-<!-- Section begin -->
-<section class="section-cucu-facts text-center">
+<section class="bg-color-white">
     <div class="container-fluid">
-        <div class="why-us-fluid">
-            <div class="row">
-                <div class="col-md-12 text-center wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                    <div class="position-relative">
-                        <h1 class="mod-head mb30">
-                            <span class="mod-green"> Our </span>
-                            <span class="mod-red">Assurance</span>
-                            <span class="mod-cerbg hidden-xs">
-                                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1493377939/landing_page/modular-wardrobes/blue-cer.jpg" alt="cir">
-                            </span>
-                        </h1>
-                    </div>
-                </div>
+        <div class="row">
 
-                <div class="col-md-10 col-md-offset-1 mt30 mb30 text-center assurance-fluid">
+            <div class="slider_container position-relative mrgmns20">
+                <div class="col-sm-6 col-md-4 col-lg-4 pn mt20 hidden-xs hidden-sm bookingform bx-form-land">
+                    <div class="contact-form" style="width: 83%; ! important">
+                        <div class="row">
+                            <h4 class="align-center">
+                                <span class="pe-7s-note"></span>
+                                Get a FREE Design Consultation
+                            </h4>
+                        </div>
+                        <div class="row">
 
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-3 pd0 wow fadeIn animated" data-wow-delay="0" style="visibility: visible; animation-name: fadeIn;">
-                                    <div class="off_count">
-                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance-01.png" alt="assurance1" class="img-centered">
+                            <div class="col-md-12">
+                                <div class="paddingtop30">
+                                    <div class="row margin_auto">
+                                        <div class="col-xs-6">
+                                            <a href="tel:+91-888-008-2082" style="color: #fff;margin-left: -16px;"><span class="nowrap"><span class="glyphicon glyphicon-earphone"></span> +91 8088 860 860</span></a>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <a href="mailto:wecare@mygubbi.com" style="color: #fff;" target="_blank"><span class="nowrap"><span class="glyphicon glyphicon-envelope"></span> reach@mygubbi.com</span></a>
+                                        </div>
                                     </div>
-                                    <h4><strong> Trust of happy <br/> home owners </strong> </h4>
                                 </div>
-                                <div class="col-xs-6 col-sm-6 col-md-3 pd0 wow fadeIn animated" data-wow-delay=".25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
-                                    <div class="off_count">
-                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance-02.png" alt="assurance2" class="img-centered">
-                                    </div>
-                                    <h4><strong> Wide range of materials, <br/> finishes & designs </strong> </h4>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-3 pd0 wow fadeIn animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-                                    <div class="off_count">
-                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance_Artboard_5.png" alt="assurance3" class="img-centered">
-                                    </div>
-                                    <h4><strong> Products from <br/> trusted brands </strong> </h4>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-3 pd0 wow fadeIn animated" data-wow-delay=".75s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeIn;">
-                                    <div class="off_count">
-                                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363380/offer%20landingpage/v1/Assurance_Artboard_5_copy.png" alt="assurance4" class="img-centered">
-                                    </div>
-                                    <h4><strong> Transparent <br/> pricing </strong> </h4>
-                                </div>
-
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                            <div class="col-md-12">
+                                <div class="row display-none" id="contact_error_row">
+                                    <p class="margin0 error-text align-center" id="contact_error"></p>
+                                </div>
+
+
+                                <form method="post" enctype="multipart/form-data"
+                                      action="https://web.mxradon.com/t/FormTracker.aspx"
+                                      id="contactForm" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
                                     <div class="row">
-                                        <div class="col-xs-6 col-sm-6 col-md-4 pd0 wow fadeIn animated" data-wow-delay="1.0s" style="visibility: visible; animation-name: fadeIn;">
-                                            <div class="off_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance-05.png" alt="assurance5" class="img-centered">
-                                            </div>
-                                            <h4><strong> Hassle - free <br/> Installation </strong> </h4>
+                                        <div class="margin-bottom20 form-group">
+                                            <input type='text' class="width100 form-control"
+                                                   id='FirstName' name='FirstName'
+                                                   placeholder="Name*" maxlength='100'
+                                                   value="" autocomplete='off'
+                                                   required='required'/>
                                         </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-4 pd0 wow fadeIn animated" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeIn;">
-                                            <div class="off_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance-06.png" alt="assurance6" class="img-centered">
-                                            </div>
-                                            <h4><strong> 5 - year <br/> warranty </strong> </h4>
+                                        <div class="margin-bottom20 form-group">
+                                            <input type='text' class="width100 form-control"
+                                                   id='EmailAddress'
+                                                   name='EmailAddress' placeholder="Email*" maxlength='100'
+                                                   value="" autocomplete='off'
+                                                   required='required' pattern=".+@.+\..+"
+                                                   title="<abc>@<xyz>.<com>"/>
                                         </div>
-                                        <div class="hidden-xs hidden-sm col-md-4 pd0 wow fadeIn animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-                                            <div class="off_count">
-                                                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance_Artboard_9.png" alt="assurance7" class="img-centered">
-                                            </div>
-                                            <h4><strong> 1 year free <br/> maintenance </strong> </h4>
+                                        <div class="margin-bottom20 form-group">
+                                            <input type='text' class="width100 form-control" id='Phone'
+                                                   name='Phone'
+                                                   placeholder="Phone Number*" maxlength='20'
+                                                   value="" autocomplete='off'
+                                                   required='required' pattern="\d{10}"
+                                                   title="e.g. 9876543210"/>
                                         </div>
-                                        <div class="hidden-md hidden-lg col-sm-6 col-sm-offset-3 pd0 wow fadeIn animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-                                            <div class="off_count11">
-                                                <img  style="width: 150px;" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1516363325/offer%20landingpage/v1/Assurance_Artboard_9.png" alt="assurance7" class="img-centered">
+                                        <div class="form-group">
+                                            <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                                <option value='cityName'>City Name</option>
+                                                <option value='Bangalore'> Bangalore </option>
+                                                <option value='Pune'> Pune </option>
+                                                <option value='Chennai'> Chennai </option>
+                                                <option value='Other' >Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                           <textarea class="width100 form-control" id="mx_Requirement"
+                                                     name='mx_Requirement' maxlength='150' value='' autocomplete='off'
+                                                     placeholder="Describe your requirements: I am looking for interior design solutions for my 2BHK home at ...."></textarea>
                                             </div>
-                                            <h4><strong> 1 year free <br/> maintenance </strong></h4>
+                                        </div>
+                                        <!--<div class="form-group">
+                                            <input type='text' id='mx_Property_Name' name='mx_Property_Name' class="width100 form-control"
+                                                   placeholder="Property Name" maxlength='50' value='' autocomplete='off'  />
+                                        </div>-->
+                                        <!--<div class="form-group">
+                                            <label for='exclude_FileUpload_1'>Upload Floorplan</label>
+                                            <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
+                                            <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
+                                        </div>-->
+                                        <div class="align-center form-group">
+                                            <button class="btn-popup"
+                                                    id="form-submit-button"
+                                                    type="submit">Submit
+                                            </button>
+                                            <br/>
+                                            <input type="hidden" name="MXHOrgCode" value="9814" />
+                                            <input type="hidden" name="MXHLandingPageId" value="173efb36-4270-11e6-b61b-22000aa8e760" />
+                                            <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                            <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                            <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-quick-contact-page" />
+                                            <input type="hidden" name="MXHAsc" value="10" />
+                                            <input type="hidden" name="MXHPageTitle" value="contact_us" />
+                                            <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                            <input type="hidden" name="MXHIsExternallyUsed" value="1" />
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+                                <script type="text/javascript"> var MXLandingPageId = '173efb36-4270-11e6-b61b-22000aa8e760'; </script>
+
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <ul class="bxslider padding0">
+                    <li>
+                        <a class="slider-move" href="#" data-number="0">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529326087/home/v2/1-Livingroom_Banner_day-view_1.jpg" class="cld-responsive img-centered width100 hidden-xs hidden-sm" alt="mygubbi bedroom design" />
+                            <div id="myMainSpan" class="onbanner-txt hidden-xs hidden-sm">
+                                <div class="onbanner-txtbg">
+                                    <h4 id="mySpan" class="wow fadeIn animated animated" data-wow-delay="1.5s" style="visibility: visible; animation-name: fadeIn; animation-delay: 1.5s; opacity: 0;"><strong>Imagine </strong>what your home could be</h4>
+                                    <!--<h4 class="wow fadeIn animated animated" data-wow-delay="2.5s" style="visibility: visible; animation-delay:2.5s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</h4>
+                                    <h2 class="wow fadeIn animated animated" data-wow-delay="3s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;">Imagine. Do</h2>-->
+                                </div>
+                            </div>
+
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529316157/home/v2/Livingroom_Banner_mobile-compressor.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design"/>
+                            <div class="onbanner-txt hidden-lg hidden-md">
+                                <div class="onbanner-txtbg">
+                                    <h2 class="wow fadeIn animated animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;padding: 20px 40px;">Imagine. Do</h2>
+                                    <!--<h4 class="wow fadeIn animated animated" data-wow-delay="2.5s" style="visibility: visible; animation-delay:2.5s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</h4>
+                                    <h2 class="wow fadeIn animated animated" data-wow-delay="3s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;">Imagine. Do</h2>-->
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="slider-move" href="#" data-number="1">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529318541/home/v2/Livingroom_Banner_night-view_1-compressor.jpg" class="cld-responsive img-centered width100 hidden-xs hidden-sm" alt="mygubbi bedroom design" />
+                            <div id="myMainSpan" class="onbanner-txt hidden-xs hidden-sm">
+                                <div class="onbanner-txtbg">
+                                    <h4 id="mySpan" class="wow fadeIn animated animated" data-wow-delay="1.5s" style="visibility: visible; animation-name: fadeIn; animation-delay: 1.5s; opacity: 0;"><strong>Imagine. Do</strong></h4>
+                                    <!--<h4 class="wow fadeIn animated animated" data-wow-delay="2.5s" style="visibility: visible; animation-delay:2.5s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</h4>
+                                    <h2 class="wow fadeIn animated animated" data-wow-delay="3s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;">Imagine. Do</h2>-->
+                                </div>
+                            </div>
+
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529316157/home/v2/Livingroom_Banner_mobile-compressor.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design"/>
+                            <div class="onbanner-txt hidden-lg hidden-md">
+                                <div class="onbanner-txtbg">
+                                    <h2 class="wow fadeIn animated animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;padding: 20px 40px;">Imagine. Do</h2>
+                                    <!--<h4 class="wow fadeIn animated animated" data-wow-delay="2.5s" style="visibility: visible; animation-delay:2.5s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</h4>
+                                    <h2 class="wow fadeIn animated animated" data-wow-delay="3s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;">Imagine. Do</h2>-->
+                                </div>
+                            </div>
+
+                        </a>
+                    </li>
+                </ul>
+                <!-- Controls -->
+                <a id="bxslider_left" class="slider_left hidden-sm hidden-xs" role="button" data-slide="prev">
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/arr-left-thick.png" class="arr_left" alt="...">
+                </a>
+                <a id="bxslider_right" class="slider_right  hidden-sm hidden-xs" role="button" data-slide="next">
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/arr-right-thick.png" class="arr_right" alt="...">
+                </a>
+                <div class="col-sm-6 col-md-4 col-lg-4 pn mt20 hidden-lg hidden-md">
+                    <div class="cucumber-form mw text-left cucumber-form-contact" id="cucu-form-mob">
+                        <div class="contact-form" style="margin-left: -15px;width: 108%;">
+                            <div class="row">
+                                <h4 class="align-center">
+                                    <span class="pe-7s-note"></span>
+                                    Get a FREE Design Consultation
+                                </h4>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="paddingtop30">
+                                        <div class="row margin_auto">
+                                            <div class="col-xs-6">
+                                                <a href="tel:+91-888-008-2082" style="color: #fff;margin-left: -16px;"><span class="nowrap"><span class="glyphicon glyphicon-earphone"></span> +91 8088 860 860</span></a>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <a href="mailto:wecare@mygubbi.com" style="color: #fff;" target="_blank"><span class="nowrap"><span class="glyphicon glyphicon-envelope"></span> reach@mygubbi.com</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row display-none" id="contact_error_row">
+                                        <p class="margin0 error-text align-center" id="contact_error"></p>
+                                    </div>
+
+
+                                    <form method="post" enctype="multipart/form-data"
+                                          action="https://web.mxradon.com/t/FormTracker.aspx"
+                                          id="contactForm" data-toggle="validator" role="form" class="width90 margin_auto paddingtop30">
+                                        <div class="row">
+                                            <div class="margin-bottom20 form-group">
+                                                <input type='text' class="width100 form-control"
+                                                       id='FirstName' name='FirstName'
+                                                       placeholder="Name*" maxlength='100'
+                                                       value="" autocomplete='off'
+                                                       required='required'/>
+                                            </div>
+                                            <div class="margin-bottom20 form-group">
+                                                <input type='text' class="width100 form-control"
+                                                       id='EmailAddress'
+                                                       name='EmailAddress' placeholder="Email*" maxlength='100'
+                                                       value="" autocomplete='off'
+                                                       required='required' pattern=".+@.+\..+"
+                                                       title="<abc>@<xyz>.<com>"/>
+                                            </div>
+                                            <div class="margin-bottom20 form-group">
+                                                <input type='text' class="width100 form-control" id='Phone'
+                                                       name='Phone'
+                                                       placeholder="Phone Number*" maxlength='20'
+                                                       value="" autocomplete='off'
+                                                       required='required' pattern="\d{10}"
+                                                       title="e.g. 9876543210"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                                    <option value='cityName'>City Name</option>
+                                                    <option value='Bangalore'> Bangalore </option>
+                                                    <option value='Pune'> Pune </option>
+                                                    <option value='Chennai'> Chennai </option>
+                                                    <option value='Other' >Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                           <textarea class="width100 form-control"  style="height: 52px;line-height: 21px ! important;"  id="mx_Requirement"
+                                                     name='mx_Requirement' maxlength='150' value='' autocomplete='off'
+                                                     placeholder="Describe your requirements: I am looking for interior design solutions for my 2BHK home at ...."></textarea>
+                                                </div>
+                                            </div>
+                                            <!--<div class="form-group">
+                                                <input type='text' id='mx_Property_Name' name='mx_Property_Name' class="width100 form-control"
+                                                       placeholder="Property Name" maxlength='50' value='' autocomplete='off'  />
+                                            </div>-->
+                                            <!--<div class="form-group">
+                                                <label for='exclude_FileUpload_1'>Upload Floorplan</label>
+                                                <input type='file' id='exclude_FileUpload_1' name='exclude_FileUpload_1' autocomplete='off' class="width100 form-control"  />
+                                                <input type='hidden' id='exclude_FileUpload_1_label' name='exclude_FileUpload_1_label' value='Upload Floorplan' class="width100 form-control"  />
+                                            </div>-->
+                                            <div class="align-center form-group">
+                                                <button class="btn-popup"
+                                                        id="form-submit-button"
+                                                        type="submit">Submit
+                                                </button>
+                                                <br/>
+                                                <input type="hidden" name="MXHOrgCode" value="9814" />
+                                                <input type="hidden" name="MXHLandingPageId" value="173efb36-4270-11e6-b61b-22000aa8e760" />
+                                                <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                                <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                                <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-quick-contact-page" />
+                                                <input type="hidden" name="MXHAsc" value="10" />
+                                                <input type="hidden" name="MXHPageTitle" value="contact_us" />
+                                                <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                                <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <script type="text/javascript"> var MXLandingPageId = '173efb36-4270-11e6-b61b-22000aa8e760'; </script>
+
+                                </div>
+                            </div>
+                            <!-- <div id="close-contactus-pop" data-element="#contactuspop" class="close-icon signup-form">
+                                 <img src="<%= imgBase + 'close-white.png'%>">
+                             </div>-->
+                        </div>
+                        <!--<h3 class="text-left"> Get a FREE Design Consultation </h3>-->
+                        <!--<form id="ldsq" class="cucumber-form-wrapper" method="post" enctype="multipart/form-data"
+                              action="https://web.mxradon.com/t/FormTracker.aspx"
+                              class="width90 margin_auto paddingtop20">
+                            <div class="row">
+                                <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control"
+                                           id='FirstName' name='FirstName'
+                                           placeholder="Name*" maxlength='100'
+                                           value="" autocomplete='off'
+                                           required='required'/>
+                                </div>
+                                <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control"
+                                           id='EmailAddress'
+                                           name='EmailAddress' placeholder="Email*" maxlength='100'
+                                           value="" autocomplete='off'
+                                           required='required' pattern=".+@.+\..+"
+                                           title="<abc>@<xyz>.<com>"/>
+                                </div>
+                                <div class="margin-bottom20 form-group">
+                                    <input type='text' class="width100 form-control" id='Phone'
+                                           name='Phone'
+                                           placeholder="Phone Number*" maxlength='20'
+                                           value="" autocomplete='off'
+                                           required='required' pattern="\d{10}"
+                                           title="e.g. 9876543210"/>
+                                </div>
+                                <div class="form-group">
+                                    <select id='mx_City_Name' class="form-control" name='mx_City_Name'>
+                                        <option value='cityName'>City Name</option>
+                                        <option value='Bangalore'> Bangalore </option>
+                                        <option value='Pune'> Pune </option>
+                                        <option value='Chennai'> Chennai </option>
+                                        <option value='Other' >Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="align-center form-group">
+                                    <button class="btn btn-block btn-offers"
+                                            id="form-submit-button"
+                                            type="submit" style="font-size:14px;">Contact me with Best Offer
+                                    </button>
+                                    <br/>
+                                    <input type="hidden" name="MXHOrgCode" value="9814" />
+                                    <input type="hidden" name="MXHLandingPageId" value="5779bc96-3c62-11e6-b61b-22000aa8e760" />
+                                    <input type="hidden" name="MXHFormBehaviour" value="1" />
+                                    <input type="hidden" name="MXHFormDataTransfer" value="0" />
+                                    <input type="hidden" name="MXHRedirectUrl" value="https://mygubbi.com/thankyou-email-lp-page" />
+                                    <input type="hidden" name="MXHAsc" value="5" />
+                                    <input type="hidden" name="MXHPageTitle" value="Bangalore mygubbi" />
+                                    <input type="hidden" name="MXHOutputMessagePosition" value="0" />
+                                    <input type="hidden" name="MXHIsExternallyUsed" value="1" />
+                                </div>
+                            </div>
+                        </form>-->
+                        <script type="text/javascript"> var MXLandingPageId = '5779bc96-3c62-11e6-b61b-22000aa8e760'; </script>
+
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
-<!-- End Section -->
 
-<div class="clearfix"></div>
-
-<section class="media-banner-section mt30 pt50">
-    <div class="media-banner">
-        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1521718475/landing_page/modular-wardrobes/factoryunit-compressor.jpg" alt="factory-banner">
-    </div>
-</section>
-
-<div class="clearfix"></div>
-
-
-<!-- Start Customer's Speak -->
-<section id="lp-testimonial" class="section-testimonial text-center">
-    <div class="gethome-interior-need">
+<section id="whyussect" class="whyus pt50 pb50 mob-padding-top-20 mob-padding-bottom-0 border-bottom-grey mb40">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <h2>800+ homes delivered</h2>
-            </div>
-        </div>
-    </div>
-    <div class="position-relative">
-        <h1 class="mod-head mb30">
-            <span class="mod-green">Here's what our customers</span>
-            <span class="mod-red"> have to say</span>
-            <span class="mod-cer hidden-xs">
-                <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1493377940/landing_page/modular-wardrobes/white-cer.jpg" alt="cir">
-            </span>
-        </h1>
-    </div>
-    <div class="container">
-
-        <div id="owl-testimonial" class="owl-carousel owl-theme">
-            <div class="item cucumber-testimonial-box">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 text-center mt30">
-                        <img class="img-centered img-profile" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1492677009/landing_page/modular-wardrobes/Narasimha.png" alt="user">
-                        <h5 class="text-center cucu-testimonialtxt"> H.T. Narasimhan <br/> Bangalore</h5>
-                    </div>
-                    <div class="col-sm-6 col-md-6 mod-testimonial">
-                        <p class="cucu-testimonial">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1492678253/landing_page/modular-wardrobes/col-up.png" style="width:23px">
-                            I am happy that I chose MyGubbi for designing wardrobes & kitchen. Right from their sales
-                            team to their designers, they are very cooperative and responsive.A special thanks to M/s
-                            Rajeev,Naik and Nataraj. Times when I was confused with the design, they helped me
-                            understand it better by relating it to my interest, which is something that impressed me a
-                            lot.
-                            <br/><span class="pull-right"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1492678253/landing_page/modular-wardrobes/col-down.png"></span><br/>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="item cucumber-testimonial-box">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 text-center mt30">
-                        <img class="img-centered img-profile" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1492677009/landing_page/modular-wardrobes/chnadra.png" alt="user">
-                        <h5 class="text-center cucu-testimonialtxt"> Mr. Chandra Shekar <br/> Bangalore </h5>
-                    </div>
-                    <div class="col-sm-6 col-md-6 mod-testimonial">
-                        <p class="cucu-testimonial">
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1492678253/landing_page/modular-wardrobes/col-up.png" style="width:23px">
-                            Neat range of choices, brilliant coordination and excellent post sales communication.
-                            Mygubbi turned out to be the perfect choice for my home interiors.
-                            They provided me with a wide range of choices and the quality met my expectations. These
-                            guys are well aware of the requirement and from designing to delivery, they are all just
-                            extremely professional.
-                            <br/><span class="pull-right"><img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1492678253/landing_page/modular-wardrobes/col-down.png"></span><br/>
-                        </p>
-                    </div>
-                </div>
+            <div class="col-lg-12 text-center padding-bottom15">
+                <h2 class="section-heading">WHY US?</h2>
             </div>
         </div>
 
+        <div class="row text-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 col-sm-6 col-xs-6 banner-icon-height">
+                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fit,h_100,w_100/home/logo/icon-multicity.png"
+                     class="cld-responsive img-centered mobIco" alt="mygubbi bedroom design" />
+                <p class="txtnumb font-size35" id="citynumb"><b>3</b></p>
+                <p class="font-size14"> Cities </p>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6 banner-icon-height">
+                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fit,h_100,w_100/v1529302708/home/v2/icon_ac.png"
+                     class="cld-responsive img-centered mobIco" alt="mygubbi bedroom design" />
+                <p class="txtnumb font-size35" id="excnumb"> 5 </p>
+                <p class="font-size14"> Experience Centers </p>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6 banner-icon-height">
+                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fit,h_100,w_100/v1529044679/menu-img/Team_1.png"
+                     class="cld-responsive img-centered mobIco" alt="mygubbi bedroom design" />
+                <p class="txtnumb font-size35" id="teamnumb"> 100+ </p>
+                <p class="font-size14"> team </p>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6 banner-icon-height">
+                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fit,h_100,w_100/v1529302708/home/v2/icon_ab.png"
+                     class="cld-responsive img-centered mobIco" alt="mygubbi bedroom design" />
+                <p class="txtnumb font-size35" id="homenumb"> 800+ </p>
+                <p class="font-size14"> homes </p>
+            </div>
+            <div class="col-md-2 col-sm-12 col-xs-12 banner-icon-height">
+                <img data-src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fit,h_100,w_100/v1529043808/menu-img/factory.png"
+                     class="cld-responsive img-centered mobIco12" alt="mygubbi bedroom design" />
+                <p class="txtnumb font-size35" id="sqftnumb">20000 </p>
+                <p class="font-size14">sqft <br/> State of the Art Factory</p>
+            </div>
+            <div class="col-md-1"></div>
+        </div>`
     </div>
 </section>
+<!-- End Services Section -->
 
 
-<!-- Start RECENT PROJECTS -->
-<!--<section class="border-bottom-grey bg-color-white pt50 pb50">
+<section class="bg-color-white mb40" id="services"  style="margin-top: 40px;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 text-center">
-                &lt;!&ndash;<h2 class="section-heading"> RECENT PROJECTS </h2>&ndash;&gt;
-                <h1 class="mod-head mb30">
-                    <span class="mod-green"> RECENT </span>
-                    <span class="mod-red">PROJECTS</span>
-                    <span class="mod-cer hidden-xs">
-                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1493377940/landing_page/modular-wardrobes/white-cer.jpg" alt="cir">
-                    </span>
-                </h1>
+                <h2 class="section-heading">Home Interior Solutions</h2>
             </div>
         </div>
-        <div class="row hidden-lg hidden-md">
-            <div class="mob-c-project">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1510829507/recent_projects/Amlan_Das_Purina_Elite/_KS_8804.jpg"
-                     class="cld-responsive img-centered width100" alt="Experience Center" />
-                &lt;!&ndash;<a class="mob-c-btn" href="/recent-projects">
-                    <button class="btn btn-explore"> EXPLORE </button>
-                </a>&ndash;&gt;
+
+        <div class="row position-relative text-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 process-icon-height1 home-interior" >
+
+                <a href="/platinum-home-interiors">
+                    <h5 class="design2 plattxt htwboxImage pb10">Platinum Homes</h5>
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529044855/Living_room_Banner_option_4.jpg" class="cld-responsive img-centered width100 hidden-xs hidden-sm imgzoomin" alt="mygubbi premium home" />
+                    <div class="hidden-xs hidden-sm"><p class="text-muted font-size14 font-weight400 text-justify pt20 Latofntfam">We understand what your “home” means to you. That is why, we offer end-to-end home solutions to transform your living space to make it chic, smart and ‘you’.</p></div>
+                </a>
+
+                <a href="/platinum-home-interiors">
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529044855/Living_room_Banner_option_4.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi premium home" />
+                    <div class="hidden-lg hidden-md"><p class="text-muted font-size14 font-weight400 text-justify pt20 Latofntfam">We understand what your “home” means to you. That is why, we offer end-to-end home solutions to transform your living space to make it chic, smart and ‘you’.</p></div>
+                </a>
+
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 process-icon-height1 home-interior " >
+                <a href="/know-your-kitchen">
+                    <h5 class="design2 plattxt htwboxImage pb10">Kitchen & Wardrobe</h5>
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1490086896/home/v2/kitchen.jpg" class="imgzoomin cld-responsive img-centered width100 hidden-xs hidden-sm" alt="mygubbi kitchen design" />
+                    <div class="hidden-xs hidden-sm">
+                        <p class="text-muted font-size14 font-weight400 text-justify pt20 Latofntfam">If you are looking for functional furniture, great finish, range of colour options & enhanced durability then modular factory produced furniture is the way to go.
+
+                        </p>
+                    </div>
+                </a>
+
+                <a href="/kitchen-cabinet-design">
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1490086896/home/v2/kitchen_mobile.jpg" class="cld-responsive img-centered width100 hidden-md hidden-lg" alt="mygubbi kitchen design" />
+                    <div class="hidden-md hidden-lg">
+                        <p class="text-muted font-size14 font-weight400 text-justify pt20 Latofntfam">If you are looking for functional furniture, great finish, range of colour options & enhanced durability then modular factory produced furniture is the way to go.
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="bg-color-white pt50 pb50 border-bottom-grey" style="background:#f8f8f8;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading"> How it works </h2>
             </div>
         </div>
-        <div class="row hidden-xs hidden-sm">
-            <div class="col-lg-6 col-md-6 col-sm-6 padding0">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1510829507/recent_projects/Amlan_Das_Purina_Elite/_KS_8804.jpg"
-                     class="cld-responsive img-centered width100" alt="Experience Center" />
-                <div class="txt-over-completed-project-img hidden-xs hidden-sm">
-                    <div>
-                        <p class="txt-over-head font-size35 txt-over-head"> PICTURE PERFECT </p>
-                    </div>
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 process-icon-height">
+                <div class="htw-box">
+                    <h5 class="design2 htwboxImage pb20" ><span class="text-primary">1.</span> Visit Us</h5>
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529044568/home/EC_VIEW_1.jpg" class="cld-responsive img-responsive img-centered hidden-xs hidden-sm" alt="mygubbi bedroom design" />
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,w_555,h_333/v1529044568/home/EC_VIEW_1.jpg" class="cld-responsive img-responsive img-centered hidden-md hidden-lg" alt="mygubbi bedroom design" />
+                    <p class="text-muted font-size14 font-weight400 text-justify pt20 pb20">Our Experience Centers help understand the possibilities in your home </p>
                 </div>
-                &lt;!&ndash;<div class="txt-over-completed-project-image hidden-xs hidden-sm">
-                    <div>
-                        <p class="font-size12 font-weight400">
-                            Have a closer look at the designs we’ve customised for customers
-                            just like you, to see why they keep coming back to us.</p>
-                    </div>
-                    <div class="exploring">
-                        <a href="/recent-projects">
-                            <button class="btn btn-explore pull-right"> EXPLORE </button>
-                        </a>
-                    </div>
-                </div>&ndash;&gt;
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="row margin0">
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom15">
-                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1510924593/recent_projects/Febin_Matew_Emerald_Estilla/_KS_9134.jpg"
-                             class="cld-responsive img-centered width100" alt="Experience Center" />
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom20">
-                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1511174101/recent_projects/Nithin_Jadhav_Euphoria/_KS_9152.jpg"
-                             class="cld-responsive img-centered width100" alt="Experience Center" />
-                    </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 process-icon-height">
+                <div class="htw-box">
+                    <h5 class="design2 htwboxImage pb20"><span class="text-primary">2.</span> Design</h5>
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,w_240,h_155/v1529049877/home/v2/interior-design.jpg" class="cld-responsive img-responsive img-centered hidden-xs hidden-sm" alt="mygubbi bedroom design" />
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,w_555,h_333/v1529049877/home/v2/interior-design.jpg" class="cld-responsive img-responsive img-centered hidden-md hidden-lg" alt="mygubbi bedroom design" />
+                    <p class="text-muted font-size14 font-weight400 text-justify pt20 pb20"> Visualize your imagination through high-definition 3D renders as we give shape to your designs </p>
                 </div>
-                <div class="row margin0">
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom15">
-                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1511172864/recent_projects/Kalyan_Seshu_Adarsh_Palm_Retreat/_KS_8997.jpg"
-                             class="cld-responsive img-centered width100" alt="Experience Center" />
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom20">
-                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1511179848/recent_projects/Santosh_Kumar_RBD/_KS_9486.jpg"
-                             class="cld-responsive img-centered width100" alt="Experience Center" />
-                    </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 process-icon-height">
+                <div class="htw-box">
+                    <h5 class="design2 htwboxImage pb20"><span class="text-primary">3.</span> Manufacture</h5>
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,w_240,h_155/v1529301039/home/v2/manufact.jpg" class="cld-responsive img-responsive img-centered hidden-xs hidden-sm" alt="mygubbi bedroom design" />
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,w_555,h_333/v1529301039/home/v2/manufact.jpg" class="cld-responsive img-responsive img-centered hidden-md hidden-lg" alt="mygubbi bedroom design" />
+                    <p class="text-muted font-size14 font-weight400 text-justify pt20 pb20"> Our State of the Art Factory & German Machinery delivers Great Quality </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 process-icon-height">
+                <div class="htw-box">
+                    <h5 class="design2 htwboxImage pb20"><span class="text-primary">4.</span> Implement</h5>
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,w_240,h_155/v1529060032/home/v2/L1_13_Bed_Room_view_2.jpg" class="cld-responsive img-responsive img-centered hidden-xs hidden-sm" alt="mygubbi bedroom design" />
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/c_fill,w_555,h_333/v1529060032/home/v2/L1_13_Bed_Room_view_2.jpg" class="cld-responsive img-responsive img-centered hidden-md hidden-lg" alt="mygubbi bedroom design" />
+                    <p class="text-muted font-size14 font-weight400 text-justify pt20 pb20"> End to End project management results in your dream home being delivered</p>
                 </div>
             </div>
         </div>
     </div>
-</section>-->
+</section>
+<!-- End Our Process Section -->
 
-
-<!-- shruthi code -->
 
 <section class="border-bottom-grey bg-color-white pt50 pb50">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <!--<h2 class="section-heading"> RECENT PROJECTS </h2>-->
-                <h1 class="mod-head mb30">
-                    <span class="mod-green"> RECENT </span>
-                    <span class="mod-red">PROJECTS</span>
-                    <span class="mod-cer hidden-xs">
-                        <img class="img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1493377940/landing_page/modular-wardrobes/white-cer.jpg" alt="cir">
-                    </span>
-                </h1>
+                <h2 class="section-heading"> OUR WORK </h2>
             </div>
         </div>
         <div class="row hidden-lg hidden-md">
-            <div class="mob-c-project">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523444976/completed_projects/platinum-projects/Shoba%20%20Rao/mbr-25.jpg"
-                     class="cld-responsive img-centered width100" alt="Experience Center" />
+            <div class="col-lg-12 text-center">
+                <div class="mob-c-project">
+
+                    <div id="ourwork-carousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#ourwork-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#ourwork-carousel" data-slide-to="1"> </li>
+                            <li data-target="#ourwork-carousel" data-slide-to="2"> </li>
+                            <li data-target="#ourwork-carousel" data-slide-to="3"> </li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">
+                                        <a href="/recent-projects">
+                                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523444976/completed_projects/platinum-projects/Shoba%20%20Rao/mbr-25.jpg"
+                                                 class="cld-responsive img-centered width100" style="height: 315px;" alt="Experience Center" />
+
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="/recent-projects">
+                                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523445002/completed_projects/platinum-projects/Sanjay%20Srivastava/10.jpg"
+                                                 class="cld-responsive img-centered width100" style="height: 315px;" alt="Experience Center" />
+
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="/recent-projects">
+                                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523445002/completed_projects/platinum-projects/Sanjay%20Srivastava/living_area.jpg"
+                                                 class="cld-responsive img-centered width100" style="height: 315px;" alt="Experience Center" />
+
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="/recent-projects">
+                                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523444976/completed_projects/platinum-projects/Shoba%20%20Rao/mbr-26.jpg"
+                                                 class="cld-responsive img-centered width100" style="height: 315px;" alt="Experience Center" />
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row hidden-xs hidden-sm">
             <div class="col-lg-6 col-md-6 col-sm-6 padding0">
-                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523444976/completed_projects/platinum-projects/Shoba%20%20Rao/mbr-25.jpg"
-                     class="cld-responsive img-centered width100" style="height: 403px;" alt="Experience Center" />
-                <div class="txt-over-completed-project-img hidden-xs hidden-sm">
-                    <div>
-                        <p class="txt-over-head font-size35 txt-over-head"> PICTURE PERFECT </p>
+                <a href="/recent-projects">
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523444976/completed_projects/platinum-projects/Shoba%20%20Rao/mbr-25.jpg"
+                         class="imgzoomin cld-responsive img-centered width100" style="height: 390px;" alt="Experience Center" />
+                </a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 padding0">
+                <div class="row margin0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom15">
+                        <a href="/recent-projects">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523445002/completed_projects/platinum-projects/Sanjay%20Srivastava/10.jpg"
+                                 class="imgzoomin cld-responsive img-centered width100" style="height: 185px;" alt="Experience Center" />
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom20">
+                        <a href="/recent-projects">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523445002/completed_projects/platinum-projects/Sanjay%20Srivastava/living_area.jpg"
+                                 class="imgzoomin cld-responsive img-centered width100" style="height: 185px;" alt="Experience Center" />
+                        </a>
+                    </div>
+                </div>
+                <div class="row margin0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom15">
+                        <a href="/recent-projects">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523444976/completed_projects/platinum-projects/Shoba%20%20Rao/mbr-26.jpg"
+                                 class="imgzoomin cld-responsive img-centered width100" style="height: 185px;" alt="Experience Center" />
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom20">
+                        <a href="/recent-projects">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523445003/completed_projects/platinum-projects/Sanjay%20Srivastava/10.x.jpg"
+                                 class="imgzoomin cld-responsive img-centered width100" style="height: 185px;" alt="Experience Center" />
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="row margin0">
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom15">
-                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523445002/completed_projects/platinum-projects/Sanjay%20Srivastava/10.jpg"
-                             class="cld-responsive img-centered width100" alt="Experience Center" />
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom20">
-                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523445002/completed_projects/platinum-projects/Sanjay%20Srivastava/living_area.jpg"
-                             class="cld-responsive img-centered width100" style="height: 185px;" alt="Experience Center" />
-                    </div>
-                </div>
-                <div class="row margin0">
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom15">
-                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523444976/completed_projects/platinum-projects/Shoba%20%20Rao/mbr-26.jpg"
-                             class="cld-responsive img-centered width100" alt="Experience Center" />
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 padding0 padding-left15 padding-bottom20">
-                        <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1523445003/completed_projects/platinum-projects/Sanjay%20Srivastava/10.x.jpg"
-                             class="cld-responsive img-centered width100" alt="Experience Center" />
-                    </div>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p class="text-muted font-size18 font-weight400 ourworkpara pt20 pb20 Latofntfam">
+                    Have a closer look at the designs we’ve customised for customers
+                    just like you, to see why they keep referring us.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End EXPERIENCE CENTER Section -->
 
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading"> TESTIMONIALS </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="nwhm-testimonial-section text-center">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12 col-md-12">
+                    <div id="nwhm-testimonial" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#nwhm-testimonial" data-slide-to="0" class="active"></li>
+                            <li data-target="#nwhm-testimonial" data-slide-to="1"> </li>
+                            <li data-target="#nwhm-testimonial" data-slide-to="2"> </li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active testimopd">
+                                        <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
+                                            <p class="text-center mt20">
+                                            <blockquote>
+                                                <span class="testihead">Glen Hathrell <i>- Bangalore </i></span>
+                                                <span class="text-primary">
+                                            <strong> MyGubbi has made our experience of home decor stress free. </strong> </span>
+                                                The designs shared were very modern and matched our taste. Our kitchen is now spacious enough for my wife to feel the comfort of a hassle free cooking. The wardrobe has given a new look to our bedrooms. I would also like to appreciate the coordination of your CRM team with timely updates and extensive support to complete the job within the stipulated time.
+                                                Keep up the good job & cheers to Mygubbi.
+                                            </blockquote>
+                                            </p>
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
+                                            <div class="nwhm-testimonialImg">
+                                                <img class="img-centered img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528452985/home/Glen-01.jpg" alt="First Image">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-lg hidden-md">
+                                            <div class="nwhm-testimonialImg">
+                                                <img class="img-centered img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528452985/home/Glen-01.jpg" alt="First Image">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-lg hidden-md">
+                                            <p class="text-center mt20">
+                                            <blockquote>
+                                                <span class="testihead">Glen Hathrell <i>- Bangalore </i> </span>
+
+                                                <span class="text-primary">
+                                            <strong> MyGubbi has made our experience of home decor stress free. </strong> </span>
+                                                The designs shared were very modern and matched our taste. Our kitchen is now spacious enough for my wife to feel the comfort of a hassle free cooking. The wardrobe has given a new look to our bedrooms. I would also like to appreciate the coordination of your CRM team with timely updates and extensive support to complete the job within the stipulated time.
+                                                Keep up the good job & cheers to Mygubbi.
+                                            </blockquote></p>
+
+                                        </div>
+                                    </div>
+                                    <div class="item testimopd">
+                                        <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
+                                            <p class="text-center mt20">
+                                            <blockquote>
+                                                <span class="testihead">Eknath & Amritha <i>- Bangalore </i> </span>
+                                                <span class="text-primary">
+                                            <strong> They understood what exactly we wanted. </strong> </span>
+                                                We wanted more of functional aspects and that was exactly we got. And, the quality I must say- they really maintained it
+                                            </blockquote></p>
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
+                                            <div class="nwhm-testimonialImg">
+                                                <iframe width="450" height="282" src="https://www.youtube.com/embed/jS6BNJoq2-8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 hidden-lg hidden-md">
+                                            <div class="nwhm-testimonialImg">
+                                                <iframe width="100%" height="220" src="https://www.youtube.com/embed/jS6BNJoq2-8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-lg hidden-md">
+                                            <p class="text-center mt20">
+                                            <blockquote>
+                                                <span class="testihead">Eknath & Amritha <i>- Bangalore </i></span>
+
+                                                <span class="text-primary">
+                                            <strong> They understood what exactly we wanted. </strong> </span>
+                                                We wanted more of functional aspects and that was exactly we got. And, the quality I must say- they really maintained it
+                                            </blockquote></p>
+
+                                        </div>
+                                    </div>
+                                    <div class="item testimopd">
+                                        <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
+                                            <p class="text-center mt20">
+                                            <blockquote>
+                                                <span class="testihead"> Anoop Kodoli <i>- Bangalore </i></span>
+
+                                                <span class="text-primary">
+                                            <strong> I am extreamly happy with the service given by MyGubbi team  </strong> </span> to design my home interiors.
+                                                The 3D images of our home helped us choose the desired look.  After the wardrobe units were installed, our bedroom has got a decent modern look, We have selected the kitchen model showcased in your office and in fact the design and production team did a fantastic job .  Thanks to MyGubbi team for their efforts and hard work
+                                            </blockquote></p>
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-xs hidden-sm">
+                                            <div class="nwhm-testimonialImg">
+                                                <img class="img-centered img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528449163/home/anoop-01.jpg" alt="First Image">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-lg hidden-md">
+                                            <div class="nwhm-testimonialImg">
+                                                <img class="img-centered img-responsive" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1528449163/home/anoop-01.jpg" alt="First Image">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-lg hidden-md">
+                                            <p class="text-center mt20">
+                                            <blockquote>
+                                                <span class="testihead"> Anoop Kodoli <i>- Bangalore </i></span>
+                                                <span class="text-primary">
+                                            <strong> I am extreamly happy with the service given by MyGubbi team  </strong> </span>to design my home interiors.
+                                                The 3D images of our home helped us choose the desired look.  After the wardrobe units were installed, our bedroom has got a decent modern look, We have selected the kitchen model showcased in your office and in fact the design and production team did a fantastic job .  Thanks to MyGubbi team for their efforts and hard work
+                                            </blockquote></p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#nwhm-testimonial" role="button" data-slide="prev" style="width:0%">
+                            <span class="fa fa-angle-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#nwhm-testimonial" role="button" data-slide="next" style="width:0%; padding-right:20px;">
+                            <span class="fa fa-angle-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- End RECENT PROJECTS -->
-<section class="modular-kitchens">
+
+
+<!-- Contact Section -->
+
+<section id="experience-center" class="bg-color-white border-bottom-grey pt50 pb50">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">EXPERIENCE CENTER</h2>
+            </div>
+        </div>
+        <div class="row position-relative">
+            <a href="/consult">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529056527/studio_desktop.jpg" class="cld-responsive img-centered width100 hidden-xs hidden-sm" alt="Experience Center" />
+            </a>
+            <a class="mob-e-btn text-center hidden-md hidden-lg" href="/mygubbi-studio">
+                <h2 class="home-img-head">  Meet @ Our EC </h2>
+                <button class="btn btn-explore"> EXPLORE </button>
+            </a>
+
+            <a href="/consult">
+                <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529056627/studio_mobile.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="Experience Center" />
+
+                <div class="premium-home-txt hidden-xs hidden-sm"><h2> Meet @ Our EC </h2></div>
+            </a>
+            <div class="address_right_section" id="style-loc">
+                <div>
+                    <p class="padding-loc-space hidden-xs hidden-sm hidden-md">
+                        Step in to know about the futuristic furniture that we create for you to style your home in a
+                        classy way! Our experience center will show you all that is needed to uplift the way your home
+                        is designed.
+                    </p>
+                </div>
+                <div class="text-white loc-space">
+                    <h4>LOCATIONS</h4>
+                    <div class="row margin-top10 location_add">
+                        <div class="col-md-2 col-sm-2 col-xs-2 location_icon">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/home/new_design/location_17.png"
+                                 class="cld-responsive img-centered" alt="Location Icon" />
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                            <a href="https://www.google.co.in/maps/place/Orange+Gubbi+technologies/@12.9174948,77.6451492,15z" target="_blank" class="txt-color-white">
+
+                                <h3 class="location-city"> BANGALORE </h3>
+                            </a>
+                            <div class="padding-top10">
+                                <p>
+                                    <a href="https://www.google.com/maps/place/MyGubbi/@12.974059,77.598848,16z/data=!4m5!3m4!1s0x0:0x1fde9fa5b2464507!8m2!3d12.9740587!4d77.5988483?hl=en-GB" target="_blank" class="txt-color-white">
+                                        No. 38, Maini Sadan, 1st Floor, 7th Main, Lavelle Road, Bangalore - 560001
+                                    </a>
+                                </p>
+
+                                <p class="paddingtop15">
+                                    <a href="https://www.google.com/maps/place/MyGubbi/@12.9177975,77.6426913,17z/data=!3m1!4b1!4m5!3m4!1s0x3bae1485ccf273c9:0xf76b78427043983d!8m2!3d12.9177975!4d77.6448853" target="_blank" class="txt-color-white">
+                                        1502, 2nd Floor, 19th Main Road,
+                                        Sector 4, HSR Layout, Bangalore - 560102
+                                    </a>
+                                </p>
+                                <p class="paddingtop15">
+                                    <a href="https://www.google.com/maps/place/MyGubbi/@12.9844757,77.747409,17z/data=!3m1!4b1!4m5!3m4!1s0x3bae0f4dfc37f49f:0xdb268b736f077a56!8m2!3d12.9844757!4d77.749603" target="_blank" class="txt-color-white">
+                                        MyGubbi,
+                                        No. 92, 2nd Floor, (Landmark- Bank Of Baroda)
+                                        Whitefield Main Road, Kadugodi Colony,
+                                        Prasanth Extension, Kadugodi, Bangalore - 560066
+                                    </a>
+                                </p>
+                                <h5 class="pt10"> <strong> TEL: +91 8088 860 860 </strong> </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-top20 location_add">
+                        <div class="col-md-2 col-sm-2 col-xs-2 location_icon">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/home/new_design/location_17.png"
+                                 class=" cld-responsive img-centered" alt="Location Icon" />
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                            <h3 class="location-city">PUNE</h3>
+                            <div class="padding-top10">
+                                <p>
+                                    <a href="https://www.google.com/maps/place/MyGubbi/@18.559414,73.792504,16z/data=!4m5!3m4!1s0x0:0xb4bb2e62814970b4!8m2!3d18.5594139!4d73.7925037?hl=en-GB" target="_blank" class="txt-color-white">
+                                        101, 1st Floor, The Mint Building, Behind K Factory,
+                                        Opp. Kapil Malhar Society, Baner, Pune - 411045
+                                    </a>
+                                </p>
+                                <h5 class="pt10"> <strong> TEL: +91 8088 860 860 </strong> </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-top20 location_add">
+                        <div class="col-md-2 col-sm-2 col-xs-2 location_icon">
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/w_auto/home/new_design/location_17.png"
+                                 class=" cld-responsive img-centered" alt="Location Icon" />
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                            <h3 class="location-city">Chennai</h3>
+                            <div class="padding-top10">
+                                <p>
+                                    <a href="https://www.google.com/maps?ll=12.943861,80.23791&z=16&t=m&hl=en-GB&gl=IN&mapclient=embed&cid=4441103498315462055" target="_blank" class="txt-color-white">
+                                        Ramaniyam Ocean - Isha, No.11, Second Floor, Rajiv Gandhi Salai,
+                                        Old Mahabalipuram Road, Okkiyam Thoraipakkam,
+                                        Chennai - 600096
+                                    </a>
+                                </p>
+                                <h5 class="pt10"> <strong> TEL: +91 8088 860 860 </strong> </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <iframe width="100%" height="415" src="https://www.youtube.com/embed/T2qH9RfwLWM?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</section>
+
+<section class="menu-spacer bg-color-white">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                <p class="mt20 mb20">
-                    At MyGubbi we give you a home right out of your imagination! We offer a wide range of sophisticated
-                    designs to do up your home, just the way you’ve always imagined. We provide end-to-end home decor
-                    solutions to deliver a home that is imagined by you, personalized for you and co-created with you.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Start 2BHK Complete Interior-->
-
-<!-- Start why us section -->
-<section class="section-why-us text-center">
-    <div class="container-fluid">
-        <div class="why-us-fluid">
-            <div class="row">
-                <div class="col-md-4 col-md-offset-4 text-center">
-                    <!--<div class="form-group">
-                        <a href="#cucu-form" class="btn btn-block btn-offers hidden-xs" type="submit"> Book a FREE Design Consultation </a>
-                        <a href="#cucu-form-mob" class="btn btn-block btn-offers hidden-sm hidden-md hidden-lg" type="submit"> Book a FREE Design Consultation </a>
-                    </div>-->
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="category-content padding30">
+                    <div class="category-details">
+                        <p>
+                            <b>Home Interior Decor</b>: Just Got Easy
+                        </p>
+                        <p class="para">
+                            Visualising a better home is a dream of every individual and what better than living in a dream home which has been designed as per your likes. Looking for interior designing for your home just got easy with mygubbi.com. Here you can get <b>custom-made furniture</b> and have a sneak-peak on the modular furnitures we have on our website.
+                        </p>
+                        <br /><br />
+                        <p class="para">
+                            Mygubbi.com: Home for <b>customized furniture</b> and <h2 class="small-head hnwds">interior designing</h2>
+                        </p>
+                        <p class="para">
+                            At mygubbi.com you can browse designs online or walk into our experience center to have a better understanding on the types, finish, materials and color options available. While we have a team of experts who have a wide experience in <b>home interior decor</b>, we have also partnered with brands including Hettich, Hafele, Century Ply and more, to ensure our products are sourced with highest quality. If you have been looking for customized furniture and home <h2 class="small-head hnwds">interior design company</h2><span class="para nwds"> then you can stop your search here at mygubbi.com. We have a broad range of traditional, modern, contemporary interior designs and more, to suit your needs!</span>
+                        </p>
+                        <p class="para">
+                            Mygubbi.com: Customized
+                        <h2 class="small-head hnwds">Interior Home Decor</h2>
+                        <span class="para nwds"> and Designing Solutions</span>
+                        </p>
+                        <p class="para">
+                            For <h3 class="small-head hnwds">home interiors,</h3>
+                        <b class="blodnwds">modern furniture designs</b>
+                        <span class="para nwds"> and customized solutions, log on to mygubbi.com.
+                        We have all the home furniture solutions that you are looking for to build your dream home. We have a wide range of
+                        </span>
+                        <span class="para nwds">
+                         <a href='https://www.mygubbi.com/wardrobe-designs-online'>modular wardrobes</a>
+                        ,<a href='https://www.mygubbi.com/kitchen-cabinet-design'> modular kitchens</a>
+                        , <a href='https://www.mygubbi.com/tv-unit-cabinet'>TV entertainment units</a>
+                        , <a href='https://www.mygubbi.com/sideboard'>side racks</a>
+                        , <a href='https://www.mygubbi.com/shoe-rack-online'>shoe racks</a>
+                        </span>
+                        <span class="para nwds"> and plenty other storage solutions.
+                        Visit our experience center now or just give a call to us - you are only 45 days away from making your dream a reality.
+                        </span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Start why us section -->
 <style>
 /* #lp-testimonial .owl-carousel .owl-item img {
     display: block;
@@ -808,8 +1192,7 @@
           navigation : true,
           items: 2,
           responsive:{
-                0:{
-                    items:1
+                0:{                    items:1
                 },
                 600:{
                     items:1
@@ -835,6 +1218,7 @@
 <script type="text/javascript" src="/js/libs/owl.carousel/dist/owl.carousel.min.js"></script>
 <script type="text/javascript" src="/js/jquery.isotope.min.js"></script>
 <script type="text/javascript" src="/js/festive.js"></script>
+<script type="text/javascript" src="/js/libs/bxslider-4/jquery.bxslider.js"></script>
 
 
 <!-- Google Code for Remarketing Tag -->
@@ -875,10 +1259,248 @@ var google_remarketing_only = true;
 
 <!--LeadSquared Tracking Code Start-->
 <script type="text/javascript" src="https://web.mxradon.com/t/Tracker.js"></script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="bootstrap" src="../../js/libs/bootstrap-custom/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
       pidTracker('9814');
 </script>
 <!--LeadSquared Tracking Code End-->
 
+<script>
+    var item = $('.testimonials-carousel .item');
+    item.eq(0).addClass('active');
+    $(document).ready(function() {
+        $('.testimonials-carousel').carousel({
+          interval: 60000,
+          pause: "false"
+        });
+
+        $('#ourwork-carousel').carousel({
+          interval: 2000,
+          pause: "false"
+        });
+
+
+        var iScrollPos = 0;
+        $( window ).scroll(function() {
+
+            var iCurScrollPos = $(this).scrollTop();
+            if (iCurScrollPos == 0) {
+                $( "#bs-example-navbar-collapse-1" ).css( "box-shadow", "none" );
+            } else {
+               $( "#bs-example-navbar-collapse-1" ).css( "box-shadow", "0px 2px 5px #ccc" );
+            }
+            iScrollPos = iCurScrollPos;
+        });
+
+
+    });
+
+    $(function() {
+        $(".trend-image-overlay").hover(function() {
+                $(".txt-over-style-image").css('display','none');
+                $(".style-image-overlay").addClass('style-image-overlay-opc');
+            },
+            function() {
+               $(".txt-over-style-image").css('display','block');
+               $(".style-image-overlay").removeClass('style-image-overlay-opc');
+        });
+
+        var navMain = $("#bs-example-navbar-collapse-1");
+        var subMenuUL = $(".dropdown");
+        var subsubMenuUL = $(".dropdown-menu");
+        subMenuUL.on("click", "li", null, function() {
+            navMain.collapse('hide');
+        });
+        subsubMenuUL.on("click", "li", null, function() {
+            navMain.collapse('hide');
+        });
+
+        $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").on("click", "li", null, function() {
+            $(this).parent().hide();
+        });
+
+        $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").hover(function() {
+                $(this).show();
+            },
+            function() {
+               $(this).hide();
+                $(this).hide();
+            });
+
+        $("#bs-example-navbar-collapse-1 ul.nav li a[id^=dropdownMenu_lg]").hover(function() {
+           $('.dropdownMenu_lg').hide();
+           var that = this;
+           $(this).next('.dropdownMenu_lg').show();
+        });
+
+        $("#bs-example-navbar-collapse-1").mouseleave(function(){
+            var hovered = $("#bs-example-navbar-collapse-1").find(".dropdownMenu_lg").length;
+            !!hovered && $('.dropdownMenu_lg').hide();
+        });
+
+    });
+</script>
+
+
+<script>
+    /*var video = document.getElementById("myVideo");
+    document.getElementById("myVideo").addEventListener('ended',myVideoHandler,false);
+
+    function myVideoHandler(e) {
+        video.currentTime = 0;
+        video.pause();
+    }
+
+   $("#bxslider_left").click(function() {
+        video.pause();
+    });
+    $("#bxslider_right").click(function() {
+        video.pause();
+    });*/
+
+
+     var gallerySlider = $('.bxslider').bxSlider({
+        mode: 'fade',
+        auto: false,
+        pause: 5000,
+        speed: 2000,
+        autoControls: false,
+        nextSelector: '.slider_right',
+        prevSelector: '.slider_left'
+    });
+    $('.slider-move').click(function (e) {
+        e.preventDefault();
+        var number = $(this).data('number');
+        gallerySlider.goToSlide(number);
+
+
+        $("#mySpan").animate({'opacity': 0}, 3000, function(){
+            $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</span>');
+        });
+
+        setTimeout(function(){
+            $("#mySpan").animate({'opacity': 0}, 3000, function(){
+                $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;"><strong>Imagine. Do</strong></span>').animate({'opacity': 1}, 4000);
+            });
+        },3000);
+
+
+
+        return false;
+    });
+
+    var numbers = [0, 1,2,3];
+    var onenumber = [0, 1, ,2, 3, 4,5];
+    var twonumber = [20,40, 60, 80,100];
+    var threenumber = [160, 320, 480, 640, 800];
+    var fournumber = [4000, 8000, 12000, 16000, 20000];
+
+    $(document).ready(function(){
+        $(".address").hover(function(){
+            $(this).css("background-color", "yellow");
+            var currentTarget = $(e.currentTarget);
+             var familyoptId = currentTarget.attr('id');
+             alert(familyoptId);
+            }, function(){
+            $(this).css("background-color", "pink");
+        });
+
+        $("#mySpan").animate({'opacity': 0}, 3000, function(){
+            $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</span>');
+        });
+
+        setTimeout(function(){
+            $("#mySpan").animate({'opacity': 0}, 3000, function(){
+                $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;"><strong>Imagine. Do</strong></span>').animate({'opacity': 1}, 4000);
+            });
+        },3000);
+
+        /*var  whyussect = $('#whyussect').position().top;
+        whyussect = whyussect;
+        var eventFired = false;
+        $(document).on('scroll', function() {
+            if( $(this).scrollTop() >=  whyussect && eventFired === false){
+                printNumbers(numbers.slice());
+                printOneNumber(onenumber.slice());
+                printtwoNumber(twonumber.slice());
+                printthreeNumber(threenumber.slice());
+                printfourNumber(fournumber.slice());
+                eventFired = true;
+            }
+        });*/
+    });
+
+
+
+
+    function printNumbers(numbersToPrint) {
+      $("#citynumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printNumbers(numbersToPrint);
+        }, 500)
+      }
+    }
+    function printOneNumber(numbersToPrint) {
+      $("#excnumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printOneNumber(numbersToPrint);
+        }, 500)
+      }
+    }
+    function printtwoNumber(numbersToPrint) {
+      $("#teamnumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printtwoNumber(numbersToPrint);
+        }, 500)
+      }
+    }
+    function printthreeNumber(numbersToPrint) {
+      $("#homenumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printthreeNumber(numbersToPrint);
+        }, 500)
+      }
+    }
+    function printfourNumber(numbersToPrint) {
+      $("#sqftnumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printfourNumber(numbersToPrint);
+        }, 500)
+      }
+    }
+
+function bangloreadresschange()
+{
+    //alert("function1 ");
+    document.getElementById('changeimage').style.background='url(https://res.cloudinary.com/mygubbi/image/upload/v1487765562/home/new_design/gubbi-map.jpg)';
+    //alert("image changed ");
+}
+
+function puneaddresschange()
+{
+    //alert("function1 ");
+    document.getElementById('changeimage').style.background='url(https://res.cloudinary.com/mygubbi/image/upload/v1524476792/home/new_design/pune.png)';
+    //alert("image changed ");
+}
+
+function chennaiaddresschange()
+{
+    //alert("function1 ");
+    document.getElementById('changeimage').style.background='url(https://res.cloudinary.com/mygubbi/image/upload/v1524476792/home/new_design/chennai.png)';
+    //alert("image changed ");
+}
+
+</script>
 </body>
 </html>

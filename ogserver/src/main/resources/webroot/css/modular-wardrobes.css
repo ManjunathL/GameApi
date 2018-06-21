@@ -100,8 +100,9 @@ ul, ol{
 .navbar-festive{
     margin-bottom: 0px;
     height: 70px;
-    background: #ea5c36;
+    background: #fff;
     border-color: #ea5c36;
+    background: #fff;
     border-radius: 0px;
 }
 .navbar-festive .navbar-brand{
@@ -1050,7 +1051,7 @@ and (max-width : 1024px)  {
     box-shadow: 8px 0px 20px rgba(51, 51, 51, 0.26);
 }
 .cucumber-form-contact{
-position: fixed;
+   /*position: fixed;*/
 z-index: 999;
 right: 30px;
 
@@ -1343,7 +1344,7 @@ right: 30px;
 
 .cucumber-footer {
     padding: 10px 0px 5px 25px;
-    background: #96dbd6;
+    background: #33434c;;
     color: #333;
 }
 
@@ -1469,6 +1470,12 @@ right: 30px;
     bottom: 0px;
     padding: 15px;
     text-align: center;
+}
+
+.bookingform{
+    position: absolute;
+    right: 0px;
+    z-index: 2;
 }
 
 @media (max-width: 768px) {

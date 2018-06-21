@@ -5117,3 +5117,9 @@ a.hideLink {
         font-size: 24px;
     }
 }
+
+@media (max-width: 991px) {
+    .home-interior{
+        width:100%!important;
+    }
+}
