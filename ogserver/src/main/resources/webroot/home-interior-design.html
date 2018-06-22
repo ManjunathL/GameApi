@@ -137,9 +137,12 @@
     </script>
     <style>
     @media (max-width: 991px) {
-    .home-interior{
-    width:88%!important;
+        .home-interior{
+        width:88%!important;
+        }
     }
+    .contact-us-side-inner{
+        visibility:hidden;
     }
     </style>
 </head>
@@ -247,7 +250,25 @@
 
 
 <section id="lp_banner" class="festive_banner_bg_mob">
-    <a href="#cucu-form-mob" id="consultIco" class="hidden-lg hidden-md hidden-sm" title="Add Concept Board"><i class="fa fa-pencil-square-o"></i></a>
+    <!--<a href="#cucu-form-mob" id="consultIco" class="hidden-lg hidden-md hidden-sm" title="Add Concept Board"><i class="fa fa-pencil-square-o"></i></a>-->
+
+    <div class="consultButn_main">
+        <div class="consultButn">
+            <a href="#cucu-form-mob">
+            <span class="contact-us-side-inner .visible-xs-block .visible-sm-block hidden-md hidden-lg">
+                <span class="font-size18">Book Design Consultation</span>
+            </span>
+            </a>
+            <a href="#cucu-form">
+            <span class="contact-us-side-inner hidden-xs hidden-sm">
+                <span class="pe-7s-note"></span>
+                <span class="vertical-line"></span>
+                <span class="font-size18">Book Design Consultation</span>
+            </span>
+            </a>
+        </div>
+    </div>
+
     <!--<div class="festive-banner-mob">
         <img class="img-responsive hidden-lg hidden-md hidden-sm" src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1499866008/landing_page/double-bonanza/mob/LV2_MOB.jpg" alt="Landing Banner" >
     </div>-->
@@ -267,7 +288,7 @@
 
             <div class="slider_container position-relative mrgmns20">
                 <div class="col-sm-6 col-md-4 col-lg-4 pn mt20 hidden-xs hidden-sm bookingform bx-form-land">
-                    <div class="contact-form" style="width: 83%; ! important">
+                    <div class="contact-form" style="width: 83%; ! important" id="cucu-form">
                         <div class="row">
                             <h4 class="align-center">
                                 <span class="pe-7s-note"></span>
@@ -383,7 +404,7 @@
                                 </div>
                             </div>
 
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529316157/home/v2/Livingroom_Banner_mobile-compressor.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design"/>
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529665864/landing_page/modular-wardrobes/living_1_1.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design"/>
                             <div class="onbanner-txt hidden-lg hidden-md">
                                 <div class="onbanner-txtbg">
                                     <h2 class="wow fadeIn animated animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;padding: 20px 40px;">Imagine. Do</h2>
@@ -404,7 +425,7 @@
                                 </div>
                             </div>
 
-                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529316157/home/v2/Livingroom_Banner_mobile-compressor.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design"/>
+                            <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529665864/landing_page/modular-wardrobes/living_1_1.jpg" class="cld-responsive img-centered width100 hidden-lg hidden-md" alt="mygubbi bedroom design"/>
                             <div class="onbanner-txt hidden-lg hidden-md">
                                 <div class="onbanner-txtbg">
                                     <h2 class="wow fadeIn animated animated" data-wow-delay="1.5s" style="visibility: visible; animation-delay: 3s; animation-name: fadeIn; opacity: 0;padding: 20px 40px;">Imagine. Do</h2>
@@ -1286,9 +1307,9 @@ var google_remarketing_only = true;
 
             var iCurScrollPos = $(this).scrollTop();
             if (iCurScrollPos == 0) {
-                $( "#bs-example-navbar-collapse-1" ).css( "box-shadow", "none" );
+                $(".contact-us-side-inner").css("visibility","hidden");
             } else {
-               $( "#bs-example-navbar-collapse-1" ).css( "box-shadow", "0px 2px 5px #ccc" );
+               $(".contact-us-side-inner").css("visibility","visible");
             }
             iScrollPos = iCurScrollPos;
         });
