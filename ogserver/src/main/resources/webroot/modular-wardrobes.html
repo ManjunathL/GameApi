@@ -151,10 +151,10 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">
-                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529042508/MyGubbi_logo-04.png" class="cld-responsive" alt="logo" />
+                    <img src="https://res.cloudinary.com/mygubbi/image/upload/f_auto/v1529042508/MyGubbi_logo-04.png" class="cld-responsive logoim" alt="logo" />
                 </a>
             </div>
-            <div class="navbar-right right-side-menu hidden-xs hidden-sm">
+            <div class="navbar-right right-side-menu">
                 <div class="nav">
                     <a href="tel:+91-730-487-3873" class="page-scroll font-size18 txt-color-white" style="padding-top: 17px;color: #8B4513;background-color: #fff;">
                         <i class="fa fa-phone txt-color-white"></i>
@@ -1322,7 +1322,7 @@
             <div class="col-lg-12 text-center">
                 <p class="text-muted font-size18 font-weight400 ourworkpara pt20 pb20 Latofntfam">
                     Have a closer look at the designs we’ve customised for customers
-                    just like you, to see why they keep coming back to us.</p>
+                    just like you, to see why they keep referring us.</p>
             </div>
         </div>
     </div>
@@ -1830,6 +1830,246 @@ function chennaiaddresschange()
       pidTracker('9814');
 </script>
 <!--LeadSquared Tracking Code End-->
+
+
+
+<script>
+    var item = $('.testimonials-carousel .item');
+    item.eq(0).addClass('active');
+    $(document).ready(function() {
+        $('.testimonials-carousel').carousel({
+          interval: 60000,
+          pause: "false"
+        });
+
+        $('#ourwork-carousel').carousel({
+          interval: 2000,
+          pause: "false"
+        });
+
+
+        var iScrollPos = 0;
+        $( window ).scroll(function() {
+
+            var iCurScrollPos = $(this).scrollTop();
+            if (iCurScrollPos == 0) {
+                $( "#bs-example-navbar-collapse-1" ).css( "box-shadow", "none" );
+            } else {
+               $( "#bs-example-navbar-collapse-1" ).css( "box-shadow", "0px 2px 5px #ccc" );
+            }
+            iScrollPos = iCurScrollPos;
+        });
+
+
+    });
+
+    $(function() {
+        $(".trend-image-overlay").hover(function() {
+                $(".txt-over-style-image").css('display','none');
+                $(".style-image-overlay").addClass('style-image-overlay-opc');
+            },
+            function() {
+               $(".txt-over-style-image").css('display','block');
+               $(".style-image-overlay").removeClass('style-image-overlay-opc');
+        });
+
+        var navMain = $("#bs-example-navbar-collapse-1");
+        var subMenuUL = $(".dropdown");
+        var subsubMenuUL = $(".dropdown-menu");
+        subMenuUL.on("click", "li", null, function() {
+            navMain.collapse('hide');
+        });
+        subsubMenuUL.on("click", "li", null, function() {
+            navMain.collapse('hide');
+        });
+
+        $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").on("click", "li", null, function() {
+            $(this).parent().hide();
+        });
+
+        $("#bs-example-navbar-collapse-1 ul.dropdownMenu_lg").hover(function() {
+                $(this).show();
+            },
+            function() {
+               $(this).hide();
+                $(this).hide();
+            });
+
+        $("#bs-example-navbar-collapse-1 ul.nav li a[id^=dropdownMenu_lg]").hover(function() {
+           $('.dropdownMenu_lg').hide();
+           var that = this;
+           $(this).next('.dropdownMenu_lg').show();
+        });
+
+        $("#bs-example-navbar-collapse-1").mouseleave(function(){
+            var hovered = $("#bs-example-navbar-collapse-1").find(".dropdownMenu_lg").length;
+            !!hovered && $('.dropdownMenu_lg').hide();
+        });
+
+    });
+</script>
+
+
+<script>
+    /*var video = document.getElementById("myVideo");
+    document.getElementById("myVideo").addEventListener('ended',myVideoHandler,false);
+
+    function myVideoHandler(e) {
+        video.currentTime = 0;
+        video.pause();
+    }
+
+   $("#bxslider_left").click(function() {
+        video.pause();
+    });
+    $("#bxslider_right").click(function() {
+        video.pause();
+    });*/
+
+
+     var gallerySlider = $('.bxslider').bxSlider({
+        mode: 'fade',
+        auto: false,
+        pause: 5000,
+        speed: 2000,
+        autoControls: false,
+        nextSelector: '.slider_right',
+        prevSelector: '.slider_left'
+    });
+    $('.slider-move').click(function (e) {
+        e.preventDefault();
+        var number = $(this).data('number');
+        gallerySlider.goToSlide(number);
+
+
+        $("#mySpan").animate({'opacity': 0}, 3000, function(){
+            $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</span>');
+        });
+
+        setTimeout(function(){
+            $("#mySpan").animate({'opacity': 0}, 3000, function(){
+                $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;"><strong>Imagine. Do</strong></span>').animate({'opacity': 1}, 4000);
+            });
+        },3000);
+
+
+
+        return false;
+    });
+
+    var numbers = [0, 1,2,3];
+    var onenumber = [0, 1, ,2, 3, 4,5];
+    var twonumber = [20,40, 60, 80,100];
+    var threenumber = [160, 320, 480, 640, 800];
+    var fournumber = [4000, 8000, 12000, 16000, 20000];
+
+    $(document).ready(function(){
+        $(".address").hover(function(){
+            $(this).css("background-color", "yellow");
+            var currentTarget = $(e.currentTarget);
+             var familyoptId = currentTarget.attr('id');
+             alert(familyoptId);
+            }, function(){
+            $(this).css("background-color", "pink");
+        });
+
+        $("#mySpan").animate({'opacity': 0}, 3000, function(){
+            $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;">We will <strong>Do</strong> anything to make it real</span>');
+        });
+
+        setTimeout(function(){
+            $("#mySpan").animate({'opacity': 0}, 3000, function(){
+                $(this).html('<span class="wow fadeIn animated" style="visibility: visible; animation-delay:1s; animation-name: fadeIn; opacity: 0;"><strong>Imagine. Do</strong></span>').animate({'opacity': 1}, 4000);
+            });
+        },3000);
+
+        /*var  whyussect = $('#whyussect').position().top;
+        whyussect = whyussect;
+        var eventFired = false;
+        $(document).on('scroll', function() {
+            if( $(this).scrollTop() >=  whyussect && eventFired === false){
+                printNumbers(numbers.slice());
+                printOneNumber(onenumber.slice());
+                printtwoNumber(twonumber.slice());
+                printthreeNumber(threenumber.slice());
+                printfourNumber(fournumber.slice());
+                eventFired = true;
+            }
+        });*/
+    });
+
+
+
+
+    function printNumbers(numbersToPrint) {
+      $("#citynumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printNumbers(numbersToPrint);
+        }, 500)
+      }
+    }
+    function printOneNumber(numbersToPrint) {
+      $("#excnumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printOneNumber(numbersToPrint);
+        }, 500)
+      }
+    }
+    function printtwoNumber(numbersToPrint) {
+      $("#teamnumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printtwoNumber(numbersToPrint);
+        }, 500)
+      }
+    }
+    function printthreeNumber(numbersToPrint) {
+      $("#homenumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printthreeNumber(numbersToPrint);
+        }, 500)
+      }
+    }
+    function printfourNumber(numbersToPrint) {
+      $("#sqftnumb").text(numbersToPrint.shift());
+
+      if (numbersToPrint.length) {
+        setTimeout(function() {
+          printfourNumber(numbersToPrint);
+        }, 500)
+      }
+    }
+
+function bangloreadresschange()
+{
+    //alert("function1 ");
+    document.getElementById('changeimage').style.background='url(https://res.cloudinary.com/mygubbi/image/upload/v1487765562/home/new_design/gubbi-map.jpg)';
+    //alert("image changed ");
+}
+
+function puneaddresschange()
+{
+    //alert("function1 ");
+    document.getElementById('changeimage').style.background='url(https://res.cloudinary.com/mygubbi/image/upload/v1524476792/home/new_design/pune.png)';
+    //alert("image changed ");
+}
+
+function chennaiaddresschange()
+{
+    //alert("function1 ");
+    document.getElementById('changeimage').style.background='url(https://res.cloudinary.com/mygubbi/image/upload/v1524476792/home/new_design/chennai.png)';
+    //alert("image changed ");
+}
+
+</script>
+
 
 </body>
 </html>
