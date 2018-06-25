@@ -24,7 +24,7 @@ define([
         story: new Stories(),
 
         renderWithUserProfCallback: function(userProfData) {
-            this.getStories();
+            //this.getStories();
             this.getStoriesInteriors();
             this.getStoriesTrends();
             this.getStoriesArch();
@@ -229,7 +229,7 @@ define([
             this.getStoriesInteriors();
             this.getStoriesTrends();
             this.getStoriesArch();
-            _.bindAll(this, 'renderWithUserProfCallback', 'getStories', 'getStoriesInteriors','getStoriesTrends',  'getStoriesArch');
+            _.bindAll(this, 'renderWithUserProfCallback', 'getStoriesInteriors','getStoriesTrends',  'getStoriesArch');
 
         },
         events: {

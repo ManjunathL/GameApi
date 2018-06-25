@@ -9265,6 +9265,9 @@ blockquote span{
 }
 
 @media (max-width: 991px) {
+    .contact-us-side-innermob{
+        visibility:hidden;
+    }
     .ourworkpara{
         text-align:justify;
     }
