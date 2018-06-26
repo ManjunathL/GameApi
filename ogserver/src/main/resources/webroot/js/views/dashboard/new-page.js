@@ -25,9 +25,9 @@ define([
 
         renderWithUserProfCallback: function(userProfData) {
             //this.getStories();
-            this.getStoriesInteriors();
-            this.getStoriesTrends();
-            this.getStoriesArch();
+           // this.getStoriesInteriors();
+           // this.getStoriesTrends();
+           // this.getStoriesArch();
 
 
             $(this.el).html(_.template(dashboardPageTemplate)({
@@ -38,7 +38,7 @@ define([
 
             this.ready();
         },
-        getStories: function() {
+        /*getStories: function() {
             var that = this;
             that.story.fetch({
                  data: {
@@ -131,7 +131,7 @@ define([
                                     console.log("couldn't fetch story data - " + response);
                                 }
                             });
-                    },
+                    },*/
         render: function() {
             var authData = this.refAuth.currentUser;
             MGF.getUserProfile(authData, this.renderWithUserProfCallback);
@@ -225,11 +225,11 @@ define([
         initialize: function() {
             Analytics.apply(Analytics.TYPE_GENERAL);
             $.cloudinary.config({ cloud_name: 'mygubbi', api_key: '492523411154281'});
-            this.getStories();
-            this.getStoriesInteriors();
-            this.getStoriesTrends();
-            this.getStoriesArch();
-            _.bindAll(this, 'renderWithUserProfCallback', 'getStoriesInteriors','getStoriesTrends',  'getStoriesArch');
+            //this.getStories();
+            //this.getStoriesInteriors();
+            //this.getStoriesTrends();
+            //this.getStoriesArch();
+            _.bindAll(this, 'renderWithUserProfCallback');
 
         },
         events: {
